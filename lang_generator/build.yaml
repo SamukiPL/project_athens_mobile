@@ -1,0 +1,15 @@
+targets:
+  $default:
+    builders:
+      nlh_generator|nlh_lang_automation:
+        enabled: true
+
+builders:
+  lang-generate:
+    target: ":lang_generator"
+    import: "package:lang_generator/builder.dart"
+    builder_factories: ["langGenerator"]
+    build_extensions: {".dart": [".lang_generator.g.part"]}
+    auto_apply: dependents
+    build_to: cache
+    applies_builders: ["source_gen|combining_builder"]

@@ -1,0 +1,42 @@
+{
+  "main": {
+    "menu": {
+      "session": "Session",
+      "music": "Music",
+      "materials": "Materials",
+      "charactersCards": "Characters Cards",
+      "activeSessions": "Active Sessions",
+      "surveys": "Surveys",
+      "systems": "Systems"
+    }
+  },
+  "login": {
+    "buttons": {
+      "login": "Log In",
+      "register": "Register now!",
+      "forgot": "Forgot password?"
+    },
+    "hints": {
+      "email": "Email",
+      "name": "User name",
+      "password": "Password",
+      "repeatPassword": "Repeat password"
+    },
+    "other": {
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "google": "Google",
+      "notAMember": "Not a member yet?",
+      "connectWith": "Connect with"
+    },
+    "validate": {
+      "fill": {
+        "email": "Fill in the email",
+        "password": "Fill in the password",
+        "all": "Fill in the login data"
+      },
+      "incorrectEmail":"Enter a valid email",
+      "wrongData": "Incorrect email or password"
+    }
+  }
+}

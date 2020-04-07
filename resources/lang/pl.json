@@ -1,0 +1,42 @@
+{
+  "main": {
+    "menu": {
+      "session": "Sesja",
+      "music": "Muzyka",
+      "materials": "Materiały",
+      "charactersCards": "Karty postaci",
+      "activeSessions": "Prowadzone sesje",
+      "surveys": "Ankiety",
+      "systems": "Systemy"
+    }
+  },
+  "login": {
+    "buttons": {
+      "login": "Zaloguj",
+      "register": "Zarejestruj się!",
+      "forgot": "Zapomniałeś hasła?"
+    },
+    "hints": {
+      "email": "Email",
+      "name": "Nazwa użytkownika",
+      "password": "Hasło",
+      "repeatPassword": "Powtórz hasło"
+    },
+    "other": {
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "google": "Google",
+      "notAMember": "Nie masz jeszcze konta?",
+      "connectWith": "Zaloguj się z"
+    },
+    "validate": {
+      "fill": {
+        "email": "Uzupełnij adres email",
+        "password": "Uzupełnij hasło",
+        "all": "Uzupełnij dane logowania"
+      },
+      "incorrectEmail":"Wprowadź prawidłowy email",
+      "wrongData": "Nieprawidłowy email lub hasło"
+    }
+  }
+}
