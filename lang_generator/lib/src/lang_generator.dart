@@ -82,7 +82,7 @@ class LangGenerator extends GeneratorForAnnotation<LangAutomation> {
     String functionCode = _generateTestingFunction();
     String testsCode = "import 'dart:convert';\n"
         "import 'dart:io';\n\n"
-        "import 'package:projectathens/i18n/localization.dart';\n"
+        "import 'package:athens_core/i18n/localization.dart';\n"
         "import 'package:flutter_test/flutter_test.dart';\n"
         "\n"
         "void main() {\n"
