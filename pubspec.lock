@@ -36,6 +36,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.0"
+  athens_core:
+    dependency: "direct main"
+    description:
+      path: athens_core
+      relative: true
+    source: path
+    version: "0.0.1"
+  authorization_flow:
+    dependency: "direct main"
+    description:
+      path: authorization_flow
+      relative: true
+    source: path
+    version: "0.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -113,6 +127,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  chopper:
+    dependency: transitive
+    description:
+      name: chopper
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.2"
   code_builder:
     dependency: transitive
     description:
@@ -228,6 +249,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.14.0+3"
+  http:
+    dependency: transitive
+    description:
+      name: http
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.12.0+4"
   http_multi_server:
     dependency: transitive
     description:
@@ -271,7 +299,7 @@ packages:
     source: hosted
     version: "3.0.1"
   lang_generator:
-    dependency: "direct main"
+    dependency: transitive
     description:
       path: lang_generator
       relative: true
@@ -333,6 +361,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.9.3"
+  pagination:
+    dependency: transitive
+    description:
+      path: pagination
+      relative: true
+    source: path
+    version: "0.0.1"
   path:
     dependency: transitive
     description:

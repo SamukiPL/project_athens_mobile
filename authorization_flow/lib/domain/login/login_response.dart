@@ -1,0 +1,3 @@
+enum LoginStatus {
+  SUCCESS, AUTH_FAILURE, NETWORK_FAILURE
+}
