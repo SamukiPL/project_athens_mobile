@@ -20,7 +20,10 @@ class AuthInterceptor implements RequestInterceptor, ResponseInterceptor {
 
   @override
   FutureOr<Response> onResponse(Response response) {
+    if (response.statusCode == 401) throw UnauthorizedError;
     return response;
   }
 
 }
+
+mixin UnauthorizedError implements Exception {}

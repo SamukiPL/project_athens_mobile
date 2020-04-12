@@ -3,6 +3,8 @@ import 'package:authorization_flow/login_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/injections/app_module.dart';
 
+import 'package:splash_screen/splash_screen_widget.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
       ),
       home: ModuleWidget(
         providers: [AppModule(context)],
-        child: LoginWidget(),
+        child: SplashScreenWidget(),
       ),
     );
   }
