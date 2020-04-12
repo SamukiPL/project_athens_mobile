@@ -13,7 +13,9 @@ class LoginBloc extends BaseBloc {
 
   LoginBloc(this.loginUseCase);
 
-  StreamController<LoginScreenState> _state = StreamController<LoginScreenState>();
+  StreamController<LoginScreenState> _stateController = StreamController<LoginScreenState>();
+
+  Stream<LoginScreenState> get state => _stateController.stream;
 
   String _login = "";
 
@@ -35,20 +37,20 @@ class LoginBloc extends BaseBloc {
     var status = await loginUseCase(params);
     switch(status) {
       case LoginStatus.SUCCESS:
-        _state.add(LoginScreenState.SUCCESS);
+        _stateController.add(LoginScreenState.SUCCESS);
         break;
       case LoginStatus.AUTH_FAILURE:
-        _state.add(LoginScreenState.AUTH_FAILURE);
+        _stateController.add(LoginScreenState.AUTH_FAILURE);
         break;
       case LoginStatus.NETWORK_FAILURE:
-        _state.add(LoginScreenState.NETWORK_FAILURE);
+        _stateController.add(LoginScreenState.NETWORK_FAILURE);
         break;
     }
   }
 
   @override
   void dispose() {
-    _state.close();
+    _stateController.close();
   }
 
 }

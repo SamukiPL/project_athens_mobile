@@ -9,6 +9,7 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^4.0.5
+  fluro: ^1.6.3
   chopper: ^3.0.2
   json_annotation: ^3.0.1
   flutter_secure_storage: ^3.3.2

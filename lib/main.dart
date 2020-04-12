@@ -1,5 +1,7 @@
+import 'package:athens_core/injections/module_widget.dart';
 import 'package:authorization_flow/login_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/injections/app_module.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +13,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginWidget(),
+      home: ModuleWidget(
+        providers: [AppModule(context)],
+        child: LoginWidget(),
+      ),
     );
   }
 }
