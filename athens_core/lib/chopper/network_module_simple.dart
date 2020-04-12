@@ -1,3 +1,4 @@
+import 'package:athens_core/chopper/auth_interceptor.dart';
 import 'package:athens_core/injections/module.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/cupertino.dart';

@@ -23,7 +23,10 @@ class LoginScreenModule extends Module {
     return List.of([
       Provider<LoginBloc>(
         create: (_) => LoginBloc(loginUseCase),
-        dispose: (context, bloc) => bloc.dispose(),
+        dispose: (context, bloc) {
+          loginApi.dispose();
+          bloc.dispose();
+        },
       )
     ]);
   }
