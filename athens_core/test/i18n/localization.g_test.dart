@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:projectathens/i18n/localization.dart';
+import 'package:athens_core/i18n/localization.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
