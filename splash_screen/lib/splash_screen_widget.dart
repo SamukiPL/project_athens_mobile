@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:athens_core/chopper/network_module_simple.dart';
 import 'package:athens_core/injections/module_widget.dart';
 import 'package:athens_core/navigation/app_navigation.dart';
@@ -21,17 +23,7 @@ class SplashScreenWidget extends StatelessWidget {
   }
 
   Widget _generateBody(BuildContext context, SplashScreenBloc bloc) {
-    var navigation = Provider.of<AppNavigation>(context);
-    bloc.direction.listen((direction) {
-      switch (direction) {
-        case SplashDirection.MAIN:
-          navigation.goToMainWidget(context);
-          break;
-        case SplashDirection.LOGIN:
-          navigation.goToLoginWidget(context);
-          break;
-      }
-    });
+    startListening(context, bloc);
     return Container(
       color: Colors.blueAccent,
       child: Center(
@@ -42,6 +34,24 @@ class SplashScreenWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void startListening(BuildContext context, SplashScreenBloc bloc) {
+    bloc.checkDirection();
+    var navigation = Provider.of<AppNavigation>(context);
+
+    StreamSubscription subscription;
+    subscription = bloc.direction.listen((direction) {
+      switch (direction) {
+        case SplashDirection.MAIN:
+          navigation.goToMainWidget(context);
+          break;
+        case SplashDirection.LOGIN:
+          navigation.goToLoginWidget(context);
+          break;
+      }
+      subscription.cancel();
+    });
   }
 
 }
