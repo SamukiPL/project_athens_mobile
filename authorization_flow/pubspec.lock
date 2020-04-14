@@ -176,6 +176,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.4"
+  fimber:
+    dependency: transitive
+    description:
+      name: fimber
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0"
   fixnum:
     dependency: transitive
     description:
@@ -195,6 +202,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_fimber:
+    dependency: transitive
+    description:
+      name: flutter_fimber
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0"
   flutter_secure_storage:
     dependency: "direct main"
     description:

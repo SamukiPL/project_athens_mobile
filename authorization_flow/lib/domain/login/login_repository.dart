@@ -1,8 +1,8 @@
 import 'package:authorization_flow/domain/login/login_params.dart';
-import 'package:authorization_flow/domain/login/login_response.dart';
+import 'package:athens_core/domain/result.dart';
 
 abstract class LoginRepository {
 
-  Future<LoginStatus> logIn(LoginParams params);
+  Future<Result> logIn(LoginParams params);
 
 }

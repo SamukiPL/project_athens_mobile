@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:athens_core/auth/auth_repository.dart';
 import 'package:athens_core/auth/auth_storage.dart';
-import 'package:athens_core/chopper/auth_interceptor.dart';
+import 'package:athens_core/chopper/client_errors.dart';
 import 'package:athens_core/chopper/jwt_decode.dart';
 import 'package:athens_core/presentation/base_bloc.dart';
 
@@ -14,16 +14,14 @@ class SplashScreenBloc extends BaseBloc {
 
   final AuthRepository _authRepository;
 
-  SplashScreenBloc(this._authRepository) {
-    _checkDirection();
-  }
+  SplashScreenBloc(this._authRepository);
 
   final StreamController<SplashDirection> _direction =
       StreamController<SplashDirection>();
 
   Stream<SplashDirection> get direction => _direction.stream;
 
-  Future<void> _checkDirection() async {
+  Future<void> checkDirection() async {
     var tokens = await _authStorage.provideTokens();
 
     if (tokens.accessToken == null) {

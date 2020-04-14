@@ -7,9 +7,9 @@ import 'package:project_athens/navigation/app_navigation_impl.dart';
 import 'package:project_athens/navigation/fluro_router.dart';
 import 'package:provider/provider.dart';
 
-class AppModule extends Module {
+class AppNavigationModule extends Module {
 
-  AppModule(BuildContext context) : super(context);
+  AppNavigationModule(BuildContext context) : super(context);
 
   @override
   List<SingleChildWidget> getProviders() {

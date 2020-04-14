@@ -23,4 +23,12 @@ class _$LoginApi extends LoginApi {
     final $request = Request('POST', $url, client.baseUrl, body: $body);
     return client.send<dynamic, dynamic>($request);
   }
+
+  @override
+  Future<Response<dynamic>> resetPassword(ResetPasswordRequest request) {
+    final $url = '/user-aggregator/auth/reset-password';
+    final $body = request;
+    final $request = Request('POST', $url, client.baseUrl, body: $body);
+    return client.send<dynamic, dynamic>($request);
+  }
 }

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:athens_core/chopper/auth_facade.dart';
 import 'package:chopper/chopper.dart';
 
-class AuthInterceptor implements RequestInterceptor, ResponseInterceptor {
+class AuthInterceptor implements RequestInterceptor {
 
   final AuthFacade authFacade;
 
@@ -18,12 +18,4 @@ class AuthInterceptor implements RequestInterceptor, ResponseInterceptor {
     return request;
   }
 
-  @override
-  FutureOr<Response> onResponse(Response response) {
-    if (response.statusCode == 401) throw UnauthorizedError;
-    return response;
-  }
-
 }
-
-mixin UnauthorizedError implements Exception {}

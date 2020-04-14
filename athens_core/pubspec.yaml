@@ -3,7 +3,7 @@ description: A new Flutter package.
 version: 0.0.1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -12,6 +12,7 @@ dependencies:
   chopper: ^3.0.2
   json_annotation: ^3.0.1
   flutter_secure_storage: ^3.3.2
+  flutter_fimber: ^0.4.0
   lang_generator:
     path: ../lang_generator
   pagination:

@@ -1,21 +1,23 @@
-import 'package:athens_core/chopper/network_module_simple.dart';
+import 'package:athens_core/injections/module_widget.dart';
 import 'package:authorization_flow/injections/login_widget_module.dart';
 import 'package:authorization_flow/navigation/login_navigation_bloc.dart';
+import 'package:authorization_flow/screens/login/login_screen.dart';
+import 'package:authorization_flow/screens/reset_password/reset_password_screen.dart';
+import 'package:authorization_flow/screens/registration/registration_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:athens_core/injections/module_widget.dart';
-import 'package:authorization_flow/screens/login/login_screen.dart';
-import 'package:authorization_flow/screens/registration/registration_screen.dart';
-import 'package:authorization_flow/screens/password_reset/password_reset_screen.dart';
 
 class LoginWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ModuleWidget(
-      providers: [LoginWidgetModule(context), NetworkModuleSimple(context)],
+      providers: [LoginWidgetModule(context)],
       child: Consumer<LoginNavigationBloc>(
-        builder: (context, navigation, _) => Container(
+        builder: (context, navigation, _) => WillPopScope(
+          onWillPop: () async {
+            return navigation.goBack();
+          },
           child: _getScreen(navigation.currentScreen),
         ),
       ),
@@ -28,7 +30,7 @@ class LoginWidget extends StatelessWidget {
         return RegistrationScreen();
         break;
       case LoginDestination.RESET_PASSWORD:
-        return PasswordResetScreen();
+        return ResetPasswordScreen();
         break;
       default:
         return LoginScreen();

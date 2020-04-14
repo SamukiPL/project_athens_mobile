@@ -2,6 +2,7 @@ import 'package:athens_core/auth/auth_repository_impl.dart';
 import 'package:athens_core/auth/network/auth_api.dart';
 import 'package:athens_core/chopper/auth_facade.dart';
 import 'package:athens_core/chopper/auth_interceptor.dart';
+import 'package:athens_core/chopper/error_interceptor.dart';
 import 'package:athens_core/injections/module.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +25,8 @@ class NetworkModule extends Module {
         create: (BuildContext context) =>
           ChopperClient(
             interceptors: [
-              HttpLoggingInterceptor(),
-              AuthInterceptor(authFacade)
+              AuthInterceptor(authFacade),
+              ErrorInterceptor()
             ]
         ),
         dispose: (context, client) {
