@@ -15,7 +15,7 @@ class ResetPasswordBloc extends BaseLoginBloc {
     _email = email;
   }
 
-  Future<void> resetPassword() async {
+  Future<void> call() async {
     if (_email.isEmpty) return;
 
     final params = ResetPasswordParams(_email);
