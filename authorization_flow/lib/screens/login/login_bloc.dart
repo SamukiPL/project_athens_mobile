@@ -1,21 +1,15 @@
 import 'dart:async';
 
-import 'package:athens_core/presentation/base_bloc.dart';
+import 'package:athens_core/domain/base_repository.dart';
 import 'package:authorization_flow/domain/login/login_params.dart';
-import 'package:authorization_flow/domain/login/login_response.dart';
 import 'package:authorization_flow/domain/login/login_use_case.dart';
+import 'package:authorization_flow/screens/base_login_bloc.dart';
 
-enum LoginScreenState { SUCCESS, AUTH_FAILURE, NETWORK_FAILURE }
+class LoginBloc extends BaseLoginBloc {
 
-class LoginBloc extends BaseBloc {
+  final LoginUseCase _loginUseCase;
 
-  final LoginUseCase loginUseCase;
-
-  LoginBloc(this.loginUseCase);
-
-  StreamController<LoginScreenState> _stateController = StreamController<LoginScreenState>();
-
-  Stream<LoginScreenState> get state => _stateController.stream;
+  LoginBloc(this._loginUseCase);
 
   String _login = "";
 
@@ -29,28 +23,14 @@ class LoginBloc extends BaseBloc {
     _password = password;
   }
 
-  Future<void> logIn() async {
+  Future<void> call() async {
     if (_login.isEmpty || _password.isEmpty) return;
 
     var params = LoginParams(_login, _password);
 
-    var status = await loginUseCase(params);
-    switch(status) {
-      case LoginStatus.SUCCESS:
-        _stateController.add(LoginScreenState.SUCCESS);
-        break;
-      case LoginStatus.AUTH_FAILURE:
-        _stateController.add(LoginScreenState.AUTH_FAILURE);
-        break;
-      case LoginStatus.NETWORK_FAILURE:
-        _stateController.add(LoginScreenState.NETWORK_FAILURE);
-        break;
-    }
+    var result = await _loginUseCase(params).safeApiCall();
+    manageState(result);
   }
 
-  @override
-  void dispose() {
-    _stateController.close();
-  }
 
 }
