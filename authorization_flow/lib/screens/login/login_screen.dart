@@ -33,14 +33,16 @@ class LoginScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        CircularProgressIndicator(),
         TextFormField(
           onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
           onChanged: (login) => bloc.setLogin(login),
+          textInputAction: TextInputAction.next,
         ),
         TextFormField(
           onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
           onChanged: (password) => bloc.setPassword(password),
+          textInputAction: TextInputAction.done,
+          onEditingComplete: () => bloc(),
         ),
         MaterialButton(
           child: Text("Login"),

@@ -42,10 +42,12 @@ class ResetPasswordScreen extends StatelessWidget {
         TextFormField(
           onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
           onChanged: (email) => bloc.setEmail(email),
+          textInputAction: TextInputAction.done,
+          onEditingComplete: () => bloc(),
         ),
         MaterialButton(
           child: Text("Reset"),
-          onPressed: () => bloc.resetPassword(),
+          onPressed: () => bloc(),
         ),
       ],
     );
