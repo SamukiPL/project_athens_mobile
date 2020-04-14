@@ -1,4 +1,5 @@
-import 'package:athens_core/chopper/auth_interceptor.dart';
+import 'package:athens_core/chopper/error_interceptor.dart';
+import 'package:athens_core/chopper/logging_interceptor.dart';
 import 'package:athens_core/injections/module.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,14 +10,13 @@ class NetworkModuleSimple extends Module {
   NetworkModuleSimple(BuildContext context) : super(context);
 
   @override
-  List<SingleChildWidget> getProviders() =>
-      List<SingleChildWidget>.of([
+  List<SingleChildWidget> getProviders() => List<SingleChildWidget>.of([
         Provider<ChopperClient>(
           create: (_) => ChopperClient(
             baseUrl: "http://51.38.36.119:3505",
             converter: JsonConverter(),
             errorConverter: JsonConverter(),
-            interceptors: [HttpLoggingInterceptor()],
+            interceptors: [ErrorInterceptor(), LoggingInterceptor()],
           ),
           dispose: (context, client) => client.dispose(),
         )
