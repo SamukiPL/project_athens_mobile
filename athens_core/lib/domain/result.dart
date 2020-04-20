@@ -12,7 +12,7 @@ class Success<T> implements Result<T> {
 
 }
 
-class Failure implements Result<Exception> {
+class Failure<T> implements Result<T> {
 
   final Exception exception;
 

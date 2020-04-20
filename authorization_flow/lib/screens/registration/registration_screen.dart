@@ -1,5 +1,4 @@
 import 'package:athens_core/injections/module_widget.dart';
-import 'package:athens_core/navigation/app_navigation.dart';
 import 'package:authorization_flow/injections/registration_module.dart';
 import 'package:authorization_flow/navigation/login_navigation_bloc.dart';
 import 'package:authorization_flow/screens/registration/registration_bloc.dart';
@@ -29,10 +28,10 @@ class RegistrationScreen extends StatelessWidget {
   }
 
   Widget _generateBody(BuildContext context, RegistrationBloc bloc) {
-    var appNavigation = Provider.of<AppNavigation>(context);
+    var loginNavigation = Provider.of<LoginNavigationBloc>(context);
     bloc.state.listen((state) {
       if (state == ScreenState.SUCCESS) {
-        appNavigation.goToMainWidget(context);
+        loginNavigation.setItem(LoginDestination.REGISTER_DEPUTIES);
       }
     });
     return Column(

@@ -1,6 +1,7 @@
 import 'package:athens_core/injections/module_widget.dart';
 import 'package:authorization_flow/injections/login_widget_module.dart';
 import 'package:authorization_flow/navigation/login_navigation_bloc.dart';
+import 'package:authorization_flow/screens/deputies_registration/deputies_registration_screen.dart';
 import 'package:authorization_flow/screens/login/login_screen.dart';
 import 'package:authorization_flow/screens/reset_password/reset_password_screen.dart';
 import 'package:authorization_flow/screens/registration/registration_screen.dart';
@@ -28,6 +29,9 @@ class LoginWidget extends StatelessWidget {
     switch (destination) {
       case LoginDestination.REGISTER:
         return RegistrationScreen();
+        break;
+      case LoginDestination.REGISTER_DEPUTIES:
+        return DeputiesRegistrationScreen();
         break;
       case LoginDestination.RESET_PASSWORD:
         return ResetPasswordScreen();

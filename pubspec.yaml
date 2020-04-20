@@ -30,6 +30,8 @@ dependencies:
     path: authorization_flow
   splash_screen:
     path: splash_screen
+  deputy_subscription:
+    path: deputy_subscription
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

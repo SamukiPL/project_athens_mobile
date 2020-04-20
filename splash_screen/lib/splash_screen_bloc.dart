@@ -6,6 +6,7 @@ import 'package:athens_core/auth/auth_storage.dart';
 import 'package:athens_core/chopper/client_errors.dart';
 import 'package:athens_core/chopper/jwt_decode.dart';
 import 'package:athens_core/presentation/base_bloc.dart';
+import 'package:rxdart/rxdart.dart';
 
 class SplashScreenBloc extends BaseBloc {
   final Jwt _jwt = Jwt();
@@ -17,7 +18,7 @@ class SplashScreenBloc extends BaseBloc {
   SplashScreenBloc(this._authRepository);
 
   final StreamController<SplashDirection> _direction =
-      StreamController<SplashDirection>();
+      BehaviorSubject<SplashDirection>();
 
   Stream<SplashDirection> get direction => _direction.stream;
 

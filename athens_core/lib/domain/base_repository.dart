@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:athens_core/domain/result.dart';
 
-extension BaseRepository on Future<Result> {
+extension BaseRepository<T> on Future<Result<T>> {
 
-  Future<Result> safeApiCall() async {
+  Future<Result<T>> safeApiCall() async {
     try {
       return await this;
     } catch(e) {

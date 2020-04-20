@@ -1,4 +1,4 @@
-name: authorization_flow
+name: deputy_subscription
 description: A new Flutter package.
 version: 0.0.1
 
@@ -27,4 +27,3 @@ dev_dependencies:
   json_serializable: ^3.3.0
 
 flutter:
-
