@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:athens_core/domain/base_repository.dart';
+import 'package:athens_core/presentation/base_bloc.dart';
 import 'package:authorization_flow/domain/login/login_params.dart';
 import 'package:authorization_flow/domain/login/login_use_case.dart';
-import 'package:authorization_flow/screens/base_login_bloc.dart';
 
-class LoginBloc extends BaseLoginBloc {
+class LoginBloc extends BaseBloc {
 
   final LoginUseCase _loginUseCase;
 

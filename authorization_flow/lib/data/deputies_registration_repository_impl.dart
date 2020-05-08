@@ -1,4 +1,5 @@
 import 'package:athens_core/domain/result.dart';
+import 'package:authorization_flow/data/network/request/deputy_request.dart';
 import 'package:authorization_flow/data/network/response/deputy_response.dart';
 import 'package:authorization_flow/domain/deputies_registration/deputies_registration_params.dart';
 import 'package:authorization_flow/domain/deputies_registration/deputies_registration_repository.dart';
@@ -23,6 +24,16 @@ class DeputiesRegistrationRepositoryImpl
         deputies.map((response) => responseToModel(response)).toList());
   }
 
+  @override
+  Future<Result> putDeputies(
+      DeputiesRegistrationParams params, List<DeputyModel> models) async {
+    final request = DeputyRequest(models
+        .map((model) => Deputy(model.deputyId, Notifications()))
+        .toList());
+    final response = await deputiesApi.putDeputies(params.cadency, request);
+    return Success<int>(response.statusCode);
+  }
+
   DeputyModel responseToModel(DeputyResponse response) =>
-      DeputyModel(name: response.name);
+      DeputyModel(deputyId: response.deputyId, name: response.name);
 }

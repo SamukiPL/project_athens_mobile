@@ -1,7 +1,6 @@
 import 'package:athens_core/injections/module.dart';
 import 'package:authorization_flow/data/deputies_registration_repository_impl.dart';
 import 'package:authorization_flow/data/network/deputies_api.dart';
-import 'package:authorization_flow/domain/deputies_registration/deputies_registration_repository.dart';
 import 'package:authorization_flow/domain/deputies_registration/deputies_registration_use_case.dart';
 import 'package:authorization_flow/screens/deputies_registration/deputies_registration_bloc.dart';
 import 'package:chopper/chopper.dart';

@@ -1,0 +1,20 @@
+name: video_flow
+description: A new Flutter package.
+version: 0.0.1
+
+environment:
+  sdk: ">=2.6.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^4.0.5
+  flutter_vlc_player: ^2.0.0
+  athens_core:
+    path: ../athens_core
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:

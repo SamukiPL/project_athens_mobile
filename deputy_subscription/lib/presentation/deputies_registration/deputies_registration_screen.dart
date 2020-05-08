@@ -23,6 +23,10 @@ class DeputiesRegistrationScreen extends BaseScreen<DeputiesRegistrationBloc> {
     return null;
   }
 
-
+  @override
+  Widget buildFloatingActionButton(BuildContext context, DeputiesRegistrationBloc bloc) {
+    // TODO: implement buildFloatingActionButton
+    return null;
+  }
 
 }

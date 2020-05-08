@@ -3,6 +3,7 @@ import 'package:athens_core/auth/network/auth_api.dart';
 import 'package:athens_core/chopper/auth_facade.dart';
 import 'package:athens_core/chopper/auth_interceptor.dart';
 import 'package:athens_core/chopper/error_interceptor.dart';
+import 'package:athens_core/chopper/logging_interceptor.dart';
 import 'package:athens_core/injections/module.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,6 @@ import 'package:nested/nested.dart';
 import 'package:provider/provider.dart';
 
 class NetworkModule extends Module {
-
   NetworkModule(BuildContext context) : super(context);
 
   @override
@@ -23,12 +23,12 @@ class NetworkModule extends Module {
     return [
       Provider<ChopperClient>(
         create: (BuildContext context) =>
-          ChopperClient(
-            interceptors: [
-              AuthInterceptor(authFacade),
-              ErrorInterceptor()
-            ]
-        ),
+            ChopperClient(
+                baseUrl: "http://51.38.36.119:3505",
+                converter: JsonConverter(),
+                errorConverter: JsonConverter(),
+                interceptors: [AuthInterceptor(authFacade), ErrorInterceptor(),
+                LoggingInterceptor()]),
         dispose: (context, client) {
           authApi.dispose();
           refreshClient.dispose();
@@ -43,8 +43,7 @@ class NetworkModule extends Module {
       baseUrl: "http://51.38.36.119:3505",
       converter: JsonConverter(),
       errorConverter: JsonConverter(),
-      interceptors: [HttpLoggingInterceptor()],
+      interceptors: [LoggingInterceptor()],
     );
   }
-
 }

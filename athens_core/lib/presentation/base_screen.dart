@@ -16,17 +16,18 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget {
   Widget build(BuildContext context) {
     return ModuleWidget(
         providers: getProviders(context),
-        child: Scaffold(
-          appBar: buildAppBar(context),
-          body: Consumer<BLOC>(
-            builder: (context, bloc, _) => buildBody(context, bloc),
+        child: Consumer<BLOC>(
+        builder: (context, bloc, _) => Scaffold(
+            appBar: buildAppBar(context, bloc),
+            body: buildBody(context, bloc),
+            floatingActionButton: buildFloatingActionButton(context, bloc),
           ),
         ));
   }
 
   Widget buildBody(BuildContext context, BLOC bloc);
   
-  AppBar buildAppBar(BuildContext context) {
+  Widget buildAppBar(BuildContext context, BLOC bloc) {
     return AppBar(
       leading: Visibility(
         visible: showBackArrow,
@@ -35,5 +36,7 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget {
       title: Text(appBarTitle),
     );
   }
+
+  Widget buildFloatingActionButton(BuildContext context, BLOC bloc);
 
 }

@@ -47,6 +47,16 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
   }
 
   @override
+  Widget generateAppBar(BuildContext context, LoginBloc bloc) {
+    return null;
+  }
+
+  @override
+  Widget generateFab(BuildContext context, LoginBloc bloc) {
+    return null;
+  }
+
+  @override
   void onAuthFailure() {
     // TODO: implement onAuthFailure
   }

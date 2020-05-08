@@ -16,7 +16,7 @@ DeputyResponse _$DeputyResponseFromJson(Map<String, dynamic> json) {
     json['parliamentClub'] as String,
     json['cardNumber'] as int,
     json['deputyId'] as String,
-    json['isAcitve'] as bool,
+    json['isActive'] as bool,
     json['cv'] == null
         ? null
         : CvBean.fromJson(json['cv'] as Map<String, dynamic>),
@@ -37,7 +37,7 @@ Map<String, dynamic> _$DeputyResponseToJson(DeputyResponse instance) =>
       'parliamentClub': instance.parliamentClub,
       'cardNumber': instance.cardNumber,
       'deputyId': instance.deputyId,
-      'isAcitve': instance.isActive,
+      'isActive': instance.isActive,
       'cv': instance.cv,
       'contact': instance.contact,
       'createAt': instance.createAt,

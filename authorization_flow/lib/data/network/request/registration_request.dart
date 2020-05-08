@@ -11,31 +11,17 @@ class RegistrationRequest {
   final String login;
   final String email;
   final String password;
-  final Subscribed subscribed;
 
-  RegistrationRequest({this.firstName, this.lastName, this.login, this.email, this.password, this.subscribed});
+  RegistrationRequest({this.firstName, this.lastName, this.login, this.email, this.password});
 
   RegistrationRequest.fromParams(RegistrationParams params) :
     firstName = params.firstName,
     lastName = params.lastName,
     login = params.login,
     email = params.email,
-    password = params.password,
-    subscribed = Subscribed(params.deputies);
+    password = params.password;
 
   factory RegistrationRequest.fromJson(Map<String, dynamic> json) => _$RegistrationRequestFromJson(json);
   Map<String, dynamic> toJson() => _$RegistrationRequestToJson(this);
-
-}
-
-@JsonSerializable()
-class Subscribed {
-
-  final List<String> deputies;
-
-  Subscribed(this.deputies);
-
-  factory Subscribed.fromJson(Map<String, dynamic> json) => _$SubscribedFromJson(json);
-  Map<String, dynamic> toJson() => _$SubscribedToJson(this);
 
 }

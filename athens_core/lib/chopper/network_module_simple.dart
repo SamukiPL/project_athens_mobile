@@ -10,15 +10,30 @@ class NetworkModuleSimple extends Module {
   NetworkModuleSimple(BuildContext context) : super(context);
 
   @override
-  List<SingleChildWidget> getProviders() => List<SingleChildWidget>.of([
-        Provider<ChopperClient>(
-          create: (_) => ChopperClient(
-            baseUrl: "http://51.38.36.119:3505",
-            converter: JsonConverter(),
-            errorConverter: JsonConverter(),
-            interceptors: [ErrorInterceptor(), LoggingInterceptor()],
-          ),
-          dispose: (context, client) => client.dispose(),
-        )
-      ]);
+  List<SingleChildWidget> getProviders() {
+    final client = ChopperClient(
+      baseUrl: "http://51.38.36.119:3505",
+      converter: JsonConverter(),
+      errorConverter: JsonConverter(),
+      interceptors: [ErrorInterceptor(), LoggingInterceptor()],
+    );
+    return List<SingleChildWidget>.of([
+      Provider<SimpleChopperClient>(
+        create: (_) => SimpleChopperClient(client),
+        dispose: (context, client) => client.dispose(),
+      )
+    ]);
+  }
+}
+
+class SimpleChopperClient {
+
+  final ChopperClient client;
+
+  SimpleChopperClient(this.client);
+
+  void dispose() {
+    client.dispose();
+  }
+
 }

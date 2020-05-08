@@ -30,12 +30,17 @@ class DeputiesRegistrationBloc extends BaseBloc
   }
 
   @override
-  void loadMore() {
-    // TODO: implement loadMore
+  void dispose() {
+    // TODO: implement dispose
   }
 
   @override
-  void dispose() {
-    // TODO: implement dispose
+  Future<void> refresh() async {
+    // TODO: implement refresh
+  }
+
+  @override
+  Future<void> loadMore() async {
+    // TODO: implement loadMore
   }
 }

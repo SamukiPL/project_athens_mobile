@@ -8,6 +8,8 @@ abstract class PagingBloc<ITEM> {
 
   PagingListAdapter<ITEM> adapter;
 
-  void loadMore();
+  Future<void> loadMore();
+
+  Future<void> refresh();
 
 }

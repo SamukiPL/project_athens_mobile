@@ -1,40 +1,31 @@
-import 'package:athens_core/injections/module_widget.dart';
+import 'package:athens_core/injections/module.dart';
 import 'package:athens_core/navigation/app_navigation.dart';
 import 'package:authorization_flow/injections/reset_password_module.dart';
 import 'package:authorization_flow/navigation/login_navigation_bloc.dart';
-import 'package:authorization_flow/screens/base_login_bloc.dart';
+import 'package:authorization_flow/screens/base_login_screen.dart';
 import 'package:authorization_flow/screens/reset_password/reset_password_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ResetPasswordScreen extends StatelessWidget {
+class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
   @override
-  Widget build(BuildContext context) {
+  List<Module> getProviders(BuildContext context) {
+    return [ResetPasswordModule(context)];
+  }
+
+  @override
+  Widget generateAppBar(BuildContext context, ResetPasswordBloc bloc) {
     final loginNavigation = Provider.of<LoginNavigationBloc>(context);
-    return ModuleWidget(
-      providers: [ResetPasswordModule(context)],
-      child: Scaffold(
-        appBar: AppBar(
-          leading: BackButton(
-            onPressed: () => loginNavigation.goBack(),
-          ),
-          title: Text("Reset"),
-        ),
-        body: Center(
-          child: Consumer<ResetPasswordBloc>(
-            builder: (context, bloc, _) => _buildBody(context, bloc),
-          ),
-        ),
+    return AppBar(
+      leading: BackButton(
+        onPressed: () => loginNavigation.goBack(),
       ),
+      title: Text("Reset"),
     );
   }
 
-  Widget _buildBody(BuildContext context, ResetPasswordBloc bloc) {
-    final appNavigation = Provider.of<AppNavigation>(context);
-    bloc.state.listen((state) {
-      if (state == ScreenState.SUCCESS)
-        appNavigation.goToLoginWidget(context);
-    });
+  @override
+  Widget generateBody(BuildContext context, ResetPasswordBloc bloc) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,5 +42,21 @@ class ResetPasswordScreen extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  @override
+  Widget generateFab(BuildContext context, ResetPasswordBloc bloc) {
+    return null;
+  }
+
+  @override
+  void onAuthFailure() {
+    // TODO: implement onAuthFailure
+  }
+
+  @override
+  void onSuccess(BuildContext context) {
+    var loginNavigation = Provider.of<LoginNavigationBloc>(context, listen: false);
+    loginNavigation.setItem(LoginDestination.LOGIN);
   }
 }

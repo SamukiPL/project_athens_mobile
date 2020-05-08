@@ -1,9 +1,9 @@
+import 'package:athens_core/domain/base_repository.dart';
+import 'package:athens_core/presentation/base_bloc.dart';
 import 'package:authorization_flow/domain/reset_password/reset_password_params.dart';
 import 'package:authorization_flow/domain/reset_password/reset_password_use_case.dart';
-import 'package:authorization_flow/screens/base_login_bloc.dart';
-import 'package:athens_core/domain/base_repository.dart';
 
-class ResetPasswordBloc extends BaseLoginBloc {
+class ResetPasswordBloc extends BaseBloc {
 
   final ResetPasswordUseCase _resetPasswordUseCase;
 

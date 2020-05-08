@@ -13,9 +13,9 @@ class AuthInterceptor implements RequestInterceptor {
   FutureOr<Request> onRequest(Request request) async {
     final accessToken = await authFacade.accessToken;
 
-    request.headers.addAll({ "Authorization": accessToken});
+    Map<String, String> authHeaders = {"Authorization": "bearer $accessToken"};
 
-    return request;
+    return applyHeaders(request, authHeaders);
   }
 
 }

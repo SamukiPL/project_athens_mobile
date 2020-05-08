@@ -1,39 +1,26 @@
-import 'package:athens_core/injections/module_widget.dart';
+import 'package:athens_core/injections/module.dart';
 import 'package:authorization_flow/injections/registration_module.dart';
 import 'package:authorization_flow/navigation/login_navigation_bloc.dart';
+import 'package:authorization_flow/screens/base_login_screen.dart';
 import 'package:authorization_flow/screens/registration/registration_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../base_login_bloc.dart';
+class RegistrationScreen extends BaseLoginScreen<RegistrationBloc> {
 
-class RegistrationScreen extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget generateAppBar(BuildContext context, RegistrationBloc bloc) {
     final loginNavigation = Provider.of<LoginNavigationBloc>(context);
-    return ModuleWidget(
-      providers: [RegistrationModule(context)],
-      child: Consumer<RegistrationBloc>(
-        builder: (context, bloc, _) => Scaffold(
-          appBar: AppBar(
-            leading: BackButton(
-              onPressed: () => loginNavigation.goBack(),
-            ),
-            title: Text("Registration"),
-          ),
-          body: _generateBody(context, bloc),
-        ),
+    return AppBar(
+      leading: BackButton(
+        onPressed: () => loginNavigation.goBack(),
       ),
+      title: Text("Registration"),
     );
   }
 
-  Widget _generateBody(BuildContext context, RegistrationBloc bloc) {
-    var loginNavigation = Provider.of<LoginNavigationBloc>(context);
-    bloc.state.listen((state) {
-      if (state == ScreenState.SUCCESS) {
-        loginNavigation.setItem(LoginDestination.REGISTER_DEPUTIES);
-      }
-    });
+  @override
+  Widget generateBody(BuildContext context, RegistrationBloc bloc) {
     return Column(
       children: <Widget>[
         TextFormField(
@@ -73,6 +60,27 @@ class RegistrationScreen extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  @override
+  Widget generateFab(BuildContext context, RegistrationBloc bloc) {
+    return null;
+  }
+
+  @override
+  List<Module> getProviders(BuildContext context) {
+    return [RegistrationModule(context)];
+  }
+
+  @override
+  void onAuthFailure() {
+    // TODO: implement onAuthFailure
+  }
+
+  @override
+  void onSuccess(BuildContext context) {
+    var loginNavigation = Provider.of<LoginNavigationBloc>(context, listen: false);
+    loginNavigation.setItem(LoginDestination.REGISTER_DEPUTIES);
   }
 
 }

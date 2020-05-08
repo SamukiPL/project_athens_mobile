@@ -1,5 +1,7 @@
 import 'package:authorization_flow/screens/deputies_registration/list/deputy_item_view_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DeputyViewHolder extends StatelessWidget {
 
@@ -9,10 +11,15 @@ class DeputyViewHolder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Text(viewModel.name),
-      ],
+    return ChangeNotifierProvider.value(
+      value: viewModel,
+      child: Consumer<DeputyItemViewModel>(
+        builder: (context, viewModel, _) => CheckboxListTile(
+          value: viewModel.checked,
+          onChanged: (checked) => viewModel.setChecked(checked),
+          title: Text(viewModel.name),
+        ),
+      ),
     );
   }
 

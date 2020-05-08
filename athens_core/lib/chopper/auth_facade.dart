@@ -12,8 +12,10 @@ class AuthFacade {
   final AuthRepository _repository;
 
   AuthFacade(this._repository) {
-    _provideTokens();
+    initialization = _provideTokens();
   }
+
+  Future initialization;
 
   String _accessToken;
   String _refreshToken;
@@ -30,6 +32,7 @@ class AuthFacade {
   }
 
   Future<String> _manageAccessToken() async {
+    await initialization;
     var now = DateTime.now().millisecondsSinceEpoch / 1000;
     if (now < _tokenExp) return _accessToken;
 

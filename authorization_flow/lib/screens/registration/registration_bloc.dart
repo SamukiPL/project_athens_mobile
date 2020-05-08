@@ -1,8 +1,8 @@
+import 'package:athens_core/presentation/base_bloc.dart';
 import 'package:authorization_flow/domain/registration/registration_params.dart';
 import 'package:authorization_flow/domain/registration/registration_use_case.dart';
-import 'package:authorization_flow/screens/base_login_bloc.dart';
 
-class RegistrationBloc extends BaseLoginBloc {
+class RegistrationBloc extends BaseBloc {
   final RegistrationUseCase _registrationUseCase;
 
   RegistrationBloc(this._registrationUseCase);

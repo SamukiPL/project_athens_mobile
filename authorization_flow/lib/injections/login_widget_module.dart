@@ -1,3 +1,4 @@
+import 'package:athens_core/chopper/network_module_simple.dart';
 import 'package:authorization_flow/data/network/login_api.dart';
 import 'package:authorization_flow/navigation/login_navigation_bloc.dart';
 import 'package:chopper/chopper.dart';
@@ -12,14 +13,14 @@ class LoginWidgetModule extends Module {
 
   @override
   List<SingleChildWidget> getProviders() {
-    ChopperClient client = Provider.of<ChopperClient>(context);
+    final client = Provider.of<SimpleChopperClient>(context);
 
     return List<SingleChildWidget>.of([
       ChangeNotifierProvider(
         create: (_) => LoginNavigationBloc(),
       ),
       Provider<LoginApi>(
-        create: (_) => LoginApi.create(client),
+        create: (_) => LoginApi.create(client.client),
         dispose: (_, api) => api.dispose(),
       )
     ]);
