@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "103077248308",
+    "firebase_url": "https://athens-35e8a.firebaseio.com",
+    "project_id": "athens-35e8a",
+    "storage_bucket": "athens-35e8a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:103077248308:android:9736045506a42b71d5f961",
+        "android_client_info": {
+          "package_name": "dev.alpaka.projectathens"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "103077248308-i9tto8rt22al99bns31cjkgmfd4d913l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYtnERkInOCWGWdi3XhpTbMHOmJ-5txNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "103077248308-i9tto8rt22al99bns31cjkgmfd4d913l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

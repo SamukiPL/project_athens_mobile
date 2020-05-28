@@ -43,7 +43,7 @@ class NetworkModule extends Module {
       baseUrl: "http://51.38.36.119:3505",
       converter: JsonConverter(),
       errorConverter: JsonConverter(),
-      interceptors: [LoggingInterceptor()],
+      interceptors: [LoggingInterceptor(), ErrorInterceptor()],
     );
   }
 }

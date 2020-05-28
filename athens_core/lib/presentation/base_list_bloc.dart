@@ -22,9 +22,6 @@ abstract class BaseListBloc<MODEL extends BaseModel, ITEM extends BaseItemViewMo
   }
 
   @override
-  PagingListAdapter<ITEM> adapter;
-
-  @override
   int batchSize = 20;
 
   @override

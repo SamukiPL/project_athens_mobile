@@ -12,7 +12,7 @@ class DeputiesList extends PagingList<DeputyItemViewModel> {
   StatelessWidget get progressView => ProgressViewHolder();
 
   @override
-  StatelessWidget getItemViewHolder(DeputyItemViewModel item) {
+  StatelessWidget getItemViewHolder(DeputyItemViewModel item, int index, int length) {
     return DeputyViewHolder(viewModel: item);
   }
 }

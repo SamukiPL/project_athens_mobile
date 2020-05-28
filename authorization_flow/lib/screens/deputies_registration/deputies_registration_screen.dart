@@ -1,4 +1,6 @@
+import 'package:athens_core/chopper/network_module.dart';
 import 'package:athens_core/injections/module.dart';
+import 'package:athens_core/injections/module_widget.dart';
 import 'package:athens_core/navigation/app_navigation.dart';
 import 'package:athens_core/presentation/fab/base_fab.dart';
 import 'package:athens_core/presentation/search_app_bar/search_app_bar.dart';
@@ -10,6 +12,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+class TestScreen extends StatelessWidget{
+
+  @override
+  Widget build(BuildContext context) {
+    return ModuleWidget(
+      providers: [NetworkModule(context)],
+      child: DeputiesRegistrationScreen(),
+    );
+  }
+
+}
+
 class DeputiesRegistrationScreen extends BaseLoginScreen<DeputiesRegistrationBloc> {
 
   @override
@@ -20,11 +34,11 @@ class DeputiesRegistrationScreen extends BaseLoginScreen<DeputiesRegistrationBlo
   @override
   Widget generateAppBar(BuildContext context, DeputiesRegistrationBloc bloc) {
     return SearchAppBar(
-        title: "Subscribe",
+        title: "Subskrypcja posłów",
         hintText: "Search...",
         showBackArrow: false,
         searchQuery: (searchQuery) => {bloc.setSearchQuery(searchQuery)},
-        additionalIcons: [IconButton(icon: Icon(Icons.forward), onPressed: () {},)]
+//        additionalIcons: [IconButton(icon: Icon(Icons.forward), onPressed: () {},)]
     );
   }
 

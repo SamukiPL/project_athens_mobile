@@ -1,3 +1,4 @@
+import 'package:athens_core/i18n/localization.dart';
 import 'package:athens_core/injections/module.dart';
 import 'package:athens_core/injections/module_widget.dart';
 import 'package:athens_core/presentation/base_bloc.dart';

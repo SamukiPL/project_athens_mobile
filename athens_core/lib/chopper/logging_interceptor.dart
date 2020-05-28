@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:chopper/chopper.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 
 class LoggingInterceptor implements RequestInterceptor, ResponseInterceptor {
@@ -15,7 +16,7 @@ class LoggingInterceptor implements RequestInterceptor, ResponseInterceptor {
   @override
   FutureOr<Response> onResponse(Response response) {
     Fimber.i(response.headers.toString());
-    Fimber.i(response.body.toString());
+    debugPrint(response.body.toString(), wrapWidth: 1024);
     return response;
   }
 

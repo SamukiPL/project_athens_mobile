@@ -31,7 +31,7 @@ class LoginWidget extends StatelessWidget {
         return RegistrationScreen();
         break;
       case LoginDestination.REGISTER_DEPUTIES:
-        return DeputiesRegistrationScreen();
+        return TestScreen();
         break;
       case LoginDestination.RESET_PASSWORD:
         return ResetPasswordScreen();

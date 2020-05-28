@@ -19,6 +19,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  firebase_crashlytics: ^0.1.3+3
   provider: ^4.0.5
   fluro: ^1.6.3
   floor: ^0.12.0
@@ -30,6 +33,8 @@ dependencies:
     path: authorization_flow
   splash_screen:
     path: splash_screen
+  timeline_flow:
+    path: timeline_flow
   deputy_subscription:
     path: deputy_subscription
   video_flow:

@@ -8,6 +8,7 @@ class DeputyResponse {
   final int cadency;
   final String name;
   final String reversedName;
+  final String photoUrl;
   final String politicalParty;
   final String parliamentClub;
   final int cardNumber;
@@ -17,7 +18,7 @@ class DeputyResponse {
   final ContactBean contact;
   final String createAt;
 
-  DeputyResponse(this.id, this.cadency, this.name, this.reversedName, this.politicalParty, this.parliamentClub, this.cardNumber, this.deputyId, this.isActive, this.cv, this.contact, this.createAt);
+  DeputyResponse(this.id, this.cadency, this.name, this.reversedName, this.photoUrl, this.politicalParty, this.parliamentClub, this.cardNumber, this.deputyId, this.isActive, this.cv, this.contact, this.createAt);
 
   factory DeputyResponse.fromJson(Map<String, dynamic> json) => _$DeputyResponseFromJson(json);
   Map<String, dynamic> toJson() => _$DeputyResponseToJson(this);

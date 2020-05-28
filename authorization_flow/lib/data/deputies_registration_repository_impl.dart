@@ -35,5 +35,5 @@ class DeputiesRegistrationRepositoryImpl
   }
 
   DeputyModel responseToModel(DeputyResponse response) =>
-      DeputyModel(deputyId: response.deputyId, name: response.name);
+      DeputyModel(deputyId: response.deputyId, name: response.name, thumbnailUrl: response.photoUrl, club: response.parliamentClub);
 }

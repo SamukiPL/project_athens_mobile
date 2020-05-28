@@ -23,7 +23,7 @@ class AppLocalizations {
   AppLocalizationsGenerated _generated;
 
   Future<bool> load() async {
-    String data = await rootBundle.loadString('nlh_resources/lang/${this.locale.languageCode}.json');
+    String data = await rootBundle.loadString('resources/lang/${this.locale.languageCode}.json');
     _words = json.decode(data);
 
     _generated = AppLocalizationsGenerated(_words);

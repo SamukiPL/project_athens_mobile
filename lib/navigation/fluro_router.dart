@@ -1,5 +1,6 @@
 import 'package:athens_core/chopper/network_module.dart';
 import 'package:athens_core/chopper/network_module_simple.dart';
+import 'package:athens_core/i18n/localization_module.dart';
 import 'package:athens_core/injections/module_widget.dart';
 import 'package:authorization_flow/login_widget.dart';
 import 'package:fluro/fluro.dart';
@@ -19,7 +20,7 @@ extension FluroRouter on Router {
     Handler loginHandler = Handler(
         handlerFunc: (context, params) =>
             ModuleWidget(
-              providers: [AppNavigationModule(context), NetworkModuleSimple(context), NetworkModule(context)],
+              providers: [AppNavigationModule(context), NetworkModuleSimple(context), LocalizationModule(context)],
               child: LoginWidget(),
             ));
     Handler homeHandler =
