@@ -36,9 +36,9 @@ Map<String, dynamic> _$DeputyToJson(Deputy instance) => <String, dynamic>{
 
 Notifications _$NotificationsFromJson(Map<String, dynamic> json) {
   return Notifications(
-    vote: json['vote'] as bool,
-    speech: json['speech'] as bool,
-    interpolation: json['interpolation'] as bool,
+    json['vote'] as bool,
+    json['speech'] as bool,
+    json['interpolation'] as bool,
   );
 }
 

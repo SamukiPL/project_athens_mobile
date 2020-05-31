@@ -31,7 +31,7 @@ class DeputyViewHolder extends StatelessWidget {
                   getNameAndClub(context),
                   getVotingType(context),
                   getSpeechType(context),
-                  getFile(context)
+                  getInterpolationType(context)
                 ],
               ),
             ),
@@ -44,17 +44,11 @@ class DeputyViewHolder extends StatelessWidget {
   Widget getCheckIcon(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: 4, right: 4),
-      child: (viewModel.checked)
-          ? Icon(
-              Icons.check_circle,
-              color: Theme.of(context).primaryColor,
+      child: Icon(
+        (viewModel.checked) ? Icons.check_circle : Icons.check_circle_outline,
+        color: getCheckColor(context, viewModel.checked),
         size: 32,
-            )
-          : Icon(
-              Icons.check_circle_outline,
-              color: Theme.of(context).dividerColor,
-        size: 32,
-            ),
+      ),
     );
   }
 
@@ -106,32 +100,47 @@ class DeputyViewHolder extends StatelessWidget {
   }
 
   Widget getVotingType(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 4),
-      child: Icon(
-        MdiIcons.vote,
-        color: Theme.of(context).dividerColor,
-      ),
+    return getTypeIcon(
+      context,
+      () => viewModel.setVote(!viewModel.vote),
+      MdiIcons.vote,
+      viewModel.vote,
     );
   }
 
   Widget getSpeechType(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 4),
-      child: Icon(
-        Icons.record_voice_over,
-        color: Theme.of(context).dividerColor,
+    return getTypeIcon(
+      context,
+      () => viewModel.setSpeech(!viewModel.speech),
+      Icons.record_voice_over,
+      viewModel.speech,
+    );
+  }
+
+  Widget getInterpolationType(BuildContext context) {
+    return getTypeIcon(
+        context,
+        () => viewModel.setInterpolation(!viewModel.interpolation),
+        Icons.insert_drive_file,
+        viewModel.interpolation);
+  }
+
+  Widget getTypeIcon(BuildContext context, Function tapFunction, IconData icon, bool checked) {
+    return GestureDetector(
+      onTap: tapFunction,
+      child: Container(
+        margin: EdgeInsets.only(right: 4),
+        child: Icon(
+          icon,
+          color: getCheckColor(context, checked),
+        ),
       ),
     );
   }
 
-  Widget getFile(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 4),
-      child: Icon(
-        Icons.insert_drive_file,
-        color: Theme.of(context).dividerColor,
-      ),
-    );
+  Color getCheckColor(BuildContext context, bool checked) {
+    return (checked)
+        ? Theme.of(context).primaryColor
+        : Theme.of(context).dividerColor;
   }
 }

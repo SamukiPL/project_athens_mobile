@@ -5,6 +5,7 @@ import 'package:athens_core/presentation/fab/fab_bloc.dart';
 import 'package:authorization_flow/domain/deputies_registration/deputies_registration_params.dart';
 import 'package:authorization_flow/domain/deputies_registration/deputies_registration_use_case.dart';
 import 'package:authorization_flow/domain/deputies_registration/deputy_model.dart';
+import 'package:authorization_flow/domain/deputies_registration/put_deputy_model.dart';
 import 'package:authorization_flow/screens/deputies_registration/list/deputy_item_view_model.dart';
 import 'package:authorization_flow/screens/deputies_registration/list/deputy_item_view_model_factory.dart';
 import 'package:pagination/paging_bloc.dart';
@@ -81,7 +82,8 @@ class DeputiesRegistrationBloc extends BaseBloc
         DeputiesRegistrationParams(9),
         _items
             .where((item) => item.checked)
-            .map((item) => item.model)
+            .map((item) => PutDeputyModel(item.model.deputyId, item.vote,
+                item.speech, item.interpolation))
             .toList());
     manageState(result);
   }

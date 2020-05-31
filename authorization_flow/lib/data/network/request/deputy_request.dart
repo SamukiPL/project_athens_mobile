@@ -34,7 +34,7 @@ class Notifications {
   final bool speech;
   final bool interpolation;
 
-  Notifications({this.vote = true, this.speech = true, this.interpolation = true});
+  Notifications(this.vote, this.speech, this.interpolation);
 
   factory Notifications.fromJson(Map<String, dynamic> json) => _$NotificationsFromJson(json);
   Map<String, dynamic> toJson() => _$NotificationsToJson(this);

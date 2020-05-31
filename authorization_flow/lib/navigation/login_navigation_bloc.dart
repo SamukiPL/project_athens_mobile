@@ -4,7 +4,7 @@ import 'package:athens_core/ext/list_extension.dart';
 enum LoginDestination { LOGIN, REGISTER, REGISTER_DEPUTIES, RESET_PASSWORD }
 
 class LoginNavigationBloc extends BaseChangeNotifier {
-  List<LoginDestination> _popStack = List.of([LoginDestination.LOGIN]);
+  List<LoginDestination> _popStack = List.of([LoginDestination.REGISTER_DEPUTIES]);
 
   LoginDestination get currentScreen => _popStack.last;
 
