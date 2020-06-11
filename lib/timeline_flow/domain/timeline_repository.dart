@@ -1,0 +1,7 @@
+import 'package:project_athens/athens_core/domain/result.dart';
+
+abstract class TimelineRepository {
+
+  Future<Result> getTimelineForDay(int cadency, String date);
+
+}
