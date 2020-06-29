@@ -147,12 +147,23 @@ class SpeechViewHolder extends StatelessWidget {
               Container(
                 width: double.infinity,
                 child: Text(
+                  "Wypowiedź",
+                  style: TextStyle(
+                    color: Theme.of(context).dividerColor,
+                    fontSize: 10
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              ),
+              Container(
+                width: double.infinity,
+                child: Text(
                   viewModel.title,
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 16),
-                  maxLines: 1,
+                  maxLines: 2,
                   textAlign: TextAlign.left,
                 ),
               ),

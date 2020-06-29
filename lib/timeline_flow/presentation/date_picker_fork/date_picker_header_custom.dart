@@ -34,9 +34,6 @@ class DatePickerHeader extends StatelessWidget {
     @required this.titleStyle,
     @required this.orientation,
     this.isShort = false,
-    @required this.icon,
-    @required this.iconTooltip,
-    @required this.onIconPressed,
   }) : assert(helpText != null),
         assert(orientation != null),
         assert(isShort != null),
@@ -69,20 +66,6 @@ class DatePickerHeader extends StatelessWidget {
   /// landscape orientation, in order to account for the keyboard height.
   final bool isShort;
 
-  /// The mode-switching icon that will be displayed in the lower right
-  /// in portrait, and lower left in landscape.
-  ///
-  /// The available icons are described in [Icons].
-  final IconData icon;
-
-  /// The text that is displayed for the tooltip of the icon.
-  final String iconTooltip;
-
-  /// Callback when the user taps the icon in the header.
-  ///
-  /// The picker will use this to toggle between entry modes.
-  final VoidCallback onIconPressed;
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -111,12 +94,6 @@ class DatePickerHeader extends StatelessWidget {
       maxLines: (isShort || orientation == Orientation.portrait) ? 1 : 2,
       overflow: TextOverflow.ellipsis,
     );
-    final IconButton icon = IconButton(
-      icon: Icon(this.icon),
-      color: onPrimarySurfaceColor,
-      tooltip: iconTooltip,
-      onPressed: onIconPressed,
-    );
 
     switch (orientation) {
       case Orientation.portrait:
@@ -139,7 +116,6 @@ class DatePickerHeader extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Expanded(child: title),
-                      icon,
                     ],
                   ),
                 ],
@@ -176,7 +152,6 @@ class DatePickerHeader extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                       horizontal: 4,
                     ),
-                    child: icon,
                   ),
                 ],
               ),

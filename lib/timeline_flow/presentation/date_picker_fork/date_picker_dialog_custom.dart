@@ -14,8 +14,6 @@ import 'date_utils.dart';
 
 const Size _calendarPortraitDialogSize = Size(330.0, 518.0);
 const Size _calendarLandscapeDialogSize = Size(496.0, 346.0);
-const Size _inputPortraitDialogSize = Size(330.0, 270.0);
-const Size _inputLandscapeDialogSize = Size(496, 160.0);
 const Duration _dialogSizeAnimationDuration = Duration(milliseconds: 200);
 
 /// Shows a dialog containing a Material Design date picker.
@@ -250,49 +248,21 @@ class _DatePickerDialog extends StatefulWidget {
 
 class _DatePickerDialogState extends State<_DatePickerDialog> {
 
-  DatePickerEntryMode _entryMode;
   DateTime _selectedDate;
-  bool _autoValidate;
   final GlobalKey _calendarPickerKey = GlobalKey();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    _entryMode = widget.initialEntryMode;
     _selectedDate = widget.initialDate;
-    _autoValidate = false;
   }
 
   void _handleOk() {
-    if (_entryMode == DatePickerEntryMode.input) {
-      final FormState form = _formKey.currentState;
-      if (!form.validate()) {
-        setState(() => _autoValidate = true);
-        return;
-      }
-      form.save();
-    }
     Navigator.pop(context, _selectedDate);
   }
 
   void _handleCancel() {
     Navigator.pop(context);
-  }
-
-  void _handelEntryModeToggle() {
-    setState(() {
-      switch (_entryMode) {
-        case DatePickerEntryMode.calendar:
-          _autoValidate = false;
-          _entryMode = DatePickerEntryMode.input;
-          break;
-        case DatePickerEntryMode.input:
-          _formKey.currentState.save();
-          _entryMode = DatePickerEntryMode.calendar;
-          break;
-      }
-    });
   }
 
   void _handleDateChanged(DateTime date) {
@@ -301,23 +271,11 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
 
   Size _dialogSize(BuildContext context) {
     final Orientation orientation = MediaQuery.of(context).orientation;
-    switch (_entryMode) {
-      case DatePickerEntryMode.calendar:
-        switch (orientation) {
-          case Orientation.portrait:
-            return _calendarPortraitDialogSize;
-          case Orientation.landscape:
-            return _calendarLandscapeDialogSize;
-        }
-        break;
-      case DatePickerEntryMode.input:
-        switch (orientation) {
-          case Orientation.portrait:
-            return _inputPortraitDialogSize;
-          case Orientation.landscape:
-            return _inputLandscapeDialogSize;
-        }
-        break;
+    switch (orientation) {
+      case Orientation.portrait:
+        return _calendarPortraitDialogSize;
+      case Orientation.landscape:
+        return _calendarLandscapeDialogSize;
     }
     return null;
   }
@@ -325,7 +283,6 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final ColorScheme colorScheme = theme.colorScheme;
     final MaterialLocalizations localizations = MaterialLocalizations.of(context);
     final Orientation orientation = MediaQuery.of(context).orientation;
     final TextTheme textTheme = theme.textTheme;
@@ -357,59 +314,23 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
       ],
     );
 
-    Widget picker;
-    IconData entryModeIcon;
-    String entryModeTooltip;
-    switch (_entryMode) {
-      case DatePickerEntryMode.calendar:
-        picker = CalendarDatePickerCustom(
-          key: _calendarPickerKey,
-          initialDate: _selectedDate,
-          firstDate: widget.firstDate,
-          lastDate: widget.lastDate,
-          onDateChanged: _handleDateChanged,
-          selectableDayPredicate: widget.selectableDayPredicate,
-          initialCalendarMode: widget.initialCalendarMode,
-        );
-        entryModeIcon = Icons.edit;
-        // TODO(darrenaustin): localize 'Switch to input'
-        entryModeTooltip = 'Switch to input';
-        break;
-
-      case DatePickerEntryMode.input:
-        picker = Form(
-          key: _formKey,
-          autovalidate: _autoValidate,
-          child: InputDatePickerFormField(
-            initialDate: _selectedDate,
-            firstDate: widget.firstDate,
-            lastDate: widget.lastDate,
-            onDateSubmitted: _handleDateChanged,
-            onDateSaved: _handleDateChanged,
-            selectableDayPredicate: widget.selectableDayPredicate,
-            errorFormatText: widget.errorFormatText,
-            errorInvalidText: widget.errorInvalidText,
-            fieldHintText: widget.fieldHintText,
-            fieldLabelText: widget.fieldLabelText,
-            autofocus: true,
-          ),
-        );
-        entryModeIcon = Icons.calendar_today;
-        // TODO(darrenaustin): localize 'Switch to calendar'
-        entryModeTooltip = 'Switch to calendar';
-        break;
-    }
+    Widget picker = CalendarDatePickerCustom(
+      key: _calendarPickerKey,
+      initialDate: _selectedDate,
+      firstDate: widget.firstDate,
+      lastDate: widget.lastDate,
+      onDateChanged: _handleDateChanged,
+      selectableDayPredicate: widget.selectableDayPredicate,
+      initialCalendarMode: widget.initialCalendarMode,
+    );
 
     final Widget header = DatePickerHeader(
       // TODO(darrenaustin): localize 'SELECT DATE'
-      helpText: widget.helpText ?? 'SELECT DATE',
+      helpText: widget.helpText ?? 'WYBIERZ DATĘ',
       titleText: dateText,
       titleStyle: dateStyle,
       orientation: orientation,
       isShort: orientation == Orientation.landscape,
-      icon: entryModeIcon,
-      iconTooltip: entryModeTooltip,
-      onIconPressed: _handelEntryModeToggle,
     );
 
     final Size dialogSize = _dialogSize(context) * textScaleFactor;
