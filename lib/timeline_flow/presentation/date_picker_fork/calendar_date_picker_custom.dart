@@ -349,7 +349,7 @@ class _DatePickerModeToggleButtonState extends State<_DatePickerModeToggleButton
           Flexible(
             child: Semantics(
               // TODO(darrenaustin): localize 'Select year'
-              label: 'Select year',
+              label: 'Wybierz rok',
               excludeSemantics: true,
               button: true,
               child: Container(
@@ -657,7 +657,7 @@ class _DayPicker extends StatelessWidget {
     final TextStyle dayStyle = textTheme.caption;
     final Color enabledDayColor = colorScheme.onSurface.withOpacity(0.87);
     final Color disabledDayColor = colorScheme.onSurface.withOpacity(0.38);
-    final Color selectedDayColor = colorScheme.onPrimary;
+    final Color selectedDayColor = Colors.white;
     final Color selectedDayBackground = colorScheme.primary;
     final Color todayColor = colorScheme.primary;
 
