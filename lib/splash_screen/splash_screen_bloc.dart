@@ -34,7 +34,7 @@ class SplashScreenBloc extends BaseBloc {
     var now = DateTime.now().millisecondsSinceEpoch / 1000;
 
     if (tokenExp > now) {
-      _direction.add(SplashDirection.MAIN);
+      _direction.add(SplashDirection.LOGIN);
       return;
     }
 
