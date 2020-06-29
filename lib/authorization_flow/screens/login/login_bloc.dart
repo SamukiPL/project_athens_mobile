@@ -28,7 +28,7 @@ class LoginBloc extends BaseBloc {
 
     var params = LoginParams(_login, _password);
 
-    var result = await _loginUseCase(params).safeApiCall();
+    var result = await _loginUseCase(params);
     manageState(result);
   }
 

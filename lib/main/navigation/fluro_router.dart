@@ -19,7 +19,7 @@ extension FluroRouter on Router {
     Handler loginHandler = Handler(
         handlerFunc: (context, params) =>
             ModuleWidget(
-              providers: [AppNavigationModule(context), NetworkModuleSimple(context), LocalizationModule(context)],
+              providers: [AppNavigationModule(context), LocalizationModule(context)],
               child: LoginWidget(),
             ));
     Handler homeHandler =

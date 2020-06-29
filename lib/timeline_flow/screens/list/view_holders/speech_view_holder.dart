@@ -1,20 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:project_athens/timeline_flow/domain/timeline_model.dart';
 import 'package:project_athens/timeline_flow/screens/list/timeline_row_view_model.dart';
 
-class TimelineViewHolder extends StatelessWidget {
-  final TimelineRowViewModel viewModel;
+class SpeechViewHolder extends StatelessWidget {
+  final SpeechRowViewModel viewModel;
   final bool showTopLine;
   final bool showBottomLine;
 
-  const TimelineViewHolder(this.viewModel, this.showTopLine, this.showBottomLine, {Key key})
+  const SpeechViewHolder(this.viewModel, this.showTopLine, this.showBottomLine,
+      {Key key})
       : super(key: key);
 
   final int hourFlex = 1;
   final int iconFlex = 1;
   final int rowTextFlex = 4;
+  final double lineThickness = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class TimelineViewHolder extends StatelessWidget {
                 child: Text(
                   DateFormat("HH:mm").format(viewModel.date),
                   style: TextStyle(
-                      color: Theme.of(context).dividerColor, fontSize: 24),
+                      color: Theme.of(context).dividerColor, fontSize: 24, fontWeight: FontWeight.w300),
                 ),
               )
             ],
@@ -70,7 +71,7 @@ class TimelineViewHolder extends StatelessWidget {
                 child: Visibility(
                   visible: showTopLine,
                   child: VerticalDivider(
-                      thickness: 3, color: Theme.of(context).dividerColor),
+                      thickness: lineThickness, color: Theme.of(context).dividerColor),
                 ),
               ),
               Flexible(
@@ -79,7 +80,7 @@ class TimelineViewHolder extends StatelessWidget {
                 child: Visibility(
                   visible: showBottomLine,
                   child: VerticalDivider(
-                      thickness: 3, color: Theme.of(context).dividerColor),
+                      thickness: lineThickness, color: Theme.of(context).dividerColor),
                 ),
               ),
             ]),
@@ -87,21 +88,45 @@ class TimelineViewHolder extends StatelessWidget {
           Center(
             child: AspectRatio(
               aspectRatio: 1.0,
-              child: Container(
-                  margin: EdgeInsets.only(top: 8, bottom: 8),
-                  height: double.infinity,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                          color: Theme.of(context).dividerColor, width: 3)),
-                  child: LayoutBuilder(
-                    builder: (context, constraint) => Icon(
-                      viewModel.type.getIconForType(),
-                      color: Theme.of(context).dividerColor,
-                      size: constraint.biggest.height - 15,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: 8, bottom: 8),
+                    height: double.infinity,
+                    child: LayoutBuilder(
+                      builder: (context, constraint) => FutureBuilder(
+                        future: viewModel.thumbnailUrl,
+                        builder: (context, AsyncSnapshot<String> snapshot) =>
+                            ClipOval(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.white
+                                ),
+                                child: Image.network(
+                                  snapshot.data ?? "",
+                                  fit: BoxFit.fitWidth,
+                                  width: constraint.biggest.height,
+                                  errorBuilder: (context, exception, stackTrace) =>  Icon(
+                                    Icons.record_voice_over,
+                                    color: Theme.of(context).dividerColor,
+                                    size: constraint.biggest.height - 15,
+                                  ),
+                                ),
+                              ),
+                            ),
+                      ),
                     ),
-                  )),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 8, bottom: 8),
+                    height: double.infinity,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                            color: Theme.of(context).dividerColor, width: lineThickness)),
+                    )],
+              ),
             ),
           ),
         ]));
@@ -112,7 +137,7 @@ class TimelineViewHolder extends StatelessWidget {
       fit: FlexFit.tight,
       flex: rowTextFlex,
       child: Card(
-        margin: EdgeInsets.only(left: 8, top: 8, bottom: 8,  right: 8),
+        margin: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
         elevation: 4,
         child: Container(
           margin: EdgeInsets.only(left: 8, top: 8, bottom: 8),
@@ -165,7 +190,7 @@ class TimelineViewHolder extends StatelessWidget {
               child: Container(
                 height: 20,
                 child: VerticalDivider(
-                    thickness: 3, color: Theme.of(context).dividerColor),
+                    thickness: lineThickness, color: Theme.of(context).dividerColor),
               )),
           Flexible(
             fit: FlexFit.tight,

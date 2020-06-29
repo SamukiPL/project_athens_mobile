@@ -20,7 +20,7 @@ class ResetPasswordBloc extends BaseBloc {
 
     final params = ResetPasswordParams(_email);
 
-    var result = await _resetPasswordUseCase(params).safeApiCall();
+    var result = await _resetPasswordUseCase(params);
     manageState(result);
   }
 

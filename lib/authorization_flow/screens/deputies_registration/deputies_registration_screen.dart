@@ -12,18 +12,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class TestScreen extends StatelessWidget{
-
-  @override
-  Widget build(BuildContext context) {
-    return ModuleWidget(
-      providers: [NetworkModule(context)],
-      child: DeputiesRegistrationScreen(),
-    );
-  }
-
-}
-
 class DeputiesRegistrationScreen extends BaseLoginScreen<DeputiesRegistrationBloc> {
 
   @override
