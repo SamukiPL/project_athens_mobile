@@ -14,7 +14,8 @@
     "buttons": {
       "login": "Zaloguj się",
       "register": "Zarejestruj się!",
-      "forgot": "Zapomniałeś hasła?"
+      "forgot": "Zapomniałeś hasła?",
+      "resetPassword": "Resetuj"
     },
     "hints": {
       "email": "Email",

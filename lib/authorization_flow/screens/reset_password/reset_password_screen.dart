@@ -1,3 +1,4 @@
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
 import 'package:project_athens/authorization_flow/injections/reset_password_module.dart';
@@ -19,27 +20,93 @@ class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
     return AppBar(
       leading: BackButton(
         onPressed: () => loginNavigation.goBack(),
+        color: Colors.white,
       ),
-      title: Text("Reset"),
+      title: Text(
+          "Reset",
+        style: TextStyle(
+          color: Colors.white
+        ),
+      ),
     );
   }
 
   @override
   Widget generateBody(BuildContext context, ResetPasswordBloc bloc) {
+    var localization = Provider.of<AppLocalizations>(context);
+
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        TextFormField(
-          onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
-          onChanged: (email) => bloc.setEmail(email),
-          textInputAction: TextInputAction.done,
-          onEditingComplete: () => bloc(),
+        Flexible(
+          flex: 1,
+          child: Container(
+            width: double.infinity,
+            color: Theme.of(context).primaryColor,
+            child: Image.asset("resources/images/logo_white.png"),
+          ),
         ),
-        MaterialButton(
-          child: Text("Reset"),
-          onPressed: () => bloc(),
-        ),
+        Flexible(
+          flex: 2,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(top: 24, bottom: 16),
+                child: Text(
+                  "Zapomniałeś hasła?",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 8),
+                child: Text(
+                  "Podaj nam swój adres email,\n dostaniesz informacje jak zresetować swoje hasło.",
+                  style: TextStyle(
+                    color: Theme.of(context).dividerColor,
+                    fontSize: 18,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(32, 8, 32, 16),
+                child: TextFormField(
+                  onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                  onChanged: (email) => bloc.setEmail(email),
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(
+                      labelText: localization.getText().loginHintsEmail(),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      )),
+                  maxLines: 1,
+                ),
+              ),
+              RaisedButton(
+                child: Container(
+                  padding: EdgeInsets.all(16),
+                  child: Text(
+                    localization.getText().loginButtonsResetPassword(),
+                    style: TextStyle(color: Colors.white),
+                    textScaleFactor: 1.5,
+                  ),
+                ),
+                onPressed: () => bloc(),
+                color: Theme.of(context).primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(32),
+                ),
+              ),
+            ],
+          ),
+        )
       ],
     );
   }
