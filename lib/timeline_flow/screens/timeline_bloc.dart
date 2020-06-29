@@ -78,7 +78,7 @@ class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> 
   }
 
   DateTime _getBeforeDate(DateTime referenceDate) {
-    var dates = _dates;
+    var dates = _dates.toList();
     dates.sort((a, b) => a.meetingDate.compareTo(b.meetingDate));
 
     dates.retainWhere((element) => element.meetingDate.isBefore(referenceDate));
@@ -90,7 +90,7 @@ class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> 
   }
 
   void setNextDate() {
-    var dates = _dates;
+    var dates = _dates.toList();
     dates.sort((a, b) => a.meetingDate.compareTo(b.meetingDate));
 
     dates.retainWhere((element) => element.meetingDate.isAfter(_selectedDate));
