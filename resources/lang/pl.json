@@ -1,4 +1,7 @@
 {
+  "universal": {
+    "back": "Wróć"
+  },
   "main": {
     "menu": {
       "session": "Sesja",
@@ -27,6 +30,7 @@
       "lastName":"Nazwisko"
     },
     "other": {
+      "forgotRationale": "Podaj nam swój adres email,\n dostaniesz informacje jak zresetować swoje hasło.",
       "facebook": "Facebook",
       "twitter": "Twitter",
       "google": "Google",

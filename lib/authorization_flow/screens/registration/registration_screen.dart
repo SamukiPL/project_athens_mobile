@@ -11,13 +11,14 @@ class RegistrationScreen extends BaseLoginScreen<RegistrationBloc> {
   @override
   Widget generateAppBar(BuildContext context, RegistrationBloc bloc) {
     final loginNavigation = Provider.of<LoginNavigationBloc>(context);
+    var localization = Provider.of<AppLocalizations>(context);
     return AppBar(
       leading: BackButton(
         onPressed: () => loginNavigation.goBack(),
         color: Colors.white,
       ),
       title: Text(
-        "Wróć",
+        localization.getText().universalBack(),
         style: TextStyle(color: Colors.white),
       ),
     );

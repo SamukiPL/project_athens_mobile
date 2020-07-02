@@ -20,6 +20,11 @@ void main() {
 }
 
 void testAllMethods(String locale, AppLocalizationsGenerated localization) {
+  test("All methods for $locale universalBack", () async {
+    String universalBack = localization.universalBack();
+    expect(true, universalBack != "" && universalBack != null); 
+  }); 
+ 
   test("All methods for $locale mainMenuSession", () async {
     String mainMenuSession = localization.mainMenuSession();
     expect(true, mainMenuSession != "" && mainMenuSession != null); 
@@ -108,6 +113,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale loginHintsLastName", () async {
     String loginHintsLastName = localization.loginHintsLastName();
     expect(true, loginHintsLastName != "" && loginHintsLastName != null); 
+  }); 
+ 
+  test("All methods for $locale loginOtherForgotRationale", () async {
+    String loginOtherForgotRationale = localization.loginOtherForgotRationale();
+    expect(true, loginOtherForgotRationale != "" && loginOtherForgotRationale != null); 
   }); 
  
   test("All methods for $locale loginOtherFacebook", () async {

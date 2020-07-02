@@ -16,6 +16,7 @@ class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
 
   @override
   Widget generateAppBar(BuildContext context, ResetPasswordBloc bloc) {
+    var localization = Provider.of<AppLocalizations>(context);
     final loginNavigation = Provider.of<LoginNavigationBloc>(context);
     return AppBar(
       leading: BackButton(
@@ -23,7 +24,7 @@ class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
         color: Colors.white,
       ),
       title: Text(
-        "Wróć",
+        localization.getText().universalBack(),
         style: TextStyle(color: Colors.white),
       ),
       elevation: 0,
@@ -57,7 +58,7 @@ class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
               Container(
                 margin: EdgeInsets.only(top: 24, bottom: 16),
                 child: Text(
-                  "Zapomniałeś hasła?",
+                  localization.getText().loginButtonsForgot(),
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 24,
@@ -67,7 +68,7 @@ class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
               Container(
                 margin: EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 8),
                 child: Text(
-                  "Podaj nam swój adres email,\n dostaniesz informacje jak zresetować swoje hasło.",
+                  localization.getText().loginOtherForgotRationale(),
                   style: TextStyle(
                     color: Theme.of(context).dividerColor,
                     fontSize: 18,
