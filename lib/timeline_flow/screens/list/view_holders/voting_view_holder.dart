@@ -19,22 +19,22 @@ class VotingViewHolder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(children: <Widget>[
       IntrinsicHeight(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            getHourWidget(context),
-            getIcon(context),
-            getRowText(context)
+            getHourWidget(context, theme),
+            getIcon(context, theme),
+            getRowText(context, theme)
           ],
         ),
       ),
-//      getLine(context)
     ]);
   }
 
-  Widget getHourWidget(BuildContext context) {
+  Widget getHourWidget(BuildContext context, ThemeData theme) {
     return Flexible(
       fit: FlexFit.tight,
       flex: hourFlex,
@@ -48,7 +48,7 @@ class VotingViewHolder extends StatelessWidget {
                 child: Text(
                   DateFormat("HH:mm").format(viewModel.date),
                   style: TextStyle(
-                      color: Theme.of(context).dividerColor, fontSize: 24, fontWeight: FontWeight.w300),
+                      color: theme.dividerColor, fontSize: 24, fontWeight: FontWeight.w300),
                 ),
               )
             ],
@@ -58,7 +58,7 @@ class VotingViewHolder extends StatelessWidget {
     );
   }
 
-  Widget getIcon(BuildContext context) {
+  Widget getIcon(BuildContext context, ThemeData theme) {
     return Flexible(
         fit: FlexFit.tight,
         flex: iconFlex,
@@ -71,7 +71,7 @@ class VotingViewHolder extends StatelessWidget {
                 child: Visibility(
                   visible: showTopLine,
                   child: VerticalDivider(
-                      thickness: lineThickness, color: Theme.of(context).dividerColor),
+                      thickness: lineThickness, color: theme.dividerColor),
                 ),
               ),
               Flexible(
@@ -80,7 +80,7 @@ class VotingViewHolder extends StatelessWidget {
                 child: Visibility(
                   visible: showBottomLine,
                   child: VerticalDivider(
-                      thickness: lineThickness, color: Theme.of(context).dividerColor),
+                      thickness: lineThickness, color: theme.dividerColor),
                 ),
               ),
             ]),
@@ -95,11 +95,11 @@ class VotingViewHolder extends StatelessWidget {
                       color: Colors.white,
                       shape: BoxShape.circle,
                       border: Border.all(
-                          color: Theme.of(context).dividerColor, width: lineThickness)),
+                          color: theme.dividerColor, width: lineThickness)),
                   child: LayoutBuilder(
                     builder: (context, constraint) => Icon(
                       MdiIcons.vote,
-                      color: Theme.of(context).dividerColor,
+                      color: theme.dividerColor,
                       size: constraint.biggest.height - 15,
                     ),
                   )),
@@ -108,7 +108,7 @@ class VotingViewHolder extends StatelessWidget {
         ]));
   }
 
-  Widget getRowText(BuildContext context) {
+  Widget getRowText(BuildContext context, ThemeData theme) {
     return Flexible(
       fit: FlexFit.tight,
       flex: rowTextFlex,
@@ -125,7 +125,7 @@ class VotingViewHolder extends StatelessWidget {
                 child: Text(
                   viewModel.title,
                   style: TextStyle(
-                      color: Theme.of(context).primaryColor,
+                      color: theme.primaryColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 16),
                   maxLines: 1,
@@ -139,27 +139,4 @@ class VotingViewHolder extends StatelessWidget {
     );
   }
 
-  Widget getLine(BuildContext context) {
-    return Visibility(
-      visible: showBottomLine,
-      child: Row(
-        children: <Widget>[
-          Flexible(fit: FlexFit.tight, flex: hourFlex, child: Container()),
-          Flexible(
-              fit: FlexFit.tight,
-              flex: iconFlex,
-              child: Container(
-                height: 20,
-                child: VerticalDivider(
-                    thickness: lineThickness, color: Theme.of(context).dividerColor),
-              )),
-          Flexible(
-            fit: FlexFit.tight,
-            flex: rowTextFlex,
-            child: Container(),
-          )
-        ],
-      ),
-    );
-  }
 }

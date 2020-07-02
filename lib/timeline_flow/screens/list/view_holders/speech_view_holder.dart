@@ -19,22 +19,22 @@ class SpeechViewHolder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(children: <Widget>[
       IntrinsicHeight(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            getHourWidget(context),
-            getIcon(context),
-            getRowText(context)
+            getHourWidget(context, theme),
+            getIcon(context, theme),
+            getRowText(context, theme)
           ],
         ),
       ),
-//      getLine(context)
     ]);
   }
 
-  Widget getHourWidget(BuildContext context) {
+  Widget getHourWidget(BuildContext context, ThemeData theme) {
     return Flexible(
       fit: FlexFit.tight,
       flex: hourFlex,
@@ -48,7 +48,7 @@ class SpeechViewHolder extends StatelessWidget {
                 child: Text(
                   DateFormat("HH:mm").format(viewModel.date),
                   style: TextStyle(
-                      color: Theme.of(context).dividerColor, fontSize: 24, fontWeight: FontWeight.w300),
+                      color: theme.dividerColor, fontSize: 24, fontWeight: FontWeight.w300),
                 ),
               )
             ],
@@ -58,7 +58,7 @@ class SpeechViewHolder extends StatelessWidget {
     );
   }
 
-  Widget getIcon(BuildContext context) {
+  Widget getIcon(BuildContext context, ThemeData theme) {
     return Flexible(
         fit: FlexFit.tight,
         flex: iconFlex,
@@ -71,7 +71,7 @@ class SpeechViewHolder extends StatelessWidget {
                 child: Visibility(
                   visible: showTopLine,
                   child: VerticalDivider(
-                      thickness: lineThickness, color: Theme.of(context).dividerColor),
+                      thickness: lineThickness, color: theme.dividerColor),
                 ),
               ),
               Flexible(
@@ -80,7 +80,7 @@ class SpeechViewHolder extends StatelessWidget {
                 child: Visibility(
                   visible: showBottomLine,
                   child: VerticalDivider(
-                      thickness: lineThickness, color: Theme.of(context).dividerColor),
+                      thickness: lineThickness, color: theme.dividerColor),
                 ),
               ),
             ]),
@@ -109,7 +109,7 @@ class SpeechViewHolder extends StatelessWidget {
                                   width: constraint.biggest.height,
                                   errorBuilder: (context, exception, stackTrace) =>  Icon(
                                     Icons.record_voice_over,
-                                    color: Theme.of(context).dividerColor,
+                                    color: theme.dividerColor,
                                     size: constraint.biggest.height - 15,
                                   ),
                                 ),
@@ -124,7 +124,7 @@ class SpeechViewHolder extends StatelessWidget {
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                            color: Theme.of(context).dividerColor, width: lineThickness)),
+                            color: theme.dividerColor, width: lineThickness)),
                     )],
               ),
             ),
@@ -132,7 +132,7 @@ class SpeechViewHolder extends StatelessWidget {
         ]));
   }
 
-  Widget getRowText(BuildContext context) {
+  Widget getRowText(BuildContext context, ThemeData theme) {
     return Flexible(
       fit: FlexFit.tight,
       flex: rowTextFlex,
@@ -147,9 +147,9 @@ class SpeechViewHolder extends StatelessWidget {
               Container(
                 width: double.infinity,
                 child: Text(
-                  "Wypowiedź",
-                  style: TextStyle(
-                    color: Theme.of(context).dividerColor,
+                  "WYPOWIEDŹ",
+                  style: theme.textTheme.overline.copyWith(
+                    color: theme.dividerColor,
                     fontSize: 10
                   ),
                   textAlign: TextAlign.left,
@@ -160,14 +160,14 @@ class SpeechViewHolder extends StatelessWidget {
                 child: Text(
                   viewModel.title,
                   style: TextStyle(
-                      color: Theme.of(context).primaryColor,
+                      color: theme.primaryColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 16),
                   maxLines: 2,
                   textAlign: TextAlign.left,
                 ),
               ),
-              getDescription(context)
+              getDescription(context, theme)
             ],
           ),
         ),
@@ -175,41 +175,17 @@ class SpeechViewHolder extends StatelessWidget {
     );
   }
 
-  Widget getDescription(BuildContext context) {
+  Widget getDescription(BuildContext context, ThemeData theme) {
     return viewModel.desc != null
         ? Container(
             width: double.infinity,
             child: Text(
               viewModel.desc,
               style: TextStyle(
-                  color: Theme.of(context).dividerColor, fontSize: 12),
+                  color: theme.dividerColor, fontSize: 12),
               textAlign: TextAlign.left,
             ),
           )
         : Container();
-  }
-
-  Widget getLine(BuildContext context) {
-    return Visibility(
-      visible: showBottomLine,
-      child: Row(
-        children: <Widget>[
-          Flexible(fit: FlexFit.tight, flex: hourFlex, child: Container()),
-          Flexible(
-              fit: FlexFit.tight,
-              flex: iconFlex,
-              child: Container(
-                height: 20,
-                child: VerticalDivider(
-                    thickness: lineThickness, color: Theme.of(context).dividerColor),
-              )),
-          Flexible(
-            fit: FlexFit.tight,
-            flex: rowTextFlex,
-            child: Container(),
-          )
-        ],
-      ),
-    );
   }
 }

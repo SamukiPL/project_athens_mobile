@@ -17,6 +17,7 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
   Widget generateBody(BuildContext context, LoginBloc bloc) {
     var localization = Provider.of<AppLocalizations>(context);
     var loginNavigation = Provider.of<LoginNavigationBloc>(context);
+    final theme = Theme.of(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,7 +60,7 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
                   loginNavigation.addItem(LoginDestination.RESET_PASSWORD),
               child: Text(
                 localization.getText().loginButtonsForgot(),
-                style: TextStyle(color: Theme.of(context).primaryColor),
+                style: TextStyle(color: theme.primaryColor),
               ),
             ),
           ),
@@ -74,7 +75,7 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
             ),
           ),
           onPressed: () => bloc(),
-          color: Theme.of(context).primaryColor,
+          color: theme.primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(32),
           ),
@@ -93,11 +94,11 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
                       loginNavigation.addItem(LoginDestination.REGISTER),
                   child: Text(
                     localization.getText().loginButtonsRegister(),
-                    style: TextStyle(color: Theme.of(context).primaryColor),
+                    style: TextStyle(color: theme.primaryColor),
                   ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(32),
-                    side: BorderSide(color: Theme.of(context).primaryColor)
+                    side: BorderSide(color: theme.primaryColor)
                   ),
                 ),
               )

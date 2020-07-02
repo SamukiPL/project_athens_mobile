@@ -16,7 +16,7 @@ class LoggingInterceptor implements RequestInterceptor, ResponseInterceptor {
   @override
   FutureOr<Response> onResponse(Response response) {
     Fimber.i(response.headers.toString());
-    debugPrint(response.body.toString(), wrapWidth: 1024);
+    Fimber.i(response.body.toString());
     return response;
   }
 
