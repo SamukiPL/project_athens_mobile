@@ -59,6 +59,10 @@ class AppLocalizationsGenerated {
     return words['login']['hints']['email'];
   }
 
+  String loginHintsLogin() {
+    return words['login']['hints']['login'];
+  }
+
   String loginHintsName() {
     return words['login']['hints']['name'];
   }
@@ -69,6 +73,14 @@ class AppLocalizationsGenerated {
 
   String loginHintsRepeatPassword() {
     return words['login']['hints']['repeatPassword'];
+  }
+
+  String loginHintsFirstName() {
+    return words['login']['hints']['firstName'];
+  }
+
+  String loginHintsLastName() {
+    return words['login']['hints']['lastName'];
   }
 
   String loginOtherFacebook() {

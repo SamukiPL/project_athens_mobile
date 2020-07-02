@@ -23,11 +23,10 @@ class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
         color: Colors.white,
       ),
       title: Text(
-          "Reset",
-        style: TextStyle(
-          color: Colors.white
-        ),
+        "Wróć",
+        style: TextStyle(color: Colors.white),
       ),
+      elevation: 0,
     );
   }
 
@@ -36,7 +35,7 @@ class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
     var localization = Provider.of<AppLocalizations>(context);
 
     return Column(
-      mainAxisSize: MainAxisSize.max,
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -51,6 +50,7 @@ class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
         Flexible(
           flex: 2,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -123,7 +123,8 @@ class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
 
   @override
   void onSuccess(BuildContext context) {
-    var loginNavigation = Provider.of<LoginNavigationBloc>(context, listen: false);
+    var loginNavigation =
+        Provider.of<LoginNavigationBloc>(context, listen: false);
     loginNavigation.setItem(LoginDestination.LOGIN);
   }
 }

@@ -19,9 +19,12 @@
     },
     "hints": {
       "email": "Email",
+      "login": "Login",
       "name": "Nazwa użytkownika",
       "password": "Hasło",
-      "repeatPassword": "Powtórz hasło"
+      "repeatPassword": "Powtórz hasło",
+      "firstName":"Imię",
+      "lastName":"Nazwisko"
     },
     "other": {
       "facebook": "Facebook",

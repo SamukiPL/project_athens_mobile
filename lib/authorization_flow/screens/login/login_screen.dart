@@ -18,6 +18,7 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
     var localization = Provider.of<AppLocalizations>(context);
     var loginNavigation = Provider.of<LoginNavigationBloc>(context);
     return Column(
+      mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[

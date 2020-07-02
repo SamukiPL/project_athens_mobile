@@ -80,6 +80,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginHintsEmail != "" && loginHintsEmail != null); 
   }); 
  
+  test("All methods for $locale loginHintsLogin", () async {
+    String loginHintsLogin = localization.loginHintsLogin();
+    expect(true, loginHintsLogin != "" && loginHintsLogin != null); 
+  }); 
+ 
   test("All methods for $locale loginHintsName", () async {
     String loginHintsName = localization.loginHintsName();
     expect(true, loginHintsName != "" && loginHintsName != null); 
@@ -93,6 +98,16 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale loginHintsRepeatPassword", () async {
     String loginHintsRepeatPassword = localization.loginHintsRepeatPassword();
     expect(true, loginHintsRepeatPassword != "" && loginHintsRepeatPassword != null); 
+  }); 
+ 
+  test("All methods for $locale loginHintsFirstName", () async {
+    String loginHintsFirstName = localization.loginHintsFirstName();
+    expect(true, loginHintsFirstName != "" && loginHintsFirstName != null); 
+  }); 
+ 
+  test("All methods for $locale loginHintsLastName", () async {
+    String loginHintsLastName = localization.loginHintsLastName();
+    expect(true, loginHintsLastName != "" && loginHintsLastName != null); 
   }); 
  
   test("All methods for $locale loginOtherFacebook", () async {
