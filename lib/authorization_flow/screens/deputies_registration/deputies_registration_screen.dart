@@ -23,7 +23,7 @@ class DeputiesRegistrationScreen extends BaseLoginScreen<DeputiesRegistrationBlo
   Widget generateAppBar(BuildContext context, DeputiesRegistrationBloc bloc) {
     return SearchAppBar(
         title: "Subskrypcja posłów",
-        hintText: "Search...",
+        hintText: "Szukaj...",
         showBackArrow: false,
         searchQuery: (searchQuery) => {bloc.setSearchQuery(searchQuery)},
 //        additionalIcons: [IconButton(icon: Icon(Icons.forward), onPressed: () {},)]

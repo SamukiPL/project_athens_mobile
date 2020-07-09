@@ -19,9 +19,14 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
     var loginNavigation = Provider.of<LoginNavigationBloc>(context);
     final theme = Theme.of(context);
     return Column(
+      mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
+        Container(
+          margin: EdgeInsets.fromLTRB(92, 0, 92, 0),
+          child: Image.asset("resources/images/logo.png"),
+        ),
         Container(
           margin: EdgeInsets.fromLTRB(32, 8, 32, 8),
           child: TextFormField(

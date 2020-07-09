@@ -9,8 +9,9 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:name=".MainApplication"
-        android:label="projectathens"
+        android:label="Świadoma demokracja"
         android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:allowBackup="false"
         android:fullBackupContent="false">
         <activity

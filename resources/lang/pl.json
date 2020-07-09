@@ -1,4 +1,7 @@
 {
+  "universal": {
+    "back": "Wróć"
+  },
   "main": {
     "menu": {
       "session": "Sesja",
@@ -14,15 +17,20 @@
     "buttons": {
       "login": "Zaloguj się",
       "register": "Zarejestruj się!",
-      "forgot": "Zapomniałeś hasła?"
+      "forgot": "Zapomniałeś hasła?",
+      "resetPassword": "Resetuj"
     },
     "hints": {
       "email": "Email",
+      "login": "Login",
       "name": "Nazwa użytkownika",
       "password": "Hasło",
-      "repeatPassword": "Powtórz hasło"
+      "repeatPassword": "Powtórz hasło",
+      "firstName":"Imię",
+      "lastName":"Nazwisko"
     },
     "other": {
+      "forgotRationale": "Podaj nam swój adres email,\n dostaniesz informacje jak zresetować swoje hasło.",
       "facebook": "Facebook",
       "twitter": "Twitter",
       "google": "Google",

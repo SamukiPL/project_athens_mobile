@@ -1,3 +1,4 @@
+import 'package:project_athens/athens_core/chopper/network_module.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/authorization_flow/injections/login_widget_module.dart';
 import 'package:project_athens/authorization_flow/navigation/login_navigation_bloc.dart';
@@ -19,19 +20,22 @@ class LoginWidget extends StatelessWidget {
           onWillPop: () async {
             return navigation.goBack();
           },
-          child: _getScreen(navigation.currentScreen),
+          child: _getScreen(context, navigation.currentScreen),
         ),
       ),
     );
   }
 
-  StatelessWidget _getScreen(LoginDestination destination) {
+  StatelessWidget _getScreen(BuildContext context, LoginDestination destination) {
     switch (destination) {
       case LoginDestination.REGISTER:
         return RegistrationScreen();
         break;
       case LoginDestination.REGISTER_DEPUTIES:
-        return DeputiesRegistrationScreen();
+        return ModuleWidget(
+          providers: [NetworkModule(context)],
+            child: DeputiesRegistrationScreen()
+        );
         break;
       case LoginDestination.RESET_PASSWORD:
         return ResetPasswordScreen();

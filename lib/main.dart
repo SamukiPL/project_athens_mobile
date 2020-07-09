@@ -5,6 +5,9 @@ import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:project_athens/athens_core/i18n/localization_delegate.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
+import 'package:project_athens/athens_core/utils/firebase/firebase_messaging_module.dart';
+import 'package:project_athens/athens_core/i18n/localization_delegate.dart';
+import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/main/firebase/firebase_messages.dart';
 import 'package:project_athens/main/injections/app_module.dart';
 import 'package:project_athens/main/injections/app_navigation_module.dart';
@@ -27,7 +30,7 @@ class MyApp extends StatelessWidget {
     _firebaseMessages.setupMessaging();
     Fimber.plantTree(DebugBufferTree());
     return ModuleWidget(
-      providers: [AppModule(context)],
+      providers: [AppModule(context), FirebaseMessagingModule(context, _firebaseMessages)],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Project Athens',

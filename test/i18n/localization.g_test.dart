@@ -20,6 +20,11 @@ void main() {
 }
 
 void testAllMethods(String locale, AppLocalizationsGenerated localization) {
+  test("All methods for $locale universalBack", () async {
+    String universalBack = localization.universalBack();
+    expect(true, universalBack != "" && universalBack != null); 
+  }); 
+ 
   test("All methods for $locale mainMenuSession", () async {
     String mainMenuSession = localization.mainMenuSession();
     expect(true, mainMenuSession != "" && mainMenuSession != null); 
@@ -70,9 +75,19 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginButtonsForgot != "" && loginButtonsForgot != null); 
   }); 
  
+  test("All methods for $locale loginButtonsResetPassword", () async {
+    String loginButtonsResetPassword = localization.loginButtonsResetPassword();
+    expect(true, loginButtonsResetPassword != "" && loginButtonsResetPassword != null); 
+  }); 
+ 
   test("All methods for $locale loginHintsEmail", () async {
     String loginHintsEmail = localization.loginHintsEmail();
     expect(true, loginHintsEmail != "" && loginHintsEmail != null); 
+  }); 
+ 
+  test("All methods for $locale loginHintsLogin", () async {
+    String loginHintsLogin = localization.loginHintsLogin();
+    expect(true, loginHintsLogin != "" && loginHintsLogin != null); 
   }); 
  
   test("All methods for $locale loginHintsName", () async {
@@ -88,6 +103,21 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale loginHintsRepeatPassword", () async {
     String loginHintsRepeatPassword = localization.loginHintsRepeatPassword();
     expect(true, loginHintsRepeatPassword != "" && loginHintsRepeatPassword != null); 
+  }); 
+ 
+  test("All methods for $locale loginHintsFirstName", () async {
+    String loginHintsFirstName = localization.loginHintsFirstName();
+    expect(true, loginHintsFirstName != "" && loginHintsFirstName != null); 
+  }); 
+ 
+  test("All methods for $locale loginHintsLastName", () async {
+    String loginHintsLastName = localization.loginHintsLastName();
+    expect(true, loginHintsLastName != "" && loginHintsLastName != null); 
+  }); 
+ 
+  test("All methods for $locale loginOtherForgotRationale", () async {
+    String loginOtherForgotRationale = localization.loginOtherForgotRationale();
+    expect(true, loginOtherForgotRationale != "" && loginOtherForgotRationale != null); 
   }); 
  
   test("All methods for $locale loginOtherFacebook", () async {
