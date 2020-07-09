@@ -12,6 +12,9 @@ class TimelineList extends PagingList<TimelineRowViewModel> {
       : super(adapter);
 
   @override
+  double get bottomPadding => 72;
+
+  @override
   StatelessWidget getItemViewHolder(
       TimelineRowViewModel item, int index, int length) {
     switch (item.type) {
