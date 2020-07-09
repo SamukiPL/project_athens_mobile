@@ -6,8 +6,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:project_athens/athens_core/i18n/localization_delegate.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/utils/firebase/firebase_messaging_module.dart';
-import 'package:project_athens/athens_core/i18n/localization_delegate.dart';
-import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/main/firebase/firebase_messages.dart';
 import 'package:project_athens/main/injections/app_module.dart';
 import 'package:project_athens/main/injections/app_navigation_module.dart';
