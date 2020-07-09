@@ -6,8 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-abstract class BaseLoginScreen<BLOC extends BaseBloc>
-    extends StatelessWidget {
+abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ModuleWidget(
@@ -26,7 +25,13 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc>
   @protected
   Widget bodyBuilder(BuildContext context, BLOC bloc) {
     setupStreamListener(context, bloc);
-    return generateBody(context, bloc);
+    return SingleChildScrollView(
+      reverse: true,
+      padding: EdgeInsets.all(0),
+        child: ConstrainedBox(
+            constraints:
+                BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
+            child: generateBody(context, bloc)));
   }
 
   void setupStreamListener(BuildContext context, BLOC bloc) {
@@ -40,12 +45,12 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc>
           break;
         case ScreenState.NETWORK_FAILURE:
           Scaffold.of(context).showBottomSheet((context) => GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: Container(
+                onTap: () => Navigator.pop(context),
+                child: Container(
                   height: 300,
                   color: Colors.red,
                 ),
-          ));
+              ));
           break;
       }
     });

@@ -14,6 +14,8 @@ class ResetPasswordModule extends Module {
 
   @override
   List<SingleChildWidget> getProviders() {
+    precacheImage(AssetImage("resources/images/logo_white.png"), context);
+
     LoginApi loginApi = Provider.of<LoginApi>(context);
     ResetPasswordRepository repository = ResetPasswordRepositoryImpl(loginApi);
     ResetPasswordUseCase useCase = ResetPasswordUseCase(repository);

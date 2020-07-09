@@ -11,6 +11,10 @@ class AppLocalizationsGenerated {
 
   final Map<String, dynamic> words;
 
+  String universalBack() {
+    return words['universal']['back'];
+  }
+
   String mainMenuSession() {
     return words['main']['menu']['session'];
   }
@@ -51,8 +55,16 @@ class AppLocalizationsGenerated {
     return words['login']['buttons']['forgot'];
   }
 
+  String loginButtonsResetPassword() {
+    return words['login']['buttons']['resetPassword'];
+  }
+
   String loginHintsEmail() {
     return words['login']['hints']['email'];
+  }
+
+  String loginHintsLogin() {
+    return words['login']['hints']['login'];
   }
 
   String loginHintsName() {
@@ -65,6 +77,18 @@ class AppLocalizationsGenerated {
 
   String loginHintsRepeatPassword() {
     return words['login']['hints']['repeatPassword'];
+  }
+
+  String loginHintsFirstName() {
+    return words['login']['hints']['firstName'];
+  }
+
+  String loginHintsLastName() {
+    return words['login']['hints']['lastName'];
+  }
+
+  String loginOtherForgotRationale() {
+    return words['login']['other']['forgotRationale'];
   }
 
   String loginOtherFacebook() {
