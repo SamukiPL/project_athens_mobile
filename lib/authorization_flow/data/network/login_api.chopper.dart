@@ -39,4 +39,13 @@ class _$LoginApi extends LoginApi {
     final $request = Request('POST', $url, client.baseUrl, body: $body);
     return client.send<dynamic, dynamic>($request);
   }
+
+  @override
+  Future<Response<dynamic>> checkAccountPairUsage(
+      CheckPairUsageRequest request) {
+    final $url = '/user-aggregator/auth/register-pair-usage';
+    final $body = request;
+    final $request = Request('POST', $url, client.baseUrl, body: $body);
+    return client.send<dynamic, dynamic>($request);
+  }
 }

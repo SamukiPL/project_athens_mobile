@@ -10,6 +10,7 @@ import 'package:project_athens/authorization_flow/screens/deputies_registration/
 import 'package:project_athens/authorization_flow/screens/deputies_registration/list/deputies_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/authorization_flow/screens/login/login_bloc.dart';
 import 'package:provider/provider.dart';
 
 class DeputiesRegistrationScreen extends BaseLoginScreen<DeputiesRegistrationBloc> {
@@ -38,10 +39,15 @@ class DeputiesRegistrationScreen extends BaseLoginScreen<DeputiesRegistrationBlo
   @override
   Widget generateFab(BuildContext context, DeputiesRegistrationBloc bloc) {
     return BaseFab(
-      onPressed: () { bloc.onFabPressed(); },
+      onPressed: () { bloc(); },
       bloc: bloc.fabBloc,
       child: Icon(Icons.done),
     );
+  }
+
+  @override
+  void onNetworkFailure(DeputiesRegistrationBloc bloc) {
+    bloc();
   }
 
   @override

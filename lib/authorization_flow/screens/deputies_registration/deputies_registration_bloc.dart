@@ -79,7 +79,7 @@ class DeputiesRegistrationBloc extends BaseBloc
     adapter.updateList((startsWith + contains).distinct());
   }
 
-  Future<void> onFabPressed() async {
+  Future<void> call() async {
     var result = await _putDeputiesUseCase(PutDeputiesParams(
         9,
         _items

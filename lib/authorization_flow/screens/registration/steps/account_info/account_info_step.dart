@@ -1,0 +1,61 @@
+import 'package:email_validator/email_validator.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/account_info/account_info_step_bloc.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_step.dart';
+import 'package:provider/provider.dart';
+
+class AccountInfoStep extends BaseRegistrationStep {
+
+  @override
+  Widget build(BuildContext context) {
+    final localization = Provider.of<AppLocalizations>(context);
+    final bloc = Provider.of<AccountInfoStepBloc>(context);
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        generateFormField(
+          context,
+          () {},
+          (login) => bloc.setLogin(login),
+          (login) => getBaseValidator(localization, login),
+          localization.getText().loginHintsLogin(),
+          TextInputAction.next
+        ),
+        generateFormField(
+          context,
+          () {},
+          (email) => bloc.setEmail(email),
+          (email) => getBaseValidator(localization, email),
+          localization.getText().loginHintsEmail(),
+          TextInputAction.next
+        ),
+        Consumer<AccountInfoStepBloc>(
+          builder: (context, bloc, _) => AnimatedOpacity(
+            opacity: bloc.showRepeatEmail ? 1 : 0,
+            curve: Curves.bounceOut,
+            duration: Duration(milliseconds: 750),
+            child: AnimatedContainer(
+              height: bloc.showRepeatEmail ? 100 : 0,
+              duration: Duration(milliseconds: 150),
+              child: generateFormField(
+                context,
+                () {},
+                (repeatEmail) => bloc.setRepeatEmail(repeatEmail),
+                (repeatEmail) => getBaseValidator(localization, repeatEmail, customValidator: (value) {
+                  if (value != bloc.email) return localization.getText().loginValidateEmailsDontMatch();
+
+                  return null;
+                }),
+                localization.getText().loginHintsRepeatEmail(),
+                TextInputAction.next
+              ),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+}

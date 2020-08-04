@@ -118,6 +118,11 @@ class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
   }
 
   @override
+  void onNetworkFailure(ResetPasswordBloc bloc) {
+    bloc();
+  }
+
+  @override
   void onAuthFailure() {
     // TODO: implement onAuthFailure
   }

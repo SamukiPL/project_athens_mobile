@@ -15,6 +15,26 @@ class AppLocalizationsGenerated {
     return words['universal']['back'];
   }
 
+  String universalNext() {
+    return words['universal']['next'];
+  }
+
+  String universalCancel() {
+    return words['universal']['cancel'];
+  }
+
+  String universalSkip() {
+    return words['universal']['skip'];
+  }
+
+  String universalChoose() {
+    return words['universal']['choose'];
+  }
+
+  String universalOk() {
+    return words['universal']['ok'];
+  }
+
   String mainMenuSession() {
     return words['main']['menu']['session'];
   }
@@ -61,6 +81,10 @@ class AppLocalizationsGenerated {
 
   String loginHintsEmail() {
     return words['login']['hints']['email'];
+  }
+
+  String loginHintsRepeatEmail() {
+    return words['login']['hints']['repeatEmail'];
   }
 
   String loginHintsLogin() {
@@ -111,20 +135,16 @@ class AppLocalizationsGenerated {
     return words['login']['other']['connectWith'];
   }
 
-  String loginValidateFillEmail() {
-    return words['login']['validate']['fill']['email'];
-  }
-
-  String loginValidateFillPassword() {
-    return words['login']['validate']['fill']['password'];
-  }
-
-  String loginValidateFillAll() {
-    return words['login']['validate']['fill']['all'];
+  String loginValidateFieldCannotBeEmpty() {
+    return words['login']['validate']['fieldCannotBeEmpty'];
   }
 
   String loginValidateIncorrectEmail() {
     return words['login']['validate']['incorrectEmail'];
+  }
+
+  String loginValidateEmailsDontMatch() {
+    return words['login']['validate']['emailsDontMatch'];
   }
 
   String loginValidateWrongData() {

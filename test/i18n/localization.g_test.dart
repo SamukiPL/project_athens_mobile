@@ -25,6 +25,31 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalBack != "" && universalBack != null); 
   }); 
  
+  test("All methods for $locale universalNext", () async {
+    String universalNext = localization.universalNext();
+    expect(true, universalNext != "" && universalNext != null); 
+  }); 
+ 
+  test("All methods for $locale universalCancel", () async {
+    String universalCancel = localization.universalCancel();
+    expect(true, universalCancel != "" && universalCancel != null); 
+  }); 
+ 
+  test("All methods for $locale universalSkip", () async {
+    String universalSkip = localization.universalSkip();
+    expect(true, universalSkip != "" && universalSkip != null); 
+  }); 
+ 
+  test("All methods for $locale universalChoose", () async {
+    String universalChoose = localization.universalChoose();
+    expect(true, universalChoose != "" && universalChoose != null); 
+  }); 
+ 
+  test("All methods for $locale universalOk", () async {
+    String universalOk = localization.universalOk();
+    expect(true, universalOk != "" && universalOk != null); 
+  }); 
+ 
   test("All methods for $locale mainMenuSession", () async {
     String mainMenuSession = localization.mainMenuSession();
     expect(true, mainMenuSession != "" && mainMenuSession != null); 
@@ -83,6 +108,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale loginHintsEmail", () async {
     String loginHintsEmail = localization.loginHintsEmail();
     expect(true, loginHintsEmail != "" && loginHintsEmail != null); 
+  }); 
+ 
+  test("All methods for $locale loginHintsRepeatEmail", () async {
+    String loginHintsRepeatEmail = localization.loginHintsRepeatEmail();
+    expect(true, loginHintsRepeatEmail != "" && loginHintsRepeatEmail != null); 
   }); 
  
   test("All methods for $locale loginHintsLogin", () async {
@@ -145,24 +175,19 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginOtherConnectWith != "" && loginOtherConnectWith != null); 
   }); 
  
-  test("All methods for $locale loginValidateFillEmail", () async {
-    String loginValidateFillEmail = localization.loginValidateFillEmail();
-    expect(true, loginValidateFillEmail != "" && loginValidateFillEmail != null); 
-  }); 
- 
-  test("All methods for $locale loginValidateFillPassword", () async {
-    String loginValidateFillPassword = localization.loginValidateFillPassword();
-    expect(true, loginValidateFillPassword != "" && loginValidateFillPassword != null); 
-  }); 
- 
-  test("All methods for $locale loginValidateFillAll", () async {
-    String loginValidateFillAll = localization.loginValidateFillAll();
-    expect(true, loginValidateFillAll != "" && loginValidateFillAll != null); 
+  test("All methods for $locale loginValidateFieldCannotBeEmpty", () async {
+    String loginValidateFieldCannotBeEmpty = localization.loginValidateFieldCannotBeEmpty();
+    expect(true, loginValidateFieldCannotBeEmpty != "" && loginValidateFieldCannotBeEmpty != null); 
   }); 
  
   test("All methods for $locale loginValidateIncorrectEmail", () async {
     String loginValidateIncorrectEmail = localization.loginValidateIncorrectEmail();
     expect(true, loginValidateIncorrectEmail != "" && loginValidateIncorrectEmail != null); 
+  }); 
+ 
+  test("All methods for $locale loginValidateEmailsDontMatch", () async {
+    String loginValidateEmailsDontMatch = localization.loginValidateEmailsDontMatch();
+    expect(true, loginValidateEmailsDontMatch != "" && loginValidateEmailsDontMatch != null); 
   }); 
  
   test("All methods for $locale loginValidateWrongData", () async {

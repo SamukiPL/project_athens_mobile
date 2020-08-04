@@ -1,16 +1,20 @@
 import 'package:project_athens/athens_core/presentation/base_bloc.dart';
-import 'package:project_athens/authorization_flow/domain/registration/registration_params.dart';
-import 'package:project_athens/authorization_flow/domain/registration/registration_use_case.dart';
+import 'package:project_athens/authorization_flow/screens/registration/stepper/registration_stepper_bloc.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/account_info/account_info_step_bloc.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/registration_steps.dart';
 
 class RegistrationBloc extends BaseBloc {
-  final RegistrationUseCase _registrationUseCase;
+  final RegistrationStepperBloc _headerBloc;
 
-  RegistrationBloc(this._registrationUseCase);
+  final AccountInfoStepBloc _accountInfoStepBloc;
+
+  RegistrationBloc(this._headerBloc, this._accountInfoStepBloc);
 
   String _firstName = "";
   String _lastName = "";
   String _login = "";
   String _email = "";
+  String _repeatEmail = "";
   String _password = "";
   String _repeatPassword = "";
 
@@ -30,6 +34,10 @@ class RegistrationBloc extends BaseBloc {
     _email = email;
   }
 
+  void setRepeatEmail(String repeatEmail) {
+    _repeatEmail = repeatEmail;
+  }
+
   void setPassword(String password) {
     _password = password;
   }
@@ -38,18 +46,22 @@ class RegistrationBloc extends BaseBloc {
     _repeatPassword = repeatPassword;
   }
 
+  void setStep(RegistrationStep step) {
+    _headerBloc.setStep(step);
+  }
+
   Future<void> call() async {
-    if ((_firstName.isEmpty ||
-            _lastName.isEmpty ||
-            _login.isEmpty ||
-            _email.isEmpty ||
-            _password.isEmpty ||
-            _repeatPassword.isEmpty) &&
-        _password == _repeatPassword) return;
-
-    final params = RegistrationParams(_firstName, _lastName, _login, _email, _password, List<String>());
-
-    final result = await _registrationUseCase(params);
-    manageState(result);
+//    if ((_firstName.isEmpty ||
+//            _lastName.isEmpty ||
+//            _login.isEmpty ||
+//            _email.isEmpty ||
+//            _password.isEmpty ||
+//            _repeatPassword.isEmpty) &&
+//        _password == _repeatPassword) return;
+//
+//    final params = RegistrationParams(_firstName, _lastName, _login, _email, _password, List<String>());
+//
+//    final result = await _registrationUseCase(params);
+//    manageState(result);
   }
 }

@@ -1,4 +1,12 @@
 {
+  "universal": {
+    "back": "Back",
+    "next": "Next",
+    "cancel": "Cancel",
+    "skip": "Skip",
+    "choose": "Choose",
+    "ok": "Ok"
+  },
   "main": {
     "menu": {
       "session": "Session",
@@ -18,9 +26,12 @@
     },
     "hints": {
       "email": "Email",
+      "repeatEmail": "Repeat Email",
       "name": "User name",
       "password": "Password",
-      "repeatPassword": "Repeat password"
+      "repeatPassword": "Repeat Password",
+      "firstName": "First Name",
+      "lastName": "Last Name"
     },
     "other": {
       "facebook": "Facebook",
@@ -30,12 +41,9 @@
       "connectWith": "Connect with"
     },
     "validate": {
-      "fill": {
-        "email": "Fill in the email",
-        "password": "Fill in the password",
-        "all": "Fill in the login data"
-      },
-      "incorrectEmail":"Enter a valid email",
+      "fieldCannotBeEmpty": "Field cannot be empty",
+      "incorrectEmail": "Enter a valid email",
+      "emailsDontMatch": "Repeated email doesn't match",
       "wrongData": "Incorrect email or password"
     }
   }

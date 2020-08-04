@@ -1,6 +1,11 @@
 {
   "universal": {
-    "back": "Wróć"
+    "back": "Wróć",
+    "next": "Dalej",
+    "cancel": "Anuluj",
+    "skip": "Pomiń",
+    "choose": "Wybierz",
+    "ok": "Ok"
   },
   "main": {
     "menu": {
@@ -22,10 +27,11 @@
     },
     "hints": {
       "email": "Email",
+      "repeatEmail": "Powtórz Email",
       "login": "Login",
-      "name": "Nazwa użytkownika",
+      "name": "Nazwa Użytkownika",
       "password": "Hasło",
-      "repeatPassword": "Powtórz hasło",
+      "repeatPassword": "Powtórz Hasło",
       "firstName":"Imię",
       "lastName":"Nazwisko"
     },
@@ -38,12 +44,9 @@
       "connectWith": "Zaloguj się z"
     },
     "validate": {
-      "fill": {
-        "email": "Uzupełnij adres email",
-        "password": "Uzupełnij hasło",
-        "all": "Uzupełnij dane logowania"
-      },
+      "fieldCannotBeEmpty": "Pole nie może być puste",
       "incorrectEmail":"Wprowadź prawidłowy email",
+      "emailsDontMatch": "Powtórzony email nie pasuje",
       "wrongData": "Nieprawidłowy email lub hasło"
     }
   }

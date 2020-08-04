@@ -12,11 +12,14 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
     return ModuleWidget(
         providers: getProviders(context),
         child: Consumer<BLOC>(
-          builder: (context, bloc, _) => Scaffold(
-            appBar: generateAppBar(context, bloc),
-            body: bodyBuilder(context, bloc),
-            floatingActionButton: generateFab(context, bloc),
-          ),
+          builder: (context, bloc, _) {
+            setupStreamListener(context, bloc);
+            return Scaffold(
+              appBar: generateAppBar(context, bloc),
+              body: Builder(builder: (context) => bodyBuilder(context, bloc)),
+              floatingActionButton: generateFab(context, bloc),
+            );
+          },
         ));
   }
 
@@ -24,9 +27,7 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
 
   @protected
   Widget bodyBuilder(BuildContext context, BLOC bloc) {
-    setupStreamListener(context, bloc);
     return SingleChildScrollView(
-      reverse: true,
       padding: EdgeInsets.all(0),
         child: ConstrainedBox(
             constraints:
@@ -44,13 +45,26 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
           onAuthFailure();
           break;
         case ScreenState.NETWORK_FAILURE:
-          Scaffold.of(context).showBottomSheet((context) => GestureDetector(
-                onTap: () => Navigator.pop(context),
+          showModalBottomSheet(context: context, builder: (context) => Column(
+            children: <Widget>[
+              Text("No internet connection"),
+              RaisedButton(
                 child: Container(
-                  height: 300,
-                  color: Colors.red,
+                  padding: EdgeInsets.all(16),
+                  child: Text(
+                    "Try again",
+                    style: TextStyle(color: Colors.white),
+                    textScaleFactor: 1.5,
+                  ),
                 ),
-              ));
+                onPressed: () => onNetworkFailure(bloc),
+                color: Theme.of(context).primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(32),
+                ),
+              )
+            ],
+          ));
           break;
       }
     });
@@ -63,6 +77,8 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
   Widget generateFab(BuildContext context, BLOC bloc);
 
   void onSuccess(BuildContext context);
+
+  void onNetworkFailure(BLOC bloc);
 
   void onAuthFailure();
 }
