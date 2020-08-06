@@ -1,7 +1,7 @@
-import 'package:project_athens/authorization_flow/screens/deputies_registration/list/deputy_item_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/deputies_chooser/list/deputy_item_view_model.dart';
 import 'package:provider/provider.dart';
 
 class DeputyViewHolder extends StatelessWidget {

@@ -30,9 +30,9 @@ abstract class PagingList<ITEM> extends StatelessWidget {
         builder: (context, state, _) => RefreshIndicator(
           onRefresh: () => _adapter.refresh(),
           child: ListView.builder(
-              padding: EdgeInsets.only(left: leftPadding, top: topPadding, right: rightPadding, bottom: bottomPadding),
-              itemCount: state.itemsCount,
-              itemBuilder: (_, index) => _itemBuilder(state.items, index),
+            padding: EdgeInsets.only(left: leftPadding, top: topPadding, right: rightPadding, bottom: bottomPadding),
+            itemCount: state.itemsCount,
+            itemBuilder: (_, index) => _itemBuilder(state.items, index),
           ),
         ),
       ),

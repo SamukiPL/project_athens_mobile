@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/utils/firebase/firebase_deputy_subscriber.dart';
-import 'package:project_athens/authorization_flow/screens/deputies_registration/deputies_registration_bloc.dart';
+import 'package:project_athens/authorization_flow/data/network/login_api.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/deputies_chooser/deputies_chooser_step_bloc.dart';
 import 'package:project_athens/deputies_utils/data/get_deputies_repository_impl.dart';
 import 'package:project_athens/deputies_utils/data/network/deputies_api.dart';
 import 'package:project_athens/deputies_utils/data/put_deputies_repository_impl.dart';
@@ -17,12 +18,16 @@ class DeputiesRegistrationModule extends Module {
 
   @override
   List<SingleChildWidget> getProviders() {
+    final loginApi = Provider.of<LoginApi>(context);
     final chopperClient = Provider.of<ChopperClient>(context);
     final firebaseMessaging = Provider.of<FirebaseMessages>(context);
+
     final deputiesApi = DeputiesApi.create(chopperClient);
     final deputySubscriber = FirebaseDeputySubscriber(firebaseMessaging);
-    final getDeputiesRepository = GetDeputiesRepositoryImpl(deputiesApi);
+
+    final getDeputiesRepository = GetDeputiesRepositoryImpl(loginApi);
     final getDeputiesUseCase = GetDeputiesUseCase(getDeputiesRepository);
+
     final putDeputiesRepository = PutDeputiesRepositoryImpl(deputiesApi, deputySubscriber);
     final putDeputiesUseCase = PutDeputiesUseCase(putDeputiesRepository);
     return [

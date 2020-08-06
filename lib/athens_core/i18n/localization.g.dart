@@ -71,6 +71,10 @@ class AppLocalizationsGenerated {
     return words['login']['buttons']['register'];
   }
 
+  String loginButtonsSignUp() {
+    return words['login']['buttons']['signUp'];
+  }
+
   String loginButtonsForgot() {
     return words['login']['buttons']['forgot'];
   }

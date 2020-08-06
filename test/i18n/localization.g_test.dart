@@ -95,6 +95,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginButtonsRegister != "" && loginButtonsRegister != null); 
   }); 
  
+  test("All methods for $locale loginButtonsSignUp", () async {
+    String loginButtonsSignUp = localization.loginButtonsSignUp();
+    expect(true, loginButtonsSignUp != "" && loginButtonsSignUp != null); 
+  }); 
+ 
   test("All methods for $locale loginButtonsForgot", () async {
     String loginButtonsForgot = localization.loginButtonsForgot();
     expect(true, loginButtonsForgot != "" && loginButtonsForgot != null); 

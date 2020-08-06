@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/presentation/base_change_notifier.dart';
 import 'package:project_athens/athens_core/ext/list_extension.dart';
 
-enum LoginDestination { LOGIN, REGISTER, REGISTER_DEPUTIES, RESET_PASSWORD }
+enum LoginDestination { LOGIN, REGISTER, RESET_PASSWORD }
 
 class LoginNavigationBloc extends BaseChangeNotifier {
   List<LoginDestination> _popStack = List.of([LoginDestination.LOGIN]);

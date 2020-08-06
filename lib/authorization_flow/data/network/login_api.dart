@@ -6,22 +6,25 @@ import 'package:chopper/chopper.dart';
 
 part 'login_api.chopper.dart';
 
-@ChopperApi(baseUrl: "/user-aggregator/auth")
+@ChopperApi()
 abstract class LoginApi extends ChopperService {
 
   static LoginApi create([ChopperClient client]) =>
       _$LoginApi(client);
 
-  @Post(path: '/login')
+  @Post(path: '/user-aggregator/auth/login')
   Future<Response> logIn(@Body() LoginRequest request);
 
-  @Post(path: '/register')
+  @Post(path: '/user-aggregator/auth/register')
   Future<Response> register(@Body() RegistrationRequest request);
 
-  @Post(path: '/reset-password')
+  @Post(path: '/user-aggregator/auth/reset-password')
   Future<Response> resetPassword(@Body() ResetPasswordRequest request);
 
-  @Post(path: '/register-pair-usage')
+  @Post(path: '/user-aggregator/auth/register-pair-usage')
   Future<Response> checkAccountPairUsage(@Body() CheckPairUsageRequest request);
+
+  @Get(path: "/deputy-aggregator/cadency-deputy/get-all/{cadency}")
+  Future<Response> getAllDeputies(@Path("cadency") int cadency);
 
 }

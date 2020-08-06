@@ -22,7 +22,9 @@
     "buttons": {
       "login": "Log In",
       "register": "Register now!",
-      "forgot": "Forgot password?"
+      "forgot": "Forgot password?",
+      "signUp": "Sign Up",
+      "resetPassword": "Reset"
     },
     "hints": {
       "email": "Email",

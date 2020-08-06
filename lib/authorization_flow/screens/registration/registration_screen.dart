@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
+import 'package:project_athens/athens_core/navigation/app_navigation.dart';
+import 'package:project_athens/authorization_flow/injections/deputies_registration_module.dart';
 import 'package:project_athens/authorization_flow/injections/registration_module.dart';
-import 'package:project_athens/authorization_flow/navigation/login_navigation_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/base_login_screen.dart';
+import 'package:project_athens/authorization_flow/screens/registration/registration_bloc.dart';
+import 'package:project_athens/authorization_flow/screens/registration/stepper/registration_stepper_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/stepper/registration_stepper_footer.dart';
 import 'package:project_athens/authorization_flow/screens/registration/stepper/registration_stepper_header.dart';
-import 'package:project_athens/authorization_flow/screens/registration/registration_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/account_info/account_info_step.dart';
-import 'package:project_athens/authorization_flow/screens/registration/steps/registration_steps.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/deputies_chooser/deputies_chooser_step.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/registration_end/registration_end_step.dart';
 import 'package:provider/provider.dart';
 
 class RegistrationScreen extends BaseLoginScreen<RegistrationBloc> {
+
+  @override
+  List<Module> getProviders(BuildContext context) {
+    return [RegistrationModule(context), DeputiesRegistrationModule(context)];
+  }
+
   @override
   Widget generateAppBar(BuildContext context, RegistrationBloc bloc) {
     return null;
@@ -24,21 +33,54 @@ class RegistrationScreen extends BaseLoginScreen<RegistrationBloc> {
     return Container(
       color: Theme.of(context).primaryColor,
       child: SafeArea(
-        child: Column(
-          children: <Widget>[
-            RegistrationStepperHeader(localization),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.only(top: 16),
-                color: Colors.white,
-                child: AccountInfoStep(),
+        child: IntrinsicHeight(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              RegistrationStepperHeader(localization),
+              Expanded(
+                child: Container(
+                  color: Colors.white,
+                  child: Stack(
+                    children: [
+                      AccountInfoStep(),
+                      Consumer<RegistrationStepperBloc>(
+                        child: Container(
+                          color: Colors.white,
+                          child: RegistrationEndStep()
+                        ),
+                        builder: (context, stepperBloc, child) => AnimatedContainer(
+                          duration: Duration(milliseconds: 267),
+                          transform: Matrix4.translationValues(
+                            stepperBloc.currentStep.index < 1 ? MediaQuery.of(context).size.width : 0,
+                            0, 0
+                          ),
+                          child: child,
+                        ),
+                      ),
+                      Consumer<RegistrationStepperBloc>(
+                        builder: (context, stepperBloc, _) => AnimatedContainer(
+                          duration: Duration(milliseconds: 267),
+                          transform: Matrix4.translationValues(
+                            stepperBloc.currentStep.index < 2 ? MediaQuery.of(context).size.width : 0,
+                            0, 0
+                          ),
+                          child: Container(
+                            color: Colors.white,
+                            child: DeputiesChooserStep()
+                        ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
-            RegistrationStepperFooter(
-                () { bloc.setStep(RegistrationStep.PASSWORD_AND_PERSONAL_INFO); },
-                () { bloc.setStep(RegistrationStep.ACCOUNT_INFO); },
-            )
-          ],
+              RegistrationStepperFooter(
+                  () { bloc.positiveButtonAction(); },
+                  () { bloc.negativeButtonAction(); },
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -50,13 +92,7 @@ class RegistrationScreen extends BaseLoginScreen<RegistrationBloc> {
   }
 
   @override
-  List<Module> getProviders(BuildContext context) {
-    return [RegistrationModule(context)];
-  }
-
-  @override
   void onNetworkFailure(RegistrationBloc bloc) {
-    bloc();
   }
 
   @override
@@ -66,71 +102,8 @@ class RegistrationScreen extends BaseLoginScreen<RegistrationBloc> {
 
   @override
   void onSuccess(BuildContext context) {
-    var loginNavigation =
-        Provider.of<LoginNavigationBloc>(context, listen: false);
-    loginNavigation.setItem(LoginDestination.REGISTER_DEPUTIES);
+    var appNavigation = Provider.of<AppNavigation>(context, listen: false);
+    appNavigation.goToMainWidget(context);
   }
-
-//
-//  Step _generateSecondStep(BuildContext context, RegistrationBloc bloc, AppLocalizations localization) => Step(
-//    title: Text("Second Second Second"),
-//    state: StepState.editing,
-//    isActive: true,
-//    content: Column(
-//      children: <Widget>[
-//        _generateFormField(
-//          context,
-//          bloc,
-//          (login) => bloc.setFirstName(login),
-//          localization.getText().loginHintsFirstName(),
-//          TextInputAction.next
-//      ),
-//        _generateFormField(
-//            context,
-//            bloc,
-//                (login) => bloc.setLastName(login),
-//            localization.getText().loginHintsLastName(),
-//            TextInputAction.next
-//        ),
-//      ],
-//    ),
-//  );
-//
-//  Step _generateThirdStep(BuildContext context, RegistrationBloc bloc, AppLocalizations localization) => Step(
-//    title: Text("Third Third Third"),
-//    content: Column(
-//      children: <Widget>[
-//        _generateFormField(
-//            context,
-//            bloc,
-//            (login) => bloc.setPassword(login),
-//            localization.getText().loginHintsPassword(),
-//            TextInputAction.next
-//        ),
-//        _generateFormField(
-//            context,
-//            bloc,
-//            (login) => bloc.setRepeatPassword(login),
-//            localization.getText().loginHintsRepeatPassword(),
-//            TextInputAction.done
-//        ),
-//        RaisedButton(
-//          child: Container(
-//            padding: EdgeInsets.all(16),
-//            child: Text(
-//              localization.getText().loginButtonsRegister(),
-//              style: TextStyle(color: Colors.white),
-//              textScaleFactor: 1.5,
-//            ),
-//          ),
-//          onPressed: () => bloc(),
-//          color: Theme.of(context).primaryColor,
-//          shape: RoundedRectangleBorder(
-//            borderRadius: BorderRadius.circular(32),
-//          ),
-//        ),
-//      ],
-//    ),
-//  );
 
 }

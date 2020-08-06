@@ -27,12 +27,14 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
 
   @protected
   Widget bodyBuilder(BuildContext context, BLOC bloc) {
-    return SingleChildScrollView(
-      padding: EdgeInsets.all(0),
-        child: ConstrainedBox(
-            constraints:
-                BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
-            child: generateBody(context, bloc)));
+    return LayoutBuilder(
+      builder: (context, constraints) => SingleChildScrollView(
+        padding: EdgeInsets.all(0),
+          child: ConstrainedBox(
+              constraints:
+                  BoxConstraints(minHeight: constraints.maxHeight),
+              child: generateBody(context, bloc))),
+    );
   }
 
   void setupStreamListener(BuildContext context, BLOC bloc) {

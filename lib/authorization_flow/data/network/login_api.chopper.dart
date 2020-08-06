@@ -48,4 +48,11 @@ class _$LoginApi extends LoginApi {
     final $request = Request('POST', $url, client.baseUrl, body: $body);
     return client.send<dynamic, dynamic>($request);
   }
+
+  @override
+  Future<Response<dynamic>> getAllDeputies(int cadency) {
+    final $url = '/deputy-aggregator/cadency-deputy/get-all/$cadency';
+    final $request = Request('GET', $url, client.baseUrl);
+    return client.send<dynamic, dynamic>($request);
+  }
 }

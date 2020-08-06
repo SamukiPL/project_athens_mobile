@@ -1,23 +1,24 @@
-import 'package:project_athens/athens_core/domain/result.dart';
-import 'package:project_athens/athens_core/presentation/base_change_notifier.dart';
+import 'package:project_athens/athens_core/domain/base_repository.dart';
+import 'package:project_athens/athens_core/presentation/base_bloc.dart';
 import 'package:project_athens/authorization_flow/domain/registration/check_pair_usage_params.dart';
 import 'package:project_athens/authorization_flow/domain/registration/check_pair_usage_use_case.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/account_info/show_repeat_email_notifier.dart';
 
-class AccountInfoStepBloc extends BaseChangeNotifier {
+class AccountInfoStepBloc extends BaseBloc {
 
   final CheckPairUsageUseCase _checkPairUsageUseCase;
 
-  AccountInfoStepBloc(this._checkPairUsageUseCase);
+  final ShowRepeatEmailNotifier _animationNotifier;
+
+  AccountInfoStepBloc(this._checkPairUsageUseCase, this._animationNotifier);
 
   String _login = "";
   String _email = "";
   String _repeatEmail = "";
 
+  String get login => _login;
   String get email => _email;
-
-  bool _showRepeatEmail = false;
-
-  bool get showRepeatEmail => _showRepeatEmail;
+  String get repeatEmail => _repeatEmail;
 
   void setLogin(String login) {
     _login = login;
@@ -25,12 +26,7 @@ class AccountInfoStepBloc extends BaseChangeNotifier {
 
   void setEmail(String email) {
     _email = email;
-
-    final newValue = email.isNotEmpty;
-    if (newValue != _showRepeatEmail) {
-      _showRepeatEmail = newValue;
-      notifyListeners();
-    }
+    _animationNotifier.manageAnimation(email.isNotEmpty);
   }
 
   void setRepeatEmail(String repeatEmail) {
@@ -38,10 +34,8 @@ class AccountInfoStepBloc extends BaseChangeNotifier {
   }
 
   Future<void> call() async {
-    if (_login.isEmpty || _email.isEmpty || _repeatEmail.isEmpty)
-      return;
-
-    _checkPairUsageUseCase.call(CheckPairUsageParams(_login, _email));
+    final result = await _checkPairUsageUseCase.call(CheckPairUsageParams(_login, _email)).safeApiCall();
+    manageState(result);
   }
 
 }
