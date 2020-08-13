@@ -12,11 +12,23 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
     return ModuleWidget(
         providers: getProviders(context),
         child: Consumer<BLOC>(
-          builder: (context, bloc, _) => Scaffold(
-            appBar: generateAppBar(context, bloc),
-            body: bodyBuilder(context, bloc),
-            floatingActionButton: generateFab(context, bloc),
-          ),
+          builder: (context, bloc, _) {
+            return StreamProvider<ScreenState>.value(
+              value: bloc.state,
+              updateShouldNotify: (_, current) {
+                stateListener(context, bloc, current);
+                return false;
+              },
+              child: Consumer<ScreenState>(
+                builder: (context, _, child) => child,
+                child: Scaffold(
+                  appBar: generateAppBar(context, bloc),
+                  body: Builder(builder: (context) => bodyBuilder(context, bloc)),
+                  floatingActionButton: generateFab(context, bloc),
+                ),
+              ),
+            );
+          },
         ));
   }
 
@@ -24,18 +36,17 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
 
   @protected
   Widget bodyBuilder(BuildContext context, BLOC bloc) {
-    setupStreamListener(context, bloc);
-    return SingleChildScrollView(
-      reverse: true,
-      padding: EdgeInsets.all(0),
-        child: ConstrainedBox(
-            constraints:
-                BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
-            child: generateBody(context, bloc)));
+    return LayoutBuilder(
+      builder: (context, constraints) => SingleChildScrollView(
+        padding: EdgeInsets.all(0),
+          child: ConstrainedBox(
+              constraints:
+                  BoxConstraints(minHeight: constraints.maxHeight),
+              child: generateBody(context, bloc))),
+    );
   }
 
-  void setupStreamListener(BuildContext context, BLOC bloc) {
-    bloc.state.listen((state) {
+  void stateListener(BuildContext context, BLOC bloc, ScreenState state) {
       switch (state) {
         case ScreenState.SUCCESS:
           onSuccess(context);
@@ -44,16 +55,28 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
           onAuthFailure();
           break;
         case ScreenState.NETWORK_FAILURE:
-          Scaffold.of(context).showBottomSheet((context) => GestureDetector(
-                onTap: () => Navigator.pop(context),
+          showModalBottomSheet(context: context, builder: (context) => Column(
+            children: <Widget>[
+              Text("No internet connection"),
+              RaisedButton(
                 child: Container(
-                  height: 300,
-                  color: Colors.red,
+                  padding: EdgeInsets.all(16),
+                  child: Text(
+                    "Try again",
+                    style: TextStyle(color: Colors.white),
+                    textScaleFactor: 1.5,
+                  ),
                 ),
-              ));
+                onPressed: () => onNetworkFailure(bloc),
+                color: Theme.of(context).primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(32),
+                ),
+              )
+            ],
+          ));
           break;
       }
-    });
   }
 
   Widget generateAppBar(BuildContext context, BLOC bloc);
@@ -63,6 +86,8 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
   Widget generateFab(BuildContext context, BLOC bloc);
 
   void onSuccess(BuildContext context);
+
+  void onNetworkFailure(BLOC bloc);
 
   void onAuthFailure();
 }

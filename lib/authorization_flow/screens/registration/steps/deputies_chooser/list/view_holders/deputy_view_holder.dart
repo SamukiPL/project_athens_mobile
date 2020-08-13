@@ -1,7 +1,7 @@
-import 'package:project_athens/authorization_flow/screens/deputies_registration/list/deputy_item_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/deputies_chooser/list/deputy_item_view_model.dart';
 import 'package:provider/provider.dart';
 
 class DeputyViewHolder extends StatelessWidget {
@@ -21,19 +21,17 @@ class DeputyViewHolder extends StatelessWidget {
           child: Card(
             elevation: 4,
             margin: EdgeInsets.all(8),
-            child: IntrinsicHeight(
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  getCheckIcon(context),
-                  getDeputyFace(context),
-                  getNameAndClub(context),
-                  getVotingType(context),
-                  getSpeechType(context),
-                  getInterpolationType(context)
-                ],
-              ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                getCheckIcon(context),
+                getDeputyFace(context),
+                getNameAndClub(context),
+                getVotingType(context),
+                getSpeechType(context),
+                getInterpolationType(context)
+              ],
             ),
           ),
         ),
@@ -67,7 +65,7 @@ class DeputyViewHolder extends StatelessWidget {
     final theme = Theme.of(context);
     return Expanded(
       child: Container(
-        margin: EdgeInsets.only(left: 8, top: 4, right: 8),
+        margin: EdgeInsets.only(left: 8, top: 4, right: 8, bottom: 4),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,

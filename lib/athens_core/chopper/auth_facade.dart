@@ -23,16 +23,23 @@ class AuthFacade {
 
   Future<String> get accessToken => _manageAccessToken();
 
-  Future<void> _provideTokens() async {
+  Future<bool> _provideTokens() async {
     var tokens = await _storage.provideTokens();
+    if (tokens.accessToken == null)
+      return false;
 
     _accessToken = tokens.accessToken;
     _refreshToken = tokens.refreshToken;
     _tokenExp = _jwt.getJwtExp(_accessToken) - 120;
+    return true;
   }
 
   Future<String> _manageAccessToken() async {
     await initialization;
+    if (_accessToken == null &&
+        !await _provideTokens())
+      return "";
+
     var now = DateTime.now().millisecondsSinceEpoch / 1000;
     if (now < _tokenExp) return _accessToken;
 
@@ -41,6 +48,7 @@ class AuthFacade {
     _tokenExp = _jwt.getJwtExp(newTokens.accessToken);
 
     return _accessToken;
+    //JestemDevem19.demokra
   }
 
 }

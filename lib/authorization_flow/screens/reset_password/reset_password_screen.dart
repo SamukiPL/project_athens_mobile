@@ -35,86 +35,96 @@ class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
   Widget generateBody(BuildContext context, ResetPasswordBloc bloc) {
     var localization = Provider.of<AppLocalizations>(context);
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Flexible(
-          flex: 1,
-          child: Container(
-            width: double.infinity,
-            color: Theme.of(context).primaryColor,
-            child: Image.asset("resources/images/logo_white.png"),
+    return IntrinsicHeight(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              color: Theme.of(context).primaryColor,
+              child: Image.asset(
+                "resources/images/logo_white.png",
+                height: 0,
+                alignment: Alignment.center,
+              ),
+            ),
           ),
-        ),
-        Flexible(
-          flex: 2,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(top: 24, bottom: 16),
-                child: Text(
-                  localization.getText().loginButtonsForgot(),
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 24,
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 8),
-                child: Text(
-                  localization.getText().loginOtherForgotRationale(),
-                  style: TextStyle(
-                    color: Theme.of(context).dividerColor,
-                    fontSize: 18,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(32, 8, 32, 16),
-                child: TextFormField(
-                  onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
-                  onChanged: (email) => bloc.setEmail(email),
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
-                      labelText: localization.getText().loginHintsEmail(),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                      )),
-                  maxLines: 1,
-                ),
-              ),
-              RaisedButton(
-                child: Container(
-                  padding: EdgeInsets.all(16),
+          Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(top: 24, bottom: 16),
                   child: Text(
-                    localization.getText().loginButtonsResetPassword(),
-                    style: TextStyle(color: Colors.white),
-                    textScaleFactor: 1.5,
+                    localization.getText().loginButtonsForgot(),
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 24,
+                    ),
                   ),
                 ),
-                onPressed: () => bloc(),
-                color: Theme.of(context).primaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(32),
+                Container(
+                  margin: EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 8),
+                  child: Text(
+                    localization.getText().loginOtherForgotRationale(),
+                    style: TextStyle(
+                      color: Theme.of(context).dividerColor,
+                      fontSize: 18,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-              ),
-            ],
-          ),
-        )
-      ],
+                Container(
+                  margin: EdgeInsets.fromLTRB(32, 8, 32, 16),
+                  child: TextFormField(
+                    onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                    onChanged: (email) => bloc.setEmail(email),
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(
+                        labelText: localization.getText().loginHintsEmail(),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        )),
+                    maxLines: 1,
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 24),
+                  child: RaisedButton(
+                    child: Container(
+                      padding: EdgeInsets.all(16),
+                      child: Text(
+                        localization.getText().loginButtonsResetPassword(),
+                        style: TextStyle(color: Colors.white),
+                        textScaleFactor: 1.5,
+                      ),
+                    ),
+                    onPressed: () => bloc(),
+                    color: Theme.of(context).primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 
   @override
   Widget generateFab(BuildContext context, ResetPasswordBloc bloc) {
     return null;
+  }
+
+  @override
+  void onNetworkFailure(ResetPasswordBloc bloc) {
+    bloc();
   }
 
   @override
