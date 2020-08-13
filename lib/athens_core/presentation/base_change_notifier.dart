@@ -13,8 +13,10 @@ abstract class BaseChangeNotifier extends ChangeNotifier {
 
   @override
   void notifyListeners() {
-    if (!disposed)
-      super.notifyListeners();
+    if (disposed)
+      return;
+
+    super.notifyListeners();
   }
 
 }

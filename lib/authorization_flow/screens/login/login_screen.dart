@@ -43,7 +43,7 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
         Container(
           margin: EdgeInsets.fromLTRB(32, 8, 32, 0),
           child: TextFormField(
-            onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
+            onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
             onChanged: (password) => bloc.setPassword(password),
             textInputAction: TextInputAction.done,
             onEditingComplete: () => bloc(),
@@ -121,6 +121,11 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
   @override
   Widget generateFab(BuildContext context, LoginBloc bloc) {
     return null;
+  }
+
+  @override
+  void onNetworkFailure(LoginBloc bloc) {
+    bloc();
   }
 
   @override

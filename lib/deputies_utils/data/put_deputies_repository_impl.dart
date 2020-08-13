@@ -25,7 +25,8 @@ class PutDeputiesRepositoryImpl
     if (response.isSuccessful) {
       await deputySubscriber.subscribeDeputies(params.deputies.map((model) =>
           model.toFirebaseDeputySubscribeModel()
-      ));
+      ).toList());
+      deputiesApi.dispose();
     }
     return Success<int>(response.statusCode);
   }

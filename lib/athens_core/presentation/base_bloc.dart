@@ -11,23 +11,24 @@ enum ScreenState { SUCCESS, AUTH_FAILURE, NETWORK_FAILURE }
 
 abstract class BaseBloc {
 
-  StreamController<ScreenState> _stateController = BehaviorSubject<ScreenState>();
+  @protected
+  StreamController<ScreenState> stateController = BehaviorSubject<ScreenState>();
 
-  Stream<ScreenState> get state => _stateController.stream;
+  Stream<ScreenState> get state => stateController.stream;
 
   @protected
   void manageState(Result result) {
     if (result is Success) {
-      _stateController.add(ScreenState.SUCCESS);
+      stateController.add(ScreenState.SUCCESS);
     } else if (result is Failure && result.exception is SocketException) {
-      _stateController.add(ScreenState.NETWORK_FAILURE);
+      stateController.add(ScreenState.NETWORK_FAILURE);
     } else if (result is Failure && result.exception is ClientError) {
-      _stateController.add(ScreenState.AUTH_FAILURE);
+      stateController.add(ScreenState.AUTH_FAILURE);
     }
   }
 
   void dispose() {
-    _stateController.close();
+    stateController.close();
   }
 
 }
