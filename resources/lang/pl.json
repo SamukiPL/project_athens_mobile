@@ -47,7 +47,10 @@
     "validate": {
       "fieldCannotBeEmpty": "Pole nie może być puste",
       "incorrectEmail":"Wprowadź prawidłowy email",
+      "loginIsTaken":"Login jest już zajęty",
+      "emailIsTaken":"Email jest już zajęty",
       "emailsDontMatch": "Powtórzony email nie pasuje",
+      "passwordsDontMatch": "Powtórzone hasło nie pasuje",
       "wrongData": "Nieprawidłowy email lub hasło"
     }
   }

@@ -1,54 +1,42 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project_athens/athens_core/i18n/localization.dart';
+import 'package:provider/provider.dart';
 
-abstract class BaseRegistrationStep extends StatelessWidget {}
+import 'base_registration_step_bloc.dart';
 
-abstract class BaseRegistrationFormStep extends BaseRegistrationStep {
-
-  GlobalKey<FormState> get formKey;
+abstract class BaseRegistrationStep<BLOC extends BaseRegistrationStepBloc> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-        child: buildFormBody(context)
+    final bloc = Provider.of<BLOC>(context);
+    return StreamProvider<StepAction>.value(
+      value: bloc.stepAction,
+      updateShouldNotify: (_, current) {
+        listenToAction(context, bloc, current);
+        return false;
+      },
+      child: Consumer<StepAction>(
+        builder: (context, _, child) => child,
+        child: buildStepBody(context, bloc)
+      )
     );
   }
 
-  Widget buildFormBody(BuildContext context);
+  Widget buildStepBody(BuildContext context, BLOC bloc);
 
-  @protected
-  Widget generateFormField(
-      BuildContext context,
-      String initialValue,
-      VoidCallback callback,
-      ValueChanged<String> onChanged,
-      FormFieldValidator<String> validator,
-      String labelText,
-      TextInputAction action) =>
-      Container(
-        margin: EdgeInsets.fromLTRB(32, 8, 32, 16),
-        child: TextFormField(
-          initialValue: initialValue,
-          onFieldSubmitted: (_) => (action == TextInputAction.next) ? FocusScope.of(context).nextFocus() : callback(),
-          onChanged: onChanged,
-          textInputAction: action,
-          decoration: InputDecoration(
-              labelText: labelText,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
-              )),
-          maxLines: 1,
-          validator: validator,
-        ),
-      );
-
-  @protected
-  String getBaseValidator(AppLocalizations localization, String value, {String Function(String) customValidator}) {
-    if (value.isEmpty) return localization.getText().loginValidateFieldCannotBeEmpty();
-
-    return customValidator != null ? customValidator(value) : null;
+  void listenToAction(BuildContext context, BLOC bloc, StepAction action) {
+    switch(action) {
+      case StepAction.NEGATIVE:
+        negativeButtonAction(context);
+        break;
+      case StepAction.POSITIVE:
+        positiveButtonAction(context, bloc);
+        break;
+    }
   }
+
+  void negativeButtonAction(BuildContext context) {}
+
+  void positiveButtonAction(BuildContext context, BLOC bloc) {}
 
 }

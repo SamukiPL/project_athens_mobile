@@ -1,20 +1,18 @@
-import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/domain/base_repository.dart';
-import 'package:project_athens/athens_core/presentation/base_bloc.dart';
+import 'package:project_athens/athens_core/domain/result.dart';
+import 'package:project_athens/athens_core/ext/list_extension.dart';
 import 'package:project_athens/athens_core/presentation/fab/fab_bloc.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_step_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/deputies_chooser/list/deputy_item_view_model.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/deputies_chooser/list/deputy_item_view_model_factory.dart';
+import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputies/get_deputies_params.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputies/get_deputies_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/put_deputies/deputies_registration_use_case.dart';
-import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
-import 'package:project_athens/deputies_utils/domain/put_deputies/put_deputies_params.dart';
-import 'package:project_athens/deputies_utils/domain/put_deputies/put_deputy_model.dart';
 import 'package:project_athens/pagination/paging_bloc.dart';
 import 'package:project_athens/pagination/paging_list_adapter.dart';
-import 'package:project_athens/athens_core/ext/list_extension.dart';
 
-class DeputiesRegistrationBloc extends BaseBloc
+class DeputiesChooserBloc extends BaseRegistrationStepBloc
     implements PagingBloc<DeputyItemViewModel> {
   final GetDeputiesUseCase _getDeputiesUseCase;
   final PutDeputiesUseCase _putDeputiesUseCase;
@@ -35,7 +33,7 @@ class DeputiesRegistrationBloc extends BaseBloc
   List<DeputyItemViewModel> _items;
   String _searchQuery = "";
 
-  DeputiesRegistrationBloc(this._getDeputiesUseCase, this._putDeputiesUseCase) {
+  DeputiesChooserBloc(this._getDeputiesUseCase, this._putDeputiesUseCase) {
     adapter = PagingListAdapter(this);
     _loadFreshData();
   }
@@ -80,14 +78,14 @@ class DeputiesRegistrationBloc extends BaseBloc
   }
 
   Future<void> call() async {
-    var result = await _putDeputiesUseCase(PutDeputiesParams(
-        9,
-        _items
-            .where((item) => item.checked)
-            .map((item) => PutDeputyModel(item.model.deputyId, item.vote,
-                item.speech, item.interpolation))
-            .toList()));
-    manageState(result);
+//    var result = await _putDeputiesUseCase(PutDeputiesParams(
+//        9,
+//        _items
+//            .where((item) => item.checked)
+//            .map((item) => PutDeputyModel(item.model.deputyId, item.vote,
+//                item.speech, item.interpolation))
+//            .toList()));
+//    manageState(result);
   }
 
   @override

@@ -45,7 +45,10 @@
     "validate": {
       "fieldCannotBeEmpty": "Field cannot be empty",
       "incorrectEmail": "Enter a valid email",
+      "loginIsTaken":"Login is already taken",
+      "emailIsTaken":"Email is already taken",
       "emailsDontMatch": "Repeated email doesn't match",
+      "passwordsDontMatch": "Repeated password doesn't match",
       "wrongData": "Incorrect email or password"
     }
   }

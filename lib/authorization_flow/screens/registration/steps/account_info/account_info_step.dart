@@ -1,41 +1,50 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
+import 'package:project_athens/authorization_flow/navigation/login_navigation_bloc.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/account_info/account_info_form_key.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/account_info/account_info_step_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/account_info/show_repeat_email_notifier.dart';
-import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_step.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_form_step.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_step_bloc.dart';
 import 'package:provider/provider.dart';
 
-class AccountInfoStep extends BaseRegistrationFormStep {
-  
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  
-  GlobalKey<FormState> get formKey => _formKey;
+class AccountInfoStep extends BaseRegistrationFormStep<AccountInfoStepBloc> {
+
+  AccountInfoStep(bool fieldsEnabled) : super(fieldsEnabled);
   
   @override
-  Widget buildFormBody(BuildContext context) {
+  Widget buildFormBody(BuildContext context, AccountInfoStepBloc bloc) {
     final localization = Provider.of<AppLocalizations>(context);
-    final bloc = Provider.of<AccountInfoStepBloc>(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         generateFormField(
-          context,
-          bloc.login,
-          () {},
-          (login) => bloc.setLogin(login),
-          (login) => getBaseValidator(localization, login),
-          localization.getText().loginHintsLogin(),
-          TextInputAction.next
+          context: context,
+          initialValue: bloc.login,
+          callback: () {},
+          onChanged: (login) => bloc.setLogin(login),
+          validator: (login) => getBaseValidator(localization, login, customValidator: (value) {
+            if (bloc.loginTaken) return localization.getText().loginValidateLoginIsTaken();
+
+            return null;
+          }),
+          labelText: localization.getText().loginHintsLogin(),
         ),
         generateFormField(
-          context,
-          bloc.email,
-          () {},
-          (email) => bloc.setEmail(email),
-          (email) => getBaseValidator(localization, email),
-          localization.getText().loginHintsEmail(),
-          TextInputAction.next
+          context: context,
+          initialValue: bloc.email,
+          callback: () {},
+          onChanged: (email) => bloc.setEmail(email),
+          validator: (email) => getBaseValidator(localization, email, customValidator: (value) {
+            if (bloc.emailTaken) return localization.getText().loginValidateEmailIsTaken();
+            if (!EmailValidator.validate(email)) return localization.getText().loginValidateIncorrectEmail();
+
+            return null;
+          }),
+          labelText: localization.getText().loginHintsEmail(),
+          keyboardType: TextInputType.emailAddress
         ),
         Consumer<ShowRepeatEmailNotifier>(
           builder: (context, animationNotifier, child) => AnimatedOpacity(
@@ -45,25 +54,36 @@ class AccountInfoStep extends BaseRegistrationFormStep {
             child: AnimatedContainer(
               height: animationNotifier.showRepeatEmail ? 100 : 0,
               duration: Duration(milliseconds: 150),
-              child: child,
+              child: animationNotifier.showRepeatEmail ? child : null,
             ),
           ),
           child: generateFormField(
-            context,
-            bloc.repeatEmail,
-            () {},
-            (repeatEmail) => bloc.setRepeatEmail(repeatEmail),
-            (repeatEmail) => getBaseValidator(localization, repeatEmail, customValidator: (value) {
+            context: context,
+            initialValue: bloc.repeatEmail,
+            callback: () { bloc.invokeAction(StepAction.POSITIVE); },
+            onChanged: (repeatEmail) => bloc.setRepeatEmail(repeatEmail),
+            validator: (repeatEmail) => getBaseValidator(localization, repeatEmail, customValidator: (value) {
               if (value != bloc.email) return localization.getText().loginValidateEmailsDontMatch();
 
               return null;
             }),
-            localization.getText().loginHintsRepeatEmail(),
-            TextInputAction.next
+            labelText: localization.getText().loginHintsRepeatEmail(),
+            action: TextInputAction.done,
+            keyboardType: TextInputType.emailAddress
           )
         )
       ],
     );
   }
 
+  @override
+  GlobalKey<FormState> getFormKey(BuildContext context) {
+    return Provider.of<AccountInfoFormKey>(context, listen: false).formKey;
+  }
+
+  @override
+  void negativeButtonAction(BuildContext context) {
+    final loginNavigation = Provider.of<LoginNavigationBloc>(context, listen: false);
+    loginNavigation.goBack();
+  }
 }

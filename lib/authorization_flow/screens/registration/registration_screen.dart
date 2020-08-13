@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
-import 'package:project_athens/authorization_flow/injections/deputies_registration_module.dart';
 import 'package:project_athens/authorization_flow/injections/registration_module.dart';
+import 'package:project_athens/authorization_flow/navigation/login_navigation_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/base_login_screen.dart';
 import 'package:project_athens/authorization_flow/screens/registration/registration_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/stepper/registration_stepper_bloc.dart';
@@ -18,7 +18,7 @@ class RegistrationScreen extends BaseLoginScreen<RegistrationBloc> {
 
   @override
   List<Module> getProviders(BuildContext context) {
-    return [RegistrationModule(context), DeputiesRegistrationModule(context)];
+    return [RegistrationModule(context)];
   }
 
   @override
@@ -43,19 +43,20 @@ class RegistrationScreen extends BaseLoginScreen<RegistrationBloc> {
                   color: Colors.white,
                   child: Stack(
                     children: [
-                      AccountInfoStep(),
                       Consumer<RegistrationStepperBloc>(
-                        child: Container(
-                          color: Colors.white,
-                          child: RegistrationEndStep()
-                        ),
+                          builder: (context, stepperBloc, child) =>  AccountInfoStep(stepperBloc.currentStep.index == 0)
+                      ),
+                      Consumer<RegistrationStepperBloc>(
                         builder: (context, stepperBloc, child) => AnimatedContainer(
                           duration: Duration(milliseconds: 267),
                           transform: Matrix4.translationValues(
                             stepperBloc.currentStep.index < 1 ? MediaQuery.of(context).size.width : 0,
                             0, 0
                           ),
-                          child: child,
+                          child: Container(
+                              color: Colors.white,
+                              child: RegistrationEndStep(stepperBloc.currentStep.index == 1)
+                          ),
                         ),
                       ),
                       Consumer<RegistrationStepperBloc>(
@@ -67,7 +68,7 @@ class RegistrationScreen extends BaseLoginScreen<RegistrationBloc> {
                           ),
                           child: Container(
                             color: Colors.white,
-                            child: DeputiesChooserStep()
+                            child: stepperBloc.currentStep.index < 2 ? null : DeputiesChooserStep()
                         ),
                         ),
                       ),
@@ -76,8 +77,8 @@ class RegistrationScreen extends BaseLoginScreen<RegistrationBloc> {
                 ),
               ),
               RegistrationStepperFooter(
-                  () { bloc.positiveButtonAction(); },
-                  () { bloc.negativeButtonAction(); },
+                bloc.positiveButtonAction,
+                bloc.negativeButtonAction,
               )
             ],
           ),
@@ -93,6 +94,7 @@ class RegistrationScreen extends BaseLoginScreen<RegistrationBloc> {
 
   @override
   void onNetworkFailure(RegistrationBloc bloc) {
+    bloc.positiveButtonAction();
   }
 
   @override

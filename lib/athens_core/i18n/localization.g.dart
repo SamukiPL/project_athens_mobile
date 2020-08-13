@@ -147,8 +147,20 @@ class AppLocalizationsGenerated {
     return words['login']['validate']['incorrectEmail'];
   }
 
+  String loginValidateLoginIsTaken() {
+    return words['login']['validate']['loginIsTaken'];
+  }
+
+  String loginValidateEmailIsTaken() {
+    return words['login']['validate']['emailIsTaken'];
+  }
+
   String loginValidateEmailsDontMatch() {
     return words['login']['validate']['emailsDontMatch'];
+  }
+
+  String loginValidatePasswordsDontMatch() {
+    return words['login']['validate']['passwordsDontMatch'];
   }
 
   String loginValidateWrongData() {

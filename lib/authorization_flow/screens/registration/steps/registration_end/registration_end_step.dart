@@ -1,49 +1,46 @@
 import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_step.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_form_step.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_step_bloc.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/registration_end/registration_end_form_key.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/registration_end/registration_end_step_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/registration_end/show_repeat_password_notifier.dart';
 import 'package:provider/provider.dart';
 
-class RegistrationEndStep extends BaseRegistrationFormStep {
-  
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class RegistrationEndStep extends BaseRegistrationFormStep<RegistrationEndStepBloc> {
 
-  GlobalKey<FormState> get formKey => _formKey;
-  
+  RegistrationEndStep(bool fieldsEnabled) : super(fieldsEnabled);
+
   @override
-  Widget buildFormBody(BuildContext context) {
+  Widget buildFormBody(BuildContext context, RegistrationEndStepBloc bloc) {
     final localization = Provider.of<AppLocalizations>(context);
-    final bloc = Provider.of<RegistrationEndStepBloc>(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         generateFormField(
-            context,
-            bloc.firstName,
-            () {},
-            (firstName) => bloc.setFirstName(firstName),
-            (firstName) => getBaseValidator(localization, firstName),
-            localization.getText().loginHintsFirstName(),
-            TextInputAction.next
+          context: context,
+          initialValue: bloc.firstName,
+          callback: () {},
+          onChanged: (firstName) => bloc.setFirstName(firstName),
+          validator: (firstName) => getBaseValidator(localization, firstName),
+          labelText: localization.getText().loginHintsFirstName()
         ),
         generateFormField(
-            context,
-            bloc.lastName,
-            () {},
-            (lastName) => bloc.setLastName(lastName),
-            (lastName) => getBaseValidator(localization, lastName),
-            localization.getText().loginHintsLastName(),
-            TextInputAction.next
+          context: context,
+          initialValue: bloc.lastName,
+          callback: () {},
+          onChanged: (lastName) => bloc.setLastName(lastName),
+          validator: (lastName) => getBaseValidator(localization, lastName),
+          labelText: localization.getText().loginHintsLastName()
         ),
         generateFormField(
-            context,
-            bloc.password,
-            () {},
-            (password) => bloc.setPassword(password),
-            (password) => getBaseValidator(localization, password),
-            localization.getText().loginHintsPassword(),
-            TextInputAction.next
+          context: context,
+          initialValue: bloc.password,
+          callback: () {},
+          onChanged: (password) => bloc.setPassword(password),
+          validator: (password) => getBaseValidator(localization, password),
+          labelText: localization.getText().loginHintsPassword(),
+          obscureText: true
         ),
         Consumer<ShowRepeatPasswordNotifier>(
             builder: (context, animationNotifier, child) => AnimatedOpacity(
@@ -57,20 +54,26 @@ class RegistrationEndStep extends BaseRegistrationFormStep {
               ),
             ),
             child: generateFormField(
-                context,
-                bloc.repeatPassword,
-                () {},
-                (repeatPassword) => bloc.setRepeatPassword(repeatPassword),
-                (repeatPassword) => getBaseValidator(localization, repeatPassword, customValidator: (value) {
-                  if (value != bloc.password) return localization.getText().loginValidateEmailsDontMatch();
+              context: context,
+              initialValue: bloc.repeatPassword,
+              callback: () { bloc.invokeAction(StepAction.POSITIVE); },
+              onChanged: (repeatPassword) => bloc.setRepeatPassword(repeatPassword),
+              validator: (repeatPassword) => getBaseValidator(localization, repeatPassword, customValidator: (value) {
+                if (value != bloc.password) return localization.getText().loginValidateEmailsDontMatch();
 
-                  return null;
-                }),
-                localization.getText().loginHintsRepeatPassword(),
-                TextInputAction.next
+                return null;
+              }),
+              labelText: localization.getText().loginHintsRepeatPassword(),
+              action: TextInputAction.done,
+              obscureText: true
             )
         )
       ],
     );
+  }
+
+  @override
+  GlobalKey<FormState> getFormKey(BuildContext context) {
+    return Provider.of<RegistrationEndFormKey>(context, listen: false).formKey;
   }
 }

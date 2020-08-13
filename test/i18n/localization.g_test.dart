@@ -190,9 +190,24 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginValidateIncorrectEmail != "" && loginValidateIncorrectEmail != null); 
   }); 
  
+  test("All methods for $locale loginValidateLoginIsTaken", () async {
+    String loginValidateLoginIsTaken = localization.loginValidateLoginIsTaken();
+    expect(true, loginValidateLoginIsTaken != "" && loginValidateLoginIsTaken != null); 
+  }); 
+ 
+  test("All methods for $locale loginValidateEmailIsTaken", () async {
+    String loginValidateEmailIsTaken = localization.loginValidateEmailIsTaken();
+    expect(true, loginValidateEmailIsTaken != "" && loginValidateEmailIsTaken != null); 
+  }); 
+ 
   test("All methods for $locale loginValidateEmailsDontMatch", () async {
     String loginValidateEmailsDontMatch = localization.loginValidateEmailsDontMatch();
     expect(true, loginValidateEmailsDontMatch != "" && loginValidateEmailsDontMatch != null); 
+  }); 
+ 
+  test("All methods for $locale loginValidatePasswordsDontMatch", () async {
+    String loginValidatePasswordsDontMatch = localization.loginValidatePasswordsDontMatch();
+    expect(true, loginValidatePasswordsDontMatch != "" && loginValidatePasswordsDontMatch != null); 
   }); 
  
   test("All methods for $locale loginValidateWrongData", () async {

@@ -13,11 +13,20 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
         providers: getProviders(context),
         child: Consumer<BLOC>(
           builder: (context, bloc, _) {
-            setupStreamListener(context, bloc);
-            return Scaffold(
-              appBar: generateAppBar(context, bloc),
-              body: Builder(builder: (context) => bodyBuilder(context, bloc)),
-              floatingActionButton: generateFab(context, bloc),
+            return StreamProvider<ScreenState>.value(
+              value: bloc.state,
+              updateShouldNotify: (_, current) {
+                stateListener(context, bloc, current);
+                return false;
+              },
+              child: Consumer<ScreenState>(
+                builder: (context, _, child) => child,
+                child: Scaffold(
+                  appBar: generateAppBar(context, bloc),
+                  body: Builder(builder: (context) => bodyBuilder(context, bloc)),
+                  floatingActionButton: generateFab(context, bloc),
+                ),
+              ),
             );
           },
         ));
@@ -37,8 +46,7 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
     );
   }
 
-  void setupStreamListener(BuildContext context, BLOC bloc) {
-    bloc.state.listen((state) {
+  void stateListener(BuildContext context, BLOC bloc, ScreenState state) {
       switch (state) {
         case ScreenState.SUCCESS:
           onSuccess(context);
@@ -69,7 +77,6 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
           ));
           break;
       }
-    });
   }
 
   Widget generateAppBar(BuildContext context, BLOC bloc);

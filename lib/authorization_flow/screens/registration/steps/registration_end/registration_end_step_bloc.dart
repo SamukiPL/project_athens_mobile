@@ -1,8 +1,9 @@
-import 'package:project_athens/athens_core/presentation/base_bloc.dart';
+import 'package:project_athens/authorization_flow/domain/registration/registration_params.dart';
 import 'package:project_athens/authorization_flow/domain/registration/registration_use_case.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_step_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/registration_end/show_repeat_password_notifier.dart';
 
-class RegistrationEndStepBloc extends BaseBloc {
+class RegistrationEndStepBloc extends BaseRegistrationStepBloc {
 
   final RegistrationUseCase _registrationUseCase;
 
@@ -46,7 +47,10 @@ class RegistrationEndStepBloc extends BaseBloc {
   }
 
   Future<void> call() async {
+    final params = RegistrationParams(_firstName, _lastName, _login, _email, _password, List<String>());
 
+    final result = await _registrationUseCase(params);
+    manageState(result);
   }
 
 }

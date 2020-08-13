@@ -21,19 +21,17 @@ class DeputyViewHolder extends StatelessWidget {
           child: Card(
             elevation: 4,
             margin: EdgeInsets.all(8),
-            child: IntrinsicHeight(
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  getCheckIcon(context),
-                  getDeputyFace(context),
-                  getNameAndClub(context),
-                  getVotingType(context),
-                  getSpeechType(context),
-                  getInterpolationType(context)
-                ],
-              ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                getCheckIcon(context),
+                getDeputyFace(context),
+                getNameAndClub(context),
+                getVotingType(context),
+                getSpeechType(context),
+                getInterpolationType(context)
+              ],
             ),
           ),
         ),
@@ -66,7 +64,7 @@ class DeputyViewHolder extends StatelessWidget {
   Widget getNameAndClub(BuildContext context) {
     return Expanded(
       child: Container(
-        margin: EdgeInsets.only(left: 8, top: 4, right: 8),
+        margin: EdgeInsets.only(left: 8, top: 4, right: 8, bottom: 4),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
