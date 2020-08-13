@@ -9,6 +9,8 @@ import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputies/get_deputies_params.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputies/get_deputies_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/put_deputies/deputies_registration_use_case.dart';
+import 'package:project_athens/deputies_utils/domain/put_deputies/put_deputies_params.dart';
+import 'package:project_athens/deputies_utils/domain/put_deputies/put_deputy_model.dart';
 import 'package:project_athens/pagination/paging_bloc.dart';
 import 'package:project_athens/pagination/paging_list_adapter.dart';
 
@@ -78,14 +80,14 @@ class DeputiesChooserBloc extends BaseRegistrationStepBloc
   }
 
   Future<void> call() async {
-//    var result = await _putDeputiesUseCase(PutDeputiesParams(
-//        9,
-//        _items
-//            .where((item) => item.checked)
-//            .map((item) => PutDeputyModel(item.model.deputyId, item.vote,
-//                item.speech, item.interpolation))
-//            .toList()));
-//    manageState(result);
+    var result = await _putDeputiesUseCase(PutDeputiesParams(
+        9,
+        _items
+            .where((item) => item.checked)
+            .map((item) => PutDeputyModel(item.model.deputyId, item.vote,
+                item.speech, item.interpolation))
+            .toList()));
+    manageState(result);
   }
 
   @override

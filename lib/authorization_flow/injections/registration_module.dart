@@ -29,7 +29,7 @@ import 'package:provider/provider.dart';
 
 class RegistrationModule extends Module {
 
-  final RegistrationStep firstStep = RegistrationStep.ACCOUNT_INFO;
+  final RegistrationStep firstStep = RegistrationStep.DEPUTIES_CHOOSER;
 
   RegistrationModule(BuildContext context) : super(context);
 

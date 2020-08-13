@@ -24,6 +24,11 @@ class DeputiesChooserStep extends BaseRegistrationStep<DeputiesChooserBloc> {
 
   @override
   void positiveButtonAction(BuildContext context, DeputiesChooserBloc bloc) {
+    bloc();
+  }
+
+  @override
+  void negativeButtonAction(BuildContext context) {
     var appNavigation = Provider.of<AppNavigation>(context, listen: false);
     appNavigation.goToMainWidget(context);
   }
