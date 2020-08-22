@@ -28,7 +28,7 @@ Voting _$VotingFromJson(Map<String, dynamic> json) {
         ?.map(
             (e) => e == null ? null : Votes.fromJson(e as Map<String, dynamic>))
         ?.toList(),
-    json['votingType'] as int,
+    _$enumDecodeNullable(_$VotingTypeEnumMap, json['votingType']),
     json['id'] as String,
   );
 }
@@ -45,9 +45,56 @@ Map<String, dynamic> _$VotingToJson(Voting instance) => <String, dynamic>{
       'votingUniqueId': instance.votingUniqueId,
       'topic': instance.topic,
       'votes': instance.votes,
-      'votingType': instance.votingType,
+      'votingType': _$VotingTypeEnumMap[instance.votingType],
       'id': instance.id,
     };
+
+T _$enumDecode<T>(
+  Map<T, dynamic> enumValues,
+  dynamic source, {
+  T unknownValue,
+}) {
+  if (source == null) {
+    throw ArgumentError('A value must be provided. Supported values: '
+        '${enumValues.values.join(', ')}');
+  }
+
+  final value = enumValues.entries
+      .singleWhere((e) => e.value == source, orElse: () => null)
+      ?.key;
+
+  if (value == null && unknownValue == null) {
+    throw ArgumentError('`$source` is not one of the supported values: '
+        '${enumValues.values.join(', ')}');
+  }
+  return value ?? unknownValue;
+}
+
+T _$enumDecodeNullable<T>(
+  Map<T, dynamic> enumValues,
+  dynamic source, {
+  T unknownValue,
+}) {
+  if (source == null) {
+    return null;
+  }
+  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
+}
+
+const _$VotingTypeEnumMap = {
+  VotingType.RESOLUTION_PROJECT: 0,
+  VotingType.LAW_PROJECT: 1,
+  VotingType.BREAK: 2,
+  VotingType.QUORUM: 3,
+  VotingType.REPORT: 4,
+  VotingType.VOTE_OF_NO_CONFIDENCE: 5,
+  VotingType.COMPLETION_OF_AGENDA: 6,
+  VotingType.SHORTENING_DEADLINE: 7,
+  VotingType.CHANGE_COMISSION_MEMBERS: 8,
+  VotingType.VOTE_FOR_PROPOSAL: 9,
+  VotingType.PERSON_VOTE: 10,
+  VotingType.UNKNOWN: 999,
+};
 
 Votes _$VotesFromJson(Map<String, dynamic> json) {
   return Votes(

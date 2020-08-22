@@ -61,6 +61,7 @@ class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> 
   }
 
   Future<void> loadNewDate(DateTime date) async {
+    adapter.updateList(List(), loading: true);
     _selectedDate = date;
     calendarBloc.setDate(date);
     final result = await getTimelineUseCase(TimelineParameters(9, date.toIso8601String()));
@@ -86,10 +87,12 @@ class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> 
   }
 
   void setPreviousDate() {
+    adapter.updateList(List(), loading: true);
     loadNewDate(_getBeforeDate(_selectedDate));
   }
 
   void setNextDate() {
+    adapter.updateList(List(), loading: true);
     var dates = _dates.toList();
     dates.sort((a, b) => a.meetingDate.compareTo(b.meetingDate));
 

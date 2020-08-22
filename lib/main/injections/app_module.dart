@@ -4,6 +4,7 @@ import 'package:project_athens/athens_core/chopper/error_interceptor.dart';
 import 'package:project_athens/athens_core/chopper/logging_interceptor.dart';
 import 'package:project_athens/athens_core/chopper/network_module_simple.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
+import 'package:project_athens/authorization_flow/data/network/login_api.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/data/get_deputies_repository_impl.dart';
 import 'package:project_athens/deputies_utils/data/network/deputies_api.dart';
@@ -24,8 +25,8 @@ class AppModule extends Module {
       interceptors: [ErrorInterceptor(), LoggingInterceptor()],
     );
 
-    final deputiesApi = DeputiesApi.create(client);
-    final getDeputiesRepository = GetDeputiesRepositoryImpl(deputiesApi);
+    final loginApi = LoginApi.create(client);
+    final getDeputiesRepository = GetDeputiesRepositoryImpl(loginApi);
     final getDeputiesUseCase = GetDeputiesUseCase(getDeputiesRepository);
 
     return List<SingleChildWidget>.of([
@@ -36,7 +37,7 @@ class AppModule extends Module {
       Provider<DeputiesCache>(
         create: (_) => DeputiesCache(getDeputiesUseCase),
         dispose: (_, __) {
-          deputiesApi.dispose();
+          loginApi.dispose();
         },
       )
     ]);
