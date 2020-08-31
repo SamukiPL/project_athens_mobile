@@ -30,7 +30,7 @@ class SplashScreenBloc extends BaseBloc {
     var tokens = await _authStorage.provideTokens();
 
     if (tokens.accessToken == null) {
-      _direction.add(SplashDirection.LOGIN);
+      _direction.add(SplashDirection.MAIN);
       return;
     }
 

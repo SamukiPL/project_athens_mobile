@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
+import 'package:project_athens/athens_core/presentation/backdrop/backdrop_widget.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:project_athens/timeline_flow/injections/timeline_module.dart';
@@ -27,7 +28,9 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
 
   @override
   Widget buildBody(BuildContext context, TimelineBloc bloc) {
-    return Container(child: TimelineList(bloc.adapter));
+    return BackdropWidget(
+      topChild: TimelineList(bloc.adapter),
+    );
   }
 
   @override
