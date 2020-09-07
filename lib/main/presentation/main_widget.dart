@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/chopper/network_module.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
+import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/main/injections/main_widget_module.dart';
 import 'package:project_athens/main/navigation/bottom_navigation_bloc_impl.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,12 @@ class MainWidget extends StatelessWidget {
     return ModuleWidget(
       providers: [NetworkModule(context), MainWidgetModule(context)],
       child: Consumer<BottomNavigationBloc>(
-        builder: (context, bloc, _) => bloc.currentItem.getDestinationManager().currentScreen(),
+        builder: (context, bloc, _) => ChangeNotifierProvider<DestinationManager>.value(
+          value: bloc.currentItem.getDestinationManager(),
+          child: Consumer<DestinationManager>(
+            builder: (context, value, _) => value.currentScreen(),
+          ),
+        ),
       ),
     );
   }

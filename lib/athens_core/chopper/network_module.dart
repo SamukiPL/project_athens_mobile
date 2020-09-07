@@ -25,7 +25,7 @@ class NetworkModule extends Module {
       Provider<ChopperClient>(
         create: (BuildContext context) =>
             ChopperClient(
-                baseUrl: "http://51.38.36.119:3505",
+                baseUrl: "http://api.swiadoma-demokracja.pl",
                 converter: JsonConverter(),
                 errorConverter: JsonConverter(),
                 interceptors: [AuthInterceptor(authFacade), ErrorInterceptor(),
@@ -41,7 +41,7 @@ class NetworkModule extends Module {
 
   ChopperClient _getRefreshClient() {
     return ChopperClient(
-      baseUrl: "http://51.38.36.119:3505",
+      baseUrl: "http://api.swiadoma-demokracja.pl",
       converter: JsonConverter(),
       errorConverter: JsonConverter(),
       interceptors: [LoggingInterceptor(), ErrorInterceptor()],
