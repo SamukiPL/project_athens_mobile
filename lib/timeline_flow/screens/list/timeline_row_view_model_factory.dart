@@ -2,11 +2,11 @@ import 'package:project_athens/timeline_flow/domain/timeline_model.dart';
 import 'package:project_athens/timeline_flow/screens/list/timeline_row_view_model.dart';
 
 extension TimelineModelExtension on List<TimelineModel> {
-  List<TimelineRowViewModel> toTimelineRowViewModel() {
-    return this.map((model) => _toRowViewModel(model)).toList();
+  List<TimelineRowViewModel> toTimelineRowViewModel(void Function(TimelineModel) itemClick) {
+    return this.map((model) => _toRowViewModel(model, itemClick)).toList();
   }
 
-  TimelineRowViewModel _toRowViewModel(TimelineModel model) {
+  TimelineRowViewModel _toRowViewModel(TimelineModel model, void Function(TimelineModel) itemClick) {
     switch (model.type) {
       case TimelineModelType.VOTING:
         VotingModel votingModel = model;
@@ -14,8 +14,12 @@ extension TimelineModelExtension on List<TimelineModel> {
         break;
       case TimelineModelType.SPEECH:
         SpeechModel speechModel = model;
-        return SpeechRowViewModel(speechModel.title, speechModel.desc,
+        final item = SpeechRowViewModel(speechModel.title, speechModel.desc,
             speechModel.date, speechModel.thumbnailUrl);
+        item.itemClick = () {
+          itemClick.call(model);
+        };
+        return item;
         break;
       default:
         throw Exception("There is no other type");

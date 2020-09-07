@@ -26,7 +26,6 @@ class SplashScreenBloc extends BaseBloc {
   Stream<SplashDirection> get direction => _direction.stream;
 
   Future<void> checkDirection() async {
-    await deputiesCache.deputies;
     var tokens = await _authStorage.provideTokens();
 
     if (tokens.accessToken == null) {
@@ -38,12 +37,14 @@ class SplashScreenBloc extends BaseBloc {
     var now = DateTime.now().millisecondsSinceEpoch / 1000;
 
     if (tokenExp > now) {
+      await deputiesCache.deputies;
       _direction.add(SplashDirection.MAIN);
       return;
     }
 
     try {
       await _authRepository.refreshTokens(tokens.refreshToken);
+      await deputiesCache.deputies;
       _direction.add(SplashDirection.MAIN);
     } on SocketException {
       _direction.add(SplashDirection.MAIN);

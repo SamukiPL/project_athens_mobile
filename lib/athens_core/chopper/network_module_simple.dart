@@ -12,7 +12,7 @@ class NetworkModuleSimple extends Module {
   @override
   List<SingleChildWidget> getProviders() {
     final client = ChopperClient(
-      baseUrl: "http://51.38.36.119:3505",
+      baseUrl: "http://api.swiadoma-demokracja.pl",
       converter: JsonConverter(),
       errorConverter: JsonConverter(),
       interceptors: [ErrorInterceptor(), LoggingInterceptor()],

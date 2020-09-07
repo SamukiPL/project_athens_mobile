@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:project_athens/athens_core/domain/list/base_model.dart';
 
-abstract class TimelineModel {
+abstract class TimelineModel extends BaseModel {
 
   final String id;
   final TimelineModelType type;
@@ -20,8 +21,9 @@ class VotingModel extends TimelineModel {
 class SpeechModel extends TimelineModel{
   final String desc;
   final Future<String> thumbnailUrl;
+  final String videoUrl;
 
-  SpeechModel(String id, String title, this.desc, DateTime date, this.thumbnailUrl) : super(id, TimelineModelType.SPEECH, title, date);
+  SpeechModel(String id, String title, this.desc, DateTime date, this.thumbnailUrl, this.videoUrl) : super(id, TimelineModelType.SPEECH, title, date);
 }
 
 enum TimelineModelType { VOTING, SPEECH }
