@@ -34,6 +34,7 @@ class TimelineModelMapper extends DataMapper<Event, TimelineModel> {
     return SpeechModel(
       item.id,
       item.personName,
+      item.parliamentClub,
       item.agenda?.title,
       item.cisInfo.eventDateTime,
       _deputiesCache.getDeputyThumbnail(item.cadencyDeputy),

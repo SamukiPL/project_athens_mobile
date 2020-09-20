@@ -17,7 +17,7 @@ import 'package:rxdart/rxdart.dart';
 
 class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> {
 
-  StreamController<TimelineModel> _destination = BehaviorSubject<TimelineModel>();
+  StreamController<TimelineModel> _destination = PublishSubject<TimelineModel>();
 
   Stream<TimelineModel> get destination => _destination.stream;
 

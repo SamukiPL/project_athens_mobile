@@ -16,9 +16,12 @@ class MainWidget extends StatelessWidget {
       providers: [NetworkModule(context), MainWidgetModule(context)],
       child: Consumer<BottomNavigationBloc>(
         builder: (context, bloc, _) => ChangeNotifierProvider<DestinationManager>.value(
-          value: bloc.currentItem.getDestinationManager(),
+          value: bloc.currentItem.getDestinationManager(context),
           child: Consumer<DestinationManager>(
-            builder: (context, value, _) => value.currentScreen(),
+            builder: (context, manager, _) => ModuleWidget(
+              providers: manager.getScreenModules(context),
+              child: manager.currentScreen()
+            ),
           ),
         ),
       ),
