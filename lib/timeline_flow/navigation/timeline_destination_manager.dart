@@ -1,31 +1,28 @@
-import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/ext/list_extension.dart';
+import 'package:project_athens/athens_core/injections/module.dart';
+import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/timeline_flow/domain/timeline_model.dart';
 import 'package:project_athens/timeline_flow/navigation/timeline_destination.dart';
-import 'package:project_athens/timeline_flow/screens/speech/speech_screen.dart';
-import 'package:project_athens/timeline_flow/screens/timeline_screen.dart';
-import 'package:project_athens/athens_core/ext/list_extension.dart';
 
 class TimelineDestinationManager extends DestinationManager {
-  List<TimelineDestination> _popStack = List.of([TimelineScreenDestination()]);
+  List<TimelineDestination> _popStack = List();
+
+  TimelineDestinationManager(BuildContext context) {
+    _popStack.add(TimelineScreenDestination(context));
+  }
 
   @override
-  Widget currentScreen() {
-    final lastItem = _popStack.last;
-    switch(lastItem.runtimeType) {
-      case SpeechScreenDestination:
-        SpeechScreenDestination speechScreenDestination = lastItem;
-        return SpeechScreen(speechModel: speechScreenDestination.speechModel,);
-        break;
-    }
-    return TimelineScreen();
-  }
+  Widget currentScreen() => _popStack.last.getScreen();
+
+  @override
+  List<Module> getScreenModules(BuildContext context) => _popStack.last.getScreenModules(context);
 
   @override
   bool goBack() {
     if (_popStack.length == 1) return true;
 
-    _popStack.removeLastIfPossible();
+    _popStack.removeLastIfPossible().dispose();
     notifyListeners();
     return false;
   }

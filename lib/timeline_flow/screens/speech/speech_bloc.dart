@@ -1,13 +1,19 @@
-import 'package:flutter_vlc_player/flutter_vlc_player.dart';
+import 'package:flick_video_player/flick_video_player.dart';
 import 'package:project_athens/athens_core/presentation/base_bloc.dart';
-import 'package:project_athens/timeline_flow/screens/speech/video_widget_bloc.dart';
+import 'package:project_athens/timeline_flow/screens/speech/video_manager.dart';
 
 class SpeechBloc extends BaseBloc {
 
-  final VideoWidgetBloc videoBloc;
+  final VideoManager videoManager;
 
-  SpeechBloc(this.videoBloc);
+  SpeechBloc(this.videoManager);
 
-  VlcPlayerController get controller => videoBloc.controller;
+  FlickManager get controller => videoManager.controller;
+
+  @override
+  void dispose() {
+    videoManager.dispose();
+    super.dispose();
+  }
 
 }

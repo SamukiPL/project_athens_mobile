@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:rxdart/rxdart.dart';
+
 import 'paging_state.dart';
 import 'paging_bloc.dart';
 
@@ -15,7 +17,7 @@ class PagingListAdapter<ITEM> {
 
   int get _itemsCount => _itemsList.length + (_loading ? 1 : 0);
 
-  final StreamController<PagingState<ITEM>> _stateController = StreamController();
+  final StreamController<PagingState<ITEM>> _stateController = BehaviorSubject();
 
   Stream<PagingState<ITEM>> get stateStream => _stateController.stream;
 

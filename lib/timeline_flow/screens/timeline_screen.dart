@@ -26,11 +26,6 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
   bool get showBackArrow => false;
 
   @override
-  List<Module> getProviders(BuildContext context) {
-    return [TimelineModule(context)];
-  }
-
-  @override
   Widget buildAppBar(BuildContext context, TimelineBloc bloc) {
     return CalendarAppBar(bloc.calendarBloc,
             () => { bloc.setPreviousDate() },
@@ -46,24 +41,12 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
     Output.output.removeWhere((key, value) => value < 10);
     Output.output.remove("to");
     Output.output.forEach((key, value) {
-      Color color;
-      switch(value % 3) {
-        case 0:
-          color = Colors.amber;
-          break;
-        case 1:
-          color = Colors.white;
-          break;
-        case 2:
-          color = Colors.red;
-          break;
-      }
       widgets.add(
           RotatedBox(
             quarterTurns: value % 2,
             child: Text(
               "#$key",
-              style: TextStyle(fontSize: value/3, color: color),
+              style: TextStyle(fontSize: (value/3), color: Colors.white),
             ),
           )
       );
@@ -78,10 +61,18 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
         child: Container(
           color: Theme.of(context).primaryColor,
           child: BackdropWidget(
-            bottomChild: Scatter(
-              fillGaps: true,
-              delegate: ArchimedeanSpiralScatterDelegate(ratio: ratio),
-              children: widgets,
+            bottomChild: Container(
+              margin: EdgeInsets.all(16),
+              child: Scatter(
+                fillGaps: true,
+                delegate: ArchimedeanSpiralScatterDelegate(
+                  ratio: ratio,
+                  a: 2.0,
+                  b: 2.0,
+                ),
+                children: widgets,
+                overflow: Overflow.visible
+              ),
             ),
             topChild: TimelineList(bloc.adapter),
           ),

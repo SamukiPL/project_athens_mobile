@@ -12,20 +12,16 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget {
   String get appBarTitle;
   bool get showBackArrow;
 
-  List<Module> getProviders(BuildContext context);
-
   @override
   Widget build(BuildContext context) {
-    return ModuleWidget(
-        providers: getProviders(context),
-        child: Consumer<BLOC>(
-        builder: (context, bloc, _) => Scaffold(
-            appBar: buildAppBar(context, bloc),
-            body: buildBody(context, bloc),
-            floatingActionButton: buildFloatingActionButton(context, bloc),
-            bottomNavigationBar: BottomNavigationWidget(),
-          ),
-        ));
+    return Consumer<BLOC>(
+      builder: (context, bloc, _) => Scaffold(
+        appBar: buildAppBar(context, bloc),
+        body: buildBody(context, bloc),
+        floatingActionButton: buildFloatingActionButton(context, bloc),
+        bottomNavigationBar: BottomNavigationWidget(),
+      ),
+    );
   }
 
   @protected
