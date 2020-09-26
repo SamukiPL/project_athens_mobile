@@ -12,9 +12,6 @@ class VotingViewHolder extends StatelessWidget {
   const VotingViewHolder(this.viewModel, this.showTopLine, this.showBottomLine, {Key key})
       : super(key: key);
 
-  final int hourFlex = 1;
-  final int iconFlex = 1;
-  final int rowTextFlex = 4;
   final double lineThickness = 2;
 
   @override
@@ -35,83 +32,75 @@ class VotingViewHolder extends StatelessWidget {
   }
 
   Widget getHourWidget(BuildContext context, ThemeData theme) {
-    return Flexible(
-      fit: FlexFit.tight,
-      flex: hourFlex,
-      child: Container(
-        margin: EdgeInsets.only(left: 4, right: 4),
-        child: Center(
-          child: Wrap(
-            children: <Widget>[
-              FittedBox(
-                fit: BoxFit.contain,
-                child: Text(
-                  DateFormat("HH:mm").format(viewModel.date),
-                  style: TextStyle(
-                      color: theme.dividerColor, fontSize: 24, fontWeight: FontWeight.w300),
-                ),
-              )
-            ],
-          ),
+    return Container(
+      margin: EdgeInsets.only(left: 4, right: 4),
+      child: Center(
+        child: Wrap(
+          children: <Widget>[
+            FittedBox(
+              fit: BoxFit.contain,
+              child: Text(
+                DateFormat("HH:mm").format(viewModel.date),
+                style: TextStyle(
+                    color: theme.dividerColor, fontSize: 24, fontWeight: FontWeight.w300),
+              ),
+            )
+          ],
         ),
       ),
     );
   }
 
   Widget getIcon(BuildContext context, ThemeData theme) {
-    return Flexible(
-        fit: FlexFit.tight,
-        flex: iconFlex,
-        child: Stack(children: <Widget>[
-          Center(
-            child: Column(children: [
-              Flexible(
-                fit: FlexFit.tight,
-                flex: 1,
-                child: Visibility(
-                  visible: showTopLine,
-                  child: VerticalDivider(
-                      thickness: lineThickness, color: theme.dividerColor),
-                ),
+    return Container(
+      width: 60,
+      child: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Column(children: [
+            Flexible(
+              fit: FlexFit.tight,
+              flex: 1,
+              child: Visibility(
+                visible: showTopLine,
+                child: VerticalDivider(
+                    thickness: lineThickness, color: theme.dividerColor),
               ),
-              Flexible(
-                fit: FlexFit.tight,
-                flex: 1,
-                child: Visibility(
-                  visible: showBottomLine,
-                  child: VerticalDivider(
-                      thickness: lineThickness, color: theme.dividerColor),
-                ),
-              ),
-            ]),
-          ),
-          Center(
-            child: AspectRatio(
-              aspectRatio: 1.0,
-              child: Container(
-                  margin: EdgeInsets.only(top: 8, bottom: 8),
-                  height: double.infinity,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                          color: theme.dividerColor, width: lineThickness)),
-                  child: LayoutBuilder(
-                    builder: (context, constraint) => Icon(
-                      MdiIcons.vote,
-                      color: theme.dividerColor,
-                      size: constraint.biggest.height - 15,
-                    ),
-                  )),
             ),
+            Flexible(
+              fit: FlexFit.tight,
+              flex: 1,
+              child: Visibility(
+                visible: showBottomLine,
+                child: VerticalDivider(
+                    thickness: lineThickness, color: theme.dividerColor),
+              ),
+            ),
+          ]),
+          AspectRatio(
+            aspectRatio: 1.0,
+            child: Container(
+                margin: EdgeInsets.only(top: 8, bottom: 8),
+                height: 40,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                        color: theme.dividerColor, width: lineThickness)),
+                child: Icon(
+                    MdiIcons.vote,
+                    color: theme.dividerColor,
+                    size: 25,
+                  ),
+                ),
           ),
-        ]));
+        ]
+      ),
+    );
   }
 
   Widget getRowText(BuildContext context, ThemeData theme) {
-    return Flexible(
-      fit: FlexFit.tight,
-      flex: rowTextFlex,
+    return Expanded(
       child: Card(
         margin: EdgeInsets.only(left: 8, top: 8, bottom: 8,  right: 8),
         elevation: 4,
@@ -120,6 +109,17 @@ class VotingViewHolder extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Container(
+                width: double.infinity,
+                child: Text(
+                  viewModel.votingDesc,
+                  style: theme.textTheme.overline.copyWith(
+                      color: theme.dividerColor,
+                      fontSize: 10
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              ),
               Container(
                 width: double.infinity,
                 child: Text(

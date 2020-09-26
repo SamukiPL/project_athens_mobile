@@ -1,6 +1,7 @@
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/cached_module.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/timeline_flow/data/network/timeline_api.dart';
@@ -23,8 +24,9 @@ class TimelineModule extends CachedModule {
   factory TimelineModule(BuildContext context) {
     final deputiesCache = Provider.of<DeputiesCache>(context);
     final chopperClient = Provider.of<ChopperClient>(context);
+    final localization = Provider.of<AppLocalizations>(context);
     TimelineApi timelineApi = TimelineApi.create(chopperClient);
-    TimelineRepository timelineRepository = TimelineRepositoryImpl(timelineApi, TimelineModelMapper(deputiesCache));
+    TimelineRepository timelineRepository = TimelineRepositoryImpl(timelineApi, TimelineModelMapper(deputiesCache, localization));
     GetTimelineUseCase getTimelineUseCase = GetTimelineUseCase(timelineRepository);
     GetMeetingsDates getMeetingsDates = GetMeetingsDates(timelineRepository);
 

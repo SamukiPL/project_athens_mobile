@@ -1,6 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:project_athens/athens_core/domain/list/base_model.dart';
 
 abstract class TimelineModel extends BaseModel {
@@ -15,10 +12,13 @@ abstract class TimelineModel extends BaseModel {
 }
 
 class VotingModel extends TimelineModel {
+  final String votingDesc;
+
   VotingModel(
       String id,
       String title,
-      DateTime date
+      DateTime date,
+      this.votingDesc
       ) : super(id, TimelineModelType.VOTING, title, date);
 }
 

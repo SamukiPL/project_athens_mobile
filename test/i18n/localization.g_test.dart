@@ -215,4 +215,64 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginValidateWrongData != "" && loginValidateWrongData != null); 
   }); 
  
+  test("All methods for $locale timelineVotingTypesResolutionProject", () async {
+    String timelineVotingTypesResolutionProject = localization.timelineVotingTypesResolutionProject();
+    expect(true, timelineVotingTypesResolutionProject != "" && timelineVotingTypesResolutionProject != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesLawProject", () async {
+    String timelineVotingTypesLawProject = localization.timelineVotingTypesLawProject();
+    expect(true, timelineVotingTypesLawProject != "" && timelineVotingTypesLawProject != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesBreak", () async {
+    String timelineVotingTypesBreak = localization.timelineVotingTypesBreak();
+    expect(true, timelineVotingTypesBreak != "" && timelineVotingTypesBreak != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesQuorum", () async {
+    String timelineVotingTypesQuorum = localization.timelineVotingTypesQuorum();
+    expect(true, timelineVotingTypesQuorum != "" && timelineVotingTypesQuorum != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesReport", () async {
+    String timelineVotingTypesReport = localization.timelineVotingTypesReport();
+    expect(true, timelineVotingTypesReport != "" && timelineVotingTypesReport != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesVoteOfNoConfidence", () async {
+    String timelineVotingTypesVoteOfNoConfidence = localization.timelineVotingTypesVoteOfNoConfidence();
+    expect(true, timelineVotingTypesVoteOfNoConfidence != "" && timelineVotingTypesVoteOfNoConfidence != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesCompletionOfAgenda", () async {
+    String timelineVotingTypesCompletionOfAgenda = localization.timelineVotingTypesCompletionOfAgenda();
+    expect(true, timelineVotingTypesCompletionOfAgenda != "" && timelineVotingTypesCompletionOfAgenda != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesShorteningDeadline", () async {
+    String timelineVotingTypesShorteningDeadline = localization.timelineVotingTypesShorteningDeadline();
+    expect(true, timelineVotingTypesShorteningDeadline != "" && timelineVotingTypesShorteningDeadline != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesChangeCommissionMembers", () async {
+    String timelineVotingTypesChangeCommissionMembers = localization.timelineVotingTypesChangeCommissionMembers();
+    expect(true, timelineVotingTypesChangeCommissionMembers != "" && timelineVotingTypesChangeCommissionMembers != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesVoteForProposal", () async {
+    String timelineVotingTypesVoteForProposal = localization.timelineVotingTypesVoteForProposal();
+    expect(true, timelineVotingTypesVoteForProposal != "" && timelineVotingTypesVoteForProposal != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesPersonVote", () async {
+    String timelineVotingTypesPersonVote = localization.timelineVotingTypesPersonVote();
+    expect(true, timelineVotingTypesPersonVote != "" && timelineVotingTypesPersonVote != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesUnknown", () async {
+    String timelineVotingTypesUnknown = localization.timelineVotingTypesUnknown();
+    expect(true, timelineVotingTypesUnknown != "" && timelineVotingTypesUnknown != null); 
+  }); 
+ 
 }

@@ -13,8 +13,9 @@ class VotingRowViewModel extends TimelineRowViewModel {
 
   final String title;
   final DateTime date;
+  final String votingDesc;
 
-  VotingRowViewModel(this.title, this.date) : super(TimelineModelType.VOTING);
+  VotingRowViewModel(this.title, this.date, this.votingDesc) : super(TimelineModelType.VOTING);
 
 }
 
