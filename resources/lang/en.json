@@ -51,5 +51,21 @@
       "passwordsDontMatch": "Repeated password doesn't match",
       "wrongData": "Incorrect email or password"
     }
+  },
+  "timeline": {
+    "votingTypes": {
+      "resolutionProject": "Resolution Project",
+      "lawProject": "Law Project",
+      "break": "Break",
+      "quorum": "Quorum",
+      "report": "Report",
+      "voteOfNoConfidence": "Vote of Not Confidence",
+      "completionOfAgenda": "Completion of Agenda",
+      "shorteningDeadline": "Shortening Deadline",
+      "changeCommissionMembers": "Change Commission Members",
+      "voteForProposal": "Vote For Proposal",
+      "personVote": "Person Vote",
+      "unknown": "Unknown"
+    }
   }
 }

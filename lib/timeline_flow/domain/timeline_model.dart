@@ -1,38 +1,42 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:project_athens/athens_core/domain/list/base_model.dart';
 
-class TimelineModel {
+abstract class TimelineModel extends BaseModel {
+
   final String id;
   final TimelineModelType type;
   final String title;
-  final String desc;
   final DateTime date;
 
-  TimelineModel(this.id, this.type, this.title, this.desc, this.date);
+  TimelineModel(this.id, this.type, this.title, this.date);
 
-  factory TimelineModel.getVoting(
-          String id, String title, DateTime speechDate) =>
-      TimelineModel(id, TimelineModelType.VOTING, title, null, speechDate);
+}
 
-  factory TimelineModel.getSpeech(
-          String id, String title, String desc, DateTime speechDate) =>
-      TimelineModel(id, TimelineModelType.SPEECH, title, desc, speechDate);
+class VotingModel extends TimelineModel {
+  final String votingDesc;
+
+  VotingModel(
+      String id,
+      String title,
+      DateTime date,
+      this.votingDesc
+      ) : super(id, TimelineModelType.VOTING, title, date);
+}
+
+class SpeechModel extends TimelineModel{
+  final String club;
+  final String desc;
+  final Future<String> thumbnailUrl;
+  final String videoUrl;
+
+  SpeechModel(
+      String id,
+      String title,
+      this.club,
+      this.desc,
+      DateTime date,
+      this.thumbnailUrl,
+      this.videoUrl
+      ) : super(id, TimelineModelType.SPEECH, title, date);
 }
 
 enum TimelineModelType { VOTING, SPEECH }
-
-extension TimelineModelTypeExt on TimelineModelType {
-
-  IconData getIconForType() {
-    switch (this) {
-      case TimelineModelType.VOTING:
-        return MdiIcons.vote;
-        break;
-      default:
-        return Icons.record_voice_over;
-        break;
-    }
-  }
-
-}

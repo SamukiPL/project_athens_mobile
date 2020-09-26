@@ -17,6 +17,13 @@ class _$TimelineApi extends TimelineApi {
   final definitionType = TimelineApi;
 
   @override
+  Future<Response<dynamic>> getMeetingsDates(int cadency) {
+    final $url = '/user-aggregator/timeline/$cadency/parliament-meetings';
+    final $request = Request('GET', $url, client.baseUrl);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
   Future<Response<dynamic>> getAllDeputies(int cadency, String date) {
     final $url = '/user-aggregator/timeline/$cadency/$date';
     final $request = Request('GET', $url, client.baseUrl);

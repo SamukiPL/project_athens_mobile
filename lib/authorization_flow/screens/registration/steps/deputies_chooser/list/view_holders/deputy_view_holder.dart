@@ -62,6 +62,7 @@ class DeputyViewHolder extends StatelessWidget {
   }
 
   Widget getNameAndClub(BuildContext context) {
+    final theme = Theme.of(context);
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(left: 8, top: 4, right: 8, bottom: 4),
@@ -75,7 +76,7 @@ class DeputyViewHolder extends StatelessWidget {
                 viewModel.model.name,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: Theme.of(context).primaryColor,
+                  color: theme.primaryColor,
                   fontSize: 18,
                 ),
               ),
@@ -86,7 +87,7 @@ class DeputyViewHolder extends StatelessWidget {
                 viewModel.model.club,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: Theme.of(context).dividerColor,
+                  color: theme.dividerColor,
                   fontSize: 12,
                 ),
               ),
@@ -137,8 +138,9 @@ class DeputyViewHolder extends StatelessWidget {
   }
 
   Color getCheckColor(BuildContext context, bool checked) {
+    final theme = Theme.of(context);
     return (checked)
-        ? Theme.of(context).primaryColor
-        : Theme.of(context).dividerColor;
+        ? theme.primaryColor
+        : theme.dividerColor;
   }
 }

@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:project_athens/athens_core/models/gender.dart';
 import 'package:project_athens/timeline_flow/data/network/response/speech.dart';
 import 'package:project_athens/timeline_flow/data/network/response/voting.dart';
 

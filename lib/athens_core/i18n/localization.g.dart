@@ -166,4 +166,52 @@ class AppLocalizationsGenerated {
   String loginValidateWrongData() {
     return words['login']['validate']['wrongData'];
   }
+
+  String timelineVotingTypesResolutionProject() {
+    return words['timeline']['votingTypes']['resolutionProject'];
+  }
+
+  String timelineVotingTypesLawProject() {
+    return words['timeline']['votingTypes']['lawProject'];
+  }
+
+  String timelineVotingTypesBreak() {
+    return words['timeline']['votingTypes']['break'];
+  }
+
+  String timelineVotingTypesQuorum() {
+    return words['timeline']['votingTypes']['quorum'];
+  }
+
+  String timelineVotingTypesReport() {
+    return words['timeline']['votingTypes']['report'];
+  }
+
+  String timelineVotingTypesVoteOfNoConfidence() {
+    return words['timeline']['votingTypes']['voteOfNoConfidence'];
+  }
+
+  String timelineVotingTypesCompletionOfAgenda() {
+    return words['timeline']['votingTypes']['completionOfAgenda'];
+  }
+
+  String timelineVotingTypesShorteningDeadline() {
+    return words['timeline']['votingTypes']['shorteningDeadline'];
+  }
+
+  String timelineVotingTypesChangeCommissionMembers() {
+    return words['timeline']['votingTypes']['changeCommissionMembers'];
+  }
+
+  String timelineVotingTypesVoteForProposal() {
+    return words['timeline']['votingTypes']['voteForProposal'];
+  }
+
+  String timelineVotingTypesPersonVote() {
+    return words['timeline']['votingTypes']['personVote'];
+  }
+
+  String timelineVotingTypesUnknown() {
+    return words['timeline']['votingTypes']['unknown'];
+  }
 }

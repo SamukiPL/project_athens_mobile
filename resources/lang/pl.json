@@ -53,5 +53,21 @@
       "passwordsDontMatch": "Powtórzone hasło nie pasuje",
       "wrongData": "Nieprawidłowy email lub hasło"
     }
+  },
+  "timeline": {
+    "votingTypes": {
+      "resolutionProject": "Projekt Rezolucji",
+      "lawProject": "Projekt Ustawy",
+      "break": "Przerwa",
+      "quorum": "Kworum",
+      "report": "Raport",
+      "voteOfNoConfidence": "Wotum Nieufności",
+      "completionOfAgenda": "Zakończenie Agendy",
+      "shorteningDeadline": "Skrócenie terminu",
+      "changeCommissionMembers": "Zmiana Czlonków Komisji",
+      "voteForProposal": "Głosowanie Za Propozycją",
+      "personVote": "Głosowanie Za Osobą",
+      "unknown": "Nieznany rodzaj głosowania"
+    }
   }
 }

@@ -4,6 +4,7 @@ import 'package:project_athens/athens_core/chopper/auth_facade.dart';
 import 'package:project_athens/athens_core/chopper/auth_interceptor.dart';
 import 'package:project_athens/athens_core/chopper/error_interceptor.dart';
 import 'package:project_athens/athens_core/chopper/logging_interceptor.dart';
+import 'package:project_athens/athens_core/chopper/network_module_simple.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class NetworkModule extends Module {
 
   @override
   List<SingleChildWidget> getProviders() {
-    final refreshClient = _getRefreshClient();
+    final refreshClient = Provider.of<SimpleChopperClient>(context).client;
     final authApi = AuthApi.create(refreshClient);
     final authRepository = AuthRepositoryImpl(authApi);
     final authFacade = AuthFacade(authRepository);
@@ -24,7 +25,7 @@ class NetworkModule extends Module {
       Provider<ChopperClient>(
         create: (BuildContext context) =>
             ChopperClient(
-                baseUrl: "http://51.38.36.119:3505",
+                baseUrl: "http://api.swiadoma-demokracja.pl",
                 converter: JsonConverter(),
                 errorConverter: JsonConverter(),
                 interceptors: [AuthInterceptor(authFacade), ErrorInterceptor(),
@@ -40,7 +41,7 @@ class NetworkModule extends Module {
 
   ChopperClient _getRefreshClient() {
     return ChopperClient(
-      baseUrl: "http://51.38.36.119:3505",
+      baseUrl: "http://api.swiadoma-demokracja.pl",
       converter: JsonConverter(),
       errorConverter: JsonConverter(),
       interceptors: [LoggingInterceptor(), ErrorInterceptor()],

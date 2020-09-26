@@ -42,7 +42,7 @@ class DeputiesChooserBloc extends BaseRegistrationStepBloc
 
   Future<void> _loadFreshData() async {
     final result =
-        await _getDeputiesUseCase(GetDeputiesParams(9)).safeApiCall();
+        await _getDeputiesUseCase(GetDeputiesParams(9));
 
     if (result is Success<List<DeputyModel>>) {
       _items = result.result.toDeputyItemViewModels(itemClick);
@@ -84,7 +84,7 @@ class DeputiesChooserBloc extends BaseRegistrationStepBloc
         9,
         _items
             .where((item) => item.checked)
-            .map((item) => PutDeputyModel(item.model.deputyId, item.vote,
+            .map((item) => PutDeputyModel(item.model.id, item.vote,
                 item.speech, item.interpolation))
             .toList()));
     manageState(result);

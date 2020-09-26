@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 class DeputyModel {
 
-  final String deputyId;
+  final String id;
 
   final String name;
 
@@ -10,6 +10,6 @@ class DeputyModel {
 
   final String club;
 
-  DeputyModel({@required this.deputyId, @required this.name, this.thumbnailUrl, this.club});
+  DeputyModel({@required this.id, @required this.name, this.thumbnailUrl, this.club});
 
 }
