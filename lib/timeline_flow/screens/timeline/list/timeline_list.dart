@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:project_athens/pagination/paging_list.dart';
 import 'package:project_athens/pagination/paging_list_adapter.dart';
 import 'package:project_athens/timeline_flow/domain/timeline_model.dart';
-import 'package:project_athens/timeline_flow/screens/list/timeline_row_view_model.dart';
-import 'package:project_athens/timeline_flow/screens/list/view_holders/progress_view_holder.dart';
-import 'package:project_athens/timeline_flow/screens/list/view_holders/speech_view_holder.dart';
-import 'package:project_athens/timeline_flow/screens/list/view_holders/voting_view_holder.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/list/view_holders/progress_view_holder.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/list/view_holders/speech_view_holder.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/list/view_holders/voting_view_holder.dart';
 
 class TimelineList extends PagingList<TimelineRowViewModel> {
   TimelineList(PagingListAdapter<TimelineRowViewModel> adapter)

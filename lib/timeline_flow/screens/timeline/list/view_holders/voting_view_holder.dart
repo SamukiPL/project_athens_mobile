@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:project_athens/timeline_flow/screens/list/timeline_row_view_model.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
 
 class VotingViewHolder extends StatelessWidget {
   final VotingRowViewModel viewModel;

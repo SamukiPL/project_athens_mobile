@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:project_athens/timeline_flow/screens/list/timeline_row_view_model.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
 
 class SpeechViewHolder extends StatelessWidget {
   final SpeechRowViewModel viewModel;

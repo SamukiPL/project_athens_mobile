@@ -13,9 +13,9 @@ import 'package:project_athens/timeline_flow/navigation/timeline_destination_man
 import 'package:project_athens/timeline_flow/presentation/calendar_app_bar.dart';
 import 'package:project_athens/timeline_flow/presentation/date_picker_fork/date_picker_dialog_custom.dart';
 import 'package:project_athens/timeline_flow/presentation/date_picker_fork/date_utils.dart';
-import 'package:project_athens/timeline_flow/screens/list/timeline_list.dart';
-import 'package:project_athens/timeline_flow/screens/outpu.dart';
-import 'package:project_athens/timeline_flow/screens/timeline_bloc.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_list.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/outpu.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/timeline_bloc.dart';
 import 'package:provider/provider.dart';
 
 class TimelineScreen extends BaseScreen<TimelineBloc> {

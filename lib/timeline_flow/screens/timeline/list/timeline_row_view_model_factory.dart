@@ -1,5 +1,5 @@
 import 'package:project_athens/timeline_flow/domain/timeline_model.dart';
-import 'package:project_athens/timeline_flow/screens/list/timeline_row_view_model.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
 
 extension TimelineModelExtension on List<TimelineModel> {
   List<TimelineRowViewModel> toTimelineRowViewModel(void Function(TimelineModel) itemClick) {

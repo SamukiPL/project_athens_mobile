@@ -18,9 +18,14 @@ class MainWidget extends StatelessWidget {
         builder: (context, bloc, _) => ChangeNotifierProvider<DestinationManager>.value(
           value: bloc.currentItem.getDestinationManager(context),
           child: Consumer<DestinationManager>(
-            builder: (context, manager, _) => ModuleWidget(
-              providers: manager.getScreenModules(context),
-              child: manager.currentScreen()
+            builder: (context, manager, _) => WillPopScope(
+              onWillPop: () async {
+                return manager.goBack();
+              },
+              child: ModuleWidget(
+                providers: manager.getScreenModules(context),
+                child: manager.currentScreen()
+              ),
             ),
           ),
         ),

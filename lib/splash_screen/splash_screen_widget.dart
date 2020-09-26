@@ -23,14 +23,16 @@ class SplashScreenWidget extends StatelessWidget {
   }
 
   Widget _generateBody(BuildContext context, SplashScreenBloc bloc) {
+    final theme = Theme.of(context);
     startListening(context, bloc);
     return Container(
-      color: Colors.blueAccent,
+      color: theme.primaryColor,
       child: Center(
         widthFactor: 25,
         heightFactor: 25,
         child: CircularProgressIndicator(
-          backgroundColor: Colors.pinkAccent,
+          backgroundColor: theme.primaryColor,
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
         ),
       ),
     );
