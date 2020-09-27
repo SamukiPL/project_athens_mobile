@@ -10,7 +10,7 @@ import 'package:project_athens/timeline_flow/domain/get_meetings_dates.dart';
 import 'package:project_athens/timeline_flow/domain/get_timeline_use_case.dart';
 import 'package:project_athens/timeline_flow/domain/timeline_repository.dart';
 import 'package:project_athens/timeline_flow/mappers/timeline_model_mapper.dart';
-import 'package:project_athens/timeline_flow/screens/timeline_bloc.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/timeline_bloc.dart';
 import 'package:provider/provider.dart';
 
 class TimelineModule extends CachedModule {

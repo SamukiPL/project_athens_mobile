@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/presentation/base_bloc.dart';
 import 'package:project_athens/pagination/paging_bloc.dart';
@@ -11,8 +10,8 @@ import 'package:project_athens/timeline_flow/domain/meetings_date.dart';
 import 'package:project_athens/timeline_flow/domain/timeline_model.dart';
 import 'package:project_athens/timeline_flow/domain/timeline_parameters.dart';
 import 'package:project_athens/timeline_flow/presentation/calendar_app_bar_bloc.dart';
-import 'package:project_athens/timeline_flow/screens/list/timeline_row_view_model.dart';
-import 'package:project_athens/timeline_flow/screens/list/timeline_row_view_model_factory.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model_factory.dart';
 import 'package:rxdart/rxdart.dart';
 
 class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> {

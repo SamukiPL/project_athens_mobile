@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:project_athens/timeline_flow/screens/list/timeline_row_view_model.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
+import 'package:provider/provider.dart';
 
 class SpeechViewHolder extends StatelessWidget {
   final SpeechRowViewModel viewModel;
@@ -89,25 +90,30 @@ class SpeechViewHolder extends StatelessWidget {
                   margin: EdgeInsets.only(top: 8, bottom: 8),
                 height: 40,
                 width: 40,
-                  child: FutureBuilder(
-                      future: viewModel.thumbnailUrl,
-                      builder: (context, AsyncSnapshot<String> snapshot) =>
-                      ClipOval(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.white
-                          ),
-                          child: Image.network(
-                            snapshot.data ?? "",
+                  child: FutureProvider<String>.value(
+                    value: viewModel.thumbnailUrl,
+                    child: ClipOval(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                        ),
+                        child: Consumer<String>(
+                          builder: (context, value, child) => value == null
+                              ? child
+                              : Image.network(
+                            value,
                             width: 40,
-                            errorBuilder: (context, exception, stackTrace) =>  Icon(
-                              Icons.record_voice_over,
-                              color: theme.dividerColor,
-                              size: 25,
-                            ),
+                            errorBuilder:
+                                (context, exception, stackTrace) => child,
+                          ),
+                          child: Icon(
+                            Icons.record_voice_over,
+                            color: theme.dividerColor,
+                            size: 25,
                           ),
                         ),
                       ),
+                    ),
                   ),
                 ),
                 Container(

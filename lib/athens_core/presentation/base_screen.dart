@@ -15,13 +15,37 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<BLOC>(
-      builder: (context, bloc, _) => Scaffold(
-        appBar: buildAppBar(context, bloc),
-        body: buildBody(context, bloc),
-        floatingActionButton: buildFloatingActionButton(context, bloc),
-        bottomNavigationBar: BottomNavigationWidget(),
+      builder: (context, bloc, _) => StreamProvider<ScreenState>.value(
+        value: bloc.state,
+        updateShouldNotify: (_, current) {
+          stateListener(context, bloc, current);
+          return false;
+        },
+        child: Consumer<ScreenState>(
+          builder: (context, _, child) => child,
+          child: Scaffold(
+            appBar: buildAppBar(context, bloc),
+            body: buildBody(context, bloc),
+            floatingActionButton: buildFloatingActionButton(context, bloc),
+            bottomNavigationBar: BottomNavigationWidget(),
+          ),
+        ),
       ),
     );
+  }
+
+  void stateListener(BuildContext context, BLOC bloc, ScreenState state) {
+    switch (state) {
+      case ScreenState.SUCCESS:
+        onSuccess(context);
+        break;
+      case ScreenState.AUTH_FAILURE:
+        onAuthFailure();
+        break;
+      case ScreenState.NETWORK_FAILURE:
+        onNetworkFailure(bloc);
+        break;
+    }
   }
 
   @protected
@@ -30,15 +54,14 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget {
   @protected
   Widget buildAppBar(BuildContext context, BLOC bloc) {
     return AppBar(
-      leading: Visibility(
-        visible: showBackArrow,
-        child: Consumer<DestinationManager>(
-          builder: (context, destinationManager, _) => BackButton(
-          color: Colors.white,
-          onPressed: () => destinationManager.goBack(),
-        ),
-        ),
-      ),
+      leading: showBackArrow
+        ? Consumer<DestinationManager>(
+            builder: (context, destinationManager, _) => BackButton(
+            color: Colors.white,
+            onPressed: () => destinationManager.goBack(),
+          )
+        )
+        : null,
       title: Text(
         appBarTitle,
         style: TextStyle(
@@ -50,5 +73,14 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget {
 
   @protected
   Widget buildFloatingActionButton(BuildContext context, BLOC bloc);
+
+  @protected
+  void onSuccess(BuildContext context) {}
+
+  @protected
+  void onNetworkFailure(BLOC bloc) {}
+
+  @protected
+  void onAuthFailure() {}
 
 }

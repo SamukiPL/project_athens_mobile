@@ -275,4 +275,9 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, timelineVotingTypesUnknown != "" && timelineVotingTypesUnknown != null); 
   }); 
  
+  test("All methods for $locale settingsButtonLogout", () async {
+    String settingsButtonLogout = localization.settingsButtonLogout();
+    expect(true, settingsButtonLogout != "" && settingsButtonLogout != null); 
+  }); 
+ 
 }

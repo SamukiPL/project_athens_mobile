@@ -12,17 +12,17 @@ class DeputiesCache {
   List<DeputyModel> _cachedDeputies;
   Map<String, String> _deputiesThumbnails = Map<String, String>();
 
-  Future<Result<List<DeputyModel>>> test;
+  Future<Result<List<DeputyModel>>> result;
 
   Future<Result<List<DeputyModel>>> get deputies async {
     if (_cachedDeputies != null) return Success(_cachedDeputies);
-    if (test != null) return test;
+    if (result != null) return result;
 
-    test = _getDeputiesUseCase(GetDeputiesParams(9)).then((value) {
+    result = _getDeputiesUseCase(GetDeputiesParams(9)).then((value) {
       if (value is Success<List<DeputyModel>>) _cachedDeputies = value.result;
       return value;
     });
-    return test;
+    return result;
   }
 
   Future<String> getDeputyThumbnail(String id) async {

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
+import 'package:project_athens/settings_flow/navigation/settings_destination_manager.dart';
 import 'package:project_athens/timeline_flow/navigation/timeline_destination_manager.dart';
 
 class BottomNavigationBlocImpl extends BottomNavigationBloc {
@@ -38,6 +39,9 @@ extension BottomNavItemExt on BottomNavItem {
 
   DestinationManager getDestinationManager(BuildContext context) {
     switch (this) {
+      case BottomNavItem.SETTINGS:
+        return SettingsDestinationManager();
+        break;
       default:
         return TimelineDestinationManager(context);
         break;
