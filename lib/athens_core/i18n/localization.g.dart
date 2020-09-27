@@ -214,4 +214,8 @@ class AppLocalizationsGenerated {
   String timelineVotingTypesUnknown() {
     return words['timeline']['votingTypes']['unknown'];
   }
+
+  String settingsButtonLogout() {
+    return words['settings']['button']['logout'];
+  }
 }

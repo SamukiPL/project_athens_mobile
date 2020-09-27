@@ -29,4 +29,11 @@ class AuthStorage {
     await storage.write(key: accessTokenKey, value: accessToken);
   }
 
+  Future<void> removeTokens() async {
+    final storage = FlutterSecureStorage();
+
+    await storage.delete(key: accessTokenKey);
+    await storage.delete(key: refreshTokenKey);
+  }
+
 }

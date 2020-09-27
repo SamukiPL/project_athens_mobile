@@ -32,7 +32,6 @@ class NetworkModule extends Module {
                 LoggingInterceptor()]),
         dispose: (context, client) {
           authApi.dispose();
-          refreshClient.dispose();
           client.dispose();
         },
       )

@@ -69,5 +69,10 @@
       "personVote": "Głosowanie Za Osobą",
       "unknown": "Nieznany rodzaj głosowania"
     }
+  },
+  "settings": {
+    "button": {
+      "logout": "Wyloguj"
+    }
   }
 }

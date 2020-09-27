@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/timeline_flow/domain/timeline_model.dart';
 import 'package:project_athens/timeline_flow/screens/speech/speech_bloc.dart';
+import 'package:provider/provider.dart';
 
 class SpeechScreen  extends BaseScreen<SpeechBloc> {
 
@@ -72,28 +73,30 @@ class SpeechScreen  extends BaseScreen<SpeechBloc> {
                     Container(
                       margin: EdgeInsets.all(8),
                       height: double.infinity,
-                      child: FutureBuilder(
-                        future: speechModel.thumbnailUrl,
-                        builder: (context, AsyncSnapshot<String> snapshot) =>
-                            ClipOval(
-                              child: Container(
-                                width: double.infinity,
-                                height: double.infinity,
-                                decoration: BoxDecoration(
-                                    color: Colors.white
-                                ),
-                                child: Image.network(
-                                  snapshot.data ?? "",
-                                  fit: BoxFit.fitWidth,
-                                  width: 45,
-                                  errorBuilder: (context, exception, stackTrace) =>  Icon(
-                                    Icons.record_voice_over,
-                                    color: theme.dividerColor,
-                                    size: 30,
-                                  ),
-                                ),
+                      child: FutureProvider<String>.value(
+                        value: speechModel.thumbnailUrl,
+                        child: ClipOval(
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white
+                            ),
+                            child: Consumer<String>(
+                              builder: (context, value, child) => value == null
+                                  ? child
+                                  : Image.network(
+                                value,
+                                width: 65,
+                                errorBuilder:
+                                    (context, exception, stackTrace) => child,
+                              ),
+                              child: Icon(
+                                Icons.record_voice_over,
+                                color: theme.dividerColor,
+                                size: 45,
                               ),
                             ),
+                          ),
+                        ),
                       ),
                     ),
                     Container(
