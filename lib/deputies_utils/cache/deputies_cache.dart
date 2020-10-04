@@ -19,9 +19,13 @@ class DeputiesCache {
     if (result != null) return result;
 
     result = _getDeputiesUseCase(GetDeputiesParams(9)).then((value) {
-      if (value is Success<List<DeputyModel>>) _cachedDeputies = value.result;
+      if (value is Success<List<DeputyModel>>)
+        _cachedDeputies = value.result;
+      else
+        result = null;
       return value;
     });
+
     return result;
   }
 

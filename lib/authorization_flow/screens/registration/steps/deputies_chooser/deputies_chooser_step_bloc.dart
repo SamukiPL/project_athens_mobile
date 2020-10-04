@@ -1,4 +1,3 @@
-import 'package:project_athens/athens_core/domain/base_repository.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/ext/list_extension.dart';
 import 'package:project_athens/athens_core/presentation/fab/fab_bloc.dart';

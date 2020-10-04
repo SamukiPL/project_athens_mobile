@@ -21,4 +21,8 @@ class ListUseCase<MODEL extends BaseModel, PARAMS extends BaseParams> {
     return _itemsRepository.refreshItems();
   }
 
+  void dispose() {
+    _itemsRepository.dispose();
+  }
+
 }

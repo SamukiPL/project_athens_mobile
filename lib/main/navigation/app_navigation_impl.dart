@@ -1,6 +1,6 @@
+import 'package:flutter/widgets.dart' hide Router;
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
 import 'package:fluro/fluro.dart';
-import 'package:flutter/cupertino.dart';
 
 import 'fluro_router.dart';
 

@@ -10,11 +10,11 @@ extension TimelineModelExtension on List<TimelineModel> {
     switch (model.type) {
       case TimelineModelType.VOTING:
         VotingModel votingModel = model;
-        return VotingRowViewModel(votingModel.title, votingModel.date, votingModel.votingDesc);
+        return VotingRowViewModel(votingModel.id, votingModel.title, votingModel.date, votingModel.votingDesc);
         break;
       case TimelineModelType.SPEECH:
         SpeechModel speechModel = model;
-        final item = SpeechRowViewModel(speechModel.title, speechModel.desc,
+        final item = SpeechRowViewModel(speechModel.id, speechModel.title, speechModel.desc,
             speechModel.date, speechModel.thumbnailUrl);
         item.itemClick = () {
           itemClick.call(model);

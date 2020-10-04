@@ -13,11 +13,8 @@ abstract class DestinationManager<DESTINATION extends Destination> extends BaseC
   List<Module> getScreenModules(BuildContext context) => popStack.last.getScreenModules(context);
 
   bool goBack() {
-    if (popStack.length == 1) return true;
-
     popStack.removeLastIfPossible().dispose();
-    notifyListeners();
-    return false;
+    return true;
   }
 
 }

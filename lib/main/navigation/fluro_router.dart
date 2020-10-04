@@ -24,10 +24,7 @@ extension FluroRouter on Router {
             ));
     Handler homeHandler =
     Handler(handlerFunc: (context, params) =>
-            ModuleWidget(
-              providers: [LocalizationModule(context)],
-              child: MainWidget(),
-            ));
+            MainWidget());
 
     router.define(RoutePaths.login, handler: loginHandler);
     router.define(RoutePaths.home, handler: homeHandler);

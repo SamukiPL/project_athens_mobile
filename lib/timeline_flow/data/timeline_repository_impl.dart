@@ -31,7 +31,7 @@ class TimelineRepositoryImpl implements TimelineRepository {
   Future<Result> getTimelineForDay(int cadency, String date) async {
     final response = await timelineApi.getAllDeputies(cadency, date);
     var timelineResponse = TimelineResponse.fromJson(response.body);
-    List<TimelineModel> resultList = networkMapper(timelineResponse.events);
+    List<TimelineModel> resultList = await networkMapper(timelineResponse.events);
     resultList.sort((a, b) => a.date.compareTo(b.date));
     
     return Success<List<TimelineModel>>(resultList);

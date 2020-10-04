@@ -7,3 +7,11 @@ abstract class DataMapper<FROM, TO> {
 
   TO transform(FROM data);
 }
+
+abstract class AsyncDataMapper<FROM, TO> {
+  Future<List<TO>> call(List<FROM> data) async {
+    return await Future.wait(data.map((from) async => await transform(from)).toList());
+  }
+
+  Future<TO> transform(FROM data);
+}

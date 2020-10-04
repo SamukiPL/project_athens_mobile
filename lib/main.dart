@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -9,12 +10,15 @@ import 'package:project_athens/athens_core/utils/firebase/firebase_messaging_mod
 import 'package:project_athens/main/firebase/firebase_messages.dart';
 import 'package:project_athens/main/injections/app_module.dart';
 import 'package:project_athens/main/injections/app_navigation_module.dart';
+import 'package:project_athens/main/injections/main_widget_module.dart';
 import 'package:project_athens/splash_screen/splash_screen_widget.dart';
 
-void main() {
-  Crashlytics.instance.enableInDevMode = true;
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
 
-  FlutterError.onError = Crashlytics.instance.recordFlutterError;
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
 
   runApp(MyApp());
 }
@@ -28,7 +32,7 @@ class MyApp extends StatelessWidget {
     _firebaseMessages.setupMessaging();
     Fimber.plantTree(DebugBufferTree());
     return ModuleWidget(
-      providers: [AppModule(context), FirebaseMessagingModule(context, _firebaseMessages)],
+      providers: [AppModule(context), FirebaseMessagingModule(context, _firebaseMessages), MainWidgetModule(context)],
       child: MaterialApp(
         title: 'Project Athens',
         theme: ThemeData(

@@ -1,4 +1,5 @@
 import 'package:project_athens/athens_core/injections/module.dart';
+import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/deputy_subscription/presentation/deputies_registration/deputies_registration_bloc.dart';
 import 'package:project_athens/deputy_subscription/presentation/deputies_registration/list/deputies_list.dart';
@@ -11,6 +12,11 @@ class DeputiesRegistrationScreen extends BaseScreen<DeputiesRegistrationBloc> {
 
   @override
   bool get showBackArrow => false;
+
+  @override
+  BottomNavItem get currentBottomBarItem {
+
+  }
 
   @override
   Widget buildBody(BuildContext context, DeputiesRegistrationBloc bloc) {

@@ -11,7 +11,7 @@ class MainWidgetModule extends Module {
   @override
   List<SingleChildWidget> getProviders() {
     return [
-      ChangeNotifierProvider<BottomNavigationBloc>(
+      Provider<BottomNavigationBloc>(
         create: (_) => BottomNavigationBlocImpl(),
       )
     ];

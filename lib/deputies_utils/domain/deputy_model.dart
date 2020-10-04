@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:project_athens/athens_core/domain/list/base_model.dart';
 
-class DeputyModel {
+class DeputyModel extends BaseModel {
 
   final String id;
 

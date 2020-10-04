@@ -11,7 +11,7 @@ class PagingListAdapter<ITEM> {
 
   PagingListAdapter(this._bloc);
 
-  List<ITEM> _itemsList;
+  List<ITEM> _itemsList = List();
 
   bool _loading;
 

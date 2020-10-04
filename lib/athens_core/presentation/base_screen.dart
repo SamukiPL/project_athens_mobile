@@ -1,5 +1,6 @@
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
+import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_widget.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_bloc.dart';
@@ -8,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget {
+
+  BottomNavItem get currentBottomBarItem;
 
   String get appBarTitle;
   bool get showBackArrow;
@@ -27,7 +30,7 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget {
             appBar: buildAppBar(context, bloc),
             body: buildBody(context, bloc),
             floatingActionButton: buildFloatingActionButton(context, bloc),
-            bottomNavigationBar: BottomNavigationWidget(),
+            bottomNavigationBar: BottomNavigationWidget(currentItem: currentBottomBarItem),
           ),
         ),
       ),
@@ -58,7 +61,10 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget {
         ? Consumer<DestinationManager>(
             builder: (context, destinationManager, _) => BackButton(
             color: Colors.white,
-            onPressed: () => destinationManager.goBack(),
+            onPressed: () {
+              destinationManager.goBack();
+              Navigator.pop(context);
+            },
           )
         )
         : null,

@@ -25,7 +25,7 @@ class VotingModel extends TimelineModel {
 class SpeechModel extends TimelineModel{
   final String club;
   final String desc;
-  final Future<String> thumbnailUrl;
+  final String thumbnailUrl;
   final String videoUrl;
 
   SpeechModel(

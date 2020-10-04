@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:flutter_scatter/flutter_scatter.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
+import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/backdrop/backdrop_widget.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
@@ -19,6 +20,9 @@ import 'package:project_athens/timeline_flow/screens/timeline/timeline_bloc.dart
 import 'package:provider/provider.dart';
 
 class TimelineScreen extends BaseScreen<TimelineBloc> {
+  @override
+  BottomNavItem get currentBottomBarItem => BottomNavItem.TIMELINE;
+
   @override
   String get appBarTitle => "Timeline";
 
@@ -55,7 +59,7 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
 
     return StreamProvider<TimelineModel>.value(
       value: bloc.destination,
-      updateShouldNotify: (_, current) => goToDestination(current, timelineNavigation),
+      updateShouldNotify: (_, current) => goToDestination(context, current, timelineNavigation),
       child: Consumer<TimelineModel>(
         builder: (context, _, child) => child,
         child: Container(
@@ -102,13 +106,13 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
     );
   }
 
-  bool goToDestination(TimelineModel model, TimelineDestinationManager timelineNavigation) {
+  bool goToDestination(BuildContext context, TimelineModel model, TimelineDestinationManager timelineNavigation) {
     switch(model.type) {
       case TimelineModelType.VOTING:
         // TODO: Handle this case.
         break;
       case TimelineModelType.SPEECH:
-        timelineNavigation.goToSpeechScreen(model);
+        timelineNavigation.goToSpeechScreen(context, model);
         break;
     }
     return false;

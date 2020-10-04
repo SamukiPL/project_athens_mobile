@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
+import 'package:project_athens/deputies_flow/navigation/deputies_destination_manager.dart';
 import 'package:project_athens/settings_flow/navigation/settings_destination_manager.dart';
 import 'package:project_athens/timeline_flow/navigation/timeline_destination_manager.dart';
 
@@ -10,6 +11,8 @@ class BottomNavigationBlocImpl extends BottomNavigationBloc {
 
   @override
   BottomNavItem get currentItem => _currentItem;
+
+  DestinationManager _currentDestinationManager;
 
   @override
   void pickItem(int i) {
@@ -21,7 +24,7 @@ class BottomNavigationBlocImpl extends BottomNavigationBloc {
         _currentItem = BottomNavItem.DEPUTIES;
         break;
       case 2:
-        _currentItem = BottomNavItem.SEARCH;
+        _currentItem = BottomNavItem.SPEECHES;
         break;
       case 3:
         _currentItem = BottomNavItem.VOTING;
@@ -30,22 +33,24 @@ class BottomNavigationBlocImpl extends BottomNavigationBloc {
         _currentItem = BottomNavItem.SETTINGS;
         break;
     }
-    notifyListeners();
+    _currentDestinationManager = null;
   }
 
-}
-
-extension BottomNavItemExt on BottomNavItem {
-
   DestinationManager getDestinationManager(BuildContext context) {
-    switch (this) {
-      case BottomNavItem.SETTINGS:
-        return SettingsDestinationManager();
-        break;
-      default:
-        return TimelineDestinationManager(context);
-        break;
+    if (_currentDestinationManager == null) {
+      switch (currentItem) {
+        case BottomNavItem.DEPUTIES:
+          _currentDestinationManager = DeputiesDestinationManager(context);
+          break;
+        case BottomNavItem.SETTINGS:
+          _currentDestinationManager = SettingsDestinationManager();
+          break;
+        default:
+          _currentDestinationManager = TimelineDestinationManager(context);
+          break;
+      }
     }
+    return _currentDestinationManager;
   }
 
 }
