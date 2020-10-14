@@ -38,7 +38,7 @@ class ContactBean {
 
 @JsonSerializable()
 class CvBean {
-  final DateTime born;
+  final String born;
   final String education;
   final String finishedSchools;
   final String profession;

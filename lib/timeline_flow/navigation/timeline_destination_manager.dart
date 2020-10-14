@@ -6,8 +6,8 @@ import 'package:project_athens/timeline_flow/navigation/timeline_destination.dar
 
 class TimelineDestinationManager extends DestinationManager<TimelineDestination> {
 
-  TimelineDestinationManager(BuildContext context) {
-    popStack.add(TimelineScreenDestination(context));
+  TimelineDestinationManager() {
+    popStack.add(TimelineScreenDestination());
   }
 
   void goToSpeechScreen(BuildContext context, SpeechModel model) {

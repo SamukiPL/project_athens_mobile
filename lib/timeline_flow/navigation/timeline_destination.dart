@@ -11,23 +11,13 @@ import 'package:project_athens/timeline_flow/injections/speech_module.dart';
 abstract class TimelineDestination<SCREEN extends BaseScreen> extends Destination<SCREEN> {}
 
 class TimelineScreenDestination extends TimelineDestination<TimelineScreen> {
-  final TimelineModule _timelineModule;
-
-  TimelineScreenDestination._(this._timelineModule);
-
-  factory TimelineScreenDestination(BuildContext context) =>
-      TimelineScreenDestination._(TimelineModule(context));
 
   @override
   TimelineScreen getScreen() => TimelineScreen();
 
   @override
-  List<Module> getScreenModules(BuildContext context) => [_timelineModule];
+  List<Module> getScreenModules(BuildContext context) => [TimelineModule(context)];
 
-  @override
-  void dispose() {
-    _timelineModule.disposeCache();
-  }
 }
 
 class SpeechScreenDestination extends TimelineDestination<SpeechScreen> {
@@ -44,6 +34,4 @@ class SpeechScreenDestination extends TimelineDestination<SpeechScreen> {
   List<Module> getScreenModules(BuildContext context) =>
       [SpeechModule(context, speechModel)];
 
-  @override
-  void dispose() {}
 }

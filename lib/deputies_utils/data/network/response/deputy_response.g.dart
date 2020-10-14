@@ -58,7 +58,7 @@ Map<String, dynamic> _$ContactBeanToJson(ContactBean instance) =>
 
 CvBean _$CvBeanFromJson(Map<String, dynamic> json) {
   return CvBean(
-    json['born'] == null ? null : DateTime.parse(json['born'] as String),
+    json['born'] as String,
     json['education'] as String,
     json['finishedSchools'] as String,
     json['profession'] as String,
@@ -66,7 +66,7 @@ CvBean _$CvBeanFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$CvBeanToJson(CvBean instance) => <String, dynamic>{
-      'born': instance.born?.toIso8601String(),
+      'born': instance.born,
       'education': instance.education,
       'finishedSchools': instance.finishedSchools,
       'profession': instance.profession,

@@ -17,9 +17,6 @@ class SpeechScreen  extends BaseScreen<SpeechBloc> {
   SpeechScreen({@required this.speechModel});
 
   @override
-  bool get showBackArrow => true;
-
-  @override
   String get appBarTitle => "Speech";
 
   @override

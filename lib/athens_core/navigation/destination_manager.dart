@@ -13,7 +13,7 @@ abstract class DestinationManager<DESTINATION extends Destination> extends BaseC
   List<Module> getScreenModules(BuildContext context) => popStack.last.getScreenModules(context);
 
   bool goBack() {
-    popStack.removeLastIfPossible().dispose();
+    popStack.removeLastIfPossible();
     return true;
   }
 
@@ -23,6 +23,4 @@ abstract class Destination<SCREEN extends BaseScreen> {
   SCREEN getScreen();
 
   List<Module> getScreenModules(BuildContext context);
-
-  void dispose();
 }

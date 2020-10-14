@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project_athens/deputies_flow/screens/deputies_list/list/deputy_list_item_view_model.dart';
+import 'package:project_athens/deputies_flow/screens/list/list/deputy_list_item_view_model.dart';
 import 'package:provider/provider.dart';
 
 class DeputyListViewHolder extends StatelessWidget {
@@ -16,13 +16,16 @@ class DeputyListViewHolder extends StatelessWidget {
         builder: (context, viewModel, _) => Card(
           elevation: 4,
           margin: EdgeInsets.all(8),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              getDeputyFace(context),
-              getNameAndClub(context),
-            ],
+          child: InkWell(
+            onTap: viewModel.itemClick,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                getDeputyFace(context),
+                getNameAndClub(context),
+              ],
+            ),
           ),
         ),
       ),
@@ -35,7 +38,10 @@ class DeputyListViewHolder extends StatelessWidget {
       width: 55,
       child: Stack(children: <Widget>[
         Center(child: Icon(Icons.photo)),
-        Image.network(viewModel.model.thumbnailUrl),
+        Hero(
+          tag: viewModel.model.id,
+          child: Image.network(viewModel.model.thumbnailUrl)
+        ),
       ]),
     );
   }

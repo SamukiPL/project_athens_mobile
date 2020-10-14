@@ -40,13 +40,13 @@ class BottomNavigationBlocImpl extends BottomNavigationBloc {
     if (_currentDestinationManager == null) {
       switch (currentItem) {
         case BottomNavItem.DEPUTIES:
-          _currentDestinationManager = DeputiesDestinationManager(context);
+          _currentDestinationManager = DeputiesDestinationManager();
           break;
         case BottomNavItem.SETTINGS:
           _currentDestinationManager = SettingsDestinationManager();
           break;
         default:
-          _currentDestinationManager = TimelineDestinationManager(context);
+          _currentDestinationManager = TimelineDestinationManager();
           break;
       }
     }

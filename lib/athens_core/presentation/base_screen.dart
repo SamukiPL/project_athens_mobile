@@ -13,7 +13,7 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget {
   BottomNavItem get currentBottomBarItem;
 
   String get appBarTitle;
-  bool get showBackArrow;
+  bool get showBackArrow => true;
 
   @override
   Widget build(BuildContext context) {

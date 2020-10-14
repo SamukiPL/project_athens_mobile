@@ -37,7 +37,10 @@ class LoginWidget extends StatelessWidget {
         return ResetPasswordScreen();
         break;
       default:
-        return LoginScreen();
+        return ModuleWidget(
+            providers: [NetworkModule(context)],
+            child: LoginScreen()
+        );
         break;
     }
   }
