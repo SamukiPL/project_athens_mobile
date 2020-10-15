@@ -1,20 +1,20 @@
 import 'package:flick_video_player/flick_video_player.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/timeline_flow/domain/timeline_model.dart';
 import 'package:project_athens/timeline_flow/screens/speech/speech_bloc.dart';
-import 'package:provider/provider.dart';
 
 class SpeechScreen  extends BaseScreen<SpeechBloc> {
+
+  @override
+  BottomNavItem get currentBottomBarItem => BottomNavItem.SPEECHES;
 
   final SpeechModel speechModel;
 
   SpeechScreen({@required this.speechModel});
-
-  @override
-  bool get showBackArrow => true;
 
   @override
   String get appBarTitle => "Speech";
@@ -67,46 +67,33 @@ class SpeechScreen  extends BaseScreen<SpeechBloc> {
                 Container(
                 width: 65,
                 height: 65,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.all(8),
-                      height: double.infinity,
-                      child: FutureProvider<String>.value(
-                        value: speechModel.thumbnailUrl,
-                        child: ClipOval(
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white
-                            ),
-                            child: Consumer<String>(
-                              builder: (context, value, child) => value == null
-                                  ? child
-                                  : Image.network(
-                                value,
-                                width: 65,
-                                errorBuilder:
-                                    (context, exception, stackTrace) => child,
-                              ),
-                              child: Icon(
+                child: Hero(
+                  tag: speechModel.id,
+                  child: Container(
+                    margin: EdgeInsets.all(8),
+                    height: double.infinity,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                            color: theme.dividerColor, width: 2)),
+                    child: ClipOval(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white
+                        ),
+                        child: Image.network(
+                          speechModel.thumbnailUrl,
+                          width: 65,
+                          errorBuilder:
+                              (context, exception, stackTrace) => Icon(
                                 Icons.record_voice_over,
                                 color: theme.dividerColor,
                                 size: 45,
-                              ),
-                            ),
                           ),
                         ),
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(top: 8, bottom: 8),
-                      height: double.infinity,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                              color: theme.dividerColor, width: 2)),
-                    )],
+                  ),
                 ),
               ),
                 Column(

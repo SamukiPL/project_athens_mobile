@@ -1,15 +1,22 @@
 import 'dart:async';
 
 import 'package:project_athens/athens_core/domain/base_repository.dart';
+import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/presentation/base_bloc.dart';
 import 'package:project_athens/authorization_flow/domain/login/login_params.dart';
 import 'package:project_athens/authorization_flow/domain/login/login_use_case.dart';
+import 'package:project_athens/deputies_utils/domain/base_deputies_params.dart';
+import 'package:project_athens/deputies_utils/domain/firebase_deputies/firebase_deputies_use_case.dart';
 
 class LoginBloc extends BaseBloc {
 
   final LoginUseCase _loginUseCase;
 
-  LoginBloc(this._loginUseCase);
+  final FirebaseDeputiesUseCase _firebaseDeputiesUseCase;
+
+  final _cadency = 9;
+
+  LoginBloc(this._loginUseCase, this._firebaseDeputiesUseCase);
 
   String _login = "";
 
@@ -28,8 +35,16 @@ class LoginBloc extends BaseBloc {
 
     var params = LoginParams(_login, _password);
 
-    var result = await _loginUseCase(params);
-    manageState(result);
+    var loginResult = await _loginUseCase(params);
+
+    if (loginResult is Success) {
+      final deputiesParams = BaseDeputiesParams(_cadency);
+      var subscribeResult = await _firebaseDeputiesUseCase(deputiesParams);
+
+      return manageState(subscribeResult);
+    }
+
+    manageState(loginResult);
   }
 
 

@@ -31,4 +31,11 @@ class _$DeputiesApi extends DeputiesApi {
     final $request = Request('PUT', $url, client.baseUrl, body: $body);
     return client.send<dynamic, dynamic>($request);
   }
+
+  @override
+  Future<Response<dynamic>> getSubscribedDeputies(int cadency) {
+    final $url = '/user-aggregator/deputy-subscribe/$cadency';
+    final $request = Request('GET', $url, client.baseUrl);
+    return client.send<dynamic, dynamic>($request);
+  }
 }

@@ -2,7 +2,7 @@ import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/injections/cached_module.dart';
+import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/timeline_flow/data/network/timeline_api.dart';
 import 'package:project_athens/timeline_flow/data/timeline_repository_impl.dart';
@@ -13,15 +13,12 @@ import 'package:project_athens/timeline_flow/mappers/timeline_model_mapper.dart'
 import 'package:project_athens/timeline_flow/screens/timeline/timeline_bloc.dart';
 import 'package:provider/provider.dart';
 
-class TimelineModule extends CachedModule {
+class TimelineModule extends Module {
 
-  final TimelineBloc _timelineBloc;
+  TimelineModule(BuildContext context) : super(context);
 
-  final TimelineApi _timelineApi;
-
-  TimelineModule._(this._timelineBloc, this._timelineApi, BuildContext context) : super(context);
-
-  factory TimelineModule(BuildContext context) {
+  @override
+  List<SingleChildWidget> getProviders() {
     final deputiesCache = Provider.of<DeputiesCache>(context);
     final chopperClient = Provider.of<ChopperClient>(context);
     final localization = Provider.of<AppLocalizations>(context);
@@ -30,21 +27,15 @@ class TimelineModule extends CachedModule {
     GetTimelineUseCase getTimelineUseCase = GetTimelineUseCase(timelineRepository);
     GetMeetingsDates getMeetingsDates = GetMeetingsDates(timelineRepository);
 
-    final timelineBloc = TimelineBloc(getTimelineUseCase, getMeetingsDates);
-    return TimelineModule._(timelineBloc, timelineApi, context);
-  }
-
-  @override
-  List<SingleChildWidget> getProviders() => [
-    Provider<TimelineBloc>.value(
-      value: _timelineBloc,
-    )
-  ];
-
-  @override
-  void disposeCache() {
-    _timelineApi.dispose();
-    _timelineBloc.dispose();
+    return [
+      Provider<TimelineBloc>(
+        create: (context) => TimelineBloc(getTimelineUseCase, getMeetingsDates),
+        dispose: (context, bloc) {
+          bloc.dispose();
+          timelineApi.dispose();
+        },
+      )
+    ];
   }
 
 }

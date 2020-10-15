@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
+import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/settings_flow/screens/settings/settings_bloc.dart';
 import 'package:provider/provider.dart';
 
 class SettingsScreen extends BaseScreen<SettingsBloc> {
+  @override
+  BottomNavItem get currentBottomBarItem => BottomNavItem.SETTINGS;
+
   @override
   String get appBarTitle => "Settings";
   @override

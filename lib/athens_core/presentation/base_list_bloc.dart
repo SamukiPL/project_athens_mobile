@@ -15,11 +15,15 @@ abstract class BaseListBloc<MODEL extends BaseModel, ITEM extends BaseItemViewMo
 
   final PARAMS _params;
 
-  final DataMapper<MODEL, ITEM> _itemMapper;
+  final DataMapper<MODEL, ITEM> _itemFactory;
 
-  BaseListBloc(this._listUseCase, this._params, this._itemMapper) {
+  BaseListBloc(this._listUseCase, this._params, this._itemFactory) {
     getItems();
+    adapter = PagingListAdapter(this);
   }
+
+  @override
+  PagingListAdapter<ITEM> adapter;
 
   @override
   int batchSize = 20;
@@ -27,11 +31,12 @@ abstract class BaseListBloc<MODEL extends BaseModel, ITEM extends BaseItemViewMo
   @override
   int page = 0;
 
-  Function itemClick;
+  Function(MODEL) get itemClick;
 
   @protected
   Future<void> getItems() async {
     _listUseCase.getItems(_params).listen((Result data) {
+      adapter.setLoading(false);
       manageState(data);
       if (data is Success<List<MODEL>>)
         adapter.updateList(_mapItems(data.result));
@@ -53,8 +58,10 @@ abstract class BaseListBloc<MODEL extends BaseModel, ITEM extends BaseItemViewMo
 
   List<ITEM> _mapItems(List<MODEL> data) {
     return data.map((model) {
-      ITEM item = _itemMapper.transform(model);
-      item.itemClick = itemClick;
+      ITEM item = _itemFactory.transform(model);
+      item.itemClick = () {
+        return itemClick(model);
+      };
       return item;
     }).toList();
   }
@@ -63,5 +70,6 @@ abstract class BaseListBloc<MODEL extends BaseModel, ITEM extends BaseItemViewMo
   void dispose() {
     super.dispose();
     adapter.dispose();
+    _listUseCase.dispose();
   }
 }

@@ -1,11 +1,15 @@
-import 'package:project_athens/athens_core/presentation/base_change_notifier.dart';
+import 'package:flutter/widgets.dart';
+
+import 'destination_manager.dart';
 
 enum BottomNavItem {
-  TIMELINE, DEPUTIES, SEARCH, VOTING, SETTINGS
+  TIMELINE, DEPUTIES, SPEECHES, VOTING, SETTINGS
 }
 
-abstract class BottomNavigationBloc extends BaseChangeNotifier {
+abstract class BottomNavigationBloc {
   BottomNavItem get currentItem;
 
   void pickItem(int i);
+
+  DestinationManager getDestinationManager(BuildContext context);
 }

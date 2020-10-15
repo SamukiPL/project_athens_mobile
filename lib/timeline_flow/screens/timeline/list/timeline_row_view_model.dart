@@ -3,9 +3,10 @@ import 'package:project_athens/timeline_flow/domain/timeline_model.dart';
 
 abstract class TimelineRowViewModel extends BaseItemViewModel {
 
+  final String id;
   final TimelineModelType type;
 
-  TimelineRowViewModel(this.type);
+  TimelineRowViewModel(this.id, this.type);
 
 }
 
@@ -15,7 +16,7 @@ class VotingRowViewModel extends TimelineRowViewModel {
   final DateTime date;
   final String votingDesc;
 
-  VotingRowViewModel(this.title, this.date, this.votingDesc) : super(TimelineModelType.VOTING);
+  VotingRowViewModel(String id, this.title, this.date, this.votingDesc) : super(id, TimelineModelType.VOTING);
 
 }
 
@@ -24,8 +25,8 @@ class SpeechRowViewModel extends TimelineRowViewModel {
   final String title;
   final String desc;
   final DateTime date;
-  final Future<String> thumbnailUrl;
+  final String thumbnailUrl;
 
-  SpeechRowViewModel(this.title, this.desc, this.date, this.thumbnailUrl) : super(TimelineModelType.SPEECH);
+  SpeechRowViewModel(String id, this.title, this.desc, this.date, this.thumbnailUrl) : super(id, TimelineModelType.SPEECH);
 
 }

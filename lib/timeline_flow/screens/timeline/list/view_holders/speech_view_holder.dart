@@ -83,48 +83,35 @@ class SpeechViewHolder extends StatelessWidget {
           ),
           AspectRatio(
             aspectRatio: 1.0,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: 8, bottom: 8),
+            child: Hero(
+              tag: viewModel.id,
+              child: Container(
+                margin: EdgeInsets.all(8),
                 height: 40,
                 width: 40,
-                  child: FutureProvider<String>.value(
-                    value: viewModel.thumbnailUrl,
-                    child: ClipOval(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                        ),
-                        child: Consumer<String>(
-                          builder: (context, value, child) => value == null
-                              ? child
-                              : Image.network(
-                            value,
-                            width: 40,
-                            errorBuilder:
-                                (context, exception, stackTrace) => child,
-                          ),
-                          child: Icon(
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                        color: theme.dividerColor, width: lineThickness)),
+                child: ClipOval(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                    ),
+                    child: Image.network(
+                      viewModel.thumbnailUrl,
+                      width: 40,
+                      errorBuilder:
+                          (context, exception, stackTrace) => Icon(
                             Icons.record_voice_over,
                             color: theme.dividerColor,
                             size: 25,
                           ),
-                        ),
-                      ),
                     ),
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 8, bottom: 8),
-                height: 40,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                          color: theme.dividerColor, width: lineThickness)),
-                  )],
-          ),
+              ),
+            ),
           ),
         ]
       ),

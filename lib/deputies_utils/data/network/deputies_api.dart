@@ -15,4 +15,7 @@ abstract class DeputiesApi extends ChopperService {
   @Put(path: "/user-aggregator/deputy-subscribe/{cadency}")
   Future<Response> putDeputies(@Path("cadency") int cadency, @body PutDeputiesRequest request);
 
+  @Get(path: "/user-aggregator/deputy-subscribe/{cadency}")
+  Future<Response> getSubscribedDeputies(@Path("cadency") int cadency);
+
 }

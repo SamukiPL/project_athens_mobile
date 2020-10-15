@@ -6,7 +6,7 @@ import 'package:project_athens/timeline_flow/data/network/response/timeline_resp
 import 'package:project_athens/timeline_flow/data/network/response/voting.dart';
 import 'package:project_athens/timeline_flow/domain/timeline_model.dart';
 
-class TimelineModelMapper extends DataMapper<Event, TimelineModel> {
+class TimelineModelMapper extends AsyncDataMapper<Event, TimelineModel> {
 
   final DeputiesCache _deputiesCache;
 
@@ -15,13 +15,13 @@ class TimelineModelMapper extends DataMapper<Event, TimelineModel> {
   TimelineModelMapper(this._deputiesCache, this._localizations);
 
   @override
-  TimelineModel transform(Event data) {
+  Future<TimelineModel> transform(Event data) async {
     switch (data.type) {
       case TimelineEventType.VOTING:
         return getVotingModel(data.item);
         break;
       case TimelineEventType.SPEECH:
-        return getSpeechModel(data.item);
+        return await getSpeechModel(data.item);
         break;
       default:
         throw Exception("There is no other TimelineEventType");
@@ -32,14 +32,14 @@ class TimelineModelMapper extends DataMapper<Event, TimelineModel> {
     return VotingModel(item.id, item.topic, item.actualVotedAt, getVotingDesc(item.votingType));
   }
 
-  TimelineModel getSpeechModel(Speech item) {
+  Future<TimelineModel> getSpeechModel(Speech item) async {
     return SpeechModel(
       item.id,
       item.personName,
       item.parliamentClub,
       item.agenda?.title,
       item.cisInfo.eventDateTime,
-      _deputiesCache.getDeputyThumbnail(item.cadencyDeputy),
+      await _deputiesCache.getDeputyThumbnail(item.cadencyDeputy),
       item.videoDownloadUrl
     );
   }

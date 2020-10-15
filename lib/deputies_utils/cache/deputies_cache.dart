@@ -1,7 +1,7 @@
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/ext/map_extension.dart';
+import 'package:project_athens/deputies_utils/domain/base_deputies_params.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
-import 'package:project_athens/deputies_utils/domain/get_deputies/get_deputies_params.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputies/get_deputies_use_case.dart';
 
 class DeputiesCache {
@@ -18,10 +18,14 @@ class DeputiesCache {
     if (_cachedDeputies != null) return Success(_cachedDeputies);
     if (result != null) return result;
 
-    result = _getDeputiesUseCase(GetDeputiesParams(9)).then((value) {
-      if (value is Success<List<DeputyModel>>) _cachedDeputies = value.result;
+    result = _getDeputiesUseCase(BaseDeputiesParams(9)).then((value) {
+      if (value is Success<List<DeputyModel>>)
+        _cachedDeputies = value.result;
+      else
+        result = null;
       return value;
     });
+
     return result;
   }
 
