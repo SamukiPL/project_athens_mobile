@@ -21,13 +21,10 @@ class PutDeputiesRepositoryImpl
     final request = PutDeputiesRequest(params.deputies
         .map((model) => Deputy(model.deputyId, Notifications(model.vote, model.speech, model.interpolation)))
         .toList());
-    final response = await deputiesApi.putDeputies(params.cadency, request);
-    if (response.isSuccessful) {
-      await deputySubscriber.subscribeDeputies(params.deputies.map((model) =>
-          model.toFirebaseDeputySubscribeModel()
-      ).toList());
-      deputiesApi.dispose();
-    }
-    return Success<int>(response.statusCode);
+    await deputiesApi.putDeputies(params.cadency, request);
+    await deputySubscriber.subscribeDeputies(params.deputies.map((model) =>
+        model.toFirebaseDeputySubscribeModel()
+    ).toList());
+    return Success<int>(200);
   }
 }

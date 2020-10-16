@@ -7,13 +7,13 @@ import 'network/deputies_api.dart';
 
 class DeputiesRegistrationRepositoryImpl implements DeputiesRegistrationRepository {
 
-  final DeputiesApi deputiesApi;
-
-  DeputiesRegistrationRepositoryImpl(this.deputiesApi);
+  // final DeputiesApi deputiesApi;
+  //
+  // DeputiesRegistrationRepositoryImpl(this.deputiesApi);
 
   @override
   Future<Result<List<DeputyModel>>> getDeputies(DeputiesRegistrationParams params) async {
-    var response = await deputiesApi.getAllDeputies(params.cadency);
+    // var response = await deputiesApi.getAllDeputies(params.cadency);
 
     return Success<List<DeputyModel>>(List());
   }

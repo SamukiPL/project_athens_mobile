@@ -1,14 +1,20 @@
 import 'dart:async';
 
+import 'package:dio/dio.dart';
 import 'package:project_athens/athens_core/chopper/client_errors.dart';
-import 'package:chopper/chopper.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
 
-class ErrorInterceptor extends ResponseInterceptor {
+class ErrorInterceptor extends Interceptor {
+
+  void informAboutServerErrors(Response response) {
+    if (response.statusCode >= 500) {
+      Crashlytics.instance.recordFlutterError(FlutterErrorDetails(exception: response.toString()));
+    }
+  }
 
   @override
-  FutureOr<Response> onResponse(Response response) {
+  Future onResponse(Response<dynamic> response) async {
     informAboutServerErrors(response);
     switch (response.statusCode) {
       case 400:
@@ -28,12 +34,6 @@ class ErrorInterceptor extends ResponseInterceptor {
         break;
     }
     return response;
-  }
-
-  void informAboutServerErrors(Response response) {
-    if (response.statusCode >= 500) {
-      Crashlytics.instance.recordFlutterError(FlutterErrorDetails(exception: response.toString()));
-    }
   }
 
 }

@@ -1,10 +1,8 @@
-import 'package:chopper/chopper.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/chopper/error_interceptor.dart';
-import 'package:project_athens/athens_core/chopper/logging_interceptor.dart';
-import 'package:project_athens/athens_core/chopper/network_module_simple.dart';
+import 'package:project_athens/athens_core/chopper/network_module.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
-import 'package:project_athens/authorization_flow/data/network/login_api.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/data/get_deputies_repository_impl.dart';
 import 'package:project_athens/deputies_utils/data/network/deputies_api.dart';
@@ -18,27 +16,23 @@ class AppModule extends Module {
 
   @override
   List<SingleChildWidget> getProviders() {
-    final client = ChopperClient(
+    final clientOptions = BaseOptions(
       baseUrl: "http://api.swiadoma-demokracja.pl",
-      converter: JsonConverter(),
-      errorConverter: JsonConverter(),
-      interceptors: [ErrorInterceptor(), LoggingInterceptor()],
     );
+    final client = Dio(clientOptions);
+    client.interceptors.addAll([LogInterceptor(), ErrorInterceptor()]);
 
-    final loginApi = LoginApi.create(client);
-    final getDeputiesRepository = GetDeputiesRepositoryImpl(loginApi);
+    final deputiesApi = DeputiesApi(client);
+    final getDeputiesRepository = GetDeputiesRepositoryImpl(deputiesApi);
     final getDeputiesUseCase = GetDeputiesUseCase(getDeputiesRepository);
 
     return List<SingleChildWidget>.of([
-      Provider<SimpleChopperClient>(
-        create: (_) => SimpleChopperClient(client),
+      Provider<SimpleDioClient>(
+        create: (_) => SimpleDioClient(client),
         dispose: (context, client) => client.dispose(),
       ),
       Provider<DeputiesCache>(
         create: (_) => DeputiesCache(getDeputiesUseCase),
-        dispose: (_, __) {
-          loginApi.dispose();
-        },
       )
     ]);
   }

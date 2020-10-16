@@ -22,20 +22,16 @@ class RegistrationRepositoryImpl implements RegistrationRepository {
       CheckPairUsageParams params) async {
     final response = await api
         .checkAccountPairUsage(CheckPairUsageRequest.fromParams(params));
-    var checkResponse = CheckPairUsageResponse.fromJson(response.body);
 
     return Success<CheckPairUsageModel>(CheckPairUsageModel(
-        loginTaken: checkResponse.usernameTaken,
-        emailTaken: checkResponse.emailTaken));
+        loginTaken: response.usernameTaken, emailTaken: response.emailTaken));
   }
 
   @override
   Future<Result> register(RegistrationParams params) async {
     final response = await api.register(RegistrationRequest.fromParams(params));
-    var loginResponse = LoginResponse.fromJson(response.body);
 
-    await storage.saveTokens(
-        loginResponse.accessToken, loginResponse.refreshToken);
+    await storage.saveTokens(response.accessToken, response.refreshToken);
 
     return Success<bool>(true);
   }

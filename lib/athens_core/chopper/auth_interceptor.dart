@@ -1,21 +1,25 @@
 import 'dart:async';
 
+import 'package:dio/dio.dart';
 import 'package:project_athens/athens_core/chopper/auth_facade.dart';
-import 'package:chopper/chopper.dart';
 
-class AuthInterceptor implements RequestInterceptor {
+class AuthInterceptor implements Interceptor {
+  final AuthFacade _authFacade;
 
-  final AuthFacade authFacade;
-
-  AuthInterceptor(this.authFacade);
+  AuthInterceptor(this._authFacade) : super();
 
   @override
-  FutureOr<Request> onRequest(Request request) async {
-    final accessToken = await authFacade.accessToken;
+  Future onRequest(RequestOptions options) async {
+    final accessToken = await _authFacade.accessToken;
 
     Map<String, String> authHeaders = {"Authorization": "bearer $accessToken"};
 
-    return applyHeaders(request, authHeaders);
+    options.headers.addAll(authHeaders);
   }
 
+  @override
+  Future onError(DioError err) async {}
+
+  @override
+  Future onResponse(Response response) async {}
 }

@@ -1,4 +1,4 @@
-import 'package:chopper/chopper.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
@@ -35,8 +35,8 @@ class RegistrationModule extends Module {
   @override
   List<SingleChildWidget> getProviders() {
     final loginApi = Provider.of<LoginApi>(context);
-    final chopperClient = Provider.of<ChopperClient>(context);
-    final deputiesApi = DeputiesApi.create(chopperClient);
+    final dio = Provider.of<Dio>(context);
+    final deputiesApi = DeputiesApi(dio);
 
     final repository = RegistrationRepositoryImpl(loginApi);
     final registrationUseCase = RegistrationUseCase(repository);
@@ -56,10 +56,7 @@ class RegistrationModule extends Module {
     return [
       Provider<RegistrationBloc>(
         create: (_) => RegistrationBloc(headerBloc, buttonStateBloc, accountInfoStepBloc, registrationEndStepBloc, deputiesChooserBloc),
-        dispose: (_, bloc) {
-          bloc.dispose();
-          deputiesApi.dispose();
-        },
+        dispose: (_, bloc) => bloc.dispose(),
       ),
       ChangeNotifierProvider<RegistrationStepperBloc>.value(
           value: headerBloc,
@@ -96,7 +93,7 @@ class RegistrationModule extends Module {
 
     final deputySubscriber = FirebaseDeputySubscriber(firebaseMessaging);
 
-    final getDeputiesRepository = GetDeputiesRepositoryImpl(loginApi);
+    final getDeputiesRepository = GetDeputiesRepositoryImpl(deputiesApi);
     final getDeputiesUseCase = GetDeputiesUseCase(getDeputiesRepository);
 
     final putDeputiesRepository = PutDeputiesRepositoryImpl(deputiesApi, deputySubscriber);

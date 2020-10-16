@@ -19,12 +19,10 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Tokens> refreshTokens(String refreshToken) async {
     var response = await authApi.refreshTokens(AuthRequest(refreshToken));
 
-    var authResponse = AuthResponse.fromJson(response.body);
-
-    var newAccessToken = authResponse.accessToken;
-    var newRefreshToken = authResponse.refreshToken == null
+    var newAccessToken = response.accessToken;
+    var newRefreshToken = response.refreshToken == null
         ? refreshToken
-        : authResponse.refreshToken;
+        : response.refreshToken;
 
     await storage.saveTokens(newAccessToken, newRefreshToken);
 

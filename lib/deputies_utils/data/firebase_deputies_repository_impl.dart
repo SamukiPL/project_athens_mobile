@@ -16,14 +16,10 @@ class FirebaseDeputiesRepositoryImpl extends FirebaseDeputiesRepository {
   @override
   Future<Result<bool>> initFirebaseDeputies(BaseDeputiesParams params) async {
     final response = await _deputiesApi.getSubscribedDeputies(params.cadency);
-    final deputies = (response.body as List)
-        .map((json) => SubscribedDeputyResponse.fromJson(json))
-        .toList();
-    await _deputySubscriber.subscribeDeputies(deputies.map((model) =>
+    await _deputySubscriber.subscribeDeputies(response.map((model) =>
         model.toFirebaseDeputySubscribeModel()
     ).toList());
-    _deputiesApi.dispose();
-    return Success<bool>(response.isSuccessful);
+    return Success<bool>(true);
   }
 
 }

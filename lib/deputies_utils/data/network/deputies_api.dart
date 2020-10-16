@@ -1,21 +1,23 @@
+import 'package:dio/dio.dart';
 import 'package:project_athens/deputies_utils/data/network/request/put_deputies_request.dart';
-import 'package:chopper/chopper.dart';
+import 'package:project_athens/deputies_utils/data/network/response/deputy_response.dart';
+import 'package:project_athens/deputies_utils/data/network/response/subscribed_deputy_response.dart';
+import 'package:retrofit/http.dart';
 
-part 'deputies_api.chopper.dart';
+part 'deputies_api.g.dart';
 
-@ChopperApi()
-abstract class DeputiesApi extends ChopperService {
+@RestApi()
+abstract class DeputiesApi {
 
-  static DeputiesApi create([ChopperClient client]) =>
-      _$DeputiesApi(client);
+  factory DeputiesApi(Dio dio, {String baseUrl}) = _DeputiesApi;
 
-  @Get(path: "/deputy-aggregator/cadency-deputy/get-all/{cadency}")
-  Future<Response> getAllDeputies(@Path("cadency") int cadency);
+  @GET("/deputy-aggregator/cadency-deputy/get-all/{cadency}")
+  Future<List<DeputyResponse>> getAllDeputies(@Path("cadency") int cadency);
 
-  @Put(path: "/user-aggregator/deputy-subscribe/{cadency}")
-  Future<Response> putDeputies(@Path("cadency") int cadency, @body PutDeputiesRequest request);
+  @PUT("/user-aggregator/deputy-subscribe/{cadency}")
+  Future<void> putDeputies(@Path("cadency") int cadency, @Body() PutDeputiesRequest request);
 
-  @Get(path: "/user-aggregator/deputy-subscribe/{cadency}")
-  Future<Response> getSubscribedDeputies(@Path("cadency") int cadency);
+  @GET("/user-aggregator/deputy-subscribe/{cadency}")
+  Future<List<SubscribedDeputyResponse>> getSubscribedDeputies(@Path("cadency") int cadency);
 
 }
