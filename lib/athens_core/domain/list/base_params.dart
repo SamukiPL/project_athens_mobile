@@ -1,3 +1,3 @@
-abstract class BaseParams {
+class BaseParams {
 
 }

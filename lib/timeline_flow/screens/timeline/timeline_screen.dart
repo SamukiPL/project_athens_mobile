@@ -8,7 +8,7 @@ import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/backdrop/backdrop_widget.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:project_athens/timeline_flow/domain/timeline_model.dart';
+import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/timeline_flow/injections/timeline_module.dart';
 import 'package:project_athens/timeline_flow/navigation/timeline_destination_manager.dart';
 import 'package:project_athens/timeline_flow/presentation/calendar_app_bar.dart';

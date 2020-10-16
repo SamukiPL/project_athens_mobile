@@ -3,6 +3,7 @@ import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dar
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/deputies_flow/navigation/deputies_destination_manager.dart';
 import 'package:project_athens/settings_flow/navigation/settings_destination_manager.dart';
+import 'package:project_athens/speeches_flow/navigation/speeches_destination_manager.dart';
 import 'package:project_athens/timeline_flow/navigation/timeline_destination_manager.dart';
 
 class BottomNavigationBlocImpl extends BottomNavigationBloc {
@@ -41,6 +42,9 @@ class BottomNavigationBlocImpl extends BottomNavigationBloc {
       switch (currentItem) {
         case BottomNavItem.DEPUTIES:
           _currentDestinationManager = DeputiesDestinationManager();
+          break;
+        case BottomNavItem.SPEECHES:
+          _currentDestinationManager = SpeechesDestinationManager();
           break;
         case BottomNavItem.SETTINGS:
           _currentDestinationManager = SettingsDestinationManager();

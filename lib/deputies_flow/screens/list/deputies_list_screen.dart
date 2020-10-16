@@ -6,7 +6,7 @@ import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/presentation/search_app_bar/search_app_bar.dart';
 import 'package:project_athens/deputies_flow/navigation/deputies_destination_manager.dart';
 import 'package:project_athens/deputies_flow/screens/list/deputies_list_bloc.dart';
-import 'package:project_athens/deputies_flow/screens/list/list/deputies_list.dart';
+import 'package:project_athens/deputies_flow/screens/list/list_impl/deputies_list.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:provider/provider.dart';
 

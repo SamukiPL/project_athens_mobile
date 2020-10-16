@@ -3,7 +3,7 @@ import 'package:project_athens/timeline_flow/data/network/response/meetings_resp
 import 'package:project_athens/timeline_flow/data/network/response/timeline_response.dart';
 import 'package:project_athens/timeline_flow/data/network/timeline_api.dart';
 import 'package:project_athens/timeline_flow/domain/meetings_date.dart';
-import 'package:project_athens/timeline_flow/domain/timeline_model.dart';
+import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/timeline_flow/domain/timeline_repository.dart';
 import 'package:project_athens/timeline_flow/mappers/meetings_dates_mapper.dart';
 import 'package:project_athens/timeline_flow/mappers/timeline_model_mapper.dart';

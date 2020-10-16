@@ -1,5 +1,5 @@
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
-import 'package:project_athens/timeline_flow/domain/timeline_model.dart';
+import 'package:project_athens/athens_core/models/timeline_model.dart';
 
 abstract class TimelineRowViewModel extends BaseItemViewModel {
 

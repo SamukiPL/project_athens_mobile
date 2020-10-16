@@ -7,7 +7,7 @@ import 'package:project_athens/pagination/paging_list_adapter.dart';
 import 'package:project_athens/timeline_flow/domain/get_meetings_dates.dart';
 import 'package:project_athens/timeline_flow/domain/get_timeline_use_case.dart';
 import 'package:project_athens/timeline_flow/domain/meetings_date.dart';
-import 'package:project_athens/timeline_flow/domain/timeline_model.dart';
+import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/timeline_flow/domain/timeline_parameters.dart';
 import 'package:project_athens/timeline_flow/presentation/calendar_app_bar_bloc.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';

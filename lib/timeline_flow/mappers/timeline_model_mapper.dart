@@ -4,7 +4,7 @@ import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/timeline_flow/data/network/response/speech.dart';
 import 'package:project_athens/timeline_flow/data/network/response/timeline_response.dart';
 import 'package:project_athens/timeline_flow/data/network/response/voting.dart';
-import 'package:project_athens/timeline_flow/domain/timeline_model.dart';
+import 'package:project_athens/athens_core/models/timeline_model.dart';
 
 class TimelineModelMapper extends AsyncDataMapper<Event, TimelineModel> {
 
