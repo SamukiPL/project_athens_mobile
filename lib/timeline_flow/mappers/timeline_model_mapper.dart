@@ -29,18 +29,23 @@ class TimelineModelMapper extends AsyncDataMapper<Event, TimelineModel> {
   }
 
   TimelineModel getVotingModel(Voting item) {
-    return VotingModel(item.id, item.topic, item.actualVotedAt, getVotingDesc(item.votingType));
+    return VotingModel(
+        id: item.id,
+        title: item.topic,
+        date: item.actualVotedAt,
+        votingDesc: getVotingDesc(item.votingType));
   }
 
   Future<TimelineModel> getSpeechModel(Speech item) async {
     return SpeechModel(
-      item.id,
-      item.personName,
-      item.parliamentClub,
-      item.agenda?.title,
-      item.cisInfo.eventDateTime,
-      await _deputiesCache.getDeputyThumbnail(item.cadencyDeputy),
-      item.videoDownloadUrl
+      id: item.id,
+      personName: item.personName,
+      deputyId: item.cadencyDeputy,
+      club: item.parliamentClub,
+      desc: item.agenda?.title,
+      date: item.cisInfo.eventDateTime,
+      thumbnailUrl: await _deputiesCache.getDeputyThumbnail(item.cadencyDeputy),
+      videoUrl: item.videoDownloadUrl
     );
   }
 

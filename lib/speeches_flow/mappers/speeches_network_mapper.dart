@@ -12,12 +12,14 @@ class SpeechesNetworkMapper
   @override
   Future<SpeechModel> transform(SpeechResponse data) async {
     return SpeechModel(
-        data.id,
-        data.personName,
-        data.parliamentClub,
-        data.agenda?.title,
-        data.cisInfo.eventDateTime,
-        await _deputiesCache.getDeputyThumbnail(data.cadencyDeputy),
-        data.videoDownloadUrl);
+        id: data.id,
+        personName: data.personName,
+        deputyId: data.cadencyDeputy,
+        club: data.parliamentClub,
+        desc: data.agenda?.title,
+        date: data.cisInfo.eventDateTime,
+        thumbnailUrl: await _deputiesCache.getDeputyThumbnail(data.cadencyDeputy),
+        videoUrl: data.videoDownloadUrl
+    );
   }
 }

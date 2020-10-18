@@ -14,7 +14,7 @@ extension TimelineModelExtension on List<TimelineModel> {
         break;
       case TimelineModelType.SPEECH:
         SpeechModel speechModel = model;
-        final item = SpeechRowViewModel(speechModel.id, speechModel.title, speechModel.desc,
+        final item = SpeechRowViewModel(speechModel.id, speechModel.personName, speechModel.desc,
             speechModel.date, speechModel.thumbnailUrl);
         item.itemClick = () {
           itemClick.call(model);

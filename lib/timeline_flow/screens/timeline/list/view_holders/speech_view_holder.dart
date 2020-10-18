@@ -144,7 +144,7 @@ class SpeechViewHolder extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   child: Text(
-                    viewModel.title,
+                    viewModel.personName,
                     style: TextStyle(
                         color: theme.primaryColor,
                         fontWeight: FontWeight.bold,

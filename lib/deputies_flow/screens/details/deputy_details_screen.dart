@@ -11,13 +11,15 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
 
   final DeputyModel _deputyModel;
 
-  DeputyDetailsScreen(this._deputyModel);
+  final BottomNavItem _currentBottomBarItem;
+
+  DeputyDetailsScreen(this._deputyModel, this._currentBottomBarItem);
 
   @override
   String get appBarTitle => _deputyModel.name;
 
   @override
-  BottomNavItem get currentBottomBarItem => BottomNavItem.DEPUTIES;
+  BottomNavItem get currentBottomBarItem => _currentBottomBarItem;
 
   @override
   Widget buildBody(BuildContext context, DeputyDetailsBloc bloc) {

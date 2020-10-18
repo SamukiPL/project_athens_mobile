@@ -1,5 +1,6 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
+import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/deputies_flow/injections/deputies_list_module.dart';
@@ -20,10 +21,12 @@ class DeputiesListDestination extends Destination<DeputiesListScreen> {
 class DeputyDetailsDestination extends Destination<DeputyDetailsScreen> {
   final DeputyModel _deputyModel;
 
-  DeputyDetailsDestination(this._deputyModel);
+  final BottomNavItem _currentBottomItem;
+
+  DeputyDetailsDestination(this._deputyModel, this._currentBottomItem);
 
   @override
-  DeputyDetailsScreen getScreen() => DeputyDetailsScreen(_deputyModel);
+  DeputyDetailsScreen getScreen() => DeputyDetailsScreen(_deputyModel, _currentBottomItem);
 
   @override
   List<Module> getScreenModules(BuildContext context) =>

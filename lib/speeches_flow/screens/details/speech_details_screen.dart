@@ -3,9 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
+import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
+import 'package:project_athens/deputies_flow/navigation/deputies_destinations.dart';
+import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:project_athens/speeches_flow/screens/details/speech_details_bloc.dart';
+import 'package:provider/provider.dart';
 
 class SpeechDetailsScreen  extends BaseScreen<SpeechDetailsBloc> {
 
@@ -24,7 +28,7 @@ class SpeechDetailsScreen  extends BaseScreen<SpeechDetailsBloc> {
     final theme = Theme.of(context);
     return Column(
       children: [
-        speakerLabel(theme),
+        speakerLabel(context, bloc, theme),
         Stack(
           children: [
             AspectRatio(
@@ -57,50 +61,54 @@ class SpeechDetailsScreen  extends BaseScreen<SpeechDetailsBloc> {
     );
   }
 
-  Widget speakerLabel(ThemeData theme) => Container(
-        color: theme.primaryColor,
+  Widget speakerLabel(BuildContext context, SpeechDetailsBloc bloc, ThemeData theme) {
+    final destinationManager = Provider.of<DestinationManager>(context);
+    return Container(
+      color: theme.primaryColor,
+      child: GestureDetector(
+        onTap: () => goToDeputyDetails(context, bloc.deputyModel, destinationManager),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
                 Container(
-                width: 65,
-                height: 65,
-                child: Hero(
-                  tag: speechModel.id,
-                  child: Container(
-                    margin: EdgeInsets.all(8),
-                    height: double.infinity,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                            color: theme.dividerColor, width: 2)),
-                    child: ClipOval(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white
-                        ),
-                        child: Image.network(
-                          speechModel.thumbnailUrl,
-                          width: 65,
-                          errorBuilder:
-                              (context, exception, stackTrace) => Icon(
-                                Icons.record_voice_over,
-                                color: theme.dividerColor,
-                                size: 45,
+                  width: 65,
+                  height: 65,
+                  child: Hero(
+                    tag: speechModel.id,
+                    child: Container(
+                      margin: EdgeInsets.all(8),
+                      height: double.infinity,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                              color: theme.dividerColor, width: 2)),
+                      child: ClipOval(
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white
+                          ),
+                          child: Image.network(
+                            speechModel.thumbnailUrl,
+                            width: 65,
+                            errorBuilder:
+                                (context, exception, stackTrace) => Icon(
+                              Icons.record_voice_over,
+                              color: theme.dividerColor,
+                              size: 45,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      speechModel.title,
+                      speechModel.personName,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -135,11 +143,16 @@ class SpeechDetailsScreen  extends BaseScreen<SpeechDetailsBloc> {
             )
           ],
         ),
-      );
+      ),
+    );
+  }
 
   @override
-  Widget buildFloatingActionButton(BuildContext context, SpeechDetailsBloc bloc) {
-    return null;
+  Widget buildFloatingActionButton(BuildContext context, SpeechDetailsBloc bloc) => null;
+
+  void goToDeputyDetails(BuildContext context, DeputyModel model, DestinationManager destinationManager) {
+    final destination = DeputyDetailsDestination(model, currentBottomBarItem);
+    destinationManager.goToDestination(context, destination);
   }
 
 }

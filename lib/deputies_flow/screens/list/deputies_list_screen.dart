@@ -51,7 +51,7 @@ class DeputiesListScreen extends BaseScreen<DeputiesListBloc> {
   }
 
   bool goToDetails(BuildContext context, DeputyModel model, DestinationManager destinationManager) {
-    destinationManager.goToDestination(context, DeputyDetailsDestination(model));
+    destinationManager.goToDestination(context, DeputyDetailsDestination(model, currentBottomBarItem));
     return false;
   }
 

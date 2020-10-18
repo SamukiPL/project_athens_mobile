@@ -57,23 +57,39 @@ class SpeechViewHolder extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Container(
-                width: double.infinity,
-                margin: EdgeInsets.only(bottom: 8),
-                child: Text(
-                  _viewModel.speakerName,
-                  style: TextStyle(
-                      color: theme.primaryColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                  maxLines: 2,
-                  textAlign: TextAlign.left,
-                ),
-              ),
+              getNameWithDate(context, theme),
               getDescription(context, theme)
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget getNameWithDate(BuildContext context, ThemeData theme) {
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.only(bottom: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Text(
+              _viewModel.personName,
+              style: TextStyle(
+                  color: theme.primaryColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
+              textAlign: TextAlign.left,
+            ),
+          ),
+          Text(
+            _viewModel.date,
+            style: TextStyle(
+              color: theme.dividerColor,
+              fontSize: 12),
+          )
+        ],
       ),
     );
   }
@@ -85,7 +101,7 @@ class SpeechViewHolder extends StatelessWidget {
       child: Text(
         _viewModel.desc,
         style: TextStyle(
-            color: theme.dividerColor, fontSize: 12),
+            color: theme.dividerColor, fontSize: 14),
         textAlign: TextAlign.left,
       ),
     )
