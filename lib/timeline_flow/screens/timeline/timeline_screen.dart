@@ -1,16 +1,13 @@
-import 'dart:collection';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_scatter/flutter_scatter.dart';
-import 'package:project_athens/athens_core/injections/module.dart';
+import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/backdrop/backdrop_widget.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:project_athens/timeline_flow/domain/timeline_model.dart';
-import 'package:project_athens/timeline_flow/injections/timeline_module.dart';
-import 'package:project_athens/timeline_flow/navigation/timeline_destination_manager.dart';
+import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
 import 'package:project_athens/timeline_flow/presentation/calendar_app_bar.dart';
 import 'package:project_athens/timeline_flow/presentation/date_picker_fork/date_picker_dialog_custom.dart';
 import 'package:project_athens/timeline_flow/presentation/date_picker_fork/date_utils.dart';
@@ -55,11 +52,11 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
           )
       );
     });
-    TimelineDestinationManager timelineNavigation = Provider.of<DestinationManager>(context);
+    final destinationManager = Provider.of<DestinationManager>(context);
 
     return StreamProvider<TimelineModel>.value(
       value: bloc.destination,
-      updateShouldNotify: (_, current) => goToDestination(context, current, timelineNavigation),
+      updateShouldNotify: (_, current) => goToDestination(context, current, destinationManager),
       child: Consumer<TimelineModel>(
         builder: (context, _, child) => child,
         child: Container(
@@ -106,13 +103,13 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
     );
   }
 
-  bool goToDestination(BuildContext context, TimelineModel model, TimelineDestinationManager timelineNavigation) {
+  bool goToDestination(BuildContext context, TimelineModel model, DestinationManager timelineNavigation) {
     switch(model.type) {
       case TimelineModelType.VOTING:
         // TODO: Handle this case.
         break;
       case TimelineModelType.SPEECH:
-        timelineNavigation.goToSpeechScreen(context, model);
+        timelineNavigation.goToDestination(context, SpeechDetailsDestination(model));
         break;
     }
     return false;

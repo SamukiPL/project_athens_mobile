@@ -1,16 +1,17 @@
-import 'package:chopper/chopper.dart';
+import 'package:dio/dio.dart';
+import 'package:project_athens/athens_core/auth/network/auth_response.dart';
+import 'package:retrofit/http.dart';
 
 import 'auth_request.dart';
 
-part 'auth_api.chopper.dart';
+part 'auth_api.g.dart';
 
-@ChopperApi(baseUrl: "/user-aggregator/auth")
-abstract class AuthApi extends ChopperService {
+@RestApi()
+abstract class AuthApi {
 
-  static AuthApi create([ChopperClient client]) =>
-      _$AuthApi(client);
+  factory AuthApi(Dio dio, {String baseUrl}) = _AuthApi;
 
-  @Post(path: '/auth')
-  Future<Response> refreshTokens(@Body() AuthRequest request);
+  @POST('/user-aggregator/auth/auth')
+  Future<AuthResponse> refreshTokens(@Body() AuthRequest request);
 
 }

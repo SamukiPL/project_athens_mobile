@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
-import 'package:project_athens/deputies_flow/navigation/deputies_destination_manager.dart';
-import 'package:project_athens/settings_flow/navigation/settings_destination_manager.dart';
-import 'package:project_athens/timeline_flow/navigation/timeline_destination_manager.dart';
+import 'package:project_athens/deputies_flow/navigation/deputies_destinations.dart';
+import 'package:project_athens/settings_flow/navigation/settings_destinations.dart';
+import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
+import 'package:project_athens/timeline_flow/navigation/timeline_destinations.dart';
 
 class BottomNavigationBlocImpl extends BottomNavigationBloc {
 
@@ -40,13 +41,16 @@ class BottomNavigationBlocImpl extends BottomNavigationBloc {
     if (_currentDestinationManager == null) {
       switch (currentItem) {
         case BottomNavItem.DEPUTIES:
-          _currentDestinationManager = DeputiesDestinationManager();
+          _currentDestinationManager = DestinationManager(DeputiesListDestination());
+          break;
+        case BottomNavItem.SPEECHES:
+          _currentDestinationManager = DestinationManager(SpeechesListDestination());
           break;
         case BottomNavItem.SETTINGS:
-          _currentDestinationManager = SettingsDestinationManager();
+          _currentDestinationManager = DestinationManager(SettingsScreenDestination());
           break;
         default:
-          _currentDestinationManager = TimelineDestinationManager();
+          _currentDestinationManager = DestinationManager(TimelineScreenDestination());
           break;
       }
     }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:project_athens/athens_core/auth/auth_repository.dart';
 import 'package:project_athens/athens_core/auth/auth_storage.dart';
 import 'package:project_athens/athens_core/chopper/client_errors.dart';
@@ -46,9 +47,8 @@ class SplashScreenBloc extends BaseBloc {
       await _authRepository.refreshTokens(tokens.refreshToken);
       await deputiesCache.deputies;
       _direction.add(SplashDirection.MAIN);
-    } on SocketException {
-      _direction.add(SplashDirection.MAIN);
-    } on UnauthorizedError {
+    } on DioError {
+      _authStorage.removeTokens();
       _direction.add(SplashDirection.LOGIN);
     }
   }

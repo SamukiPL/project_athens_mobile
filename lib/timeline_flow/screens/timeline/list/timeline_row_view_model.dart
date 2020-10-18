@@ -1,5 +1,5 @@
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
-import 'package:project_athens/timeline_flow/domain/timeline_model.dart';
+import 'package:project_athens/athens_core/models/timeline_model.dart';
 
 abstract class TimelineRowViewModel extends BaseItemViewModel {
 
@@ -22,11 +22,11 @@ class VotingRowViewModel extends TimelineRowViewModel {
 
 class SpeechRowViewModel extends TimelineRowViewModel {
 
-  final String title;
+  final String personName;
   final String desc;
   final DateTime date;
   final String thumbnailUrl;
 
-  SpeechRowViewModel(String id, this.title, this.desc, this.date, this.thumbnailUrl) : super(id, TimelineModelType.SPEECH);
+  SpeechRowViewModel(String id, this.personName, this.desc, this.date, this.thumbnailUrl) : super(id, TimelineModelType.SPEECH);
 
 }

@@ -1,4 +1,4 @@
-import 'package:chopper/chopper.dart';
+import 'package:dio/dio.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/utils/firebase/firebase_deputy_subscriber.dart';
 import 'package:project_athens/authorization_flow/data/login_repository_impl.dart';
@@ -35,8 +35,8 @@ class LoginScreenModule extends Module {
   }
 
   FirebaseDeputiesUseCase getFirebaseDeputiesUseCase(BuildContext context) {
-    final chopperClient = Provider.of<ChopperClient>(context);
-    final deputiesApi = DeputiesApi.create(chopperClient);
+    final chopperClient = Provider.of<Dio>(context);
+    final deputiesApi = DeputiesApi(chopperClient);
 
     final firebaseMessaging = Provider.of<FirebaseMessages>(context);
     final deputySubscriber = FirebaseDeputySubscriber(firebaseMessaging);

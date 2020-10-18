@@ -4,7 +4,7 @@ import 'package:project_athens/athens_core/domain/list/list_use_case.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/deputies_flow/data/deputies_list_repository_impl.dart';
 import 'package:project_athens/deputies_flow/screens/list/deputies_list_bloc.dart';
-import 'package:project_athens/deputies_flow/screens/list/list/deputy_item_view_model_factory.dart';
+import 'package:project_athens/deputies_flow/screens/list/list_impl/deputy_item_view_model_factory.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:provider/provider.dart';
 

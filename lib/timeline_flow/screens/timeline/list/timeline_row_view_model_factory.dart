@@ -1,4 +1,4 @@
-import 'package:project_athens/timeline_flow/domain/timeline_model.dart';
+import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
 
 extension TimelineModelExtension on List<TimelineModel> {
@@ -14,7 +14,7 @@ extension TimelineModelExtension on List<TimelineModel> {
         break;
       case TimelineModelType.SPEECH:
         SpeechModel speechModel = model;
-        final item = SpeechRowViewModel(speechModel.id, speechModel.title, speechModel.desc,
+        final item = SpeechRowViewModel(speechModel.id, speechModel.personName, speechModel.desc,
             speechModel.date, speechModel.thumbnailUrl);
         item.itemClick = () {
           itemClick.call(model);

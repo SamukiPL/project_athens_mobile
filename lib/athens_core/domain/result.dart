@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:project_athens/athens_core/chopper/client_errors.dart';
 
 abstract class Result<T> {}
@@ -17,7 +18,7 @@ class Failure<T> implements Result<T> {
   final Exception exception;
 
   Failure(this.exception) {
-    if (exception is! SocketException && exception is! ClientError)
+    if (exception is! DioError)
       throw exception;
   }
 

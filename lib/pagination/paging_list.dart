@@ -8,13 +8,13 @@ import 'paging_state.dart';
 abstract class PagingList<ITEM> extends StatelessWidget {
 
   @protected
-  final double leftPadding = 16;
+  final double leftPadding = 8;
   @protected
-  final double topPadding = 16;
+  final double topPadding = 8;
   @protected
-  final double rightPadding = 16;
+  final double rightPadding = 8;
   @protected
-  final double bottomPadding = 16;
+  final double bottomPadding = 8;
 
   @protected
   final bool refreshable = true;
@@ -40,7 +40,9 @@ abstract class PagingList<ITEM> extends StatelessWidget {
     );
   }
 
-  Widget getList(PagingState<ITEM> state) => ListView.builder(
+  @protected
+  Widget getList(PagingState<ITEM> state) => ListView.separated(
+    separatorBuilder: (context, index) => buildSeparator(context, index),
     padding: EdgeInsets.only(left: leftPadding, top: topPadding, right: rightPadding, bottom: bottomPadding),
     itemCount: state.itemsCount,
     itemBuilder: (_, index) => _itemBuilder(state.items, index),
@@ -56,6 +58,10 @@ abstract class PagingList<ITEM> extends StatelessWidget {
       return progressView;
   }
 
+  @protected
   StatelessWidget getItemViewHolder(ITEM item, int index, int length);
+
+  @protected
+  StatelessWidget buildSeparator(context, index) => Container();
 
 }

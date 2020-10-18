@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:project_athens/athens_core/chopper/network_module_simple.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
 import 'package:flutter/cupertino.dart';

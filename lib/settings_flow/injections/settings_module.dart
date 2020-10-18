@@ -1,4 +1,4 @@
-import 'package:chopper/chopper.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
@@ -13,18 +13,15 @@ class SettingsModule extends Module {
 
   @override
   List<SingleChildWidget> getProviders() {
-    final client = Provider.of<ChopperClient>(context);
-    final settingsApi = SettingsApi.create(client);
+    final client = Provider.of<Dio>(context);
+    final settingsApi = SettingsApi(client);
 
     final logoutRepository = LogoutRepositoryImpl(settingsApi);
     final logoutUseCase = LogoutUseCase(logoutRepository);
     return [
       Provider<SettingsBloc>(
         create: (_) => SettingsBloc(logoutUseCase),
-        dispose: (context, bloc) {
-          bloc.dispose();
-          settingsApi.dispose();
-        },
+        dispose: (context, bloc) => bloc.dispose(),
       )
     ];
   }

@@ -1,4 +1,4 @@
-import 'package:chopper/chopper.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
@@ -20,9 +20,9 @@ class TimelineModule extends Module {
   @override
   List<SingleChildWidget> getProviders() {
     final deputiesCache = Provider.of<DeputiesCache>(context);
-    final chopperClient = Provider.of<ChopperClient>(context);
+    final dio = Provider.of<Dio>(context);
     final localization = Provider.of<AppLocalizations>(context);
-    TimelineApi timelineApi = TimelineApi.create(chopperClient);
+    TimelineApi timelineApi = TimelineApi(dio);
     TimelineRepository timelineRepository = TimelineRepositoryImpl(timelineApi, TimelineModelMapper(deputiesCache, localization));
     GetTimelineUseCase getTimelineUseCase = GetTimelineUseCase(timelineRepository);
     GetMeetingsDates getMeetingsDates = GetMeetingsDates(timelineRepository);
@@ -30,10 +30,7 @@ class TimelineModule extends Module {
     return [
       Provider<TimelineBloc>(
         create: (context) => TimelineBloc(getTimelineUseCase, getMeetingsDates),
-        dispose: (context, bloc) {
-          bloc.dispose();
-          timelineApi.dispose();
-        },
+        dispose: (context, bloc) => bloc.dispose(),
       )
     ];
   }

@@ -1,11 +1,12 @@
-import 'package:chopper/chopper.dart';
-
-part 'deputies_api.chopper.dart';
-
-@ChopperApi(baseUrl: "/deputy-aggregator/cadency-deputy/")
-abstract class DeputiesApi extends ChopperService {
-
-  @Get(path: "get-all/{cadency}")
-  Future<Response> getAllDeputies(@Path("cadency") int cadency);
-
-}
+// import 'package:project_athens/deputies_utils/data/network/response/deputy_response.dart';
+// import 'package:retrofit/http.dart';
+//
+// part 'deputies_api.g.dart';
+//
+// @RestApi(baseUrl: "/deputy-aggregator/cadency-deputy/")
+// abstract class DeputiesApi {
+//
+//   @GET("get-all/{cadency}")
+//   Future<List<DeputyResponse>> getAllDeputies(@Path("cadency") int cadency);
+//
+// }

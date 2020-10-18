@@ -120,11 +120,11 @@ class SpeechViewHolder extends StatelessWidget {
 
   Widget getRowText(BuildContext context, ThemeData theme) {
     return Expanded(
-      child: GestureDetector(
-        onTap: viewModel.itemClick,
-        child: Card(
-          margin: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
-          elevation: 4,
+      child: Card(
+        margin: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
+        elevation: 4,
+        child: InkWell(
+          onTap: viewModel.itemClick,
           child: Container(
             margin: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
             child: Column(
@@ -144,7 +144,7 @@ class SpeechViewHolder extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   child: Text(
-                    viewModel.title,
+                    viewModel.personName,
                     style: TextStyle(
                         color: theme.primaryColor,
                         fontWeight: FontWeight.bold,

@@ -1,14 +1,14 @@
-import 'package:chopper/chopper.dart';
+import 'package:dio/dio.dart';
+import 'package:retrofit/http.dart';
 
-part 'settings_api.chopper.dart';
+part 'settings_api.g.dart';
 
-@ChopperApi(baseUrl: "/user-aggregator/auth")
-abstract class SettingsApi extends ChopperService {
+@RestApi()
+abstract class SettingsApi {
 
-  static SettingsApi create([ChopperClient client]) =>
-      _$SettingsApi(client);
+  factory SettingsApi(Dio dio, {String baseUrl}) = _SettingsApi;
 
-  @Post(path: '/logout')
-  Future<Response> logout();
+  @POST('/user-aggregator/auth/logout')
+  Future<void> logout();
 
 }

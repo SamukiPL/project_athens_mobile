@@ -29,6 +29,16 @@ class DeputiesCache {
     return result;
   }
 
+  Future<DeputyModel> getDeputyModel(String id) async {
+    if (_cachedDeputies.isNotEmpty)
+      return _cachedDeputies.firstWhere(
+              (element) => element.id == id)
+      ;
+
+    await deputies;
+    return _cachedDeputies.firstWhere((element) => element.id == id);
+  }
+
   Future<String> getDeputyThumbnail(String id) async {
     if (_deputiesThumbnails.containsKey(id)) return _deputiesThumbnails[id];
 
