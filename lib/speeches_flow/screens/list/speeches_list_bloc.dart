@@ -21,7 +21,9 @@ class SpeechesListBloc
   Stream<SpeechModel> get goToDetails => _goToDetails.stream;
 
   @override
-  Function(SpeechModel p1) get itemClick => throw UnimplementedError();
+  Function(SpeechModel p1) get itemClick => (SpeechModel model) {
+    _goToDetails.add(model);
+  };
 
   @override
   void dispose() {

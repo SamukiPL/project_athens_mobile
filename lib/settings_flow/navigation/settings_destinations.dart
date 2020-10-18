@@ -6,17 +6,11 @@ import 'package:project_athens/main/injections/app_navigation_module.dart';
 import 'package:project_athens/settings_flow/injections/settings_module.dart';
 import 'package:project_athens/settings_flow/screens/settings/settings_screen.dart';
 
-abstract class SettingsDestination<SCREEN extends BaseScreen> extends Destination<SCREEN> {}
-
-class SettingsScreenDestination extends SettingsDestination<SettingsScreen> {
-  @override
-  void dispose() {}
-
+class SettingsScreenDestination extends Destination<SettingsScreen> {
   @override
   SettingsScreen getScreen() => SettingsScreen();
 
   @override
-  List<Module> getScreenModules(BuildContext context) => [SettingsModule(context), AppNavigationModule(context)];
-
+  List<Module> getScreenModules(BuildContext context) =>
+      [SettingsModule(context), AppNavigationModule(context)];
 }
-

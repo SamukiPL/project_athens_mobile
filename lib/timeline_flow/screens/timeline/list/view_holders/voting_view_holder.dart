@@ -104,35 +104,38 @@ class VotingViewHolder extends StatelessWidget {
       child: Card(
         margin: EdgeInsets.only(left: 8, top: 8, bottom: 8,  right: 8),
         elevation: 4,
-        child: Container(
-          margin: EdgeInsets.only(left: 8, top: 8, bottom: 8),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                width: double.infinity,
-                child: Text(
-                  viewModel.votingDesc,
-                  style: theme.textTheme.overline.copyWith(
-                      color: theme.dividerColor,
-                      fontSize: 10
+        child: InkWell(
+          onTap: viewModel.itemClick,
+          child: Container(
+            margin: EdgeInsets.only(left: 8, top: 8, bottom: 8),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  width: double.infinity,
+                  child: Text(
+                    viewModel.votingDesc,
+                    style: theme.textTheme.overline.copyWith(
+                        color: theme.dividerColor,
+                        fontSize: 10
+                    ),
+                    textAlign: TextAlign.left,
                   ),
-                  textAlign: TextAlign.left,
                 ),
-              ),
-              Container(
-                width: double.infinity,
-                child: Text(
-                  viewModel.title,
-                  style: TextStyle(
-                      color: theme.primaryColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                  maxLines: 1,
-                  textAlign: TextAlign.left,
+                Container(
+                  width: double.infinity,
+                  child: Text(
+                    viewModel.title,
+                    style: TextStyle(
+                        color: theme.primaryColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
+                    maxLines: 1,
+                    textAlign: TextAlign.left,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -5,7 +5,8 @@ import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
-import 'package:project_athens/speeches_flow/navigation/speeches_destination_manager.dart';
+import 'package:project_athens/athens_core/presentation/search_app_bar/search_app_bar.dart';
+import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
 import 'package:project_athens/speeches_flow/screens/list/list_impl/speeches_list.dart';
 import 'package:project_athens/speeches_flow/screens/list/speeches_list_bloc.dart';
 import 'package:provider/provider.dart';
@@ -21,10 +22,10 @@ class SpeechesListScreen extends BaseScreen<SpeechesListBloc> {
 
   @override
   Widget buildBody(BuildContext context, SpeechesListBloc bloc) {
-    SpeechesDestinationManager speechesDestinationManager = Provider.of<DestinationManager>(context);
+    final destinationManager = Provider.of<DestinationManager>(context);
     return StreamProvider<SpeechModel>.value(
       value: bloc.goToDetails,
-      updateShouldNotify: (_, model) => goToDetails(context, model, speechesDestinationManager),
+      updateShouldNotify: (_, model) => goToDetails(context, model, destinationManager),
       child: Consumer<SpeechModel>(
         builder: (BuildContext context, SpeechModel value, Widget child) => child,
         child: Column(
@@ -43,10 +44,15 @@ class SpeechesListScreen extends BaseScreen<SpeechesListBloc> {
   }
 
   @override
+  Widget buildAppBar(BuildContext context, SpeechesListBloc bloc) {
+    return SearchAppBar(title: appBarTitle, hintText: "Not ready yet", searchQuery: (query) {}, showBackArrow: showBackArrow);
+  }
+
+  @override
   Widget buildFloatingActionButton(BuildContext context, SpeechesListBloc bloc) => null;
 
-  bool goToDetails(BuildContext context, SpeechModel model, SpeechesDestinationManager destinationManager) {
-    destinationManager.goToSpeechDetails(context, model);
+  bool goToDetails(BuildContext context, SpeechModel model, DestinationManager destinationManager) {
+    destinationManager.goToDestination(context, SpeechDetailsDestination(model));
     return false;
   }
 

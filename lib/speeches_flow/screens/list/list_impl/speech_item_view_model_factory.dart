@@ -4,6 +4,11 @@ import 'package:project_athens/speeches_flow/screens/list/list_impl/speech_item_
 
 class SpeechItemViewModelFactory extends DataMapper<SpeechModel, SpeechItemViewModel> {
   @override
-  SpeechItemViewModel transform(data) => SpeechItemViewModel();
+  SpeechItemViewModel transform(data) => SpeechItemViewModel(
+    data.id,
+    data.title,
+    data.desc,
+    data.thumbnailUrl
+  );
 
 }

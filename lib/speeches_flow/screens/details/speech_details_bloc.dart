@@ -1,12 +1,12 @@
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:project_athens/athens_core/presentation/base_bloc.dart';
-import 'package:project_athens/timeline_flow/screens/speech/video_manager.dart';
+import 'package:project_athens/speeches_flow/screens/details/video_manager.dart';
 
-class SpeechBloc extends BaseBloc {
+class SpeechDetailsBloc extends BaseBloc {
 
   final VideoManager videoManager;
 
-  SpeechBloc(this.videoManager);
+  SpeechDetailsBloc(this.videoManager);
 
   FlickManager get controller => videoManager.controller;
 

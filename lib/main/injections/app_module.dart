@@ -20,7 +20,7 @@ class AppModule extends Module {
       baseUrl: "http://api.swiadoma-demokracja.pl",
     );
     final client = Dio(clientOptions);
-    client.interceptors.addAll([LogInterceptor(), ErrorInterceptor()]);
+    client.interceptors.addAll([LogInterceptor(requestBody: true, responseBody: true), ErrorInterceptor()]);
 
     final deputiesApi = DeputiesApi(client);
     final getDeputiesRepository = GetDeputiesRepositoryImpl(deputiesApi);

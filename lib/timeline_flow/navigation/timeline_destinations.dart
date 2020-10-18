@@ -4,13 +4,11 @@ import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/timeline_flow/injections/timeline_module.dart';
-import 'package:project_athens/timeline_flow/screens/speech/speech_screen.dart';
+import 'package:project_athens/speeches_flow/screens/details/speech_details_screen.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/timeline_screen.dart';
-import 'package:project_athens/timeline_flow/injections/speech_module.dart';
+import 'package:project_athens/speeches_flow/injections/speech_module.dart';
 
-abstract class TimelineDestination<SCREEN extends BaseScreen> extends Destination<SCREEN> {}
-
-class TimelineScreenDestination extends TimelineDestination<TimelineScreen> {
+class TimelineScreenDestination extends Destination<TimelineScreen> {
 
   @override
   TimelineScreen getScreen() => TimelineScreen();
@@ -20,13 +18,13 @@ class TimelineScreenDestination extends TimelineDestination<TimelineScreen> {
 
 }
 
-class SpeechScreenDestination extends TimelineDestination<SpeechScreen> {
+class SpeechScreenDestination extends Destination<SpeechDetailsScreen> {
   final SpeechModel speechModel;
 
   SpeechScreenDestination(this.speechModel);
 
   @override
-  SpeechScreen getScreen() => SpeechScreen(
+  SpeechDetailsScreen getScreen() => SpeechDetailsScreen(
         speechModel: speechModel,
       );
 

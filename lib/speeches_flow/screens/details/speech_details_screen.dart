@@ -5,22 +5,22 @@ import 'package:intl/intl.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
-import 'package:project_athens/timeline_flow/screens/speech/speech_bloc.dart';
+import 'package:project_athens/speeches_flow/screens/details/speech_details_bloc.dart';
 
-class SpeechScreen  extends BaseScreen<SpeechBloc> {
+class SpeechDetailsScreen  extends BaseScreen<SpeechDetailsBloc> {
 
   @override
   BottomNavItem get currentBottomBarItem => BottomNavItem.SPEECHES;
 
   final SpeechModel speechModel;
 
-  SpeechScreen({@required this.speechModel});
+  SpeechDetailsScreen({@required this.speechModel});
 
   @override
   String get appBarTitle => "Speech";
 
   @override
-  Widget buildBody(BuildContext context, SpeechBloc bloc) {
+  Widget buildBody(BuildContext context, SpeechDetailsBloc bloc) {
     final theme = Theme.of(context);
     return Column(
       children: [
@@ -138,7 +138,7 @@ class SpeechScreen  extends BaseScreen<SpeechBloc> {
       );
 
   @override
-  Widget buildFloatingActionButton(BuildContext context, SpeechBloc bloc) {
+  Widget buildFloatingActionButton(BuildContext context, SpeechDetailsBloc bloc) {
     return null;
   }
 

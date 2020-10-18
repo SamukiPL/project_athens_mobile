@@ -8,20 +8,16 @@ import 'package:project_athens/deputies_flow/screens/details/deputy_details_scre
 import 'package:project_athens/deputies_flow/screens/list/deputies_list_screen.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 
-abstract class DeputiesDestination<SCREEN extends BaseScreen>
-    extends Destination<SCREEN> {}
-
-class DeputiesListDestination extends DeputiesDestination<DeputiesListScreen> {
-
+class DeputiesListDestination extends Destination<DeputiesListScreen> {
   @override
   DeputiesListScreen getScreen() => DeputiesListScreen();
 
   @override
-  List<Module> getScreenModules(BuildContext context) => [DeputiesListModule(context)];
+  List<Module> getScreenModules(BuildContext context) =>
+      [DeputiesListModule(context)];
 }
 
-class DeputyDetailsDestination
-    extends DeputiesDestination<DeputyDetailsScreen> {
+class DeputyDetailsDestination extends Destination<DeputyDetailsScreen> {
   final DeputyModel _deputyModel;
 
   DeputyDetailsDestination(this._deputyModel);
