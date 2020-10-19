@@ -25,6 +25,9 @@ abstract class BaseListBloc<MODEL extends BaseModel, ITEM extends BaseItemViewMo
   @override
   PagingListAdapter<ITEM> adapter;
 
+  @protected
+  List<ITEM> itemsList;
+
   @override
   int batchSize = 20;
 
@@ -39,7 +42,8 @@ abstract class BaseListBloc<MODEL extends BaseModel, ITEM extends BaseItemViewMo
       adapter.setLoading(false);
       manageState(data);
       if (data is Success<List<MODEL>>)
-        adapter.updateList(_mapItems(data.result));
+        itemsList = _mapItems(data.result);
+        adapter.updateList(itemsList);
     });
     page++;
   }

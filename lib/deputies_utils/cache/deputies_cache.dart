@@ -30,10 +30,7 @@ class DeputiesCache {
   }
 
   Future<DeputyModel> getDeputyModel(String id) async {
-    if (_cachedDeputies.isNotEmpty)
-      return _cachedDeputies.firstWhere(
-              (element) => element.id == id)
-      ;
+    if (_cachedDeputies.isNotEmpty) return _cachedDeputies.firstWhere((element) => element.id == id);
 
     await deputies;
     return _cachedDeputies.firstWhere((element) => element.id == id);

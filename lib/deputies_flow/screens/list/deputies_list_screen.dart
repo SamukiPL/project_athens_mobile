@@ -47,7 +47,7 @@ class DeputiesListScreen extends BaseScreen<DeputiesListBloc> {
 
   @override
   Widget buildAppBar(BuildContext context, DeputiesListBloc bloc) {
-    return SearchAppBar(title: appBarTitle, hintText: "Deputies", searchQuery: (query) {}, showBackArrow: showBackArrow);
+    return SearchAppBar(title: appBarTitle, hintText: "Search", searchQuery: (query) => bloc.setSearchQuery(query), showBackArrow: showBackArrow);
   }
 
   bool goToDetails(BuildContext context, DeputyModel model, DestinationManager destinationManager) {
