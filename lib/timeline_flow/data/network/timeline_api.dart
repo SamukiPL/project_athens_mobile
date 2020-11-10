@@ -1,6 +1,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:project_athens/timeline_flow/data/network/response/meetings_response.dart';
+import 'package:project_athens/timeline_flow/data/network/response/noun_cloud_response.dart';
 import 'package:project_athens/timeline_flow/data/network/response/timeline_response.dart';
 import 'package:retrofit/http.dart';
 
@@ -16,5 +17,9 @@ abstract class TimelineApi {
 
   @GET("/user-aggregator/timeline/{cadency}/{date}")
   Future<TimelineResponse> getAllDeputies(
+      @Path("cadency") int cadency, @Path("date") String date);
+
+  @GET("/user-aggregator/timeline/{cadency}/{date}/noun-cloud")
+  Future<NounCloudResponse> getNounCloud(
       @Path("cadency") int cadency, @Path("date") String date);
 }

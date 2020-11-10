@@ -4,12 +4,13 @@ import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/presentation/base_bloc.dart';
 import 'package:project_athens/pagination/paging_bloc.dart';
 import 'package:project_athens/pagination/paging_list_adapter.dart';
-import 'package:project_athens/timeline_flow/domain/get_meetings_dates.dart';
-import 'package:project_athens/timeline_flow/domain/get_timeline_use_case.dart';
+import 'package:project_athens/timeline_flow/domain/use_cases/get_meetings_dates.dart';
+import 'package:project_athens/timeline_flow/domain/use_cases/get_timeline_use_case.dart';
 import 'package:project_athens/timeline_flow/domain/meetings_date.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/timeline_flow/domain/timeline_parameters.dart';
 import 'package:project_athens/timeline_flow/presentation/calendar_app_bar_bloc.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/cloud/noun_cloud_bloc.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model_factory.dart';
 import 'package:rxdart/rxdart.dart';
@@ -20,11 +21,13 @@ class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> 
 
   Stream<TimelineModel> get destination => _destination.stream;
 
-  final GetTimelineUseCase getTimelineUseCase;
+  final GetTimelineUseCase _getTimelineUseCase;
 
-  final GetMeetingsDates getMeetingsDates;
+  final GetMeetingsDates _getMeetingsDates;
 
-  TimelineBloc(this.getTimelineUseCase, this.getMeetingsDates) {
+  final NounCloudBloc nounCloudBloc;
+
+  TimelineBloc(this._getTimelineUseCase, this._getMeetingsDates, this.nounCloudBloc) {
     adapter = PagingListAdapter(this);
     _loadMeetingsDates();
   }
@@ -62,7 +65,7 @@ class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> 
   }
 
   Future<void> _loadMeetingsDates() async {
-    final result = await getMeetingsDates(TimelineParameters(9, ""));
+    final result = await _getMeetingsDates(TimelineParameters(9, ""));
 
     if (result is Success<List<MeetingDate>>) {
       _dates = result.result;
@@ -71,15 +74,18 @@ class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> 
   }
 
   Future<void> loadNewDate(DateTime date) async {
+    final params = TimelineParameters(9, date.toIso8601String());
     adapter.updateList(List(), loading: true);
     _selectedDate = date;
     calendarBloc.setDate(date);
-    final result = await getTimelineUseCase(TimelineParameters(9, date.toIso8601String()));
+    final result = await _getTimelineUseCase(params);
 
     if (result is Success<List<TimelineModel>>) {
       _items = result.result.toTimelineRowViewModel(itemClick);
       adapter.updateList(_items);
     }
+
+    nounCloudBloc.loadCloud(params);
   }
 
   @override
