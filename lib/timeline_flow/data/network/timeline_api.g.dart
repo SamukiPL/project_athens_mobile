@@ -53,4 +53,24 @@ class _TimelineApi implements TimelineApi {
     final value = TimelineResponse.fromJson(_result.data);
     return value;
   }
+
+  @override
+  Future<NounCloudResponse> getNounCloud(cadency, date) async {
+    ArgumentError.checkNotNull(cadency, 'cadency');
+    ArgumentError.checkNotNull(date, 'date');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/user-aggregator/timeline/$cadency/$date/noun-cloud',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = NounCloudResponse.fromJson(_result.data);
+    return value;
+  }
 }

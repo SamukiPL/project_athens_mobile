@@ -6,10 +6,12 @@ import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/timeline_flow/data/network/timeline_api.dart';
 import 'package:project_athens/timeline_flow/data/timeline_repository_impl.dart';
-import 'package:project_athens/timeline_flow/domain/get_meetings_dates.dart';
-import 'package:project_athens/timeline_flow/domain/get_timeline_use_case.dart';
+import 'package:project_athens/timeline_flow/domain/use_cases/get_meetings_dates.dart';
+import 'package:project_athens/timeline_flow/domain/use_cases/get_noun_cloud_use_case.dart';
+import 'package:project_athens/timeline_flow/domain/use_cases/get_timeline_use_case.dart';
 import 'package:project_athens/timeline_flow/domain/timeline_repository.dart';
 import 'package:project_athens/timeline_flow/mappers/timeline_model_mapper.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/cloud/noun_cloud_bloc.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/timeline_bloc.dart';
 import 'package:provider/provider.dart';
 
@@ -24,12 +26,16 @@ class TimelineModule extends Module {
     final localization = Provider.of<AppLocalizations>(context);
     TimelineApi timelineApi = TimelineApi(dio);
     TimelineRepository timelineRepository = TimelineRepositoryImpl(timelineApi, TimelineModelMapper(deputiesCache, localization));
+
     GetTimelineUseCase getTimelineUseCase = GetTimelineUseCase(timelineRepository);
     GetMeetingsDates getMeetingsDates = GetMeetingsDates(timelineRepository);
+    GetNounCloudUseCase getNounCloudUseCase = GetNounCloudUseCase(timelineRepository);
+
+    NounCloudBloc nounCloudBloc = NounCloudBloc(getNounCloudUseCase);
 
     return [
       Provider<TimelineBloc>(
-        create: (context) => TimelineBloc(getTimelineUseCase, getMeetingsDates),
+        create: (context) => TimelineBloc(getTimelineUseCase, getMeetingsDates, nounCloudBloc),
         dispose: (context, bloc) => bloc.dispose(),
       )
     ];

@@ -1,7 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_scatter/flutter_scatter.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
@@ -11,8 +10,8 @@ import 'package:project_athens/speeches_flow/navigation/speeches_destinations.da
 import 'package:project_athens/timeline_flow/presentation/calendar_app_bar.dart';
 import 'package:project_athens/timeline_flow/presentation/date_picker_fork/date_picker_dialog_custom.dart';
 import 'package:project_athens/timeline_flow/presentation/date_picker_fork/date_utils.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/cloud/noun_cloud.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_list.dart';
-import 'package:project_athens/timeline_flow/screens/timeline/outpu.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/timeline_bloc.dart';
 import 'package:provider/provider.dart';
 
@@ -35,23 +34,6 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
 
   @override
   Widget buildBody(BuildContext context, TimelineBloc bloc) {
-    final screenSize = MediaQuery.of(context).size;
-    final ratio = screenSize.width / screenSize.height;
-
-    List<Widget> widgets = List<Widget>();
-    Output.output.removeWhere((key, value) => value < 10);
-    Output.output.remove("to");
-    Output.output.forEach((key, value) {
-      widgets.add(
-          RotatedBox(
-            quarterTurns: value % 2,
-            child: Text(
-              "#$key",
-              style: TextStyle(fontSize: (value/3), color: Colors.white),
-            ),
-          )
-      );
-    });
     final destinationManager = Provider.of<DestinationManager>(context);
 
     return StreamProvider<TimelineModel>.value(
@@ -62,19 +44,7 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
         child: Container(
           color: Theme.of(context).primaryColor,
           child: BackdropWidget(
-            bottomChild: Container(
-              margin: EdgeInsets.all(16),
-              child: Scatter(
-                fillGaps: true,
-                delegate: ArchimedeanSpiralScatterDelegate(
-                  ratio: ratio,
-                  a: 2.0,
-                  b: 2.0,
-                ),
-                children: widgets,
-                overflow: Overflow.visible
-              ),
-            ),
+            bottomChild: NounCloud(bloc: bloc.nounCloudBloc),
             topChild: TimelineList(bloc.adapter),
           ),
         ),
