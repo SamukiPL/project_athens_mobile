@@ -5,6 +5,7 @@ import 'package:project_athens/deputies_flow/navigation/deputies_destinations.da
 import 'package:project_athens/settings_flow/navigation/settings_destinations.dart';
 import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
 import 'package:project_athens/timeline_flow/navigation/timeline_destinations.dart';
+import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
 
 class BottomNavigationBlocImpl extends BottomNavigationBloc {
 
@@ -45,6 +46,9 @@ class BottomNavigationBlocImpl extends BottomNavigationBloc {
           break;
         case BottomNavItem.SPEECHES:
           _currentDestinationManager = DestinationManager(SpeechesListDestination());
+          break;
+        case BottomNavItem.VOTING:
+          _currentDestinationManager = DestinationManager(VotesListDestination(currentItem));
           break;
         case BottomNavItem.SETTINGS:
           _currentDestinationManager = DestinationManager(SettingsScreenDestination());

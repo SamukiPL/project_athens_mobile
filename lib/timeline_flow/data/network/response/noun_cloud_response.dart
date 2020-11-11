@@ -13,7 +13,7 @@ class NounCloudResponse {
   final int cadency;
   final DateTime scheduledAt;
   final int sessionIId;
-  final LinkedHashMap<String, int> nouns;
+  final Map<String, int> nouns;
 
   NounCloudResponse(this.id, this.createAt, this.updateAt, this.cadency, this.scheduledAt, this.sessionIId, this.nouns);
 
