@@ -34,7 +34,7 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
             onChanged: (login) => bloc.setLogin(login),
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
-                labelText: localization.getText().loginHintsEmail(),
+                labelText: localization.getText().loginHintsLogin(),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5.0),
                 )),
@@ -54,6 +54,7 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
                   borderRadius: BorderRadius.circular(5.0),
                 )),
             maxLines: 1,
+            obscureText: true
           ),
         ),
         Container(
