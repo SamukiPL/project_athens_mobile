@@ -39,15 +39,15 @@ class TimelineRepositoryImpl implements TimelineRepository {
   @override
   Future<Result<List<WordModel>>> getNounCloud(int cadency, String date) async {
     final response = await timelineApi.getNounCloud(cadency, date);
-    final values = response.nouns.values.toList()
-      ..sort((a, b) => b.compareTo(a));
+    final values = response.nouns
+      ..sort((a, b) => b.hits.compareTo(a.hits));
     final minValueAllowed = (values.length > 75) ? values[75] : values.last;
     final minimisedNouns = response.nouns
-      ..removeWhere((key, value) => value < minValueAllowed || key == "to");
+      ..removeWhere((tag) => tag.hits < minValueAllowed.hits || tag.key == "to");
 
     final test = List<WordModel>();
-    minimisedNouns.forEach((key, value) {
-      test.add(WordModel(value / (minValueAllowed / 5), key));
+    minimisedNouns.forEach((tag) {
+      test.add(WordModel(tag.hits / (minValueAllowed.hits / 5), tag.key));
     });
 
     test.shuffle(Random(97518234));

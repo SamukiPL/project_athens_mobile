@@ -6,6 +6,18 @@ part of 'noun_cloud_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+NounTag _$NounTagFromJson(Map<String, dynamic> json) {
+  return NounTag(
+    json['key'] as String,
+    json['hits'] as int,
+  );
+}
+
+Map<String, dynamic> _$NounTagToJson(NounTag instance) => <String, dynamic>{
+      'key': instance.key,
+      'hits': instance.hits,
+    };
+
 NounCloudResponse _$NounCloudResponseFromJson(Map<String, dynamic> json) {
   return NounCloudResponse(
     json['id'] as String,
@@ -20,9 +32,10 @@ NounCloudResponse _$NounCloudResponseFromJson(Map<String, dynamic> json) {
         ? null
         : DateTime.parse(json['scheduledAt'] as String),
     json['sessionIId'] as int,
-    (json['nouns'] as Map<String, dynamic>)?.map(
-      (k, e) => MapEntry(k, e as int),
-    ),
+    (json['nouns'] as List)
+        ?.map((e) =>
+            e == null ? null : NounTag.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
