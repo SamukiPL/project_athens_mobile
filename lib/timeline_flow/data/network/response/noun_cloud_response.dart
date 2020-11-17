@@ -5,6 +5,17 @@ import 'package:json_annotation/json_annotation.dart';
 part 'noun_cloud_response.g.dart';
 
 @JsonSerializable()
+class NounTag {
+  final String key;
+  final int hits;
+
+  NounTag(this.key, this.hits);
+
+  factory NounTag.fromJson(Map<String, dynamic> json) => _$NounTagFromJson(json);
+  Map<String, dynamic> toJson() => _$NounTagToJson(this);
+}
+
+@JsonSerializable()
 class NounCloudResponse {
 
   final String id;
@@ -13,7 +24,7 @@ class NounCloudResponse {
   final int cadency;
   final DateTime scheduledAt;
   final int sessionIId;
-  final LinkedHashMap<String, int> nouns;
+  final List<NounTag> nouns;
 
   NounCloudResponse(this.id, this.createAt, this.updateAt, this.cadency, this.scheduledAt, this.sessionIId, this.nouns);
 
