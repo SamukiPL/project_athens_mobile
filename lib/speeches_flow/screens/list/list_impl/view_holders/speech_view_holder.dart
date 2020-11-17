@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/speeches_flow/screens/list/list_impl/speech_item_view_model.dart';
 
 class SpeechViewHolder extends StatelessWidget {
@@ -58,7 +59,8 @@ class SpeechViewHolder extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               getNameWithDate(context, theme),
-              getDescription(context, theme)
+              getDescription(context, theme),
+              TechnicalData(technicalId: _viewModel.id)
             ],
           ),
         ),

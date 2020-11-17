@@ -8,15 +8,15 @@ void main() {
   String scriptPath = Platform.script.path;
   String filePathForCoverage = '/' + scriptPath.substring(0, scriptPath.indexOf('test')).substring(1) + 'resources/lang/';
 
-  File plFile = File(filePathForCoverage + 'pl.json');
-  String plData = plFile.readAsStringSync();
-  Map<String, dynamic> plWords = json.decode(plData);
-  testAllMethods('pl', AppLocalizationsGenerated(plWords));
-
   File enFile = File(filePathForCoverage + 'en.json');
   String enData = enFile.readAsStringSync();
   Map<String, dynamic> enWords = json.decode(enData);
   testAllMethods('en', AppLocalizationsGenerated(enWords));
+
+  File plFile = File(filePathForCoverage + 'pl.json');
+  String plData = plFile.readAsStringSync();
+  Map<String, dynamic> plWords = json.decode(plData);
+  testAllMethods('pl', AppLocalizationsGenerated(plWords));
 }
 
 void testAllMethods(String locale, AppLocalizationsGenerated localization) {
@@ -278,6 +278,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale settingsButtonLogout", () async {
     String settingsButtonLogout = localization.settingsButtonLogout();
     expect(true, settingsButtonLogout != "" && settingsButtonLogout != null); 
+  }); 
+ 
+  test("All methods for $locale settingsSwitchTechnicalData", () async {
+    String settingsSwitchTechnicalData = localization.settingsSwitchTechnicalData();
+    expect(true, settingsSwitchTechnicalData != "" && settingsSwitchTechnicalData != null); 
   }); 
  
 }

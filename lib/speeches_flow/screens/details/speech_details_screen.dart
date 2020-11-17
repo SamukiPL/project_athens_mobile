@@ -6,6 +6,7 @@ import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dar
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
+import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/deputies_flow/navigation/deputies_destinations.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:project_athens/speeches_flow/screens/details/speech_details_bloc.dart';
@@ -56,6 +57,10 @@ class SpeechDetailsScreen  extends BaseScreen<SpeechDetailsBloc> {
               fontSize: 18
             ),
           ),
+        ),
+        Container(
+          margin: EdgeInsets.all(16),
+          child: TechnicalData(technicalId: speechModel.id),
         )
       ],
     );
@@ -125,7 +130,7 @@ class SpeechDetailsScreen  extends BaseScreen<SpeechDetailsBloc> {
                         ),
                         textAlign: TextAlign.left,
                       ),
-                    )
+                    ),
                   ],
                 )
               ],

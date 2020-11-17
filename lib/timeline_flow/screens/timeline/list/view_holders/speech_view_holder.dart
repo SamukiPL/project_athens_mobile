@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:project_athens/athens_core/configuration/configuration.dart';
+import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +27,7 @@ class SpeechViewHolder extends StatelessWidget {
           children: <Widget>[
             getHourWidget(context, theme),
             getIcon(context, theme),
-            getRowText(context, theme)
+            getRowText(context, theme),
           ],
         ),
       ),
@@ -119,6 +121,8 @@ class SpeechViewHolder extends StatelessWidget {
   }
 
   Widget getRowText(BuildContext context, ThemeData theme) {
+    final configuration = Provider.of<Configuration>(context);
+
     return Expanded(
       child: Card(
         margin: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
@@ -153,7 +157,9 @@ class SpeechViewHolder extends StatelessWidget {
                     textAlign: TextAlign.left,
                   ),
                 ),
-                getDescription(context, theme)
+                getDescription(context, theme),
+                TechnicalData(technicalId: viewModel.id)
+                // getTechnicalData(context, theme)
               ],
             ),
           ),
@@ -174,5 +180,23 @@ class SpeechViewHolder extends StatelessWidget {
             ),
           )
         : Container();
+  }
+
+  Widget getTechnicalData(BuildContext context, ThemeData theme) {
+    final configuration = Provider.of<Configuration>(context);
+    return StreamBuilder(stream: configuration.showTechnicalData, builder: (context, AsyncSnapshot<bool> snapshot) {
+      return snapshot.data ? Container(
+          width: double.infinity,
+          child: Text(
+            'Id:' + viewModel.id,
+            style: TextStyle(
+                color: theme.accentColor, fontSize: 9
+            ),
+            textAlign: TextAlign.left,
+          )
+      ) : Container();
+      return Container();
+    });
+
   }
 }

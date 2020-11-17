@@ -73,6 +73,9 @@
   "settings": {
     "button": {
       "logout": "Wyloguj"
+    },
+    "switch": {
+      "technicalData": "Pokaż dane techniczne"
     }
   }
 }
