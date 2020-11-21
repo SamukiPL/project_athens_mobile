@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/deputies_flow/screens/list/list_impl/deputy_list_item_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -76,7 +77,8 @@ class DeputyListViewHolder extends StatelessWidget {
                   fontSize: 12,
                 ),
               ),
-            )
+            ),
+            TechnicalData(technicalId: viewModel.model.id)
           ],
         ),
       ),

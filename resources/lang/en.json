@@ -73,6 +73,9 @@
   "settings": {
     "button": {
       "logout": "Logout"
+    },
+    "switch": {
+      "technicalData": "Show technical data"
     }
   }
 }
