@@ -121,8 +121,6 @@ class SpeechViewHolder extends StatelessWidget {
   }
 
   Widget getRowText(BuildContext context, ThemeData theme) {
-    final configuration = Provider.of<Configuration>(context);
-
     return Expanded(
       child: Card(
         margin: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
@@ -159,7 +157,6 @@ class SpeechViewHolder extends StatelessWidget {
                 ),
                 getDescription(context, theme),
                 TechnicalData(technicalId: viewModel.id)
-                // getTechnicalData(context, theme)
               ],
             ),
           ),
@@ -180,23 +177,5 @@ class SpeechViewHolder extends StatelessWidget {
             ),
           )
         : Container();
-  }
-
-  Widget getTechnicalData(BuildContext context, ThemeData theme) {
-    final configuration = Provider.of<Configuration>(context);
-    return StreamBuilder(stream: configuration.showTechnicalData, builder: (context, AsyncSnapshot<bool> snapshot) {
-      return snapshot.data ? Container(
-          width: double.infinity,
-          child: Text(
-            'Id:' + viewModel.id,
-            style: TextStyle(
-                color: theme.accentColor, fontSize: 9
-            ),
-            textAlign: TextAlign.left,
-          )
-      ) : Container();
-      return Container();
-    });
-
   }
 }

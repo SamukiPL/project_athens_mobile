@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/chopper/network_module.dart';
-import 'package:project_athens/athens_core/configuration/configuration_module.dart';
 import 'package:project_athens/athens_core/i18n/localization_module.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';

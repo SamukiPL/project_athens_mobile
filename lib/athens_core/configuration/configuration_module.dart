@@ -12,6 +12,7 @@ class ConfigurationModule extends Module {
   List<SingleChildWidget> getProviders() {
     return [Provider<Configuration>(
       create: (context) => Configuration(),
+      dispose: (context, configuration) => configuration.dispose(),
     )];
   }
 }

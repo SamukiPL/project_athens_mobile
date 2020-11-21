@@ -60,7 +60,7 @@ class SpeechDetailsScreen  extends BaseScreen<SpeechDetailsBloc> {
         ),
         Container(
           margin: EdgeInsets.all(16),
-          child: TechnicalData(technicalId: speechModel.id),
+          child: TechnicalData(technicalId: speechModel.id, additionalIds: { 'deputyId': speechModel.deputyId }),
         )
       ],
     );
