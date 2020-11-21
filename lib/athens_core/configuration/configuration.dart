@@ -13,18 +13,18 @@ class Configuration {
   final storage = new FlutterSecureStorage();
   Stream<bool> get showTechnicalData => _showTechnicalDataSource.stream.shareValue();
 
-  _init() async {
+  Future<void> _init() async {
     final showTechnicalDataFlag = await storage.readBool(key: ConfigurationStorageNames.SHOW_TECHNICAL_DATA);
     _showTechnicalDataSource.add(showTechnicalDataFlag);
   }
 
-  updateShowTechnicalData(bool newState) {
+  void updateShowTechnicalData(bool newState) {
     _showTechnicalDataSource.add(newState);
 
     storage.write(key: ConfigurationStorageNames.SHOW_TECHNICAL_DATA, value: newState.toString());
   }
 
   void dispose() {
-    this._showTechnicalDataSource.close();
+    _showTechnicalDataSource.close();
 }
 }

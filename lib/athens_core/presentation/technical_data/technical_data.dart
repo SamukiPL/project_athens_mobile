@@ -11,7 +11,7 @@ class TechnicalData extends StatelessWidget {
   const TechnicalData({Key key, @required this.technicalId, this.additionalIds})
       : super(key: key);
 
-  _copyToClipboard(String text) {
+  void _copyToClipboard(String text) {
     Clipboard.setData(new ClipboardData(text: text));
   }
 
@@ -60,16 +60,6 @@ class TechnicalData extends StatelessWidget {
   }
 
   List<Widget> buildAdditionalIds(BuildContext context) {
-    if (additionalIds != null && additionalIds.length > 0) {
-      final List<Widget> widgets = List();
-
-      additionalIds.forEach((key, value) {
-        widgets.add(buildIdField(key, value, context));
-      });
-
-      return widgets;
-    } else {
-      return [];
-    }
+    return additionalIds?.map((key, value) => MapEntry(key, buildIdField(key, value, context)))?.values?.toList() ?? [];
   }
 }
