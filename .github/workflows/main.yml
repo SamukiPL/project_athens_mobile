@@ -37,7 +37,7 @@ jobs:
       - run: flutter test
       - run: flutter build apk
       - name: Upload
-      uses: actions/upload-artifact@master
-      with:
-        name: apk-build
-        path: build/app/outputs/bundle/release
+        uses: actions/upload-artifact@master
+        with:
+          name: apk-build
+          path: build/app/outputs/bundle/release
