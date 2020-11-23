@@ -33,14 +33,32 @@ jobs:
         with:
           # flutter-version: '1.9.1+hotfix.6'
           channel: "dev"
+      - env:
+          ADC_API_KEY: ${{secrets.ADC_API_KEY}}
+          ADC_API_KEY_NAME: ${{secrets.ADC_API_KEY_NAME}}
+      - name: Unencrypt and untar api key tar
+        run: |
+          mkdir -p $HOME/secrets
+          gpg --quiet --batch --yes --decrypt --passphrase="$ADC_API_KEY" \
+          --output $HOME/secrets/api-key.tar android/api-key.tar.gpg
+          tar xvf $HOME/secrets/api-key.tar
+      - name: Build flutter apk and appbundle
       - run: flutter pub get
       - run: flutter test
       - run: flutter build appbundle
       - run: flutter build apk
-      - run: ls -l .
-      - run: ls -l build/app/outputs/flutter-apk/
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
           name: apk-build
           path: build/app/outputs/flutter-apk/app.apk
+      - name: Deploy
+        if: (github.base_ref == 'master' && github.event_name == 'pull_request')
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.2.1
+        with:
+          appId: ${{secrets.FIREBASE_ANDROID_APPID}}
+          serviceCredentialsFile: $HOME/secrets/$ADC_API_KEY_NAME
+          groups: devs
+          release_notes: "a new version"
+          file: build/app/outputs/apk/release/app.apk
+      
