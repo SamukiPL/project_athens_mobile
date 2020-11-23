@@ -54,7 +54,7 @@ jobs:
           path: build/app/outputs/flutter-apk/app.apk
       - name: Deploy
         if: (github.base_ref == 'master' && github.event_name == 'pull_request')
-        uses: wzieba/Firebase-Distribution-Github-Action@v1.2.1
+        uses: wzieba/Firebase-Distribution-Github-Action@master
         with:
           appId: ${{secrets.FIREBASE_ANDROID_APPID}}
           serviceCredentialsFile: $HOME/secrets/$ADC_API_KEY_NAME
