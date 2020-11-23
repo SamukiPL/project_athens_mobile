@@ -38,10 +38,10 @@ jobs:
           ADC_API_KEY_NAME: ${{secrets.ADC_API_KEY_NAME}}
       # - name: Unencrypt and untar api key tar
         run: |
-          mkdir -p $HOME/secrets
+          mkdir -p secrets
           gpg --quiet --batch --yes --decrypt --passphrase="$ADC_API_KEY" \
-          --output $HOME/secrets/api-key.tar android/api-key.tar.gpg
-          tar xvf $HOME/secrets/api-key.tar
+          --output secrets/api-key.tar android/api-key.tar.gpg
+          tar xvf secrets/api-key.tar
       # - name: Build flutter apk and appbundle
       - run: flutter pub get
       - run: flutter test
