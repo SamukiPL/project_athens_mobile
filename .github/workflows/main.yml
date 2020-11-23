@@ -52,6 +52,7 @@ jobs:
         with:
           name: apk-build
           path: build/app/outputs/flutter-apk/app.apk
+      - run: ls -l secrets/
       - name: Deploy
         if: (github.base_ref == 'master' && github.event_name == 'pull_request')
         uses: wzieba/Firebase-Distribution-Github-Action@master
