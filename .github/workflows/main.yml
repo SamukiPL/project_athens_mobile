@@ -37,6 +37,8 @@ jobs:
       - run: flutter test
       - run: flutter build appbundle
       - run: flutter build apk
+      - run: ls -l .
+      - run: ls -l build/app/outputs/flutter-apk/
       - name: Upload
         uses: actions/upload-artifact@master
         with:
