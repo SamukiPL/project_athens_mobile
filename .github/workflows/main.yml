@@ -42,7 +42,7 @@ jobs:
           gpg --quiet --batch --yes --decrypt --passphrase="$ADC_API_KEY" \
           --output $HOME/secrets/api-key.tar android/api-key.tar.gpg
           tar xvf $HOME/secrets/api-key.tar
-      - name: Build flutter apk and appbundle
+      # - name: Build flutter apk and appbundle
       - run: flutter pub get
       - run: flutter test
       - run: flutter build appbundle
