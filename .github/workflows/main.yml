@@ -40,7 +40,7 @@ jobs:
       - run: ls -l .
       - run: ls -l build/app/outputs/flutter-apk/
       - name: Upload
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v2
         with:
           name: apk-build
-          path: build\app\outputs\flutter-apk\app.apk
+          path: build/app/outputs/flutter-apk/app.apk
