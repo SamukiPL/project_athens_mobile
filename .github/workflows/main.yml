@@ -59,6 +59,7 @@ jobs:
           appId: ${{secrets.FIREBASE_ANDROID_APPID}}
           serviceCredentialsFile: $HOME/secrets/$ADC_API_KEY_NAME
           groups: devs
-          release_notes: "a new version"
+          releaseNotes: "a new version"
+          debug: true
           file: build/app/outputs/apk/release/app.apk
       
