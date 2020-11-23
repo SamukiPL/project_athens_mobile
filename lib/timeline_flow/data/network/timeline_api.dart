@@ -2,7 +2,7 @@
 import 'package:dio/dio.dart';
 import 'package:project_athens/timeline_flow/data/network/response/meetings_response.dart';
 import 'package:project_athens/timeline_flow/data/network/response/noun_cloud_response.dart';
-import 'package:project_athens/timeline_flow/data/network/response/timeline_response.dart';
+import 'package:project_athens/athens_core/data/base_responses/timeline_response.dart';
 import 'package:retrofit/http.dart';
 
 part 'timeline_api.g.dart';

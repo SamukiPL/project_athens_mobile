@@ -3,8 +3,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/domain/list/base_params.dart';
 import 'package:project_athens/athens_core/domain/list/list_use_case.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
-import 'package:project_athens/athens_core/models/timeline_model.dart';
+import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/voting_flow/data/network/voting_api.dart';
 import 'package:project_athens/voting_flow/data/votes_list_repository_impl.dart';
 import 'package:project_athens/voting_flow/mappers/voting_network_mapper.dart';
@@ -19,8 +20,9 @@ class VotesListModule extends Module {
   @override
   List<SingleChildWidget> getProviders() {
     final dio = Provider.of<Dio>(context);
+    final localizations = Provider.of<AppLocalizations>(context);
     final votingApi = VotingApi(dio);
-    final networkMapper = VotingNetworkMapper();
+    final networkMapper = VotingNetworkMapper(localizations);
 
     final itemsRepository = VotesListRepositoryImpl(votingApi, networkMapper);
 

@@ -1,7 +1,7 @@
+import 'package:project_athens/athens_core/data/base_responses/speech_response.dart';
 import 'package:project_athens/athens_core/domain/data_mapper.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
-import 'package:project_athens/speeches_flow/data/network/responses/speech_response.dart';
 
 class SpeechesNetworkMapper
     extends AsyncDataMapper<SpeechResponse, SpeechModel> {

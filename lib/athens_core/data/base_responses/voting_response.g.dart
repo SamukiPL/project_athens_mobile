@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'voting.dart';
+part of 'voting_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Voting _$VotingFromJson(Map<String, dynamic> json) {
-  return Voting(
+VotingResponse _$VotingResponseFromJson(Map<String, dynamic> json) {
+  return VotingResponse(
     json['votingNumbers'] == null
         ? null
         : VotingNumbers.fromJson(json['votingNumbers'] as Map<String, dynamic>),
@@ -19,7 +19,7 @@ Voting _$VotingFromJson(Map<String, dynamic> json) {
         ? null
         : DateTime.parse(json['createAt'] as String),
     json['cadency'] as int,
-    json['orderPoint'],
+    json['orderPoint'] as int,
     json['sessionIId'] as int,
     json['votingIId'] as int,
     json['votingUniqueId'] as String,
@@ -33,7 +33,8 @@ Voting _$VotingFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$VotingToJson(Voting instance) => <String, dynamic>{
+Map<String, dynamic> _$VotingResponseToJson(VotingResponse instance) =>
+    <String, dynamic>{
       'votingNumbers': instance.votingNumbers,
       'votedAt': instance.votedAt?.toIso8601String(),
       'actualVotedAt': instance.actualVotedAt?.toIso8601String(),

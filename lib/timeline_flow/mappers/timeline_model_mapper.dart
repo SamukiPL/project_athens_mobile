@@ -1,9 +1,10 @@
 import 'package:project_athens/athens_core/domain/data_mapper.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
+import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
-import 'package:project_athens/timeline_flow/data/network/response/speech.dart';
-import 'package:project_athens/timeline_flow/data/network/response/timeline_response.dart';
-import 'package:project_athens/timeline_flow/data/network/response/voting.dart';
+import 'package:project_athens/athens_core/data/base_responses/speech_response.dart';
+import 'package:project_athens/athens_core/data/base_responses/timeline_response.dart';
+import 'package:project_athens/athens_core/data/base_responses/voting_response.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 
 class TimelineModelMapper extends AsyncDataMapper<Event, TimelineModel> {
@@ -28,15 +29,19 @@ class TimelineModelMapper extends AsyncDataMapper<Event, TimelineModel> {
     }
   }
 
-  TimelineModel getVotingModel(Voting item) {
+  TimelineModel getVotingModel(VotingResponse item) {
+    final results = VoteResultModel(item.inFavor, item.against, item.hold, item.absent);
+    final voteModels = item.votes.map((vote) => VoteModel(VoteType.values[vote.type], vote.cadencyDeputy)).toList();
     return VotingModel(
         id: item.id,
         title: item.topic,
         date: item.actualVotedAt,
-        votingDesc: getVotingDesc(item.votingType));
+        votingDesc: getVotingDesc(item.votingType),
+        results: results,
+        votes: voteModels);
   }
 
-  Future<TimelineModel> getSpeechModel(Speech item) async {
+  Future<TimelineModel> getSpeechModel(SpeechResponse item) async {
     return SpeechModel(
       id: item.id,
       personName: item.personName,

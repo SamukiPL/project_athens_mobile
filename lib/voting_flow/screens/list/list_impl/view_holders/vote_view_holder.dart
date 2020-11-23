@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:project_athens/voting_flow/screens/list/list_impl/vote_item_view_model.dart';
 
 class VoteViewHolder extends StatelessWidget {
@@ -9,8 +10,16 @@ class VoteViewHolder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return GestureDetector(
+      onTap: () {
+        _viewModel.itemClick();
+      },
+      child: Container(
+        width: double.infinity,
+        height: 300,
+        color: Colors.red,
+      ),
+    );
   }
 
 }
