@@ -58,7 +58,7 @@ jobs:
         uses: wzieba/Firebase-Distribution-Github-Action@master
         with:
           appId: ${{secrets.FIREBASE_ANDROID_APPID}}
-          serviceCredentialsFile: "secrets/${{env.ADC_API_KEY_NAME}}"
+          serviceCredentialsFile: "secrets/${{secrets.ADC_API_KEY_NAME}}"
           groups: devs
           releaseNotes: "a new version"
           debug: true
