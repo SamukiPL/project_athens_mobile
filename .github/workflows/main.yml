@@ -41,7 +41,8 @@ jobs:
           mkdir -p secrets
           gpg --quiet --batch --yes --decrypt --passphrase="$ADC_API_KEY" \
           --output secrets/api-key.tar android/api-key.tar.gpg
-          tar xvf secrets/api-key.tar
+          tar xvf secrets/api-key.tar -C secrets/
+      - run: ls -l secrets/
       # - name: Build flutter apk and appbundle
       - run: flutter pub get
       - run: flutter test
@@ -52,7 +53,6 @@ jobs:
         with:
           name: apk-build
           path: build/app/outputs/flutter-apk/app.apk
-      - run: ls -l secrets/
       - name: Deploy
         if: (github.base_ref == 'master' && github.event_name == 'pull_request')
         uses: wzieba/Firebase-Distribution-Github-Action@master
