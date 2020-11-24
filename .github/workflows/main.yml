@@ -62,5 +62,5 @@ jobs:
           groups: devs
           releaseNotes: "a new version"
           debug: true
-          file: build/app/outputs/apk/release/app.apk
+          file: build/app/outputs/flutter-apk/app.apk
       
