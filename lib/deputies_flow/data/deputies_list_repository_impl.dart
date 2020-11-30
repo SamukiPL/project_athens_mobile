@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:project_athens/athens_core/domain/list/base_params.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
+import 'package:project_athens/deputies_flow/domain/deputies_list_params.dart';
 import 'package:project_athens/deputies_flow/domain/deputies_list_repository.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
@@ -19,8 +19,8 @@ class DeputiesListRepositoryImpl extends DeputiesListRepository {
   Future<void> fetchItems(int limit, int offset) async {}
 
   @override
-  Stream<Result<List<DeputyModel>>> getItems(BaseParams params) {
-    getDeputies();
+  Stream<Result<List<DeputyModel>>> getItems(DeputiesListParams params) {
+    getDeputies(params.deputyIdsToShow?.toSet());
 
     return _deputiesSubject.stream;
   }
@@ -33,9 +33,14 @@ class DeputiesListRepositoryImpl extends DeputiesListRepository {
     _deputiesSubject.close();
   }
 
-  Future<void> getDeputies() async {
-    final deputies = await _deputiesCache.deputies;
-    _deputiesSubject.add(deputies);
+  Future<void> getDeputies(Set<String> deputiesIds) async {
+    Result<List<DeputyModel>> deputiesResult = await _deputiesCache.deputies;
+    if (deputiesIds != null && deputiesResult is Success<List<DeputyModel>>) {
+      final filteredValue = (deputiesResult as Success<List<DeputyModel>>).value.toList()
+        ..removeWhere((element) => !deputiesIds.contains(element.id));
+      deputiesResult = Success(filteredValue);
+    }
+    _deputiesSubject.add(deputiesResult);
   }
 
 }

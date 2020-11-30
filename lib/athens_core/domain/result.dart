@@ -7,9 +7,9 @@ abstract class Result<T> {}
 
 class Success<T> implements Result<T> {
 
-  final T result;
+  final T value;
 
-  Success(this.result);
+  Success(this.value);
 
 }
 

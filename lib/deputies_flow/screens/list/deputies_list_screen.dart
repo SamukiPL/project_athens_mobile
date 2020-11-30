@@ -11,13 +11,18 @@ import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:provider/provider.dart';
 
 class DeputiesListScreen extends BaseScreen<DeputiesListBloc> {
+
+  final BottomNavItem _currentBottomBarItem;
+
+  DeputiesListScreen(this._currentBottomBarItem);
+
   @override
-  BottomNavItem get currentBottomBarItem => BottomNavItem.DEPUTIES;
+  BottomNavItem get currentBottomBarItem => _currentBottomBarItem;
 
   @override
   String get appBarTitle => "Deputies";
   @override
-  bool get showBackArrow => false;
+  bool get showBackArrow => currentBottomBarItem != BottomNavItem.DEPUTIES;
 
   @override
   Widget buildBody(BuildContext context, DeputiesListBloc bloc) {

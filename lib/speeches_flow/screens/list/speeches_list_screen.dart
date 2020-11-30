@@ -25,7 +25,7 @@ class SpeechesListScreen extends BaseScreen<SpeechesListBloc> {
     final destinationManager = Provider.of<DestinationManager>(context);
     return StreamProvider<SpeechModel>.value(
       value: bloc.goToDetails,
-      updateShouldNotify: (_, model) => goToDetails(context, model, destinationManager),
+      updateShouldNotify: (_, model) => _goToDetails(context, model, destinationManager),
       child: Consumer<SpeechModel>(
         builder: (BuildContext context, SpeechModel value, Widget child) => child,
         child: Column(
@@ -51,7 +51,7 @@ class SpeechesListScreen extends BaseScreen<SpeechesListBloc> {
   @override
   Widget buildFloatingActionButton(BuildContext context, SpeechesListBloc bloc) => null;
 
-  bool goToDetails(BuildContext context, SpeechModel model, DestinationManager destinationManager) {
+  bool _goToDetails(BuildContext context, SpeechModel model, DestinationManager destinationManager) {
     destinationManager.goToDestination(context, SpeechDetailsDestination(model));
     return false;
   }

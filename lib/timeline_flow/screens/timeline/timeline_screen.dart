@@ -13,6 +13,7 @@ import 'package:project_athens/timeline_flow/presentation/date_picker_fork/date_
 import 'package:project_athens/timeline_flow/screens/timeline/cloud/noun_cloud.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_list.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/timeline_bloc.dart';
+import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
 import 'package:provider/provider.dart';
 
 class TimelineScreen extends BaseScreen<TimelineBloc> {
@@ -76,7 +77,7 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
   bool goToDestination(BuildContext context, TimelineModel model, DestinationManager timelineNavigation) {
     switch(model.type) {
       case TimelineModelType.VOTING:
-        // TODO: Handle this case.
+        timelineNavigation.goToDestination(context, VoteDetailsDestination(currentBottomBarItem, model));
         break;
       case TimelineModelType.SPEECH:
         timelineNavigation.goToDestination(context, SpeechDetailsDestination(model));

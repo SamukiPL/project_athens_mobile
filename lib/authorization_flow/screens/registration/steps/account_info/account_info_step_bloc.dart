@@ -47,9 +47,9 @@ class AccountInfoStepBloc extends BaseRegistrationStepBloc {
   Future<void> call() async {
     final result = await _checkPairUsageUseCase.call(CheckPairUsageParams(_login, _email)).safeApiCall();
     if (result is Success<CheckPairUsageModel> &&
-        result.result.isSomethingTaken) {
-      _loginTaken = result.result.loginTaken;
-      _emailTaken = result.result.emailTaken;
+        result.value.isSomethingTaken) {
+      _loginTaken = result.value.loginTaken;
+      _emailTaken = result.value.emailTaken;
       invokeAction(StepAction.POSITIVE);
       return;
     }

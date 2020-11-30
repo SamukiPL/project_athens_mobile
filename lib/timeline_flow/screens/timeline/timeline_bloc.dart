@@ -68,7 +68,7 @@ class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> 
     final result = await _getMeetingsDates(TimelineParameters(9, ""));
 
     if (result is Success<List<MeetingDate>>) {
-      _dates = result.result;
+      _dates = result.value;
       loadNewDate(_getBeforeDate(DateTime.now()));
     }
   }
@@ -81,7 +81,7 @@ class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> 
     final result = await _getTimelineUseCase(params);
 
     if (result is Success<List<TimelineModel>>) {
-      _items = result.result.toTimelineRowViewModel(itemClick);
+      _items = result.value.toTimelineRowViewModel(itemClick);
       adapter.updateList(_items);
     }
 

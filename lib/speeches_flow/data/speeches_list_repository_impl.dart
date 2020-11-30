@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:project_athens/athens_core/data/base_responses/speech_response.dart';
 import 'package:project_athens/athens_core/domain/list/base_params.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
-import 'package:project_athens/speeches_flow/data/network/responses/speech_response.dart';
 import 'package:project_athens/speeches_flow/data/network/speeches_api.dart';
 import 'package:project_athens/speeches_flow/domain/list/speeches_list_repository.dart';
 import 'package:project_athens/speeches_flow/mappers/speeches_network_mapper.dart';

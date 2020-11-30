@@ -24,7 +24,7 @@ class NounCloudBloc {
     final result = await _getNounCloudUseCase(params).safeApiCall();
 
     if (result is Success<List<WordModel>>) {
-      final widgets = await generateWidgets(result.result);
+      final widgets = await generateWidgets(result.value);
       _stateController.add(CloudReady(widgets));
     }
   }

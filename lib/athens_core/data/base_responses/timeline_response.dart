@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:project_athens/timeline_flow/data/network/response/speech.dart';
-import 'package:project_athens/timeline_flow/data/network/response/voting.dart';
+import 'package:project_athens/athens_core/data/base_responses/speech_response.dart';
+import 'package:project_athens/athens_core/data/base_responses/voting_response.dart';
 
 part 'timeline_response.g.dart';
 
@@ -28,10 +28,10 @@ class Event {
 
     switch (type) {
       case TimelineEventType.VOTING:
-        item = Voting.fromJson(json['item'] as Map<String, dynamic>);
+        item = VotingResponse.fromJson(json['item'] as Map<String, dynamic>);
         break;
       case TimelineEventType.SPEECH:
-        item = Speech.fromJson(json['item'] as Map<String, dynamic>);
+        item = SpeechResponse.fromJson(json['item'] as Map<String, dynamic>);
         break;
     }
 

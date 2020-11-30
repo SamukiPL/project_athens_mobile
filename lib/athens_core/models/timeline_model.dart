@@ -10,18 +10,6 @@ abstract class TimelineModel extends BaseModel {
 
 }
 
-class VotingModel extends TimelineModel {
-  final String votingDesc;
-  final String title;
-
-  VotingModel({
-    String id,
-    this.title,
-    DateTime date,
-    this.votingDesc
-  }) : super(id, TimelineModelType.VOTING, date);
-}
-
 class SpeechModel extends TimelineModel{
   final String personName;
   final String deputyId;

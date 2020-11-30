@@ -1,10 +1,11 @@
 import 'package:project_athens/athens_core/models/gender.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:project_athens/athens_core/data/base_responses/timeline_response.dart';
 
 part 'speech_response.g.dart';
 
 @JsonSerializable()
-class SpeechResponse {
+class SpeechResponse extends TimelineItem {
 
   final Agenda agenda;
   final CisInfo cisInfo;

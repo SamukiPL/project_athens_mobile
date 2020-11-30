@@ -21,7 +21,7 @@ class NetworkModule extends Module {
     final authFacade = AuthFacade(authRepository);
 
     final clientOptions = BaseOptions(
-      baseUrl: "http://api.swiadoma-demokracja.pl",
+      baseUrl: "https://api.swiadoma-demokracja.pl",
     );
 
     return [

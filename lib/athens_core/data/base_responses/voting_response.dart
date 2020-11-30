@@ -1,16 +1,16 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:project_athens/timeline_flow/data/network/response/timeline_response.dart';
+import 'package:project_athens/athens_core/data/base_responses/timeline_response.dart';
 
-part 'voting.g.dart';
+part 'voting_response.g.dart';
 
 @JsonSerializable()
-class Voting implements TimelineItem {
+class VotingResponse implements TimelineItem {
   final VotingNumbers votingNumbers;
   final DateTime votedAt;
   final DateTime actualVotedAt;
   final DateTime createAt;
   final int cadency;
-  final dynamic orderPoint;
+  final int orderPoint;
   final int sessionIId;
   final int votingIId;
   final String votingUniqueId;
@@ -19,7 +19,12 @@ class Voting implements TimelineItem {
   final VotingType votingType;
   final String id;
 
-  Voting(
+  int get inFavor => votingNumbers.inFavor;
+  int get against => votingNumbers.against;
+  int get hold => votingNumbers.hold;
+  int get absent => votingNumbers.absent;
+
+  VotingResponse(
       this.votingNumbers,
       this.votedAt,
       this.actualVotedAt,
@@ -34,9 +39,9 @@ class Voting implements TimelineItem {
       this.votingType,
       this.id);
 
-  factory Voting.fromJson(Map<String, dynamic> json) => _$VotingFromJson(json);
+  factory VotingResponse.fromJson(Map<String, dynamic> json) => _$VotingResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$VotingToJson(this);
+  Map<String, dynamic> toJson() => _$VotingResponseToJson(this);
 }
 
 @JsonSerializable()
