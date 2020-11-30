@@ -218,4 +218,8 @@ class AppLocalizationsGenerated {
   String settingsButtonLogout() {
     return words['settings']['button']['logout'];
   }
+
+  String settingsSwitchTechnicalData() {
+    return words['settings']['switch']['technicalData'];
+  }
 }

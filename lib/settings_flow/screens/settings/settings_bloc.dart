@@ -12,5 +12,4 @@ class SettingsBloc extends BaseBloc {
     final result = await _logoutUseCase(null).safeApiCall();
     manageState(result);
   }
-
 }

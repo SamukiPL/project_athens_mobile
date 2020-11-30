@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:project_athens/athens_core/configuration/configuration.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
@@ -19,14 +20,32 @@ class SettingsScreen extends BaseScreen<SettingsBloc> {
   @override
   Widget buildBody(BuildContext context, SettingsBloc bloc) {
     final localization = Provider.of<AppLocalizations>(context);
+    final configuration = Provider.of<Configuration>(context);
+
     return Container(
-      child: MaterialButton(
-        onPressed: () {
-          bloc.logout();
-        },
-        child: Text(localization.getText().settingsButtonLogout()),
-      ),
-    );
+        child: Column(
+      children: [
+        MaterialButton(
+          onPressed: () {
+            bloc.logout();
+          },
+          child: Text(localization.getText().settingsButtonLogout()),
+        ),
+        Row(
+          children: [
+            StreamProvider.value(
+                value: configuration.showTechnicalData,
+                initialData: false,
+                child: Consumer<bool>(
+                    builder: (BuildContext context, bool value, Widget child) =>
+                        Switch(
+                            value: value,
+                            onChanged: configuration.updateShowTechnicalData))),
+            Text(localization.getText().settingsSwitchTechnicalData()),
+          ],
+        )
+      ],
+    ));
   }
 
   @override
@@ -39,5 +58,4 @@ class SettingsScreen extends BaseScreen<SettingsBloc> {
     var appNavigation = Provider.of<AppNavigation>(context, listen: false);
     appNavigation.goToLoginWidget(context);
   }
-
 }

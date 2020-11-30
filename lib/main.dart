@@ -12,6 +12,7 @@ import 'package:project_athens/main/injections/app_module.dart';
 import 'package:project_athens/main/injections/app_navigation_module.dart';
 import 'package:project_athens/main/injections/main_widget_module.dart';
 import 'package:project_athens/splash_screen/splash_screen_widget.dart';
+import 'athens_core/configuration/configuration_module.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
     _firebaseMessages.setupMessaging();
     Fimber.plantTree(DebugBufferTree());
     return ModuleWidget(
-      providers: [AppModule(context), FirebaseMessagingModule(context, _firebaseMessages), MainWidgetModule(context)],
+      providers: [AppModule(context), FirebaseMessagingModule(context, _firebaseMessages), MainWidgetModule(context), ConfigurationModule(context)],
       child: MaterialApp(
         title: 'Project Athens',
         theme: ThemeData(
