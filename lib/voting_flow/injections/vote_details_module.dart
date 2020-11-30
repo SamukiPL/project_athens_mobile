@@ -17,7 +17,7 @@ class VoteDetailsModule extends Module {
 
     return [
       Provider<VoteDetailsBloc>(
-        create: (_) => VoteDetailsBloc(),
+        create: (_) => VoteDetailsBloc(_votingModel),
         dispose: (_, bloc) => bloc.dispose(),
       )
     ];

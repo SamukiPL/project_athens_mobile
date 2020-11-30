@@ -39,7 +39,7 @@ abstract class BaseListBloc<MODEL extends BaseModel, ITEM extends BaseItemViewMo
       adapter.setLoading(false);
       manageState(data);
       if (data is Success<List<MODEL>>)
-        adapter.updateList(_mapItems(data.result));
+        adapter.updateList(_mapItems(data.value));
     });
     page++;
   }

@@ -3,6 +3,7 @@ import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/domain/list/list_use_case.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/deputies_flow/data/deputies_list_repository_impl.dart';
+import 'package:project_athens/deputies_flow/domain/deputies_list_params.dart';
 import 'package:project_athens/deputies_flow/screens/list/deputies_list_bloc.dart';
 import 'package:project_athens/deputies_flow/screens/list/list_impl/deputy_item_view_model_factory.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
@@ -10,7 +11,9 @@ import 'package:provider/provider.dart';
 
 class DeputiesListModule extends Module {
 
-  DeputiesListModule(BuildContext context) : super(context);
+  final List<String> _deputiesIdsToShow;
+
+  DeputiesListModule(BuildContext context, this._deputiesIdsToShow) : super(context);
 
   @override
   List<SingleChildWidget> getProviders() {
@@ -20,9 +23,11 @@ class DeputiesListModule extends Module {
     final listUseCase = ListUseCase(deputiesListRepository);
     final itemFactory = DeputyItemViewModelFactory();
 
+    final deputiesListParams = DeputiesListParams(deputyIdsToShow: _deputiesIdsToShow);
+
     return [
       Provider<DeputiesListBloc>(
-        create: (context) => DeputiesListBloc(listUseCase, null, itemFactory),
+        create: (context) => DeputiesListBloc(listUseCase, deputiesListParams, itemFactory),
         dispose: (context, bloc) => bloc.dispose(),
       )
     ];

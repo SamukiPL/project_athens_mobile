@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/voting_flow/screens/list/list_impl/vote_item_view_model.dart';
 
 class VoteViewHolder extends StatelessWidget {
@@ -10,14 +11,80 @@ class VoteViewHolder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return GestureDetector(
       onTap: () {
         _viewModel.itemClick();
       },
-      child: Container(
-        width: double.infinity,
-        height: 300,
-        color: Colors.red,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _getTypeAndDateRow(theme),
+          _getResults(),
+          _getTitle(theme),
+          TechnicalData(technicalId: _viewModel.id)
+        ],
+      ),
+    );
+  }
+
+  Widget _getTypeAndDateRow(ThemeData theme) {
+    return Container(
+      margin: EdgeInsets.only(top: 8, bottom: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            _viewModel.description,
+            style: TextStyle(
+              color: theme.primaryColor,
+              fontSize: 18
+            ),
+          ),
+          Text(
+            _viewModel.date,
+            style: TextStyle(
+                color: theme.dividerColor,
+                fontSize: 12
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _getResults() {
+    return Container(
+      child: RichText(
+          text: TextSpan(
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 14
+            ),
+            children: [
+              TextSpan(text: _viewModel.results.inFavor.toString(), style: TextStyle(color: Colors.green)),
+              TextSpan(text: "/",),
+              TextSpan(text: _viewModel.results.against.toString(), style: TextStyle(color: Colors.red)),
+              TextSpan(text: "/",),
+              TextSpan(text: _viewModel.results.hold.toString(), style: TextStyle(color: Colors.grey)),
+              TextSpan(text: "/",),
+              TextSpan(text: _viewModel.results.absent.toString(), style: TextStyle(color: Colors.grey)),
+            ]
+          )
+      ),
+    );
+  }
+
+  Widget _getTitle(ThemeData theme) {
+    return Container(
+      margin: EdgeInsets.only(top: 8, bottom: 8),
+      child: Text(
+        _viewModel.title,
+        style: TextStyle(
+          color: theme.dividerColor,
+            fontSize: 14
+        ),
+        textAlign: TextAlign.left,
       ),
     );
   }

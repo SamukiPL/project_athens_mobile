@@ -15,15 +15,15 @@ class DeputiesCache {
   Future<Result<List<DeputyModel>>> result;
 
   Future<Result<List<DeputyModel>>> get deputies async {
-    if (_cachedDeputies != null) return Success(_cachedDeputies);
+    if (_cachedDeputies != null) return Success(_cachedDeputies.toList());
     if (result != null) return result;
 
-    result = _getDeputiesUseCase(BaseDeputiesParams(9)).then((value) {
-      if (value is Success<List<DeputyModel>>)
-        _cachedDeputies = value.result;
+    result = _getDeputiesUseCase(BaseDeputiesParams(9)).then((result) {
+      if (result is Success<List<DeputyModel>>)
+        _cachedDeputies = result.value;
       else
-        result = null;
-      return value;
+        this.result = null;
+      return result;
     });
 
     return result;
@@ -45,7 +45,7 @@ class DeputiesCache {
     final result = await deputies;
     String thumbnailUrl;
     if (result is Success<List<DeputyModel>>) {
-      thumbnailUrl = result.result?.firstWhere((element) => element.id == id,
+      thumbnailUrl = result.value?.firstWhere((element) => element.id == id,
           orElse: () => null)
           ?.thumbnailUrl;
       _deputiesThumbnails.putIfNotNull(id, thumbnailUrl);

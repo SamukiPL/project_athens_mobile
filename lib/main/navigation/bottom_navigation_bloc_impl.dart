@@ -16,48 +16,21 @@ class BottomNavigationBlocImpl extends BottomNavigationBloc {
 
   DestinationManager _currentDestinationManager;
 
+  List<DestinationManager> destinationManagers = BottomNavItem.values.map((item) => item.getDestinationManager()).toList();
+
+  BottomNavigationBlocImpl() {
+    _currentDestinationManager = destinationManagers.first;
+  }
+
   @override
   void pickItem(int i) {
-    switch (i) {
-      case 0:
-        _currentItem = BottomNavItem.TIMELINE;
-        break;
-      case 1:
-        _currentItem = BottomNavItem.DEPUTIES;
-        break;
-      case 2:
-        _currentItem = BottomNavItem.SPEECHES;
-        break;
-      case 3:
-        _currentItem = BottomNavItem.VOTING;
-        break;
-      case 4:
-        _currentItem = BottomNavItem.SETTINGS;
-        break;
-    }
-    _currentDestinationManager = null;
+    final newItem = BottomNavItem.values[i];
+    destinationManagers[i] = newItem.getDestinationManager();
+    _currentItem = newItem;
+    _currentDestinationManager = destinationManagers[i];
   }
 
   DestinationManager getDestinationManager(BuildContext context) {
-    if (_currentDestinationManager == null) {
-      switch (currentItem) {
-        case BottomNavItem.DEPUTIES:
-          _currentDestinationManager = DestinationManager(DeputiesListDestination());
-          break;
-        case BottomNavItem.SPEECHES:
-          _currentDestinationManager = DestinationManager(SpeechesListDestination());
-          break;
-        case BottomNavItem.VOTING:
-          _currentDestinationManager = DestinationManager(VotesListDestination(currentItem));
-          break;
-        case BottomNavItem.SETTINGS:
-          _currentDestinationManager = DestinationManager(SettingsScreenDestination());
-          break;
-        default:
-          _currentDestinationManager = DestinationManager(TimelineScreenDestination());
-          break;
-      }
-    }
     return _currentDestinationManager;
   }
 

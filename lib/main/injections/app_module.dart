@@ -17,7 +17,7 @@ class AppModule extends Module {
   @override
   List<SingleChildWidget> getProviders() {
     final clientOptions = BaseOptions(
-      baseUrl: "http://api.swiadoma-demokracja.pl",
+      baseUrl: "https://api.swiadoma-demokracja.pl",
     );
     final client = Dio(clientOptions);
     client.interceptors.addAll([LogInterceptor(requestBody: true, responseBody: true), ErrorInterceptor()]);

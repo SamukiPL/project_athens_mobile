@@ -44,7 +44,7 @@ class DeputiesChooserBloc extends BaseRegistrationStepBloc
         await _getDeputiesUseCase(BaseDeputiesParams(9));
 
     if (result is Success<List<DeputyModel>>) {
-      _items = result.result.toDeputyItemViewModels(itemClick);
+      _items = result.value.toDeputyItemViewModels(itemClick);
       adapter.updateList(_items);
     }
   }
