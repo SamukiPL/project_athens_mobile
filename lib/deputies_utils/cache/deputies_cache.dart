@@ -1,5 +1,6 @@
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/ext/map_extension.dart';
+import 'package:project_athens/deputies_utils/data/network/response/deputy_response.dart';
 import 'package:project_athens/deputies_utils/domain/base_deputies_params.dart';
 import 'package:project_athens/deputies_utils/domain/base_parliament_clubs_params.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
@@ -19,43 +20,58 @@ class DeputiesCache {
 
   Future<Result<List<DeputyModel>>> get deputies async {
     if (_cachedDeputies != null) return Success(_cachedDeputies.toList());
-    if (result != null) return result;
 
-    result = _getDeputiesUseCase(BaseDeputiesParams(9)).then((result) {
-      if (result is Success<List<DeputyModel>>)
-        _cachedDeputies = result.value;
-      else
-        this.result = null;
-      return result;
+    final clubs =
+        (await parliamentClubs as Success<List<ParliamentClubModel>>)?.value ?? List();
+
+    final result = await _getDeputiesUseCase(BaseDeputiesParams(9)).then((result) {
+      if (result is Success<List<DeputyResponse>>) {
+        _cachedDeputies = result.value.map((e) => _responseToModel(
+            e, clubs.firstWhere((element) => element.id == e.parliamentClub))).toList();
+        return _cachedDeputies;
+      } else {
+        return List();
+      }
     });
 
-    return result;
+    return Success(result);
   }
 
   Future<Result<List<ParliamentClubModel>>> get parliamentClubs async {
-    if (_cachedParliamentClubs != null) return Success(_cachedParliamentClubs.toList());
-    if (clubsResult != null) return clubsResult;
+    if (_cachedParliamentClubs != null)
+      return Success(_cachedParliamentClubs.toList());
+    // if (clubsResult != null) return clubsResult;
 
-    clubsResult = _getParliamentClubsUseCase(BaseParliamentClubsParams(9)).then((clubsResult) {
-      if (clubsResult is Success<List<ParliamentClubModel>>)
+    final clubsResult = await _getParliamentClubsUseCase(BaseParliamentClubsParams(9))
+        .then((clubsResult) {
+      if (clubsResult is Success<List<ParliamentClubModel>>) {
         _cachedParliamentClubs = clubsResult.value;
-      return clubsResult;
+        return _cachedParliamentClubs;
+      }
+      return List();
     });
 
-    return clubsResult;
+    return Success(clubsResult);
   }
 
-  Future<Result<List<DeputyModel>>> result;
-  Future<Result<List<ParliamentClubModel>>> clubsResult;
+  // Future<Result<List<DeputyModel>>> result;
+  // Future<Result<List<ParliamentClubModel>>> clubsResult;
 
+  DeputyModel _responseToModel(
+          DeputyResponse response, ParliamentClubModel club) =>
+      DeputyModel(
+          id: response.id,
+          name: response.name,
+          thumbnailUrl: response.photoUrl,
+          clubId: response.parliamentClub,
+          club: club.shortName);
 
   Future<DeputyModel> getDeputyModel(String id) async {
     if (_cachedDeputies.isNotEmpty)
-      return _cachedDeputies.firstWhere(
-              (element) => element.id == id)
-      ;
+      return _cachedDeputies.firstWhere((element) => element.id == id);
 
     await deputies;
+
     return _cachedDeputies.firstWhere((element) => element.id == id);
   }
 
@@ -65,8 +81,8 @@ class DeputiesCache {
     final result = await deputies;
     String thumbnailUrl;
     if (result is Success<List<DeputyModel>>) {
-      thumbnailUrl = result.value?.firstWhere((element) => element.id == id,
-          orElse: () => null)
+      thumbnailUrl = result.value
+          ?.firstWhere((element) => element.id == id, orElse: () => null)
           ?.thumbnailUrl;
       _deputiesThumbnails.putIfNotNull(id, thumbnailUrl);
     }
@@ -76,11 +92,10 @@ class DeputiesCache {
 
   Future<ParliamentClubModel> getParliamentClubModel(String id) async {
     if (_cachedDeputies.isNotEmpty)
-      return _cachedParliamentClubs.firstWhere(
-              (element) => element.id == id)
-      ;
+      return _cachedParliamentClubs.firstWhere((element) => element.id == id);
 
-    await deputies;
+    await parliamentClubs;
+
     return _cachedParliamentClubs.firstWhere((element) => element.id == id);
   }
 }

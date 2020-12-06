@@ -46,7 +46,7 @@ class TimelineModelMapper extends AsyncDataMapper<Event, TimelineModel> {
       id: item.id,
       personName: item.personName,
       deputyId: item.cadencyDeputy,
-      club: item.parliamentClub,
+      club:  (await _deputiesCache.getParliamentClubModel(item.parliamentClub))?.shortName ?? '',
       desc: item.agenda?.title,
       date: item.cisInfo.eventDateTime,
       thumbnailUrl: await _deputiesCache.getDeputyThumbnail(item.cadencyDeputy),

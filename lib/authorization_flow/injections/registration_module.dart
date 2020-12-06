@@ -18,10 +18,9 @@ import 'package:project_athens/authorization_flow/screens/registration/steps/reg
 import 'package:project_athens/authorization_flow/screens/registration/steps/registration_end/registration_end_step_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/registration_end/show_repeat_password_notifier.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/registration_steps.dart';
-import 'package:project_athens/deputies_utils/data/get_deputies_repository_impl.dart';
+import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/data/network/deputies_api.dart';
 import 'package:project_athens/deputies_utils/data/put_deputies_repository_impl.dart';
-import 'package:project_athens/deputies_utils/domain/get_deputies/get_deputies_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/put_deputies/deputies_registration_use_case.dart';
 import 'package:project_athens/main/firebase/firebase_messages.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +35,7 @@ class RegistrationModule extends Module {
   List<SingleChildWidget> getProviders() {
     final loginApi = Provider.of<LoginApi>(context);
     final dio = Provider.of<Dio>(context);
+
     final deputiesApi = DeputiesApi(dio);
 
     final repository = RegistrationRepositoryImpl(loginApi);
@@ -90,16 +90,14 @@ class RegistrationModule extends Module {
 
   DeputiesChooserBloc getDeputiesChooserBloc(BuildContext context, LoginApi loginApi, DeputiesApi deputiesApi) {
     final firebaseMessaging = Provider.of<FirebaseMessages>(context);
+    final deputiesCache = Provider.of<DeputiesCache>(context);
 
     final deputySubscriber = FirebaseDeputySubscriber(firebaseMessaging);
-
-    final getDeputiesRepository = GetDeputiesRepositoryImpl(deputiesApi);
-    final getDeputiesUseCase = GetDeputiesUseCase(getDeputiesRepository);
 
     final putDeputiesRepository = PutDeputiesRepositoryImpl(deputiesApi, deputySubscriber);
     final putDeputiesUseCase = PutDeputiesUseCase(putDeputiesRepository);
 
-    return DeputiesChooserBloc(getDeputiesUseCase, putDeputiesUseCase);
+    return DeputiesChooserBloc(deputiesCache, putDeputiesUseCase);
   }
 
 }
