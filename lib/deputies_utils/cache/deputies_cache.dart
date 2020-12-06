@@ -1,18 +1,21 @@
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/ext/map_extension.dart';
 import 'package:project_athens/deputies_utils/domain/base_deputies_params.dart';
+import 'package:project_athens/deputies_utils/domain/base_parliament_clubs_params.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputies/get_deputies_use_case.dart';
+import 'package:project_athens/deputies_utils/domain/get_parliament_clubs/get_parliament_clubs_use_case.dart';
+import 'package:project_athens/deputies_utils/domain/parliament_club_model.dart';
 
 class DeputiesCache {
   final GetDeputiesUseCase _getDeputiesUseCase;
+  final GetParliamentClubsUseCase _getParliamentClubsUseCase;
 
-  DeputiesCache(this._getDeputiesUseCase);
+  DeputiesCache(this._getDeputiesUseCase, this._getParliamentClubsUseCase);
 
   List<DeputyModel> _cachedDeputies;
+  List<ParliamentClubModel> _cachedParliamentClubs;
   Map<String, String> _deputiesThumbnails = Map<String, String>();
-
-  Future<Result<List<DeputyModel>>> result;
 
   Future<Result<List<DeputyModel>>> get deputies async {
     if (_cachedDeputies != null) return Success(_cachedDeputies.toList());
@@ -28,6 +31,23 @@ class DeputiesCache {
 
     return result;
   }
+
+  Future<Result<List<ParliamentClubModel>>> get parliamentClubs async {
+    if (_cachedParliamentClubs != null) return Success(_cachedParliamentClubs.toList());
+    if (clubsResult != null) return clubsResult;
+
+    clubsResult = _getParliamentClubsUseCase(BaseParliamentClubsParams(9)).then((clubsResult) {
+      if (clubsResult is Success<List<ParliamentClubModel>>)
+        _cachedParliamentClubs = clubsResult.value;
+      return clubsResult;
+    });
+
+    return clubsResult;
+  }
+
+  Future<Result<List<DeputyModel>>> result;
+  Future<Result<List<ParliamentClubModel>>> clubsResult;
+
 
   Future<DeputyModel> getDeputyModel(String id) async {
     if (_cachedDeputies.isNotEmpty)
@@ -52,5 +72,15 @@ class DeputiesCache {
     }
 
     return thumbnailUrl;
+  }
+
+  Future<ParliamentClubModel> getParliamentClubModel(String id) async {
+    if (_cachedDeputies.isNotEmpty)
+      return _cachedParliamentClubs.firstWhere(
+              (element) => element.id == id)
+      ;
+
+    await deputies;
+    return _cachedParliamentClubs.firstWhere((element) => element.id == id);
   }
 }
