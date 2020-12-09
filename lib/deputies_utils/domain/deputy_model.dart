@@ -11,6 +11,8 @@ class DeputyModel extends BaseModel {
 
   final String club;
 
-  DeputyModel({@required this.id, @required this.name, this.thumbnailUrl, this.club});
+  final String clubId;
+
+  DeputyModel({@required this.id, @required this.name, this.thumbnailUrl, this.clubId, this.club});
 
 }
