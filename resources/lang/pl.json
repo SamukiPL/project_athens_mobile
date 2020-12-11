@@ -5,7 +5,10 @@
     "cancel": "Anuluj",
     "skip": "Pomiń",
     "choose": "Wybierz",
-    "ok": "Ok"
+    "ok": "Ok",
+    "noData": {
+      "defaultText": "Brak danych"
+    }
   },
   "main": {
     "menu": {
@@ -68,7 +71,17 @@
       "voteForProposal": "Głosowanie Za Propozycją",
       "personVote": "Głosowanie Za Osobą",
       "unknown": "Nieznany rodzaj głosowania"
-    }
+    },
+    "nounCloud": {
+      "noNouns":  "Ups... Nie udało nam się pobrać chmury tagów dla wybranej daty. Proszę spróbować później."
+    },
+    "noEvents": "Brak wydarzeń dla obecnej daty.\nProszę spróbować później."
+  },
+  "speeches": {
+    "noData": "Nie znaleziono przemów dla podanych kryteriów."
+  },
+  "votings": {
+    "noData": "Nie znaleziono głosowań dla podanych kryteriów."
   },
   "settings": {
     "button": {

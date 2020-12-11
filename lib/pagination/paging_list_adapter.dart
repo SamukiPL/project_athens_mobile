@@ -41,7 +41,7 @@ class PagingListAdapter<ITEM> {
   }
 
   void _addStateToStream() {
-    _stateController.add(PagingState(_itemsList, _itemsCount));
+    _stateController.add(PagingState(_itemsList, _itemsCount, _loading));
   }
 
   void dispose() {

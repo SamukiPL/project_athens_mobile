@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
@@ -23,6 +24,9 @@ class SpeechesListScreen extends BaseScreen<SpeechesListBloc> {
   @override
   Widget buildBody(BuildContext context, SpeechesListBloc bloc) {
     final destinationManager = Provider.of<DestinationManager>(context);
+
+    final localizations = Provider.of<AppLocalizations>(context);
+
     return StreamProvider<SpeechModel>.value(
       value: bloc.goToDetails,
       updateShouldNotify: (_, model) => _goToDetails(context, model, destinationManager),
@@ -34,7 +38,7 @@ class SpeechesListScreen extends BaseScreen<SpeechesListBloc> {
               Expanded(
                 child: Container(
                   height: 0,
-                  child: SpeechesList(bloc.adapter),
+                  child: SpeechesList(bloc.adapter, localizations.getText().speechesNoData()),
                 ),
               )
             ]

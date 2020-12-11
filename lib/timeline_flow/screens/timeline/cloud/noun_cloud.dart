@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_scatter/flutter_scatter.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
+import 'package:project_athens/athens_core/presentation/no_data/no_data.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/cloud/noun_cloud_bloc.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/cloud/noun_cloud_state.dart';
 import 'package:provider/provider.dart';
@@ -44,10 +46,14 @@ class NounCloud extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
     final ratio = screenSize.width / screenSize.height;
 
+    final localizations = Provider.of<AppLocalizations>(context);
+
+
     return InteractiveViewer(
       child: Transform.scale(
         scale: 0.85,
-        child: Scatter(
+        child: state.nounsWidgets.length > 0 ?
+        Scatter(
             fillGaps: true,
             delegate: ArchimedeanSpiralScatterDelegate(
               ratio: ratio,
@@ -55,7 +61,11 @@ class NounCloud extends StatelessWidget {
               b: 1.0,
             ),
             children: state.nounsWidgets,
-            overflow: Overflow.visible),
+            overflow: Overflow.visible)
+        : NoData(
+          text: localizations.getText().timelineNounCloudNoNouns(),
+          color: Colors.white,
+        ),
       ),
     );
   }

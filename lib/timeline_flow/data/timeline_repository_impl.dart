@@ -31,28 +31,37 @@ class TimelineRepositoryImpl implements TimelineRepository {
   Future<Result> getTimelineForDay(int cadency, String date) async {
     final response = await timelineApi.getAllDeputies(cadency, date);
     List<TimelineModel> resultList = await networkMapper(response.events);
-    resultList.sort((a, b) => a.date.compareTo(b.date));
-    
+
+    if (resultList.length > 0) {
+      resultList.sort((a, b) => a.date.compareTo(b.date));
+    }
+
     return Success<List<TimelineModel>>(resultList);
   }
 
   @override
   Future<Result<List<WordModel>>> getNounCloud(int cadency, String date) async {
     final response = await timelineApi.getNounCloud(cadency, date);
-    final values = response.nouns
-      ..sort((a, b) => b.hits.compareTo(a.hits));
-    final minValueAllowed = (values.length > 75) ? values[75] : values.last;
-    final minimisedNouns = response.nouns
-      ..removeWhere((tag) => tag.hits < minValueAllowed.hits || tag.key == "to");
 
-    final test = List<WordModel>();
-    minimisedNouns.forEach((tag) {
-      test.add(WordModel(tag.hits / (minValueAllowed.hits / 5), tag.key));
-    });
+    final values = response.nouns.length > 0 ? response.nouns : List();
 
-    test.shuffle(Random(97518234));
+    final finalWords = List<WordModel>();
 
-    return Success<List<WordModel>>(test);
+    if (values.length > 0) {
+      values.sort((a, b) => b.hits.compareTo(a.hits));
+      final minValueAllowed = (values.length > 75) ? values[75] : values.last;
+      final minimisedNouns = response.nouns
+        ..removeWhere((tag) => tag.hits < minValueAllowed.hits || tag.key == "to");
+
+      minimisedNouns.forEach((tag) {
+        finalWords.add(WordModel(tag.hits / (minValueAllowed.hits / 5), tag.key));
+      });
+    }
+
+
+    finalWords.shuffle(Random(97518234));
+
+    return Success<List<WordModel>>(finalWords);
   }
 
 }

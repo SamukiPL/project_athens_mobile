@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
@@ -28,6 +29,9 @@ class VotesListScreen extends BaseScreen<VotesListBloc> {
   @override
   Widget buildBody(BuildContext context, VotesListBloc bloc) {
     final destinationManager = Provider.of<DestinationManager>(context);
+
+    final localizations = Provider.of<AppLocalizations>(context);
+
     return StreamProvider<VotingModel>.value(
       value: bloc.goToDetails,
       updateShouldNotify: (_, model) => _goToDetails(context, model, destinationManager),
@@ -39,7 +43,7 @@ class VotesListScreen extends BaseScreen<VotesListBloc> {
               Expanded(
                 child: Container(
                   height: 0,
-                  child: VotesList(bloc.adapter),
+                  child: VotesList(bloc.adapter, localizations.getText().votingsNoData()),
                 ),
               )
             ]

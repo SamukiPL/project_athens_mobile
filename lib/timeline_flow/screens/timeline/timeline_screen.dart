@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
@@ -36,6 +37,7 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
   @override
   Widget buildBody(BuildContext context, TimelineBloc bloc) {
     final destinationManager = Provider.of<DestinationManager>(context);
+    final localizations = Provider.of<AppLocalizations>(context);
 
     return StreamProvider<TimelineModel>.value(
       value: bloc.destination,
@@ -46,7 +48,7 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
           color: Theme.of(context).primaryColor,
           child: BackdropWidget(
             bottomChild: NounCloud(bloc: bloc.nounCloudBloc),
-            topChild: TimelineList(bloc.adapter),
+            topChild: TimelineList(bloc.adapter, localizations.getText().timelineNoEvents()),
           ),
         ),
       ),

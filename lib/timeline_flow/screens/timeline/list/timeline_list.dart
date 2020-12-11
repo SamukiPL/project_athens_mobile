@@ -8,8 +8,8 @@ import 'package:project_athens/timeline_flow/screens/timeline/list/view_holders/
 import 'package:project_athens/timeline_flow/screens/timeline/list/view_holders/voting_view_holder.dart';
 
 class TimelineList extends PagingList<TimelineRowViewModel> {
-  TimelineList(PagingListAdapter<TimelineRowViewModel> adapter)
-      : super(adapter);
+  TimelineList(PagingListAdapter<TimelineRowViewModel> adapter, String noDataText)
+      : super(adapter, noDataText: noDataText);
 
   @override
   double get bottomPadding => 72;

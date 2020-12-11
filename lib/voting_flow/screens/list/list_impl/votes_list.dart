@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:project_athens/pagination/paging_list.dart';
 import 'package:project_athens/pagination/paging_list_adapter.dart';
-import 'package:project_athens/speeches_flow/screens/list/list_impl/speech_item_view_model.dart';
 import 'package:project_athens/voting_flow/screens/list/list_impl/view_holders/vote_progress_view_holder.dart';
 import 'package:project_athens/voting_flow/screens/list/list_impl/view_holders/vote_view_holder.dart';
 import 'package:project_athens/voting_flow/screens/list/list_impl/vote_item_view_model.dart';
 
 class VotesList extends PagingList<VoteItemViewModel> {
 
-  VotesList(PagingListAdapter<VoteItemViewModel> adapter) : super(adapter);
+  VotesList(PagingListAdapter<VoteItemViewModel> adapter, String noDataText) : super(adapter, noDataText: noDataText);
 
   @override
   bool get refreshable => false;

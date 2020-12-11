@@ -50,6 +50,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalOk != "" && universalOk != null); 
   }); 
  
+  test("All methods for $locale universalNoDataDefaultText", () async {
+    String universalNoDataDefaultText = localization.universalNoDataDefaultText();
+    expect(true, universalNoDataDefaultText != "" && universalNoDataDefaultText != null); 
+  }); 
+ 
   test("All methods for $locale mainMenuSession", () async {
     String mainMenuSession = localization.mainMenuSession();
     expect(true, mainMenuSession != "" && mainMenuSession != null); 
@@ -95,14 +100,14 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginButtonsRegister != "" && loginButtonsRegister != null); 
   }); 
  
-  test("All methods for $locale loginButtonsSignUp", () async {
-    String loginButtonsSignUp = localization.loginButtonsSignUp();
-    expect(true, loginButtonsSignUp != "" && loginButtonsSignUp != null); 
-  }); 
- 
   test("All methods for $locale loginButtonsForgot", () async {
     String loginButtonsForgot = localization.loginButtonsForgot();
     expect(true, loginButtonsForgot != "" && loginButtonsForgot != null); 
+  }); 
+ 
+  test("All methods for $locale loginButtonsSignUp", () async {
+    String loginButtonsSignUp = localization.loginButtonsSignUp();
+    expect(true, loginButtonsSignUp != "" && loginButtonsSignUp != null); 
   }); 
  
   test("All methods for $locale loginButtonsResetPassword", () async {
@@ -273,6 +278,26 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale timelineVotingTypesUnknown", () async {
     String timelineVotingTypesUnknown = localization.timelineVotingTypesUnknown();
     expect(true, timelineVotingTypesUnknown != "" && timelineVotingTypesUnknown != null); 
+  }); 
+ 
+  test("All methods for $locale timelineNounCloudNoNouns", () async {
+    String timelineNounCloudNoNouns = localization.timelineNounCloudNoNouns();
+    expect(true, timelineNounCloudNoNouns != "" && timelineNounCloudNoNouns != null); 
+  }); 
+ 
+  test("All methods for $locale timelineNoEvents", () async {
+    String timelineNoEvents = localization.timelineNoEvents();
+    expect(true, timelineNoEvents != "" && timelineNoEvents != null); 
+  }); 
+ 
+  test("All methods for $locale speechesNoData", () async {
+    String speechesNoData = localization.speechesNoData();
+    expect(true, speechesNoData != "" && speechesNoData != null); 
+  }); 
+ 
+  test("All methods for $locale votingsNoData", () async {
+    String votingsNoData = localization.votingsNoData();
+    expect(true, votingsNoData != "" && votingsNoData != null); 
   }); 
  
   test("All methods for $locale settingsButtonLogout", () async {

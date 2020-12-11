@@ -26,6 +26,8 @@ class NounCloudBloc {
     if (result is Success<List<WordModel>>) {
       final widgets = await generateWidgets(result.value);
       _stateController.add(CloudReady(widgets));
+    } else {
+
     }
   }
 
