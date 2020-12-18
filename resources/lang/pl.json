@@ -55,6 +55,7 @@
     }
   },
   "timeline": {
+    "timelineNavTitle": "Wydarzenia",
     "votingTypes": {
       "resolutionProject": "Projekt Rezolucji",
       "lawProject": "Projekt Ustawy",
@@ -70,7 +71,32 @@
       "unknown": "Nieznany rodzaj głosowania"
     }
   },
+  "deputies": {
+    "deputiesListTitle": "Posłowie"
+  },
+  "speeches": {
+    "speechesListTitle": "Przemowy",
+    "speechDetailsTitle": "Przemowa"
+  },
+  "votings": {
+    "votingListTitle": "Głosowania",
+    "voteTypes": {
+      "totalDeputiesPlural": "Liczba członków",
+      "actualVotedDeputiesPlural": "Głosowało",
+      "inFavorSingle": "Poparł",
+      "inFavor": "Poparło",
+      "againstSingle": "Przeciwny",
+      "against": "Przeciw",
+      "holdPlural": "Wstrzymało się",
+      "absentPlural": "Nieobecnych",
+      "holdSingle": "Wstrzymał się",
+      "absentSingle": "Nieobecny"
+    },
+    "subscribedDeputiesVotes": "Obserwowani posłowie",
+    "votesNeededToPass": "Głosów poparcia potrzebnych"
+  },
   "settings": {
+    "settingsTitle": "Ustawienia",
     "button": {
       "logout": "Wyloguj"
     },

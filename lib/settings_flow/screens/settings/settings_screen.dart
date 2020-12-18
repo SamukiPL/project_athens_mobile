@@ -13,9 +13,11 @@ class SettingsScreen extends BaseScreen<SettingsBloc> {
   BottomNavItem get currentBottomBarItem => BottomNavItem.SETTINGS;
 
   @override
-  String get appBarTitle => "Settings";
-  @override
   bool get showBackArrow => false;
+
+  String getAppBarTitle(AppLocalizations localizations, SettingsBloc bloc) {
+    return localizations.getText().settingsSettingsTitle();
+  }
 
   @override
   Widget buildBody(BuildContext context, SettingsBloc bloc) {

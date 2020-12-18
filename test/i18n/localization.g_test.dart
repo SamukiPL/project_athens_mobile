@@ -215,6 +215,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginValidateWrongData != "" && loginValidateWrongData != null); 
   }); 
  
+  test("All methods for $locale timelineTimelineNavTitle", () async {
+    String timelineTimelineNavTitle = localization.timelineTimelineNavTitle();
+    expect(true, timelineTimelineNavTitle != "" && timelineTimelineNavTitle != null); 
+  }); 
+ 
   test("All methods for $locale timelineVotingTypesResolutionProject", () async {
     String timelineVotingTypesResolutionProject = localization.timelineVotingTypesResolutionProject();
     expect(true, timelineVotingTypesResolutionProject != "" && timelineVotingTypesResolutionProject != null); 
@@ -273,6 +278,91 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale timelineVotingTypesUnknown", () async {
     String timelineVotingTypesUnknown = localization.timelineVotingTypesUnknown();
     expect(true, timelineVotingTypesUnknown != "" && timelineVotingTypesUnknown != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesDeputiesListTitle", () async {
+    String deputiesDeputiesListTitle = localization.deputiesDeputiesListTitle();
+    expect(true, deputiesDeputiesListTitle != "" && deputiesDeputiesListTitle != null); 
+  }); 
+ 
+  test("All methods for $locale speechesSpeechesListTitle", () async {
+    String speechesSpeechesListTitle = localization.speechesSpeechesListTitle();
+    expect(true, speechesSpeechesListTitle != "" && speechesSpeechesListTitle != null); 
+  }); 
+ 
+  test("All methods for $locale speechesSpeechDetailsTitle", () async {
+    String speechesSpeechDetailsTitle = localization.speechesSpeechDetailsTitle();
+    expect(true, speechesSpeechDetailsTitle != "" && speechesSpeechDetailsTitle != null); 
+  }); 
+ 
+  test("All methods for $locale votingsVotingListTitle", () async {
+    String votingsVotingListTitle = localization.votingsVotingListTitle();
+    expect(true, votingsVotingListTitle != "" && votingsVotingListTitle != null); 
+  }); 
+ 
+  test("All methods for $locale votingsVoteTypesTotalDeputiesPlural", () async {
+    String votingsVoteTypesTotalDeputiesPlural = localization.votingsVoteTypesTotalDeputiesPlural();
+    expect(true, votingsVoteTypesTotalDeputiesPlural != "" && votingsVoteTypesTotalDeputiesPlural != null); 
+  }); 
+ 
+  test("All methods for $locale votingsVoteTypesActualVotedDeputiesPlural", () async {
+    String votingsVoteTypesActualVotedDeputiesPlural = localization.votingsVoteTypesActualVotedDeputiesPlural();
+    expect(true, votingsVoteTypesActualVotedDeputiesPlural != "" && votingsVoteTypesActualVotedDeputiesPlural != null); 
+  }); 
+ 
+  test("All methods for $locale votingsVoteTypesInFavorSingle", () async {
+    String votingsVoteTypesInFavorSingle = localization.votingsVoteTypesInFavorSingle();
+    expect(true, votingsVoteTypesInFavorSingle != "" && votingsVoteTypesInFavorSingle != null); 
+  }); 
+ 
+  test("All methods for $locale votingsVoteTypesInFavor", () async {
+    String votingsVoteTypesInFavor = localization.votingsVoteTypesInFavor();
+    expect(true, votingsVoteTypesInFavor != "" && votingsVoteTypesInFavor != null); 
+  }); 
+ 
+  test("All methods for $locale votingsVoteTypesAgainstSingle", () async {
+    String votingsVoteTypesAgainstSingle = localization.votingsVoteTypesAgainstSingle();
+    expect(true, votingsVoteTypesAgainstSingle != "" && votingsVoteTypesAgainstSingle != null); 
+  }); 
+ 
+  test("All methods for $locale votingsVoteTypesAgainst", () async {
+    String votingsVoteTypesAgainst = localization.votingsVoteTypesAgainst();
+    expect(true, votingsVoteTypesAgainst != "" && votingsVoteTypesAgainst != null); 
+  }); 
+ 
+  test("All methods for $locale votingsVoteTypesHoldPlural", () async {
+    String votingsVoteTypesHoldPlural = localization.votingsVoteTypesHoldPlural();
+    expect(true, votingsVoteTypesHoldPlural != "" && votingsVoteTypesHoldPlural != null); 
+  }); 
+ 
+  test("All methods for $locale votingsVoteTypesAbsentPlural", () async {
+    String votingsVoteTypesAbsentPlural = localization.votingsVoteTypesAbsentPlural();
+    expect(true, votingsVoteTypesAbsentPlural != "" && votingsVoteTypesAbsentPlural != null); 
+  }); 
+ 
+  test("All methods for $locale votingsVoteTypesHoldSingle", () async {
+    String votingsVoteTypesHoldSingle = localization.votingsVoteTypesHoldSingle();
+    expect(true, votingsVoteTypesHoldSingle != "" && votingsVoteTypesHoldSingle != null); 
+  }); 
+ 
+  test("All methods for $locale votingsVoteTypesAbsentSingle", () async {
+    String votingsVoteTypesAbsentSingle = localization.votingsVoteTypesAbsentSingle();
+    expect(true, votingsVoteTypesAbsentSingle != "" && votingsVoteTypesAbsentSingle != null); 
+  }); 
+ 
+  test("All methods for $locale votingsSubscribedDeputiesVotes", () async {
+    String votingsSubscribedDeputiesVotes = localization.votingsSubscribedDeputiesVotes();
+    expect(true, votingsSubscribedDeputiesVotes != "" && votingsSubscribedDeputiesVotes != null); 
+  }); 
+ 
+  test("All methods for $locale votingsVotesNeededToPass", () async {
+    String votingsVotesNeededToPass = localization.votingsVotesNeededToPass();
+    expect(true, votingsVotesNeededToPass != "" && votingsVotesNeededToPass != null); 
+  }); 
+ 
+  test("All methods for $locale settingsSettingsTitle", () async {
+    String settingsSettingsTitle = localization.settingsSettingsTitle();
+    expect(true, settingsSettingsTitle != "" && settingsSettingsTitle != null); 
   }); 
  
   test("All methods for $locale settingsButtonLogout", () async {

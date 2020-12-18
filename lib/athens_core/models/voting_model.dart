@@ -1,3 +1,4 @@
+import 'package:project_athens/athens_core/data/base_responses/voting_response.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 
 class VotingModel extends TimelineModel {
@@ -5,6 +6,9 @@ class VotingModel extends TimelineModel {
   final String title;
   final VoteResultModel results;
   final List<VoteModel> votes;
+  final int absoluteMajority;
+  final int qualifyingMajority;
+  final List<ParliamentClubVotingNumbers> clubVotes;
 
   VotingModel({
     String id,
@@ -12,7 +16,10 @@ class VotingModel extends TimelineModel {
     DateTime date,
     this.votingDesc,
     this.results,
-    this.votes
+    this.votes,
+    this.absoluteMajority,
+    this.qualifyingMajority,
+    this.clubVotes
   }) : super(id, TimelineModelType.VOTING, date);
 }
 

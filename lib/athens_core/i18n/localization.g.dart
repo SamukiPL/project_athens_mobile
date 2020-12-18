@@ -167,6 +167,10 @@ class AppLocalizationsGenerated {
     return words['login']['validate']['wrongData'];
   }
 
+  String timelineTimelineNavTitle() {
+    return words['timeline']['timelineNavTitle'];
+  }
+
   String timelineVotingTypesResolutionProject() {
     return words['timeline']['votingTypes']['resolutionProject'];
   }
@@ -213,6 +217,74 @@ class AppLocalizationsGenerated {
 
   String timelineVotingTypesUnknown() {
     return words['timeline']['votingTypes']['unknown'];
+  }
+
+  String deputiesDeputiesListTitle() {
+    return words['deputies']['deputiesListTitle'];
+  }
+
+  String speechesSpeechesListTitle() {
+    return words['speeches']['speechesListTitle'];
+  }
+
+  String speechesSpeechDetailsTitle() {
+    return words['speeches']['speechDetailsTitle'];
+  }
+
+  String votingsVotingListTitle() {
+    return words['votings']['votingListTitle'];
+  }
+
+  String votingsVoteTypesTotalDeputiesPlural() {
+    return words['votings']['voteTypes']['totalDeputiesPlural'];
+  }
+
+  String votingsVoteTypesActualVotedDeputiesPlural() {
+    return words['votings']['voteTypes']['actualVotedDeputiesPlural'];
+  }
+
+  String votingsVoteTypesInFavorSingle() {
+    return words['votings']['voteTypes']['inFavorSingle'];
+  }
+
+  String votingsVoteTypesInFavor() {
+    return words['votings']['voteTypes']['inFavor'];
+  }
+
+  String votingsVoteTypesAgainstSingle() {
+    return words['votings']['voteTypes']['againstSingle'];
+  }
+
+  String votingsVoteTypesAgainst() {
+    return words['votings']['voteTypes']['against'];
+  }
+
+  String votingsVoteTypesHoldPlural() {
+    return words['votings']['voteTypes']['holdPlural'];
+  }
+
+  String votingsVoteTypesAbsentPlural() {
+    return words['votings']['voteTypes']['absentPlural'];
+  }
+
+  String votingsVoteTypesHoldSingle() {
+    return words['votings']['voteTypes']['holdSingle'];
+  }
+
+  String votingsVoteTypesAbsentSingle() {
+    return words['votings']['voteTypes']['absentSingle'];
+  }
+
+  String votingsSubscribedDeputiesVotes() {
+    return words['votings']['subscribedDeputiesVotes'];
+  }
+
+  String votingsVotesNeededToPass() {
+    return words['votings']['votesNeededToPass'];
+  }
+
+  String settingsSettingsTitle() {
+    return words['settings']['settingsTitle'];
   }
 
   String settingsButtonLogout() {

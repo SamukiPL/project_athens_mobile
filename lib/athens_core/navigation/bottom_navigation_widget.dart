@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:project_athens/main/presentation/main_widget.dart';
@@ -13,6 +14,8 @@ class BottomNavigationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations localizations = Provider.of<AppLocalizations>(context);
+
     return Hero(
       tag: "BottomBarTest",
       child: Consumer<BottomNavigationBloc>(
@@ -26,23 +29,23 @@ class BottomNavigationWidget extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
                 icon: Icon(Icons.timeline),
-                label: "Wydarzenia"
+                label: localizations.getText().timelineTimelineNavTitle()
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
-                label: "Posłowie"
+                label: localizations.getText().deputiesDeputiesListTitle()
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.record_voice_over),
-                label: "Przemowy"
+                label: localizations.getText().speechesSpeechesListTitle()
             ),
             BottomNavigationBarItem(
                 icon: Icon(MdiIcons.vote),
-                label: "Głosowania"
+                label: localizations.getText().votingsVotingListTitle()
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.settings),
-                label: "Ustawienia"
+                label: localizations.getText().settingsSettingsTitle()
             ),
           ],
         ),

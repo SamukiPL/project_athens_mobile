@@ -55,6 +55,7 @@
     }
   },
   "timeline": {
+    "timelineNavTitle": "Timeline",
     "votingTypes": {
       "resolutionProject": "Resolution Project",
       "lawProject": "Law Project",
@@ -70,7 +71,32 @@
       "unknown": "Unknown"
     }
   },
+  "deputies": {
+    "deputiesListTitle": "Deputies"
+  },
+  "speeches": {
+    "speechesListTitle": "Speeches",
+    "speechDetailsTitle": "Speech"
+  },
+  "votings": {
+    "votingListTitle": "Voting",
+    "voteTypes": {
+      "totalDeputiesPlural": "Number of members",
+      "actualVotedDeputiesPlural": "Voted",
+      "inFavorSingle": "In favor",
+      "inFavor": "In favor",
+      "againstSingle": "Against",
+      "against": "Against",
+      "holdPlural": "Hold",
+      "absentPlural": "Absent",
+      "holdSingle": "Hold",
+      "absentSingle": "Absent"
+    },
+    "subscribedDeputiesVotes": "Subscribed deputies vote",
+    "votesNeededToPass": "Votes needed to pass"
+  },
   "settings": {
+    "settingsTitle": "Settings",
     "button": {
       "logout": "Logout"
     },

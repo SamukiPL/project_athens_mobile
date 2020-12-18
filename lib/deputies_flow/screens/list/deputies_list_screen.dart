@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
@@ -20,9 +21,12 @@ class DeputiesListScreen extends BaseScreen<DeputiesListBloc> {
   BottomNavItem get currentBottomBarItem => _currentBottomBarItem;
 
   @override
-  String get appBarTitle => "Deputies";
-  @override
   bool get showBackArrow => currentBottomBarItem != BottomNavItem.DEPUTIES;
+
+  @override
+  String getAppBarTitle(AppLocalizations localizations, DeputiesListBloc bloc) {
+    return localizations.getText().deputiesDeputiesListTitle();
+  }
 
   @override
   Widget buildBody(BuildContext context, DeputiesListBloc bloc) {
@@ -52,7 +56,9 @@ class DeputiesListScreen extends BaseScreen<DeputiesListBloc> {
 
   @override
   Widget buildAppBar(BuildContext context, DeputiesListBloc bloc) {
-    return SearchAppBar(title: appBarTitle, hintText: "Deputies", searchQuery: (query) {}, showBackArrow: showBackArrow);
+    final AppLocalizations localizations = Provider.of<AppLocalizations>(context);
+
+    return SearchAppBar(title: getAppBarTitle(localizations, bloc), hintText: "Deputies", searchQuery: (query) {}, showBackArrow: showBackArrow);
   }
 
   bool goToDetails(BuildContext context, DeputyModel model, DestinationManager destinationManager) {

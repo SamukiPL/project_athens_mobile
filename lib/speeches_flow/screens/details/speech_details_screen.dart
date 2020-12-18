@@ -2,6 +2,7 @@ import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
@@ -22,7 +23,9 @@ class SpeechDetailsScreen  extends BaseScreen<SpeechDetailsBloc> {
   SpeechDetailsScreen({@required this.speechModel});
 
   @override
-  String get appBarTitle => "Speech";
+  String getAppBarTitle(AppLocalizations localizations, SpeechDetailsBloc bloc) {
+    return localizations.getText().speechesSpeechDetailsTitle();
+  }
 
   @override
   Widget buildBody(BuildContext context, SpeechDetailsBloc bloc) {

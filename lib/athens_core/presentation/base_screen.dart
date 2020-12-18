@@ -1,3 +1,4 @@
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
@@ -12,7 +13,6 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget {
 
   BottomNavItem get currentBottomBarItem;
 
-  String get appBarTitle;
   bool get showBackArrow => true;
 
   @override
@@ -56,6 +56,8 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget {
 
   @protected
   Widget buildAppBar(BuildContext context, BLOC bloc) {
+    final AppLocalizations localizations = Provider.of<AppLocalizations>(context);
+
     return AppBar(
       leading: showBackArrow
         ? Consumer<DestinationManager>(
@@ -69,12 +71,17 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget {
         )
         : null,
       title: Text(
-        appBarTitle,
+        getAppBarTitle(localizations, bloc),
         style: TextStyle(
           color: Colors.white
         ),
       ),
     );
+  }
+
+  @protected
+  String getAppBarTitle(AppLocalizations localizations, BLOC bloc) {
+    throw UnimplementedError('getAppBarTitle has to be overridden');
   }
 
   @protected

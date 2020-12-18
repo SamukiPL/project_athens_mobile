@@ -17,9 +17,12 @@ class VotingNetworkMapper extends DataMapper<VotingResponse, VotingModel> {
         id: data.id,
         title: data.topic,
         date: data.actualVotedAt,
+        absoluteMajority: data.absoluteMajority,
+        qualifyingMajority: data.qualifyingMajority,
         votingDesc: getVotingDesc(data.votingType),
         results: results,
-        votes: voteModels);
+        votes: voteModels,
+        clubVotes: data.parliamentClubVotingNumbers);
   }
 
   String getVotingDesc(VotingType type) {

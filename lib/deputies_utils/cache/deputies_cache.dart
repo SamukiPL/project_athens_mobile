@@ -63,7 +63,7 @@ class DeputiesCache {
           club: club.shortName);
 
   Future<DeputyModel> getDeputyModel(String id) async {
-    if (_cachedDeputies.isNotEmpty)
+    if (_cachedDeputies != null && _cachedDeputies.isNotEmpty)
       return _cachedDeputies.firstWhere((element) => element.id == id);
 
     await deputies;
@@ -87,7 +87,7 @@ class DeputiesCache {
   }
 
   Future<ParliamentClubModel> getParliamentClubModel(String id) async {
-    if (_cachedDeputies.isNotEmpty)
+    if (_cachedParliamentClubs != null && _cachedParliamentClubs.isNotEmpty)
       return _cachedParliamentClubs.firstWhere((element) => element.id == id);
 
     await parliamentClubs;

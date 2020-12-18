@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
@@ -20,10 +21,11 @@ class VotesListScreen extends BaseScreen<VotesListBloc> {
   BottomNavItem get currentBottomBarItem => _currentBottomBarItem;
   
   @override
-  String get appBarTitle => "Votes";
-
-  @override
   bool get showBackArrow => false;
+
+  @override getAppBarTitle(AppLocalizations localizations, VotesListBloc bloc) {
+    return localizations.getText().votingsVotingListTitle();
+  }
 
   @override
   Widget buildBody(BuildContext context, VotesListBloc bloc) {
@@ -50,7 +52,14 @@ class VotesListScreen extends BaseScreen<VotesListBloc> {
 
   @override
   Widget buildAppBar(BuildContext context, VotesListBloc bloc) {
-    return SearchAppBar(title: appBarTitle, hintText: "Not ready yet", searchQuery: (query) {}, showBackArrow: showBackArrow);
+    final AppLocalizations localizations = Provider.of<AppLocalizations>(context);
+
+    return SearchAppBar(
+        title: getAppBarTitle(localizations, bloc),
+        hintText: "Not ready yet",
+        searchQuery: (query) {},
+        showBackArrow: showBackArrow
+    );
   }
 
   @override
