@@ -5,6 +5,7 @@ import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
+import 'package:project_athens/athens_core/presentation/data_loading/data_loading_widget.dart';
 import 'package:project_athens/athens_core/presentation/search_app_bar/search_app_bar.dart';
 import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
 import 'package:project_athens/voting_flow/screens/list/list_impl/votes_list.dart';
@@ -30,6 +31,9 @@ class VotesListScreen extends BaseScreen<VotesListBloc> {
   @override
   Widget buildBody(BuildContext context, VotesListBloc bloc) {
     final destinationManager = Provider.of<DestinationManager>(context);
+
+    final localizations = Provider.of<AppLocalizations>(context);
+
     return StreamProvider<VotingModel>.value(
       value: bloc.goToDetails,
       updateShouldNotify: (_, model) => _goToDetails(context, model, destinationManager),
@@ -39,9 +43,10 @@ class VotesListScreen extends BaseScreen<VotesListBloc> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
-                child: Container(
-                  height: 0,
-                  child: VotesList(bloc.adapter),
+                child: DataLoadingWidget(
+                  bloc.dataLoadingBloc,
+                  child: _buildContent(bloc),
+                  noDataText: localizations.getText().votingsNoData(),
                 ),
               )
             ]
@@ -49,6 +54,11 @@ class VotesListScreen extends BaseScreen<VotesListBloc> {
       ),
     );
   }
+
+  Widget _buildContent(VotesListBloc bloc) => Container(
+    height: 0,
+    child: VotesList(bloc.adapter),
+  );
 
   @override
   Widget buildAppBar(BuildContext context, VotesListBloc bloc) {

@@ -1,11 +1,13 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/backdrop/backdrop_widget.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
+import 'package:project_athens/athens_core/presentation/data_loading/data_loading_widget.dart';
 import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
 import 'package:project_athens/timeline_flow/presentation/calendar_app_bar.dart';
 import 'package:project_athens/timeline_flow/presentation/date_picker_fork/date_picker_dialog_custom.dart';
@@ -36,6 +38,7 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
   @override
   Widget buildBody(BuildContext context, TimelineBloc bloc) {
     final destinationManager = Provider.of<DestinationManager>(context);
+    final localizations = Provider.of<AppLocalizations>(context);
 
     return StreamProvider<TimelineModel>.value(
       value: bloc.destination,
@@ -46,7 +49,11 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
           color: Theme.of(context).primaryColor,
           child: BackdropWidget(
             bottomChild: NounCloud(bloc: bloc.nounCloudBloc),
-            topChild: TimelineList(bloc.adapter),
+            topChild: DataLoadingWidget(
+              bloc.dataLoadingBloc,
+              child: TimelineList(bloc.adapter),
+              noDataText: localizations.getText().timelineNoEvents(),
+            ),
           ),
         ),
       ),

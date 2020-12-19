@@ -24,6 +24,8 @@ class TimelineList extends PagingList<TimelineRowViewModel> {
       case TimelineModelType.SPEECH:
         return SpeechViewHolder(item, index != 0, index != length - 1);
         break;
+      default:
+        throw ArgumentError("There is no more TimelineModelType");
     }
   }
 

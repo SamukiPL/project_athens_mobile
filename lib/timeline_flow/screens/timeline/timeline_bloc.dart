@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/presentation/base_bloc.dart';
+import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
 import 'package:project_athens/pagination/paging_bloc.dart';
 import 'package:project_athens/pagination/paging_list_adapter.dart';
 import 'package:project_athens/timeline_flow/domain/use_cases/get_meetings_dates.dart';
@@ -83,6 +84,9 @@ class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> 
     if (result is Success<List<TimelineModel>>) {
       _items = result.value.toTimelineRowViewModel(itemClick);
       adapter.updateList(_items);
+      setLoadingState((_items.isEmpty) ? DataLoadingState.NO_DATA : DataLoadingState.CONTENT_LOADED);
+    } else {
+      setLoadingState(DataLoadingState.NO_DATA);
     }
 
     nounCloudBloc.loadCloud(params);

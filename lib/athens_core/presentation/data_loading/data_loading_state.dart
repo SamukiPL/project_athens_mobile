@@ -1,0 +1,3 @@
+enum DataLoadingState {
+ INITIAL_LOADING, CONTENT_LOADED, NO_DATA, NO_NETWORK
+}
