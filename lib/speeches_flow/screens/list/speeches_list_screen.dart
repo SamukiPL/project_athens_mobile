@@ -6,6 +6,7 @@ import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
+import 'package:project_athens/athens_core/presentation/data_loading/data_loading_widget.dart';
 import 'package:project_athens/athens_core/presentation/search_app_bar/search_app_bar.dart';
 import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
 import 'package:project_athens/speeches_flow/screens/list/list_impl/speeches_list.dart';
@@ -36,9 +37,10 @@ class SpeechesListScreen extends BaseScreen<SpeechesListBloc> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
-                child: Container(
-                  height: 0,
-                  child: SpeechesList(bloc.adapter, localizations.getText().speechesNoData()),
+                child: DataLoadingWidget(
+                  bloc.dataLoadingBloc,
+                  child: _buildContent(bloc),
+                  noDataText: localizations.getText().speechesNoData(),
                 ),
               )
             ]
@@ -46,6 +48,11 @@ class SpeechesListScreen extends BaseScreen<SpeechesListBloc> {
       ),
     );
   }
+
+  Widget _buildContent(SpeechesListBloc bloc) => Container(
+    height: 0,
+    child: SpeechesList(bloc.adapter),
+  );
 
   @override
   Widget buildAppBar(BuildContext context, SpeechesListBloc bloc) {

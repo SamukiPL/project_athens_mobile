@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project_athens/athens_core/presentation/no_data/no_data.dart';
 import 'package:provider/provider.dart';
 
 import 'paging_list_adapter.dart';
@@ -22,15 +21,13 @@ abstract class PagingList<ITEM> extends StatelessWidget {
 
   final PagingListAdapter<ITEM> _adapter;
 
-  final String noDataText;
-
-  const PagingList(this._adapter, {Key key, this.noDataText}) : super(key: key);
+  const PagingList(this._adapter, {Key key}) : super(key: key);
 
   StatelessWidget get progressView;
 
   Widget build(BuildContext context) {
     return StreamProvider.value(
-      initialData: PagingState<ITEM>(List<ITEM>(), 1, true),
+      initialData: PagingState<ITEM>(List<ITEM>(), 1),
       value: _adapter.stateStream,
       child: Consumer<PagingState<ITEM>>(
         builder: (context, state, _) => refreshable
@@ -45,29 +42,12 @@ abstract class PagingList<ITEM> extends StatelessWidget {
 
   @protected
   Widget getList(PagingState<ITEM> state) {
-    if (state.loading) {
-      return Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            progressView
-          ],
-        ),
-      );
-      return progressView;
-    } else {
-      if (state.items.length == 0) {
-        return NoData(text: this.noDataText, color: Color.fromRGBO(0, 0, 0, 0.25));
-      } else {
-        return ListView.separated(
-            separatorBuilder: (context, index) => buildSeparator(context, index),
-            padding: EdgeInsets.only(left: leftPadding, top: topPadding, right: rightPadding, bottom: bottomPadding),
-            itemCount: state.itemsCount,
-            itemBuilder: (_, index) => _itemBuilder(state.items, index)
-        );
-      }
-    }
+    return ListView.separated(
+        separatorBuilder: (context, index) => buildSeparator(context, index),
+        padding: EdgeInsets.only(left: leftPadding, top: topPadding, right: rightPadding, bottom: bottomPadding),
+        itemCount: state.itemsCount,
+        itemBuilder: (_, index) => _itemBuilder(state.items, index)
+    );
   }
 
 

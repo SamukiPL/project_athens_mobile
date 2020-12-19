@@ -8,7 +8,7 @@ import 'package:project_athens/speeches_flow/screens/list/list_impl/view_holders
 
 class SpeechesList extends PagingList<SpeechItemViewModel> {
 
-  SpeechesList(PagingListAdapter<SpeechItemViewModel> adapter, String noDataText) : super(adapter, noDataText: noDataText);
+  SpeechesList(PagingListAdapter<SpeechItemViewModel> adapter) : super(adapter);
 
   @override
   bool get refreshable => false;

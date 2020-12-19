@@ -5,8 +5,6 @@ class PagingState<ITEM> {
 
   final int itemsCount;
 
-  final bool loading;
-
-  PagingState(this.items, this.itemsCount, this.loading);
+  PagingState(this.items, this.itemsCount);
 
 }

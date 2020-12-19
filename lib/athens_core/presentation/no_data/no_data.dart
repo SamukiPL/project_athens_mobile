@@ -8,7 +8,7 @@ class NoData extends StatelessWidget {
   final TextAlign textAlign;
   final Color color;
 
-  NoData({ this.text, this.textAlign = TextAlign.center, this.color = Colors.black });
+  NoData({this.text, this.textAlign = TextAlign.center, this.color = Colors.black });
 
   _getDefaultText(BuildContext context) {
     final localization = Provider.of<AppLocalizations>(context);

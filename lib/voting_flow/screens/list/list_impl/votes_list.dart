@@ -7,7 +7,7 @@ import 'package:project_athens/voting_flow/screens/list/list_impl/vote_item_view
 
 class VotesList extends PagingList<VoteItemViewModel> {
 
-  VotesList(PagingListAdapter<VoteItemViewModel> adapter, String noDataText) : super(adapter, noDataText: noDataText);
+  VotesList(PagingListAdapter<VoteItemViewModel> adapter) : super(adapter);
 
   @override
   bool get refreshable => false;

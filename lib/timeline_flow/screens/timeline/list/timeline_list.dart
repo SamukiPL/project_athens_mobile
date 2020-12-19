@@ -8,8 +8,8 @@ import 'package:project_athens/timeline_flow/screens/timeline/list/view_holders/
 import 'package:project_athens/timeline_flow/screens/timeline/list/view_holders/voting_view_holder.dart';
 
 class TimelineList extends PagingList<TimelineRowViewModel> {
-  TimelineList(PagingListAdapter<TimelineRowViewModel> adapter, String noDataText)
-      : super(adapter, noDataText: noDataText);
+  TimelineList(PagingListAdapter<TimelineRowViewModel> adapter)
+      : super(adapter);
 
   @override
   double get bottomPadding => 72;
@@ -24,6 +24,8 @@ class TimelineList extends PagingList<TimelineRowViewModel> {
       case TimelineModelType.SPEECH:
         return SpeechViewHolder(item, index != 0, index != length - 1);
         break;
+      default:
+        throw ArgumentError("There is no more TimelineModelType");
     }
   }
 
