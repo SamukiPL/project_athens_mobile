@@ -370,11 +370,6 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, votingsVoteTypesAbsentSingle != "" && votingsVoteTypesAbsentSingle != null); 
   }); 
  
-  test("All methods for $locale votingsVoteTypesNoData", () async {
-    String votingsVoteTypesNoData = localization.votingsVoteTypesNoData();
-    expect(true, votingsVoteTypesNoData != "" && votingsVoteTypesNoData != null); 
-  }); 
- 
   test("All methods for $locale votingsSubscribedDeputiesVotes", () async {
     String votingsSubscribedDeputiesVotes = localization.votingsSubscribedDeputiesVotes();
     expect(true, votingsSubscribedDeputiesVotes != "" && votingsSubscribedDeputiesVotes != null); 
@@ -383,6 +378,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale votingsVotesNeededToPass", () async {
     String votingsVotesNeededToPass = localization.votingsVotesNeededToPass();
     expect(true, votingsVotesNeededToPass != "" && votingsVotesNeededToPass != null); 
+  }); 
+ 
+  test("All methods for $locale votingsNoData", () async {
+    String votingsNoData = localization.votingsNoData();
+    expect(true, votingsNoData != "" && votingsNoData != null); 
   }); 
  
   test("All methods for $locale settingsSettingsTitle", () async {

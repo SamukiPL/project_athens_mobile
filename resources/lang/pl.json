@@ -98,11 +98,11 @@
       "holdPlural": "Wstrzymało się",
       "absentPlural": "Nieobecnych",
       "holdSingle": "Wstrzymał się",
-      "absentSingle": "Nieobecny",
-      "noData": "Nie znaleziono głosowań dla podanych kryteriów."
+      "absentSingle": "Nieobecny"
     },
     "subscribedDeputiesVotes": "Obserwowani posłowie",
-    "votesNeededToPass": "Głosów poparcia potrzebnych"
+    "votesNeededToPass": "Głosów poparcia potrzebnych",
+    "noData": "Nie znaleziono głosowań dla podanych kryteriów."
   },
   "settings": {
     "settingsTitle": "Ustawienia",

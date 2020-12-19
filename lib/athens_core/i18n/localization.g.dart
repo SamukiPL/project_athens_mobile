@@ -291,16 +291,16 @@ class AppLocalizationsGenerated {
     return words['votings']['voteTypes']['absentSingle'];
   }
 
-  String votingsVoteTypesNoData() {
-    return words['votings']['voteTypes']['noData'];
-  }
-
   String votingsSubscribedDeputiesVotes() {
     return words['votings']['subscribedDeputiesVotes'];
   }
 
   String votingsVotesNeededToPass() {
     return words['votings']['votesNeededToPass'];
+  }
+
+  String votingsNoData() {
+    return words['votings']['noData'];
   }
 
   String settingsSettingsTitle() {
