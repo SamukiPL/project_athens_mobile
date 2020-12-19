@@ -15,12 +15,15 @@ import 'package:provider/provider.dart';
 
 class SpeechesListScreen extends BaseScreen<SpeechesListBloc> {
   @override
-  String get appBarTitle => "Speeches";
-  @override
   bool get showBackArrow => false;
 
   @override
   BottomNavItem get currentBottomBarItem => BottomNavItem.SPEECHES;
+
+  @override
+  String getAppBarTitle(AppLocalizations localizations, SpeechesListBloc bloc) {
+    return localizations.getText().speechesSpeechesListTitle();
+  }
 
   @override
   Widget buildBody(BuildContext context, SpeechesListBloc bloc) {
@@ -56,7 +59,9 @@ class SpeechesListScreen extends BaseScreen<SpeechesListBloc> {
 
   @override
   Widget buildAppBar(BuildContext context, SpeechesListBloc bloc) {
-    return SearchAppBar(title: appBarTitle, hintText: "Not ready yet", searchQuery: (query) {}, showBackArrow: showBackArrow);
+    final AppLocalizations localizations = Provider.of<AppLocalizations>(context);
+
+    return SearchAppBar(title: getAppBarTitle(localizations, bloc), hintText: "Not ready yet", searchQuery: (query) {}, showBackArrow: showBackArrow);
   }
 
   @override

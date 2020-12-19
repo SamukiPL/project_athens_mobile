@@ -30,6 +30,13 @@ VotingResponse _$VotingResponseFromJson(Map<String, dynamic> json) {
         ?.toList(),
     _$enumDecodeNullable(_$VotingTypeEnumMap, json['votingType']),
     json['id'] as String,
+    json['absoluteMajority'] as int,
+    json['qualifyingMajority'] as int,
+    (json['parliamentClubVotingNumbers'] as List)
+        ?.map((e) => e == null
+            ? null
+            : ParliamentClubVotingNumbers.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
@@ -48,6 +55,9 @@ Map<String, dynamic> _$VotingResponseToJson(VotingResponse instance) =>
       'votes': instance.votes,
       'votingType': _$VotingTypeEnumMap[instance.votingType],
       'id': instance.id,
+      'absoluteMajority': instance.absoluteMajority,
+      'qualifyingMajority': instance.qualifyingMajority,
+      'parliamentClubVotingNumbers': instance.parliamentClubVotingNumbers,
     };
 
 T _$enumDecode<T>(
@@ -124,4 +134,29 @@ Map<String, dynamic> _$VotingNumbersToJson(VotingNumbers instance) =>
       'against': instance.against,
       'hold': instance.hold,
       'absent': instance.absent,
+    };
+
+ParliamentClubVotingNumbers _$ParliamentClubVotingNumbersFromJson(
+    Map<String, dynamic> json) {
+  return ParliamentClubVotingNumbers(
+    json['inFavor'] as int,
+    json['against'] as int,
+    json['hold'] as int,
+    json['absent'] as int,
+    json['totalDeputies'] as int,
+    json['actualVoted'] as int,
+    json['parliamentClub'] as String,
+  );
+}
+
+Map<String, dynamic> _$ParliamentClubVotingNumbersToJson(
+        ParliamentClubVotingNumbers instance) =>
+    <String, dynamic>{
+      'inFavor': instance.inFavor,
+      'against': instance.against,
+      'hold': instance.hold,
+      'absent': instance.absent,
+      'totalDeputies': instance.totalDeputies,
+      'actualVoted': instance.actualVoted,
+      'parliamentClub': instance.parliamentClub,
     };

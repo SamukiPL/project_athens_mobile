@@ -25,7 +25,7 @@ dependencies:
   rxdart: ^0.24.1
   modal_bottom_sheet: ^0.2.2
   percent_indicator: ^2.1.7+4
-  material_design_icons_flutter: ^4.0.5655
+  material_design_icons_flutter: ^4.0.5755
   intl: ^0.16.1
   json_annotation: ^3.1.0
   flutter_secure_storage: ^3.3.4

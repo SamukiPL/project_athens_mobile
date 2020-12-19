@@ -18,6 +18,9 @@ class VotingResponse implements TimelineItem {
   final List<Votes> votes;
   final VotingType votingType;
   final String id;
+  final int absoluteMajority;
+  final int qualifyingMajority;
+  final List<ParliamentClubVotingNumbers> parliamentClubVotingNumbers;
 
   int get inFavor => votingNumbers.inFavor;
   int get against => votingNumbers.against;
@@ -37,7 +40,10 @@ class VotingResponse implements TimelineItem {
       this.topic,
       this.votes,
       this.votingType,
-      this.id);
+      this.id,
+      this.absoluteMajority,
+      this.qualifyingMajority,
+      this.parliamentClubVotingNumbers);
 
   factory VotingResponse.fromJson(Map<String, dynamic> json) => _$VotingResponseFromJson(json);
 
@@ -69,6 +75,24 @@ class VotingNumbers {
       _$VotingNumbersFromJson(json);
 
   Map<String, dynamic> toJson() => _$VotingNumbersToJson(this);
+}
+
+@JsonSerializable()
+class ParliamentClubVotingNumbers {
+  final int inFavor;
+  final int against;
+  final int hold;
+  final int absent;
+  final int totalDeputies;
+  final int actualVoted;
+  final String parliamentClub;
+
+  ParliamentClubVotingNumbers(this.inFavor, this.against, this.hold, this.absent, this.totalDeputies, this.actualVoted, this.parliamentClub);
+
+  factory ParliamentClubVotingNumbers.fromJson(Map<String, dynamic> json) =>
+      _$ParliamentClubVotingNumbersFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ParliamentClubVotingNumbersToJson(this);
 }
 
 enum VotingType {

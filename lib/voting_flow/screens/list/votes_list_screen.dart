@@ -22,10 +22,11 @@ class VotesListScreen extends BaseScreen<VotesListBloc> {
   BottomNavItem get currentBottomBarItem => _currentBottomBarItem;
   
   @override
-  String get appBarTitle => "Votes";
-
-  @override
   bool get showBackArrow => false;
+
+  @override getAppBarTitle(AppLocalizations localizations, VotesListBloc bloc) {
+    return localizations.getText().votingsVotingListTitle();
+  }
 
   @override
   Widget buildBody(BuildContext context, VotesListBloc bloc) {
@@ -61,7 +62,14 @@ class VotesListScreen extends BaseScreen<VotesListBloc> {
 
   @override
   Widget buildAppBar(BuildContext context, VotesListBloc bloc) {
-    return SearchAppBar(title: appBarTitle, hintText: "Not ready yet", searchQuery: (query) {}, showBackArrow: showBackArrow);
+    final AppLocalizations localizations = Provider.of<AppLocalizations>(context);
+
+    return SearchAppBar(
+        title: getAppBarTitle(localizations, bloc),
+        hintText: "Not ready yet",
+        searchQuery: (query) {},
+        showBackArrow: showBackArrow
+    );
   }
 
   @override
