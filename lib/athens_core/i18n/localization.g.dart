@@ -35,6 +35,10 @@ class AppLocalizationsGenerated {
     return words['universal']['ok'];
   }
 
+  String universalNoDataDefaultText() {
+    return words['universal']['noData']['defaultText'];
+  }
+
   String mainMenuSession() {
     return words['main']['menu']['session'];
   }
@@ -71,12 +75,12 @@ class AppLocalizationsGenerated {
     return words['login']['buttons']['register'];
   }
 
-  String loginButtonsSignUp() {
-    return words['login']['buttons']['signUp'];
-  }
-
   String loginButtonsForgot() {
     return words['login']['buttons']['forgot'];
+  }
+
+  String loginButtonsSignUp() {
+    return words['login']['buttons']['signUp'];
   }
 
   String loginButtonsResetPassword() {
@@ -219,6 +223,14 @@ class AppLocalizationsGenerated {
     return words['timeline']['votingTypes']['unknown'];
   }
 
+  String timelineNounCloudNoNouns() {
+    return words['timeline']['nounCloud']['noNouns'];
+  }
+
+  String timelineNoEvents() {
+    return words['timeline']['noEvents'];
+  }
+
   String deputiesDeputiesListTitle() {
     return words['deputies']['deputiesListTitle'];
   }
@@ -229,6 +241,10 @@ class AppLocalizationsGenerated {
 
   String speechesSpeechDetailsTitle() {
     return words['speeches']['speechDetailsTitle'];
+  }
+
+  String speechesNoData() {
+    return words['speeches']['noData'];
   }
 
   String votingsVotingListTitle() {
@@ -273,6 +289,10 @@ class AppLocalizationsGenerated {
 
   String votingsVoteTypesAbsentSingle() {
     return words['votings']['voteTypes']['absentSingle'];
+  }
+
+  String votingsVoteTypesNoData() {
+    return words['votings']['voteTypes']['noData'];
   }
 
   String votingsSubscribedDeputiesVotes() {

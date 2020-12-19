@@ -78,18 +78,13 @@
     },
     "noEvents": "No events for currently selected date."
   },
-  "speeches": {
-    "noData": "No speeches for specified criteria."
-  },
-  "votings": {
-    "noData": "No votings for specified criteria."
-  },
   "deputies": {
     "deputiesListTitle": "Deputies"
   },
   "speeches": {
     "speechesListTitle": "Speeches",
-    "speechDetailsTitle": "Speech"
+    "speechDetailsTitle": "Speech",
+    "noData": "No speeches for specified criteria."
   },
   "votings": {
     "votingListTitle": "Voting",
@@ -103,7 +98,8 @@
       "holdPlural": "Hold",
       "absentPlural": "Absent",
       "holdSingle": "Hold",
-      "absentSingle": "Absent"
+      "absentSingle": "Absent",
+      "noData": "No votings for specified criteria."
     },
     "subscribedDeputiesVotes": "Subscribed deputies vote",
     "votesNeededToPass": "Votes needed to pass"

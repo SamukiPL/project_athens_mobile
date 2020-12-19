@@ -78,18 +78,13 @@
     },
     "noEvents": "Brak wydarzeń dla obecnej daty.\nProszę spróbować później."
   },
-  "speeches": {
-    "noData": "Nie znaleziono przemów dla podanych kryteriów."
-  },
-  "votings": {
-    "noData": "Nie znaleziono głosowań dla podanych kryteriów."
-  },
   "deputies": {
     "deputiesListTitle": "Posłowie"
   },
   "speeches": {
     "speechesListTitle": "Przemowy",
-    "speechDetailsTitle": "Przemowa"
+    "speechDetailsTitle": "Przemowa",
+    "noData": "Nie znaleziono przemów dla podanych kryteriów."
   },
   "votings": {
     "votingListTitle": "Głosowania",
@@ -103,7 +98,8 @@
       "holdPlural": "Wstrzymało się",
       "absentPlural": "Nieobecnych",
       "holdSingle": "Wstrzymał się",
-      "absentSingle": "Nieobecny"
+      "absentSingle": "Nieobecny",
+      "noData": "Nie znaleziono głosowań dla podanych kryteriów."
     },
     "subscribedDeputiesVotes": "Obserwowani posłowie",
     "votesNeededToPass": "Głosów poparcia potrzebnych"

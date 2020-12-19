@@ -8,15 +8,15 @@ void main() {
   String scriptPath = Platform.script.path;
   String filePathForCoverage = '/' + scriptPath.substring(0, scriptPath.indexOf('test')).substring(1) + 'resources/lang/';
 
-  File enFile = File(filePathForCoverage + 'en.json');
-  String enData = enFile.readAsStringSync();
-  Map<String, dynamic> enWords = json.decode(enData);
-  testAllMethods('en', AppLocalizationsGenerated(enWords));
-
   File plFile = File(filePathForCoverage + 'pl.json');
   String plData = plFile.readAsStringSync();
   Map<String, dynamic> plWords = json.decode(plData);
   testAllMethods('pl', AppLocalizationsGenerated(plWords));
+
+  File enFile = File(filePathForCoverage + 'en.json');
+  String enData = enFile.readAsStringSync();
+  Map<String, dynamic> enWords = json.decode(enData);
+  testAllMethods('en', AppLocalizationsGenerated(enWords));
 }
 
 void testAllMethods(String locale, AppLocalizationsGenerated localization) {
@@ -48,6 +48,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale universalOk", () async {
     String universalOk = localization.universalOk();
     expect(true, universalOk != "" && universalOk != null); 
+  }); 
+ 
+  test("All methods for $locale universalNoDataDefaultText", () async {
+    String universalNoDataDefaultText = localization.universalNoDataDefaultText();
+    expect(true, universalNoDataDefaultText != "" && universalNoDataDefaultText != null); 
   }); 
  
   test("All methods for $locale mainMenuSession", () async {
@@ -95,14 +100,14 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginButtonsRegister != "" && loginButtonsRegister != null); 
   }); 
  
-  test("All methods for $locale loginButtonsSignUp", () async {
-    String loginButtonsSignUp = localization.loginButtonsSignUp();
-    expect(true, loginButtonsSignUp != "" && loginButtonsSignUp != null); 
-  }); 
- 
   test("All methods for $locale loginButtonsForgot", () async {
     String loginButtonsForgot = localization.loginButtonsForgot();
     expect(true, loginButtonsForgot != "" && loginButtonsForgot != null); 
+  }); 
+ 
+  test("All methods for $locale loginButtonsSignUp", () async {
+    String loginButtonsSignUp = localization.loginButtonsSignUp();
+    expect(true, loginButtonsSignUp != "" && loginButtonsSignUp != null); 
   }); 
  
   test("All methods for $locale loginButtonsResetPassword", () async {
@@ -280,6 +285,16 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, timelineVotingTypesUnknown != "" && timelineVotingTypesUnknown != null); 
   }); 
  
+  test("All methods for $locale timelineNounCloudNoNouns", () async {
+    String timelineNounCloudNoNouns = localization.timelineNounCloudNoNouns();
+    expect(true, timelineNounCloudNoNouns != "" && timelineNounCloudNoNouns != null); 
+  }); 
+ 
+  test("All methods for $locale timelineNoEvents", () async {
+    String timelineNoEvents = localization.timelineNoEvents();
+    expect(true, timelineNoEvents != "" && timelineNoEvents != null); 
+  }); 
+ 
   test("All methods for $locale deputiesDeputiesListTitle", () async {
     String deputiesDeputiesListTitle = localization.deputiesDeputiesListTitle();
     expect(true, deputiesDeputiesListTitle != "" && deputiesDeputiesListTitle != null); 
@@ -293,6 +308,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale speechesSpeechDetailsTitle", () async {
     String speechesSpeechDetailsTitle = localization.speechesSpeechDetailsTitle();
     expect(true, speechesSpeechDetailsTitle != "" && speechesSpeechDetailsTitle != null); 
+  }); 
+ 
+  test("All methods for $locale speechesNoData", () async {
+    String speechesNoData = localization.speechesNoData();
+    expect(true, speechesNoData != "" && speechesNoData != null); 
   }); 
  
   test("All methods for $locale votingsVotingListTitle", () async {
@@ -348,6 +368,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale votingsVoteTypesAbsentSingle", () async {
     String votingsVoteTypesAbsentSingle = localization.votingsVoteTypesAbsentSingle();
     expect(true, votingsVoteTypesAbsentSingle != "" && votingsVoteTypesAbsentSingle != null); 
+  }); 
+ 
+  test("All methods for $locale votingsVoteTypesNoData", () async {
+    String votingsVoteTypesNoData = localization.votingsVoteTypesNoData();
+    expect(true, votingsVoteTypesNoData != "" && votingsVoteTypesNoData != null); 
   }); 
  
   test("All methods for $locale votingsSubscribedDeputiesVotes", () async {
