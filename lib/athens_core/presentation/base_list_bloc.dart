@@ -6,6 +6,7 @@ import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/presentation/base_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
 import 'package:project_athens/pagination/paging_bloc.dart';
 import 'package:project_athens/pagination/paging_list_adapter.dart';
 
@@ -33,13 +34,20 @@ abstract class BaseListBloc<MODEL extends BaseModel, ITEM extends BaseItemViewMo
 
   Function(MODEL) get itemClick;
 
+  @override
+  void manageState(Result result) {
+    super.manageState(result);
+    if (result is Success<List<MODEL>>) {
+      adapter.updateList(_mapItems(result.value));
+      setLoadingState((result.value.isEmpty) ? DataLoadingState.NO_DATA : DataLoadingState.CONTENT_LOADED);
+    }
+  }
+
   @protected
   Future<void> getItems() async {
     _listUseCase.getItems(_params).listen((Result data) {
       adapter.setLoading(false);
       manageState(data);
-      if (data is Success<List<MODEL>>)
-        adapter.updateList(_mapItems(data.value));
     });
     page++;
   }

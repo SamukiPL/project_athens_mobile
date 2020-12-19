@@ -5,7 +5,10 @@
     "cancel": "Cancel",
     "skip": "Skip",
     "choose": "Choose",
-    "ok": "Ok"
+    "ok": "Ok",
+    "noData": {
+      "defaultText": "No data"
+    }
   },
   "main": {
     "menu": {
@@ -68,7 +71,17 @@
       "voteForProposal": "Vote For Proposal",
       "personVote": "Person Vote",
       "unknown": "Unknown"
-    }
+    },
+    "nounCloud": {
+      "noNouns":  "Ups... we couldn't get nouns for current date. Please try again later."
+    },
+    "noEvents": "No events for currently selected date."
+  },
+  "speeches": {
+    "noData": "No speeches for specified criteria."
+  },
+  "votings": {
+    "noData": "No votings for specified criteria."
   },
   "settings": {
     "button": {

@@ -35,6 +35,10 @@ class AppLocalizationsGenerated {
     return words['universal']['ok'];
   }
 
+  String universalNoDataDefaultText() {
+    return words['universal']['noData']['defaultText'];
+  }
+
   String mainMenuSession() {
     return words['main']['menu']['session'];
   }
@@ -71,12 +75,12 @@ class AppLocalizationsGenerated {
     return words['login']['buttons']['register'];
   }
 
-  String loginButtonsSignUp() {
-    return words['login']['buttons']['signUp'];
-  }
-
   String loginButtonsForgot() {
     return words['login']['buttons']['forgot'];
+  }
+
+  String loginButtonsSignUp() {
+    return words['login']['buttons']['signUp'];
   }
 
   String loginButtonsResetPassword() {
@@ -213,6 +217,22 @@ class AppLocalizationsGenerated {
 
   String timelineVotingTypesUnknown() {
     return words['timeline']['votingTypes']['unknown'];
+  }
+
+  String timelineNounCloudNoNouns() {
+    return words['timeline']['nounCloud']['noNouns'];
+  }
+
+  String timelineNoEvents() {
+    return words['timeline']['noEvents'];
+  }
+
+  String speechesNoData() {
+    return words['speeches']['noData'];
+  }
+
+  String votingsNoData() {
+    return words['votings']['noData'];
   }
 
   String settingsButtonLogout() {

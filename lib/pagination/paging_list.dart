@@ -41,12 +41,15 @@ abstract class PagingList<ITEM> extends StatelessWidget {
   }
 
   @protected
-  Widget getList(PagingState<ITEM> state) => ListView.separated(
-    separatorBuilder: (context, index) => buildSeparator(context, index),
-    padding: EdgeInsets.only(left: leftPadding, top: topPadding, right: rightPadding, bottom: bottomPadding),
-    itemCount: state.itemsCount,
-    itemBuilder: (_, index) => _itemBuilder(state.items, index),
-  );
+  Widget getList(PagingState<ITEM> state) {
+    return ListView.separated(
+        separatorBuilder: (context, index) => buildSeparator(context, index),
+        padding: EdgeInsets.only(left: leftPadding, top: topPadding, right: rightPadding, bottom: bottomPadding),
+        itemCount: state.itemsCount,
+        itemBuilder: (_, index) => _itemBuilder(state.items, index)
+    );
+  }
+
 
   StatelessWidget _itemBuilder(List<ITEM> items, int index) {
     if (items.length - 7 == index)

@@ -17,4 +17,3 @@ class CloudReady extends NounCloudState {
 class CloudFail extends NounCloudState {
 
 }
-
