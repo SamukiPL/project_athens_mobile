@@ -98,11 +98,11 @@
       "holdPlural": "Hold",
       "absentPlural": "Absent",
       "holdSingle": "Hold",
-      "absentSingle": "Absent",
-      "noData": "No votings for specified criteria."
+      "absentSingle": "Absent"
     },
     "subscribedDeputiesVotes": "Subscribed deputies vote",
-    "votesNeededToPass": "Votes needed to pass"
+    "votesNeededToPass": "Votes needed to pass",
+    "noData": "No votings for specified criteria."
   },
   "settings": {
     "settingsTitle": "Settings",
