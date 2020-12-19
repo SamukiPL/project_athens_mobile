@@ -30,3 +30,14 @@ class SpeechRowViewModel extends TimelineRowViewModel {
   SpeechRowViewModel(String id, this.personName, this.desc, this.date, this.thumbnailUrl) : super(id, TimelineModelType.SPEECH);
 
 }
+
+class GroupedVotingViewModel extends TimelineRowViewModel {
+
+  final String title;
+  final DateTime firstDate;
+  final DateTime lastDate;
+  final String votingDesc;
+
+  GroupedVotingViewModel(String id, this.title, this.firstDate, this.lastDate, this.votingDesc) : super(id, TimelineModelType.GROUPED_VOTING);
+
+}

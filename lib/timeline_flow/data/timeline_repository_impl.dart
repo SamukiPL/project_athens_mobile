@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
+import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/timeline_flow/data/network/timeline_api.dart';
 import 'package:project_athens/timeline_flow/domain/cloud/word_model.dart';
 import 'package:project_athens/timeline_flow/domain/meetings_date.dart';
@@ -30,7 +31,8 @@ class TimelineRepositoryImpl implements TimelineRepository {
   @override
   Future<Result> getTimelineForDay(int cadency, String date) async {
     final response = await timelineApi.getAllDeputies(cadency, date);
-    List<TimelineModel> resultList = await networkMapper(response.events);
+    List<TimelineModel> mappedList = await networkMapper(response.events);
+    List<TimelineModel> resultList = groupVotes(mappedList);
 
     if (resultList.length > 0) {
       resultList.sort((a, b) => a.date.compareTo(b.date));
@@ -58,10 +60,28 @@ class TimelineRepositoryImpl implements TimelineRepository {
       });
     }
 
-
     finalWords.shuffle(Random(97518234));
 
     return Success<List<WordModel>>(finalWords);
+  }
+
+  List<TimelineModel> groupVotes(List<TimelineModel> models) {
+    final groupedVotes = Map<int, List<VotingModel>>();
+
+    List<VotingModel> votesToGroup = models.where((element) => element is VotingModel && element.orderPoint != null).toList();
+    votesToGroup.forEach((element) {
+      List<VotingModel> group = groupedVotes[element.orderPoint] ?? List();
+      group.add(element);
+      groupedVotes[element.orderPoint] = group;
+    });
+
+    final newList = models.where((element) => !(element is VotingModel && element.orderPoint != null)).toList();
+
+    groupedVotes.values.forEach((group) {
+      newList.add(group.createGroupedVotingModel());
+    });
+
+    return newList;
   }
 
 }

@@ -8,22 +8,28 @@ extension TimelineModelExtension on List<TimelineModel> {
   }
 
   TimelineRowViewModel _toRowViewModel(TimelineModel model, void Function(TimelineModel) itemClick) {
+    TimelineRowViewModel item;
     switch (model.type) {
       case TimelineModelType.VOTING:
         VotingModel votingModel = model;
-        return VotingRowViewModel(votingModel.id, votingModel.title, votingModel.date, votingModel.votingDesc);
+        item = VotingRowViewModel(votingModel.id, votingModel.title, votingModel.date, votingModel.votingDesc);
         break;
       case TimelineModelType.SPEECH:
         SpeechModel speechModel = model;
-        final item = SpeechRowViewModel(speechModel.id, speechModel.personName, speechModel.desc,
+        item = SpeechRowViewModel(speechModel.id, speechModel.personName, speechModel.desc,
             speechModel.date, speechModel.thumbnailUrl);
-        item.itemClick = () {
-          itemClick.call(model);
-        };
-        return item;
+        break;
+      case TimelineModelType.GROUPED_VOTING:
+        GroupedVotingModel groupedVotingModel = model;
+        item = GroupedVotingViewModel(groupedVotingModel.id, groupedVotingModel.title,
+            groupedVotingModel.firstDate, groupedVotingModel.lastDate, groupedVotingModel.votingDesc);
         break;
       default:
         throw Exception("There is no other type");
     }
+    item.itemClick = () {
+      itemClick.call(model);
+    };
+    return item;
   }
 }

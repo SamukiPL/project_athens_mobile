@@ -9,6 +9,7 @@ class VotingModel extends TimelineModel {
   final int absoluteMajority;
   final int qualifyingMajority;
   final List<ParliamentClubVotingNumbers> clubVotes;
+  final int orderPoint;
 
   VotingModel({
     String id,
@@ -19,7 +20,8 @@ class VotingModel extends TimelineModel {
     this.votes,
     this.absoluteMajority,
     this.qualifyingMajority,
-    this.clubVotes
+    this.clubVotes,
+    this.orderPoint
   }) : super(id, TimelineModelType.VOTING, date);
 }
 
@@ -40,3 +42,22 @@ class VoteModel {
 }
 
 enum VoteType { IN_FAVOR, AGAINST, HOLD, ABSENT }
+
+extension VotingsListExtension on List<VotingModel> {
+
+  GroupedVotingModel createGroupedVotingModel() {
+    sort((a, b) => a.date.compareTo(b.date));
+    final firstItem = first;
+    final lastItem = last;
+    return GroupedVotingModel(
+        votingDesc: firstItem.votingDesc,
+        title: firstItem.title,
+        groupedVotes: this,
+        firstDate: firstItem.date,
+        lastDate: lastItem.date,
+        id: firstItem.id,
+        date: firstItem.date
+    );
+  }
+
+}
