@@ -9,6 +9,7 @@ import 'package:project_athens/athens_core/presentation/backdrop/backdrop_widget
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_widget.dart';
 import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
+import 'package:project_athens/timeline_flow/navigation/timeline_destinations.dart';
 import 'package:project_athens/timeline_flow/presentation/calendar_app_bar.dart';
 import 'package:project_athens/timeline_flow/presentation/date_picker_fork/date_picker_dialog_custom.dart';
 import 'package:project_athens/timeline_flow/presentation/date_picker_fork/date_utils.dart';
@@ -88,6 +89,9 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
         break;
       case TimelineModelType.SPEECH:
         timelineNavigation.goToDestination(context, SpeechDetailsDestination(model));
+        break;
+      case TimelineModelType.GROUPED_VOTING:
+        timelineNavigation.goToDestination(context, GroupDetailsDestination(model));
         break;
     }
     return false;

@@ -50,7 +50,6 @@ abstract class PagingList<ITEM> extends StatelessWidget {
     );
   }
 
-
   StatelessWidget _itemBuilder(List<ITEM> items, int index) {
     if (items.length - 7 == index)
       _adapter.loadMoreData();
