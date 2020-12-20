@@ -68,11 +68,12 @@ class TimelineRepositoryImpl implements TimelineRepository {
   List<TimelineModel> groupVotes(List<TimelineModel> models) {
     final groupedVotes = Map<int, List<VotingModel>>();
 
-    List<VotingModel> votesToGroup = models.where((element) => element is VotingModel && element.orderPoint != null).toList();
+    List<TimelineModel> votesToGroup = models.where((element) => element is VotingModel && element.orderPoint != null).toList();
     votesToGroup.forEach((element) {
-      List<VotingModel> group = groupedVotes[element.orderPoint] ?? List();
-      group.add(element);
-      groupedVotes[element.orderPoint] = group;
+      VotingModel voting = element;
+      List<VotingModel> group = groupedVotes[voting.orderPoint] ?? List();
+      group.add(voting);
+      groupedVotes[voting.orderPoint] = group;
     });
 
     final newList = models.where((element) => !(element is VotingModel && element.orderPoint != null)).toList();

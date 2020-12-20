@@ -41,7 +41,7 @@ class GroupedVotingViewHolder extends StatelessWidget {
             FittedBox(
               fit: BoxFit.contain,
               child: Text(
-                "${DateFormat("HH:mm").format(viewModel.firstDate)} - ${DateFormat("HH:mm").format(viewModel.lastDate)}",
+                DateFormat("HH:mm").format(viewModel.firstDate),
                 style: TextStyle(
                     color: theme.dividerColor, fontSize: 24, fontWeight: FontWeight.w300),
               ),
