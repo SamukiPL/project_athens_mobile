@@ -14,15 +14,16 @@ class VotingNetworkMapper extends DataMapper<VotingResponse, VotingModel> {
     final results = VoteResultModel(data.inFavor, data.against, data.hold, data.absent);
     final voteModels = data.votes.map((vote) => VoteModel(VoteType.values[vote.type], vote.cadencyDeputy)).toList();
     return VotingModel(
-        id: data.id,
-        title: data.topic,
-        date: data.actualVotedAt,
-        absoluteMajority: data.absoluteMajority,
-        qualifyingMajority: data.qualifyingMajority,
-        votingDesc: getVotingDesc(data.votingType),
-        results: results,
-        votes: voteModels,
-        clubVotes: data.parliamentClubVotingNumbers);
+    id: data.id,
+    title: data.topic,
+    date: data.actualVotedAt,
+    absoluteMajority: data.absoluteMajority,
+    qualifyingMajority: data.qualifyingMajority,
+    votingDesc: getVotingDesc(data.votingType),
+    results: results,
+    votes: voteModels,
+    clubVotes: data.parliamentClubVotingNumbers,
+    orderPoint: data.orderPoint);
   }
 
   String getVotingDesc(VotingType type) {
