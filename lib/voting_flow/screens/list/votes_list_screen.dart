@@ -30,28 +30,19 @@ class VotesListScreen extends BaseScreen<VotesListBloc> {
 
   @override
   Widget buildBody(BuildContext context, VotesListBloc bloc) {
-    final destinationManager = Provider.of<DestinationManager>(context);
-
     final localizations = Provider.of<AppLocalizations>(context);
 
-    return StreamProvider<VotingModel>.value(
-      value: bloc.goToDetails,
-      updateShouldNotify: (_, model) => _goToDetails(context, model, destinationManager),
-      child: Consumer<VotingModel>(
-        builder: (BuildContext context, VotingModel value, Widget child) => child,
-        child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: DataLoadingWidget(
-                  bloc.dataLoadingBloc,
-                  child: _buildContent(bloc),
-                  noDataText: localizations.getText().votingsNoData(),
-                ),
-              )
-            ]
-        ),
-      ),
+    return Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Expanded(
+            child: DataLoadingWidget(
+              bloc.dataLoadingBloc,
+              child: _buildContent(bloc),
+              noDataText: localizations.getText().votingsNoData(),
+            ),
+          )
+        ]
     );
   }
 
@@ -74,10 +65,5 @@ class VotesListScreen extends BaseScreen<VotesListBloc> {
 
   @override
   Widget buildFloatingActionButton(BuildContext context, VotesListBloc bloc) => null;
-
-  bool _goToDetails(BuildContext context, VotingModel model, DestinationManager destinationManager) {
-    destinationManager.goToDestination(context, VoteDetailsDestination(_currentBottomBarItem, model));
-    return false;
-  }
   
 }

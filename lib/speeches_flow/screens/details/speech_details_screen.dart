@@ -3,15 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
-import 'package:project_athens/athens_core/navigation/destination_manager.dart';
-import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
+import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
+import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/deputies_flow/navigation/deputies_destinations.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:project_athens/speeches_flow/screens/details/speech_details_bloc.dart';
-import 'package:provider/provider.dart';
 
 class SpeechDetailsScreen  extends BaseScreen<SpeechDetailsBloc> {
 
@@ -70,11 +68,10 @@ class SpeechDetailsScreen  extends BaseScreen<SpeechDetailsBloc> {
   }
 
   Widget speakerLabel(BuildContext context, SpeechDetailsBloc bloc, ThemeData theme) {
-    final destinationManager = Provider.of<DestinationManager>(context);
     return Container(
       color: theme.primaryColor,
       child: GestureDetector(
-        onTap: () => goToDeputyDetails(context, bloc.deputyModel, destinationManager),
+        onTap: () => goToDeputyDetails(context, bloc.deputyModel),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -158,9 +155,9 @@ class SpeechDetailsScreen  extends BaseScreen<SpeechDetailsBloc> {
   @override
   Widget buildFloatingActionButton(BuildContext context, SpeechDetailsBloc bloc) => null;
 
-  void goToDeputyDetails(BuildContext context, DeputyModel model, DestinationManager destinationManager) {
+  void goToDeputyDetails(BuildContext context, DeputyModel model) {
     final destination = DeputyDetailsDestination(model, currentBottomBarItem);
-    destinationManager.goToDestination(context, destination);
+    goToDestination(context, destination);
   }
 
 }

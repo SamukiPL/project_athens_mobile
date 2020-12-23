@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:project_athens/athens_core/domain/base_repository.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
-import 'package:project_athens/athens_core/presentation/base_bloc.dart';
+import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
 import 'package:project_athens/authorization_flow/domain/login/login_params.dart';
 import 'package:project_athens/authorization_flow/domain/login/login_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/base_deputies_params.dart';

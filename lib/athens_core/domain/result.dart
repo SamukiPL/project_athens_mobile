@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:project_athens/athens_core/chopper/client_errors.dart';
+import 'package:flutter_fimber/flutter_fimber.dart';
 
 abstract class Result<T> {}
 
@@ -17,9 +17,16 @@ class Failure<T> implements Result<T> {
 
   final Exception exception;
 
-  Failure(this.exception) {
-    if (exception is! DioError)
-      throw exception;
+  Failure._(this.exception);
+
+  factory Failure(exceptionOrError) {
+    if (exceptionOrError is Error) {
+      Fimber.e("Some error occurred, fix your code!!!");
+      Fimber.e(exceptionOrError.toString());
+      throw exceptionOrError;
+    }
+
+    return Failure._(exceptionOrError);
   }
 
 }

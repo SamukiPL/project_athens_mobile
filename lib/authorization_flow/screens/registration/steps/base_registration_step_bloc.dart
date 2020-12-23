@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:project_athens/athens_core/presentation/base_bloc.dart';
+import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
 enum StepAction { NEGATIVE, POSITIVE }

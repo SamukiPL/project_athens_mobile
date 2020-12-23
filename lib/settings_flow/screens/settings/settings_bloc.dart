@@ -1,4 +1,4 @@
-import 'package:project_athens/athens_core/presentation/base_bloc.dart';
+import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
 import 'package:project_athens/settings_flow/domain/settings/logout_use_case.dart';
 import 'package:project_athens/athens_core/domain/base_repository.dart';
 

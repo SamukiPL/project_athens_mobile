@@ -1,26 +1,26 @@
 import 'dart:async';
 
 import 'package:project_athens/athens_core/domain/result.dart';
-import 'package:project_athens/athens_core/presentation/base_bloc.dart';
+import 'package:project_athens/athens_core/models/timeline_model.dart';
+import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
+import 'package:project_athens/athens_core/navigation/destination_manager.dart';
+import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
 import 'package:project_athens/pagination/paging_bloc.dart';
 import 'package:project_athens/pagination/paging_list_adapter.dart';
+import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
+import 'package:project_athens/timeline_flow/domain/meetings_date.dart';
+import 'package:project_athens/timeline_flow/domain/timeline_parameters.dart';
 import 'package:project_athens/timeline_flow/domain/use_cases/get_meetings_dates.dart';
 import 'package:project_athens/timeline_flow/domain/use_cases/get_timeline_use_case.dart';
-import 'package:project_athens/timeline_flow/domain/meetings_date.dart';
-import 'package:project_athens/athens_core/models/timeline_model.dart';
-import 'package:project_athens/timeline_flow/domain/timeline_parameters.dart';
+import 'package:project_athens/timeline_flow/navigation/timeline_destinations.dart';
 import 'package:project_athens/timeline_flow/presentation/calendar_app_bar_bloc.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/cloud/noun_cloud_bloc.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model_factory.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
 
 class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> {
-
-  StreamController<TimelineModel> _destination = PublishSubject<TimelineModel>();
-
-  Stream<TimelineModel> get destination => _destination.stream;
 
   final GetTimelineUseCase _getTimelineUseCase;
 
@@ -53,7 +53,19 @@ class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> 
   final CalendarAppBarBloc calendarBloc = CalendarAppBarBloc(DateTime.now());
 
   void itemClick(TimelineModel model) {
-    _destination.add(model);
+    Destination destination;
+    switch (model.type) {
+      case TimelineModelType.VOTING:
+        destination = VoteDetailsDestination(BottomNavItem.TIMELINE, model);
+        break;
+      case TimelineModelType.SPEECH:
+        destination = SpeechDetailsDestination(model);
+        break;
+      case TimelineModelType.GROUPED_VOTING:
+        destination = GroupDetailsDestination(model);
+        break;
+    }
+    goToDestination(destination);
   }
 
   @override
@@ -71,6 +83,8 @@ class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> 
     if (result is Success<List<MeetingDate>>) {
       _dates = result.value;
       loadNewDate(_getBeforeDate(DateTime.now()));
+    } else {
+      manageState(result);
     }
   }
 
@@ -85,9 +99,8 @@ class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> 
       _items = result.value.toTimelineRowViewModel(itemClick);
       adapter.updateList(_items);
       setLoadingState((_items.isEmpty) ? DataLoadingState.NO_DATA : DataLoadingState.CONTENT_LOADED);
-    } else {
-      setLoadingState(DataLoadingState.NO_DATA);
     }
+    manageState(result);
 
     nounCloudBloc.loadCloud(params);
   }
@@ -95,7 +108,6 @@ class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> 
   @override
   void dispose() {
     adapter.dispose();
-    _destination.close();
     super.dispose();
   }
 

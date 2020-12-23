@@ -1,15 +1,13 @@
 
 import 'dart:async';
-import 'dart:io';
 
-import 'package:project_athens/athens_core/chopper/client_errors.dart';
-import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:project_athens/athens_core/domain/result.dart';
+import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_bloc.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
+import 'package:project_athens/athens_core/presentation/widget_state.dart';
 import 'package:rxdart/rxdart.dart';
-
-enum ScreenState { SUCCESS, AUTH_FAILURE, NETWORK_FAILURE }
 
 abstract class BaseBloc {
 
@@ -18,20 +16,22 @@ abstract class BaseBloc {
   DataLoadingBloc get dataLoadingBloc => _dataLoadingBloc;
 
   @protected
-  StreamController<ScreenState> stateController = BehaviorSubject<ScreenState>();
+  StreamController<WidgetState> stateController = BehaviorSubject<WidgetState>();
 
-  Stream<ScreenState> get state => stateController.stream;
+  Stream<WidgetState> get state => stateController.stream;
 
   @protected
   void manageState(Result result) {
     if (result is Success) {
-      stateController.add(ScreenState.SUCCESS);
-    } else if (result is Failure && result.exception is SocketException) {
-      stateController.add(ScreenState.NETWORK_FAILURE);
-      setLoadingState(DataLoadingState.NO_NETWORK);
-    } else if (result is Failure && result.exception is ClientError) {
-      stateController.add(ScreenState.AUTH_FAILURE);
+      stateController.add(WidgetState.success());
+    } else if (result is Failure) {
+      Failure failure = result;
+      stateController.add(failure.exception.getWidgetState());
     }
+  }
+
+  void goToDestination(Destination destination) {
+    stateController.add(WidgetState.redirection(destination));
   }
 
   @protected
