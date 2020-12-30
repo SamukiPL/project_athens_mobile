@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_bloc.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
 import 'package:project_athens/athens_core/presentation/no_data/no_data.dart';
+import 'package:project_athens/athens_core/presentation/retry/retry_widget.dart';
+import 'package:project_athens/athens_core/presentation/widget_state.dart';
 import 'package:provider/provider.dart';
 
 class DataLoadingWidget extends StatelessWidget {
@@ -13,6 +15,8 @@ class DataLoadingWidget extends StatelessWidget {
   final Widget child;
   final Widget noData;
   final String noDataText;
+  final Widget retryWidget;
+  final VoidCallback onRetry;
 
   const DataLoadingWidget(
       this._bloc,
@@ -20,7 +24,9 @@ class DataLoadingWidget extends StatelessWidget {
       this.initialLoading,
       @required this.child,
       this.noData,
-      this.noDataText})
+      this.noDataText,
+      this.retryWidget,
+      @required this.onRetry})
       : super(key: key);
 
   @override
@@ -28,17 +34,19 @@ class DataLoadingWidget extends StatelessWidget {
     return ChangeNotifierProvider<DataLoadingBloc>.value(
       value: _bloc,
       child: Consumer<DataLoadingBloc>(builder: (context, bloc, _) {
-        switch (bloc.loadingState) {
-          case DataLoadingState.INITIAL_LOADING:
+        switch (bloc.loadingState.runtimeType) {
+          case InitialLoading:
             return _getInitialLoading();
             break;
-          case DataLoadingState.CONTENT_LOADED:
+          case ContentLoaded:
             return child;
             break;
-          case DataLoadingState.NO_NETWORK:
-            // TODO Maybe in the future
-          case DataLoadingState.NO_DATA:
+          case NoDataLoaded:
             return _getNoData();
+            break;
+          case LoadingError:
+            LoadingError loadingError = bloc.loadingState;
+            return _getRetryWidget(loadingError.errorType);
             break;
           default:
             throw ArgumentError();
@@ -72,4 +80,9 @@ class DataLoadingWidget extends StatelessWidget {
   Widget _buildBaseNoData() => NoData(
         text: noDataText,
       );
+  
+  Widget _getRetryWidget(ErrorType errorType) => RetryWidget(
+      errorType: errorType,
+      onRetry: onRetry
+  );
 }

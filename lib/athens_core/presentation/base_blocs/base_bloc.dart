@@ -26,7 +26,16 @@ abstract class BaseBloc {
       stateController.add(WidgetState.success());
     } else if (result is Failure) {
       Failure failure = result;
-      stateController.add(failure.exception.getWidgetState());
+      final state = failure.exception.getWidgetState();
+      _manageErrorState(state);
+      stateController.add(state);
+    }
+  }
+
+  void _manageErrorState(WidgetState state) {
+    if (state is ErrorState) {
+      ErrorState errorState = state;
+      setLoadingState(DataLoadingState.error(errorState.type));
     }
   }
 

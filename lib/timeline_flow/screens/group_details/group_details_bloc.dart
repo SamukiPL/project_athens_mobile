@@ -22,7 +22,7 @@ class GroupDetailsBloc extends BaseBloc {
 
   Future<List<TimelineRowViewModel>> getListItems() async {
     final list = _groupedModel.groupedVotes.toTimelineRowViewModel(itemClick);
-    setLoadingState(DataLoadingState.CONTENT_LOADED);
+    setLoadingState(DataLoadingState.contentLoaded());
     return list;
   }
 

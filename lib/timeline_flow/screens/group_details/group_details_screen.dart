@@ -1,4 +1,4 @@
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
@@ -21,8 +21,9 @@ class GroupDetailsScreen extends BaseScreen<GroupDetailsBloc> {
   @override
   Widget buildBody(BuildContext context, GroupDetailsBloc bloc) {
     return DataLoadingWidget(
-        bloc.dataLoadingBloc,
-        child: _buildContent(bloc)
+      bloc.dataLoadingBloc,
+      child: _buildContent(bloc),
+      onRetry: () => {},
     );
   }
 

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
-import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_widget.dart';
 import 'package:project_athens/athens_core/presentation/search_app_bar/search_app_bar.dart';
-import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
 import 'package:project_athens/voting_flow/screens/list/list_impl/votes_list.dart';
 import 'package:project_athens/voting_flow/screens/list/votes_list_bloc.dart';
 import 'package:provider/provider.dart';
@@ -40,6 +37,7 @@ class VotesListScreen extends BaseScreen<VotesListBloc> {
               bloc.dataLoadingBloc,
               child: _buildContent(bloc),
               noDataText: localizations.getText().votingsNoData(),
+              onRetry: bloc.refresh,
             ),
           )
         ]

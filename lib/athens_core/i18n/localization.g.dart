@@ -35,8 +35,24 @@ class AppLocalizationsGenerated {
     return words['universal']['ok'];
   }
 
+  String universalRetry() {
+    return words['universal']['retry'];
+  }
+
   String universalNoDataDefaultText() {
     return words['universal']['noData']['defaultText'];
+  }
+
+  String universalErrorNetwork() {
+    return words['universal']['error']['network'];
+  }
+
+  String universalErrorServer() {
+    return words['universal']['error']['server'];
+  }
+
+  String universalErrorUnknown() {
+    return words['universal']['error']['unknown'];
   }
 
   String mainMenuSession() {

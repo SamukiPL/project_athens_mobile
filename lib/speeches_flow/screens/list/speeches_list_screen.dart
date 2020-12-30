@@ -34,6 +34,7 @@ class SpeechesListScreen extends BaseScreen<SpeechesListBloc> {
               bloc.dataLoadingBloc,
               child: _buildContent(bloc),
               noDataText: localizations.getText().speechesNoData(),
+              onRetry: bloc.refresh,
             ),
           )
         ]

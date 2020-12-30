@@ -73,8 +73,12 @@ class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> 
 
   @override
   Future<void> refresh() {
-    adapter.updateList(List());
-    return loadNewDate(_selectedDate);
+    if (_dates == null) {
+      return _loadMeetingsDates();
+    } else {
+      adapter.updateList(List());
+      return loadNewDate(_selectedDate);
+    }
   }
 
   Future<void> _loadMeetingsDates() async {
@@ -98,7 +102,7 @@ class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> 
     if (result is Success<List<TimelineModel>>) {
       _items = result.value.toTimelineRowViewModel(itemClick);
       adapter.updateList(_items);
-      setLoadingState((_items.isEmpty) ? DataLoadingState.NO_DATA : DataLoadingState.CONTENT_LOADED);
+      setLoadingState((_items.isEmpty) ? DataLoadingState.noData() : DataLoadingState.contentLoaded());
     }
     manageState(result);
 

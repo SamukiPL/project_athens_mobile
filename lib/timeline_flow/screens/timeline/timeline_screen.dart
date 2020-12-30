@@ -19,9 +19,6 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
   BottomNavItem get currentBottomBarItem => BottomNavItem.TIMELINE;
 
   @override
-  String get appBarTitle => "Timeline";
-
-  @override
   bool get showBackArrow => false;
 
   @override
@@ -43,6 +40,7 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
           bloc.dataLoadingBloc,
           child: TimelineList(bloc.adapter),
           noDataText: localizations.getText().timelineNoEvents(),
+          onRetry: bloc.refresh,
         ),
       ),
     );
