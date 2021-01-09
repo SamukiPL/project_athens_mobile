@@ -15,8 +15,10 @@ class DataLoadingWidget extends StatelessWidget {
   final Widget child;
   final Widget noData;
   final String noDataText;
-  final Widget retryWidget;
+  final Function(ErrorType) retryWidget;
   final VoidCallback onRetry;
+
+  final Color color;
 
   const DataLoadingWidget(
       this._bloc,
@@ -26,7 +28,8 @@ class DataLoadingWidget extends StatelessWidget {
       this.noData,
       this.noDataText,
       this.retryWidget,
-      @required this.onRetry})
+      this.onRetry,
+      this.color = Colors.black})
       : super(key: key);
 
   @override
@@ -78,11 +81,20 @@ class DataLoadingWidget extends StatelessWidget {
   }
 
   Widget _buildBaseNoData() => NoData(
-        text: noDataText,
-      );
+    text: noDataText,
+    color: color,
+  );
   
-  Widget _getRetryWidget(ErrorType errorType) => RetryWidget(
-      errorType: errorType,
-      onRetry: onRetry
+  Widget _getRetryWidget(ErrorType errorType) {
+    if (retryWidget == null && onRetry == null)
+      return _getNoData();
+
+    return retryWidget(errorType) ?? _buildBaseRetry(errorType);
+  }
+
+  Widget _buildBaseRetry(ErrorType errorType) => RetryWidget(
+    errorType: errorType,
+    onRetry: onRetry,
+    color: color,
   );
 }

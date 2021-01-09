@@ -112,6 +112,7 @@ class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> 
   @override
   void dispose() {
     adapter.dispose();
+    nounCloudBloc.dispose();
     super.dispose();
   }
 
