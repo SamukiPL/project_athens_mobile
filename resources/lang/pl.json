@@ -6,8 +6,14 @@
     "skip": "Pomiń",
     "choose": "Wybierz",
     "ok": "Ok",
+    "retry": "Spróbuj ponownie",
     "noData": {
       "defaultText": "Brak danych"
+    },
+    "error": {
+      "network": "Coś poszło nie tak. Proszę sprawdzić swoje połączenie z internetem.",
+      "server": "Serwer nie odpowiada. Prosimy spróbować później.",
+      "unknown": "Coś poszło nie tak, prosimy spróbować później."
     }
   },
   "main": {

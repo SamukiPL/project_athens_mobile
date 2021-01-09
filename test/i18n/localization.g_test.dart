@@ -50,9 +50,29 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalOk != "" && universalOk != null); 
   }); 
  
+  test("All methods for $locale universalRetry", () async {
+    String universalRetry = localization.universalRetry();
+    expect(true, universalRetry != "" && universalRetry != null); 
+  }); 
+ 
   test("All methods for $locale universalNoDataDefaultText", () async {
     String universalNoDataDefaultText = localization.universalNoDataDefaultText();
     expect(true, universalNoDataDefaultText != "" && universalNoDataDefaultText != null); 
+  }); 
+ 
+  test("All methods for $locale universalErrorNetwork", () async {
+    String universalErrorNetwork = localization.universalErrorNetwork();
+    expect(true, universalErrorNetwork != "" && universalErrorNetwork != null); 
+  }); 
+ 
+  test("All methods for $locale universalErrorServer", () async {
+    String universalErrorServer = localization.universalErrorServer();
+    expect(true, universalErrorServer != "" && universalErrorServer != null); 
+  }); 
+ 
+  test("All methods for $locale universalErrorUnknown", () async {
+    String universalErrorUnknown = localization.universalErrorUnknown();
+    expect(true, universalErrorUnknown != "" && universalErrorUnknown != null); 
   }); 
  
   test("All methods for $locale mainMenuSession", () async {

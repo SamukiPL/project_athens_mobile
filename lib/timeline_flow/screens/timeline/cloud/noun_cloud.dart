@@ -2,9 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_scatter/flutter_scatter.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/presentation/no_data/no_data.dart';
+import 'package:project_athens/athens_core/presentation/data_loading/data_loading_widget.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/cloud/noun_cloud_bloc.dart';
-import 'package:project_athens/timeline_flow/screens/timeline/cloud/noun_cloud_state.dart';
 import 'package:provider/provider.dart';
 
 class NounCloud extends StatelessWidget {
@@ -14,58 +13,39 @@ class NounCloud extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider.value(
-      value: bloc.state,
-      initialData: CloudLoading(),
-      child: Container(
-        margin: EdgeInsets.all(16),
-        child: Consumer<NounCloudState>(
-          builder: (context, state, _) => generateCurrentWidget(context, state),
+    final localizations = Provider.of<AppLocalizations>(context);
+
+    return StreamProvider<List<Widget>>.value(
+      value: bloc.widgets,
+      initialData: [],
+      child: DataLoadingWidget(
+        bloc.dataLoadingBloc,
+        child: Consumer<List<Widget>>(
+          builder: (context, widgets, _) => generateReadyWidget(context, widgets),
         ),
+        onRetry: null,
+        noDataText: localizations.getText().timelineNounCloudNoNouns(),
+        color: Colors.white,
       ),
     );
   }
 
-  Widget generateCurrentWidget(BuildContext context, NounCloudState state) {
-    switch (state.runtimeType) {
-      case CloudReady:
-        return generateReadyWidget(context, state);
-      case CloudFail:
-    }
-
-    return generateLoadingWidget();
-  }
-
-  Widget generateLoadingWidget() {
-    return Center(
-      child: CircularProgressIndicator(),
-    );
-  }
-
-  Widget generateReadyWidget(BuildContext context, CloudReady state) {
+  Widget generateReadyWidget(BuildContext context, List<Widget> widgets) {
     final screenSize = MediaQuery.of(context).size;
     final ratio = screenSize.width / screenSize.height;
-
-    final localizations = Provider.of<AppLocalizations>(context);
-
 
     return InteractiveViewer(
       child: Transform.scale(
         scale: 0.85,
-        child: state.nounsWidgets.length > 0 ?
-        Scatter(
+        child: Scatter(
             fillGaps: true,
             delegate: ArchimedeanSpiralScatterDelegate(
               ratio: ratio,
               a: 1.0,
               b: 1.0,
             ),
-            children: state.nounsWidgets,
-            overflow: Overflow.visible)
-        : NoData(
-          text: localizations.getText().timelineNounCloudNoNouns(),
-          color: Colors.white,
-        ),
+            children: widgets,
+            overflow: Overflow.visible),
       ),
     );
   }

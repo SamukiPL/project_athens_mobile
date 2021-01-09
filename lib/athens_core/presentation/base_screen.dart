@@ -1,12 +1,11 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/injections/module.dart';
-import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_widget.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
-import 'package:project_athens/athens_core/presentation/base_bloc.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
+import 'package:project_athens/athens_core/presentation/widget_state.dart';
 import 'package:provider/provider.dart';
 
 abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget {
@@ -18,13 +17,13 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<BLOC>(
-      builder: (context, bloc, _) => StreamProvider<ScreenState>.value(
+      builder: (context, bloc, _) => StreamProvider<WidgetState>.value(
         value: bloc.state,
         updateShouldNotify: (_, current) {
           stateListener(context, bloc, current);
           return false;
         },
-        child: Consumer<ScreenState>(
+        child: Consumer<WidgetState>(
           builder: (context, _, child) => child,
           child: Scaffold(
             appBar: buildAppBar(context, bloc),
@@ -37,16 +36,20 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget {
     );
   }
 
-  void stateListener(BuildContext context, BLOC bloc, ScreenState state) {
-    switch (state) {
-      case ScreenState.SUCCESS:
+  void stateListener(BuildContext context, BLOC bloc, WidgetState state) {
+    switch (state.runtimeType) {
+      case SuccessState:
         onSuccess(context);
         break;
-      case ScreenState.AUTH_FAILURE:
+      case AuthFailure:
         onAuthFailure();
         break;
-      case ScreenState.NETWORK_FAILURE:
+      case ErrorState:
         onNetworkFailure(bloc);
+        break;
+      case Redirection:
+        Redirection redirection = state;
+        goToDestination(context, redirection.destination);
         break;
     }
   }
@@ -95,5 +98,11 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget {
 
   @protected
   void onAuthFailure() {}
+
+  @protected
+  void goToDestination(BuildContext context, Destination destination) {
+    final destinationManager = Provider.of<DestinationManager>(context, listen: false);
+    destinationManager.goToDestination(context, destination);
+  }
 
 }

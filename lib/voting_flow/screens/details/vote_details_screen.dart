@@ -10,10 +10,8 @@ import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
-import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
-import 'package:project_athens/deputies_flow/navigation/deputies_destinations.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:project_athens/deputies_utils/domain/parliament_club_model.dart';
@@ -40,42 +38,32 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
   @override
   Widget buildBody(BuildContext context, VoteDetailsBloc bloc) {
     final theme = Theme.of(context);
-    final destinationManager = Provider.of<DestinationManager>(context);
 
-    return StreamProvider<List<String>>.value(
-      value: bloc.goToDeputiesList,
-      updateShouldNotify: (_, current) {
-        return goToDeputiesList(context, current, destinationManager);
-      },
-      child: Consumer<List<String>>(
-        builder: (context, _, child) => child,
-        child: SingleChildScrollView(
-          child: Container(
-            color: Colors.grey.shade200,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // vote distribution card
-                buildFullCard(
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      buildDateAndFrequencyTable(context, theme),
-                      Container(
-                        child: buildVoteDistributionChart(bloc, context)
-                      )
-                    ],
+    return SingleChildScrollView(
+      child: Container(
+        color: Colors.grey.shade200,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // vote distribution card
+            buildFullCard(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  buildDateAndFrequencyTable(context, theme),
+                  Container(
+                    child: buildVoteDistributionChart(bloc, context)
                   )
-                ),
-                buildFullCard(buildDescription(theme)),
-                buildFullCard(buildClubVoteDistributionView(context, theme)),
-                buildFullCard(buildDeputyVotesView(context, theme)),
-                TechnicalData(technicalId: _votingModel.id),
-              ],
+                ],
+              )
             ),
-          )
+            buildFullCard(buildDescription(theme)),
+            buildFullCard(buildClubVoteDistributionView(context, theme)),
+            buildFullCard(buildDeputyVotesView(context, theme)),
+            TechnicalData(technicalId: _votingModel.id),
+          ],
         ),
-      ),
+      )
     );
   }
 
@@ -509,10 +497,5 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
 
   @override
   Widget buildFloatingActionButton(BuildContext context, VoteDetailsBloc bloc) => null;
-
-  bool goToDeputiesList(BuildContext context, List<String> deputiesIds, DestinationManager destinationManager) {
-    destinationManager.goToDestination(context, DeputiesListDestination(currentBottomItem: currentBottomBarItem, deputiesIdsToShow: deputiesIds));
-    return false;
-  }
 
 }

@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:project_athens/athens_core/presentation/base_bloc.dart';
+import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
+import 'package:project_athens/athens_core/presentation/widget_state.dart';
 import 'package:project_athens/authorization_flow/screens/registration/stepper/registration_stepper_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/stepper/stepper_button_state_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/account_info/account_info_step_bloc.dart';
@@ -27,8 +27,8 @@ class RegistrationBloc extends BaseBloc {
       this._deputiesChooserBloc
   ) {
     _accountInfoStepBloc.state.listen((screenState) {
-      switch (screenState) {
-        case ScreenState.SUCCESS:
+      switch (screenState.runtimeType) {
+        case SuccessState:
           _buttonStateBloc.changeState(StepperButtonState.IDLE);
           _registrationEndStepBloc.setLoginAndEmail(
               _accountInfoStepBloc.login, _accountInfoStepBloc.email);
@@ -39,8 +39,8 @@ class RegistrationBloc extends BaseBloc {
       }
     });
     _registrationEndStepBloc.state.listen((screenState) {
-      switch (screenState) {
-        case ScreenState.SUCCESS:
+      switch (screenState.runtimeType) {
+        case SuccessState:
           _buttonStateBloc.changeState(StepperButtonState.IDLE);
           _stepperBloc.setStep(RegistrationStep.DEPUTIES_CHOOSER);
           break;

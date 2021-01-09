@@ -1,4 +1,4 @@
-import 'package:project_athens/athens_core/presentation/base_bloc.dart';
+import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
 import 'package:project_athens/deputy_subscription/domain/deputies_registration/deputies_registration_params.dart';
 import 'package:project_athens/deputy_subscription/domain/deputies_registration/deputies_registration_use_case.dart';
 import 'package:project_athens/deputy_subscription/presentation/deputies_registration/list/deputy_item_view_model.dart';

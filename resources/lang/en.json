@@ -6,8 +6,14 @@
     "skip": "Skip",
     "choose": "Choose",
     "ok": "Ok",
+    "retry": "Try again",
     "noData": {
       "defaultText": "No data"
+    },
+    "error": {
+      "network": "Something went wrong. Please check your internet connection.",
+      "server": "Server is not responding. Please try again later.",
+      "unknown": "Something went wrong, please try again later."
     }
   },
   "main": {

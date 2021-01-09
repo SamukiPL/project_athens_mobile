@@ -3,7 +3,7 @@ import 'package:project_athens/athens_core/domain/list/base_model.dart';
 import 'package:project_athens/athens_core/domain/list/base_params.dart';
 import 'package:project_athens/athens_core/domain/list/list_use_case.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
-import 'package:project_athens/athens_core/presentation/base_bloc.dart';
+import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
@@ -39,7 +39,7 @@ abstract class BaseListBloc<MODEL extends BaseModel, ITEM extends BaseItemViewMo
     super.manageState(result);
     if (result is Success<List<MODEL>>) {
       adapter.updateList(_mapItems(result.value));
-      setLoadingState((result.value.isEmpty) ? DataLoadingState.NO_DATA : DataLoadingState.CONTENT_LOADED);
+      setLoadingState((result.value.isEmpty) ? DataLoadingState.noData() : DataLoadingState.contentLoaded());
     }
   }
 

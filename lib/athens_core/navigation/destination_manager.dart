@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/ext/list_extension.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
-import 'package:project_athens/athens_core/presentation/base_change_notifier.dart';
+import 'package:project_athens/athens_core/presentation/base_blocs/base_change_notifier.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/main/presentation/main_widget.dart';
 

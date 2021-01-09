@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
-import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_widget.dart';
 import 'package:project_athens/athens_core/presentation/search_app_bar/search_app_bar.dart';
-import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
 import 'package:project_athens/voting_flow/screens/list/list_impl/votes_list.dart';
 import 'package:project_athens/voting_flow/screens/list/votes_list_bloc.dart';
 import 'package:provider/provider.dart';
@@ -30,28 +27,20 @@ class VotesListScreen extends BaseScreen<VotesListBloc> {
 
   @override
   Widget buildBody(BuildContext context, VotesListBloc bloc) {
-    final destinationManager = Provider.of<DestinationManager>(context);
-
     final localizations = Provider.of<AppLocalizations>(context);
 
-    return StreamProvider<VotingModel>.value(
-      value: bloc.goToDetails,
-      updateShouldNotify: (_, model) => _goToDetails(context, model, destinationManager),
-      child: Consumer<VotingModel>(
-        builder: (BuildContext context, VotingModel value, Widget child) => child,
-        child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: DataLoadingWidget(
-                  bloc.dataLoadingBloc,
-                  child: _buildContent(bloc),
-                  noDataText: localizations.getText().votingsNoData(),
-                ),
-              )
-            ]
-        ),
-      ),
+    return Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Expanded(
+            child: DataLoadingWidget(
+              bloc.dataLoadingBloc,
+              child: _buildContent(bloc),
+              noDataText: localizations.getText().votingsNoData(),
+              onRetry: bloc.refresh,
+            ),
+          )
+        ]
     );
   }
 
@@ -74,10 +63,5 @@ class VotesListScreen extends BaseScreen<VotesListBloc> {
 
   @override
   Widget buildFloatingActionButton(BuildContext context, VotesListBloc bloc) => null;
-
-  bool _goToDetails(BuildContext context, VotingModel model, DestinationManager destinationManager) {
-    destinationManager.goToDestination(context, VoteDetailsDestination(_currentBottomBarItem, model));
-    return false;
-  }
   
 }

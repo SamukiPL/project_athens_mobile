@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:project_athens/athens_core/models/voting_model.dart';
-import 'package:project_athens/athens_core/presentation/base_bloc.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
+import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
+import 'package:project_athens/deputies_flow/navigation/deputies_destinations.dart';
 
 class VoteDetailsBloc extends BaseBloc {
 
@@ -10,22 +11,13 @@ class VoteDetailsBloc extends BaseBloc {
 
   VoteDetailsBloc(this._votingModel);
 
-  final StreamController<List<String>> _goToDeputiesList = PublishSubject();
-
-  Stream<List<String>> get goToDeputiesList => _goToDeputiesList.stream;
-
   Future<void> prepareList(VoteType voteType) async {
     List<String> deputiesIds = _votingModel.votes
         .where((element) => element.type == voteType)
         .map((e) => e.cadencyDeputy)
         .toList();
-    _goToDeputiesList.add(deputiesIds);
+    goToDestination(DeputiesListDestination(currentBottomItem: BottomNavItem.VOTING, deputiesIdsToShow: deputiesIds));
   }
 
-  @override
-  void dispose() {
-    _goToDeputiesList.close();
-    super.dispose();
-  }
 
 }
