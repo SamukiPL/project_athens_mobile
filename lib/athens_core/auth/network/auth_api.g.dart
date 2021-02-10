@@ -22,7 +22,6 @@ class _AuthApi implements AuthApi {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(request?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>(
         '/user-aggregator/auth/auth',
         queryParameters: queryParameters,

@@ -10,18 +10,16 @@ import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 
 class DeputiesListDestination extends Destination<DeputiesListScreen> {
 
-  final List<String> deputiesIdsToShow;
-
   final BottomNavItem currentBottomItem;
 
-  DeputiesListDestination({this.currentBottomItem, this.deputiesIdsToShow});
+  DeputiesListDestination({this.currentBottomItem});
 
   @override
   DeputiesListScreen getScreen() => DeputiesListScreen(currentBottomItem ?? BottomNavItem.DEPUTIES);
 
   @override
   List<Module> getScreenModules(BuildContext context) =>
-      [DeputiesListModule(context, deputiesIdsToShow)];
+      [DeputiesListModule(context)];
 }
 
 class DeputyDetailsDestination extends Destination<DeputyDetailsScreen> {

@@ -11,13 +11,4 @@ class VoteDetailsBloc extends BaseBloc {
 
   VoteDetailsBloc(this._votingModel);
 
-  Future<void> prepareList(VoteType voteType) async {
-    List<String> deputiesIds = _votingModel.votes
-        .where((element) => element.type == voteType)
-        .map((e) => e.cadencyDeputy)
-        .toList();
-    goToDestination(DeputiesListDestination(currentBottomItem: BottomNavItem.VOTING, deputiesIdsToShow: deputiesIds));
-  }
-
-
 }

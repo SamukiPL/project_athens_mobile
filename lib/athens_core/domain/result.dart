@@ -1,10 +1,6 @@
-import 'dart:io';
-
-import 'package:dio/dio.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 
 abstract class Result<T> {}
-
 class Success<T> implements Result<T> {
 
   final T value;

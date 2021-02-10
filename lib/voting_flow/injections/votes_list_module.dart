@@ -1,11 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:nested/nested.dart';
+import 'package:project_athens/athens_core/domain/base_list_facade.dart';
 import 'package:project_athens/athens_core/domain/list/base_params.dart';
-import 'package:project_athens/athens_core/domain/list/list_use_case.dart';
+import 'package:project_athens/athens_core/domain/list/list_facade.dart';
+import 'package:project_athens/athens_core/filters_and_sort/data/filters_repository.dart';
+import 'package:project_athens/athens_core/filters_and_sort/domain/filterable_facade.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
+import 'package:project_athens/athens_core/presentation/search_app_bar/search_app_bar_facade.dart';
 import 'package:project_athens/voting_flow/data/network/voting_api.dart';
 import 'package:project_athens/voting_flow/data/votes_list_repository_impl.dart';
 import 'package:project_athens/voting_flow/mappers/voting_network_mapper.dart';
@@ -25,18 +29,22 @@ class VotesListModule extends Module {
     final networkMapper = VotingNetworkMapper(localizations);
 
     final itemsRepository = VotesListRepositoryImpl(votingApi, networkMapper);
-
-    final listUseCase = ListUseCase<VotingModel, BaseParams>(itemsRepository);
-
-    final params = BaseParams();
+    final filtersRepository = FiltersRepository();
+    final listFacade = BaseListFacade<VotingModel>(itemsRepository, filtersRepository);
 
     final itemFactory = VoteItemViewModelFactory();
 
     return [
       Provider<VotesListBloc>(
-        create: (_) => VotesListBloc(listUseCase, params, itemFactory),
+        create: (_) => VotesListBloc(listFacade, itemFactory),
         dispose: (_, bloc) => bloc.dispose(),
-      )
+      ),
+      Provider<SearchAppBarFacade>(
+        create: (_) => listFacade,
+      ),
+      Provider<FilterableFacade>(
+        create: (_) => listFacade,
+      ),
     ];
   }
 

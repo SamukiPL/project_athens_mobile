@@ -3,23 +3,25 @@ import 'package:project_athens/athens_core/domain/list/base_params.dart';
 import 'package:project_athens/athens_core/domain/list/items_repository.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 
-class ListUseCase<MODEL extends BaseModel, PARAMS extends BaseParams> {
+abstract class ListFacade<MODEL extends BaseModel, PARAMS extends BaseParams> {
 
   final ItemsRepository<MODEL, PARAMS> _itemsRepository;
 
-  ListUseCase(this._itemsRepository);
+  ListFacade(this._itemsRepository);
 
   Future<void> fetchItems(int limit, int offset) {
-    return _itemsRepository.fetchItems(limit, offset);
+    return _itemsRepository.fetchItems(getParams(limit: limit, offset: offset));
   }
 
-  Stream<Result<List<MODEL>>> getItems(PARAMS params) {
-    return _itemsRepository.getItems(params);
+  Stream<Result<List<MODEL>>> getItems() {
+    return _itemsRepository.getItems(getParams());
   }
 
   Future<void> refreshItems() {
-    return _itemsRepository.refreshItems();
+    return _itemsRepository.refreshItems(getParams());
   }
+
+  PARAMS getParams({int limit = 20, int offset = 0});
 
   void dispose() {
     _itemsRepository.dispose();

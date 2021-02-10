@@ -22,7 +22,6 @@ class _LoginApi implements LoginApi {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(request?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>(
         '/user-aggregator/auth/login',
         queryParameters: queryParameters,
@@ -43,7 +42,6 @@ class _LoginApi implements LoginApi {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(request?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>(
         '/user-aggregator/auth/register',
         queryParameters: queryParameters,
@@ -64,7 +62,6 @@ class _LoginApi implements LoginApi {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(request?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>(
         '/user-aggregator/auth/reset-password',
         queryParameters: queryParameters,
@@ -85,7 +82,6 @@ class _LoginApi implements LoginApi {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(request?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>(
         '/user-aggregator/auth/register-pair-usage',
         queryParameters: queryParameters,

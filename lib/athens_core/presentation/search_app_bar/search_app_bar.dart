@@ -1,5 +1,6 @@
 import 'package:project_athens/athens_core/presentation/search_app_bar/search_app_bar_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/presentation/search_app_bar/search_app_bar_facade.dart';
 import 'package:provider/provider.dart';
 
 PreferredSize SearchAppBar(
@@ -13,7 +14,6 @@ PreferredSize SearchAppBar(
     child: _SearchAppBar(
         title: title,
         hintText: hintText,
-        searchQuery: searchQuery,
         showBackArrow: showBackArrow,
         additionalIcons: additionalIcons),
   );
@@ -24,8 +24,6 @@ class _SearchAppBar extends StatelessWidget {
 
   final String hintText;
 
-  final ValueChanged<String> searchQuery;
-
   final bool showBackArrow;
 
   final List<IconButton> additionalIcons;
@@ -34,15 +32,16 @@ class _SearchAppBar extends StatelessWidget {
       {Key key,
       @required this.title,
       @required this.hintText,
-      @required this.searchQuery,
       @required this.showBackArrow,
       this.additionalIcons = const []})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final searchAppBarFacade = Provider.of<SearchAppBarFacade>(context);
+
     return ChangeNotifierProvider<SearchAppBarBloc>(
-      create: (_) => SearchAppBarBloc(),
+      create: (_) => SearchAppBarBloc(searchAppBarFacade),
       child: Consumer<SearchAppBarBloc>(
         builder: (context, bloc, _) => AppBar(
           title: _buildAppBarTitle(bloc),
@@ -60,7 +59,9 @@ class _SearchAppBar extends StatelessWidget {
       case SearchAppBarState.SEARCHING:
         return TextFormField(
           initialValue: "",
-          onChanged: searchQuery,
+          onChanged: (query) {
+            bloc.changeSearchQuery(query);
+          },
           style: TextStyle(color: Colors.white),
           decoration: InputDecoration(
               prefixIcon: Icon(
@@ -87,7 +88,7 @@ class _SearchAppBar extends StatelessWidget {
             color: Colors.white,
           ),
           onPressed: () {
-            searchQuery("");
+            bloc.changeSearchQuery("");
             bloc.setState(SearchAppBarState.DEFAULT);
           },
         );
