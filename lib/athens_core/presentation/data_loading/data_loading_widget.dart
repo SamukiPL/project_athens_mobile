@@ -89,7 +89,7 @@ class DataLoadingWidget extends StatelessWidget {
     if (retryWidget == null && onRetry == null)
       return _getNoData();
 
-    return retryWidget(errorType) ?? _buildBaseRetry(errorType);
+    return retryWidget?.call(errorType) ?? _buildBaseRetry(errorType);
   }
 
   Widget _buildBaseRetry(ErrorType errorType) => RetryWidget(

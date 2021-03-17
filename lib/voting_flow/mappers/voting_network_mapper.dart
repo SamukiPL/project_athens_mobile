@@ -3,14 +3,14 @@ import 'package:project_athens/athens_core/domain/data_mapper.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
 
-class VotingNetworkMapper extends DataMapper<VotingResponse, VotingModel> {
+class VotingNetworkMapper extends AsyncDataMapper<VotingResponse, VotingModel> {
 
   final AppLocalizations _localizations;
 
   VotingNetworkMapper(this._localizations);
 
   @override
-  VotingModel transform(VotingResponse data) {
+  Future<VotingModel> transform(VotingResponse data) async {
     final results = VoteResultModel(data.inFavor, data.against, data.hold, data.absent);
     final voteModels = data.votes.map((vote) => VoteModel(VoteType.values[vote.type], vote.cadencyDeputy)).toList();
     return VotingModel(

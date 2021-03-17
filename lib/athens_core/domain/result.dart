@@ -27,3 +27,4 @@ class Failure<T> implements Result<T> {
 
 }
 
+class Refresh<T> implements Result<T> {}

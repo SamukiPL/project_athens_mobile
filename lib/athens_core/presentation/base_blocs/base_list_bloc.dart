@@ -30,7 +30,7 @@ abstract class BaseListBloc<
   int batchSize = 20;
 
   @override
-  int page = 0;
+  int offset = 0;
 
   Function(MODEL) get itemClick;
 
@@ -38,10 +38,12 @@ abstract class BaseListBloc<
   void manageState(Result result) {
     super.manageState(result);
     if (result is Success<List<MODEL>>) {
-      adapter.updateList(_mapItems(result.value));
+      offset = adapter.updateList(_mapItems(result.value));
       setLoadingState((result.value.isEmpty)
           ? DataLoadingState.noData()
           : DataLoadingState.contentLoaded());
+    } else if(result is Refresh<List<MODEL>>) {
+      adapter.updateList(List<ITEM>(), loading: true);
     } else {
       adapter.setLoading(false);
     }
@@ -53,24 +55,16 @@ abstract class BaseListBloc<
       adapter.setLoading(false);
       manageState(data);
     });
-    page++;
   }
 
-  Future<void> test;
-
   @override
-  Future<void> loadMore() async {
-    if (test == null) {
-      adapter.setLoading(true);
-      test = _listUseCase.fetchItems(batchSize, page * batchSize).whenComplete(() {
-        test = null;
-      });
-    }
+  Future<void> loadMore() {
+    adapter.setLoading(true);
+    return _listUseCase.fetchItems(batchSize, offset);
   }
 
   @override
   Future<void> refresh() async {
-    adapter.updateList(List<ITEM>(), loading: true);
     _listUseCase.refreshItems();
   }
 

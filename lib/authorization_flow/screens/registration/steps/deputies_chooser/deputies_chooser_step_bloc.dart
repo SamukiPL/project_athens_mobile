@@ -24,7 +24,7 @@ class DeputiesChooserBloc extends BaseRegistrationStepBloc
   int batchSize = 40;
 
   @override
-  int page = 1;
+  int offset = 0;
 
   FabBloc _fabBloc = FabBloc(visible: false);
 

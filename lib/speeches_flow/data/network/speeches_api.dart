@@ -12,6 +12,6 @@ abstract class SpeechesApi  {
   factory SpeechesApi(Dio dio, {String baseUrl}) = _SpeechesApi;
 
   @POST("/deputy-aggregator/cadency-speech/search")
-  Future<SpeechesSearchResponse> getAllDeputies(@Body() SpeechSearchRequest request);
+  Future<SpeechesSearchResponse> getSpeeches(@Body() SpeechSearchRequest request);
 
 }

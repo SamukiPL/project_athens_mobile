@@ -16,7 +16,7 @@ class DeputiesRegistrationBloc extends BaseBloc
   int batchSize = 40;
 
   @override
-  int page = 1;
+  int offset = 1;
 
   DeputiesRegistrationBloc(this._deputiesRegistrationUseCase) {
     adapter = PagingListAdapter(this);

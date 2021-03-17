@@ -34,27 +34,25 @@ abstract class PagingList<ITEM> extends StatelessWidget {
         builder: (context, state, _) => refreshable
             ? RefreshIndicator(
           onRefresh: () => _adapter.refresh(),
-          child: getList(state),
+          child: getList(_adapter, state),
         )
-            : getList(state),
+            : getList(_adapter, state),
       ),
     );
   }
 
   @protected
-  Widget getList(PagingState<ITEM> state) {
+  Widget getList(PagingListAdapter adapter, PagingState<ITEM> state) {
     return ListView.separated(
-        separatorBuilder: (context, index) => buildSeparator(context, index),
-        padding: EdgeInsets.only(left: leftPadding, top: topPadding, right: rightPadding, bottom: bottomPadding),
-        itemCount: state.itemsCount,
-        itemBuilder: (_, index) => _itemBuilder(state.items, index)
+      controller: adapter.scrollController,
+      separatorBuilder: (context, index) => buildSeparator(context, index),
+      padding: EdgeInsets.only(left: leftPadding, top: topPadding, right: rightPadding, bottom: bottomPadding),
+      itemCount: state.itemsCount,
+      itemBuilder: (_, index) => _itemBuilder(state.items, index)
     );
   }
 
   StatelessWidget _itemBuilder(List<ITEM> items, int index) {
-    if (items.length - 1 == index)
-      _adapter.loadMoreData();
-
     if (items.length > index)
       return getItemViewHolder(items[index], index, items.length);
     else
