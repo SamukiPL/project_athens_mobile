@@ -41,7 +41,7 @@ dependencies:
   # fix for ios build
   # error: /Users/runner/work/project_athens_mobile/project_athens_mobile/ios/Flutter/Release.xcconfig:1:
   # could not find included file 'Pods/Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig' in search paths (in target 'Runner' from project 'Runner')
-  path_provider: 1.6.1
+  path_provider: 1.6.18
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
