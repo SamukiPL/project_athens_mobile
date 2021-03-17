@@ -34,6 +34,7 @@ dependencies:
   video_player: ^0.10.12+3
   flick_video_player: ^0.1.1
   sortedmap: ^0.4.2+1
+  syncfusion_flutter_datepicker: ^18.4.39-beta
   lang_generator:
     path: lang_generator
 

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:provider/provider.dart';
 
 import 'paging_list_adapter.dart';
@@ -51,7 +52,7 @@ abstract class PagingList<ITEM> extends StatelessWidget {
   }
 
   StatelessWidget _itemBuilder(List<ITEM> items, int index) {
-    if (items.length - 7 == index)
+    if (items.length - 1 == index)
       _adapter.loadMoreData();
 
     if (items.length > index)

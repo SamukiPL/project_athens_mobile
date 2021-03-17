@@ -1,9 +1,9 @@
 import 'package:project_athens/athens_core/domain/list/base_params.dart';
 
 class DeputiesListParams extends BaseParams {
+  
+  final String searchQuery;
 
-  final List<String> deputyIdsToShow;
-
-  DeputiesListParams({this.deputyIdsToShow});
+  DeputiesListParams(this.searchQuery);
 
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:project_athens/athens_core/filters_and_sort/filters_bottom_sheet.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
@@ -57,11 +58,19 @@ class VotesListScreen extends BaseScreen<VotesListBloc> {
         title: getAppBarTitle(localizations, bloc),
         hintText: "Not ready yet",
         searchQuery: (query) {},
-        showBackArrow: showBackArrow
+        showBackArrow: showBackArrow,
+        additionalIcons: [
+          IconButton(icon: Icon(Icons.filter_alt_sharp, color: Colors.white,),
+              onPressed: () => showFullScreenDialog(context))
+        ]
     );
   }
 
   @override
   Widget buildFloatingActionButton(BuildContext context, VotesListBloc bloc) => null;
+
+  void showFullScreenDialog(BuildContext context) {
+    showFilterBottomSheet(context);
+  }
   
 }

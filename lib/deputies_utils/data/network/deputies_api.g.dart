@@ -44,7 +44,6 @@ class _DeputiesApi implements DeputiesApi {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(request?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     await _dio.request<void>('/user-aggregator/deputy-subscribe/$cadency',
         queryParameters: queryParameters,
         options: RequestOptions(

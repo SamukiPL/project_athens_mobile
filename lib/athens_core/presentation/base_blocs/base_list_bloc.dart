@@ -1,7 +1,7 @@
 import 'package:project_athens/athens_core/domain/data_mapper.dart';
 import 'package:project_athens/athens_core/domain/list/base_model.dart';
 import 'package:project_athens/athens_core/domain/list/base_params.dart';
-import 'package:project_athens/athens_core/domain/list/list_use_case.dart';
+import 'package:project_athens/athens_core/domain/list/list_facade.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
@@ -10,15 +10,15 @@ import 'package:project_athens/athens_core/presentation/data_loading/data_loadin
 import 'package:project_athens/pagination/paging_bloc.dart';
 import 'package:project_athens/pagination/paging_list_adapter.dart';
 
-abstract class BaseListBloc<MODEL extends BaseModel, ITEM extends BaseItemViewModel,
+abstract class BaseListBloc<
+    MODEL extends BaseModel,
+    ITEM extends BaseItemViewModel,
     PARAMS extends BaseParams> extends BaseBloc implements PagingBloc<ITEM> {
-  final ListUseCase<MODEL, PARAMS> _listUseCase;
-
-  final PARAMS _params;
+  final ListFacade<MODEL, PARAMS> _listUseCase;
 
   final DataMapper<MODEL, ITEM> _itemFactory;
 
-  BaseListBloc(this._listUseCase, this._params, this._itemFactory) {
+  BaseListBloc(this._listUseCase, this._itemFactory) {
     getItems();
     adapter = PagingListAdapter(this);
   }
@@ -39,23 +39,33 @@ abstract class BaseListBloc<MODEL extends BaseModel, ITEM extends BaseItemViewMo
     super.manageState(result);
     if (result is Success<List<MODEL>>) {
       adapter.updateList(_mapItems(result.value));
-      setLoadingState((result.value.isEmpty) ? DataLoadingState.noData() : DataLoadingState.contentLoaded());
+      setLoadingState((result.value.isEmpty)
+          ? DataLoadingState.noData()
+          : DataLoadingState.contentLoaded());
+    } else {
+      adapter.setLoading(false);
     }
   }
 
   @protected
   Future<void> getItems() async {
-    _listUseCase.getItems(_params).listen((Result data) {
+    _listUseCase.getItems().listen((Result data) {
       adapter.setLoading(false);
       manageState(data);
     });
     page++;
   }
 
+  Future<void> test;
+
   @override
   Future<void> loadMore() async {
-    adapter.setLoading(true);
-    await _listUseCase.fetchItems(batchSize, page * batchSize);
+    if (test == null) {
+      adapter.setLoading(true);
+      test = _listUseCase.fetchItems(batchSize, page * batchSize).whenComplete(() {
+        test = null;
+      });
+    }
   }
 
   @override

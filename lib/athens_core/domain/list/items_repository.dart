@@ -5,11 +5,11 @@ import 'package:rxdart/rxdart.dart';
 
 abstract class ItemsRepository<MODEL extends BaseModel, PARAMS extends BaseParams> {
 
-  Future<void> fetchItems(int limit, int offset);
+  Future<void> fetchItems(PARAMS params);
 
   Stream<Result<List<MODEL>>> getItems(PARAMS params);
 
-  Future<void> refreshItems();
+  Future<void> refreshItems(PARAMS params);
 
   void dispose();
 

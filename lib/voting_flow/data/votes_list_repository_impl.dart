@@ -21,7 +21,7 @@ class VotesListRepositoryImpl extends VotesListRepository {
   VotesListRepositoryImpl(this._votingApi, this._networkMapper);
 
   @override
-  Future<void> fetchItems(int limit, int offset) async {}
+  Future<void> fetchItems(BaseParams params) async {}
 
   @override
   Stream<Result<List<VotingModel>>> getItems(BaseParams params) {
@@ -31,7 +31,7 @@ class VotesListRepositoryImpl extends VotesListRepository {
   }
 
   @override
-  Future<void> refreshItems() async {}
+  Future<void> refreshItems(BaseParams params) async {}
 
   @override
   void dispose() {

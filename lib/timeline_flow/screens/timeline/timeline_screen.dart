@@ -54,7 +54,7 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
             context: context,
             initialDate: bloc.selectedDate,
             firstDate: DateTime.utc(2016),
-            lastDate: DateTime.utc(2021),
+            lastDate: DateTime.utc(2022),
             selectableDayPredicate: (DateTime date) {
               return bloc.dates.any((element) => dateOnly(element.meetingDate).isAtSameMomentAs(date));
             },
