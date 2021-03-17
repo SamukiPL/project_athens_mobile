@@ -51,8 +51,8 @@ class SpeechesListRepositoryImpl extends SpeechesListRepository {
           params.from?.toIso8601String(), params.to?.toIso8601String(), params.sortingParam, 9)
     );
 
-    final modelsList = await _networkMapper(response);
+    final modelsList = await _networkMapper(response.speeches);
     _cache = _cache + modelsList;
-    _speechesSubject.add(Success(modelsList));
+    _speechesSubject.add(Success(_cache));
   }
 }

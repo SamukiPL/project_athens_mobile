@@ -18,7 +18,7 @@ class SpeechesNetworkMapper
         club: data.parliamentClub,
         desc: data.agenda?.title,
         date: data.cisInfo.eventDateTime,
-        thumbnailUrl: await _deputiesCache.getDeputyThumbnail(data.cadencyDeputy),
+        thumbnailUrl: await _deputiesCache.getDeputyThumbnail(data.cadencyDeputy) ?? "",
         videoUrl: data.videoDownloadUrl
     );
   }

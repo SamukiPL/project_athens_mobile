@@ -10,7 +10,9 @@ import 'package:project_athens/athens_core/presentation/data_loading/data_loadin
 import 'package:project_athens/pagination/paging_bloc.dart';
 import 'package:project_athens/pagination/paging_list_adapter.dart';
 
-abstract class BaseListBloc<MODEL extends BaseModel, ITEM extends BaseItemViewModel,
+abstract class BaseListBloc<
+    MODEL extends BaseModel,
+    ITEM extends BaseItemViewModel,
     PARAMS extends BaseParams> extends BaseBloc implements PagingBloc<ITEM> {
   final ListFacade<MODEL, PARAMS> _listUseCase;
 
@@ -37,7 +39,11 @@ abstract class BaseListBloc<MODEL extends BaseModel, ITEM extends BaseItemViewMo
     super.manageState(result);
     if (result is Success<List<MODEL>>) {
       adapter.updateList(_mapItems(result.value));
-      setLoadingState((result.value.isEmpty) ? DataLoadingState.noData() : DataLoadingState.contentLoaded());
+      setLoadingState((result.value.isEmpty)
+          ? DataLoadingState.noData()
+          : DataLoadingState.contentLoaded());
+    } else {
+      adapter.setLoading(false);
     }
   }
 
@@ -50,10 +56,16 @@ abstract class BaseListBloc<MODEL extends BaseModel, ITEM extends BaseItemViewMo
     page++;
   }
 
+  Future<void> test;
+
   @override
   Future<void> loadMore() async {
-    adapter.setLoading(true);
-    await _listUseCase.fetchItems(batchSize, page * batchSize);
+    if (test == null) {
+      adapter.setLoading(true);
+      test = _listUseCase.fetchItems(batchSize, page * batchSize).whenComplete(() {
+        test = null;
+      });
+    }
   }
 
   @override
