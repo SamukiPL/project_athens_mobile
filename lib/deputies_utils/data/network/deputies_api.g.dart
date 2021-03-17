@@ -37,6 +37,25 @@ class _DeputiesApi implements DeputiesApi {
   }
 
   @override
+  Future<DeputyResponse> getDeputy(cadencyDeputyId) async {
+    ArgumentError.checkNotNull(cadencyDeputyId, 'cadencyDeputyId');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/deputy-aggregator/cadency-deputy/$cadencyDeputyId',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = DeputyResponse.fromJson(_result.data);
+    return value;
+  }
+
+  @override
   Future<void> putDeputies(cadency, request) async {
     ArgumentError.checkNotNull(cadency, 'cadency');
     ArgumentError.checkNotNull(request, 'request');

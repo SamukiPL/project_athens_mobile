@@ -91,12 +91,12 @@ class AppLocalizationsGenerated {
     return words['login']['buttons']['register'];
   }
 
-  String loginButtonsForgot() {
-    return words['login']['buttons']['forgot'];
-  }
-
   String loginButtonsSignUp() {
     return words['login']['buttons']['signUp'];
+  }
+
+  String loginButtonsForgot() {
+    return words['login']['buttons']['forgot'];
   }
 
   String loginButtonsResetPassword() {
@@ -249,6 +249,42 @@ class AppLocalizationsGenerated {
 
   String deputiesDeputiesListTitle() {
     return words['deputies']['deputiesListTitle'];
+  }
+
+  String deputiesInformation() {
+    return words['deputies']['information'];
+  }
+
+  String deputiesSpeeches() {
+    return words['deputies']['speeches'];
+  }
+
+  String deputiesVotings() {
+    return words['deputies']['votings'];
+  }
+
+  String deputiesBirthDate() {
+    return words['deputies']['birthDate'];
+  }
+
+  String deputiesEducation() {
+    return words['deputies']['education'];
+  }
+
+  String deputiesProfession() {
+    return words['deputies']['profession'];
+  }
+
+  String deputiesFinishedSchools() {
+    return words['deputies']['finishedSchools'];
+  }
+
+  String deputiesParliamentExperience() {
+    return words['deputies']['parliamentExperience'];
+  }
+
+  String deputiesNoHighestAccuracy() {
+    return words['deputies']['noHighestAccuracy'];
   }
 
   String speechesSpeechesListTitle() {
