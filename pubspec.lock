@@ -939,6 +939,9 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.5.1"
+<<<<<<< HEAD
+>>>>>>> aa4aca6 (feat(pbrejdak): deputy details)
+=======
 >>>>>>> aa4aca6 (feat(pbrejdak): deputy details)
   yaml:
     dependency: transitive
