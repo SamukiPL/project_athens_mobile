@@ -85,7 +85,16 @@
     "noEvents": "No events for currently selected date."
   },
   "deputies": {
-    "deputiesListTitle": "Deputies"
+    "deputiesListTitle": "Deputies",
+    "information": "Information",
+    "speeches": "Speeches",
+    "votings": "Votings",
+    "birthDate": "Birth date",
+    "education": "Education",
+    "profession": "Profession",
+    "finishedSchools": "Finished schools",
+    "parliamentExperience": "Parliament experience",
+    "noHighestAccuracy": "none"
   },
   "speeches": {
     "speechesListTitle": "Speeches",
