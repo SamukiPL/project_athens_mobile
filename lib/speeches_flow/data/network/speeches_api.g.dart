@@ -16,7 +16,7 @@ class _SpeechesApi implements SpeechesApi {
   String baseUrl;
 
   @override
-  Future<SpeechesSearchResponse> getAllDeputies(request) async {
+  Future<SpeechesSearchResponse> getSpeeches(request) async {
     ArgumentError.checkNotNull(request, 'request');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

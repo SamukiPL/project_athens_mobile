@@ -2,8 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/domain/base_list_facade.dart';
-import 'package:project_athens/athens_core/domain/list/base_params.dart';
-import 'package:project_athens/athens_core/domain/list/list_facade.dart';
 import 'package:project_athens/athens_core/filters_and_sort/data/filters_repository.dart';
 import 'package:project_athens/athens_core/filters_and_sort/domain/filterable_facade.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';

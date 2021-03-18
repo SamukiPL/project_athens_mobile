@@ -28,8 +28,8 @@ class SpeechesListRepositoryImpl extends SpeechesListRepository {
   }
 
   @override
-  Future<void> fetchItems(BaseListParams params) async {
-    networkCall(params);
+  Future<void> fetchItems(BaseListParams params) {
+    return networkCall(params);
   }
 
   @override
@@ -42,11 +42,12 @@ class SpeechesListRepositoryImpl extends SpeechesListRepository {
   @override
   Future<void> refreshItems(BaseListParams params) async {
     _cache = List.empty();
+    _speechesSubject.add(Refresh());
     networkCall(params);
   }
 
   Future<void> networkCall(BaseListParams params) async {
-    final response = await _speechesApi.getAllDeputies(
+    final response = await _speechesApi.getSpeeches(
       SpeechSearchRequest(params.limit, params.offset, params.searchQuery,
           params.from?.toIso8601String(), params.to?.toIso8601String(), params.sortingParam, 9)
     );

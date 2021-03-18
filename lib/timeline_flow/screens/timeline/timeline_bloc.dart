@@ -40,7 +40,7 @@ class TimelineBloc extends BaseBloc implements PagingBloc<TimelineRowViewModel> 
   int batchSize;
 
   @override
-  int page;
+  int offset;
 
   List<MeetingDate> _dates;
   DateTime _selectedDate;
