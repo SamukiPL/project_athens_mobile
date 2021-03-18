@@ -914,10 +914,7 @@ packages:
       name: web_socket_channel
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "1.2.0"
-=======
-    version: "1.1.0"
   win32:
     dependency: transitive
     description:
@@ -939,7 +936,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.5.1"
->>>>>>> aa4aca6 (feat(pbrejdak): deputy details)
   yaml:
     dependency: transitive
     description:
