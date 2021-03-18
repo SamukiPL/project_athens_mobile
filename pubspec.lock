@@ -916,8 +916,11 @@ packages:
     source: hosted
 <<<<<<< HEAD
     version: "1.2.0"
+<<<<<<< HEAD
 =======
     version: "1.1.0"
+=======
+>>>>>>> f0da9cb7ba08874f27066092003ac54e9253f424
   win32:
     dependency: transitive
     description:
@@ -940,9 +943,12 @@ packages:
     source: hosted
     version: "4.5.1"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> aa4aca6 (feat(pbrejdak): deputy details)
 =======
 >>>>>>> aa4aca6 (feat(pbrejdak): deputy details)
+=======
+>>>>>>> f0da9cb7ba08874f27066092003ac54e9253f424
   yaml:
     dependency: transitive
     description:
