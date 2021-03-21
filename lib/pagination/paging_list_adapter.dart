@@ -1,25 +1,24 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_fimber/flutter_fimber.dart';
+import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
+import 'package:project_athens/athens_core/presentation/base_list/base_items_view_models/base_progress_view_model.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'paging_state.dart';
 import 'paging_bloc.dart';
 
-class PagingListAdapter<ITEM> {
+class PagingListAdapter {
 
-  final PagingBloc<ITEM> _bloc;
+  final PagingBloc _bloc;
 
-  List<ITEM> _itemsList = List();
+  List<BaseItemViewModel> _itemsList = [];
 
   bool _loading;
 
-  int get _itemsCount => _itemsList.length + (_loading ? 1 : 0);
+  final StreamController<PagingState<BaseItemViewModel>> _stateController = BehaviorSubject();
 
-  final StreamController<PagingState<ITEM>> _stateController = BehaviorSubject();
-
-  Stream<PagingState<ITEM>> get stateStream => _stateController.stream;
+  Stream<PagingState<BaseItemViewModel>> get stateStream => _stateController.stream;
 
   final ScrollController _scrollController = ScrollController();
 
@@ -36,7 +35,7 @@ class PagingListAdapter<ITEM> {
     _scrollController.addListener(loadMoreListener);
   }
 
-  int updateList(List<ITEM> itemsList, {bool loading = false}) {
+  int updateList(List<BaseItemViewModel> itemsList, {bool loading = false}) {
     _itemsList = itemsList;
     _loading = loading;
     _addStateToStream();
@@ -67,7 +66,12 @@ class PagingListAdapter<ITEM> {
   }
 
   void _addStateToStream() {
-    _stateController.add(PagingState(_itemsList, _itemsCount));
+    var listToPass = _itemsList;
+
+    if (_loading)
+      listToPass = listToPass + [BaseProgressViewModel()];
+
+    _stateController.add(PagingState(listToPass));
   }
 
   void dispose() {

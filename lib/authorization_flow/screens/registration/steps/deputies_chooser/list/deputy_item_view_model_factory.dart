@@ -6,9 +6,7 @@ extension DeputyItemViewModelFactory on List<DeputyModel> {
       bool Function(DeputyItemViewModel) itemClick) {
     return this.map((model) {
       var item = DeputyItemViewModel(model: model, name: model.name);
-      item.itemClick = () {
-        return itemClick(item);
-      };
+      item.itemClick = itemClick;
       return item;
     }).toList();
   }

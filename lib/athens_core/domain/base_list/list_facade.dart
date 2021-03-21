@@ -1,11 +1,11 @@
-import 'package:project_athens/athens_core/domain/list/base_model.dart';
-import 'package:project_athens/athens_core/domain/list/base_params.dart';
-import 'package:project_athens/athens_core/domain/list/items_repository.dart';
+import 'package:project_athens/athens_core/domain/base_list/base_model.dart';
+import 'package:project_athens/athens_core/domain/base_list/base_params.dart';
+import 'package:project_athens/athens_core/domain/base_list/items_repository.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 
-abstract class ListFacade<MODEL extends BaseModel, PARAMS extends BaseParams> {
+abstract class ListFacade<PARAMS extends BaseParams> {
 
-  final ItemsRepository<MODEL, PARAMS> _itemsRepository;
+  final ItemsRepository _itemsRepository;
 
   ListFacade(this._itemsRepository);
 
@@ -13,7 +13,7 @@ abstract class ListFacade<MODEL extends BaseModel, PARAMS extends BaseParams> {
     return _itemsRepository.fetchItems(getParams(limit: limit, offset: offset));
   }
 
-  Stream<Result<List<MODEL>>> getItems() {
+  Stream<Result<List<BaseModel>>> getItems() {
     return _itemsRepository.getItems(getParams());
   }
 

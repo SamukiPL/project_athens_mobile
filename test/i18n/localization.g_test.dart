@@ -8,15 +8,15 @@ void main() {
   String scriptPath = Platform.script.path;
   String filePathForCoverage = '/' + scriptPath.substring(0, scriptPath.indexOf('test')).substring(1) + 'resources/lang/';
 
-  File enFile = File(filePathForCoverage + 'en.json');
-  String enData = enFile.readAsStringSync();
-  Map<String, dynamic> enWords = json.decode(enData);
-  testAllMethods('en', AppLocalizationsGenerated(enWords));
-
   File plFile = File(filePathForCoverage + 'pl.json');
   String plData = plFile.readAsStringSync();
   Map<String, dynamic> plWords = json.decode(plData);
   testAllMethods('pl', AppLocalizationsGenerated(plWords));
+
+  File enFile = File(filePathForCoverage + 'en.json');
+  String enData = enFile.readAsStringSync();
+  Map<String, dynamic> enWords = json.decode(enData);
+  testAllMethods('en', AppLocalizationsGenerated(enWords));
 }
 
 void testAllMethods(String locale, AppLocalizationsGenerated localization) {

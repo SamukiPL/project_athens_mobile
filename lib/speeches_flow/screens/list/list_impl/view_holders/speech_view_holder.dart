@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/speeches_flow/screens/list/list_impl/speech_item_view_model.dart';
 
@@ -23,7 +24,7 @@ class SpeechViewHolder extends StatelessWidget {
 
   Widget getThumbnail(ThemeData theme) {
     return Hero(
-      tag: _viewModel.id,
+      tag: _viewModel.model.id,
       child: Container(
         margin: EdgeInsets.all(8),
         height: 40,
@@ -34,7 +35,7 @@ class SpeechViewHolder extends StatelessWidget {
               color: Colors.white,
             ),
             child: Image.network(
-              _viewModel.thumbnailUrl,
+              _viewModel.model.thumbnailUrl,
               width: 40,
               errorBuilder:
                   (context, exception, stackTrace) => Icon(
@@ -60,7 +61,7 @@ class SpeechViewHolder extends StatelessWidget {
             children: <Widget>[
               getNameWithDate(context, theme),
               getDescription(context, theme),
-              TechnicalData(technicalId: _viewModel.id)
+              TechnicalData(technicalId: _viewModel.model.id)
             ],
           ),
         ),
@@ -77,7 +78,7 @@ class SpeechViewHolder extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              _viewModel.personName,
+              _viewModel.model.personName,
               style: TextStyle(
                   color: theme.primaryColor,
                   fontWeight: FontWeight.bold,
@@ -86,7 +87,7 @@ class SpeechViewHolder extends StatelessWidget {
             ),
           ),
           Text(
-            _viewModel.date,
+            DateFormat("d.M.y", "pl").format(_viewModel.model.date),
             style: TextStyle(
               color: theme.dividerColor,
               fontSize: 12),
@@ -97,11 +98,11 @@ class SpeechViewHolder extends StatelessWidget {
   }
 
   Widget getDescription(BuildContext context, ThemeData theme) {
-    return _viewModel.desc != null
+    return _viewModel.model.desc != null
         ? Container(
       width: double.infinity,
       child: Text(
-        _viewModel.desc,
+        _viewModel.model.desc,
         style: TextStyle(
             color: theme.dividerColor, fontSize: 14),
         textAlign: TextAlign.left,

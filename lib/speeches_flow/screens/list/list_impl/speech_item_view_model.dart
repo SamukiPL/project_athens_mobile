@@ -1,13 +1,23 @@
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
+import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
+import 'package:project_athens/speeches_flow/screens/list/list_impl/view_holders/speech_view_holder.dart';
 
 class SpeechItemViewModel extends BaseItemViewModel {
 
-  final String id;
-  final String personName;
-  final String desc;
-  final String thumbnailUrl;
-  final String date;
+  final SpeechModel model;
 
-  SpeechItemViewModel(this.id, this.personName, this.desc, this.thumbnailUrl, this.date);
+  SpeechItemViewModel(this.model);
+
+  @override
+  Widget buildWidget(int index, int length) {
+    return SpeechViewHolder(this);
+  }
+
+  @override
+  void itemClick() {
+    redirection(SpeechDetailsDestination(model));
+  }
 
 }

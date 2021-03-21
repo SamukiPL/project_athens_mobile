@@ -1,22 +1,18 @@
-import 'package:project_athens/athens_core/domain/data_mapper.dart';
-import 'package:project_athens/athens_core/domain/list/base_model.dart';
-import 'package:project_athens/athens_core/domain/list/base_params.dart';
-import 'package:project_athens/athens_core/domain/list/list_facade.dart';
+import 'package:project_athens/athens_core/domain/base_list/base_model.dart';
+import 'package:project_athens/athens_core/domain/base_list/list_facade.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:project_athens/athens_core/presentation/base_list/item_view_model_factory.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
 import 'package:project_athens/pagination/paging_bloc.dart';
 import 'package:project_athens/pagination/paging_list_adapter.dart';
 
-abstract class BaseListBloc<
-    MODEL extends BaseModel,
-    ITEM extends BaseItemViewModel,
-    PARAMS extends BaseParams> extends BaseBloc implements PagingBloc<ITEM> {
-  final ListFacade<MODEL, PARAMS> _listUseCase;
+class BaseListBloc extends BaseBloc implements PagingBloc {
+  final ListFacade _listUseCase;
 
-  final DataMapper<MODEL, ITEM> _itemFactory;
+  final ItemViewModelFactory _itemFactory;
 
   BaseListBloc(this._listUseCase, this._itemFactory) {
     getItems();
@@ -24,7 +20,7 @@ abstract class BaseListBloc<
   }
 
   @override
-  PagingListAdapter<ITEM> adapter;
+  PagingListAdapter adapter;
 
   @override
   int batchSize = 20;
@@ -32,18 +28,16 @@ abstract class BaseListBloc<
   @override
   int offset = 0;
 
-  Function(MODEL) get itemClick;
-
   @override
   void manageState(Result result) {
     super.manageState(result);
-    if (result is Success<List<MODEL>>) {
+    if (result is Success<List<BaseModel>>) {
       offset = adapter.updateList(_mapItems(result.value));
       setLoadingState((result.value.isEmpty)
           ? DataLoadingState.noData()
           : DataLoadingState.contentLoaded());
-    } else if(result is Refresh<List<MODEL>>) {
-      adapter.updateList(List<ITEM>(), loading: true);
+    } else if(result is Refresh<List<BaseModel>>) {
+      adapter.updateList([], loading: true);
     } else {
       adapter.setLoading(false);
     }
@@ -68,11 +62,11 @@ abstract class BaseListBloc<
     _listUseCase.refreshItems();
   }
 
-  List<ITEM> _mapItems(List<MODEL> data) {
+  List<BaseItemViewModel> _mapItems(List<BaseModel> data) {
     return data.map((model) {
-      ITEM item = _itemFactory.transform(model);
-      item.itemClick = () {
-        return itemClick(model);
+      BaseItemViewModel item = _itemFactory.create(model);
+      item.redirection = (destination) {
+        goToDestination(destination);
       };
       return item;
     }).toList();

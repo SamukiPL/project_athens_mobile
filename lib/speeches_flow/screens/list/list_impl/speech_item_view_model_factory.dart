@@ -1,16 +1,19 @@
-import 'package:intl/intl.dart';
-import 'package:project_athens/athens_core/domain/data_mapper.dart';
+import 'package:project_athens/athens_core/domain/base_list/base_model.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
+import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
+import 'package:project_athens/athens_core/presentation/base_list/item_view_model_factory.dart';
 import 'package:project_athens/speeches_flow/screens/list/list_impl/speech_item_view_model.dart';
 
-class SpeechItemViewModelFactory extends DataMapper<SpeechModel, SpeechItemViewModel> {
+class SpeechItemViewModelFactory extends ItemViewModelFactory {
+
   @override
-  SpeechItemViewModel transform(data) => SpeechItemViewModel(
-    data.id,
-    data.personName,
-    data.desc,
-    data.thumbnailUrl,
-    DateFormat("d.M.y", "pl").format(data.date)
-  );
+  BaseItemViewModel createWithoutError(BaseModel model) {
+    switch(model.runtimeType) {
+      case SpeechModel:
+        return SpeechItemViewModel(model);
+    }
+
+    return null;
+  }
 
 }

@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:project_athens/athens_core/domain/list/base_model.dart';
+import 'package:project_athens/athens_core/domain/base_list/base_model.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
 
 abstract class TimelineModel extends BaseModel {

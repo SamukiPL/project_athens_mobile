@@ -41,7 +41,7 @@ class GroupedVotingViewHolder extends StatelessWidget {
             FittedBox(
               fit: BoxFit.contain,
               child: Text(
-                DateFormat("HH:mm").format(viewModel.firstDate),
+                DateFormat("HH:mm").format(viewModel.model.firstDate),
                 style: TextStyle(
                     color: theme.dividerColor, fontSize: 24, fontWeight: FontWeight.w300),
               ),
@@ -115,7 +115,7 @@ class GroupedVotingViewHolder extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   child: Text(
-                    viewModel.votingDesc,
+                    viewModel.model.votingDesc,
                     style: theme.textTheme.overline.copyWith(
                         color: theme.dividerColor,
                         fontSize: 10
@@ -126,7 +126,7 @@ class GroupedVotingViewHolder extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   child: Text(
-                    viewModel.title,
+                    viewModel.model.title,
                     style: TextStyle(
                         color: theme.primaryColor,
                         fontWeight: FontWeight.bold,
@@ -135,7 +135,7 @@ class GroupedVotingViewHolder extends StatelessWidget {
                     textAlign: TextAlign.left,
                   ),
                 ),
-                TechnicalData(technicalId: viewModel.id),
+                TechnicalData(technicalId: viewModel.model.id),
               ],
             ),
           ),

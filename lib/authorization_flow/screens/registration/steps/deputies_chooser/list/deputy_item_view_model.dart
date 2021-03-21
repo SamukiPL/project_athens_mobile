@@ -1,4 +1,5 @@
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/deputies_chooser/list/view_holders/deputy_view_holder.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -9,6 +10,8 @@ class DeputyItemViewModel extends BaseItemViewModel {
   final String name;
 
   DeputyItemViewModel({@required this.model, @required this.name});
+
+  bool Function(DeputyItemViewModel) itemClick;
 
   bool _checked = false;
   bool get checked => _checked;
@@ -27,7 +30,7 @@ class DeputyItemViewModel extends BaseItemViewModel {
     _speech = checked;
     _interpolation = false;
     _checked = checked;
-    _checked = itemClick() && checked;
+    _checked = itemClick(this) && checked;
     notifyListeners();
   }
 
@@ -44,6 +47,11 @@ class DeputyItemViewModel extends BaseItemViewModel {
   void setInterpolation(bool interpolation) {
     _interpolation = checked && interpolation;
     notifyListeners();
+  }
+
+  @override
+  Widget buildWidget(int index, int length) {
+    return DeputyViewHolder(viewModel: this);
   }
 
 }

@@ -1,35 +1,33 @@
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
+import 'package:project_athens/athens_core/navigation/destination_manager.dart';
+import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
 
 extension TimelineModelExtension on List<TimelineModel> {
-  List<TimelineRowViewModel> toTimelineRowViewModel(void Function(TimelineModel) itemClick) {
-    return this.map((model) => _toRowViewModel(model, itemClick)).toList();
+  List<BaseItemViewModel> toTimelineRowViewModel(void Function(Destination) redirection) {
+    return this.map((model) => _toRowViewModel(model, redirection)).toList();
   }
 
-  TimelineRowViewModel _toRowViewModel(TimelineModel model, void Function(TimelineModel) itemClick) {
-    TimelineRowViewModel item;
+  BaseItemViewModel _toRowViewModel(TimelineModel model, void Function(Destination) redirection) {
+    BaseItemViewModel item;
     switch (model.type) {
       case TimelineModelType.VOTING:
         VotingModel votingModel = model;
-        item = VotingRowViewModel(votingModel.id, votingModel.title, votingModel.date, votingModel.votingDesc);
+        item = VotingRowViewModel(votingModel);
         break;
       case TimelineModelType.SPEECH:
         SpeechModel speechModel = model;
-        item = SpeechRowViewModel(speechModel.id, speechModel.personName, speechModel.desc,
-            speechModel.date, speechModel.thumbnailUrl);
+        item = SpeechRowViewModel(speechModel);
         break;
       case TimelineModelType.GROUPED_VOTING:
         GroupedVotingModel groupedVotingModel = model;
-        item = GroupedVotingViewModel(groupedVotingModel.id, groupedVotingModel.title,
-            groupedVotingModel.firstDate, groupedVotingModel.lastDate, groupedVotingModel.votingDesc);
+        item = GroupedVotingViewModel(groupedVotingModel);
         break;
       default:
         throw Exception("There is no other type");
     }
-    item.itemClick = () {
-      itemClick.call(model);
-    };
+    item.redirection = redirection;
     return item;
   }
 }
