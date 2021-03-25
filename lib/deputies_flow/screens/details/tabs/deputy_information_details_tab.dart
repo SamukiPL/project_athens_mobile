@@ -2,23 +2,67 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
+import 'package:project_athens/athens_core/presentation/async_once/async_once.dart';
 import 'package:project_athens/athens_core/presentation/full_card/full_card.dart';
 import 'package:project_athens/athens_core/presentation/simple_horizontal_table/simple_horizontal_table.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
-import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_information_details_tab_bloc.dart';
+import 'package:project_athens/deputies_flow/domain/details/get_full_deputy_use_case.dart';
+import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_information_extension.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_full.dart';
 import 'package:provider/provider.dart';
 
 class DeputyInformationDetailsTab extends StatelessWidget {
-  final DeputyInformationDetailsTabBloc bloc;
 
-  DeputyInformationDetailsTab(this.bloc);
+  @override
+  Widget build(BuildContext context) {
+    final localizations = Provider.of<AppLocalizations>(context);
+    final theme = Theme.of(context);
+
+    final asyncOnceUseCase = Provider.of<GetFullDeputyUseCase>(context);
+    return AsyncOnce<DeputyFull>(asyncOnceUseCase: asyncOnceUseCase, builder: (deputyFull) {
+      return SingleChildScrollView(
+        child: Container(
+          color: Colors.grey.shade200,
+          child: Column(
+              children: [
+                FullCard(
+                  child: buildBriefInfoTable(localizations, deputyFull),
+                  rightPadding: 10,
+                  leftPadding: 10,
+                  header: 'Podstawowe informacje',
+                ),
+                FullCard(
+                  rightPadding: 10,
+                  leftPadding: 10,
+                  child: buildDetailedInfoBlock(localizations, theme, deputyFull),
+                  header: 'Doświadczenie',
+                ),
+                FullCard(
+                    rightPadding: 10,
+                    leftPadding: 10,
+                    child: buildStatisticsBlock(localizations, theme, deputyFull),
+                    header: 'Statystyki'
+                )
+              ]
+          ),
+        ),
+      );
+    });
+  }
+
+  Widget buildBriefInfoTable(AppLocalizations localizations, DeputyFull deputyFull) {
+    return Column(
+      children: [
+        SimpleHorizontalTable(cells: deputyFull.getBriefInfoTableCells(localizations)),
+        TechnicalData(technicalId: deputyFull.getDeputyId())
+      ],
+    );
+  }
 
   Widget buildCardHeader(String text, ThemeData theme, double fontSize) {
     fontSize = fontSize != null ? fontSize : 21;
 
     return Container(
-          // padding: EdgeInsets.only(top: 5, bottom: 5, left: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -30,27 +74,10 @@ class DeputyInformationDetailsTab extends StatelessWidget {
                     color: theme.dividerColor
                 ),
               ),
-              // Container(
-              //   padding: EdgeInsets.only(left: 5),
-              //   width: 50,
-              //   height: 2,
-              //   decoration: BoxDecoration(
-              //       color: theme.dividerColor
-              //   ),
-              // )
             ],
           )
         );
 
-  }
-
-  Widget buildBriefInfoTable(AppLocalizations localizations) {
-    return Column(
-      children: [
-        SimpleHorizontalTable(cells: bloc.getBriefInfoTableCells(localizations)),
-        TechnicalData(technicalId: bloc.getDeputyId())
-      ],
-    );
   }
 
   Widget buildHorizontalTable(String leftText, String rightText, ThemeData theme) {
@@ -91,8 +118,8 @@ class DeputyInformationDetailsTab extends StatelessWidget {
 
   }
 
-  Widget buildDetailedInfoBlock(AppLocalizations localizations, ThemeData theme) {
-    final cv = bloc.getDeputyCV();
+  Widget buildDetailedInfoBlock(AppLocalizations localizations, ThemeData theme, DeputyFull deputyFull) {
+    final cv = deputyFull.getDeputyCV();
 
     final finishedSchools = cv.finishedSchools.trim();
     final experience = cv.parliamentExperience.trim();
@@ -171,54 +198,22 @@ class DeputyInformationDetailsTab extends StatelessWidget {
     );
   }
 
-  Widget buildStatisticsBlock(AppLocalizations localizations, ThemeData theme) {
-    final stats = bloc.getStatistics();
+  Widget buildStatisticsBlock(AppLocalizations localizations, ThemeData theme, DeputyFull deputyFull) {
+    final stats = deputyFull.getStatistics();
 
     final voteAccuracy = stats.clubVoteAccuracy;
     voteAccuracy.sort((a,b) => a.compatibleVotes > b.compatibleVotes ? -1 : 1);
 
-    final cells = bloc.getStatisticsHorizontalTableCells(localizations);
+    final cells = deputyFull.getStatisticsHorizontalTableCells(localizations);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // buildCardHeader('Statystyki', theme, 21),
         SimpleHorizontalTable(cells: cells),
         buildCardHeader('Zgodność głosowania', theme, 15),
         buildVoteAccuracyTable(voteAccuracy, localizations, theme)
       ],
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final localizations = Provider.of<AppLocalizations>(context);
-    final theme = Theme.of(context);
-
-    return Container(
-      child: Column(
-        children: [
-          FullCard(
-            child: buildBriefInfoTable(localizations),
-            rightPadding: 10,
-            leftPadding: 10,
-            header: 'Podstawowe informacje',
-          ),
-          FullCard(
-            rightPadding: 10,
-            leftPadding: 10,
-            child: buildDetailedInfoBlock(localizations, theme),
-            header: 'Doświadczenie',
-          ),
-          FullCard(
-            rightPadding: 10,
-            leftPadding: 10,
-            child: buildStatisticsBlock(localizations, theme),
-            header: 'Statystyki'
-          )
-        ]
-      ),
     );
   }
 }

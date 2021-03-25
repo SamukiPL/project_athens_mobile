@@ -1,39 +1,30 @@
-import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
 import 'package:project_athens/athens_core/presentation/simple_horizontal_table/simple_horizontal_table_cell.dart';
-import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_full.dart';
 
-class DeputyInformationDetailsTabBloc extends BaseBloc {
-  final DeputyFull _deputyFull;
-  final DeputiesCache _deputiesCache;
-
-  DeputyInformationDetailsTabBloc(this._deputyFull, this._deputiesCache);
+extension DeputyFullExtension on DeputyFull {
 
   List<SimpleHorizontalTableCell> getBriefInfoTableCells(AppLocalizations localizations) {
-    final born = _deputyFull.cv.born;
+    final born = cv.born;
     final bornDate = born.contains(',') ? born.substring(0, born.indexOf(',')) : born;
 
     return [
       SimpleHorizontalTableCell(lowerText: bornDate, upperText: localizations.getText().deputiesBirthDate()),
-      SimpleHorizontalTableCell(lowerText: _deputyFull.cv.education, upperText: localizations.getText().deputiesEducation()),
-      SimpleHorizontalTableCell(lowerText: _deputyFull.cv.profession, upperText: localizations.getText().deputiesProfession())
+      SimpleHorizontalTableCell(lowerText: cv.education, upperText: localizations.getText().deputiesEducation()),
+      SimpleHorizontalTableCell(lowerText: cv.profession, upperText: localizations.getText().deputiesProfession())
     ].toList();
   }
 
   String getFinishedSchools() {
-    // return deputyFull.cv.finishedSchools.split(',').map((e) => e.trim()).toList();
-    return _deputyFull.cv.finishedSchools.trim();
+    return cv.finishedSchools.trim();
   }
 
   DeputyCv getDeputyCV() {
-    return _deputyFull.cv;
+    return cv;
   }
 
   String getDeputyId() {
-    return _deputyFull.id;
+    return id;
   }
 
   // String getParliamentExperience() {
@@ -41,11 +32,11 @@ class DeputyInformationDetailsTabBloc extends BaseBloc {
   // }
 
   Statistics getStatistics() {
-    return _deputyFull.statistics;
+    return statistics;
   }
 
   List<SimpleHorizontalTableCell> getStatisticsHorizontalTableCells(AppLocalizations localizations) {
-    final stats = _deputyFull.statistics;
+    final stats = statistics;
 
     final voteAccuracy = stats.clubVoteAccuracy;
     voteAccuracy.sort((a, b) => a.compatibleVotes > b.compatibleVotes ? -1 : 1);

@@ -1,58 +1,53 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project_athens/athens_core/domain/result.dart';
+import 'package:project_athens/athens_core/domain/async_once/async_once_use_case.dart';
+import 'package:project_athens/athens_core/presentation/async_once/async_once_bloc.dart';
+import 'package:project_athens/athens_core/presentation/data_loading/data_loading_widget.dart';
+import 'package:project_athens/athens_core/presentation/widget_state.dart';
 import 'package:provider/provider.dart';
 
-typedef asyncSourceFn<T> = Future<Result<T>> Function(BuildContext context);
-typedef childFn<T> = Widget Function(BuildContext context, T data);
-
 class AsyncOnce<T> extends StatelessWidget {
-  final asyncSourceFn<T> asyncFn;
+  final AsyncOnceUseCase asyncOnceUseCase;
 
-  final Future<Result<T>> asyncSource;
-
+  final Widget initialLoading;
+  final Widget Function(T) builder;
+  final Widget noData;
+  final String noDataText;
+  final Function(ErrorType) retryWidget;
   final bool canRetry;
 
-  final childFn child;
+  final Color color;
 
-  AsyncOnce({this.asyncFn, this.asyncSource, this.canRetry, this.child})
-      : assert(asyncSource != null || asyncFn != null);
+  const AsyncOnce(
+      {Key key,
+      @required this.asyncOnceUseCase,
+      this.initialLoading,
+      @required this.builder,
+      this.noData,
+      this.noDataText,
+      this.retryWidget,
+      this.canRetry = false,
+      this.color})
+      : assert(asyncOnceUseCase != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Future<Result<T>> source;
-
-    if (asyncFn != null) {
-      source = asyncFn.call(context);
-    } else {
-      source = asyncSource;
-    }
-
-    if (source == null) {
-      throw Exception('Async source must be provided. Instead got null');
-    }
-
-    return FutureProvider(
-      create: (context) => source,
-      child: Consumer<Result<T>>(
-        builder: (context, data, _) => _getWidget(context, data),
-      )
+    final bloc = AsyncOnceBloc<T>(asyncOnceUseCase);
+    return DataLoadingWidget(
+      bloc.dataLoadingBloc,
+      child: StreamProvider<T>.value(
+        value: bloc.state,
+        child: Consumer<T>(
+          builder: (context, value, _) => (value != null) ? builder(value) : Container(),
+        ),
+      ),
+      initialLoading: initialLoading,
+      noData: noData,
+      noDataText: noDataText,
+      retryWidget: retryWidget,
+      onRetry: (canRetry) ? () => bloc.asyncOnce() : null,
+      color: color,
     );
-  }
-
-  Widget _getWidget(BuildContext context, Result<T> data) {
-    if (data == null) {
-      // loader
-      return Center(
-        child: CircularProgressIndicator()
-      );
-    } else if (data is Success<T>) {
-      // success
-      return child.call(context, data.value);
-    } else if (data is Failure<T>) {
-      // error
-    } else {
-      throw Exception('Data result has to be Success<T> or Failure<T>. Instead got ' + data.runtimeType.toString());
-    }
   }
 }
