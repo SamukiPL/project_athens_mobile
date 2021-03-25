@@ -8,6 +8,7 @@ import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/presentation/base_list/base_list_bloc.dart';
 import 'package:project_athens/deputies_flow/data/deputy_speeches_network_data_source.dart';
 import 'package:project_athens/deputies_flow/data/network/deputies_details_api.dart';
+import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_details_list_blocs.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/speeches_flow/mappers/speeches_network_mapper.dart';
 import 'package:project_athens/speeches_flow/screens/list/list_impl/speech_item_view_model_factory.dart';
@@ -34,10 +35,12 @@ class DeputySpeechesModule extends Module {
 
     final itemFactory = SpeechItemViewModelFactory();
 
+    final listBloc = BaseListBloc(listFacade, itemFactory);
+
     return [
-      Provider<BaseListBloc>(
-        create: (context) => BaseListBloc(listFacade, itemFactory),
-        dispose: (context, bloc) => bloc.dispose(),
+      Provider<DeputySpeechesDetailsBlocContainer>(
+        create: (context) => DeputySpeechesDetailsBlocContainer(listBloc),
+        dispose: (context, container) => container.listBloc.dispose(),
       ),
     ];
   }

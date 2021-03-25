@@ -28,8 +28,8 @@ class DeputyVotesNetworkDataSource
               params.limit,
               params.offset,
               params.searchQuery,
-              params.from?.toIso8601String(),
-              params.to?.toIso8601String(),
+              null,
+              null,
               params.sortingParam,
               _cadency));
 

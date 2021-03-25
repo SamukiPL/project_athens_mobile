@@ -135,20 +135,14 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
   }
 
   Widget buildDeputyInformationTab(BuildContext context) {
-    return ModuleWidget(
-        providers: [DeputyInformationModule(context, _deputyModel.id)],
-        child: DeputyInformationDetailsTab());
+    return DeputyInformationDetailsTab();
   }
 
   Widget buildDeputySpeechesTab(BuildContext context) {
-    return ModuleWidget(
-      providers: [DeputySpeechesModule(context, _deputyModel.id)],
-        child: DeputySpeechesDetailsTab());
+    return DeputySpeechesDetailsTab();
   }
 
   Widget buildDeputyVotingsTab(BuildContext context) {
-    return ModuleWidget(
-      providers: [DeputyVotingsModule(context, _deputyModel.id)],
-        child: DeputyVotingsDetailsTab());
+    return DeputyVotingsDetailsTab();
   }
 }

@@ -36,10 +36,10 @@ class AsyncOnce<T> extends StatelessWidget {
     final bloc = AsyncOnceBloc<T>(asyncOnceUseCase);
     return DataLoadingWidget(
       bloc.dataLoadingBloc,
-      child: StreamProvider<T>.value(
-        value: bloc.state,
-        child: Consumer<T>(
-          builder: (context, value, _) => (value != null) ? builder(value) : Container(),
+      child: ChangeNotifierProvider<AsyncOnceBloc>.value(
+        value: bloc,
+        child: Consumer<AsyncOnceBloc>(
+          builder: (context, bloc, _) => builder(bloc.value),
         ),
       ),
       initialLoading: initialLoading,

@@ -53,7 +53,8 @@ class PagingListAdapter {
 
   void loadMoreListener() {
     final fetchMorePosition = 0.85 * _scrollController.position.maxScrollExtent;
-    if (_scrollController.position.pixels > fetchMorePosition) {
+    if (_scrollController.position.pixels > fetchMorePosition
+        && (_itemsList.length % 20) == 0) {
       _scrollController.removeListener(loadMoreListener);
       _loadMore.add({});
     }
