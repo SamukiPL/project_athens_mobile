@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
+import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_widget.dart';
 import 'package:project_athens/timeline_flow/screens/group_details/group_details_bloc.dart';
@@ -28,10 +29,10 @@ class GroupDetailsScreen extends BaseScreen<GroupDetailsBloc> {
   }
 
   Widget _buildContent(GroupDetailsBloc bloc) {
-    return FutureProvider<List<TimelineRowViewModel>>.value(
+    return FutureProvider<List<BaseItemViewModel>>.value(
       value: bloc.getListItems(),
       initialData: [],
-      child: Consumer<List<TimelineRowViewModel>>(
+      child: Consumer<List<BaseItemViewModel>>(
         builder: (context, list, _) => GroupDetailsList(list),
       ),
     );

@@ -6,11 +6,11 @@ import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dar
 import 'package:project_athens/athens_core/presentation/backdrop/backdrop_widget.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_widget.dart';
+import 'package:project_athens/pagination/paging_list.dart';
 import 'package:project_athens/timeline_flow/presentation/calendar_app_bar.dart';
 import 'package:project_athens/timeline_flow/presentation/date_picker_fork/date_picker_dialog_custom.dart';
 import 'package:project_athens/timeline_flow/presentation/date_picker_fork/date_utils.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/cloud/noun_cloud.dart';
-import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_list.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/timeline_bloc.dart';
 import 'package:provider/provider.dart';
 
@@ -38,7 +38,7 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
         bottomChild: NounCloud(bloc: bloc.nounCloudBloc),
         topChild: DataLoadingWidget(
           bloc.dataLoadingBloc,
-          child: TimelineList(bloc.adapter),
+          child: PagingList(bloc.adapter),
           noDataText: localizations.getText().timelineNoEvents(),
           onRetry: bloc.refresh,
         ),

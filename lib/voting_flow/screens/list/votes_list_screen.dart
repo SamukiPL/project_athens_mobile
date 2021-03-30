@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:project_athens/athens_core/filters_and_sort/filters_bottom_sheet.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
+import 'package:project_athens/athens_core/presentation/base_list/base_list.dart';
+import 'package:project_athens/athens_core/presentation/base_list/base_list_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
-import 'package:project_athens/athens_core/presentation/data_loading/data_loading_widget.dart';
 import 'package:project_athens/athens_core/presentation/search_app_bar/search_app_bar.dart';
-import 'package:project_athens/voting_flow/screens/list/list_impl/votes_list.dart';
-import 'package:project_athens/voting_flow/screens/list/votes_list_bloc.dart';
 import 'package:provider/provider.dart';
 
-class VotesListScreen extends BaseScreen<VotesListBloc> {
+class VotesListScreen extends BaseScreen<BaseListBloc> {
 
   final BottomNavItem _currentBottomBarItem;
 
@@ -22,36 +20,26 @@ class VotesListScreen extends BaseScreen<VotesListBloc> {
   @override
   bool get showBackArrow => false;
 
-  @override getAppBarTitle(AppLocalizations localizations, VotesListBloc bloc) {
+  @override getAppBarTitle(AppLocalizations localizations, BaseListBloc bloc) {
     return localizations.getText().votingsVotingListTitle();
   }
 
   @override
-  Widget buildBody(BuildContext context, VotesListBloc bloc) {
+  Widget buildBody(BuildContext context, BaseListBloc bloc) {
     final localizations = Provider.of<AppLocalizations>(context);
 
     return Column(
         mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
-            child: DataLoadingWidget(
-              bloc.dataLoadingBloc,
-              child: _buildContent(bloc),
-              noDataText: localizations.getText().votingsNoData(),
-              onRetry: bloc.refresh,
-            ),
+            child: BaseListWidget(listBloc: bloc, noDataText: localizations.getText().votingsNoData(),),
           )
         ]
     );
   }
 
-  Widget _buildContent(VotesListBloc bloc) => Container(
-    height: 0,
-    child: VotesList(bloc.adapter),
-  );
-
   @override
-  Widget buildAppBar(BuildContext context, VotesListBloc bloc) {
+  Widget buildAppBar(BuildContext context, BaseListBloc bloc) {
     final AppLocalizations localizations = Provider.of<AppLocalizations>(context);
 
     return SearchAppBar(
@@ -67,7 +55,7 @@ class VotesListScreen extends BaseScreen<VotesListBloc> {
   }
 
   @override
-  Widget buildFloatingActionButton(BuildContext context, VotesListBloc bloc) => null;
+  Widget buildFloatingActionButton(BuildContext context, BaseListBloc bloc) => null;
 
   void showFullScreenDialog(BuildContext context) {
     showFilterBottomSheet(context);

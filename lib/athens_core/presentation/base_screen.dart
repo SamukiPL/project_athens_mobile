@@ -5,10 +5,11 @@ import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dar
 import 'package:project_athens/athens_core/navigation/bottom_navigation_widget.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
+import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/widget_state.dart';
 import 'package:provider/provider.dart';
 
-abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget {
+abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget with RedirectionDelegate {
 
   BottomNavItem get currentBottomBarItem;
 
@@ -98,11 +99,5 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget {
 
   @protected
   void onAuthFailure() {}
-
-  @protected
-  void goToDestination(BuildContext context, Destination destination) {
-    final destinationManager = Provider.of<DestinationManager>(context, listen: false);
-    destinationManager.goToDestination(context, destination);
-  }
 
 }

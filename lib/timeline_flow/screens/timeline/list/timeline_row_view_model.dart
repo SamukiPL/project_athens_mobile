@@ -1,43 +1,53 @@
-import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
+import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
+import 'package:project_athens/athens_core/models/voting_model.dart';
+import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
+import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
+import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
+import 'package:project_athens/timeline_flow/navigation/timeline_destinations.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/list/view_holders/grouped_voting_view_holder.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/list/view_holders/speech_view_holder.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/list/view_holders/voting_view_holder.dart';
+import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
 
-abstract class TimelineRowViewModel extends BaseItemViewModel {
+bool showTopLine(int index) => index != 0;
+bool showBottomLine(int index, int length) => index != length - 1;
 
-  final String id;
-  final TimelineModelType type;
+class VotingRowViewModel extends BaseItemViewModel {
 
-  TimelineRowViewModel(this.id, this.type);
+  final VotingModel model;
 
-}
+  VotingRowViewModel(this.model);
 
-class VotingRowViewModel extends TimelineRowViewModel {
-
-  final String title;
-  final DateTime date;
-  final String votingDesc;
-
-  VotingRowViewModel(String id, this.title, this.date, this.votingDesc) : super(id, TimelineModelType.VOTING);
-
-}
-
-class SpeechRowViewModel extends TimelineRowViewModel {
-
-  final String personName;
-  final String desc;
-  final DateTime date;
-  final String thumbnailUrl;
-
-  SpeechRowViewModel(String id, this.personName, this.desc, this.date, this.thumbnailUrl) : super(id, TimelineModelType.SPEECH);
+  @override
+  Widget buildWidget(int index, int length) {
+    return VotingViewHolder(this, showTopLine(index), showBottomLine(index, length));
+  }
 
 }
 
-class GroupedVotingViewModel extends TimelineRowViewModel {
+class SpeechRowViewModel extends BaseItemViewModel {
 
-  final String title;
-  final DateTime firstDate;
-  final DateTime lastDate;
-  final String votingDesc;
+  final SpeechModel model;
 
-  GroupedVotingViewModel(String id, this.title, this.firstDate, this.lastDate, this.votingDesc) : super(id, TimelineModelType.GROUPED_VOTING);
+  SpeechRowViewModel(this.model);
+
+  @override
+  Widget buildWidget(int index, int length) {
+    return SpeechViewHolder(this, showTopLine(index), showBottomLine(index, length));
+  }
+
+}
+
+class GroupedVotingViewModel extends BaseItemViewModel {
+
+  final GroupedVotingModel model;
+
+  GroupedVotingViewModel(this.model);
+
+  @override
+  Widget buildWidget(int index, int length) {
+    return GroupedVotingViewHolder(this, showTopLine(index), showBottomLine(index, length));
+  }
 
 }

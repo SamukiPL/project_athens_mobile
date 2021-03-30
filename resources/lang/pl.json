@@ -85,7 +85,16 @@
     "noEvents": "Brak wydarzeń dla obecnej daty.\nProszę spróbować później."
   },
   "deputies": {
-    "deputiesListTitle": "Posłowie"
+    "deputiesListTitle": "Posłowie",
+    "information": "Informacje",
+    "speeches": "Wypowiedzi",
+    "votings": "Głosowania",
+    "birthDate": "Data urodzenia",
+    "education": "Wykształcenie",
+    "profession": "Zawód",
+    "finishedSchools": "Ukończone szkoły",
+    "parliamentExperience": "Doświadczenie parlamentarne",
+    "noHighestAccuracy": "Brak"
   },
   "speeches": {
     "speechesListTitle": "Przemowy",

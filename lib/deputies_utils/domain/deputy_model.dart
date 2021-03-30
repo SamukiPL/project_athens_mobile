@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:project_athens/athens_core/domain/list/base_model.dart';
+import 'package:project_athens/athens_core/domain/base_list/base_model.dart';
 
 class DeputyModel extends BaseModel {
 

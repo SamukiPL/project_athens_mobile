@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
+import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
 
-class SpeechViewHolder extends StatelessWidget {
+class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
   final SpeechRowViewModel viewModel;
   final bool showTopLine;
   final bool showBottomLine;
@@ -41,7 +43,7 @@ class SpeechViewHolder extends StatelessWidget {
             FittedBox(
               fit: BoxFit.contain,
               child: Text(
-                DateFormat("HH:mm").format(viewModel.date),
+                DateFormat("HH:mm").format(viewModel.model.date),
                 style: TextStyle(
                     color: theme.dividerColor, fontSize: 24, fontWeight: FontWeight.w300),
               ),
@@ -84,7 +86,7 @@ class SpeechViewHolder extends StatelessWidget {
           AspectRatio(
             aspectRatio: 1.0,
             child: Hero(
-              tag: viewModel.id,
+              tag: viewModel.model.id,
               child: Container(
                 margin: EdgeInsets.all(8),
                 height: 40,
@@ -99,7 +101,7 @@ class SpeechViewHolder extends StatelessWidget {
                       color: Colors.white,
                     ),
                     child: Image.network(
-                      viewModel.thumbnailUrl,
+                      viewModel.model.thumbnailUrl,
                       width: 40,
                       errorBuilder:
                           (context, exception, stackTrace) => Icon(
@@ -124,7 +126,9 @@ class SpeechViewHolder extends StatelessWidget {
         margin: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
         elevation: 4,
         child: InkWell(
-          onTap: viewModel.itemClick,
+          onTap: () {
+            goToDestination(context, SpeechDetailsDestination(viewModel.model));
+          },
           child: Container(
             margin: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
             child: Column(
@@ -144,7 +148,7 @@ class SpeechViewHolder extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   child: Text(
-                    viewModel.personName,
+                    viewModel.model.personName,
                     style: TextStyle(
                         color: theme.primaryColor,
                         fontWeight: FontWeight.bold,
@@ -154,7 +158,7 @@ class SpeechViewHolder extends StatelessWidget {
                   ),
                 ),
                 getDescription(context, theme),
-                TechnicalData(technicalId: viewModel.id)
+                TechnicalData(technicalId: viewModel.model.id)
               ],
             ),
           ),
@@ -164,11 +168,11 @@ class SpeechViewHolder extends StatelessWidget {
   }
 
   Widget getDescription(BuildContext context, ThemeData theme) {
-    return viewModel.desc != null
+    return viewModel.model.desc != null
         ? Container(
             width: double.infinity,
             child: Text(
-              viewModel.desc,
+              viewModel.model.desc,
               style: TextStyle(
                   color: theme.dividerColor, fontSize: 12),
               textAlign: TextAlign.left,

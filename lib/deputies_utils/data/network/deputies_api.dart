@@ -14,6 +14,9 @@ abstract class DeputiesApi {
   @GET("/deputy-aggregator/cadency-deputy/get-all/{cadency}")
   Future<List<DeputyResponse>> getAllDeputies(@Path("cadency") int cadency);
 
+  @GET('/deputy-aggregator/cadency-deputy/{cadencyDeputyId}')
+  Future<DeputyResponse> getDeputy(@Path("cadencyDeputyId") String cadencyDeputyId);
+
   @PUT("/user-aggregator/deputy-subscribe/{cadency}")
   Future<void> putDeputies(@Path("cadency") int cadency, @Body() PutDeputiesRequest request);
 

@@ -13,12 +13,12 @@ import 'package:project_athens/pagination/paging_bloc.dart';
 import 'package:project_athens/pagination/paging_list_adapter.dart';
 
 class DeputiesChooserBloc extends BaseRegistrationStepBloc
-    implements PagingBloc<DeputyItemViewModel> {
+    implements PagingBloc {
   final DeputiesCache _deputiesCache;
   final PutDeputiesUseCase _putDeputiesUseCase;
 
   @override
-  PagingListAdapter<DeputyItemViewModel> adapter;
+  PagingListAdapter adapter;
 
   @override
   int batchSize = 40;

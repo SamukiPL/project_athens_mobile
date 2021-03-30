@@ -120,14 +120,14 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginButtonsRegister != "" && loginButtonsRegister != null); 
   }); 
  
-  test("All methods for $locale loginButtonsForgot", () async {
-    String loginButtonsForgot = localization.loginButtonsForgot();
-    expect(true, loginButtonsForgot != "" && loginButtonsForgot != null); 
-  }); 
- 
   test("All methods for $locale loginButtonsSignUp", () async {
     String loginButtonsSignUp = localization.loginButtonsSignUp();
     expect(true, loginButtonsSignUp != "" && loginButtonsSignUp != null); 
+  }); 
+ 
+  test("All methods for $locale loginButtonsForgot", () async {
+    String loginButtonsForgot = localization.loginButtonsForgot();
+    expect(true, loginButtonsForgot != "" && loginButtonsForgot != null); 
   }); 
  
   test("All methods for $locale loginButtonsResetPassword", () async {
@@ -318,6 +318,51 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale deputiesDeputiesListTitle", () async {
     String deputiesDeputiesListTitle = localization.deputiesDeputiesListTitle();
     expect(true, deputiesDeputiesListTitle != "" && deputiesDeputiesListTitle != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesInformation", () async {
+    String deputiesInformation = localization.deputiesInformation();
+    expect(true, deputiesInformation != "" && deputiesInformation != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesSpeeches", () async {
+    String deputiesSpeeches = localization.deputiesSpeeches();
+    expect(true, deputiesSpeeches != "" && deputiesSpeeches != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesVotings", () async {
+    String deputiesVotings = localization.deputiesVotings();
+    expect(true, deputiesVotings != "" && deputiesVotings != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesBirthDate", () async {
+    String deputiesBirthDate = localization.deputiesBirthDate();
+    expect(true, deputiesBirthDate != "" && deputiesBirthDate != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesEducation", () async {
+    String deputiesEducation = localization.deputiesEducation();
+    expect(true, deputiesEducation != "" && deputiesEducation != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesProfession", () async {
+    String deputiesProfession = localization.deputiesProfession();
+    expect(true, deputiesProfession != "" && deputiesProfession != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesFinishedSchools", () async {
+    String deputiesFinishedSchools = localization.deputiesFinishedSchools();
+    expect(true, deputiesFinishedSchools != "" && deputiesFinishedSchools != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesParliamentExperience", () async {
+    String deputiesParliamentExperience = localization.deputiesParliamentExperience();
+    expect(true, deputiesParliamentExperience != "" && deputiesParliamentExperience != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesNoHighestAccuracy", () async {
+    String deputiesNoHighestAccuracy = localization.deputiesNoHighestAccuracy();
+    expect(true, deputiesNoHighestAccuracy != "" && deputiesNoHighestAccuracy != null); 
   }); 
  
   test("All methods for $locale speechesSpeechesListTitle", () async {
