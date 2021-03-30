@@ -1,15 +1,14 @@
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
-import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
 
 extension TimelineModelExtension on List<TimelineModel> {
-  List<BaseItemViewModel> toTimelineRowViewModel(void Function(Destination) redirection) {
-    return this.map((model) => _toRowViewModel(model, redirection)).toList();
+  List<BaseItemViewModel> toTimelineRowViewModel() {
+    return this.map((model) => _toRowViewModel(model)).toList();
   }
 
-  BaseItemViewModel _toRowViewModel(TimelineModel model, void Function(Destination) redirection) {
+  BaseItemViewModel _toRowViewModel(TimelineModel model) {
     BaseItemViewModel item;
     switch (model.type) {
       case TimelineModelType.VOTING:
@@ -27,7 +26,6 @@ extension TimelineModelExtension on List<TimelineModel> {
       default:
         throw Exception("There is no other type");
     }
-    item.redirection = redirection;
     return item;
   }
 }

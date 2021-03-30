@@ -16,9 +16,4 @@ class DeputyListItemViewModel extends BaseItemViewModel {
     return DeputyListViewHolder(viewModel: this);
   }
 
-  @override
-  void itemClick() {
-    redirection(DeputyDetailsDestination(model, BottomNavItem.DEPUTIES));
-  }
-
 }

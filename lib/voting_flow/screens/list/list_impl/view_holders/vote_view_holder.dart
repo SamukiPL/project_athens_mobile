@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
+import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
+import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
 import 'package:project_athens/voting_flow/screens/list/list_impl/vote_item_view_model.dart';
 
-class VoteViewHolder extends StatelessWidget {
+class VoteViewHolder extends StatelessWidget with RedirectionDelegate {
 
   final VoteItemViewModel _viewModel;
 
@@ -14,7 +17,7 @@ class VoteViewHolder extends StatelessWidget {
     final theme = Theme.of(context);
     return GestureDetector(
       onTap: () {
-        _viewModel.itemClick();
+        goToDestination(context, VoteDetailsDestination(BottomNavItem.VOTING, _viewModel.model));
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

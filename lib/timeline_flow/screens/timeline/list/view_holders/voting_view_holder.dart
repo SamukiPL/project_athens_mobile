@@ -2,10 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
+import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
+import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
 
-class VotingViewHolder extends StatelessWidget {
+class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
   final VotingRowViewModel viewModel;
   final bool showTopLine;
   final bool showBottomLine;
@@ -106,7 +109,9 @@ class VotingViewHolder extends StatelessWidget {
         margin: EdgeInsets.only(left: 8, top: 8, bottom: 8,  right: 8),
         elevation: 4,
         child: InkWell(
-          onTap: viewModel.itemClick,
+          onTap: () {
+            goToDestination(context, VoteDetailsDestination(BottomNavItem.TIMELINE, viewModel.model));
+          },
           child: Container(
             margin: EdgeInsets.only(left: 8, top: 8, bottom: 8),
             child: Column(

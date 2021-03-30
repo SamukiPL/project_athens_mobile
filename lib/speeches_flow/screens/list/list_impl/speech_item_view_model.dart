@@ -15,9 +15,4 @@ class SpeechItemViewModel extends BaseItemViewModel {
     return SpeechViewHolder(this);
   }
 
-  @override
-  void itemClick() {
-    redirection(SpeechDetailsDestination(model));
-  }
-
 }

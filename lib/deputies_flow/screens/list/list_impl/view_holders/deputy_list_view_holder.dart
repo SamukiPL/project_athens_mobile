@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
+import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
+import 'package:project_athens/deputies_flow/navigation/deputies_destinations.dart';
 import 'package:project_athens/deputies_flow/screens/list/list_impl/deputy_list_item_view_model.dart';
 import 'package:provider/provider.dart';
 
-class DeputyListViewHolder extends StatelessWidget {
+class DeputyListViewHolder extends StatelessWidget with RedirectionDelegate {
   final DeputyListItemViewModel viewModel;
 
   const DeputyListViewHolder({Key key, @required this.viewModel}) : super(key: key);
@@ -18,7 +21,9 @@ class DeputyListViewHolder extends StatelessWidget {
           elevation: 4,
           margin: EdgeInsets.all(8),
           child: InkWell(
-            onTap: viewModel.itemClick,
+            onTap: () {
+              goToDestination(context, DeputyDetailsDestination(viewModel.model, BottomNavItem.DEPUTIES));
+            },
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,

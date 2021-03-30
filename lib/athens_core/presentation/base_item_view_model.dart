@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 
 abstract class BaseItemViewModel extends BaseChangeNotifier {
 
-  Function(Destination) redirection;
-
   Widget buildWidget(int index, int length);
 
 }

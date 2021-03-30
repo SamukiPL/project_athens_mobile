@@ -24,11 +24,6 @@ class VotingRowViewModel extends BaseItemViewModel {
     return VotingViewHolder(this, showTopLine(index), showBottomLine(index, length));
   }
 
-  @override
-  void itemClick() {
-    redirection(VoteDetailsDestination(BottomNavItem.TIMELINE, model));
-  }
-
 }
 
 class SpeechRowViewModel extends BaseItemViewModel {
@@ -42,11 +37,6 @@ class SpeechRowViewModel extends BaseItemViewModel {
     return SpeechViewHolder(this, showTopLine(index), showBottomLine(index, length));
   }
 
-  @override
-  void itemClick() {
-    redirection(SpeechDetailsDestination(model));
-  }
-
 }
 
 class GroupedVotingViewModel extends BaseItemViewModel {
@@ -58,11 +48,6 @@ class GroupedVotingViewModel extends BaseItemViewModel {
   @override
   Widget buildWidget(int index, int length) {
     return GroupedVotingViewHolder(this, showTopLine(index), showBottomLine(index, length));
-  }
-
-  @override
-  void itemClick() {
-    redirection(GroupDetailsDestination(model));
   }
 
 }

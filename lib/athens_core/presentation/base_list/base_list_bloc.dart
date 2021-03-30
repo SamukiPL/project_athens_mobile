@@ -65,9 +65,6 @@ class BaseListBloc extends BaseBloc implements PagingBloc {
   List<BaseItemViewModel> _mapItems(List<BaseModel> data) {
     return data.map((model) {
       BaseItemViewModel item = _itemFactory.create(model);
-      item.redirection = (destination) {
-        goToDestination(destination);
-      };
       return item;
     }).toList();
   }

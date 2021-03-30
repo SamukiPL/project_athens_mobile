@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
+import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
 import 'package:project_athens/speeches_flow/screens/list/list_impl/speech_item_view_model.dart';
 
-class SpeechViewHolder extends StatelessWidget {
+class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
 
   final SpeechItemViewModel _viewModel;
 
@@ -53,7 +55,9 @@ class SpeechViewHolder extends StatelessWidget {
   Widget getItemCard(BuildContext context, ThemeData theme) {
     return Expanded(
       child: InkWell(
-        onTap: _viewModel.itemClick,
+        onTap: () {
+          goToDestination(context, SpeechDetailsDestination(_viewModel.model));
+        },
         child: Container(
           margin: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
           child: Column(

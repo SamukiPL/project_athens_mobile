@@ -21,7 +21,7 @@ class GroupDetailsBloc extends BaseBloc {
   Stream<VotingModel> get destination => _destination.stream;
 
   Future<List<BaseItemViewModel>> getListItems() async {
-    final list = _groupedModel.groupedVotes.toTimelineRowViewModel(goToDestination);
+    final list = _groupedModel.groupedVotes.toTimelineRowViewModel();
     setLoadingState(DataLoadingState.contentLoaded());
     return list;
   }
