@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
 import 'package:project_athens/athens_core/presentation/base_list/base_items_view_models/base_progress_view_model.dart';
 import 'package:provider/provider.dart';
@@ -49,7 +50,6 @@ class PagingList extends StatelessWidget {
   Widget getList(
       PagingListAdapter adapter, PagingState<BaseItemViewModel> state) {
     return ListView.separated(
-        controller: (paginationIncluded) ? adapter.scrollController : null,
         separatorBuilder: (context, index) => separator ?? Container(),
         padding: EdgeInsets.only(
             left: leftPadding,
@@ -61,6 +61,10 @@ class PagingList extends StatelessWidget {
   }
 
   StatelessWidget _itemBuilder(List<BaseItemViewModel> items, int index) {
+    if (items.length - 10 == index) {
+      _adapter.paginationController.loadMore();
+    }
+
     return items[index].buildWidget(index, items.length);
   }
 }
