@@ -18,9 +18,7 @@ import 'package:provider/provider.dart';
 class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
   final DeputyModel _deputyModel;
 
-  final BottomNavItem _currentBottomBarItem;
-
-  DeputyDetailsScreen(this._deputyModel, this._currentBottomBarItem);
+  DeputyDetailsScreen(this._deputyModel);
 
   @override
   Widget buildBody(BuildContext context, DeputyDetailsBloc bloc) {
@@ -110,9 +108,6 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
 
   @override
   String get appBarTitle => _deputyModel.name;
-
-  @override
-  BottomNavItem get currentBottomBarItem => _currentBottomBarItem;
 
   @override
   Widget buildFloatingActionButton(

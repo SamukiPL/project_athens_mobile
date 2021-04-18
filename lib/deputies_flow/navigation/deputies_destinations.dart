@@ -12,13 +12,12 @@ import 'package:project_athens/deputies_flow/screens/list/deputies_list_screen.d
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 
 class DeputiesListDestination extends Destination<DeputiesListScreen> {
-  final BottomNavItem currentBottomItem;
 
-  DeputiesListDestination({this.currentBottomItem});
+  DeputiesListDestination(): super(BottomNavItem.DEPUTIES);
 
   @override
   DeputiesListScreen getScreen() =>
-      DeputiesListScreen(currentBottomItem ?? BottomNavItem.DEPUTIES);
+      DeputiesListScreen();
 
   @override
   List<Module> getScreenModules(BuildContext context) =>
@@ -28,13 +27,11 @@ class DeputiesListDestination extends Destination<DeputiesListScreen> {
 class DeputyDetailsDestination extends Destination<DeputyDetailsScreen> {
   final DeputyModel _deputyModel;
 
-  final BottomNavItem _currentBottomItem;
-
-  DeputyDetailsDestination(this._deputyModel, this._currentBottomItem);
+  DeputyDetailsDestination(this._deputyModel): super(BottomNavItem.DEPUTIES);
 
   @override
   DeputyDetailsScreen getScreen() =>
-      DeputyDetailsScreen(_deputyModel, _currentBottomItem);
+      DeputyDetailsScreen(_deputyModel);
 
   @override
   List<Module> getScreenModules(BuildContext context) => [

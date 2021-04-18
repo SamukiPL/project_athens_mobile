@@ -1,17 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
-import 'package:project_athens/athens_core/models/voting_model.dart';
-import 'package:project_athens/athens_core/navigation/destination_manager.dart';
-import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
+import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
+import 'package:project_athens/athens_core/navigation/destination_manager.dart';
+import 'package:project_athens/speeches_flow/injections/speech_module.dart';
+import 'package:project_athens/speeches_flow/screens/details/speech_details_screen.dart';
 import 'package:project_athens/timeline_flow/injections/group_details_module.dart';
 import 'package:project_athens/timeline_flow/injections/timeline_module.dart';
-import 'package:project_athens/speeches_flow/screens/details/speech_details_screen.dart';
 import 'package:project_athens/timeline_flow/screens/group_details/group_details_screen.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/timeline_screen.dart';
-import 'package:project_athens/speeches_flow/injections/speech_module.dart';
 
 class TimelineScreenDestination extends Destination<TimelineScreen> {
+
+  TimelineScreenDestination() : super(BottomNavItem.TIMELINE);
 
   @override
   TimelineScreen getScreen() => TimelineScreen();
@@ -24,7 +25,7 @@ class TimelineScreenDestination extends Destination<TimelineScreen> {
 class SpeechScreenDestination extends Destination<SpeechDetailsScreen> {
   final SpeechModel speechModel;
 
-  SpeechScreenDestination(this.speechModel);
+  SpeechScreenDestination(this.speechModel): super(BottomNavItem.SPEECHES);
 
   @override
   SpeechDetailsScreen getScreen() => SpeechDetailsScreen(
@@ -41,7 +42,7 @@ class GroupDetailsDestination extends Destination<GroupDetailsScreen> {
 
   final GroupedVotingModel _groupedModel;
 
-  GroupDetailsDestination(this._groupedModel);
+  GroupDetailsDestination(this._groupedModel): super(BottomNavItem.TIMELINE);
 
   @override
   GroupDetailsScreen getScreen() => GroupDetailsScreen();

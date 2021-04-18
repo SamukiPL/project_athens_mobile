@@ -12,9 +12,6 @@ import 'package:provider/provider.dart';
 class GroupDetailsScreen extends BaseScreen<GroupDetailsBloc> {
 
   @override
-  BottomNavItem get currentBottomBarItem => BottomNavItem.TIMELINE;
-
-  @override
   String getAppBarTitle(AppLocalizations localizations, GroupDetailsBloc bloc) {
     return localizations.getText().timelineTimelineNavTitle();
   }

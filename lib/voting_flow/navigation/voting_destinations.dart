@@ -10,12 +10,10 @@ import 'package:project_athens/voting_flow/screens/list/votes_list_screen.dart';
 
 class VotesListDestination extends Destination<VotesListScreen> {
 
-  final BottomNavItem _currentBottomBarItem;
-
-  VotesListDestination(this._currentBottomBarItem);
+  VotesListDestination() : super(BottomNavItem.VOTING);
   
   @override
-  VotesListScreen getScreen() => VotesListScreen(_currentBottomBarItem);
+  VotesListScreen getScreen() => VotesListScreen();
 
   @override
   List<Module> getScreenModules(BuildContext context) => [VotesListModule(context)];
@@ -24,14 +22,12 @@ class VotesListDestination extends Destination<VotesListScreen> {
 
 class VoteDetailsDestination extends Destination<VoteDetailsScreen> {
 
-  final BottomNavItem _currentBottomBarItem;
-
   final VotingModel _votingModel;
 
-  VoteDetailsDestination(this._currentBottomBarItem, this._votingModel);
+  VoteDetailsDestination(this._votingModel): super(BottomNavItem.VOTING);
 
   @override
-  VoteDetailsScreen getScreen() => VoteDetailsScreen(_currentBottomBarItem, _votingModel);
+  VoteDetailsScreen getScreen() => VoteDetailsScreen(_votingModel);
 
   @override
   List<Module> getScreenModules(BuildContext context) => [VoteDetailsModule(context, _votingModel)];

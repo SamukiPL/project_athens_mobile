@@ -8,47 +8,39 @@ import 'package:provider/provider.dart';
 
 class BottomNavigationWidget extends StatelessWidget {
 
-  final BottomNavItem currentItem;
-
-  const BottomNavigationWidget({Key key, @required this.currentItem}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final AppLocalizations localizations = Provider.of<AppLocalizations>(context);
 
-    return Hero(
-      tag: "BottomBarTest",
-      child: Consumer<BottomNavigationBloc>(
-        builder: (context, bloc, _) => BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex: currentItem.index,
-          onTap: (item) {
-            bloc.pickItem(item);
-            refreshMainWidget(context);
-          },
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.timeline),
-                label: localizations.getText().timelineTimelineNavTitle()
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: localizations.getText().deputiesDeputiesListTitle()
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.record_voice_over),
-                label: localizations.getText().speechesSpeechesListTitle()
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(MdiIcons.vote),
-                label: localizations.getText().votingsVotingListTitle()
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: localizations.getText().settingsSettingsTitle()
-            ),
-          ],
-        ),
+    return Consumer<BottomNavigationBloc>(
+      builder: (context, bloc, _) => BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: bloc.currentItem.index,
+        onTap: (item) {
+          bloc.pickItem(item);
+        },
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.timeline),
+              label: localizations.getText().timelineTimelineNavTitle()
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: localizations.getText().deputiesDeputiesListTitle()
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.record_voice_over),
+              label: localizations.getText().speechesSpeechesListTitle()
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(MdiIcons.vote),
+              label: localizations.getText().votingsVotingListTitle()
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: localizations.getText().settingsSettingsTitle()
+          ),
+        ],
       ),
     );
   }
