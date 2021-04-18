@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_list/base_list_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/presentation/search_app_bar/search_app_bar.dart';
@@ -10,15 +9,8 @@ import 'package:provider/provider.dart';
 
 class DeputiesListScreen extends BaseScreen<BaseListBloc> {
 
-  final BottomNavItem _currentBottomBarItem;
-
-  DeputiesListScreen(this._currentBottomBarItem);
-
   @override
-  BottomNavItem get currentBottomBarItem => _currentBottomBarItem;
-
-  @override
-  bool get showBackArrow => currentBottomBarItem != BottomNavItem.DEPUTIES;
+  bool get showBackArrow => false;
 
   @override
   String getAppBarTitle(AppLocalizations localizations, BaseListBloc bloc) {

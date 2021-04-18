@@ -9,8 +9,6 @@ import 'package:project_athens/settings_flow/screens/settings/settings_bloc.dart
 import 'package:provider/provider.dart';
 
 class SettingsScreen extends BaseScreen<SettingsBloc> {
-  @override
-  BottomNavItem get currentBottomBarItem => BottomNavItem.SETTINGS;
 
   @override
   bool get showBackArrow => false;

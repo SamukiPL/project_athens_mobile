@@ -15,8 +15,6 @@ import 'package:project_athens/timeline_flow/screens/timeline/timeline_bloc.dart
 import 'package:provider/provider.dart';
 
 class TimelineScreen extends BaseScreen<TimelineBloc> {
-  @override
-  BottomNavItem get currentBottomBarItem => BottomNavItem.TIMELINE;
 
   @override
   bool get showBackArrow => false;

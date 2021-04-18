@@ -13,9 +13,6 @@ import 'package:project_athens/speeches_flow/screens/details/speech_details_bloc
 
 class SpeechDetailsScreen  extends BaseScreen<SpeechDetailsBloc> {
 
-  @override
-  BottomNavItem get currentBottomBarItem => BottomNavItem.SPEECHES;
-
   final SpeechModel speechModel;
 
   SpeechDetailsScreen({@required this.speechModel});
@@ -156,7 +153,7 @@ class SpeechDetailsScreen  extends BaseScreen<SpeechDetailsBloc> {
   Widget buildFloatingActionButton(BuildContext context, SpeechDetailsBloc bloc) => null;
 
   void goToDeputyDetails(BuildContext context, DeputyModel model) {
-    final destination = DeputyDetailsDestination(model, currentBottomBarItem);
+    final destination = DeputyDetailsDestination(model);
     goToDestination(context, destination);
   }
 

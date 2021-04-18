@@ -22,7 +22,7 @@ class DeputyListViewHolder extends StatelessWidget with RedirectionDelegate {
           margin: EdgeInsets.all(8),
           child: InkWell(
             onTap: () {
-              goToDestination(context, DeputyDetailsDestination(viewModel.model, BottomNavItem.DEPUTIES));
+              goToDestination(context, DeputyDetailsDestination(viewModel.model));
             },
             child: Row(
               mainAxisSize: MainAxisSize.min,
