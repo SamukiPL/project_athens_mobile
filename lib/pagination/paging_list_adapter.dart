@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
 import 'package:project_athens/athens_core/presentation/base_list/base_items_view_models/base_progress_view_model.dart';
+import 'package:project_athens/pagination/pagination_listener.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'paging_state.dart';
@@ -20,9 +21,9 @@ class PagingListAdapter {
 
   Stream<PagingState<BaseItemViewModel>> get stateStream => _stateController.stream;
 
-  final ScrollController _scrollController = ScrollController();
+  final PaginationController _paginationController = PaginationController();
 
-  ScrollController get scrollController => _scrollController;
+  PaginationController get paginationController => _paginationController;
   
   final StreamController<void> _loadMore = BehaviorSubject();
 
@@ -30,9 +31,9 @@ class PagingListAdapter {
     _loadMore.stream
       .debounceTime(Duration(milliseconds: 500))
       .listen((event) {
-        loadMoreData();
+        _loadMoreData();
     });
-    _scrollController.addListener(loadMoreListener);
+    _paginationController.addListener(loadMoreListener);
   }
 
   int updateList(List<BaseItemViewModel> itemsList, {bool loading = false}) {
@@ -52,17 +53,15 @@ class PagingListAdapter {
   }
 
   void loadMoreListener() {
-    final fetchMorePosition = 0.85 * _scrollController.position.maxScrollExtent;
-    if (_scrollController.position.pixels > fetchMorePosition
-        && (_itemsList.length % 20) == 0) {
-      _scrollController.removeListener(loadMoreListener);
+    if ((_itemsList.length % 20) == 0) {
+      _paginationController.removeListener(loadMoreListener);
       _loadMore.add({});
     }
   }
 
-  void loadMoreData() {
+  void _loadMoreData() {
     _bloc.loadMore().whenComplete(() {
-      _scrollController.addListener(loadMoreListener);
+      _paginationController.addListener(loadMoreListener);
     });
   }
 

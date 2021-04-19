@@ -110,7 +110,7 @@ class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
         elevation: 4,
         child: InkWell(
           onTap: () {
-            goToDestination(context, VoteDetailsDestination(BottomNavItem.TIMELINE, viewModel.model));
+            goToDestination(context, VoteDetailsDestination(viewModel.model));
           },
           child: Container(
             margin: EdgeInsets.only(left: 8, top: 8, bottom: 8),

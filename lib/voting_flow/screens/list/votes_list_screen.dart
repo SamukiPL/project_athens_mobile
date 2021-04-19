@@ -10,12 +10,7 @@ import 'package:provider/provider.dart';
 
 class VotesListScreen extends BaseScreen<BaseListBloc> {
 
-  final BottomNavItem _currentBottomBarItem;
-
-  VotesListScreen(this._currentBottomBarItem);
-  
-  @override
-  BottomNavItem get currentBottomBarItem => _currentBottomBarItem;
+  VotesListScreen();
   
   @override
   bool get showBackArrow => false;

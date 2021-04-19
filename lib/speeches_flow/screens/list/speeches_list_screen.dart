@@ -15,9 +15,6 @@ class SpeechesListScreen extends BaseScreen<BaseListBloc> {
   bool get showBackArrow => false;
 
   @override
-  BottomNavItem get currentBottomBarItem => BottomNavItem.SPEECHES;
-
-  @override
   String getAppBarTitle(AppLocalizations localizations, BaseListBloc bloc) {
     return localizations.getText().speechesSpeechesListTitle();
   }

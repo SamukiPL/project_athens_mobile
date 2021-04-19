@@ -6,6 +6,7 @@ import 'package:project_athens/athens_core/presentation/base_item_view_model.dar
 import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/presentation/base_list/item_view_model_factory.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
+import 'package:project_athens/athens_core/presentation/widget_state.dart';
 import 'package:project_athens/pagination/paging_bloc.dart';
 import 'package:project_athens/pagination/paging_list_adapter.dart';
 
@@ -30,16 +31,18 @@ class BaseListBloc extends BaseBloc implements PagingBloc {
 
   @override
   void manageState(Result result) {
-    super.manageState(result);
     if (result is Success<List<BaseModel>>) {
+      stateController.add(WidgetState.success());
       offset = adapter.updateList(_mapItems(result.value));
       setLoadingState((result.value.isEmpty)
           ? DataLoadingState.noData()
           : DataLoadingState.contentLoaded());
     } else if(result is Refresh<List<BaseModel>>) {
       adapter.updateList([], loading: true);
-    } else {
+    } else if (result is Failure<List<BaseModel>> && result.value.isNotEmpty) {
       adapter.setLoading(false);
+    } else {
+      manageState(result);
     }
   }
 

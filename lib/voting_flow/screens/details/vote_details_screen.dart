@@ -9,7 +9,6 @@ import 'package:project_athens/athens_core/data/base_responses/voting_response.d
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
-import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/presentation/full_card/full_card.dart';
 import 'package:project_athens/athens_core/presentation/simple_horizontal_table/simple_horizontal_table.dart';
@@ -23,14 +22,10 @@ import 'package:project_athens/voting_flow/screens/details/vote_details_bloc.dar
 import 'package:provider/provider.dart';
 
 class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
-  final BottomNavItem _currentBottomBarItem;
 
   final VotingModel _votingModel;
 
-  VoteDetailsScreen(this._currentBottomBarItem, this._votingModel);
-
-  @override
-  BottomNavItem get currentBottomBarItem => _currentBottomBarItem;
+  VoteDetailsScreen(this._votingModel);
 
   @override
   String getAppBarTitle(AppLocalizations localization, VoteDetailsBloc bloc) {

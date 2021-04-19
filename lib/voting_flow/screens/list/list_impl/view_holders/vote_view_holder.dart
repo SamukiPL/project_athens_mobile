@@ -17,7 +17,7 @@ class VoteViewHolder extends StatelessWidget with RedirectionDelegate {
     final theme = Theme.of(context);
     return GestureDetector(
       onTap: () {
-        goToDestination(context, VoteDetailsDestination(BottomNavItem.VOTING, _viewModel.model));
+        goToDestination(context, VoteDetailsDestination(_viewModel.model));
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

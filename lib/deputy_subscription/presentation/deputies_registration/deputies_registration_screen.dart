@@ -14,11 +14,6 @@ class DeputiesRegistrationScreen extends BaseScreen<DeputiesRegistrationBloc> {
   bool get showBackArrow => false;
 
   @override
-  BottomNavItem get currentBottomBarItem {
-
-  }
-
-  @override
   Widget buildBody(BuildContext context, DeputiesRegistrationBloc bloc) {
     return PagingList(bloc.adapter);
   }
