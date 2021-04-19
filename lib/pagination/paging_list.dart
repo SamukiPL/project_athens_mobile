@@ -23,9 +23,9 @@ class PagingList extends StatelessWidget {
 
   const PagingList(this._adapter,
       {Key key,
-      this.leftPadding = 8,
+      this.leftPadding = 16,
       this.topPadding = 8,
-      this.rightPadding = 8,
+      this.rightPadding = 16,
       this.bottomPadding = 8,
       this.refreshable = false,
       this.paginationIncluded = true,

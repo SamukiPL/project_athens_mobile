@@ -15,40 +15,53 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        getThumbnail(theme),
-        getItemCard(context, theme)
-      ],
+    return
+      Column(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              getThumbnail(theme),
+              getItemCard(context, theme),
+            ],
+          ),
+          _getBorderBottom(theme)
+        ],
     );
   }
 
   Widget getThumbnail(ThemeData theme) {
-    return Hero(
-      tag: _viewModel.model.id,
-      child: Container(
-        margin: EdgeInsets.all(8),
-        height: 40,
-        width: 40,
-        child: ClipOval(
+    return Column(
+      children: [
+        Hero(
+          tag: _viewModel.model.id,
           child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-            ),
-            child: Image.network(
-              _viewModel.model.thumbnailUrl,
-              width: 40,
-              errorBuilder:
-                  (context, exception, stackTrace) => Icon(
-                Icons.record_voice_over,
-                color: theme.dividerColor,
-                size: 25,
+            margin: EdgeInsets.only(right: 8, top: 8),
+            height: 40,
+            width: 40,
+            child: ClipOval(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: Image.network(
+                  _viewModel.model.thumbnailUrl,
+                  width: 40,
+                  errorBuilder:
+                      (context, exception, stackTrace) => Icon(
+                    Icons.record_voice_over,
+                    color: theme.dividerColor,
+                    size: 25,
+                  ),
+                ),
               ),
             ),
           ),
         ),
-      ),
+        // Container(
+        //   child: Text(_viewModel.model.club.shortName),
+        // )
+      ],
     );
   }
 
@@ -59,11 +72,12 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
           goToDestination(context, SpeechDetailsDestination(_viewModel.model));
         },
         child: Container(
-          margin: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
+          margin: EdgeInsets.only(top: 8, bottom: 8),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               getNameWithDate(context, theme),
+              getClubName(context, theme),
               getDescription(context, theme),
               TechnicalData(technicalId: _viewModel.model.id)
             ],
@@ -76,7 +90,7 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
   Widget getNameWithDate(BuildContext context, ThemeData theme) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.only(bottom: 8),
+      // margin: EdgeInsets.only(bottom: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -84,6 +98,7 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
             child: Text(
               _viewModel.model.personName,
               style: TextStyle(
+                  // color: Colors.black87,
                   color: theme.primaryColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 18),
@@ -101,6 +116,22 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
     );
   }
 
+  Widget getClubName(BuildContext context, ThemeData theme) {
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.only(bottom: 8),
+      child: Text(
+        _viewModel.model.club?.shortName,
+        style: TextStyle(
+          color: theme.dividerColor,
+          fontWeight: FontWeight.w400,
+          fontSize: 12
+        ),
+        textAlign: TextAlign.left
+      ),
+    );
+  }
+
   Widget getDescription(BuildContext context, ThemeData theme) {
     return _viewModel.model.desc != null
         ? Container(
@@ -114,5 +145,15 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
     )
         : Container();
   }
+
+  Widget _getBorderBottom(ThemeData theme) {
+    return Container(
+      decoration: BoxDecoration(
+        color: theme.dividerColor,
+      ),
+      height: 1,
+    );
+  }
+
 
 }

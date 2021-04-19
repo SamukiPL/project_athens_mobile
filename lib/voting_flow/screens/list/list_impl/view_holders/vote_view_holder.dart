@@ -25,7 +25,8 @@ class VoteViewHolder extends StatelessWidget with RedirectionDelegate {
           _getTypeAndDateRow(theme),
           _getResults(),
           _getTitle(theme),
-          TechnicalData(technicalId: _viewModel.id)
+          TechnicalData(technicalId: _viewModel.id),
+          _getBorderBottom(theme),
         ],
       ),
     );
@@ -89,6 +90,15 @@ class VoteViewHolder extends StatelessWidget with RedirectionDelegate {
         ),
         textAlign: TextAlign.left,
       ),
+    );
+  }
+
+  Widget _getBorderBottom(ThemeData theme) {
+    return Container(
+      decoration: BoxDecoration(
+        color: theme.dividerColor,
+      ),
+      height: 1,
     );
   }
 
