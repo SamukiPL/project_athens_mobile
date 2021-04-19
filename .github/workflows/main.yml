@@ -54,7 +54,7 @@ jobs:
       - name: Deploy
 #        if: (github.base_ref == 'master' && github.event_name == 'pull_request')
 #        temporaily to check whether deploy works properly
-        if: (github.base_ref == 'master')
+        # if: (github.base_ref == 'master')
         uses: wzieba/Firebase-Distribution-Github-Action@master
         with:
           appId: ${{secrets.FIREBASE_ANDROID_APPID}}
