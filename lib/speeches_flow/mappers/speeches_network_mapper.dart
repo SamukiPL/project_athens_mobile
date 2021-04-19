@@ -15,7 +15,7 @@ class SpeechesNetworkMapper
         id: data.id,
         personName: data.personName,
         deputyId: data.cadencyDeputy,
-        club: data.parliamentClub,
+        club: await _deputiesCache.getParliamentClubModel(data.parliamentClub),
         desc: data.agenda?.title,
         date: data.cisInfo.eventDateTime,
         thumbnailUrl: await _deputiesCache.getDeputyThumbnail(data.cadencyDeputy) ?? "",
