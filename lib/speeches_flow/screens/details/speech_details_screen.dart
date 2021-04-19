@@ -120,7 +120,7 @@ class SpeechDetailsScreen  extends BaseScreen<SpeechDetailsBloc> {
                     Padding(
                       padding: EdgeInsets.only(top: 4),
                       child: Text(
-                        speechModel.club,
+                        speechModel.club.shortName,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 12,
