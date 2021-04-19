@@ -6,7 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   String scriptPath = Platform.script.path;
-  String filePathForCoverage = scriptPath.substring(0, scriptPath.indexOf('main.dart')).substring(1) + 'resources/lang/';
+  String osPrefix = Platform.isLinux ? '/' : '';
+  String filePathForCoverage = osPrefix + scriptPath.substring(0, scriptPath.indexOf('main.dart')).substring(1) + 'resources/lang/';
 
   File plFile = File(filePathForCoverage + 'pl.json');
   String plData = plFile.readAsStringSync();

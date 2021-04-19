@@ -87,7 +87,8 @@ class LangGenerator extends GeneratorForAnnotation<LangAutomation> {
         "\n"
         "void main() {\n"
         "  String scriptPath = Platform.script.path;\n"
-        "  String filePathForCoverage = scriptPath.substring(0, scriptPath.indexOf('main.dart')).substring(1) + 'resources/lang/';\n";
+        "  String osPrefix = Platform.isLinux ? '/' : '';\n"
+        "  String filePathForCoverage = osPrefix + scriptPath.substring(0, scriptPath.indexOf('main.dart')).substring(1) + 'resources/lang/';\n";
 
     allJsonFiles.forEach((FileSystemEntity entity) {
       if (entity.path.endsWith(".json")) {
