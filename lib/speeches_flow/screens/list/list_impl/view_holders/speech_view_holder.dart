@@ -106,7 +106,7 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
             ),
           ),
           Text(
-            DateFormat("d.M.y", "pl").format(_viewModel.model.date),
+            DateFormat("d.MM.y", "pl").format(_viewModel.model.date),
             style: TextStyle(
               color: theme.dividerColor,
               fontSize: 12),
