@@ -17,8 +17,8 @@ class FullCard extends StatelessWidget {
       child: Text(
           header,
           style: TextStyle(
-            color: theme.dividerColor,
-            fontWeight: FontWeight.w200,
+            color: Colors.black,
+            fontWeight: FontWeight.w400,
             fontSize: 20
           ),
       ),

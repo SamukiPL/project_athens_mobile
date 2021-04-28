@@ -28,20 +28,28 @@ class DeputiesCache {
   Future<Result<List<DeputyModel>>> get deputies async {
     if (_cachedDeputies != null) return Success(_cachedDeputies.toList());
 
-    final clubs =
-        (await parliamentClubs as Success<List<ParliamentClubModel>>)?.value ?? List();
+    // final clubs =
+    //     (await parliamentClubs as Success<List<ParliamentClubModel>>)?.value ?? List();
+
+    final clubsResponse = await parliamentClubs;
+
+    if (clubsResponse is Failure<List<ParliamentClubModel>>) {
+      return Failure(clubsResponse.exception);
+    }
+
+    final clubs = (clubsResponse as Success<List<ParliamentClubModel>>)?.value;
 
     final result = await _getDeputiesUseCase(BaseDeputiesParams(9)).then((result) {
       if (result is Success<List<DeputyResponse>>) {
         _cachedDeputies = result.value.map((deputy) => _responseToModel(
             deputy, clubs.firstWhere((club) => club.id == deputy.parliamentClub))).toList();
-        return _cachedDeputies;
+        return Success(_cachedDeputies);
       } else {
-        return List();
+        return result;
       }
     });
 
-    return Success(result);
+    return result;
   }
 
   Future<Result<List<ParliamentClubModel>>> get parliamentClubs async {
@@ -52,12 +60,13 @@ class DeputiesCache {
         .then((clubsResult) {
       if (clubsResult is Success<List<ParliamentClubModel>>) {
         _cachedParliamentClubs = clubsResult.value;
-        return _cachedParliamentClubs;
+        return Success(_cachedParliamentClubs);
+      } else {
+        return clubsResult;
       }
-      return List();
     });
 
-    return Success(clubsResult);
+    return clubsResult;
   }
 
   DeputyModel _responseToModel(

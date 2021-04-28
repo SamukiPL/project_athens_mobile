@@ -10,7 +10,7 @@ class VoteItemViewModel extends BaseItemViewModel {
 
   String get id => model.id;
   String get title => model.title;
-  String get date => DateFormat("d.M.y", "pl").format(model.date);
+  String get date => DateFormat("d.MM.y", "pl").format(model.date);
   VoteResultModel get results => model.results;
   String get description => model.votingDesc;
 
