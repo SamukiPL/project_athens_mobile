@@ -27,6 +27,14 @@ SpeechResponse _$SpeechResponseFromJson(Map<String, dynamic> json) {
     json['parliamentClub'] as String,
     json['cadency'] as int,
     json['rangeId'] as String,
+    json['previousPersonSpeech'] == null
+        ? null
+        : PersonSpeech.fromJson(
+            json['previousPersonSpeech'] as Map<String, dynamic>),
+    json['nextPersonSpeech'] == null
+        ? null
+        : PersonSpeech.fromJson(
+            json['nextPersonSpeech'] as Map<String, dynamic>),
   );
 }
 
@@ -45,6 +53,8 @@ Map<String, dynamic> _$SpeechResponseToJson(SpeechResponse instance) =>
       'parliamentClub': instance.parliamentClub,
       'cadency': instance.cadency,
       'rangeId': instance.rangeId,
+      'previousPersonSpeech': instance.previousPersonSpeech,
+      'nextPersonSpeech': instance.nextPersonSpeech,
     };
 
 Agenda _$AgendaFromJson(Map<String, dynamic> json) {
@@ -151,3 +161,18 @@ const _$GenderEnumMap = {
   Gender.MALE: 'male',
   Gender.FEMALE: 'female',
 };
+
+PersonSpeech _$PersonSpeechFromJson(Map<String, dynamic> json) {
+  return PersonSpeech(
+    json['deputyCardId'] as int,
+    json['fullName'] as String,
+    json['speechId'] as String,
+  );
+}
+
+Map<String, dynamic> _$PersonSpeechToJson(PersonSpeech instance) =>
+    <String, dynamic>{
+      'deputyCardId': instance.deputyCardId,
+      'fullName': instance.fullName,
+      'speechId': instance.speechId,
+    };

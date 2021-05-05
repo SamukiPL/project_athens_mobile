@@ -20,8 +20,10 @@ class SpeechResponse extends TimelineItem {
   final String parliamentClub;
   final int cadency;
   final String rangeId;
+  final PersonSpeech previousPersonSpeech;
+  final PersonSpeech nextPersonSpeech;
 
-  SpeechResponse(this.agenda, this.cisInfo, this.createAt, this.id, this.deputyCardIdentifier, this.fileName, this.videoDownloadUrl, this.length, this.personName, this.cadencyDeputy, this.parliamentClub, this.cadency, this.rangeId);
+  SpeechResponse(this.agenda, this.cisInfo, this.createAt, this.id, this.deputyCardIdentifier, this.fileName, this.videoDownloadUrl, this.length, this.personName, this.cadencyDeputy, this.parliamentClub, this.cadency, this.rangeId, this.previousPersonSpeech, this.nextPersonSpeech);
 
   factory SpeechResponse.fromJson(Map<String, dynamic> json) => _$SpeechResponseFromJson(json);
   Map<String, dynamic> toJson() => _$SpeechResponseToJson(this);
@@ -70,4 +72,16 @@ class Person {
 
   factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);
   Map<String, dynamic> toJson() => _$PersonToJson(this);
+}
+
+@JsonSerializable()
+class PersonSpeech {
+  final int deputyCardId;
+  final String fullName;
+  final String speechId;
+
+  PersonSpeech(this.deputyCardId, this.fullName, this.speechId);
+
+  factory PersonSpeech.fromJson(Map<String, dynamic> json) => _$PersonSpeechFromJson(json);
+  Map<String, dynamic> toJson() => _$PersonSpeechToJson(this);
 }
