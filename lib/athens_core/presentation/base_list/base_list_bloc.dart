@@ -42,7 +42,7 @@ class BaseListBloc extends BaseBloc implements PagingBloc {
     } else if (result is Failure<List<BaseModel>> && result.value.isNotEmpty) {
       adapter.setLoading(false);
     } else {
-      manageState(result);
+      super.manageState(result);
     }
   }
 

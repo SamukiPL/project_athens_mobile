@@ -8,7 +8,6 @@ import 'package:project_athens/athens_core/navigation/destination_widget.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 
 class DestinationManager {
-
   final BottomNavItem bottomNavItem;
 
   DestinationManager(Destination destination, this.bottomNavItem) {
@@ -20,7 +19,8 @@ class DestinationManager {
 
   Widget currentScreen() => popStack.last.getScreen();
 
-  List<Module> getScreenModules(BuildContext context) => popStack.last.getScreenModules(context);
+  List<Module> getScreenModules(BuildContext context) =>
+      popStack.last.getScreenModules(context);
 
   bool goBack() {
     popStack.removeLastIfPossible();
@@ -37,22 +37,31 @@ class DestinationManager {
   void goToDestination(BuildContext context, Destination destination) {
     popStack.add(destination);
 
-    Navigator.push(context, MaterialPageRoute(
-        builder: (context) => DestinationWidget(
-          destinationManager: this,
-          moduleWidget: ModuleWidget(
-              providers: getScreenModules(context),
-              child: currentScreen()),
-        )),
-    );
+    push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ModuleWidget(
+              providers: getScreenModules(context), child: currentScreen()),
+        ),
+        destination.replace);
   }
 
+  void push<T extends Object>(
+      BuildContext context, Route<T> route, bool replace) {
+    if (replace) {
+      Navigator.pushReplacement(context, route);
+    } else {
+      Navigator.push(context, route);
+    }
+  }
 }
 
 abstract class Destination<SCREEN extends BaseScreen> {
   final BottomNavItem bottomNavItem;
 
-  Destination(this.bottomNavItem);
+  final bool replace;
+
+  Destination(this.bottomNavItem, {this.replace = false});
 
   SCREEN getScreen();
 

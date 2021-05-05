@@ -70,6 +70,7 @@ class TimelineBloc extends BaseBloc implements PagingBloc {
   }
 
   Future<void> loadNewDate(DateTime date) async {
+    setLoadingState(DataLoadingState.initialLoading());
     final params = TimelineParameters(9, date.toIso8601String());
     adapter.updateList([], loading: true);
     _selectedDate = date;

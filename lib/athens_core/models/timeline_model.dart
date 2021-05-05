@@ -14,26 +14,6 @@ abstract class TimelineModel extends BaseModel {
 
 }
 
-class SpeechModel extends TimelineModel {
-  final String personName;
-  final String deputyId;
-  final ParliamentClubModel club;
-  final String desc;
-  final String thumbnailUrl;
-  final String videoUrl;
-
-  SpeechModel({
-    String id,
-    this.personName,
-    this.deputyId,
-    this.club,
-    this.desc,
-    DateTime date,
-    this.thumbnailUrl,
-    this.videoUrl
-  }) : super(id, TimelineModelType.SPEECH, date);
-}
-
 class GroupedVotingModel extends TimelineModel {
   final String votingDesc;
   final String title;

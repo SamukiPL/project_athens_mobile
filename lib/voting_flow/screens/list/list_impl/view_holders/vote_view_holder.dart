@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
@@ -26,7 +25,6 @@ class VoteViewHolder extends StatelessWidget with RedirectionDelegate {
           _getResults(),
           _getTitle(theme),
           TechnicalData(technicalId: _viewModel.id),
-          _getBorderBottom(theme),
         ],
       ),
     );
@@ -90,15 +88,6 @@ class VoteViewHolder extends StatelessWidget with RedirectionDelegate {
         ),
         textAlign: TextAlign.left,
       ),
-    );
-  }
-
-  Widget _getBorderBottom(ThemeData theme) {
-    return Container(
-      decoration: BoxDecoration(
-        color: theme.dividerColor,
-      ),
-      height: 1,
     );
   }
 

@@ -1,3 +1,4 @@
+import 'package:project_athens/athens_core/models/speech_model.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';

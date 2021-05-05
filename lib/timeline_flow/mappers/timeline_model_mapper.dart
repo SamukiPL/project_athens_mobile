@@ -1,5 +1,6 @@
 import 'package:project_athens/athens_core/domain/data_mapper.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
+import 'package:project_athens/athens_core/models/speech_model.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/athens_core/data/base_responses/speech_response.dart';

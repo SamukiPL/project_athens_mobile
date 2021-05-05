@@ -76,15 +76,22 @@ class DeputiesCache {
           name: response.name,
           thumbnailUrl: response.photoUrl,
           clubId: response.parliamentClub,
-          club: club.shortName);
+          club: club.shortName,
+          cardId: response.cardId);
 
-  Future<DeputyModel> getDeputyModel(String id) async {
+  Future<DeputyModel> getDeputyModelById(String id) =>
+      _getDeputyModel((model) => model.id == id);
+
+  Future<DeputyModel> getDeputyModelByCardId(int cardId) =>
+      _getDeputyModel((model) => model.cardId == cardId);
+
+  Future<DeputyModel> _getDeputyModel(bool Function(DeputyModel) condition) async {
     if (_cachedDeputies != null && _cachedDeputies.isNotEmpty)
-      return _cachedDeputies.firstWhere((element) => element.id == id);
+      return _cachedDeputies.firstWhere((element) => condition(element));
 
     await deputies;
 
-    return _cachedDeputies.firstWhere((element) => element.id == id);
+    return _cachedDeputies.firstWhere((element) => condition(element));
   }
 
   Future<String> getDeputyThumbnail(String id) async {

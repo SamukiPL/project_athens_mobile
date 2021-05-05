@@ -410,7 +410,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
 
     final circleSize = viewWidth * 0.25;
 
-    final foundDeputy = deputiesCache.getDeputyModel(voting.cadencyDeputy);
+    final foundDeputy = deputiesCache.getDeputyModelById(voting.cadencyDeputy);
     // return Container();
     return FutureProvider(
       create: (context) => foundDeputy,

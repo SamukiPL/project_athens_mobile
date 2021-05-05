@@ -11,7 +11,7 @@ import 'package:project_athens/main/presentation/main_widget.dart';
 class AppNavigationImpl implements AppNavigation {
   @override
   void goToLoginWidget(BuildContext context) {
-    Navigator.push(
+    Navigator.pushReplacement(
         context,
         MaterialPageRoute(
             builder: (context) => ModuleWidget(
@@ -25,7 +25,7 @@ class AppNavigationImpl implements AppNavigation {
 
   @override
   void goToMainWidget(BuildContext context) {
-    Navigator.push(
+    Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => MainWidget()));
   }
 }

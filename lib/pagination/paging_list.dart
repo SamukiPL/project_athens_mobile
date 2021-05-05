@@ -61,7 +61,7 @@ class PagingList extends StatelessWidget {
   }
 
   StatelessWidget _itemBuilder(List<BaseItemViewModel> items, int index) {
-    if (items.length - 10 == index) {
+    if (items.length - 7 == index) {
       _adapter.paginationController.loadMore();
     }
 

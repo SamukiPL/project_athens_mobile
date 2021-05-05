@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:project_athens/main/presentation/main_widget.dart';
 import 'package:provider/provider.dart';
 
 class BottomNavigationWidget extends StatelessWidget {
@@ -42,16 +41,6 @@ class BottomNavigationWidget extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  void refreshMainWidget(BuildContext context) {
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(
-        builder: (context) => MainWidget()
-      ),
-      (Route<dynamic> route) => false
     );
   }
 
