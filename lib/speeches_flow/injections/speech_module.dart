@@ -1,25 +1,36 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
-import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
+import 'package:project_athens/speeches_flow/data/details_speech_network_data_source.dart';
+import 'package:project_athens/speeches_flow/data/network/speeches_api.dart';
+import 'package:project_athens/speeches_flow/data/speech_cache.dart';
+import 'package:project_athens/speeches_flow/domain/get_speech_use_case.dart';
+import 'package:project_athens/speeches_flow/mappers/speeches_network_mapper.dart';
 import 'package:project_athens/speeches_flow/screens/details/speech_details_bloc.dart';
-import 'package:project_athens/speeches_flow/screens/details/video_manager.dart';
 import 'package:provider/provider.dart';
 
 class SpeechModule extends Module {
-  final SpeechModel speechModel;
+  final String speechId;
+  final bool isNormalSpeech;
 
-  SpeechModule(BuildContext context, this.speechModel) : super(context);
+  SpeechModule(BuildContext context, this.speechId, this.isNormalSpeech) : super(context);
 
   @override
   List<SingleChildWidget> getProviders() {
-    final videoWidgetBloc = VideoManager(speechModel);
+    final dio = Provider.of<Dio>(context);
+    final speechesApi = SpeechesApi(dio);
     final deputiesCache = Provider.of<DeputiesCache>(context);
+    final networkMapper = SpeechesNetworkMapper(deputiesCache);
+    final speechCache = Provider.of<SpeechCache>(context);
+
+    final detailsSpeechNetworkDataSource = DetailsSpeechNetworkDataSource(speechesApi, networkMapper, speechId, isNormalSpeech, speechCache);
+    final getSpeechUseCase = GetSpeechUseCase(detailsSpeechNetworkDataSource);
 
     return [
       Provider<SpeechDetailsBloc>(
-        create: (_) => SpeechDetailsBloc(speechModel, videoWidgetBloc, deputiesCache),
+        create: (_) => SpeechDetailsBloc(isNormalSpeech, getSpeechUseCase, deputiesCache),
         dispose: (context, bloc) => bloc.dispose(),
       ),
     ];

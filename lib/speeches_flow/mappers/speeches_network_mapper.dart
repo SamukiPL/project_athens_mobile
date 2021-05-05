@@ -1,5 +1,6 @@
 import 'package:project_athens/athens_core/data/base_responses/speech_response.dart';
 import 'package:project_athens/athens_core/domain/data_mapper.dart';
+import 'package:project_athens/athens_core/models/speech_model.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 
@@ -19,7 +20,21 @@ class SpeechesNetworkMapper
         desc: data.agenda?.title,
         date: data.cisInfo.eventDateTime,
         thumbnailUrl: await _deputiesCache.getDeputyThumbnail(data.cadencyDeputy) ?? "",
-        videoUrl: data.videoDownloadUrl
+        videoUrl: data.videoDownloadUrl,
+        nextPersonSpeech: await _transformPersonSpeechResponse(data.nextPersonSpeech),
+        previousPersonSpeech: await _transformPersonSpeechResponse(data.previousPersonSpeech),
     );
+  }
+
+  Future<PersonSpeechModel> _transformPersonSpeechResponse(PersonSpeech personSpeech) async {
+    if (personSpeech == null) return null;
+
+    if (personSpeech.deputyCardId != null) {
+      final deputy = await _deputiesCache.getDeputyModelByCardId(personSpeech.deputyCardId);
+
+      return PersonSpeechModel(name: deputy.name, thumbnailUrl: deputy.thumbnailUrl, speechId: personSpeech.speechId);
+    }
+
+    return PersonSpeechModel(name: personSpeech.fullName, speechId: personSpeech.speechId);
   }
 }

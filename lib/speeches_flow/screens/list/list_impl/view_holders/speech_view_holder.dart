@@ -25,7 +25,6 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
               getItemCard(context, theme),
             ],
           ),
-          _getBorderBottom(theme)
         ],
     );
   }
@@ -58,9 +57,6 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
             ),
           ),
         ),
-        // Container(
-        //   child: Text(_viewModel.model.club.shortName),
-        // )
       ],
     );
   }
@@ -69,7 +65,7 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
     return Expanded(
       child: InkWell(
         onTap: () {
-          goToDestination(context, SpeechDetailsDestination(_viewModel.model));
+          goToDestination(context, SpeechDetailsDestination(_viewModel.model.id, true));
         },
         child: Container(
           margin: EdgeInsets.only(top: 8, bottom: 8),
@@ -90,7 +86,6 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
   Widget getNameWithDate(BuildContext context, ThemeData theme) {
     return Container(
       width: double.infinity,
-      // margin: EdgeInsets.only(bottom: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -98,7 +93,6 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
             child: Text(
               _viewModel.model.personName,
               style: TextStyle(
-                  // color: Colors.black87,
                   color: theme.primaryColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 18),
@@ -145,15 +139,5 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
     )
         : Container();
   }
-
-  Widget _getBorderBottom(ThemeData theme) {
-    return Container(
-      decoration: BoxDecoration(
-        color: theme.dividerColor,
-      ),
-      height: 1,
-    );
-  }
-
 
 }
