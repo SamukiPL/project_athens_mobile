@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
@@ -35,7 +36,9 @@ class SpeechDetailsScreen extends BaseScreen<SpeechDetailsBloc> {
       ThemeData theme, AppLocalizations localization) {
     return Column(
       children: [
-        SpeechVideoWidget(videoManager: bloc.videoManager,),
+        SpeechVideoWidget(
+          videoManager: bloc.videoManager,
+        ),
         speakerLabel(context, bloc, theme),
         Expanded(
           child: SingleChildScrollView(
@@ -151,22 +154,25 @@ class SpeechDetailsScreen extends BaseScreen<SpeechDetailsBloc> {
   Widget buildNextRow(SpeechDetailsBloc bloc, ThemeData theme,
           AppLocalizations localization) =>
       (bloc.speechModel.nextPersonSpeech != null)
-          ? GestureDetector(
-              onTap: () => bloc.goToNextSpeech(),
-              child: IntrinsicHeight(
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    buildPic(
-                        theme, bloc.speechModel.nextPersonSpeech.thumbnailUrl),
-                    buildNextDecoration(theme),
-                    buildNextPreviousInfo(
-                        theme,
-                        localization().speechesNextSpeech(),
-                        bloc.speechModel.nextPersonSpeech.name),
-                  ],
+          ? Container(
+              margin: EdgeInsets.symmetric(vertical: 16),
+              child: GestureDetector(
+                onTap: () => bloc.goToNextSpeech(),
+                child: IntrinsicHeight(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      buildPic(theme,
+                          bloc.speechModel.nextPersonSpeech.thumbnailUrl),
+                      buildNextDecoration(theme),
+                      buildNextPreviousInfo(
+                          theme,
+                          localization().speechesNextSpeech(),
+                          bloc.speechModel.nextPersonSpeech.name),
+                    ],
+                  ),
                 ),
               ),
             )
@@ -175,25 +181,28 @@ class SpeechDetailsScreen extends BaseScreen<SpeechDetailsBloc> {
   Widget buildPreviousRow(SpeechDetailsBloc bloc, ThemeData theme,
           AppLocalizations localization) =>
       (bloc.speechModel.previousPersonSpeech != null)
-          ? GestureDetector(
-              onTap: () => bloc.goToPreviousSpeech(),
-              child: IntrinsicHeight(
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    buildNextPreviousInfo(
-                        theme,
-                        localization().speechesPreviousSpeech(),
-                        bloc.speechModel.previousPersonSpeech.name),
-                    buildPreviousDecoration(theme),
-                    buildPic(theme,
-                        bloc.speechModel.previousPersonSpeech.thumbnailUrl),
-                  ],
+          ? Container(
+        margin: EdgeInsets.symmetric(vertical: 16),
+            child: GestureDetector(
+                onTap: () => bloc.goToPreviousSpeech(),
+                child: IntrinsicHeight(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      buildNextPreviousInfo(
+                          theme,
+                          localization().speechesPreviousSpeech(),
+                          bloc.speechModel.previousPersonSpeech.name),
+                      buildPreviousDecoration(theme),
+                      buildPic(theme,
+                          bloc.speechModel.previousPersonSpeech.thumbnailUrl),
+                    ],
+                  ),
                 ),
               ),
-            )
+          )
           : Container();
 
   Widget buildNextPreviousInfo(ThemeData theme, String header, String name) {
