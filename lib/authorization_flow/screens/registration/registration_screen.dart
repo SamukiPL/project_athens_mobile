@@ -98,7 +98,7 @@ class RegistrationScreen extends BaseLoginScreen<RegistrationBloc> {
   }
 
   @override
-  void onAuthFailure() {
+  void onAuthFailure(BuildContext context, RegistrationBloc bloc) {
     throw Exception("Should never occur on registration!");
   }
 

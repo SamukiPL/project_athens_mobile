@@ -29,19 +29,25 @@ class DeputyInformationDetailsTab extends StatelessWidget {
                   child: buildBriefInfoTable(localizations, deputyFull),
                   rightPadding: 10,
                   leftPadding: 10,
-                  header: 'Podstawowe informacje',
+                  header: localizations.getText().deputiesBasicInfo(),
                 ),
                 FullCard(
                   rightPadding: 10,
                   leftPadding: 10,
                   child: buildDetailedInfoBlock(localizations, theme, deputyFull),
-                  header: 'Doświadczenie',
+                  header: localizations.getText().deputiesExperience(),
                 ),
                 FullCard(
                     rightPadding: 10,
                     leftPadding: 10,
                     child: buildStatisticsBlock(localizations, theme, deputyFull),
-                    header: 'Statystyki'
+                    header: localizations.getText().deputiesStatistics()
+                ),
+                FullCard(
+                  rightPadding: 10,
+                  leftPadding: 10,
+                  child: buildNounCloud(localizations, theme, deputyFull),
+                  header: localizations.getText().deputiesWordCloud()
                 )
               ]
           ),
@@ -211,9 +217,13 @@ class DeputyInformationDetailsTab extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SimpleHorizontalTable(cells: cells),
-        buildCardHeader('Zgodność głosowania', theme, 15),
+        buildCardHeader(localizations.getText().deputiesVoteAccuracy(), theme, 15),
         buildVoteAccuracyTable(voteAccuracy, localizations, theme)
       ],
     );
+  }
+
+  Widget buildNounCloud(AppLocalizations localizations, ThemeData theme, DeputyFull deputyFull) {
+
   }
 }

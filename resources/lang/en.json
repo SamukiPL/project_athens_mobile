@@ -61,6 +61,9 @@
       "emailsDontMatch": "Repeated email doesn't match",
       "passwordsDontMatch": "Repeated password doesn't match",
       "wrongData": "Incorrect email or password"
+    },
+    "error": {
+      "passwordOrLoginDoesNotMatch": "Password or login are incorrect"
     }
   },
   "timeline": {
@@ -94,7 +97,15 @@
     "profession": "Profession",
     "finishedSchools": "Finished schools",
     "parliamentExperience": "Parliament experience",
-    "noHighestAccuracy": "none"
+    "noHighestAccuracy": "none",
+    "speechCounter": "Speech counter",
+    "voteAbsency": "Vote absency",
+    "mostAccuracy": "Most vote accuracy",
+    "voteAccuracy": "Vote accuracy",
+    "basicInfo": "Basic information",
+    "experience" : "Experience",
+    "statistics": "Statistics",
+    "wordCloud": "Word cloud"
   },
   "speeches": {
     "speechesListTitle": "Speeches",

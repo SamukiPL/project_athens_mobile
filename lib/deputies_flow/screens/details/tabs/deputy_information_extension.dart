@@ -54,15 +54,15 @@ extension DeputyFullExtension on DeputyFull {
       SimpleHorizontalTableCell(
           lowerText: stats.speechesCount.toString(),
           // icon: Icons.record_voice_over,
-          upperText: 'Licznik przemówień'),
+          upperText: localizations.getText().deputiesSpeechCounter()),
       SimpleHorizontalTableCell(
           lowerText: stats.voteAbsencyCount.toString(),
           // icon: MdiIcons.accountOff,
-          upperText: 'Nieobecność na głosowaniach'),
+          upperText: localizations.getText().deputiesVoteAbsency()),
       SimpleHorizontalTableCell(
           lowerText: highestAccuracyText,
           // icon: Icons.gps_fixed,
-          upperText: 'Największa zgodność')
+          upperText: localizations.getText().deputiesMostAccuracy())
     ].toList();
   }
 }

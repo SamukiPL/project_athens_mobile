@@ -22,7 +22,8 @@ class _DeputiesDetailsApi implements DeputiesDetailsApi {
     ArgumentError.checkNotNull(query, 'query');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _data = query;
+    final _data = <String, dynamic>{};
+    _data.addAll(query?.toJson() ?? <String, dynamic>{});
     final _result = await _dio.request<List<dynamic>>(
         '/deputy-aggregator/cadency-speech/deputy/$cadencyDeputyId',
         queryParameters: queryParameters,
@@ -46,7 +47,8 @@ class _DeputiesDetailsApi implements DeputiesDetailsApi {
     ArgumentError.checkNotNull(query, 'query');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _data = query;
+    final _data = <String, dynamic>{};
+    _data.addAll(query?.toJson() ?? <String, dynamic>{});
     final _result = await _dio.request<List<dynamic>>(
         '/deputy-aggregator/cadency-voting/$cadency/deputy/$cadencyDeputyId',
         queryParameters: queryParameters,

@@ -61,6 +61,9 @@
       "emailsDontMatch": "Powtórzony email nie pasuje",
       "passwordsDontMatch": "Powtórzone hasło nie pasuje",
       "wrongData": "Nieprawidłowy email lub hasło"
+    },
+    "error": {
+      "passwordOrLoginDoesNotMatch": "Podane hasło lub login są błędne"
     }
   },
   "timeline": {
@@ -94,7 +97,15 @@
     "profession": "Zawód",
     "finishedSchools": "Ukończone szkoły",
     "parliamentExperience": "Doświadczenie parlamentarne",
-    "noHighestAccuracy": "Brak"
+    "noHighestAccuracy": "Brak",
+    "speechCounter": "Licznik przemówień",
+    "voteAbsency": "Nieobecność na głosowaniach",
+    "mostAccuracy": "Największa zgodność",
+    "voteAccuracy": "Zgodność głosowania",
+    "basicInfo": "Podstawowe informacje",
+    "experience" : "Doświadczenie",
+    "statistics": "Statystyki",
+    "wordCloud": "Chmura słów"
   },
   "speeches": {
     "speechesListTitle": "Przemowy",

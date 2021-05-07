@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
@@ -47,34 +50,73 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
   }
 
   void stateListener(BuildContext context, BLOC bloc, WidgetState state) {
+      final localizations = AppLocalizations.of(context);
+
       switch (state.runtimeType) {
         case SuccessState:
           onSuccess(context);
           break;
         case AuthFailure:
-          onAuthFailure();
+          onAuthFailure(context, bloc);
           break;
         case ErrorState:
-          showModalBottomSheet(context: context, builder: (context) => Column(
-            children: <Widget>[
-              Text("No internet connection"),
-              RaisedButton(
-                child: Container(
-                  padding: EdgeInsets.all(16),
-                  child: Text(
-                    "Try again",
-                    style: TextStyle(color: Colors.white),
-                    textScaleFactor: 1.5,
-                  ),
-                ),
-                onPressed: () => onNetworkFailure(bloc),
-                color: Theme.of(context).primaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(32),
-                ),
-              )
-            ],
-          ));
+          final errType = (state as ErrorState).type;
+          String errMsg;
+          switch(errType) {
+            case ErrorType.NETWORK:
+              errMsg = localizations.getText().universalErrorNetwork();
+              break;
+            case ErrorType.SERVER:
+              errMsg = localizations.getText().universalErrorServer();
+              break;
+            case ErrorType.UNKNOWN:
+              errMsg = localizations.getText().universalErrorUnknown();
+              break;
+          }
+          showModalBottomSheet(context: context, builder: (context) =>
+              Container(
+                padding: EdgeInsets.all(12),
+                child:Column(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.only(bottom: 8),
+                      child: Icon(Icons.sentiment_dissatisfied, size: 75),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(bottom: 8),
+                      child: Text(
+                        errMsg,
+                        // localizations.getText().universalErrorNetwork(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 20
+                        ),
+                      ),
+                    ),
+                    Expanded(child: Container(),),
+
+                    RaisedButton(
+                      child: Container(
+                        padding: EdgeInsets.all(16),
+                        child: Text(
+                          localizations.getText().universalRetry(),
+                          style: TextStyle(color: Colors.white),
+                          textScaleFactor: 1.5,
+                        ),
+                      ),
+                      onPressed: ((){
+                        Navigator.pop(context);
+                        onNetworkFailure(bloc);
+                      }),
+                      color: Theme.of(context).primaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32),
+                      ),
+                    )
+                  ],
+                )
+              ),
+            );
           break;
       }
   }
@@ -89,5 +131,5 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
 
   void onNetworkFailure(BLOC bloc);
 
-  void onAuthFailure();
+  void onAuthFailure(BuildContext context, BLOC bloc);
 }

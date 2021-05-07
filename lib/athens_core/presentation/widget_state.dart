@@ -8,7 +8,7 @@ class WidgetState {
   WidgetState._();
 
   factory WidgetState.success() = SuccessState;
-  factory WidgetState.error(ErrorType type) = ErrorState;
+  factory WidgetState.error(ErrorType type, DioError httpErr) = ErrorState;
   factory WidgetState.authFailure() = AuthFailure;
   factory WidgetState.redirection(Destination destination) = Redirection;
 }
@@ -32,10 +32,20 @@ enum ErrorType {
 
 class ErrorState extends WidgetState {
   final ErrorType type;
-  ErrorState(this.type): super._();
+  final DioError httpErr;
+  ErrorState(this.type, this.httpErr): super._();
 }
 
 extension StateExceptionExtension on Exception {
+
+  ErrorType parseServerError() {
+    DioError err = this as DioError;
+
+    switch (err.response.statusCode) {
+      case 401: return ErrorType.AUTH;
+      default: return ErrorType.SERVER;
+    }
+  }
 
   ErrorType getErrorType() {
     if (this is DioError) {
@@ -48,6 +58,7 @@ extension StateExceptionExtension on Exception {
           return ErrorType.NETWORK;
           break;
         case DioErrorType.RESPONSE:
+          return parseServerError();
         case DioErrorType.CANCEL:
         return ErrorType.SERVER;
           break;
@@ -64,7 +75,7 @@ extension StateExceptionExtension on Exception {
       if (type == ErrorType.AUTH)
         return WidgetState.authFailure();
 
-      return WidgetState.error(type);
+      return WidgetState.error(type, this);
   }
 
 }
