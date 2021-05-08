@@ -16,6 +16,7 @@ DeputyResponse _$DeputyResponseFromJson(Map<String, dynamic> json) {
     json['politicalParty'] as String,
     json['parliamentClub'] as String,
     json['cardNumber'] as int,
+    json['cardId'] as int,
     json['deputyId'] as String,
     json['isActive'] as bool,
     json['cv'] == null
@@ -41,6 +42,7 @@ Map<String, dynamic> _$DeputyResponseToJson(DeputyResponse instance) =>
       'politicalParty': instance.politicalParty,
       'parliamentClub': instance.parliamentClub,
       'cardNumber': instance.cardNumber,
+      'cardId': instance.cardId,
       'deputyId': instance.deputyId,
       'isActive': instance.isActive,
       'cv': instance.cv,

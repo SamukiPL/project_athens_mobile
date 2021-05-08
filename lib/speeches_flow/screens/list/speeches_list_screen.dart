@@ -23,37 +23,45 @@ class SpeechesListScreen extends BaseScreen<BaseListBloc> {
   Widget buildBody(BuildContext context, BaseListBloc bloc) {
     final localizations = Provider.of<AppLocalizations>(context);
 
-    return Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Expanded(
-            child: BaseListWidget(listBloc: bloc, noDataText: localizations.getText().speechesNoData()),
-          )
-        ]
-    );
+    return Column(mainAxisSize: MainAxisSize.max, children: [
+      Expanded(
+        child: BaseListWidget(
+          listBloc: bloc,
+          noDataText: localizations.getText().speechesNoData(),
+          separator: Divider(
+            height: 1,
+            indent: 48,
+          ),
+        ),
+      )
+    ]);
   }
 
   @override
   Widget buildAppBar(BuildContext context, BaseListBloc bloc) {
-    final AppLocalizations localizations = Provider.of<AppLocalizations>(context);
+    final AppLocalizations localizations =
+        Provider.of<AppLocalizations>(context);
 
     return SearchAppBar(
-      title: getAppBarTitle(localizations, bloc),
-      hintText: "Not ready yet",
-      searchQuery: (query) {},
-      showBackArrow: showBackArrow,
-      additionalIcons: [
-        IconButton(icon: Icon(Icons.filter_alt_sharp, color: Colors.white,),
-            onPressed: () => showFullScreenDialog(context))
-      ]
-    );
+        title: getAppBarTitle(localizations, bloc),
+        hintText: "Not ready yet",
+        searchQuery: (query) {},
+        showBackArrow: showBackArrow,
+        additionalIcons: [
+          IconButton(
+              icon: Icon(
+                Icons.filter_alt_sharp,
+                color: Colors.white,
+              ),
+              onPressed: () => showFullScreenDialog(context))
+        ]);
   }
 
   @override
-  Widget buildFloatingActionButton(BuildContext context, BaseListBloc bloc) => null;
+  Widget buildFloatingActionButton(BuildContext context, BaseListBloc bloc) =>
+      null;
 
   void showFullScreenDialog(BuildContext context) {
     showFilterBottomSheet(context);
   }
-
 }

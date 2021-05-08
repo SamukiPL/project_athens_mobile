@@ -13,6 +13,7 @@ class DataLoadingWidget extends StatelessWidget {
 
   final Widget initialLoading;
   final Widget child;
+  final Widget Function() childBuilder;
   final Widget noData;
   final String noDataText;
   final Function(ErrorType) retryWidget;
@@ -24,7 +25,8 @@ class DataLoadingWidget extends StatelessWidget {
       this._bloc,
       {Key key,
       this.initialLoading,
-      @required this.child,
+      this.child,
+      this.childBuilder,
       this.noData,
       this.noDataText,
       this.retryWidget,
@@ -42,7 +44,7 @@ class DataLoadingWidget extends StatelessWidget {
             return _getInitialLoading();
             break;
           case ContentLoaded:
-            return child;
+            return child ?? childBuilder();
             break;
           case NoDataLoaded:
             return _getNoData();

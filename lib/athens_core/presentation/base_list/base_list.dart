@@ -8,7 +8,9 @@ class BaseListWidget extends StatelessWidget {
   final BaseListBloc listBloc;
   final String noDataText;
 
-  const BaseListWidget({Key key, this.listBloc, this.noDataText}) : super(key: key);
+  final Widget separator;
+
+  const BaseListWidget({Key key, this.listBloc, this.noDataText, this.separator}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +19,7 @@ class BaseListWidget extends StatelessWidget {
       child: PagingList(
         listBloc.adapter,
         refreshable: true,
+        separator: separator,
       ),
       noDataText: noDataText,
       onRetry: listBloc.refresh,

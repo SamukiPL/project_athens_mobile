@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
+import 'package:project_athens/athens_core/models/speech_model.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
@@ -23,18 +24,16 @@ class TimelineScreenDestination extends Destination<TimelineScreen> {
 }
 
 class SpeechScreenDestination extends Destination<SpeechDetailsScreen> {
-  final SpeechModel speechModel;
+  final String _speechId;
 
-  SpeechScreenDestination(this.speechModel): super(BottomNavItem.SPEECHES);
+  SpeechScreenDestination(this._speechId): super(BottomNavItem.SPEECHES);
 
   @override
-  SpeechDetailsScreen getScreen() => SpeechDetailsScreen(
-        speechModel: speechModel,
-      );
+  SpeechDetailsScreen getScreen() => SpeechDetailsScreen();
 
   @override
   List<Module> getScreenModules(BuildContext context) =>
-      [SpeechModule(context, speechModel)];
+      [SpeechModule(context, _speechId, false)];
 
 }
 

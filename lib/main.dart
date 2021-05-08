@@ -12,6 +12,7 @@ import 'package:project_athens/main/injections/app_module.dart';
 import 'package:project_athens/main/injections/app_navigation_module.dart';
 import 'package:project_athens/main/injections/main_widget_module.dart';
 import 'package:project_athens/splash_screen/splash_screen_widget.dart';
+
 import 'athens_core/configuration/configuration_module.dart';
 
 Future<void> main() async {
@@ -55,7 +56,7 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.white,
             dividerColor: Color(0xffaaaaaa),
             primaryColor: Color(0xff00bfff),
-            primaryColorDark: Colors.indigo,
+            primaryColorDark: Color(0xff008ebe),
             accentColor: Colors.blueAccent),
         home: ModuleWidget(
           providers: [AppNavigationModule(context)],

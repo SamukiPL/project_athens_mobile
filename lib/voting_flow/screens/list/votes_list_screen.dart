@@ -9,13 +9,13 @@ import 'package:project_athens/athens_core/presentation/search_app_bar/search_ap
 import 'package:provider/provider.dart';
 
 class VotesListScreen extends BaseScreen<BaseListBloc> {
-
   VotesListScreen();
-  
+
   @override
   bool get showBackArrow => false;
 
-  @override getAppBarTitle(AppLocalizations localizations, BaseListBloc bloc) {
+  @override
+  getAppBarTitle(AppLocalizations localizations, BaseListBloc bloc) {
     return localizations.getText().votingsVotingListTitle();
   }
 
@@ -23,19 +23,23 @@ class VotesListScreen extends BaseScreen<BaseListBloc> {
   Widget buildBody(BuildContext context, BaseListBloc bloc) {
     final localizations = Provider.of<AppLocalizations>(context);
 
-    return Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Expanded(
-            child: BaseListWidget(listBloc: bloc, noDataText: localizations.getText().votingsNoData(),),
-          )
-        ]
-    );
+    return Column(mainAxisSize: MainAxisSize.max, children: [
+      Expanded(
+        child: BaseListWidget(
+          listBloc: bloc,
+          noDataText: localizations.getText().votingsNoData(),
+          separator: Divider(
+            height: 1,
+          ),
+        ),
+      )
+    ]);
   }
 
   @override
   Widget buildAppBar(BuildContext context, BaseListBloc bloc) {
-    final AppLocalizations localizations = Provider.of<AppLocalizations>(context);
+    final AppLocalizations localizations =
+        Provider.of<AppLocalizations>(context);
 
     return SearchAppBar(
         title: getAppBarTitle(localizations, bloc),
@@ -43,17 +47,20 @@ class VotesListScreen extends BaseScreen<BaseListBloc> {
         searchQuery: (query) {},
         showBackArrow: showBackArrow,
         additionalIcons: [
-          IconButton(icon: Icon(Icons.filter_alt_sharp, color: Colors.white,),
+          IconButton(
+              icon: Icon(
+                Icons.filter_alt_sharp,
+                color: Colors.white,
+              ),
               onPressed: () => showFullScreenDialog(context))
-        ]
-    );
+        ]);
   }
 
   @override
-  Widget buildFloatingActionButton(BuildContext context, BaseListBloc bloc) => null;
+  Widget buildFloatingActionButton(BuildContext context, BaseListBloc bloc) =>
+      null;
 
   void showFullScreenDialog(BuildContext context) {
     showFilterBottomSheet(context);
   }
-  
 }

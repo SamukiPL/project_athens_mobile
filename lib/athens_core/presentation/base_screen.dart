@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_widget.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';

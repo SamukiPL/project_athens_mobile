@@ -299,6 +299,18 @@ class AppLocalizationsGenerated {
     return words['speeches']['noData'];
   }
 
+  String speechesPreviousSpeech() {
+    return words['speeches']['previousSpeech'];
+  }
+
+  String speechesNextSpeech() {
+    return words['speeches']['nextSpeech'];
+  }
+
+  String speechesPlayNow() {
+    return words['speeches']['playNow'];
+  }
+
   String votingsVotingListTitle() {
     return words['votings']['votingListTitle'];
   }

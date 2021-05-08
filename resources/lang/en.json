@@ -99,7 +99,10 @@
   "speeches": {
     "speechesListTitle": "Speeches",
     "speechDetailsTitle": "Speech",
-    "noData": "No speeches for specified criteria."
+    "noData": "No speeches for specified criteria.",
+    "previousSpeech": "Previous speech",
+    "nextSpeech": "Next speech",
+    "playNow": "Play now"
   },
   "votings": {
     "votingListTitle": "Voting",

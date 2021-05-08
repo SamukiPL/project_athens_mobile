@@ -381,6 +381,21 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, speechesNoData != "" && speechesNoData != null); 
   }); 
  
+  test("All methods for $locale speechesPreviousSpeech", () async {
+    String speechesPreviousSpeech = localization.speechesPreviousSpeech();
+    expect(true, speechesPreviousSpeech != "" && speechesPreviousSpeech != null); 
+  }); 
+ 
+  test("All methods for $locale speechesNextSpeech", () async {
+    String speechesNextSpeech = localization.speechesNextSpeech();
+    expect(true, speechesNextSpeech != "" && speechesNextSpeech != null); 
+  }); 
+ 
+  test("All methods for $locale speechesPlayNow", () async {
+    String speechesPlayNow = localization.speechesPlayNow();
+    expect(true, speechesPlayNow != "" && speechesPlayNow != null); 
+  }); 
+ 
   test("All methods for $locale votingsVotingListTitle", () async {
     String votingsVotingListTitle = localization.votingsVotingListTitle();
     expect(true, votingsVotingListTitle != "" && votingsVotingListTitle != null); 

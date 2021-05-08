@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
-import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
+import 'package:project_athens/timeline_flow/navigation/timeline_destinations.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
 
 class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
@@ -127,7 +127,7 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
         elevation: 4,
         child: InkWell(
           onTap: () {
-            goToDestination(context, SpeechDetailsDestination(viewModel.model));
+            goToDestination(context, SpeechScreenDestination(viewModel.model.id));
           },
           child: Container(
             margin: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),

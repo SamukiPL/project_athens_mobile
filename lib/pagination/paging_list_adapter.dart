@@ -53,7 +53,7 @@ class PagingListAdapter {
   }
 
   void loadMoreListener() {
-    if ((_itemsList.length % 20) == 0) {
+    if ((_itemsList.length % 20) == 0 && _itemsList.length > 0) {
       _paginationController.removeListener(loadMoreListener);
       _loadMore.add({});
     }

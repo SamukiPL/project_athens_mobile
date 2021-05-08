@@ -4,7 +4,9 @@ import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
+import 'package:project_athens/speeches_flow/data/speech_cache.dart';
 import 'package:project_athens/timeline_flow/data/network/timeline_api.dart';
+import 'package:project_athens/timeline_flow/data/speech_queue_setter.dart';
 import 'package:project_athens/timeline_flow/data/timeline_repository_impl.dart';
 import 'package:project_athens/timeline_flow/domain/use_cases/get_meetings_dates.dart';
 import 'package:project_athens/timeline_flow/domain/use_cases/get_noun_cloud_use_case.dart';
@@ -22,10 +24,14 @@ class TimelineModule extends Module {
   @override
   List<SingleChildWidget> getProviders() {
     final deputiesCache = Provider.of<DeputiesCache>(context);
+    final speechCache = Provider.of<SpeechCache>(context);
     final dio = Provider.of<Dio>(context);
     final localization = Provider.of<AppLocalizations>(context);
     TimelineApi timelineApi = TimelineApi(dio);
-    TimelineRepository timelineRepository = TimelineRepositoryImpl(timelineApi, TimelineModelMapper(deputiesCache, localization));
+    TimelineRepository timelineRepository = TimelineRepositoryImpl(
+        timelineApi,
+        TimelineModelMapper(deputiesCache, localization),
+        SpeechQueueSetter(speechCache));
 
     GetTimelineUseCase getTimelineUseCase = GetTimelineUseCase(timelineRepository);
     GetMeetingsDates getMeetingsDates = GetMeetingsDates(timelineRepository);

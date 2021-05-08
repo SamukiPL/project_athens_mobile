@@ -99,7 +99,10 @@
   "speeches": {
     "speechesListTitle": "Przemowy",
     "speechDetailsTitle": "Przemowa",
-    "noData": "Nie znaleziono przemów dla podanych kryteriów."
+    "noData": "Nie znaleziono przemów dla podanych kryteriów.",
+    "previousSpeech": "Poprzednia przemowa",
+    "nextSpeech": "Następna przemowa",
+    "playNow": "Odtwórz teraz"
   },
   "votings": {
     "votingListTitle": "Głosowania",

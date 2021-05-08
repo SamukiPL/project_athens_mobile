@@ -1,7 +1,7 @@
 import 'package:project_athens/athens_core/data/base_list/network_data_source.dart';
 import 'package:project_athens/athens_core/domain/base_list/base_params.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
-import 'package:project_athens/athens_core/models/timeline_model.dart';
+import 'package:project_athens/athens_core/models/speech_model.dart';
 import 'package:project_athens/deputies_flow/data/network/deputies_details_api.dart';
 import 'package:project_athens/speeches_flow/data/network/request/speech_search_request.dart';
 import 'package:project_athens/speeches_flow/mappers/speeches_network_mapper.dart';

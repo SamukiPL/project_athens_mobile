@@ -16,6 +16,25 @@ class _SpeechesApi implements SpeechesApi {
   String baseUrl;
 
   @override
+  Future<SpeechResponse> getSpeech(speechId) async {
+    ArgumentError.checkNotNull(speechId, 'speechId');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/deputy-aggregator/cadency-speech/$speechId',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = SpeechResponse.fromJson(_result.data);
+    return value;
+  }
+
+  @override
   Future<SpeechesSearchResponse> getSpeeches(request) async {
     ArgumentError.checkNotNull(request, 'request');
     const _extra = <String, dynamic>{};
