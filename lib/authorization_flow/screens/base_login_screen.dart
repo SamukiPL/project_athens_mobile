@@ -60,19 +60,7 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
           onAuthFailure(context, bloc);
           break;
         case ErrorState:
-          final errType = (state as ErrorState).type;
-          String errMsg;
-          switch(errType) {
-            case ErrorType.NETWORK:
-              errMsg = localizations.getText().universalErrorNetwork();
-              break;
-            case ErrorType.SERVER:
-              errMsg = localizations.getText().universalErrorServer();
-              break;
-            case ErrorType.UNKNOWN:
-              errMsg = localizations.getText().universalErrorUnknown();
-              break;
-          }
+          String errMsg = _getErrorMessage(state as ErrorState, localizations);
           showModalBottomSheet(context: context, builder: (context) =>
               Container(
                 padding: EdgeInsets.all(12),
@@ -119,6 +107,21 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
             );
           break;
       }
+  }
+
+  _getErrorMessage(ErrorState state, AppLocalizations localizations) {
+    final errType = state.type;
+    switch(errType) {
+      case ErrorType.NETWORK:
+        return localizations.getText().universalErrorNetwork();
+        break;
+      case ErrorType.SERVER:
+        return localizations.getText().universalErrorServer();
+        break;
+      case ErrorType.UNKNOWN:
+        return localizations.getText().universalErrorUnknown();
+        break;
+    }
   }
 
   Widget generateAppBar(BuildContext context, BLOC bloc);

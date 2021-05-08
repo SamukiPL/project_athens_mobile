@@ -10,6 +10,39 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends BaseLoginScreen<LoginBloc> {
+  Widget _buildErrorBox(AppLocalizations localization, LoginBloc bloc, ThemeData theme) {
+    if (bloc.authFailedNotifier.hasFailed) {
+      return AnimatedContainer(
+          margin: EdgeInsets.fromLTRB(32, 8, 32, 8),
+          width: double.infinity,
+          height: bloc.authFailedNotifier.hasFailed ? 50 : 0,
+          duration: Duration(seconds: 2),
+          curve: Curves.bounceIn,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: theme.errorColor.withOpacity(0.6),
+              border: Border.all(
+                  color: Colors.redAccent,
+                  width: 2,
+                  style: BorderStyle.solid
+              )
+          ),
+          child: Center(
+            child: Text(
+              localization.getText().loginErrorPasswordOrLoginDoesNotMatch(),
+              style:  TextStyle(
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+
+            ),
+          )
+      );
+    } else {
+      return Container();
+    }
+  }
+
   @override
   List<Module> getProviders(BuildContext context) =>
       [LoginScreenModule(context)];
@@ -31,32 +64,7 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
         ChangeNotifierProvider<AuthFailedNotifier>.value(
           value: bloc.authFailedNotifier,
           child: Consumer<AuthFailedNotifier>(
-            builder: (context, authFailed, _) => bloc.authFailedNotifier.hasFailed ? AnimatedContainer(
-              margin: EdgeInsets.fromLTRB(32, 8, 32, 8),
-              width: double.infinity,
-              height: bloc.authFailed ? 0 : 50,
-              duration: Duration(seconds: 2),
-              curve: Curves.bounceIn,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: theme.errorColor.withOpacity(0.6),
-                border: Border.all(
-                  color: Colors.redAccent,
-                  width: 2,
-                  style: BorderStyle.solid
-                )
-              ),
-              child: Center(
-                child: Text(
-                  localization.getText().loginErrorPasswordOrLoginDoesNotMatch(),
-                  style:  TextStyle(
-                    color: Colors.white,
-                  ),
-                  textAlign: TextAlign.center,
-
-                ),
-              )
-            ) : Container(),
+            builder: (context, authFailed, _) => _buildErrorBox(localization, bloc, theme),
           ),
 
         ),

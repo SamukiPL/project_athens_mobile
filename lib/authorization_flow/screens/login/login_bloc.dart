@@ -15,7 +15,6 @@ class LoginBloc extends BaseBloc {
   final FirebaseDeputiesUseCase _firebaseDeputiesUseCase;
 
   final _cadency = 9;
-  bool authFailed = false;
   final AuthFailedNotifier authFailedNotifier = AuthFailedNotifier();
 
   LoginBloc(this._loginUseCase, this._firebaseDeputiesUseCase);
