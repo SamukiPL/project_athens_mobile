@@ -187,6 +187,10 @@ class AppLocalizationsGenerated {
     return words['login']['validate']['wrongData'];
   }
 
+  String loginErrorPasswordOrLoginDoesNotMatch() {
+    return words['login']['error']['passwordOrLoginDoesNotMatch'];
+  }
+
   String timelineTimelineNavTitle() {
     return words['timeline']['timelineNavTitle'];
   }
@@ -285,6 +289,38 @@ class AppLocalizationsGenerated {
 
   String deputiesNoHighestAccuracy() {
     return words['deputies']['noHighestAccuracy'];
+  }
+
+  String deputiesSpeechCounter() {
+    return words['deputies']['speechCounter'];
+  }
+
+  String deputiesVoteAbsency() {
+    return words['deputies']['voteAbsency'];
+  }
+
+  String deputiesMostAccuracy() {
+    return words['deputies']['mostAccuracy'];
+  }
+
+  String deputiesVoteAccuracy() {
+    return words['deputies']['voteAccuracy'];
+  }
+
+  String deputiesBasicInfo() {
+    return words['deputies']['basicInfo'];
+  }
+
+  String deputiesExperience() {
+    return words['deputies']['experience'];
+  }
+
+  String deputiesStatistics() {
+    return words['deputies']['statistics'];
+  }
+
+  String deputiesWordCloud() {
+    return words['deputies']['wordCloud'];
   }
 
   String speechesSpeechesListTitle() {

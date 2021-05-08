@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
     return ModuleWidget(
       providers: [AppModule(context), FirebaseMessagingModule(context, _firebaseMessages), MainWidgetModule(context), ConfigurationModule(context)],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Project Athens',
         theme: ThemeData(
           primarySwatch: MaterialColor(

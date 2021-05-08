@@ -9,15 +9,15 @@ void main() {
   String osPrefix = Platform.isLinux ? '/' : '';
   String filePathForCoverage = osPrefix + scriptPath.substring(0, scriptPath.indexOf('main.dart')).substring(1) + 'resources/lang/';
 
-  File plFile = File(filePathForCoverage + 'pl.json');
-  String plData = plFile.readAsStringSync();
-  Map<String, dynamic> plWords = json.decode(plData);
-  testAllMethods('pl', AppLocalizationsGenerated(plWords));
-
   File enFile = File(filePathForCoverage + 'en.json');
   String enData = enFile.readAsStringSync();
   Map<String, dynamic> enWords = json.decode(enData);
   testAllMethods('en', AppLocalizationsGenerated(enWords));
+
+  File plFile = File(filePathForCoverage + 'pl.json');
+  String plData = plFile.readAsStringSync();
+  Map<String, dynamic> plWords = json.decode(plData);
+  testAllMethods('pl', AppLocalizationsGenerated(plWords));
 }
 
 void testAllMethods(String locale, AppLocalizationsGenerated localization) {
@@ -241,6 +241,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginValidateWrongData != "" && loginValidateWrongData != null); 
   }); 
  
+  test("All methods for $locale loginErrorPasswordOrLoginDoesNotMatch", () async {
+    String loginErrorPasswordOrLoginDoesNotMatch = localization.loginErrorPasswordOrLoginDoesNotMatch();
+    expect(true, loginErrorPasswordOrLoginDoesNotMatch != "" && loginErrorPasswordOrLoginDoesNotMatch != null); 
+  }); 
+ 
   test("All methods for $locale timelineTimelineNavTitle", () async {
     String timelineTimelineNavTitle = localization.timelineTimelineNavTitle();
     expect(true, timelineTimelineNavTitle != "" && timelineTimelineNavTitle != null); 
@@ -364,6 +369,46 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale deputiesNoHighestAccuracy", () async {
     String deputiesNoHighestAccuracy = localization.deputiesNoHighestAccuracy();
     expect(true, deputiesNoHighestAccuracy != "" && deputiesNoHighestAccuracy != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesSpeechCounter", () async {
+    String deputiesSpeechCounter = localization.deputiesSpeechCounter();
+    expect(true, deputiesSpeechCounter != "" && deputiesSpeechCounter != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesVoteAbsency", () async {
+    String deputiesVoteAbsency = localization.deputiesVoteAbsency();
+    expect(true, deputiesVoteAbsency != "" && deputiesVoteAbsency != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesMostAccuracy", () async {
+    String deputiesMostAccuracy = localization.deputiesMostAccuracy();
+    expect(true, deputiesMostAccuracy != "" && deputiesMostAccuracy != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesVoteAccuracy", () async {
+    String deputiesVoteAccuracy = localization.deputiesVoteAccuracy();
+    expect(true, deputiesVoteAccuracy != "" && deputiesVoteAccuracy != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesBasicInfo", () async {
+    String deputiesBasicInfo = localization.deputiesBasicInfo();
+    expect(true, deputiesBasicInfo != "" && deputiesBasicInfo != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesExperience", () async {
+    String deputiesExperience = localization.deputiesExperience();
+    expect(true, deputiesExperience != "" && deputiesExperience != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesStatistics", () async {
+    String deputiesStatistics = localization.deputiesStatistics();
+    expect(true, deputiesStatistics != "" && deputiesStatistics != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesWordCloud", () async {
+    String deputiesWordCloud = localization.deputiesWordCloud();
+    expect(true, deputiesWordCloud != "" && deputiesWordCloud != null); 
   }); 
  
   test("All methods for $locale speechesSpeechesListTitle", () async {
