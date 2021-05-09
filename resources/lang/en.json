@@ -7,9 +7,11 @@
     "choose": "Choose",
     "ok": "Ok",
     "retry": "Try again",
+    "close": "Close",
     "noData": {
       "defaultText": "No data"
     },
+    "information": "Information",
     "error": {
       "network": "Something went wrong. Please check your internet connection.",
       "server": "Server is not responding. Please try again later.",
@@ -105,7 +107,9 @@
     "basicInfo": "Basic information",
     "experience" : "Experience",
     "statistics": "Statistics",
-    "wordCloud": "Word cloud"
+    "statisticsInfo": "TBA",
+    "wordCloud": "Word cloud",
+    "wordCloudInfo": "TBA"
   },
   "speeches": {
     "speechesListTitle": "Speeches",

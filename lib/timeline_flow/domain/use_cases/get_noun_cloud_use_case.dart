@@ -1,6 +1,6 @@
+import 'package:project_athens/athens_core/data/word_model/word_model.dart';
 import 'package:project_athens/athens_core/domain/base_use_case.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
-import 'package:project_athens/timeline_flow/domain/cloud/word_model.dart';
 import 'package:project_athens/timeline_flow/domain/timeline_parameters.dart';
 import 'package:project_athens/timeline_flow/domain/timeline_repository.dart';
 

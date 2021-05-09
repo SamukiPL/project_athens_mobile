@@ -1,5 +1,5 @@
+import 'package:project_athens/athens_core/data/word_model/word_model.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
-import 'package:project_athens/timeline_flow/domain/cloud/word_model.dart';
 
 abstract class TimelineRepository {
 

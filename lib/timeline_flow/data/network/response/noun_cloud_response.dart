@@ -1,19 +1,9 @@
 import 'dart:collection';
 
 import 'package:json_annotation/json_annotation.dart';
+import 'package:project_athens/athens_core/data/word_model/noun_tag.dart';
 
 part 'noun_cloud_response.g.dart';
-
-@JsonSerializable()
-class NounTag {
-  final String key;
-  final int hits;
-
-  NounTag(this.key, this.hits);
-
-  factory NounTag.fromJson(Map<String, dynamic> json) => _$NounTagFromJson(json);
-  Map<String, dynamic> toJson() => _$NounTagToJson(this);
-}
 
 @JsonSerializable()
 class NounCloudResponse {

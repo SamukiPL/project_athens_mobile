@@ -5,12 +5,14 @@ import 'package:project_athens/athens_core/chopper/network_module.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/data/get_deputies_repository_impl.dart';
+import 'package:project_athens/deputies_utils/data/get_deputy_nouns_repository_impl.dart';
 import 'package:project_athens/deputies_utils/data/get_deputy_repository_impl.dart';
 import 'package:project_athens/deputies_utils/data/get_parliament_clubs_repository_impl.dart';
 import 'package:project_athens/deputies_utils/data/network/deputies_api.dart';
 import 'package:project_athens/deputies_utils/data/network/parliament_clubs_api.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputies/get_deputies_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputy/get_deputy_use_case.dart';
+import 'package:project_athens/deputies_utils/domain/get_deputy_nouns/get_deputy_nouns_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/get_parliament_clubs/get_parliament_clubs_use_case.dart';
 import 'package:project_athens/speeches_flow/data/speech_cache.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +35,8 @@ class AppModule extends Module {
     final getDeputiesUseCase = GetDeputiesUseCase(getDeputiesRepository);
     final getDeputyRepository = GetDeputyRepositoryImpl(deputiesApi);
     final getDeputyUseCase = GetDeputyUseCase(getDeputyRepository);
+    final getDeputyNounsRepository = GetDeputyNounsRepositoryImpl(deputiesApi);
+    final getDeputyNounsUseCase = GetDeputyNounsUseCase(getDeputyNounsRepository);
 
 
     final parliamentClubsApi = ParliamentClubsApi(client);
@@ -47,7 +51,7 @@ class AppModule extends Module {
         dispose: (context, client) => client.dispose(),
       ),
       Provider<DeputiesCache>(
-        create: (_) => DeputiesCache(getDeputiesUseCase, getParliamentClubsUseCase, getDeputyUseCase),
+        create: (_) => DeputiesCache(getDeputiesUseCase, getParliamentClubsUseCase, getDeputyUseCase, getDeputyNounsUseCase),
       ),
       Provider<SpeechCache>(create: (_) => SpeechCache()),
     ]);

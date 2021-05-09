@@ -1,6 +1,12 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_scatter/flutter_scatter.dart';
+import 'package:project_athens/athens_core/data/word_model/noun_tag.dart';
+import 'package:project_athens/athens_core/data/word_model/word_model_mapper.dart';
+import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/async_once/async_once.dart';
 import 'package:project_athens/athens_core/presentation/full_card/full_card.dart';
@@ -8,6 +14,9 @@ import 'package:project_athens/athens_core/presentation/simple_horizontal_table/
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/deputies_flow/domain/details/get_full_deputy_use_case.dart';
 import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_information_extension.dart';
+import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
+import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
+import 'package:project_athens/deputies_utils/data/network/response/deputy_nouns_response.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_full.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +28,9 @@ class DeputyInformationDetailsTab extends StatelessWidget {
     final theme = Theme.of(context);
 
     final asyncOnceUseCase = Provider.of<GetFullDeputyUseCase>(context);
+
+    final DeputiesCache deputyCache = Provider.of<DeputiesCache>(context);
+
     return AsyncOnce<DeputyFull>(asyncOnceUseCase: asyncOnceUseCase, builder: (deputyFull) {
       return SingleChildScrollView(
         child: Container(
@@ -41,13 +53,15 @@ class DeputyInformationDetailsTab extends StatelessWidget {
                     rightPadding: 10,
                     leftPadding: 10,
                     child: buildStatisticsBlock(localizations, theme, deputyFull),
-                    header: localizations.getText().deputiesStatistics()
+                    header: localizations.getText().deputiesStatistics(),
+                    dialogText: localizations.getText().deputiesStatisticsInfo(),
                 ),
                 FullCard(
                   rightPadding: 10,
                   leftPadding: 10,
-                  child: buildNounCloud(localizations, theme, deputyFull),
-                  header: localizations.getText().deputiesWordCloud()
+                  child: buildNounCloud(localizations, theme, deputyFull, deputyCache, context),
+                  header: localizations.getText().deputiesWordCloud(),
+                  dialogText: localizations.getText().deputiesWordCloudInfo(),
                 )
               ]
           ),
@@ -223,7 +237,59 @@ class DeputyInformationDetailsTab extends StatelessWidget {
     );
   }
 
-  Widget buildNounCloud(AppLocalizations localizations, ThemeData theme, DeputyFull deputyFull) {
+  List<Widget> generateNounsWidgets(List<NounTag> nouns) {
+    final words = mapToWordModel(nouns);
 
+    List<Widget> widgets = [];
+    words.forEach((model) {
+      widgets.add(RotatedBox(
+        quarterTurns: (model.occurrence % 2).toInt(),
+        child: Text(
+          "#${model.word}",
+          style: TextStyle(fontSize: model.occurrence, color: Colors.black38),
+        ),
+      ));
+    });
+
+    return widgets;
+  }
+
+  Widget buildNounCloud(AppLocalizations localizations, ThemeData theme, DeputyFull deputyFull, DeputiesCache deputyCache, BuildContext context) {
+    final nounsPromise = deputyCache.getDeputyNouns(deputyFull.id);
+
+    final screenSize = MediaQuery.of(context).size;
+    final ratio = (screenSize.width - 20) / screenSize.height;
+
+    return FutureProvider<Result<List<NounTag>>>(
+      create: (context) => nounsPromise,
+      child: Consumer<Result<List<NounTag>>>(
+          builder: (context, list, _) {
+            if (list is Success<List<NounTag>>) {
+              final nouns = (list as Success<List<NounTag>>).value;
+              return InteractiveViewer(
+                child: Transform.scale(
+                  scale: 0.80,
+                  child: Scatter(
+                      fillGaps: true,
+                      delegate: ArchimedeanSpiralScatterDelegate(
+                        ratio: ratio,
+                        a: 1.0,
+                        b: 1.0,
+                      ),
+                      children: generateNounsWidgets(nouns),
+                      overflow: Overflow.visible),
+                ),
+              );
+            } else {
+              return Container(
+                width: double.infinity,
+                height: screenSize.width,
+                child: Center(
+                  child: CircularProgressIndicator())
+              );
+            }
+          }
+        )
+    );
   }
 }

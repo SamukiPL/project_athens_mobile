@@ -5,11 +5,13 @@
     "cancel": "Anuluj",
     "skip": "Pomiń",
     "choose": "Wybierz",
+    "close": "Zamknij",
     "ok": "Ok",
     "retry": "Spróbuj ponownie",
     "noData": {
       "defaultText": "Brak danych"
     },
+    "information": "Informacja",
     "error": {
       "network": "Coś poszło nie tak. Proszę sprawdzić swoje połączenie z internetem.",
       "server": "Serwer nie odpowiada. Prosimy spróbować później.",
@@ -105,7 +107,9 @@
     "basicInfo": "Podstawowe informacje",
     "experience" : "Doświadczenie",
     "statistics": "Statystyki",
-    "wordCloud": "Chmura słów"
+    "statisticsInfo": "Zgodność głosowania oznacza ile razy dany poseł zagłosował wraz z większością partii. Proces zgodnośći głosowania jest aktualizowany codziennie o 3 w nocy.",
+    "wordCloud": "Chmura słów",
+    "wordCloudInfo": "Chmura słów to eksperymentalna usługa, która polega na zliczaniu rzeczowników oraz prezentacji od największych do najmniejszych, gdzie największe słowo to najczęsciej wypowiedziane"
   },
   "speeches": {
     "speechesListTitle": "Przemowy",
