@@ -14,17 +14,19 @@ class RegistrationStepperHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return Consumer<RegistrationStepperBloc>(
       builder: (context, bloc, _) => Padding(
         padding: EdgeInsets.all(8.0),
         child: Row(
           children: <Widget>[
             CircularPercentIndicator(
-              radius: 100,
-              lineWidth: 10,
+              radius: 50,
+              lineWidth: 5,
               percent: (bloc.currentStep.index + 1)/3,
               backgroundColor: Colors.white,
-              progressColor: Colors.green,
+              progressColor: theme.accentColor,
               animateFromLastPercent: true,
               animation: true,
               animationDuration: 350,
@@ -32,48 +34,74 @@ class RegistrationStepperHeader extends StatelessWidget {
                 "${bloc.currentStep.index + 1} z 3",
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 24
+                    fontSize: 15
                 ),
               ),
             ),
             Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  Container(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: <Widget>[
-                        Expanded(
-                          child: Text(
-                            bloc.currentStep.getCurrentStepTitle(_localization),
-                            style: TextStyle(
-                                fontSize: 28,
-                                color: Colors.white
+              child: Container(
+                padding: EdgeInsets.only(left: 10),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  // crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Container(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(
+                              bloc.currentStep.getCurrentStepTitle(_localization),
+                              style: TextStyle(
+                                  fontSize: 28,
+                                  color: Colors.white
+                              ),
+                              // textAlign: TextAlign.center,
+                              // softWrap: true,
                             ),
-                            textAlign: TextAlign.center,
-                            softWrap: true,
                           ),
-                        ),
-                        Icon(
-                          Icons.help_outline,
-                          color: Colors.white,
-                        )
-                      ],
+                          Icon(
+                            Icons.help_outline,
+                            color: Colors.white,
+                          )
+                        ],
+                      ),
+                      // margin: EdgeInsets.only(bottom: 8),
                     ),
-                    margin: EdgeInsets.only(bottom: 8),
-                  ),
-                  Text(
-                    bloc.currentStep.getNextStepTitle(_localization),
-                    style: TextStyle(
-                        fontSize: 10,
-                        color: Colors.white
-                    ),
-                    softWrap: true,
-                  )
-                ],
-              ),
+                    bloc.currentStep.getNextStepTitle(_localization) != ""
+                        ? Text(
+                            bloc.currentStep.getNextStepTitle(_localization),
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                            // softWrap: true,
+                          )
+                    : Container(),
+                    StreamProvider.value(
+                      value: bloc.headerHelperLine,
+                      initialData: "",
+                      child: Consumer<String>(
+                        builder: (context, line, _) => line != ""
+                            ? Text(
+                                line,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                                // softWrap: true,
+                              )
+                            : Container()
+                      )
+                    )
+                  ],
+                ),
+              )
+
             )
           ],
         ),

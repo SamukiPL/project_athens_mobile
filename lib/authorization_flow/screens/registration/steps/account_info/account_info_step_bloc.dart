@@ -50,6 +50,12 @@ class AccountInfoStepBloc extends BaseRegistrationStepBloc {
         result.value.isSomethingTaken) {
       _loginTaken = result.value.loginTaken;
       _emailTaken = result.value.emailTaken;
+
+      if (_loginTaken || _emailTaken) {
+        resetFooterButtons();
+        invokeAction(null);
+      }
+
       invokeAction(StepAction.POSITIVE);
       return;
     }
