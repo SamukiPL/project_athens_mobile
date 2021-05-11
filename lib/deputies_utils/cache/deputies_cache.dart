@@ -161,7 +161,7 @@ class DeputiesCache {
 
     final result = await _getDeputyNounsUseCase(BaseDeputyParams(9, id)).then((result) async {
       if (result is Success<List<WordModel>>) {
-        final words = (result as Success<List<WordModel>>).value;
+        final words = result.value;
 
         _cachedDeputyNouns.putIfNotNull(id, words);
 
