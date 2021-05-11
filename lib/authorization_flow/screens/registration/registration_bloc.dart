@@ -34,9 +34,18 @@ class RegistrationBloc extends BaseBloc {
               _accountInfoStepBloc.login, _accountInfoStepBloc.email);
           _stepperBloc.setStep(RegistrationStep.REGISTRATION_END);
           break;
+        case ErrorState:
+          _buttonStateBloc.changeState(StepperButtonState.IDLE);
+          break;
         default:
           stateController.add(screenState);
       }
+    });
+    _accountInfoStepBloc.headingLine.listen((event) {
+      _stepperBloc.setHeaderHelperLine(event);
+    });
+    _accountInfoStepBloc.resetFooterButtonState.listen((event) {
+      _buttonStateBloc.changeState(StepperButtonState.IDLE);
     });
     _registrationEndStepBloc.state.listen((screenState) {
       switch (screenState.runtimeType) {
@@ -48,9 +57,15 @@ class RegistrationBloc extends BaseBloc {
           stateController.add(screenState);
       }
     });
+    _registrationEndStepBloc.headingLine.listen((event) {
+      _stepperBloc.setHeaderHelperLine(event);
+    });
     _deputiesChooserBloc.state.listen((screenState) {
       _buttonStateBloc.changeState(StepperButtonState.IDLE);
       stateController.add(screenState);
+    });
+    _deputiesChooserBloc.headingLine.listen((event) {
+      _stepperBloc.setHeaderHelperLine(event);
     });
   }
 

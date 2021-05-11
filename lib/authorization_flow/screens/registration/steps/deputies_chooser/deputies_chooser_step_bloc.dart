@@ -26,6 +26,8 @@ class DeputiesChooserBloc extends BaseRegistrationStepBloc
   @override
   int offset = 0;
 
+  final int maxDeputyListen = 40;
+
   FabBloc _fabBloc = FabBloc(visible: false);
 
   FabBloc get fabBloc => _fabBloc;
@@ -58,7 +60,12 @@ class DeputiesChooserBloc extends BaseRegistrationStepBloc
 
   bool itemClick(DeputyItemViewModel item) {
     _fabBloc.setVisible(_items.any((item) => item.checked));
-    return _items.where((item) => item.checked).length <= 20;
+
+    final checkedCount = _items.where((item) => item.checked).length;
+
+    updateHeaderHelperLine("Możesz zaznaczyć jeszcze " + (maxDeputyListen - checkedCount).toString() + ' posłów.');
+    
+    return _items.where((item) => item.checked).length <= maxDeputyListen;
   }
 
   void setSearchQuery(String searchQuery) {
