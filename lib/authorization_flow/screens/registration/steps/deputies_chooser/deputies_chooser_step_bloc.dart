@@ -65,7 +65,7 @@ class DeputiesChooserBloc extends BaseRegistrationStepBloc
 
     updateHeaderHelperLine("Możesz zaznaczyć jeszcze " + (maxDeputyListen - checkedCount).toString() + ' posłów.');
     
-    return _items.where((item) => item.checked).length <= 40;
+    return _items.where((item) => item.checked).length <= maxDeputyListen;
   }
 
   void setSearchQuery(String searchQuery) {

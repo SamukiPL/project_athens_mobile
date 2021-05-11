@@ -8,11 +8,11 @@ class RegistrationStepperBloc extends BaseChangeNotifier {
 
   RegistrationStepperBloc(this._currentStep);
 
-  BehaviorSubject<String> headerHelperLineSource = new BehaviorSubject<String>();
+  BehaviorSubject<String> _headerHelperLineSource = new BehaviorSubject<String>();
 
   RegistrationStep get currentStep => _currentStep;
 
-  Stream<String> get headerHelperLine => headerHelperLineSource.stream.startWith("");
+  Stream<String> get headerHelperLine => _headerHelperLineSource.stream.startWith("");
 
   void setStep(RegistrationStep step) {
     _currentStep = step;
@@ -20,7 +20,14 @@ class RegistrationStepperBloc extends BaseChangeNotifier {
   }
 
   void setHeaderHelperLine(String line) {
-    headerHelperLineSource.add(line);
+    _headerHelperLineSource.add(line);
+  }
+
+  @override
+  void dispose() {
+    _headerHelperLineSource.close();
+
+    super.dispose();
   }
 
 }

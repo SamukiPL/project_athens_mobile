@@ -24,13 +24,7 @@ abstract class BaseRegistrationStepBloc extends BaseBloc {
     _stepActionController.add(action);
   }
 
-  @override
-  void dispose() {
-    _stepActionController.close();
-    _headingLineController.close();
-    _resetFooterButtonStateController.close();
-    super.dispose();
-  }
+
 
   void updateHeaderHelperLine(String line) {
     _headingLineController.add(line);
@@ -40,4 +34,11 @@ abstract class BaseRegistrationStepBloc extends BaseBloc {
     _resetFooterButtonStateController.add(Random(951234).nextInt(1000));
   }
 
+  @override
+  void dispose() {
+    _stepActionController.close();
+    _headingLineController.close();
+    _resetFooterButtonStateController.close();
+    super.dispose();
+  }
 }

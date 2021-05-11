@@ -43,9 +43,7 @@ class RegistrationStepperHeader extends StatelessWidget {
                 padding: EdgeInsets.only(left: 10),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
-                  // mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  // crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
                     Container(
                       child: Row(
@@ -55,11 +53,9 @@ class RegistrationStepperHeader extends StatelessWidget {
                             child: Text(
                               bloc.currentStep.getCurrentStepTitle(_localization),
                               style: TextStyle(
-                                  fontSize: 28,
+                                  fontSize: 20,
                                   color: Colors.white
                               ),
-                              // textAlign: TextAlign.center,
-                              // softWrap: true,
                             ),
                           ),
                           Icon(
@@ -68,34 +64,30 @@ class RegistrationStepperHeader extends StatelessWidget {
                           )
                         ],
                       ),
-                      // margin: EdgeInsets.only(bottom: 8),
                     ),
                     bloc.currentStep.getNextStepTitle(_localization) != ""
                         ? Text(
                             bloc.currentStep.getNextStepTitle(_localization),
                             textAlign: TextAlign.start,
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 14,
                               color: Colors.white,
                             ),
-                            // softWrap: true,
                           )
                     : Container(),
                     StreamProvider.value(
                       value: bloc.headerHelperLine,
                       initialData: "",
                       child: Consumer<String>(
-                        builder: (context, line, _) => line != ""
-                            ? Text(
-                                line,
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                ),
-                                // softWrap: true,
-                              )
-                            : Container()
+                        builder: (context, line, _) =>
+                          Text(
+                              line,
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.white,
+                              ),
+                            )
                       )
                     )
                   ],

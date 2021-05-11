@@ -53,7 +53,6 @@ class AccountInfoStepBloc extends BaseRegistrationStepBloc {
 
       if (_loginTaken || _emailTaken) {
         resetFooterButtons();
-        invokeAction(null);
       }
 
       invokeAction(StepAction.POSITIVE);
