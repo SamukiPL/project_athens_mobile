@@ -1,5 +1,6 @@
+import 'package:project_athens/athens_core/data/word_model/word_model.dart';
+import 'package:project_athens/athens_core/data/word_model/word_model_mapper.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
-import 'package:project_athens/deputies_utils/data/network/response/deputy_nouns_response.dart';
 import 'package:project_athens/deputies_utils/domain/base_deputy_params.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputy_nouns/get_deputy_nouns_repository.dart';
 
@@ -12,10 +13,12 @@ class GetDeputyNounsRepositoryImpl
   GetDeputyNounsRepositoryImpl(this._deputiesApi);
 
   @override
-  Future<Result<DeputyNounsResponse>> getDeputyNouns(
+  Future<Result<List<WordModel>>> getDeputyNouns(
       BaseDeputyParams params) async {
     final response = await _deputiesApi.getDeputyNouns(params.deputyId);
 
-    return Success<DeputyNounsResponse>(response);
+    final words = mapToWordModel(response.nouns);
+
+    return Success<List<WordModel>>(words);
   }
 }
