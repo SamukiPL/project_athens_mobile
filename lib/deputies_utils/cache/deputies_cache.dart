@@ -1,4 +1,6 @@
 import 'package:project_athens/athens_core/data/word_model/noun_tag.dart';
+import 'package:project_athens/athens_core/data/word_model/word_model.dart';
+import 'package:project_athens/athens_core/data/word_model/word_model_mapper.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/ext/map_extension.dart';
 import 'package:project_athens/deputies_utils/data/network/response/deputy_nouns_response.dart';
@@ -28,7 +30,7 @@ class DeputiesCache {
   Map<String, String> _deputiesThumbnails = Map<String, String>();
 
   Map<String, DeputyFull> _cachedDeputiesResponse = Map<String, DeputyFull>();
-  Map<String, List<NounTag>> _cachedDeputyNouns = new Map<String, List<NounTag>>();
+  Map<String, List<WordModel>> _cachedDeputyNouns = new Map<String, List<WordModel>>();
 
   Future<Result<List<DeputyModel>>> get deputies async {
     if (_cachedDeputies != null) return Success(_cachedDeputies.toList());
@@ -152,7 +154,7 @@ class DeputiesCache {
     return result as Result<DeputyFull>;
   }
 
-  Future<Result<List<NounTag>>> getDeputyNouns(String id) async {
+  Future<Result<List<WordModel>>> getDeputyNouns(String id) async {
     if (_cachedDeputyNouns.containsKey(id)) {
       return Success(_cachedDeputyNouns[id]);
     }
@@ -160,10 +162,11 @@ class DeputiesCache {
     final result = await _getDeputyNounsUseCase(BaseDeputyParams(9, id)).then((result) async {
       if (result is Success<DeputyNounsResponse>) {
         final nouns = result.value.nouns;
+        final words = mapToWordModel(nouns);
 
-        _cachedDeputyNouns.putIfNotNull(id, nouns);
+        _cachedDeputyNouns.putIfNotNull(id, words);
 
-        final res = Success(nouns);
+        final res = Success(words);
 
         return res;
       } else {
@@ -171,6 +174,6 @@ class DeputiesCache {
       }
     });
 
-    return result as Result<List<NounTag>>;
+    return result as Result<List<WordModel>>;
   }
 }

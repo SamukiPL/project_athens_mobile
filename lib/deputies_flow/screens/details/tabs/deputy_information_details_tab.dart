@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_scatter/flutter_scatter.dart';
 import 'package:project_athens/athens_core/data/word_model/noun_tag.dart';
+import 'package:project_athens/athens_core/data/word_model/word_model.dart';
 import 'package:project_athens/athens_core/data/word_model/word_model_mapper.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
@@ -237,8 +238,7 @@ class DeputyInformationDetailsTab extends StatelessWidget {
     );
   }
 
-  List<Widget> generateNounsWidgets(List<NounTag> nouns) {
-    final words = mapToWordModel(nouns);
+  List<Widget> generateNounsWidgets(List<WordModel> words) {
 
     List<Widget> widgets = [];
     words.forEach((model) {
@@ -260,12 +260,12 @@ class DeputyInformationDetailsTab extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
     final ratio = (screenSize.width - 20) / screenSize.height;
 
-    return FutureProvider<Result<List<NounTag>>>(
+    return FutureProvider<Result<List<WordModel>>>(
       create: (context) => nounsPromise,
-      child: Consumer<Result<List<NounTag>>>(
+      child: Consumer<Result<List<WordModel>>>(
           builder: (context, list, _) {
-            if (list is Success<List<NounTag>>) {
-              final nouns = (list as Success<List<NounTag>>).value;
+            if (list is Success<List<WordModel>>) {
+              final nouns = (list as Success<List<WordModel>>).value;
               return InteractiveViewer(
                 child: Transform.scale(
                   scale: 0.80,
