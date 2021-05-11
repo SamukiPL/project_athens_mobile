@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:project_athens/deputies_utils/data/network/request/put_deputies_request.dart';
+import 'package:project_athens/deputies_utils/data/network/response/deputy_nouns_response.dart';
 import 'package:project_athens/deputies_utils/data/network/response/deputy_response.dart';
 import 'package:project_athens/deputies_utils/data/network/response/subscribed_deputy_response.dart';
 import 'package:retrofit/http.dart';
@@ -16,6 +17,9 @@ abstract class DeputiesApi {
 
   @GET('/deputy-aggregator/cadency-deputy/{cadencyDeputyId}')
   Future<DeputyResponse> getDeputy(@Path("cadencyDeputyId") String cadencyDeputyId);
+
+  @GET('/deputy-aggregator/cadency-deputy/{cadencyDeputyId}/noun-cloud')
+  Future<DeputyNounsResponse> getDeputyNouns(@Path('cadencyDeputyId') String cadencyDeputyId);
 
   @PUT("/user-aggregator/deputy-subscribe/{cadency}")
   Future<void> putDeputies(@Path("cadency") int cadency, @Body() PutDeputiesRequest request);

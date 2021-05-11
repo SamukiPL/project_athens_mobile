@@ -31,6 +31,10 @@ class AppLocalizationsGenerated {
     return words['universal']['choose'];
   }
 
+  String universalClose() {
+    return words['universal']['close'];
+  }
+
   String universalOk() {
     return words['universal']['ok'];
   }
@@ -41,6 +45,10 @@ class AppLocalizationsGenerated {
 
   String universalNoDataDefaultText() {
     return words['universal']['noData']['defaultText'];
+  }
+
+  String universalInformation() {
+    return words['universal']['information'];
   }
 
   String universalErrorNetwork() {
@@ -319,8 +327,16 @@ class AppLocalizationsGenerated {
     return words['deputies']['statistics'];
   }
 
+  String deputiesStatisticsInfo() {
+    return words['deputies']['statisticsInfo'];
+  }
+
   String deputiesWordCloud() {
     return words['deputies']['wordCloud'];
+  }
+
+  String deputiesWordCloudInfo() {
+    return words['deputies']['wordCloudInfo'];
   }
 
   String speechesSpeechesListTitle() {

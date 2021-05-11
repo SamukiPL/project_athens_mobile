@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 
 class FullCard extends StatelessWidget {
 
@@ -8,20 +9,35 @@ class FullCard extends StatelessWidget {
   final double rightPadding;
   final String header;
   final double headerPadding;
+  final String dialogText;
 
-  FullCard({@required this.child, this.leftPadding = 0, this.rightPadding = 0, this.header, this.headerPadding = 0});
+  FullCard({@required this.child, this.leftPadding = 0, this.rightPadding = 0, this.header, this.headerPadding = 0, this.dialogText = ''});
 
-  Widget buildHeader(ThemeData theme) {
+  Widget buildHeader(ThemeData theme, BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: headerPadding, right: headerPadding),
-      child: Text(
-          header,
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.w400,
-            fontSize: 20
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+              header,
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+                fontSize: 20
+              ),
           ),
-      ),
+          dialogText != '' ?
+          GestureDetector(
+            onTap: () => openInfoDialog(context),
+            child: Icon(
+              Icons.help_outline,
+              color: Colors.black54,
+            )
+          )
+          : Container()
+        ],
+      )
 
     );
   }
@@ -47,11 +63,29 @@ class FullCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              header != null ? this.buildHeader(theme) : Container(),
+              header != null ? this.buildHeader(theme, context) : Container(),
               child
             ],
           ),
         )
+    );
+  }
+
+  openInfoDialog(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(localizations.getText().universalInformation()),
+          content: Text(localizations.getText().deputiesWordCloudInfo()),
+          actions: [
+            FlatButton(
+              child: Text(localizations.getText().universalClose()),
+              onPressed: () => Navigator.of(context).pop(),
+            )
+          ],
+        ),
+        barrierDismissible: true
     );
   }
 }

@@ -1,5 +1,9 @@
+import 'package:project_athens/athens_core/data/word_model/noun_tag.dart';
+import 'package:project_athens/athens_core/data/word_model/word_model.dart';
+import 'package:project_athens/athens_core/data/word_model/word_model_mapper.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/ext/map_extension.dart';
+import 'package:project_athens/deputies_utils/data/network/response/deputy_nouns_response.dart';
 import 'package:project_athens/deputies_utils/data/network/response/deputy_response.dart';
 import 'package:project_athens/deputies_utils/domain/base_deputies_params.dart';
 import 'package:project_athens/deputies_utils/domain/base_deputy_params.dart';
@@ -9,6 +13,7 @@ import 'package:project_athens/deputies_utils/domain/deputy_full_mapper.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputies/get_deputies_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputy/get_deputy_use_case.dart';
+import 'package:project_athens/deputies_utils/domain/get_deputy_nouns/get_deputy_nouns_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/get_parliament_clubs/get_parliament_clubs_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/parliament_club_model.dart';
 
@@ -16,14 +21,16 @@ class DeputiesCache {
   final GetDeputiesUseCase _getDeputiesUseCase;
   final GetParliamentClubsUseCase _getParliamentClubsUseCase;
   final GetDeputyUseCase _getDeputyUseCase;
+  final GetDeputyNounsUseCase _getDeputyNounsUseCase;
 
-  DeputiesCache(this._getDeputiesUseCase, this._getParliamentClubsUseCase, this._getDeputyUseCase);
+  DeputiesCache(this._getDeputiesUseCase, this._getParliamentClubsUseCase, this._getDeputyUseCase, this._getDeputyNounsUseCase);
 
   List<DeputyModel> _cachedDeputies;
   List<ParliamentClubModel> _cachedParliamentClubs;
   Map<String, String> _deputiesThumbnails = Map<String, String>();
 
   Map<String, DeputyFull> _cachedDeputiesResponse = Map<String, DeputyFull>();
+  Map<String, List<WordModel>> _cachedDeputyNouns = new Map<String, List<WordModel>>();
 
   Future<Result<List<DeputyModel>>> get deputies async {
     if (_cachedDeputies != null) return Success(_cachedDeputies.toList());
@@ -145,5 +152,27 @@ class DeputiesCache {
     });
 
     return result as Result<DeputyFull>;
+  }
+
+  Future<Result<List<WordModel>>> getDeputyNouns(String id) async {
+    if (_cachedDeputyNouns.containsKey(id)) {
+      return Success(_cachedDeputyNouns[id]);
+    }
+
+    final result = await _getDeputyNounsUseCase(BaseDeputyParams(9, id)).then((result) async {
+      if (result is Success<List<WordModel>>) {
+        final words = result.value;
+
+        _cachedDeputyNouns.putIfNotNull(id, words);
+
+        final res = Success(words);
+
+        return res;
+      } else {
+        return null;
+      }
+    });
+
+    return result as Result<List<WordModel>>;
   }
 }

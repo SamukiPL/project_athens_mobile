@@ -46,6 +46,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalChoose != "" && universalChoose != null); 
   }); 
  
+  test("All methods for $locale universalClose", () async {
+    String universalClose = localization.universalClose();
+    expect(true, universalClose != "" && universalClose != null); 
+  }); 
+ 
   test("All methods for $locale universalOk", () async {
     String universalOk = localization.universalOk();
     expect(true, universalOk != "" && universalOk != null); 
@@ -59,6 +64,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale universalNoDataDefaultText", () async {
     String universalNoDataDefaultText = localization.universalNoDataDefaultText();
     expect(true, universalNoDataDefaultText != "" && universalNoDataDefaultText != null); 
+  }); 
+ 
+  test("All methods for $locale universalInformation", () async {
+    String universalInformation = localization.universalInformation();
+    expect(true, universalInformation != "" && universalInformation != null); 
   }); 
  
   test("All methods for $locale universalErrorNetwork", () async {
@@ -406,9 +416,19 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, deputiesStatistics != "" && deputiesStatistics != null); 
   }); 
  
+  test("All methods for $locale deputiesStatisticsInfo", () async {
+    String deputiesStatisticsInfo = localization.deputiesStatisticsInfo();
+    expect(true, deputiesStatisticsInfo != "" && deputiesStatisticsInfo != null); 
+  }); 
+ 
   test("All methods for $locale deputiesWordCloud", () async {
     String deputiesWordCloud = localization.deputiesWordCloud();
     expect(true, deputiesWordCloud != "" && deputiesWordCloud != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesWordCloudInfo", () async {
+    String deputiesWordCloudInfo = localization.deputiesWordCloudInfo();
+    expect(true, deputiesWordCloudInfo != "" && deputiesWordCloudInfo != null); 
   }); 
  
   test("All methods for $locale speechesSpeechesListTitle", () async {

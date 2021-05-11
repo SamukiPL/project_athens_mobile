@@ -1,11 +1,12 @@
 import 'dart:math';
 
+import 'package:project_athens/athens_core/data/word_model/word_model.dart';
+import 'package:project_athens/athens_core/data/word_model/word_model_mapper.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/timeline_flow/data/network/timeline_api.dart';
 import 'package:project_athens/timeline_flow/data/speech_queue_setter.dart';
 import 'package:project_athens/timeline_flow/data/votes_grouper.dart';
-import 'package:project_athens/timeline_flow/domain/cloud/word_model.dart';
 import 'package:project_athens/timeline_flow/domain/meetings_date.dart';
 import 'package:project_athens/timeline_flow/domain/timeline_repository.dart';
 import 'package:project_athens/timeline_flow/mappers/meetings_dates_mapper.dart';
@@ -49,22 +50,7 @@ class TimelineRepositoryImpl implements TimelineRepository {
 
     final values = response.nouns.length > 0 ? response.nouns : List();
 
-    final finalWords = List<WordModel>();
-
-    if (values.length > 0) {
-      values.sort((a, b) => b.hits.compareTo(a.hits));
-      final minValueAllowed = (values.length > 75) ? values[75] : values.last;
-      final minimisedNouns = response.nouns
-        ..removeWhere(
-            (tag) => tag.hits < minValueAllowed.hits || tag.key == "to");
-
-      minimisedNouns.forEach((tag) {
-        finalWords
-            .add(WordModel(tag.hits / (minValueAllowed.hits / 5), tag.key));
-      });
-    }
-
-    finalWords.shuffle(Random(97518234));
+    final finalWords = mapToWordModel(values);
 
     return Success<List<WordModel>>(finalWords);
   }
