@@ -26,6 +26,12 @@ class RegistrationBloc extends BaseBloc {
       this._registrationEndStepBloc, 
       this._deputiesChooserBloc
   ) {
+    _listenToAccountInfoBloc();
+    _listenToRegistrationEndStepBLoc();
+    _listenToDeputiesChooserBloc();
+  }
+
+  void _listenToAccountInfoBloc() {
     _accountInfoStepBloc.state.listen((screenState) {
       switch (screenState.runtimeType) {
         case SuccessState:
@@ -47,6 +53,9 @@ class RegistrationBloc extends BaseBloc {
     _accountInfoStepBloc.resetFooterButtonState.listen((event) {
       _buttonStateBloc.changeState(StepperButtonState.IDLE);
     });
+  }
+
+  void _listenToRegistrationEndStepBLoc() {
     _registrationEndStepBloc.state.listen((screenState) {
       switch (screenState.runtimeType) {
         case SuccessState:
@@ -60,6 +69,9 @@ class RegistrationBloc extends BaseBloc {
     _registrationEndStepBloc.headingLine.listen((event) {
       _stepperBloc.setHeaderHelperLine(event);
     });
+  }
+  
+  void _listenToDeputiesChooserBloc() {
     _deputiesChooserBloc.state.listen((screenState) {
       _buttonStateBloc.changeState(StepperButtonState.IDLE);
       stateController.add(screenState);
@@ -95,6 +107,12 @@ class RegistrationBloc extends BaseBloc {
       case RegistrationStep.DEPUTIES_CHOOSER:
         _deputiesChooserBloc.invokeAction(StepAction.NEGATIVE);
         break;
+    }
+  }
+
+  void headerIconAction() {
+    if (_stepperBloc.currentStep == RegistrationStep.DEPUTIES_CHOOSER) {
+      _deputiesChooserBloc.showSearchBar();
     }
   }
 

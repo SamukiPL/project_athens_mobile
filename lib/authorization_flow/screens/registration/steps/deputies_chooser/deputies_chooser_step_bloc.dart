@@ -4,6 +4,7 @@ import 'package:project_athens/athens_core/presentation/fab/fab_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_step_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/deputies_chooser/list/deputy_item_view_model.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/deputies_chooser/list/deputy_item_view_model_factory.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/deputies_chooser/step_search_bar_bloc.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:project_athens/deputies_utils/domain/put_deputies/deputies_registration_use_case.dart';
@@ -14,8 +15,10 @@ import 'package:project_athens/pagination/paging_list_adapter.dart';
 
 class DeputiesChooserBloc extends BaseRegistrationStepBloc
     implements PagingBloc {
+
   final DeputiesCache _deputiesCache;
   final PutDeputiesUseCase _putDeputiesUseCase;
+  final StepSearchBarBloc _searchBarBloc;
 
   @override
   PagingListAdapter adapter;
@@ -35,7 +38,7 @@ class DeputiesChooserBloc extends BaseRegistrationStepBloc
   List<DeputyItemViewModel> _items;
   String _searchQuery = "";
 
-  DeputiesChooserBloc(this._deputiesCache, this._putDeputiesUseCase) {
+  DeputiesChooserBloc(this._deputiesCache, this._putDeputiesUseCase, this._searchBarBloc) {
     adapter = PagingListAdapter(this);
     _loadFreshData();
   }
@@ -68,8 +71,12 @@ class DeputiesChooserBloc extends BaseRegistrationStepBloc
     return _items.where((item) => item.checked).length <= maxDeputyListen;
   }
 
+  void showSearchBar() {
+    _searchBarBloc.show();
+  }
+
   void setSearchQuery(String searchQuery) {
-    _searchQuery = searchQuery;
+    _searchQuery = searchQuery.toLowerCase();
     if (_items != null) _updateListWithQuery();
   }
 

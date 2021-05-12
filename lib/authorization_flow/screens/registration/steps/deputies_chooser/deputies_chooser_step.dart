@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_step.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/deputies_chooser/deputies_chooser_step_bloc.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/deputies_chooser/step_search_bar.dart';
 import 'package:project_athens/pagination/paging_list.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +13,9 @@ class DeputiesChooserStep extends BaseRegistrationStep<DeputiesChooserBloc> {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
+        StepSearchBar(
+          setSearchQuery: bloc.setSearchQuery,
+        ),
         Expanded(
           child: Container(
             height: 0,

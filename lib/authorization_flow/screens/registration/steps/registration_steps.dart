@@ -1,7 +1,5 @@
+import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/authorization_flow/screens/registration/steps/account_info/account_info_step.dart';
-import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_step.dart';
-import 'package:project_athens/authorization_flow/screens/registration/steps/registration_end/registration_end_step.dart';
 
 enum RegistrationStep {
   ACCOUNT_INFO, REGISTRATION_END, DEPUTIES_CHOOSER
@@ -70,6 +68,17 @@ extension RegistrationStepExt on RegistrationStep {
         break;
       default:
         throw ArgumentError("Should never occur");
+        break;
+    }
+  }
+
+  IconData getStepIcon() {
+    switch(this) {
+      case RegistrationStep.DEPUTIES_CHOOSER:
+        return Icons.search;
+        break;
+      default:
+        return null;
         break;
     }
   }

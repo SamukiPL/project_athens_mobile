@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
+import 'package:project_athens/authorization_flow/screens/registration/registration_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/registration_steps.dart';
 import 'package:project_athens/authorization_flow/screens/registration/stepper/registration_stepper_bloc.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,7 @@ class RegistrationStepperHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final registrationBloc = Provider.of<RegistrationBloc>(context);
 
     return Consumer<RegistrationStepperBloc>(
       builder: (context, bloc, _) => Padding(
@@ -45,24 +47,11 @@ class RegistrationStepperHeader extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Container(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          Expanded(
-                            child: Text(
-                              bloc.currentStep.getCurrentStepTitle(_localization),
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.white
-                              ),
-                            ),
-                          ),
-                          Icon(
-                            Icons.help_outline,
-                            color: Colors.white,
-                          )
-                        ],
+                    Text(
+                      bloc.currentStep.getCurrentStepTitle(_localization),
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white
                       ),
                     ),
                     bloc.currentStep.getNextStepTitle(_localization) != ""
@@ -94,6 +83,13 @@ class RegistrationStepperHeader extends StatelessWidget {
                 ),
               )
 
+            ),
+            GestureDetector(
+              onTap: () => registrationBloc.headerIconAction(),
+              child: Icon(
+                bloc.currentStep.getStepIcon(),
+                color: Colors.white,
+              ),
             )
           ],
         ),
