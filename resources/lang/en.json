@@ -145,5 +145,17 @@
     "switch": {
       "technicalData": "Show technical data"
     }
+  },
+  "filters": {
+    "title": "Filters",
+    "filters": {
+      "dateFrom": "Date from:",
+      "dateTo": "Date to:"
+    }
+  },
+  "sort": {
+    "title": "Sort by:",
+    "ascending": "Ascending",
+    "descending": "Descending"
   }
 }

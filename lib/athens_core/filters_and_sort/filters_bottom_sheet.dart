@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/filters_and_sort/domain/filterable_facade.dart';
 import 'package:project_athens/athens_core/filters_and_sort/filters_bloc.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/widget_state.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +23,7 @@ class _FiltersBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = Provider.of<AppLocalizations>(context);
     final filterableFacade = Provider.of<FilterableFacade>(parentContext);
     final bloc = FiltersBloc(filterableFacade);
 
@@ -30,7 +32,7 @@ class _FiltersBottomSheet extends StatelessWidget {
       child: new Scaffold(
         appBar: new AppBar(
           backgroundColor: Colors.white,
-          title: const Text('Filters'),
+          title: Text(localizations().filtersTitle()),
           leading: IconButton(
             icon: Icon(Icons.close),
             onPressed: () => Navigator.pop(context),

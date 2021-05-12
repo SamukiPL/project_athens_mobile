@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -27,6 +28,8 @@ class _DateChooserBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = Provider.of<AppLocalizations>(context);
+
     return Provider<DateRangePickerController>(
       create: (_) {
         final controller = DateRangePickerController();
@@ -40,7 +43,7 @@ class _DateChooserBottomSheet extends StatelessWidget {
           child: new Scaffold(
               appBar: new AppBar(
                 backgroundColor: Colors.white,
-                title: const Text('Filters'),
+                title: Text(localizations().filtersTitle()),
                 leading: IconButton(
                   icon: Icon(Icons.close),
                   onPressed: () => Navigator.pop(context),

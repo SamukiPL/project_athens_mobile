@@ -29,7 +29,7 @@ class VotesListModule extends Module {
     final networkDataSource = VotesListNetworkDataSource(votingApi, networkMapper);
 
     final itemsRepository = ItemsRepositoryImpl(networkDataSource);
-    final filtersRepository = FiltersRepository();
+    final filtersRepository = FiltersRepository(localizations);
     final listFacade = BaseListFacade(itemsRepository, filtersRepository);
 
     final itemFactory = VoteItemViewModelFactory();

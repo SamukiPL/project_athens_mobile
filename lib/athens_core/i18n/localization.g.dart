@@ -430,4 +430,28 @@ class AppLocalizationsGenerated {
   String settingsSwitchTechnicalData() {
     return words['settings']['switch']['technicalData'];
   }
+
+  String filtersTitle() {
+    return words['filters']['title'];
+  }
+
+  String filtersFiltersDateFrom() {
+    return words['filters']['filters']['dateFrom'];
+  }
+
+  String filtersFiltersDateTo() {
+    return words['filters']['filters']['dateTo'];
+  }
+
+  String sortTitle() {
+    return words['sort']['title'];
+  }
+
+  String sortAscending() {
+    return words['sort']['ascending'];
+  }
+
+  String sortDescending() {
+    return words['sort']['descending'];
+  }
 }
