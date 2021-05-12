@@ -12,11 +12,17 @@ class MainWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ModuleWidget(
       providers: [NetworkModule(context), LocalizationModule(context)],
-      child: Stack(
-        children: BottomNavItem.values
-            .map((item) =>
-                DestinationNavigator(item, item.getInitialDestination()))
-            .toList(),
+      child: Consumer<BottomNavigationBloc>(
+        builder: (context, bloc, child) => WillPopScope(child: child, onWillPop: () async {
+          bloc.pop();
+          return false;
+        }),
+        child: Stack(
+          children: BottomNavItem.values
+              .map((item) =>
+                  DestinationNavigator(item, item.getInitialDestination()))
+              .toList(),
+        ),
       ),
     );
   }

@@ -45,7 +45,7 @@ abstract class BaseRegistrationFormStep<BLOC extends BaseRegistrationStepBloc> e
         margin: EdgeInsets.fromLTRB(32, 8, 32, 16),
         child: TextFormField(
           initialValue: initialValue,
-          onFieldSubmitted: (_) => (action == TextInputAction.next) ? FocusScope.of(context).nextFocus() : callback(),
+          onFieldSubmitted: (_) => (action == TextInputAction.next) ? {} : callback(),
           onChanged: onChanged,
           textInputAction: action,
           decoration: InputDecoration(

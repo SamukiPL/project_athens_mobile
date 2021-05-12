@@ -82,7 +82,7 @@ class SpeechDetailsScreen extends BaseScreen<SpeechDetailsBloc> {
                   width: 65,
                   height: 65,
                   child: Hero(
-                    tag: bloc.speechModel.id,
+                    tag: bloc.speechModel.id, //TODO
                     child: Container(
                       margin: EdgeInsets.all(8),
                       height: double.infinity,
@@ -94,13 +94,13 @@ class SpeechDetailsScreen extends BaseScreen<SpeechDetailsBloc> {
                         child: Container(
                           decoration: BoxDecoration(color: Colors.white),
                           child: Image.network(
-                            bloc.speechModel.thumbnailUrl,
+                            bloc.speechModel.thumbnailUrl ?? "", //TODO
                             width: 65,
                             errorBuilder: (context, exception, stackTrace) =>
                                 Icon(
                               Icons.record_voice_over,
                               color: theme.dividerColor,
-                              size: 45,
+                              size: 35,
                             ),
                           ),
                         ),
@@ -122,7 +122,7 @@ class SpeechDetailsScreen extends BaseScreen<SpeechDetailsBloc> {
                     Padding(
                       padding: EdgeInsets.only(top: 4),
                       child: Text(
-                        bloc.speechModel.club.shortName,
+                        bloc.speechModel.club?.shortName ?? "niez.", // TODO
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 12,
@@ -257,12 +257,12 @@ class SpeechDetailsScreen extends BaseScreen<SpeechDetailsBloc> {
           child: Container(
             decoration: BoxDecoration(color: Colors.white),
             child: Image.network(
-              thumbnailUrl,
+              thumbnailUrl ?? "", //TODO
               width: 65,
               errorBuilder: (context, exception, stackTrace) => Icon(
                 Icons.record_voice_over,
                 color: theme.dividerColor,
-                size: 45,
+                size: 35,
               ),
             ),
           ),
@@ -314,8 +314,10 @@ class SpeechDetailsScreen extends BaseScreen<SpeechDetailsBloc> {
           BuildContext context, SpeechDetailsBloc bloc) =>
       null;
 
-  void goToDeputyDetails(BuildContext context, DeputyModel model) {
-    final destination = DeputyDetailsDestination(model);
-    goToDestination(context, destination);
+  void goToDeputyDetails(BuildContext context, DeputyModel model) { //TODO
+    if (model != null) {
+      final destination = DeputyDetailsDestination(model);
+      goToDestination(context, destination);
+    }
   }
 }

@@ -4,7 +4,6 @@ import 'package:project_athens/athens_core/ext/list_extension.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
-import 'package:project_athens/athens_core/navigation/destination_widget.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 
 class DestinationManager {
@@ -22,15 +21,16 @@ class DestinationManager {
   List<Module> getScreenModules(BuildContext context) =>
       popStack.last.getScreenModules(context);
 
-  bool goBack() {
+  bool goBack(BuildContext context) {
     popStack.removeLastIfPossible();
-    return true;
+    Navigator.maybePop(context);
+    return false;
   }
 
   void popToFirst(BuildContext context) {
     while (popStack.isThereMoreThanOneItem()) {
-      popStack.removeLast();
-      Navigator.pop(context);
+      popStack.removeLastIfPossible();
+      Navigator.maybePop(context);
     }
   }
 

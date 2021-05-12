@@ -44,7 +44,8 @@ class SpeechDetailsBloc extends BaseBloc {
   }
 
   Future<void> _initDeputyModel() async {
-    _deputyModel = await _deputiesCache.getDeputyModelById(speechModel.deputyId);
+    if (speechModel.deputyId != null)
+      _deputyModel = await _deputiesCache.getDeputyModelById(speechModel.deputyId);
   }
 
   void goToNextSpeech() {

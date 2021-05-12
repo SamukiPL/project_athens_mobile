@@ -80,7 +80,6 @@ class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
                 Container(
                   margin: EdgeInsets.fromLTRB(32, 8, 32, 16),
                   child: TextFormField(
-                    onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
                     onChanged: (email) => bloc.setEmail(email),
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(

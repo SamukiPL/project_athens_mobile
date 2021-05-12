@@ -21,18 +21,14 @@ class DestinationNavigator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<BottomNavigationBloc>(
-      builder: (context, bloc, child) => WillPopScope(
-        onWillPop: () async {
-          if (bloc.currentItem != bottomNavItem)
-            return destinationManager.goBack();
-          else
-            return false;
-        },
-        child: Offstage(
+      builder: (context, bloc, child) {
+        if (bloc.wasItemReselected(bottomNavItem))
+          destinationManager.popToFirst(context);
+        return Offstage(
           offstage: bloc.currentItem != bottomNavItem,
           child: child,
-        ),
-      ),
+        );
+      },
       child: Provider<DestinationManager>.value(
         value: destinationManager,
         child: Navigator(
