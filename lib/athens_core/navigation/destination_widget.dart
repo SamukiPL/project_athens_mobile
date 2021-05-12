@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
+import 'package:project_athens/athens_core/navigation/navigation_event.dart';
 import 'package:provider/provider.dart';
 
 class DestinationWidget extends StatelessWidget {
@@ -32,6 +33,15 @@ class DestinationWidget extends StatelessWidget {
 
   void _manageDestination(BuildContext context, BottomNavigationBloc bloc,
       NavigationEvent event) {
+    if (event is GoToEvent) {
+      _manageGoToEvent(context, bloc, event);
+    } else if (event is PopEvent && event.currentNavItem == destinationManager.bottomNavItem) {
+      Navigator.maybePop(context);
+    }
+  }
+
+  void _manageGoToEvent(BuildContext context, BottomNavigationBloc bloc,
+      GoToEvent event) {
     final destination = event.destination;
     if (destination.bottomNavItem == destinationManager.bottomNavItem) {
       _checkAndManageRedirectionToDifferentNavigation(context, bloc, event);
@@ -40,9 +50,8 @@ class DestinationWidget extends StatelessWidget {
   }
 
   void _checkAndManageRedirectionToDifferentNavigation(BuildContext context,
-      BottomNavigationBloc bloc, NavigationEvent event) {
+      BottomNavigationBloc bloc, GoToEvent event) {
     if (event.redirectionToDifferentTab) {
-      destinationManager.popToFirst(context);
       bloc.setItem(destinationManager.bottomNavItem);
     }
   }

@@ -38,7 +38,6 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
         Container(
           margin: EdgeInsets.fromLTRB(32, 8, 32, 8),
           child: TextFormField(
-            onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
             onChanged: (login) => bloc.setLogin(login),
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(

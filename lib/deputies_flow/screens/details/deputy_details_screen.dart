@@ -1,13 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/injections/module_widget.dart';
-import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
-import 'package:project_athens/deputies_flow/injections/details_tabs/deputy_information_module.dart';
-import 'package:project_athens/deputies_flow/injections/details_tabs/deputy_speeches_module.dart';
-import 'package:project_athens/deputies_flow/injections/details_tabs/deputy_votings_module.dart';
 import 'package:project_athens/deputies_flow/screens/details/deputy_details_bloc.dart';
 import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_information_details_tab.dart';
 import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_speeches_details_tab.dart';
@@ -33,8 +28,7 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
                         builder: (context, destinationManager, _) => BackButton(
                               color: Colors.white,
                               onPressed: () {
-                                destinationManager.goBack();
-                                Navigator.pop(context);
+                                destinationManager.goBack(context);
                               },
                             )),
                     key: Key("app-bar"),

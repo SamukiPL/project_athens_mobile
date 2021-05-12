@@ -1,3 +1,4 @@
+import 'package:project_athens/athens_core/navigation/navigation_event.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_change_notifier.dart';
 import 'package:project_athens/deputies_flow/navigation/deputies_destinations.dart';
 import 'package:project_athens/settings_flow/navigation/settings_destinations.dart';
@@ -16,6 +17,7 @@ enum BottomNavItem {
 class BottomNavigationBloc extends BaseChangeNotifier {
 
   BottomNavItem _currentItem = BottomNavItem.TIMELINE;
+  BottomNavItem _previousItem;
 
   BottomNavItem get currentItem => _currentItem;
 
@@ -24,17 +26,26 @@ class BottomNavigationBloc extends BaseChangeNotifier {
   Stream<NavigationEvent> get destination => _destination.stream;
 
   void pickItem(int i) {
+    _previousItem = _currentItem;
     _currentItem = BottomNavItem.values[i];
     notifyListeners();
   }
 
   void setItem(BottomNavItem item) {
+    _previousItem = _currentItem;
     _currentItem = item;
     notifyListeners();
   }
 
+  bool wasItemReselected(BottomNavItem navigatorItem) => currentItem == _previousItem && navigatorItem == currentItem;
+
   void goToDestination(Destination destination) {
-    final newEvent = NavigationEvent(destination, currentItem != destination.bottomNavItem);
+    final newEvent = NavigationEvent.goTo(destination, currentItem != destination.bottomNavItem);
+    _destination.add(newEvent);
+  }
+
+  void pop() {
+    final newEvent = NavigationEvent.pop(currentItem);
     _destination.add(newEvent);
   }
 
@@ -43,12 +54,6 @@ class BottomNavigationBloc extends BaseChangeNotifier {
     _destination.close();
     super.dispose();
   }
-}
-
-class NavigationEvent {
-  final Destination destination;
-  final bool redirectionToDifferentTab;
-  NavigationEvent(this.destination, this.redirectionToDifferentTab);
 }
 
 extension BottomNavItemExtension on BottomNavItem {

@@ -65,8 +65,7 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget with Re
             builder: (context, destinationManager, _) => BackButton(
             color: Colors.white,
             onPressed: () {
-              destinationManager.goBack();
-              Navigator.pop(context);
+              destinationManager.goBack(context);
             },
           )
         )

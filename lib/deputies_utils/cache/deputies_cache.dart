@@ -117,6 +117,8 @@ class DeputiesCache {
   }
 
   Future<ParliamentClubModel> getParliamentClubModel(String id) async {
+    if (id == null) return null;
+
     if (_cachedParliamentClubs != null && _cachedParliamentClubs.isNotEmpty)
       return _cachedParliamentClubs.firstWhere((element) => element.id == id);
 
