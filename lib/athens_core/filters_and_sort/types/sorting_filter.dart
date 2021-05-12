@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:project_athens/athens_core/filters_and_sort/domain/sorting_model.dart';
 import 'package:project_athens/athens_core/filters_and_sort/types/base_filter_type.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:provider/provider.dart';
 
 class SortingFilter extends BaseFilterType {
@@ -22,6 +23,8 @@ class SortingFilter extends BaseFilterType {
 
   @override
   Widget buildFilter(BuildContext parentContext) {
+    final localizations = Provider.of<AppLocalizations>(parentContext);
+
     return ChangeNotifierProvider<SortingFilter>.value(
       value: this,
       child: Consumer<SortingFilter>(
@@ -31,7 +34,7 @@ class SortingFilter extends BaseFilterType {
             Container(
               margin: EdgeInsets.only(left: 8, top: 4),
               child: Text(
-                "Sort by:",
+                localizations().sortTitle(),
                 style: TextStyle(fontSize: 18),
               ),
             ),

@@ -29,7 +29,7 @@ class DeputyVotingsModule extends Module {
 
     final dataSource = DeputyVotesNetworkDataSource(votesDetailsApi, networkMapper, 9, _deputyId);
     final itemsRepository = ItemsRepositoryImpl(dataSource);
-    final filtersRepository = FiltersRepository();
+    final filtersRepository = FiltersRepository(localizations);
 
     final listFacade = BaseListFacade(itemsRepository, filtersRepository);
 

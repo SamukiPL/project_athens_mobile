@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl/intl.dart';
 import 'package:project_athens/athens_core/filters_and_sort//choose_date_bottom_sheet.dart';
 import 'package:project_athens/athens_core/filters_and_sort/types/base_filter_type.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:provider/provider.dart';
 
 class DateFromTo extends BaseFilterType {
@@ -19,19 +20,21 @@ class DateFromTo extends BaseFilterType {
   @override
   Widget buildFilter(BuildContext parentContext) {
     final theme = Theme.of(parentContext);
+    final localizations = Provider.of<AppLocalizations>(parentContext);
+
     return ChangeNotifierProvider<DateFromTo>.value(
       value: this,
       child: Consumer<DateFromTo>(
         builder: (context, type, child) => Row(
           children: [
-            _buildDateColumn(parentContext, theme, "Date from:", fromTime,
+            _buildDateColumn(parentContext, theme, localizations().filtersFiltersDateFrom(), fromTime,
                 () async {
               fromTime = await showDateChooserBottomSheet(parentContext,
                       firstSelectedDate: fromTime, maxDate: toTime) ??
                   fromTime;
               notifyListeners();
             }),
-            _buildDateColumn(parentContext, theme, "Date to:", toTime,
+            _buildDateColumn(parentContext, theme, localizations().filtersFiltersDateTo(), toTime,
                 () async {
               toTime = await showDateChooserBottomSheet(parentContext,
                       firstSelectedDate: toTime, minDate: fromTime) ??

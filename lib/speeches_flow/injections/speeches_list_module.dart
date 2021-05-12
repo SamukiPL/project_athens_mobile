@@ -5,6 +5,7 @@ import 'package:project_athens/athens_core/data/base_list/items_repository_impl.
 import 'package:project_athens/athens_core/domain/base_list_facade.dart';
 import 'package:project_athens/athens_core/filters_and_sort/data/filters_repository.dart';
 import 'package:project_athens/athens_core/filters_and_sort/domain/filterable_facade.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/presentation/base_list/base_list_bloc.dart';
 import 'package:project_athens/athens_core/presentation/search_app_bar/search_app_bar_facade.dart';
@@ -22,6 +23,7 @@ class SpeechesListModule extends Module {
   @override
   List<SingleChildWidget> getProviders() {
     final dio = Provider.of<Dio>(context);
+    final localizations = Provider.of<AppLocalizations>(context);
     final speechesApi = SpeechesApi(dio);
     final deputiesCache = Provider.of<DeputiesCache>(context);
     final speechCache = Provider.of<SpeechCache>(context);
@@ -30,7 +32,7 @@ class SpeechesListModule extends Module {
     final networkDataSource = SpeechesListNetworkDataSource(speechesApi, networkMapper, speechCache);
 
     final speechesRepository = ItemsRepositoryImpl(networkDataSource);
-    final filtersRepository = FiltersRepository();
+    final filtersRepository = FiltersRepository(localizations);
     final listFacade = BaseListFacade(speechesRepository, filtersRepository);
 
     final itemFactory = SpeechItemViewModelFactory();
