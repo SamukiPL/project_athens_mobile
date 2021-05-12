@@ -1,6 +1,6 @@
 name: project_athens
-description: A new Flutter application.
-version: 0.0.4+3
+description: Świadoma Demokoracja to aplikacja to śledzenia aktywności poselskiej w sejmie.
+version: 0.0.5
 
 environment:
   sdk: ">=2.6.0 <3.0.0"

@@ -137,7 +137,7 @@ class SpeechDetailsScreen extends BaseScreen<SpeechDetailsBloc> {
             Container(
               margin: EdgeInsets.only(right: 8),
               child: Text(
-                DateFormat("hh:mm\nd.MM.y", "pl").format(bloc.speechModel.date),
+                DateFormat("HH:mm\ndd.MM.y", "pl").format(bloc.speechModel.date),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 14,

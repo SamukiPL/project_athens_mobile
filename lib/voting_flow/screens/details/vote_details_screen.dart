@@ -83,7 +83,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
     return Container(
         padding: EdgeInsets.only(bottom: 20),
         child: Text(
-          DateFormat("hh:mm d.MM.y", "pl").format(_votingModel.date),
+          DateFormat("HH:mm d.MM.y", "pl").format(_votingModel.date),
           style: TextStyle(
             color: theme.primaryColor,
             fontSize: 14,
@@ -105,7 +105,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
 
     final cells = [
       SimpleHorizontalTableCell(
-        lowerText: DateFormat("hh:mm", "pl").format(_votingModel.date),
+        lowerText: DateFormat("HH:mm", "pl").format(_votingModel.date),
         icon: Icons.access_time
       ),
       SimpleHorizontalTableCell(
@@ -200,7 +200,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
             style: TextStyle(color: theme.primaryColor, fontSize: 18),
           ),
           Text(
-            DateFormat("hh:mm\nd.MM.y", "pl").format(_votingModel.date),
+            DateFormat("HH:mm\nd.MM.y", "pl").format(_votingModel.date),
             style: TextStyle(
               color: theme.primaryColor,
               fontSize: 14,
