@@ -30,7 +30,7 @@ class DeputyViewHolder extends StatelessWidget {
                 getNameAndClub(context),
                 getVotingType(context),
                 getSpeechType(context),
-                getInterpolationType(context)
+                // getInterpolationType(context)
               ],
             ),
           ),

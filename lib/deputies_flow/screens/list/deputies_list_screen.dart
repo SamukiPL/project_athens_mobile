@@ -39,7 +39,7 @@ class DeputiesListScreen extends BaseScreen<BaseListBloc> {
   Widget buildAppBar(BuildContext context, BaseListBloc bloc) {
     final AppLocalizations localizations = Provider.of<AppLocalizations>(context);
 
-    return SearchAppBar(title: getAppBarTitle(localizations, bloc), hintText: "Deputies", searchQuery: (query) {}, showBackArrow: showBackArrow);
+    return SearchAppBar(title: getAppBarTitle(localizations, bloc), hintText: getAppBarTitle(localizations, bloc), searchQuery: (query) {}, showBackArrow: showBackArrow);
   }
 
 }

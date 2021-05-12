@@ -14,6 +14,7 @@ import 'package:project_athens/authorization_flow/screens/registration/steps/acc
 import 'package:project_athens/authorization_flow/screens/registration/steps/account_info/account_info_step_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/account_info/show_repeat_email_notifier.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/deputies_chooser/deputies_chooser_step_bloc.dart';
+import 'package:project_athens/authorization_flow/screens/registration/steps/deputies_chooser/step_search_bar_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/registration_end/registration_end_form_key.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/registration_end/registration_end_step_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/registration_end/show_repeat_password_notifier.dart';
@@ -51,7 +52,8 @@ class RegistrationModule extends Module {
     final repeatPasswordNotifier = ShowRepeatPasswordNotifier();
     final registrationEndStepBloc = RegistrationEndStepBloc(registrationUseCase, repeatPasswordNotifier);
 
-    final deputiesChooserBloc = getDeputiesChooserBloc(context, loginApi, deputiesApi);
+    final stepSearchBarBloc = StepSearchBarBloc();
+    final deputiesChooserBloc = getDeputiesChooserBloc(context, loginApi, deputiesApi, stepSearchBarBloc);
 
     return [
       Provider<RegistrationBloc>(
@@ -84,11 +86,18 @@ class RegistrationModule extends Module {
       ),
       Provider<DeputiesChooserBloc>.value(
         value: deputiesChooserBloc,
+      ),
+      ChangeNotifierProvider<StepSearchBarBloc>.value(
+          value: stepSearchBarBloc
       )
     ];
   }
 
-  DeputiesChooserBloc getDeputiesChooserBloc(BuildContext context, LoginApi loginApi, DeputiesApi deputiesApi) {
+  DeputiesChooserBloc getDeputiesChooserBloc(
+      BuildContext context,
+      LoginApi loginApi,
+      DeputiesApi deputiesApi,
+      StepSearchBarBloc stepSearchBarBloc) {
     final firebaseMessaging = Provider.of<FirebaseMessages>(context);
     final deputiesCache = Provider.of<DeputiesCache>(context);
 
@@ -97,7 +106,7 @@ class RegistrationModule extends Module {
     final putDeputiesRepository = PutDeputiesRepositoryImpl(deputiesApi, deputySubscriber);
     final putDeputiesUseCase = PutDeputiesUseCase(putDeputiesRepository);
 
-    return DeputiesChooserBloc(deputiesCache, putDeputiesUseCase);
+    return DeputiesChooserBloc(deputiesCache, putDeputiesUseCase, stepSearchBarBloc);
   }
 
 }

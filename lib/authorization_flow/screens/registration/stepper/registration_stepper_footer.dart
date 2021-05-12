@@ -23,14 +23,17 @@ class RegistrationStepperFooter extends StatelessWidget {
         builder: (context, bloc, _) => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            FlatButton(
-              child: Text(
-                bloc.currentStep.getNegativeButtonText(localization),
-                style: TextStyle(
-                  color: Colors.grey
+            Visibility(
+              visible: bloc.currentStep != RegistrationStep.DEPUTIES_CHOOSER, //TODO remove after implementation
+              child: TextButton(
+                child: Text(
+                  bloc.currentStep.getNegativeButtonText(localization),
+                  style: TextStyle(
+                    color: Colors.grey
+                  ),
                 ),
+                onPressed: _negativeButtonCallback,
               ),
-              onPressed: _negativeButtonCallback,
             ),
             RaisedButton(
               child: Stack(
