@@ -37,6 +37,7 @@ VotingResponse _$VotingResponseFromJson(Map<String, dynamic> json) {
             ? null
             : ParliamentClubVotingNumbers.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    json['deputyVoteType'] as int,
   );
 }
 
@@ -58,6 +59,7 @@ Map<String, dynamic> _$VotingResponseToJson(VotingResponse instance) =>
       'absoluteMajority': instance.absoluteMajority,
       'qualifyingMajority': instance.qualifyingMajority,
       'parliamentClubVotingNumbers': instance.parliamentClubVotingNumbers,
+      'deputyVoteType': instance.deputyVoteType,
     };
 
 T _$enumDecode<T>(

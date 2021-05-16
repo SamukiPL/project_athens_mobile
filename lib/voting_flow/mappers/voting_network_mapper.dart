@@ -23,7 +23,8 @@ class VotingNetworkMapper extends AsyncDataMapper<VotingResponse, VotingModel> {
     results: results,
     votes: voteModels,
     clubVotes: data.parliamentClubVotingNumbers,
-    orderPoint: data.orderPoint);
+    orderPoint: data.orderPoint,
+    deputyVoteType: VoteType.values[data.deputyVoteType != null ? data.deputyVoteType : 1]);
   }
 
   String getVotingDesc(VotingType type) {
