@@ -10,6 +10,7 @@ class VotingModel extends TimelineModel {
   final int qualifyingMajority;
   final List<ParliamentClubVotingNumbers> clubVotes;
   final int orderPoint;
+  final VoteType deputyVoteType;
 
   VotingModel({
     String id,
@@ -21,7 +22,8 @@ class VotingModel extends TimelineModel {
     this.absoluteMajority,
     this.qualifyingMajority,
     this.clubVotes,
-    this.orderPoint
+    this.orderPoint,
+    this.deputyVoteType
   }) : super(id, TimelineModelType.VOTING, date);
 }
 

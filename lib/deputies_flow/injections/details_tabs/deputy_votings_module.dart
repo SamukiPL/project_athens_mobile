@@ -9,6 +9,7 @@ import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/presentation/base_list/base_list_bloc.dart';
 import 'package:project_athens/deputies_flow/data/deputy_votes_network_data_source.dart';
 import 'package:project_athens/deputies_flow/data/network/deputies_details_api.dart';
+import 'package:project_athens/deputies_flow/injections/details_tabs/deputy_vote_view/deputy_vote_item_view_model_factory.dart';
 import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_details_list_blocs.dart';
 import 'package:project_athens/voting_flow/mappers/voting_network_mapper.dart';
 import 'package:project_athens/voting_flow/screens/list/list_impl/vote_item_view_model_factory.dart';
@@ -33,7 +34,7 @@ class DeputyVotingsModule extends Module {
 
     final listFacade = BaseListFacade(itemsRepository, filtersRepository);
 
-    final itemFactory = VoteItemViewModelFactory();
+    final itemFactory = DeputyVoteItemViewModelFactory();
 
     final listBloc = BaseListBloc(listFacade, itemFactory);
 
