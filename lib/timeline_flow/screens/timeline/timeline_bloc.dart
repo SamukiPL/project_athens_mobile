@@ -12,6 +12,7 @@ import 'package:project_athens/timeline_flow/domain/use_cases/get_meetings_dates
 import 'package:project_athens/timeline_flow/domain/use_cases/get_timeline_use_case.dart';
 import 'package:project_athens/timeline_flow/presentation/calendar_app_bar_bloc.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/cloud/noun_cloud_bloc.dart';
+import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model_factory.dart';
 
 class TimelineBloc extends BaseBloc implements PagingBloc {
@@ -42,7 +43,7 @@ class TimelineBloc extends BaseBloc implements PagingBloc {
 
   List<MeetingDate> get dates => _dates;
   DateTime get selectedDate => _selectedDate;
-  
+
   final CalendarAppBarBloc calendarBloc = CalendarAppBarBloc(DateTime.now());
 
   @override
@@ -78,7 +79,8 @@ class TimelineBloc extends BaseBloc implements PagingBloc {
     final result = await _getTimelineUseCase(params);
 
     if (result is Success<List<TimelineModel>>) {
-      final items = result.value.toTimelineRowViewModel();
+      final items = result.value.toTimelineRowViewModel(
+          date: date, timerViewModel: TimerViewModel(refresh));
       adapter.updateList(items);
       setLoadingState((items.isEmpty) ? DataLoadingState.noData() : DataLoadingState.contentLoaded());
     }
