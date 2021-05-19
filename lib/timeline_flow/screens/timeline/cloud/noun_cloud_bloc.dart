@@ -23,7 +23,7 @@ class NounCloudBloc extends BaseBloc {
 
   Future<void> loadCloud(TimelineParameters params) async {
     setLoadingState(DataLoadingState.initialLoading());
-    final Result<List<WordModel>> result = await _getNounCloudUseCase(params).safeApiCall();
+    final Result<List<WordModel>> result = (await _getNounCloudUseCase(params).safeApiCall()) as Result<List<WordModel>>;
 
     manageState(result);
     if (result is Success<List<WordModel>>) {

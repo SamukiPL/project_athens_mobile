@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:project_athens/athens_core/data/word_model/noun_tag.dart';
 import 'package:project_athens/athens_core/data/word_model/word_model.dart';
 import 'package:project_athens/athens_core/data/word_model/word_model_mapper.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
@@ -48,9 +49,9 @@ class TimelineRepositoryImpl implements TimelineRepository {
   Future<Result<List<WordModel>>> getNounCloud(int cadency, String date) async {
     final response = await timelineApi.getNounCloud(cadency, date);
 
-    final values = response.nouns.length > 0 ? response.nouns : List();
+    final values = response.nouns.length > 0 ? response.nouns : List<NounTag>();
 
-    final finalWords = mapToWordModel(values);
+    final List<WordModel> finalWords = mapToWordModel(values);
 
     return Success<List<WordModel>>(finalWords);
   }

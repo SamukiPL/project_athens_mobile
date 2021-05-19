@@ -40,7 +40,8 @@ class TimelineModelMapper extends AsyncDataMapper<Event, TimelineModel> {
         votingDesc: getVotingDesc(item.votingType),
         results: results,
         votes: voteModels,
-        orderPoint: item.orderPoint);
+        orderPoint: item.orderPoint,
+        clubVotes: item.parliamentClubVotingNumbers);
   }
 
   Future<TimelineModel> getSpeechModel(SpeechResponse item) async {
