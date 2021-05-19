@@ -36,7 +36,7 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
         bottomChild: NounCloud(bloc: bloc.nounCloudBloc),
         topChild: DataLoadingWidget(
           bloc.dataLoadingBloc,
-          child: PagingList(bloc.adapter),
+          child: PagingList(bloc.adapter, refreshable: true,),
           noDataText: localizations.getText().timelineNoEvents(),
           onRetry: bloc.refresh,
         ),

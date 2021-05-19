@@ -1,12 +1,20 @@
 import 'package:project_athens/athens_core/models/speech_model.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
+import 'package:project_athens/athens_core/ext/date_time_extension.dart';
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
 
 extension TimelineModelExtension on List<TimelineModel> {
-  List<BaseItemViewModel> toTimelineRowViewModel() {
-    return this.map((model) => _toRowViewModel(model)).toList();
+  List<BaseItemViewModel> toTimelineRowViewModel(
+      {DateTime date, TimerViewModel timerViewModel}) {
+    final list = this.map((model) => _toRowViewModel(model)).toList();
+
+    if (date != null && date.isToday) {
+      list.add(timerViewModel);
+    }
+
+    return list;
   }
 
   BaseItemViewModel _toRowViewModel(TimelineModel model) {
