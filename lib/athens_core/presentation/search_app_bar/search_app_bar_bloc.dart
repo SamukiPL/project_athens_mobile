@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_change_notifier.dart';
 import 'package:project_athens/athens_core/presentation/search_app_bar/search_app_bar_facade.dart';
 
@@ -12,6 +13,8 @@ class SearchAppBarBloc extends BaseChangeNotifier {
   SearchAppBarState _state = SearchAppBarState.DEFAULT;
 
   SearchAppBarState get state => _state;
+
+  FocusNode searchFocusNode = FocusNode();
 
   Timer _debounce;
 
@@ -30,6 +33,7 @@ class SearchAppBarBloc extends BaseChangeNotifier {
 
   @override
   void dispose() {
+    searchFocusNode.dispose();
     _debounce?.cancel();
     super.dispose();
   }

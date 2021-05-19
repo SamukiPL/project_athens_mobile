@@ -68,7 +68,11 @@ class _SearchAppBar extends StatelessWidget {
                 Icons.search,
                 color: Colors.white,
               ),
-              hintText: hintText),
+              hintText: hintText,
+              hintStyle: TextStyle(
+                color: Colors.white60
+              )),
+          focusNode: bloc.searchFocusNode,
         );
         break;
       default:
@@ -90,6 +94,7 @@ class _SearchAppBar extends StatelessWidget {
           onPressed: () {
             bloc.changeSearchQuery("");
             bloc.setState(SearchAppBarState.DEFAULT);
+            bloc.searchFocusNode.unfocus();
           },
         );
         break;
@@ -101,6 +106,7 @@ class _SearchAppBar extends StatelessWidget {
           ),
           onPressed: () {
             bloc.setState(SearchAppBarState.SEARCHING);
+            bloc.searchFocusNode.requestFocus();
           },
         );
     }

@@ -21,6 +21,7 @@ class Failure<T> implements Result<T> {
     if (exceptionOrError is Error) {
       Fimber.e("Some error occurred, fix your code!!!");
       Fimber.e(exceptionOrError.toString());
+      Fimber.e(exceptionOrError.stackTrace.toString());
       throw exceptionOrError;
     }
 
