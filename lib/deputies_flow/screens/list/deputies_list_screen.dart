@@ -11,6 +11,8 @@ class DeputiesListScreen extends BaseScreen<BaseListBloc> {
 
   @override
   bool get showBackArrow => false;
+  @override
+  bool get shouldShowBottomBar => true;
 
   @override
   String getAppBarTitle(AppLocalizations localizations, BaseListBloc bloc) {

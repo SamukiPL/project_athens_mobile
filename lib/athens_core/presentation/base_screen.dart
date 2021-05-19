@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget with RedirectionDelegate {
 
   bool get showBackArrow => true;
+  bool get shouldShowBottomBar => false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget with Re
             appBar: buildAppBar(context, bloc),
             body: buildBody(context, bloc),
             floatingActionButton: buildFloatingActionButton(context, bloc),
-            bottomNavigationBar: BottomNavigationWidget(),
+            bottomNavigationBar: shouldShowBottomBar ? BottomNavigationWidget() : null,
           ),
         ),
       ),
