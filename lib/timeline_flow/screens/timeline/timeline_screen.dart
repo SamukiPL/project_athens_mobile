@@ -18,6 +18,8 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
 
   @override
   bool get showBackArrow => false;
+  @override
+  bool get shouldShowBottomBar => true;
 
   @override
   Widget buildAppBar(BuildContext context, TimelineBloc bloc) {

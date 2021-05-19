@@ -12,6 +12,8 @@ class SettingsScreen extends BaseScreen<SettingsBloc> {
 
   @override
   bool get showBackArrow => false;
+  @override
+  bool get shouldShowBottomBar => true;
 
   String getAppBarTitle(AppLocalizations localizations, SettingsBloc bloc) {
     return localizations.getText().settingsSettingsTitle();

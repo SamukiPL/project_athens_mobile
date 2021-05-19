@@ -40,7 +40,7 @@ class BottomNavigationBloc extends BaseChangeNotifier {
   bool wasItemReselected(BottomNavItem navigatorItem) => currentItem == _previousItem && navigatorItem == currentItem;
 
   void goToDestination(Destination destination) {
-    final newEvent = NavigationEvent.goTo(destination, currentItem != destination.bottomNavItem);
+    final newEvent = NavigationEvent.goTo(destination, false);
     _destination.add(newEvent);
   }
 

@@ -13,6 +13,8 @@ class VotesListScreen extends BaseScreen<BaseListBloc> {
 
   @override
   bool get showBackArrow => false;
+  @override
+  bool get shouldShowBottomBar => true;
 
   @override
   getAppBarTitle(AppLocalizations localizations, BaseListBloc bloc) {

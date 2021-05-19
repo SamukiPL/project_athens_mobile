@@ -13,6 +13,8 @@ import 'package:provider/provider.dart';
 class SpeechesListScreen extends BaseScreen<BaseListBloc> {
   @override
   bool get showBackArrow => false;
+  @override
+  bool get shouldShowBottomBar => true;
 
   @override
   String getAppBarTitle(AppLocalizations localizations, BaseListBloc bloc) {

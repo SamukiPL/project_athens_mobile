@@ -6,7 +6,6 @@ import 'package:project_athens/athens_core/navigation/navigation_event.dart';
 import 'package:provider/provider.dart';
 
 class DestinationWidget extends StatelessWidget {
-
   final DestinationManager destinationManager;
 
   final ModuleWidget moduleWidget;
@@ -21,7 +20,9 @@ class DestinationWidget extends StatelessWidget {
     return StreamProvider<NavigationEvent>.value(
       value: bottomNavigationBloc.destination,
       updateShouldNotify: (_, newEvent) {
-        _manageDestination(context, bottomNavigationBloc, newEvent);
+        if (bottomNavigationBloc.currentItem ==
+            destinationManager.bottomNavItem)
+          _manageDestination(context, bottomNavigationBloc, newEvent);
         return false;
       },
       child: Consumer<NavigationEvent>(
@@ -31,29 +32,19 @@ class DestinationWidget extends StatelessWidget {
     );
   }
 
-  void _manageDestination(BuildContext context, BottomNavigationBloc bloc,
-      NavigationEvent event) {
+  void _manageDestination(
+      BuildContext context, BottomNavigationBloc bloc, NavigationEvent event) {
     if (event is GoToEvent) {
       _manageGoToEvent(context, bloc, event);
-    } else if (event is PopEvent && event.currentNavItem == destinationManager.bottomNavItem) {
+    } else if (event is PopEvent &&
+        event.currentNavItem == destinationManager.bottomNavItem) {
       Navigator.maybePop(context);
     }
   }
 
-  void _manageGoToEvent(BuildContext context, BottomNavigationBloc bloc,
-      GoToEvent event) {
+  void _manageGoToEvent(
+      BuildContext context, BottomNavigationBloc bloc, GoToEvent event) {
     final destination = event.destination;
-    if (destination.bottomNavItem == destinationManager.bottomNavItem) {
-      _checkAndManageRedirectionToDifferentNavigation(context, bloc, event);
-      destinationManager.goToDestination(context, destination);
-    }
+    destinationManager.goToDestination(context, destination);
   }
-
-  void _checkAndManageRedirectionToDifferentNavigation(BuildContext context,
-      BottomNavigationBloc bloc, GoToEvent event) {
-    if (event.redirectionToDifferentTab) {
-      bloc.setItem(destinationManager.bottomNavItem);
-    }
-  }
-
 }
