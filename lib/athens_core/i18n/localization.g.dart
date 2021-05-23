@@ -339,6 +339,18 @@ class AppLocalizationsGenerated {
     return words['deputies']['wordCloudInfo'];
   }
 
+  String deputiesSubscribe() {
+    return words['deputies']['subscribe'];
+  }
+
+  String deputiesNotSubscribingDeputy() {
+    return words['deputies']['notSubscribingDeputy'];
+  }
+
+  String deputiesSubscribingDeputy() {
+    return words['deputies']['subscribingDeputy'];
+  }
+
   String speechesSpeechesListTitle() {
     return words['speeches']['speechesListTitle'];
   }

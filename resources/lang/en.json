@@ -109,7 +109,10 @@
     "statistics": "Statistics",
     "statisticsInfo": "TBA",
     "wordCloud": "Word cloud",
-    "wordCloudInfo": "TBA"
+    "wordCloudInfo": "TBA",
+    "subscribe": "Subscribe",
+    "notSubscribingDeputy": "Not subscribed",
+    "subscribingDeputy": "Subscribed"
   },
   "speeches": {
     "speechesListTitle": "Speeches",

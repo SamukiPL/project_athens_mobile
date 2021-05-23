@@ -1,21 +1,22 @@
-import 'package:project_athens/athens_core/data/word_model/noun_tag.dart';
 import 'package:project_athens/athens_core/data/word_model/word_model.dart';
-import 'package:project_athens/athens_core/data/word_model/word_model_mapper.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/ext/map_extension.dart';
-import 'package:project_athens/deputies_utils/data/network/response/deputy_nouns_response.dart';
 import 'package:project_athens/deputies_utils/data/network/response/deputy_response.dart';
+import 'package:project_athens/deputies_utils/data/network/response/subscribed_deputy_response.dart';
 import 'package:project_athens/deputies_utils/domain/base_deputies_params.dart';
 import 'package:project_athens/deputies_utils/domain/base_deputy_params.dart';
 import 'package:project_athens/deputies_utils/domain/base_parliament_clubs_params.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_full.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_full_mapper.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
+import 'package:project_athens/deputies_utils/domain/firebase_deputies/firebase_deputies_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputies/get_deputies_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputy/get_deputy_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputy_nouns/get_deputy_nouns_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/get_parliament_clubs/get_parliament_clubs_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/parliament_club_model.dart';
+import 'package:project_athens/deputies_utils/domain/subscribed_deputy_model.dart';
+import 'package:project_athens/deputies_utils/mappers/subscribed_deputy_mapper.dart';
 
 class DeputiesCache {
   final GetDeputiesUseCase _getDeputiesUseCase;
@@ -35,9 +36,6 @@ class DeputiesCache {
   Future<Result<List<DeputyModel>>> get deputies async {
     if (_cachedDeputies != null) return Success(_cachedDeputies.toList());
 
-    // final clubs =
-    //     (await parliamentClubs as Success<List<ParliamentClubModel>>)?.value ?? List();
-
     final clubsResponse = await parliamentClubs;
 
     if (clubsResponse is Failure<List<ParliamentClubModel>>) {
@@ -50,6 +48,7 @@ class DeputiesCache {
       if (result is Success<List<DeputyResponse>>) {
         _cachedDeputies = result.value.map((deputy) => _responseToModel(
             deputy, clubs.firstWhere((club) => club.id == deputy.parliamentClub))).toList();
+
         return Success(_cachedDeputies);
       } else {
         return result;
@@ -137,7 +136,7 @@ class DeputiesCache {
         final clubs = await parliamentClubs;
 
         if (clubs is Success<List<ParliamentClubModel>>) {
-          final deputyFullMapper = DeputyFullMapper((clubs as Success<List<ParliamentClubModel>>).value);
+          final deputyFullMapper = DeputyFullMapper(clubs.value);
           final deputyFull = deputyFullMapper.transform(result.value);
 
           _cachedDeputiesResponse.putIfNotNull(deputyFull.id, deputyFull);
@@ -153,7 +152,7 @@ class DeputiesCache {
       }
     });
 
-    return result as Result<DeputyFull>;
+    return result;
   }
 
   Future<Result<List<WordModel>>> getDeputyNouns(String id) async {
@@ -175,6 +174,9 @@ class DeputiesCache {
       }
     });
 
-    return result as Result<List<WordModel>>;
+    return result;
+  }
+
+  dispose() {
   }
 }
