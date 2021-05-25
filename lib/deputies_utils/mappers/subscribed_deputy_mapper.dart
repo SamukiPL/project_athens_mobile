@@ -19,23 +19,18 @@ class SubscribedDeputyMapper extends DataMapper<DeputyModel, SubscribedDeputyMod
       isSubscribed = false;
     }
 
-    final subscribedDeputyNotifications = SubscribedDeputyNotifications(
+    final subscribedDeputyNotifications = SubscribedDeputyNotificationsNotifier(
       subscribedDeputy.notifications.vote,
       subscribedDeputy.notifications.speech,
       subscribedDeputy.notifications.interpolation,
       isSubscribed,
     );
 
-    return SubscribedDeputyModel(
+    return SubscribedDeputyModel.fromDeputyModel(
+      data,
       subscribedDeputy.isPrimary,
       subscribedDeputy.cadencyDeputyId,
       subscribedDeputyNotifications,
-      data.id,
-      data.name,
-      data.thumbnailUrl,
-      data.club,
-      data.clubId,
-      data.cardId
     );
   }
 }

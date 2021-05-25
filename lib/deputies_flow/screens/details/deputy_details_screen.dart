@@ -5,11 +5,11 @@ import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/deputies_flow/screens/details/deputy_details_bloc.dart';
+import 'package:project_athens/deputies_flow/screens/details/presentation/subscribed_deputy_bar_view.dart';
 import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_information_details_tab.dart';
 import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_speeches_details_tab.dart';
 import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_votings_details_tab.dart';
 import 'package:project_athens/deputies_utils/domain/subscribed_deputy_model.dart';
-import 'package:project_athens/deputies_utils/domain/subscribed_deputy_notifications_notifier.dart';
 import 'package:provider/provider.dart';
 
 class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
@@ -57,7 +57,6 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
                                         color: Colors.white,
                                       ),
                                     ),
-                                    // Icon(MdiIcons.license, color: Colors.white)
                                   ],
                                 ),
                                 Text(
@@ -87,7 +86,7 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
                     collapsedHeight: 0,
                     expandedHeight: 0,
                     bottom: PreferredSize(
-                      preferredSize: Size.fromHeight(10),
+                      preferredSize: Size.fromHeight(50),
                       child: Container(),
                     ),
                     flexibleSpace: Padding(
@@ -96,12 +95,11 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
                         height: double.infinity,
                         width: double.infinity,
                         padding: EdgeInsets.only(left: 12, right: 12),
-                        // color: Colors.black,
                         child: ChangeNotifierProvider<SubscribedDeputyNotificationsNotifier>.value(
-                          value: bloc.deputyModel.notifications.notificationsChangeNotifier,
+                          value: bloc.deputyModel.notifications,
                           child: Consumer<SubscribedDeputyNotificationsNotifier>(
                             builder: (context, notifier, _) => bloc.deputyModel.notifications.isSubscribed
-                                ? deputyObservedView(bloc, context)
+                                ? SubscribedDeputyBarView(bloc.deputyModel)
                                 : notObservedDeputyView(bloc, context),
                           ),
                         )
@@ -165,87 +163,6 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
     return DeputyVotingsDetailsTab();
   }
 
-  Widget deputyObservedView(DeputyDetailsBloc bloc, BuildContext context) {
-    final theme = Theme.of(context);
-    final localizations = Provider.of<AppLocalizations>(context);
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Container(
-          child:
-            GestureDetector(
-              onTap: () => bloc.deputyModel.notifications.setIsSubscribed(false),
-              child: Row(
-                children: [
-                  Icon(MdiIcons.bookmarkCheckOutline, color: theme.primaryColor),
-                  Text(
-                    localizations.getText().deputiesSubscribingDeputy(),
-                    style: TextStyle(
-                        color: theme.dividerColor,
-                        fontSize: 14
-                    ),
-                  ),
-                ]
-              )
-          )
-        ),
-        Row(
-          children: [
-            getSpeechType(context, bloc),
-            getVotingType(context, bloc),
-            getInterpolationType(context, bloc)
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget getVotingType(BuildContext context, DeputyDetailsBloc bloc) {
-    return getTypeIcon(
-      context,
-      () => bloc.deputyModel.notifications.setVote(!bloc.deputyModel.notifications.vote),
-      MdiIcons.vote,
-      bloc.deputyModel.notifications.vote,
-    );
-  }
-
-  Widget getSpeechType(BuildContext context, DeputyDetailsBloc bloc) {
-    return getTypeIcon(
-      context,
-      () => bloc.deputyModel.notifications.setSpeech(!bloc.deputyModel.notifications.speech),
-      Icons.record_voice_over,
-      bloc.deputyModel.notifications.speech,
-    );
-  }
-
-  Widget getInterpolationType(BuildContext context, DeputyDetailsBloc bloc) {
-    return getTypeIcon(
-        context,
-        () => bloc.deputyModel.notifications
-            .setInterpolation(!bloc.deputyModel.notifications.interpolation),
-        Icons.insert_drive_file,
-        bloc.deputyModel.notifications.interpolation);
-  }
-
-  Widget getTypeIcon(
-      BuildContext context, Function tapFunction, IconData icon, bool checked) {
-    return GestureDetector(
-      onTap: tapFunction,
-      child: Container(
-        margin: EdgeInsets.only(right: 4),
-        child: Icon(
-          icon,
-          color: getCheckColor(context, checked),
-        ),
-      ),
-    );
-  }
-
-  Color getCheckColor(BuildContext context, bool checked) {
-    final theme = Theme.of(context);
-    return (checked) ? theme.primaryColor : theme.dividerColor;
-  }
-
   Widget notObservedDeputyView(DeputyDetailsBloc bloc, BuildContext context) {
     final theme = Theme.of(context);
     final localizations = Provider.of<AppLocalizations>(context);
@@ -280,36 +197,6 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
         ]
       ),
     );
-  }
-}
-
-class _SliverWatchedDeputiesAppBarDelegate
-    extends SliverPersistentHeaderDelegate {
-  _SliverWatchedDeputiesAppBarDelegate(this._appBar, this.color);
-
-  final Color color;
-  final Widget _appBar;
-
-  @override
-  // double get minExtent => _appBar.preferredSize.height;
-  double get minExtent => 50;
-
-  @override
-  // double get maxExtent => _appBar.preferredSize.height;
-  double get maxExtent => 50;
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return new Container(
-      child: _appBar,
-      color: Colors.white,
-    );
-  }
-
-  @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
-    return false;
   }
 }
 

@@ -1,12 +1,10 @@
 import 'package:project_athens/athens_core/presentation/base_blocs/base_change_notifier.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
-import 'package:project_athens/deputies_utils/domain/subscribed_deputy_notifications_notifier.dart';
-import 'package:rxdart/rxdart.dart';
 
 class SubscribedDeputyModel extends DeputyModel {
   final bool isPrimary;
   final String cadencyDeputyId;
-  final SubscribedDeputyNotifications notifications;
+  final SubscribedDeputyNotificationsNotifier notifications;
 
   SubscribedDeputyModel(
       this.isPrimary,
@@ -27,22 +25,25 @@ class SubscribedDeputyModel extends DeputyModel {
       thumbnailUrl: thumbnailUrl
     );
 
-
+  SubscribedDeputyModel.fromDeputyModel(
+    DeputyModel model,
+      this.isPrimary,
+      this.cadencyDeputyId,
+      this.notifications
+  ) : super(id: model.id, name: model.name, club: model.club, cardId: model.cardId, thumbnailUrl: model.thumbnailUrl);
 
   dispose() {
     notifications.dispose();
   }
 }
 
-class SubscribedDeputyNotifications {
+class SubscribedDeputyNotificationsNotifier extends BaseChangeNotifier {
   bool vote;
   bool speech;
   bool interpolation;
   bool isSubscribed;
 
-  SubscribedDeputyNotifications(this.vote, this.speech, this.interpolation, this.isSubscribed);
-
-  final SubscribedDeputyNotificationsNotifier notificationsChangeNotifier = SubscribedDeputyNotificationsNotifier();
+  SubscribedDeputyNotificationsNotifier(this.vote, this.speech, this.interpolation, this.isSubscribed) : super();
 
   Function() updateCallback;
 
@@ -57,7 +58,7 @@ class SubscribedDeputyNotifications {
       speech = true;
     }
 
-    notificationsChangeNotifier.notifyListeners();
+    notifyListeners();
     updateCallback.call();
   }
 
@@ -68,7 +69,7 @@ class SubscribedDeputyNotifications {
 
     speech = state;
 
-    notificationsChangeNotifier.notifyListeners();
+    notifyListeners();
     updateCallback.call();
   }
 
@@ -79,7 +80,7 @@ class SubscribedDeputyNotifications {
 
     interpolation = state;
 
-    notificationsChangeNotifier.notifyListeners();
+    notifyListeners();
     updateCallback.call();
   }
 
@@ -90,11 +91,11 @@ class SubscribedDeputyNotifications {
 
     vote = state;
 
-    notificationsChangeNotifier.notifyListeners();
+    notifyListeners();
     updateCallback.call();
   }
 
   dispose() {
-    notificationsChangeNotifier.dispose();
+    super.dispose();
   }
 }
