@@ -31,10 +31,6 @@ class SubscribedDeputyModel extends DeputyModel {
       this.cadencyDeputyId,
       this.notifications
   ) : super(id: model.id, name: model.name, club: model.club, cardId: model.cardId, thumbnailUrl: model.thumbnailUrl);
-
-  dispose() {
-    notifications.dispose();
-  }
 }
 
 class SubscribedDeputyNotificationsNotifier extends BaseChangeNotifier {
@@ -43,7 +39,7 @@ class SubscribedDeputyNotificationsNotifier extends BaseChangeNotifier {
   bool interpolation;
   bool isSubscribed;
 
-  SubscribedDeputyNotificationsNotifier(this.vote, this.speech, this.interpolation, this.isSubscribed) : super();
+  SubscribedDeputyNotificationsNotifier(this.vote, this.speech, this.interpolation, this.isSubscribed);
 
   Function() updateCallback;
 
@@ -93,9 +89,5 @@ class SubscribedDeputyNotificationsNotifier extends BaseChangeNotifier {
 
     notifyListeners();
     updateCallback.call();
-  }
-
-  dispose() {
-    super.dispose();
   }
 }

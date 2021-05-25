@@ -57,7 +57,6 @@ class SubscribedDeputyCacheModule extends Module {
     return List<SingleChildWidget>.of([
       Provider<SubscribedDeputiesCache>(
         create: (_) => SubscribedDeputiesCache(_deputiesCache, firebaseDeputiesUseCase, deleteDeputyUseCase, putDeputyUseCase),
-        dispose: (_, cache) => cache.dispose(),
       )
     ]);
   }
