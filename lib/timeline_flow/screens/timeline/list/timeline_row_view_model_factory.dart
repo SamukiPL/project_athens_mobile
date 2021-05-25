@@ -5,6 +5,15 @@ import 'package:project_athens/athens_core/ext/date_time_extension.dart';
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
 
+extension DateHelpers on DateTime {
+  bool get isToday {
+    final now = DateTime.now();
+    return now.day == this.day &&
+        now.month == this.month &&
+        now.year == this.year;
+  }
+}
+
 extension TimelineModelExtension on List<TimelineModel> {
   List<BaseItemViewModel> toTimelineRowViewModel(
       {DateTime date, TimerViewModel timerViewModel}) {

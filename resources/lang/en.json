@@ -143,7 +143,8 @@
       "logout": "Logout"
     },
     "switch": {
-      "technicalData": "Show technical data"
+      "technicalData": "Show technical data",
+      "wakelockTimeline": "Prevent from wake lock in timeline view"
     }
   },
   "filters": {

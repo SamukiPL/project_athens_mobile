@@ -37,6 +37,7 @@ class SpeechDetailsBloc extends BaseBloc {
     if (result is Success<SpeechModel>) {
       _speechModel = result.value;
       _videoManager = VideoManager(speechModel, isNormalSpeech);
+
       await _initDeputyModel();
       setLoadingState(DataLoadingState.contentLoaded());
     }
