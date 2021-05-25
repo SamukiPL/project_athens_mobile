@@ -4,6 +4,7 @@ import 'package:project_athens/athens_core/presentation/base_blocs/base_change_n
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/speeches_flow/screens/details/video_widget/next_video_overlay_bloc.dart';
 import 'package:video_player/video_player.dart';
+import 'package:wakelock/wakelock.dart';
 
 enum VideoState {NOT_INITIALIZED, PLAYING, PAUSED, ENDED}
 
@@ -23,10 +24,21 @@ class VideoManager {
       autoPlay: true,
       onVideoEnd: () => nextVideoOverlayBloc.pushOnNext(speechModel.nextPersonSpeech)
     );
+
+    final flickVideo = controller.flickVideoManager;
+    flickVideo.addListener(() async {
+      final isAlreadyLocked = await Wakelock.isEnabled;
+      if ((flickVideo.isPlaying || flickVideo.isVideoInitialized) && !isAlreadyLocked) {
+        Wakelock.enable();
+      } else if (flickVideo.isVideoEnded && isAlreadyLocked) {
+        Wakelock.disable();
+      }
+    });
   }
 
   void dispose() {
     controller.dispose();
+    Wakelock.disable();
     nextVideoOverlayBloc.dispose();
   }
 

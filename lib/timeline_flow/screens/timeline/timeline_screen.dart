@@ -1,8 +1,10 @@
 
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/configuration/configuration.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/presentation/backdrop/backdrop_widget.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_widget.dart';
@@ -13,8 +15,11 @@ import 'package:project_athens/timeline_flow/presentation/date_picker_fork/date_
 import 'package:project_athens/timeline_flow/screens/timeline/cloud/noun_cloud.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/timeline_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:wakelock/wakelock.dart';
 
 class TimelineScreen extends BaseScreen<TimelineBloc> {
+
+  StreamSubscription<bool> _preventFromWakelockSub;
 
   @override
   bool get showBackArrow => false;
@@ -31,6 +36,8 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
   @override
   Widget buildBody(BuildContext context, TimelineBloc bloc) {
     final localizations = Provider.of<AppLocalizations>(context);
+
+    _subscribeToWakelockPreventChange(context);
 
     return Container(
       color: Theme.of(context).primaryColor,
@@ -67,4 +74,20 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
     );
   }
 
+  void _subscribeToWakelockPreventChange(BuildContext context) {
+    final config = Provider.of<Configuration>(context);
+
+    _preventFromWakelockSub = config.wakelockOnTimeline.listen((bool prevent) {
+      if (prevent) {
+        Wakelock.enable();
+      } else {
+        Wakelock.disable();
+      }
+    });
+  }
+
+  @override
+  dispose() {
+    _preventFromWakelockSub.cancel();
+  }
 }
