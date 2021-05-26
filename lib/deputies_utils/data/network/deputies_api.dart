@@ -27,4 +27,7 @@ abstract class DeputiesApi {
   @GET("/user-aggregator/deputy-subscribe/{cadency}")
   Future<List<SubscribedDeputyResponse>> getSubscribedDeputies(@Path("cadency") int cadency);
 
+  @DELETE("/user-aggregator/deputy-subscribe/{cadency}/{cadencyDeputyId}")
+  Future<void> deleteDeputy(@Path("cadency") int cadency, @Path("cadencyDeputyId") String cadencyDeputyId);
+
 }

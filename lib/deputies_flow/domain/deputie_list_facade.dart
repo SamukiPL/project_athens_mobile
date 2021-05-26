@@ -10,5 +10,4 @@ class DeputiesListFacade extends ListFacade<DeputiesListParams> with SearchAppBa
   DeputiesListParams getParams({int limit = 20, int offset = 0}) => DeputiesListParams(
     searchQuery
   );
-
 }

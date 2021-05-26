@@ -8,6 +8,7 @@ import 'package:project_athens/deputies_flow/data/deputies_list_data_source.dart
 import 'package:project_athens/deputies_flow/domain/deputie_list_facade.dart';
 import 'package:project_athens/deputies_flow/screens/list/list_impl/deputy_item_view_model_factory.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
+import 'package:project_athens/deputies_utils/cache/subscribed_deputies_cache.dart';
 import 'package:provider/provider.dart';
 
 class DeputiesListModule extends Module {
@@ -16,7 +17,7 @@ class DeputiesListModule extends Module {
 
   @override
   List<SingleChildWidget> getProviders() {
-    final deputiesCache = Provider.of<DeputiesCache>(context);
+    final deputiesCache = Provider.of<SubscribedDeputiesCache>(context);
 
     final deputiesDataSource = DeputiesListDataSource(deputiesCache);
 

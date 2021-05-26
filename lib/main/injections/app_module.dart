@@ -19,7 +19,6 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 class AppModule extends Module {
-
   AppModule(BuildContext context) : super(context);
 
   @override
@@ -28,6 +27,7 @@ class AppModule extends Module {
       baseUrl: "https://api.swiadoma-demokracja.pl",
     );
     final client = Dio(clientOptions);
+
     client.interceptors.addAll([LogInterceptor(requestBody: true, responseBody: true), ErrorInterceptor()]);
 
     final deputiesApi = DeputiesApi(client);
@@ -43,8 +43,6 @@ class AppModule extends Module {
     final getParliamentClubsRepository = GetParliamentClubsRepositoryImpl(parliamentClubsApi);
     final getParliamentClubsUseCase = GetParliamentClubsUseCase(getParliamentClubsRepository);
 
-
-
     return List<SingleChildWidget>.of([
       Provider<SimpleDioClient>(
         create: (_) => SimpleDioClient(client),
@@ -52,6 +50,7 @@ class AppModule extends Module {
       ),
       Provider<DeputiesCache>(
         create: (_) => DeputiesCache(getDeputiesUseCase, getParliamentClubsUseCase, getDeputyUseCase, getDeputyNounsUseCase),
+        dispose: (context, cache) => cache.dispose(),
       ),
       Provider<SpeechCache>(create: (_) => SpeechCache()),
     ]);

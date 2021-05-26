@@ -114,4 +114,23 @@ class _DeputiesApi implements DeputiesApi {
         .toList();
     return value;
   }
+
+  @override
+  Future<void> deleteDeputy(cadency, cadencyDeputyId) async {
+    ArgumentError.checkNotNull(cadency, 'cadency');
+    ArgumentError.checkNotNull(cadencyDeputyId, 'cadencyDeputyId');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    await _dio.request<void>(
+        '/user-aggregator/deputy-subscribe/$cadency/$cadencyDeputyId',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'DELETE',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    return null;
+  }
 }

@@ -77,7 +77,7 @@ class FullCard extends StatelessWidget {
         context: context,
         builder: (context) => AlertDialog(
           title: Text(localizations.getText().universalInformation()),
-          content: Text(localizations.getText().deputiesWordCloudInfo()),
+          content: Text(dialogText),
           actions: [
             FlatButton(
               child: Text(localizations.getText().universalClose()),

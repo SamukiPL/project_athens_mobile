@@ -9,15 +9,15 @@ void main() {
   String osPrefix = Platform.isLinux ? '/' : '';
   String filePathForCoverage = osPrefix + scriptPath.substring(0, scriptPath.indexOf('main.dart')).substring(1) + 'resources/lang/';
 
-  File plFile = File(filePathForCoverage + 'pl.json');
-  String plData = plFile.readAsStringSync();
-  Map<String, dynamic> plWords = json.decode(plData);
-  testAllMethods('pl', AppLocalizationsGenerated(plWords));
-
   File enFile = File(filePathForCoverage + 'en.json');
   String enData = enFile.readAsStringSync();
   Map<String, dynamic> enWords = json.decode(enData);
   testAllMethods('en', AppLocalizationsGenerated(enWords));
+
+  File plFile = File(filePathForCoverage + 'pl.json');
+  String plData = plFile.readAsStringSync();
+  Map<String, dynamic> plWords = json.decode(plData);
+  testAllMethods('pl', AppLocalizationsGenerated(plWords));
 }
 
 void testAllMethods(String locale, AppLocalizationsGenerated localization) {
@@ -429,6 +429,21 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale deputiesWordCloudInfo", () async {
     String deputiesWordCloudInfo = localization.deputiesWordCloudInfo();
     expect(true, deputiesWordCloudInfo != "" && deputiesWordCloudInfo != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesSubscribe", () async {
+    String deputiesSubscribe = localization.deputiesSubscribe();
+    expect(true, deputiesSubscribe != "" && deputiesSubscribe != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesNotSubscribingDeputy", () async {
+    String deputiesNotSubscribingDeputy = localization.deputiesNotSubscribingDeputy();
+    expect(true, deputiesNotSubscribingDeputy != "" && deputiesNotSubscribingDeputy != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesSubscribingDeputy", () async {
+    String deputiesSubscribingDeputy = localization.deputiesSubscribingDeputy();
+    expect(true, deputiesSubscribingDeputy != "" && deputiesSubscribingDeputy != null); 
   }); 
  
   test("All methods for $locale speechesSpeechesListTitle", () async {
