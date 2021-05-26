@@ -18,15 +18,26 @@ class NounCloud extends StatelessWidget {
     return StreamProvider<List<Widget>>.value(
       value: bloc.widgets,
       initialData: [],
-      child: DataLoadingWidget(
-        bloc.dataLoadingBloc,
-        child: Consumer<List<Widget>>(
-          builder: (context, widgets, _) => generateReadyWidget(context, widgets),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxHeight: 220,
+          maxWidth: double.infinity
         ),
-        onRetry: null,
-        noDataText: localizations.getText().timelineNounCloudNoNouns(),
-        color: Colors.white,
-      ),
+        child: Center(
+          child: DataLoadingWidget(
+            bloc.dataLoadingBloc,
+            child: Consumer<List<Widget>>(
+              builder: (context, widgets, _) => generateReadyWidget(context, widgets),
+            ),
+            onRetry: null,
+            noDataText: localizations.getText().timelineNounCloudNoNouns(),
+            color: Colors.white,
+            invertLoaderColor: true,
+          ),
+        )
+
+      )
+
     );
   }
 

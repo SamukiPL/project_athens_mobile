@@ -18,6 +18,7 @@ class DataLoadingWidget extends StatelessWidget {
   final String noDataText;
   final Function(ErrorType) retryWidget;
   final VoidCallback onRetry;
+  final bool invertLoaderColor;
 
   final Color color;
 
@@ -31,7 +32,8 @@ class DataLoadingWidget extends StatelessWidget {
       this.noDataText,
       this.retryWidget,
       this.onRetry,
-      this.color = Colors.black})
+      this.color = Colors.black,
+      this.invertLoaderColor = false})
       : super(key: key);
 
   @override
@@ -65,17 +67,17 @@ class DataLoadingWidget extends StatelessWidget {
   }
 
   Widget _buildBaseInitialLoading() => Center(
-    child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              widthFactor: 10,
-              heightFactor: 10,
-              child: CircularProgressIndicator(),
-            )
-          ],
-        ),
+    child: Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: Center(
+        widthFactor: 10,
+        heightFactor: 10,
+        child: CircularProgressIndicator(
+            valueColor: invertLoaderColor ? AlwaysStoppedAnimation<Color>(Colors.white) : null
+        )
+      ),
+    )
   );
 
   Widget _getNoData() {
