@@ -31,6 +31,10 @@ class SubscribedDeputyModel extends DeputyModel {
       this.cadencyDeputyId,
       this.notifications
   ) : super(id: model.id, name: model.name, club: model.club, cardId: model.cardId, thumbnailUrl: model.thumbnailUrl);
+
+  dispose() {
+    notifications.dispose();
+  }
 }
 
 class SubscribedDeputyNotificationsNotifier extends BaseChangeNotifier {

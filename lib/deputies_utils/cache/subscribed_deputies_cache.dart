@@ -81,4 +81,8 @@ class SubscribedDeputiesCache {
       await _deleteDeputyUseCase.call(DeleteDeputyParams(9, subscribedDeputy.id));
     }
   }
+
+  dispose () {
+    _cachedSubscribedDeputies.forEach((element) => element.dispose());
+  }
 }
