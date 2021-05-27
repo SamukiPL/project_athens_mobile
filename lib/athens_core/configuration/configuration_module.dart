@@ -10,9 +10,11 @@ class ConfigurationModule extends Module {
 
   @override
   List<SingleChildWidget> getProviders() {
-    return [Provider<Configuration>(
-      create: (context) => Configuration(),
-      dispose: (context, configuration) => configuration.dispose(),
-    )];
+    return [
+      Provider<Configuration>(
+        create: (context) => Configuration(),
+        dispose: (context, configuration) => configuration.dispose(),
+      ),
+    ];
   }
 }

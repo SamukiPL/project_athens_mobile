@@ -19,8 +19,6 @@ import 'package:wakelock/wakelock.dart';
 
 class TimelineScreen extends BaseScreen<TimelineBloc> {
 
-  StreamSubscription<bool> _preventFromWakelockSub;
-
   @override
   bool get showBackArrow => false;
   @override
@@ -36,8 +34,6 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
   @override
   Widget buildBody(BuildContext context, TimelineBloc bloc) {
     final localizations = Provider.of<AppLocalizations>(context);
-
-    _subscribeToWakelockPreventChange(context);
 
     return Container(
       color: Theme.of(context).primaryColor,
@@ -72,22 +68,5 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
       child: Icon(Icons.calendar_today),
       backgroundColor: Theme.of(context).primaryColor,
     );
-  }
-
-  void _subscribeToWakelockPreventChange(BuildContext context) {
-    final config = Provider.of<Configuration>(context);
-
-    _preventFromWakelockSub = config.wakelockOnTimeline.listen((bool prevent) {
-      if (prevent) {
-        Wakelock.enable();
-      } else {
-        Wakelock.disable();
-      }
-    });
-  }
-
-  @override
-  dispose() {
-    _preventFromWakelockSub.cancel();
   }
 }

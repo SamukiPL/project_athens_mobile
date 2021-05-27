@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
+import 'package:project_athens/main/wakelock/wakelock_service.dart';
 import 'package:project_athens/speeches_flow/data/details_speech_network_data_source.dart';
 import 'package:project_athens/speeches_flow/data/network/speeches_api.dart';
 import 'package:project_athens/speeches_flow/data/speech_cache.dart';
@@ -28,9 +29,11 @@ class SpeechModule extends Module {
     final detailsSpeechNetworkDataSource = DetailsSpeechNetworkDataSource(speechesApi, networkMapper, speechId, isNormalSpeech, speechCache);
     final getSpeechUseCase = GetSpeechUseCase(detailsSpeechNetworkDataSource);
 
+    final wakelock = Provider.of<WakelockService>(context);
+
     return [
       Provider<SpeechDetailsBloc>(
-        create: (_) => SpeechDetailsBloc(isNormalSpeech, getSpeechUseCase, deputiesCache),
+        create: (_) => SpeechDetailsBloc(isNormalSpeech, getSpeechUseCase, deputiesCache, wakelock),
         dispose: (context, bloc) => bloc.dispose(),
       ),
     ];

@@ -19,6 +19,8 @@ import 'package:project_athens/deputies_utils/data/network/deputies_api.dart';
 import 'package:project_athens/deputies_utils/domain/firebase_deputies/firebase_deputies_use_case.dart';
 import 'package:project_athens/deputies_utils/injections/subscribed_deputy_cache_module.dart';
 import 'package:project_athens/main/firebase/firebase_messages.dart';
+import 'package:project_athens/main/injections/wakelock_module.dart';
+import 'package:project_athens/main/wakelock/wakelock_service.dart';
 import 'package:provider/provider.dart';
 
 class MainWidget extends StatelessWidget {
@@ -30,7 +32,8 @@ class MainWidget extends StatelessWidget {
       providers: [
         NetworkModule(context),
         LocalizationModule(context),
-        SubscribedDeputyCacheModule(context, firebaseMessages)
+        SubscribedDeputyCacheModule(context, firebaseMessages),
+        WakelockModule(context)
       ],
       child: Consumer<BottomNavigationBloc>(
         builder: (context, bloc, child) => WillPopScope(child: child, onWillPop: () async {
