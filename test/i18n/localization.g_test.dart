@@ -576,6 +576,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, filtersFiltersDateTo != "" && filtersFiltersDateTo != null); 
   }); 
  
+  test("All methods for $locale filtersFiltersSearchPhrase", () async {
+    String filtersFiltersSearchPhrase = localization.filtersFiltersSearchPhrase();
+    expect(true, filtersFiltersSearchPhrase != "" && filtersFiltersSearchPhrase != null); 
+  }); 
+ 
   test("All methods for $locale sortTitle", () async {
     String sortTitle = localization.sortTitle();
     expect(true, sortTitle != "" && sortTitle != null); 

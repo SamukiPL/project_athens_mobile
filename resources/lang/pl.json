@@ -153,7 +153,8 @@
     "title": "Filtry",
     "filters": {
       "dateFrom": "Od daty:",
-      "dateTo": "Do daty:"
+      "dateTo": "Do daty:",
+      "searchPhrase": "Wpisz frazę..."
     }
   },
   "sort": {
