@@ -71,7 +71,9 @@ class _SearchAppBar extends StatelessWidget {
               hintText: hintText,
               hintStyle: TextStyle(
                 color: Colors.white60
-              )),
+              ),
+          ),
+          cursorColor: Colors.white60,
           focusNode: bloc.searchFocusNode,
         );
         break;

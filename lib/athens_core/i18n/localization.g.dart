@@ -455,6 +455,10 @@ class AppLocalizationsGenerated {
     return words['filters']['filters']['dateTo'];
   }
 
+  String filtersFiltersSearchPhrase() {
+    return words['filters']['filters']['searchPhrase'];
+  }
+
   String sortTitle() {
     return words['sort']['title'];
   }
