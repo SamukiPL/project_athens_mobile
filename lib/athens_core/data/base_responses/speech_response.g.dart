@@ -35,6 +35,9 @@ SpeechResponse _$SpeechResponseFromJson(Map<String, dynamic> json) {
         ? null
         : PersonSpeech.fromJson(
             json['nextPersonSpeech'] as Map<String, dynamic>),
+    json['updateAt'] == null
+        ? null
+        : DateTime.parse(json['updateAt'] as String),
   );
 }
 
@@ -43,6 +46,7 @@ Map<String, dynamic> _$SpeechResponseToJson(SpeechResponse instance) =>
       'agenda': instance.agenda,
       'cisInfo': instance.cisInfo,
       'createAt': instance.createAt?.toIso8601String(),
+      'updateAt': instance.updateAt?.toIso8601String(),
       'id': instance.id,
       'deputyCardIdentifier': instance.deputyCardIdentifier,
       'fileName': instance.fileName,

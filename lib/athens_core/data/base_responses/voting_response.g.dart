@@ -38,6 +38,9 @@ VotingResponse _$VotingResponseFromJson(Map<String, dynamic> json) {
             : ParliamentClubVotingNumbers.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     json['deputyVoteType'] as int,
+    json['updateAt'] == null
+        ? null
+        : DateTime.parse(json['updateAt'] as String),
   );
 }
 
@@ -47,6 +50,7 @@ Map<String, dynamic> _$VotingResponseToJson(VotingResponse instance) =>
       'votedAt': instance.votedAt?.toIso8601String(),
       'actualVotedAt': instance.actualVotedAt?.toIso8601String(),
       'createAt': instance.createAt?.toIso8601String(),
+      'updateAt': instance.updateAt?.toIso8601String(),
       'cadency': instance.cadency,
       'orderPoint': instance.orderPoint,
       'sessionIId': instance.sessionIId,
@@ -106,6 +110,15 @@ const _$VotingTypeEnumMap = {
   VotingType.CHANGE_COMISSION_MEMBERS: 8,
   VotingType.VOTE_FOR_PROPOSAL: 9,
   VotingType.PERSON_VOTE: 10,
+  VotingType.VOTE_FOR_POSTPONEMENT_GATHERING: 11,
+  VotingType.MARSHAL: 12,
+  VotingType.VICE_MARSHAL: 13,
+  VotingType.CHOOSE_COMISSION_MEMBERS: 14,
+  VotingType.SELECTION_OF_PARLIAMENT_SECRETARIES: 15,
+  VotingType.VOTE_OF_CONFIDENCE: 16,
+  VotingType.SELECTION_OF_STATE_TRIBUNAL: 17,
+  VotingType.SELECTION_OF_CONSTITUTIONAL_COURT: 18,
+  VotingType.SELECTION_OF_DEPUTY_MEMBER_NATIONAL_COUNCIL_JUDICIARY: 19,
   VotingType.UNKNOWN: 999,
 };
 

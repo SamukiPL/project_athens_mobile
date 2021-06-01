@@ -37,7 +37,7 @@ class VoteViewHolder extends StatelessWidget with RedirectionDelegate {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            _viewModel.description,
+            _viewModel.description != null ? _viewModel.description : "",
             style: TextStyle(
               color: theme.primaryColor,
               fontSize: 18

@@ -17,10 +17,11 @@ class DeputyResponse {
   final bool isActive;
   final CvBean cv;
   final ContactBean contact;
-  final String createAt;
   final StatisticsBean statistics;
+  final DateTime createAt;
+  final DateTime updateAt;
 
-  DeputyResponse(this.id, this.cadency, this.name, this.reversedName, this.photoUrl, this.politicalParty, this.parliamentClub, this.cardNumber, this.cardId, this.deputyId, this.isActive, this.cv, this.contact, this.createAt, this.statistics);
+  DeputyResponse(this.id, this.cadency, this.name, this.reversedName, this.photoUrl, this.politicalParty, this.parliamentClub, this.cardNumber, this.cardId, this.deputyId, this.isActive, this.cv, this.contact, this.statistics, this.createAt, this.updateAt);
 
   factory DeputyResponse.fromJson(Map<String, dynamic> json) => _$DeputyResponseFromJson(json);
   Map<String, dynamic> toJson() => _$DeputyResponseToJson(this);

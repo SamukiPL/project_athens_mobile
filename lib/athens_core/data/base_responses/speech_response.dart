@@ -10,6 +10,7 @@ class SpeechResponse extends TimelineItem {
   final Agenda agenda;
   final CisInfo cisInfo;
   final DateTime createAt;
+  final DateTime updateAt;
   final String id;
   final int deputyCardIdentifier;
   final String fileName;
@@ -23,7 +24,7 @@ class SpeechResponse extends TimelineItem {
   final PersonSpeech previousPersonSpeech;
   final PersonSpeech nextPersonSpeech;
 
-  SpeechResponse(this.agenda, this.cisInfo, this.createAt, this.id, this.deputyCardIdentifier, this.fileName, this.videoDownloadUrl, this.length, this.personName, this.cadencyDeputy, this.parliamentClub, this.cadency, this.rangeId, this.previousPersonSpeech, this.nextPersonSpeech);
+  SpeechResponse(this.agenda, this.cisInfo, this.createAt, this.id, this.deputyCardIdentifier, this.fileName, this.videoDownloadUrl, this.length, this.personName, this.cadencyDeputy, this.parliamentClub, this.cadency, this.rangeId, this.previousPersonSpeech, this.nextPersonSpeech, this.updateAt);
 
   factory SpeechResponse.fromJson(Map<String, dynamic> json) => _$SpeechResponseFromJson(json);
   Map<String, dynamic> toJson() => _$SpeechResponseToJson(this);

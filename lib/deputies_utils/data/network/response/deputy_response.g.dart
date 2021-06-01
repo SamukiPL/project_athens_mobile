@@ -25,10 +25,15 @@ DeputyResponse _$DeputyResponseFromJson(Map<String, dynamic> json) {
     json['contact'] == null
         ? null
         : ContactBean.fromJson(json['contact'] as Map<String, dynamic>),
-    json['createAt'] as String,
     json['statistics'] == null
         ? null
         : StatisticsBean.fromJson(json['statistics'] as Map<String, dynamic>),
+    json['createAt'] == null
+        ? null
+        : DateTime.parse(json['createAt'] as String),
+    json['updateAt'] == null
+        ? null
+        : DateTime.parse(json['updateAt'] as String),
   );
 }
 
@@ -47,8 +52,9 @@ Map<String, dynamic> _$DeputyResponseToJson(DeputyResponse instance) =>
       'isActive': instance.isActive,
       'cv': instance.cv,
       'contact': instance.contact,
-      'createAt': instance.createAt,
       'statistics': instance.statistics,
+      'createAt': instance.createAt?.toIso8601String(),
+      'updateAt': instance.updateAt?.toIso8601String(),
     };
 
 ContactBean _$ContactBeanFromJson(Map<String, dynamic> json) {

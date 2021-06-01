@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_widget.dart';
+import 'package:project_athens/athens_core/presentation/db_source/db_source.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/athens_core/utils/pair.dart';
 import 'package:project_athens/deputies_flow/navigation/deputies_destinations.dart';
@@ -43,6 +44,7 @@ class SpeechDetailsScreen extends BaseScreen<SpeechDetailsBloc> {
         Expanded(
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   margin: EdgeInsets.all(16),
@@ -53,6 +55,10 @@ class SpeechDetailsScreen extends BaseScreen<SpeechDetailsBloc> {
                 ),
                 buildNextRow(bloc, theme, localization),
                 buildPreviousRow(bloc, theme, localization),
+                Container(
+                  margin: EdgeInsets.all(16),
+                  child: DbSource(bloc.speechModel)
+                ),
                 Container(
                   margin: EdgeInsets.all(16),
                   child: TechnicalData(

@@ -10,6 +10,7 @@ import 'package:project_athens/athens_core/data/word_model/word_model_mapper.dar
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/async_once/async_once.dart';
+import 'package:project_athens/athens_core/presentation/db_source/db_source.dart';
 import 'package:project_athens/athens_core/presentation/full_card/full_card.dart';
 import 'package:project_athens/athens_core/presentation/simple_horizontal_table/simple_horizontal_table.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
@@ -63,6 +64,11 @@ class DeputyInformationDetailsTab extends StatelessWidget {
                   child: buildNounCloud(localizations, theme, deputyFull, deputyCache, context),
                   header: localizations.getText().deputiesWordCloud(),
                   dialogText: localizations.getText().deputiesWordCloudInfo(),
+                ),
+                FullCard(
+                  rightPadding: 10,
+                  leftPadding: 10,
+                  child: DbSource(deputyFull),
                 )
               ]
           ),

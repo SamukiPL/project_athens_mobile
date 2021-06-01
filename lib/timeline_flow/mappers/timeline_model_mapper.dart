@@ -36,12 +36,17 @@ class TimelineModelMapper extends AsyncDataMapper<Event, TimelineModel> {
     return VotingModel(
         id: item.id,
         title: item.topic,
-        date: item.actualVotedAt,
+        date: item.votedAt,
         votingDesc: getVotingDesc(item.votingType),
         results: results,
         votes: voteModels,
         orderPoint: item.orderPoint,
-        clubVotes: item.parliamentClubVotingNumbers);
+        clubVotes: item.parliamentClubVotingNumbers,
+        createAt: item.createAt,
+        // since for now service does NOT provide updates
+        // because votes for now are immutable on server side
+        updateAt: item.createAt
+    );
   }
 
   Future<TimelineModel> getSpeechModel(SpeechResponse item) async {
@@ -53,7 +58,9 @@ class TimelineModelMapper extends AsyncDataMapper<Event, TimelineModel> {
       desc: item.agenda?.title,
       date: item.cisInfo.eventDateTime,
       thumbnailUrl: await _deputiesCache.getDeputyThumbnail(item.cadencyDeputy),
-      videoUrl: item.videoDownloadUrl
+      videoUrl: item.videoDownloadUrl,
+      updateAt: item.updateAt,
+      createAt: item.createAt
     );
   }
 
@@ -91,6 +98,33 @@ class TimelineModelMapper extends AsyncDataMapper<Event, TimelineModel> {
         break;
       case VotingType.PERSON_VOTE:
         return _localizations.getText().timelineVotingTypesPersonVote();
+        break;
+      case VotingType.VOTE_FOR_POSTPONEMENT_GATHERING:
+        return _localizations.getText().timelineVotingTypesVoteForPostponementGathering();
+        break;
+      case VotingType.MARSHAL:
+        return _localizations.getText().timelineVotingTypesMarshal();
+        break;
+      case VotingType.VICE_MARSHAL:
+        return _localizations.getText().timelineVotingTypesViceMarshal();
+        break;
+      case VotingType.CHOOSE_COMISSION_MEMBERS:
+        return _localizations.getText().timelineVotingTypesChooseComissionMembers();
+        break;
+      case VotingType.SELECTION_OF_PARLIAMENT_SECRETARIES:
+        return _localizations.getText().timelineVotingTypesSelectionOfParliamentSecretaries();
+        break;
+      case VotingType.VOTE_OF_CONFIDENCE:
+        return _localizations.getText().timelineVotingTypesVoteOfConfidence();
+        break;
+      case VotingType.SELECTION_OF_STATE_TRIBUNAL:
+        return _localizations.getText().timelineVotingTypesSelectionOfStateTribunal();
+        break;
+      case VotingType.SELECTION_OF_CONSTITUTIONAL_COURT:
+        return _localizations.getText().timelineVotingTypesSelectionOfConstitutionalCourt();
+        break;
+      case VotingType.SELECTION_OF_DEPUTY_MEMBER_NATIONAL_COUNCIL_JUDICIARY:
+        return _localizations.getText().timelineVotingTypesSelectionOfNationalCouncilJudiciary();
         break;
       case VotingType.UNKNOWN:
         return _localizations.getText().timelineVotingTypesUnknown();
