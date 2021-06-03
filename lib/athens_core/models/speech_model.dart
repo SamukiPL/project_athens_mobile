@@ -22,7 +22,9 @@ class SpeechModel extends TimelineModel {
     this.videoUrl,
     this.nextPersonSpeech,
     this.previousPersonSpeech,
-  }) : super(id, TimelineModelType.SPEECH, date);
+    DateTime createAt,
+    DateTime updateAt,
+  }) : super(id, TimelineModelType.SPEECH, date, createAt, updateAt);
 
   SpeechModel changePersonSpeeches({PersonSpeechModel newNextPersonSpeech, PersonSpeechModel newPreviousPersonSpeech}) => SpeechModel(
     id: id,
@@ -34,7 +36,9 @@ class SpeechModel extends TimelineModel {
     thumbnailUrl: thumbnailUrl,
     videoUrl: videoUrl,
     nextPersonSpeech: newNextPersonSpeech,
-    previousPersonSpeech: newPreviousPersonSpeech
+    previousPersonSpeech: newPreviousPersonSpeech,
+    updateAt: updateAt,
+    createAt: createAt
   );
 }
 

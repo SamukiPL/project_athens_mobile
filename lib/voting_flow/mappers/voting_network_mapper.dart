@@ -16,7 +16,7 @@ class VotingNetworkMapper extends AsyncDataMapper<VotingResponse, VotingModel> {
     return VotingModel(
     id: data.id,
     title: data.topic,
-    date: data.actualVotedAt,
+    date: data.votedAt,
     absoluteMajority: data.absoluteMajority,
     qualifyingMajority: data.qualifyingMajority,
     votingDesc: getVotingDesc(data.votingType),
@@ -24,7 +24,12 @@ class VotingNetworkMapper extends AsyncDataMapper<VotingResponse, VotingModel> {
     votes: voteModels,
     clubVotes: data.parliamentClubVotingNumbers,
     orderPoint: data.orderPoint,
-    deputyVoteType: VoteType.values[data.deputyVoteType != null ? data.deputyVoteType : 1]);
+    deputyVoteType: VoteType.values[data.deputyVoteType != null ? data.deputyVoteType : 1],
+    createAt: data.createAt,
+    // since for now service does NOT provide updates
+    // because votes for now are immutable on server side
+    updateAt: data.createAt
+    );
   }
 
   String getVotingDesc(VotingType type) {
@@ -61,6 +66,33 @@ class VotingNetworkMapper extends AsyncDataMapper<VotingResponse, VotingModel> {
         break;
       case VotingType.PERSON_VOTE:
         return _localizations.getText().timelineVotingTypesPersonVote();
+        break;
+      case VotingType.VOTE_FOR_POSTPONEMENT_GATHERING:
+        return _localizations.getText().timelineVotingTypesVoteForPostponementGathering();
+        break;
+      case VotingType.MARSHAL:
+        return _localizations.getText().timelineVotingTypesMarshal();
+        break;
+      case VotingType.VICE_MARSHAL:
+        return _localizations.getText().timelineVotingTypesViceMarshal();
+        break;
+      case VotingType.CHOOSE_COMISSION_MEMBERS:
+        return _localizations.getText().timelineVotingTypesChooseComissionMembers();
+        break;
+      case VotingType.SELECTION_OF_PARLIAMENT_SECRETARIES:
+        return _localizations.getText().timelineVotingTypesSelectionOfParliamentSecretaries();
+        break;
+      case VotingType.VOTE_OF_CONFIDENCE:
+        return _localizations.getText().timelineVotingTypesVoteOfConfidence();
+        break;
+      case VotingType.SELECTION_OF_STATE_TRIBUNAL:
+        return _localizations.getText().timelineVotingTypesSelectionOfStateTribunal();
+        break;
+      case VotingType.SELECTION_OF_CONSTITUTIONAL_COURT:
+        return _localizations.getText().timelineVotingTypesSelectionOfConstitutionalCourt();
+        break;
+      case VotingType.SELECTION_OF_DEPUTY_MEMBER_NATIONAL_COUNCIL_JUDICIARY:
+        return _localizations.getText().timelineVotingTypesSelectionOfNationalCouncilJudiciary();
         break;
       case VotingType.UNKNOWN:
         return _localizations.getText().timelineVotingTypesUnknown();

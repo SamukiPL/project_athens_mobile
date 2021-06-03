@@ -1,6 +1,7 @@
+import 'package:project_athens/athens_core/models/db_harvest_model.dart';
 import 'package:project_athens/deputies_utils/domain/parliament_club_model.dart';
 
-class DeputyFull {
+class DeputyFull extends DbHarvestModel {
   final String id;
   final int cadency;
   final String name;
@@ -13,10 +14,9 @@ class DeputyFull {
   final bool isActive;
   final DeputyCv cv;
   final Contact contact;
-  final String createAt;
   final Statistics statistics;
 
-  DeputyFull(this.id, this.cadency, this.name, this.reversedName, this.photoUrl, this.politicalParty, this.parliamentClub, this.cardNumber, this.deputyId, this.isActive, this.cv, this.contact, this.createAt, this.statistics);
+  DeputyFull(this.id, this.cadency, this.name, this.reversedName, this.photoUrl, this.politicalParty, this.parliamentClub, this.cardNumber, this.deputyId, this.isActive, this.cv, this.contact, this.statistics, DateTime createAt, DateTime updateAt) : super(createAt, updateAt);
 }
 
 class Contact {

@@ -10,6 +10,7 @@ import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
+import 'package:project_athens/athens_core/presentation/db_source/db_source.dart';
 import 'package:project_athens/athens_core/presentation/full_card/full_card.dart';
 import 'package:project_athens/athens_core/presentation/simple_horizontal_table/simple_horizontal_table.dart';
 import 'package:project_athens/athens_core/presentation/simple_horizontal_table/simple_horizontal_table_cell.dart';
@@ -56,7 +57,9 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
           FullCard(header: 'Opis', headerPadding: 8, child: buildDescription(theme)),
           FullCard(header: 'Rozkład głosów', headerPadding: 8, child: buildClubVoteDistributionView(context, theme)),
           FullCard(header: 'Obserwowani posłowie', headerPadding: 8, child: buildDeputyVotesView(context, theme)),
+          FullCard(leftPadding: 8, rightPadding: 8, child: DbSource(_votingModel),),
           TechnicalData(technicalId: _votingModel.id),
+
         ],
       ),
     ));

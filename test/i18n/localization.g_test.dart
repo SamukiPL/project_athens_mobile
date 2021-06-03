@@ -86,6 +86,21 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalErrorUnknown != "" && universalErrorUnknown != null); 
   }); 
  
+  test("All methods for $locale universalSource", () async {
+    String universalSource = localization.universalSource();
+    expect(true, universalSource != "" && universalSource != null); 
+  }); 
+ 
+  test("All methods for $locale universalCreatedAt", () async {
+    String universalCreatedAt = localization.universalCreatedAt();
+    expect(true, universalCreatedAt != "" && universalCreatedAt != null); 
+  }); 
+ 
+  test("All methods for $locale universalUpdatedAt", () async {
+    String universalUpdatedAt = localization.universalUpdatedAt();
+    expect(true, universalUpdatedAt != "" && universalUpdatedAt != null); 
+  }); 
+ 
   test("All methods for $locale mainMenuSession", () async {
     String mainMenuSession = localization.mainMenuSession();
     expect(true, mainMenuSession != "" && mainMenuSession != null); 
@@ -314,6 +329,51 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale timelineVotingTypesPersonVote", () async {
     String timelineVotingTypesPersonVote = localization.timelineVotingTypesPersonVote();
     expect(true, timelineVotingTypesPersonVote != "" && timelineVotingTypesPersonVote != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesVoteForPostponementGathering", () async {
+    String timelineVotingTypesVoteForPostponementGathering = localization.timelineVotingTypesVoteForPostponementGathering();
+    expect(true, timelineVotingTypesVoteForPostponementGathering != "" && timelineVotingTypesVoteForPostponementGathering != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesMarshal", () async {
+    String timelineVotingTypesMarshal = localization.timelineVotingTypesMarshal();
+    expect(true, timelineVotingTypesMarshal != "" && timelineVotingTypesMarshal != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesViceMarshal", () async {
+    String timelineVotingTypesViceMarshal = localization.timelineVotingTypesViceMarshal();
+    expect(true, timelineVotingTypesViceMarshal != "" && timelineVotingTypesViceMarshal != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesChooseComissionMembers", () async {
+    String timelineVotingTypesChooseComissionMembers = localization.timelineVotingTypesChooseComissionMembers();
+    expect(true, timelineVotingTypesChooseComissionMembers != "" && timelineVotingTypesChooseComissionMembers != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesSelectionOfParliamentSecretaries", () async {
+    String timelineVotingTypesSelectionOfParliamentSecretaries = localization.timelineVotingTypesSelectionOfParliamentSecretaries();
+    expect(true, timelineVotingTypesSelectionOfParliamentSecretaries != "" && timelineVotingTypesSelectionOfParliamentSecretaries != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesVoteOfConfidence", () async {
+    String timelineVotingTypesVoteOfConfidence = localization.timelineVotingTypesVoteOfConfidence();
+    expect(true, timelineVotingTypesVoteOfConfidence != "" && timelineVotingTypesVoteOfConfidence != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesSelectionOfStateTribunal", () async {
+    String timelineVotingTypesSelectionOfStateTribunal = localization.timelineVotingTypesSelectionOfStateTribunal();
+    expect(true, timelineVotingTypesSelectionOfStateTribunal != "" && timelineVotingTypesSelectionOfStateTribunal != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesSelectionOfConstitutionalCourt", () async {
+    String timelineVotingTypesSelectionOfConstitutionalCourt = localization.timelineVotingTypesSelectionOfConstitutionalCourt();
+    expect(true, timelineVotingTypesSelectionOfConstitutionalCourt != "" && timelineVotingTypesSelectionOfConstitutionalCourt != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesSelectionOfNationalCouncilJudiciary", () async {
+    String timelineVotingTypesSelectionOfNationalCouncilJudiciary = localization.timelineVotingTypesSelectionOfNationalCouncilJudiciary();
+    expect(true, timelineVotingTypesSelectionOfNationalCouncilJudiciary != "" && timelineVotingTypesSelectionOfNationalCouncilJudiciary != null); 
   }); 
  
   test("All methods for $locale timelineVotingTypesUnknown", () async {

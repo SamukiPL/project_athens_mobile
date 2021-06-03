@@ -9,6 +9,7 @@ class VotingResponse implements TimelineItem {
   final DateTime votedAt;
   final DateTime actualVotedAt;
   final DateTime createAt;
+  final DateTime updateAt;
   final int cadency;
   final int orderPoint;
   final int sessionIId;
@@ -45,7 +46,8 @@ class VotingResponse implements TimelineItem {
       this.absoluteMajority,
       this.qualifyingMajority,
       this.parliamentClubVotingNumbers,
-      this.deputyVoteType);
+      this.deputyVoteType,
+      this.updateAt);
 
   factory VotingResponse.fromJson(Map<String, dynamic> json) => _$VotingResponseFromJson(json);
 
@@ -121,6 +123,24 @@ enum VotingType {
   /// Pkt 19. porz. dzien. Wybór sędziów Trybunału Konstytucyjnego - głosowanie nad wyborem pana Jakuba Steliny na stanowisko sędziego Trybunału Konstytucyjnego
   @JsonValue(10)
   PERSON_VOTE,
+  @JsonValue(11)
+  VOTE_FOR_POSTPONEMENT_GATHERING,
+  @JsonValue(12)
+  MARSHAL,
+  @JsonValue(13)
+  VICE_MARSHAL,
+  @JsonValue(14)
+  CHOOSE_COMISSION_MEMBERS,
+  @JsonValue(15)
+  SELECTION_OF_PARLIAMENT_SECRETARIES,
+  @JsonValue(16)
+  VOTE_OF_CONFIDENCE,
+  @JsonValue(17)
+  SELECTION_OF_STATE_TRIBUNAL,
+  @JsonValue(18)
+  SELECTION_OF_CONSTITUTIONAL_COURT,
+  @JsonValue(19)
+  SELECTION_OF_DEPUTY_MEMBER_NATIONAL_COUNCIL_JUDICIARY,
   @JsonValue(999)
   UNKNOWN
 }
