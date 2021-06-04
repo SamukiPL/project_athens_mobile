@@ -16,7 +16,10 @@
       "network": "Something went wrong. Please check your internet connection.",
       "server": "Server is not responding. Please try again later.",
       "unknown": "Something went wrong, please try again later."
-    }
+    },
+    "source": "Source",
+    "createdAt": "Created at",
+    "updatedAt": "Updated At"
   },
   "main": {
     "menu": {
@@ -82,6 +85,15 @@
       "changeCommissionMembers": "Change Commission Members",
       "voteForProposal": "Vote For Proposal",
       "personVote": "Person Vote",
+      "voteForPostponementGathering": "Vote for postponemend gathering",
+      "marshal": "Selection of Marshal",
+      "viceMarshal": "Selecrion of Vicemarshal",
+      "chooseComissionMembers": "Selection of comission members",
+      "selectionOfParliamentSecretaries": "Selection of Parliament Secretaries",
+      "voteOfConfidence": "Vote of confidence",
+      "selectionOfStateTribunal": "Selection of State Tribunal",
+      "selectionOfConstitutionalCourt": "Selection of Constitutional Court",
+      "selectionOfNationalCouncilJudiciary": "Selection of KRS members",
       "unknown": "Unknown"
     },
     "nounCloud": {
@@ -154,7 +166,8 @@
     "title": "Filters",
     "filters": {
       "dateFrom": "Date from:",
-      "dateTo": "Date to:"
+      "dateTo": "Date to:",
+      "searchPhrase": "Enter search phrase..."
     }
   },
   "sort": {

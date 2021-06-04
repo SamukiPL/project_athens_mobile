@@ -16,7 +16,10 @@
       "network": "Coś poszło nie tak. Proszę sprawdzić swoje połączenie z internetem.",
       "server": "Serwer nie odpowiada. Prosimy spróbować później.",
       "unknown": "Coś poszło nie tak, prosimy spróbować później."
-    }
+    },
+    "source": "Źródło danych",
+    "createdAt": "Data utworzenia",
+    "updatedAt": "Data aktualizacji"
   },
   "main": {
     "menu": {
@@ -82,6 +85,15 @@
       "changeCommissionMembers": "Zmiana Czlonków Komisji",
       "voteForProposal": "Głosowanie Za Propozycją",
       "personVote": "Głosowanie Za Osobą",
+      "voteForPostponementGathering": "Głosowanie nad odroczeniem posiedzenia",
+      "marshal": "Wybór Marszałka",
+      "viceMarshal": "Wybór Wicemarszałka",
+      "chooseComissionMembers": "Wybór składu osobowego komisji",
+      "selectionOfParliamentSecretaries": "Wybór sekretarzy sejmu",
+      "voteOfConfidence": "Wotum zaufania",
+      "selectionOfStateTribunal": "Wybór członków trybunały stanu",
+      "selectionOfConstitutionalCourt": "Wybór sędziów trybunału konstytucyjnego",
+      "selectionOfNationalCouncilJudiciary": "Wybór członków KRS",
       "unknown": "Nieznany rodzaj głosowania"
     },
     "nounCloud": {
@@ -154,7 +166,8 @@
     "title": "Filtry",
     "filters": {
       "dateFrom": "Od daty:",
-      "dateTo": "Do daty:"
+      "dateTo": "Do daty:",
+      "searchPhrase": "Wpisz frazę..."
     }
   },
   "sort": {

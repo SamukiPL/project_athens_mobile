@@ -63,6 +63,18 @@ class AppLocalizationsGenerated {
     return words['universal']['error']['unknown'];
   }
 
+  String universalSource() {
+    return words['universal']['source'];
+  }
+
+  String universalCreatedAt() {
+    return words['universal']['createdAt'];
+  }
+
+  String universalUpdatedAt() {
+    return words['universal']['updatedAt'];
+  }
+
   String mainMenuSession() {
     return words['main']['menu']['session'];
   }
@@ -245,6 +257,43 @@ class AppLocalizationsGenerated {
 
   String timelineVotingTypesPersonVote() {
     return words['timeline']['votingTypes']['personVote'];
+  }
+
+  String timelineVotingTypesVoteForPostponementGathering() {
+    return words['timeline']['votingTypes']['voteForPostponementGathering'];
+  }
+
+  String timelineVotingTypesMarshal() {
+    return words['timeline']['votingTypes']['marshal'];
+  }
+
+  String timelineVotingTypesViceMarshal() {
+    return words['timeline']['votingTypes']['viceMarshal'];
+  }
+
+  String timelineVotingTypesChooseComissionMembers() {
+    return words['timeline']['votingTypes']['chooseComissionMembers'];
+  }
+
+  String timelineVotingTypesSelectionOfParliamentSecretaries() {
+    return words['timeline']['votingTypes']['selectionOfParliamentSecretaries'];
+  }
+
+  String timelineVotingTypesVoteOfConfidence() {
+    return words['timeline']['votingTypes']['voteOfConfidence'];
+  }
+
+  String timelineVotingTypesSelectionOfStateTribunal() {
+    return words['timeline']['votingTypes']['selectionOfStateTribunal'];
+  }
+
+  String timelineVotingTypesSelectionOfConstitutionalCourt() {
+    return words['timeline']['votingTypes']['selectionOfConstitutionalCourt'];
+  }
+
+  String timelineVotingTypesSelectionOfNationalCouncilJudiciary() {
+    return words['timeline']['votingTypes']
+        ['selectionOfNationalCouncilJudiciary'];
   }
 
   String timelineVotingTypesUnknown() {
@@ -457,6 +506,10 @@ class AppLocalizationsGenerated {
 
   String filtersFiltersDateTo() {
     return words['filters']['filters']['dateTo'];
+  }
+
+  String filtersFiltersSearchPhrase() {
+    return words['filters']['filters']['searchPhrase'];
   }
 
   String sortTitle() {

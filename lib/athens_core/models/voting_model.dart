@@ -23,8 +23,10 @@ class VotingModel extends TimelineModel {
     this.qualifyingMajority,
     this.clubVotes,
     this.orderPoint,
-    this.deputyVoteType
-  }) : super(id, TimelineModelType.VOTING, date);
+    this.deputyVoteType,
+    DateTime createAt,
+    DateTime updateAt,
+  }) : super(id, TimelineModelType.VOTING, date, createAt, updateAt);
 }
 
 class VoteResultModel {

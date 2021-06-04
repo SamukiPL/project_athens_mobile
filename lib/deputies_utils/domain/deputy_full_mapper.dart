@@ -18,7 +18,7 @@ class DeputyFullMapper extends DataMapper<DeputyResponse, DeputyFull> {
   DeputyFull transform(DeputyResponse data) {
     final currentClub = _clubs.firstWhere((element) => element.id == data.parliamentClub);
 
-    return DeputyFull(data.id, data.cadency, data.name, data.reversedName, data.photoUrl, data.politicalParty, currentClub, data.cardNumber, data.deputyId, data.isActive, _cvMapper.transform(data.cv), _contactMapper.transform(data.contact), data.createAt, _statisticsMapper.transform(data.statistics));
+    return DeputyFull(data.id, data.cadency, data.name, data.reversedName, data.photoUrl, data.politicalParty, currentClub, data.cardNumber, data.deputyId, data.isActive, _cvMapper.transform(data.cv), _contactMapper.transform(data.contact), _statisticsMapper.transform(data.statistics),  data.createAt, data.updateAt);
   }
 }
 

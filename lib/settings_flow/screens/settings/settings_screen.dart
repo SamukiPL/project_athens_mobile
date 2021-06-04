@@ -58,6 +58,26 @@ class SettingsScreen extends BaseScreen<SettingsBloc> {
                             onChanged: configuration.updateWakelockOnTimeline))),
             Text(localization.getText().settingsSwitchWakelockTimeline()),
           ],
+        Expanded(child: Container(),),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text('Podoba Ci się aplikacja?'),
+            MaterialButton(
+                onPressed: () => bloc.goToCrowdFundingPage(),
+                child: Text(
+                    "Wesprzyj nas ❤",
+                    style: TextStyle(
+                      color: Color.fromRGBO(230, 65, 100, 1)
+                    ),
+                ),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(32),
+                    side: BorderSide(color: Color.fromRGBO(230, 65, 100, 1))
+                ),
+
+            )
+          ]
         )
       ],
     ));

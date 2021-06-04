@@ -45,7 +45,7 @@ class VotesListScreen extends BaseScreen<BaseListBloc> {
 
     return SearchAppBar(
         title: getAppBarTitle(localizations, bloc),
-        hintText: "Not ready yet",
+        hintText: localizations.getText().filtersFiltersSearchPhrase(),
         searchQuery: (query) {},
         showBackArrow: showBackArrow,
         additionalIcons: [
