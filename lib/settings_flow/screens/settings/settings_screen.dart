@@ -58,7 +58,8 @@ class SettingsScreen extends BaseScreen<SettingsBloc> {
                             onChanged: configuration.updateWakelockOnTimeline))),
             Text(localization.getText().settingsSwitchWakelockTimeline()),
           ],
-        Expanded(child: Container(),),
+        ),
+        Expanded(child: Container()),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
