@@ -621,6 +621,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, settingsSwitchTechnicalData != "" && settingsSwitchTechnicalData != null); 
   }); 
  
+  test("All methods for $locale settingsSwitchWakelockTimeline", () async {
+    String settingsSwitchWakelockTimeline = localization.settingsSwitchWakelockTimeline();
+    expect(true, settingsSwitchWakelockTimeline != "" && settingsSwitchWakelockTimeline != null); 
+  }); 
+ 
   test("All methods for $locale filtersTitle", () async {
     String filtersTitle = localization.filtersTitle();
     expect(true, filtersTitle != "" && filtersTitle != null); 

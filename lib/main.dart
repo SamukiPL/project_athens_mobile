@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
     _firebaseMessages.setupMessaging();
     Fimber.plantTree(DebugBufferTree());
     return ModuleWidget(
-      providers: [AppModule(context), FirebaseMessagingModule(context, _firebaseMessages), MainWidgetModule(context), ConfigurationModule(context)],
+      providers: [AppModule(context), FirebaseMessagingModule(context, _firebaseMessages), ConfigurationModule(context), MainWidgetModule(context)],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Project Athens',

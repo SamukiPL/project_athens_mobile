@@ -6,6 +6,7 @@ import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dar
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
+import 'package:project_athens/main/wakelock/wakelock_service.dart';
 import 'package:project_athens/speeches_flow/domain/get_speech_use_case.dart';
 import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
 import 'package:project_athens/speeches_flow/screens/details/video_widget/video_manager.dart';
@@ -18,7 +19,9 @@ class SpeechDetailsBloc extends BaseBloc {
 
   final DeputiesCache _deputiesCache;
 
-  SpeechDetailsBloc(this.isNormalSpeech, this._getSpeechUseCase, this._deputiesCache) {
+  final WakelockService _wakelock;
+
+  SpeechDetailsBloc(this.isNormalSpeech, this._getSpeechUseCase, this._deputiesCache, this._wakelock) {
     _getSpeechModel();
   }
 
@@ -36,7 +39,8 @@ class SpeechDetailsBloc extends BaseBloc {
 
     if (result is Success<SpeechModel>) {
       _speechModel = result.value;
-      _videoManager = VideoManager(speechModel, isNormalSpeech);
+      _videoManager = VideoManager(speechModel, isNormalSpeech, _wakelock);
+
       await _initDeputyModel();
       setLoadingState(DataLoadingState.contentLoaded());
     }
@@ -61,6 +65,10 @@ class SpeechDetailsBloc extends BaseBloc {
   @override
   void dispose() {
     videoManager.dispose();
+
+    // due to flick video player is disabling wakelock via direct Wakelock
+    // reference we have to manually check whether we should restore wakelock
+    _wakelock.shouldLock();
     super.dispose();
   }
 

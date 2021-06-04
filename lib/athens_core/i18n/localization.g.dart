@@ -492,6 +492,10 @@ class AppLocalizationsGenerated {
     return words['settings']['switch']['technicalData'];
   }
 
+  String settingsSwitchWakelockTimeline() {
+    return words['settings']['switch']['wakelockTimeline'];
+  }
+
   String filtersTitle() {
     return words['filters']['title'];
   }

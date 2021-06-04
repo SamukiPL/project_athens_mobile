@@ -158,7 +158,8 @@
       "logout": "Wyloguj"
     },
     "switch": {
-      "technicalData": "Pokaż dane techniczne"
+      "technicalData": "Pokaż dane techniczne",
+      "wakelockTimeline": "Nie wygaszaj ekranu w widoku wydarzeń"
     }
   },
   "filters": {

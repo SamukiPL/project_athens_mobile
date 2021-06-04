@@ -1,8 +1,10 @@
 
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/configuration/configuration.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/presentation/backdrop/backdrop_widget.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_widget.dart';
@@ -13,6 +15,7 @@ import 'package:project_athens/timeline_flow/presentation/date_picker_fork/date_
 import 'package:project_athens/timeline_flow/screens/timeline/cloud/noun_cloud.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/timeline_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:wakelock/wakelock.dart';
 
 class TimelineScreen extends BaseScreen<TimelineBloc> {
 
@@ -66,5 +69,4 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
       backgroundColor: Theme.of(context).primaryColor,
     );
   }
-
 }
