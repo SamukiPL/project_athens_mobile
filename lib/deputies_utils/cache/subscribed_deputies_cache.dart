@@ -21,7 +21,7 @@ class SubscribedDeputiesCache {
 
   SubscribedDeputiesCache(this._deputiesCache, this._firebaseDeputiesUseCase, this._deleteDeputyUseCase, this._putDeputiesUseCase);
 
-  List<SubscribedDeputyModel> _cachedSubscribedDeputies = [];
+  List<SubscribedDeputyModel> _cachedSubscribedDeputies;
 
   Future<Result<List<SubscribedDeputyModel>>> get subscribedDeputies async {
     if (_cachedSubscribedDeputies != null) {
@@ -83,6 +83,8 @@ class SubscribedDeputiesCache {
   }
 
   dispose () {
-    _cachedSubscribedDeputies.forEach((element) => element.dispose());
+    if (_cachedSubscribedDeputies != null) {
+      _cachedSubscribedDeputies.forEach((element) => element.dispose());
+    }
   }
 }
