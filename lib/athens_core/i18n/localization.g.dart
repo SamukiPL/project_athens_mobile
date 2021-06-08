@@ -496,6 +496,10 @@ class AppLocalizationsGenerated {
     return words['settings']['switch']['wakelockTimeline'];
   }
 
+  String settingsHallOfFameTitle() {
+    return words['settings']['hallOfFame']['title'];
+  }
+
   String filtersTitle() {
     return words['filters']['title'];
   }
