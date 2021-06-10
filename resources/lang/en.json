@@ -160,6 +160,9 @@
     "switch": {
       "technicalData": "Show technical data",
       "wakelockTimeline": "Prevent from wake lock in timeline view"
+    },
+    "hallOfFame": {
+      "title": "Hall of fame"
     }
   },
   "filters": {
