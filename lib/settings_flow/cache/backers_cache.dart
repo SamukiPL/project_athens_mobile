@@ -1,6 +1,6 @@
 import 'package:project_athens/athens_core/domain/base_list/base_params.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
-import 'package:project_athens/settings_flow/domain/settings/backer.dart';
+import 'package:project_athens/settings_flow/domain/settings/backer_model.dart';
 import 'package:project_athens/settings_flow/domain/settings/get_backers_use_case.dart';
 
 class BackersCache {
