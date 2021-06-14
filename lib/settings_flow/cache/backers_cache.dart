@@ -1,6 +1,6 @@
 import 'package:project_athens/athens_core/domain/base_list/base_params.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
-import 'package:project_athens/settings_flow/data/network/response/get_backers_response.dart';
+import 'package:project_athens/settings_flow/domain/settings/backer.dart';
 import 'package:project_athens/settings_flow/domain/settings/get_backers_use_case.dart';
 
 class BackersCache {
@@ -8,17 +8,17 @@ class BackersCache {
 
   BackersCache(this._getBackersUseCase);
 
-  List<Backer> _cachedBackers;
+  List<BackerModel> _cachedBackers;
 
-  Future<Result<List<Backer>>> get backers async {
+  Future<Result<List<BackerModel>>> get backers async {
     if (_cachedBackers != null) {
       return Success(_cachedBackers);
     }
 
     final result = await _getBackersUseCase(BaseParams()).then((result) {
-      if (result is Success<GetBackersResponse>) {
-        _cachedBackers = result.value.backers;
-        return Success(result.value.backers);
+      if (result is Success<List<BackerModel>>) {
+        _cachedBackers = result.value;
+        return Success(result.value);
       } else {
         return result;
       }
@@ -30,7 +30,7 @@ class BackersCache {
   Future<bool> get hasUserBacked async {
     final cachedBackers = await backers;
     
-    if (cachedBackers is Success<List<Backer>>) {
+    if (cachedBackers is Success<List<BackerModel>>) {
       return cachedBackers.value.firstWhere((element) => element.isCurrentUser != null && element.isCurrentUser == true) != null;
     } else {
       return false;

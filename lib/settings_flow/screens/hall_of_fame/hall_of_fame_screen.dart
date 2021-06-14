@@ -5,6 +5,7 @@ import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/settings_flow/data/network/response/get_backers_response.dart';
+import 'package:project_athens/settings_flow/domain/settings/backer.dart';
 import 'package:project_athens/settings_flow/screens/hall_of_fame/hall_of_fame_bloc.dart';
 import 'package:provider/provider.dart';
 
@@ -38,9 +39,9 @@ class HallOfFameScreen extends BaseScreen<HallOfFameBloc> {
           ),
           FutureProvider(
             create: (context) => bloc.backersCache.backers,
-            child: Consumer<Result<List<Backer>>>(
+            child: Consumer<Result<List<BackerModel>>>(
               builder: (context, backers, _) {
-                if (backers != null && backers is Success<List<Backer>>) {
+                if (backers != null && backers is Success<List<BackerModel>>) {
                   return
                     Expanded(child: _buildBackers(backers.value, theme)
                     );
@@ -93,7 +94,7 @@ class HallOfFameScreen extends BaseScreen<HallOfFameBloc> {
     );
   }
 
-  Widget _buildBackerItem(Backer backer, ThemeData theme) {
+  Widget _buildBackerItem(BackerModel backer, ThemeData theme) {
     return Container(
       margin: EdgeInsets.only(top: 8, bottom: 8),
       child: Column(
@@ -147,7 +148,7 @@ class HallOfFameScreen extends BaseScreen<HallOfFameBloc> {
     );
   }
 
-  Widget _buildBackers(List<Backer> backers, ThemeData theme) {
+  Widget _buildBackers(List<BackerModel> backers, ThemeData theme) {
     backers.sort((a,b) => b.amount.compareTo(a.amount));
 
     return Column(

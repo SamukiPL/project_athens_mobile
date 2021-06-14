@@ -7,8 +7,4 @@ class HallOfFameBloc extends BaseBloc {
   final BackersCache backersCache;
 
   HallOfFameBloc(this.backersCache);
-
-  @override
-  dispose() {
-  }
 }
