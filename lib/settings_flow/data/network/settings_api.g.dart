@@ -30,4 +30,22 @@ class _SettingsApi implements SettingsApi {
         data: _data);
     return null;
   }
+
+  @override
+  Future<GetBackersResponse> getBackers() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/user-aggregator/crowd-funding/backers',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = GetBackersResponse.fromJson(_result.data);
+    return value;
+  }
 }

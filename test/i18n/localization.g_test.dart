@@ -626,6 +626,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, settingsSwitchWakelockTimeline != "" && settingsSwitchWakelockTimeline != null); 
   }); 
  
+  test("All methods for $locale settingsHallOfFameTitle", () async {
+    String settingsHallOfFameTitle = localization.settingsHallOfFameTitle();
+    expect(true, settingsHallOfFameTitle != "" && settingsHallOfFameTitle != null); 
+  }); 
+ 
   test("All methods for $locale filtersTitle", () async {
     String filtersTitle = localization.filtersTitle();
     expect(true, filtersTitle != "" && filtersTitle != null); 

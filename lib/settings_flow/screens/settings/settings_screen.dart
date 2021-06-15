@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/configuration/configuration.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
-import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
+import 'package:project_athens/settings_flow/navigation/settings_destinations.dart';
 import 'package:project_athens/settings_flow/screens/settings/settings_bloc.dart';
 import 'package:provider/provider.dart';
 
@@ -25,13 +25,17 @@ class SettingsScreen extends BaseScreen<SettingsBloc> {
     final configuration = Provider.of<Configuration>(context);
 
     return Container(
-        child: Column(
+      child: Column(
       children: [
         MaterialButton(
           onPressed: () {
             bloc.logout();
           },
           child: Text(localization.getText().settingsButtonLogout()),
+        ),
+        MaterialButton(
+          onPressed: () => goToDestination(context, SettingsHallOfFameScreenDestination()),
+          child: Text(localization.getText().settingsHallOfFameTitle()),
         ),
         Row(
           children: [

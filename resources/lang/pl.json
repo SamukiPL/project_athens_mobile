@@ -160,6 +160,9 @@
     "switch": {
       "technicalData": "Pokaż dane techniczne",
       "wakelockTimeline": "Nie wygaszaj ekranu w widoku wydarzeń"
+    },
+    "hallOfFame": {
+      "title": "Hala sław"
     }
   },
   "filters": {
