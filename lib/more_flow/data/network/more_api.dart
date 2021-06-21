@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
-import 'package:project_athens/settings_flow/data/network/response/get_backers_response.dart';
+import 'package:project_athens/more_flow/data/network/response/get_backers_response.dart';
 import 'package:retrofit/http.dart';
 
 
 
-part 'settings_api.g.dart';
+part 'more_api.g.dart';
 
 @RestApi()
-abstract class SettingsApi {
+abstract class MoreApi {
 
-  factory SettingsApi(Dio dio, {String baseUrl}) = _SettingsApi;
+  factory MoreApi(Dio dio, {String baseUrl}) = _MoreApi;
 
   @POST('/user-aggregator/auth/logout')
   Future<void> logout();

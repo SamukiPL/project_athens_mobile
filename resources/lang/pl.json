@@ -152,6 +152,13 @@
     "votesNeededToPass": "Głosów poparcia potrzebnych",
     "noData": "Nie znaleziono głosowań dla podanych kryteriów."
   },
+  "more":  {
+    "title": "Więcej",
+    "user": "Użytkownik",
+    "goToSettings": "Przejdź do ustawień",
+    "likeApplication": "Podoba Ci się aplikacja?",
+    "supportUs": "Wesprzyj nas ❤"
+  },
   "settings": {
     "settingsTitle": "Ustawienia",
     "button": {

@@ -480,6 +480,26 @@ class AppLocalizationsGenerated {
     return words['votings']['noData'];
   }
 
+  String moreTitle() {
+    return words['more']['title'];
+  }
+
+  String moreUser() {
+    return words['more']['user'];
+  }
+
+  String moreGoToSettings() {
+    return words['more']['goToSettings'];
+  }
+
+  String moreLikeApplication() {
+    return words['more']['likeApplication'];
+  }
+
+  String moreSupportUs() {
+    return words['more']['supportUs'];
+  }
+
   String settingsSettingsTitle() {
     return words['settings']['settingsTitle'];
   }

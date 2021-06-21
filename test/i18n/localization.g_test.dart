@@ -606,6 +606,31 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, votingsNoData != "" && votingsNoData != null); 
   }); 
  
+  test("All methods for $locale moreTitle", () async {
+    String moreTitle = localization.moreTitle();
+    expect(true, moreTitle != "" && moreTitle != null); 
+  }); 
+ 
+  test("All methods for $locale moreUser", () async {
+    String moreUser = localization.moreUser();
+    expect(true, moreUser != "" && moreUser != null); 
+  }); 
+ 
+  test("All methods for $locale moreGoToSettings", () async {
+    String moreGoToSettings = localization.moreGoToSettings();
+    expect(true, moreGoToSettings != "" && moreGoToSettings != null); 
+  }); 
+ 
+  test("All methods for $locale moreLikeApplication", () async {
+    String moreLikeApplication = localization.moreLikeApplication();
+    expect(true, moreLikeApplication != "" && moreLikeApplication != null); 
+  }); 
+ 
+  test("All methods for $locale moreSupportUs", () async {
+    String moreSupportUs = localization.moreSupportUs();
+    expect(true, moreSupportUs != "" && moreSupportUs != null); 
+  }); 
+ 
   test("All methods for $locale settingsSettingsTitle", () async {
     String settingsSettingsTitle = localization.settingsSettingsTitle();
     expect(true, settingsSettingsTitle != "" && settingsSettingsTitle != null); 

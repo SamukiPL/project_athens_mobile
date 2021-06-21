@@ -4,9 +4,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
-import 'package:project_athens/settings_flow/data/network/response/get_backers_response.dart';
-import 'package:project_athens/settings_flow/domain/settings/backer_model.dart';
-import 'package:project_athens/settings_flow/screens/hall_of_fame/hall_of_fame_bloc.dart';
+import 'package:project_athens/more_flow/domain/more/backer_model.dart';
+import 'package:project_athens/more_flow/screens/hall_of_fame/hall_of_fame_bloc.dart';
 import 'package:provider/provider.dart';
 
 class HallOfFameScreen extends BaseScreen<HallOfFameBloc> {

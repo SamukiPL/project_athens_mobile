@@ -152,6 +152,13 @@
     "votesNeededToPass": "Votes needed to pass",
     "noData": "No votings for specified criteria."
   },
+  "more":  {
+    "title": "Więcej",
+    "user": "User",
+    "goToSettings": "Go to settings",
+    "likeApplication": "Like the application?",
+    "supportUs": "Support us ❤"
+  },
   "settings": {
     "settingsTitle": "Settings",
     "button": {

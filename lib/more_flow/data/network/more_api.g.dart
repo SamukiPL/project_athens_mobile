@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'settings_api.dart';
+part of 'more_api.dart';
 
 // **************************************************************************
 // RetrofitGenerator
 // **************************************************************************
 
-class _SettingsApi implements SettingsApi {
-  _SettingsApi(this._dio, {this.baseUrl}) {
+class _MoreApi implements MoreApi {
+  _MoreApi(this._dio, {this.baseUrl}) {
     ArgumentError.checkNotNull(_dio, '_dio');
   }
 
