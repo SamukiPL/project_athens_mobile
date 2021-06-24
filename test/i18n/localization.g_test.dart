@@ -101,6 +101,31 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalUpdatedAt != "" && universalUpdatedAt != null); 
   }); 
  
+  test("All methods for $locale universalUpdateCupertinoDialogTitle", () async {
+    String universalUpdateCupertinoDialogTitle = localization.universalUpdateCupertinoDialogTitle();
+    expect(true, universalUpdateCupertinoDialogTitle != "" && universalUpdateCupertinoDialogTitle != null); 
+  }); 
+ 
+  test("All methods for $locale universalUpdateCupertinoDialogButtonIgnore", () async {
+    String universalUpdateCupertinoDialogButtonIgnore = localization.universalUpdateCupertinoDialogButtonIgnore();
+    expect(true, universalUpdateCupertinoDialogButtonIgnore != "" && universalUpdateCupertinoDialogButtonIgnore != null); 
+  }); 
+ 
+  test("All methods for $locale universalUpdateCupertinoDialogButtonLater", () async {
+    String universalUpdateCupertinoDialogButtonLater = localization.universalUpdateCupertinoDialogButtonLater();
+    expect(true, universalUpdateCupertinoDialogButtonLater != "" && universalUpdateCupertinoDialogButtonLater != null); 
+  }); 
+ 
+  test("All methods for $locale universalUpdateCupertinoDialogButtonUpdateNow", () async {
+    String universalUpdateCupertinoDialogButtonUpdateNow = localization.universalUpdateCupertinoDialogButtonUpdateNow();
+    expect(true, universalUpdateCupertinoDialogButtonUpdateNow != "" && universalUpdateCupertinoDialogButtonUpdateNow != null); 
+  }); 
+ 
+  test("All methods for $locale universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow", () async {
+    String universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow = localization.universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow();
+    expect(true, universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow != "" && universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow != null); 
+  }); 
+ 
   test("All methods for $locale mainMenuSession", () async {
     String mainMenuSession = localization.mainMenuSession();
     expect(true, mainMenuSession != "" && mainMenuSession != null); 
@@ -629,6 +654,16 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale moreSupportUs", () async {
     String moreSupportUs = localization.moreSupportUs();
     expect(true, moreSupportUs != "" && moreSupportUs != null); 
+  }); 
+ 
+  test("All methods for $locale moreCheckForUpdates", () async {
+    String moreCheckForUpdates = localization.moreCheckForUpdates();
+    expect(true, moreCheckForUpdates != "" && moreCheckForUpdates != null); 
+  }); 
+ 
+  test("All methods for $locale moreAppVersion", () async {
+    String moreAppVersion = localization.moreAppVersion();
+    expect(true, moreAppVersion != "" && moreAppVersion != null); 
   }); 
  
   test("All methods for $locale settingsSettingsTitle", () async {

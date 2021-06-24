@@ -19,7 +19,16 @@
     },
     "source": "Źródło danych",
     "createdAt": "Data utworzenia",
-    "updatedAt": "Data aktualizacji"
+    "updatedAt": "Data aktualizacji",
+    "update": {
+      "cupertinoDialog": {
+        "title": "Zaktualizować aplikacje?",
+        "buttonIgnore": "Zignoruj",
+        "buttonLater": "Później",
+        "buttonUpdateNow": "Aktualuzuj",
+        "wouldYouLikeToUpdateAppNow": "Chcesz zaktualizować aplikacje teraz?"
+      }
+    }
   },
   "main": {
     "menu": {
@@ -157,7 +166,9 @@
     "user": "Użytkownik",
     "goToSettings": "Przejdź do ustawień",
     "likeApplication": "Podoba Ci się aplikacja?",
-    "supportUs": "Wesprzyj nas ❤"
+    "supportUs": "Wesprzyj nas ❤",
+    "checkForUpdates": "Sprawdź dostępność aktualizacji",
+    "appVersion": "Wersja aplikacji"
   },
   "settings": {
     "settingsTitle": "Ustawienia",

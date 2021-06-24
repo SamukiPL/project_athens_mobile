@@ -1,3 +1,4 @@
+import 'package:project_athens/athens_core/auto_updater/auto_updater.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
@@ -8,6 +9,7 @@ import 'package:project_athens/authorization_flow/screens/login/auth_failed_noti
 import 'package:project_athens/authorization_flow/screens/login/login_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:upgrader/upgrader.dart';
 
 class LoginScreen extends BaseLoginScreen<LoginBloc> {
   @override
@@ -16,6 +18,9 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
 
   @override
   Widget generateBody(BuildContext context, LoginBloc bloc) {
+    final _autoUpdater = Provider.of<AutoUpdater>(context, listen: false);
+    _autoUpdater.checkForUpdates();
+
     var localization = Provider.of<AppLocalizations>(context);
     var loginNavigation = Provider.of<LoginNavigationBloc>(context);
     final theme = Theme.of(context);
@@ -117,7 +122,7 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
               )
             ],
           ),
-        )
+        ),
       ],
     );
   }

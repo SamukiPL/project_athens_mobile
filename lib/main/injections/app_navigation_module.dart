@@ -1,3 +1,4 @@
+import 'package:project_athens/athens_core/auto_updater/auto_updater.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
 import 'package:flutter/material.dart';

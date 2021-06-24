@@ -67,6 +67,76 @@ class MoreScreen extends BaseScreen<MoreBloc> {
                   ),
                 )
               ),
+              Column(
+                children: [
+                  MaterialButton(
+                      onPressed: () => bloc.checkForUpdates(),
+                      child: Container(
+                          width: double.infinity,
+                          child: StreamProvider<bool>.value(
+                            value: bloc.checkingForUpdateStream,
+                            initialData: false,
+                            child: Consumer<bool>(builder: (context, isChecking, bloc) {
+                              if (!isChecking) {
+                                return Text(
+                                  localization.getText().moreCheckForUpdates(),
+                                  textAlign: TextAlign.left,
+                                  style: linkTextStyle,
+                                );
+                              } else {
+                                return Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      localization.getText().moreCheckForUpdates(),
+                                      textAlign: TextAlign.left,
+                                      style: linkTextStyle,
+                                    ),
+                                    Container(
+                                        padding: EdgeInsets.only(left: 8),
+                                        child: SizedBox(
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2,
+                                          ),
+                                          height: 18,
+                                          width: 18,
+                                        )
+                                    ),
+                                  ],
+                                );
+                              }
+                            }),
+                          )
+                      )
+                  ),
+                  FutureProvider.value(
+                    value: bloc.getAppVersion(),
+                    initialData: '',
+                    child: Consumer<String>(
+                      builder: (context, version, _) {
+                        if (version != null && version != '') {
+                          return Container(
+                            width: double.infinity,
+                            padding: EdgeInsets.only(left: 36),
+                            child: Text(
+                              localization.getText().moreAppVersion() + ": " + version,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w300,
+                                color: Colors.black45,
+                                fontSize: 10
+                              ),
+                            )
+                          );
+                        } else {
+                          return Container();
+                        }
+                      },
+                    ),
+                  )
+                ],
+              )
             ]),
             Expanded(child: Container()),
             Row(
@@ -74,6 +144,9 @@ class MoreScreen extends BaseScreen<MoreBloc> {
                 children: [
                   Text(localization.getText().moreLikeApplication()),
                   MaterialButton(
+                    splashColor: Color.fromRGBO(230, 65, 100, 0.4),
+                    focusColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
                     onPressed: () => bloc.goToCrowdFundingPage(),
                     child: Text(
                       localization.getText().moreSupportUs(),
@@ -88,7 +161,8 @@ class MoreScreen extends BaseScreen<MoreBloc> {
 
                   )
                 ]
-            )
+            ),
+
           ],
         ));
   }

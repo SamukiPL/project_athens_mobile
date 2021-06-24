@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:project_athens/athens_core/auto_updater/auto_updater.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,7 +11,6 @@ import 'splash_screen_bloc.dart';
 import 'splash_screen_module.dart';
 
 class SplashScreenWidget extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
       return ModuleWidget(

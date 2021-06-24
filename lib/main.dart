@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:project_athens/athens_core/auto_updater/auto_updater.dart';
 import 'package:project_athens/athens_core/i18n/localization_delegate.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/utils/firebase/firebase_messaging_module.dart';
@@ -32,6 +33,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _firebaseMessages.setupMessaging();
+
+    // we have to eagerly create auto updater due to
+    // splash screen bloc could access it immediately
+    // after it starts to checking direction
     Fimber.plantTree(DebugBufferTree());
     return ModuleWidget(
       providers: [AppModule(context), FirebaseMessagingModule(context, _firebaseMessages), ConfigurationModule(context), MainWidgetModule(context)],

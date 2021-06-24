@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:nested/nested.dart';
+import 'package:project_athens/athens_core/auto_updater/auto_updater.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/more_flow/cache/backers_cache.dart';
 import 'package:project_athens/more_flow/data/more/get_bacekers_repository_impl.dart';
@@ -29,9 +30,11 @@ class MoreModule extends Module {
     final _backersCache = BackersCache(getBackersUseCase);
     _backersCache.backers;
 
+    final AutoUpdater _autoUpdater = Provider.of<AutoUpdater>(context);
+
     return [
       Provider<MoreBloc>(
-        create: (_) => MoreBloc(logoutUseCase),
+        create: (_) => MoreBloc(logoutUseCase, _autoUpdater),
         dispose: (context, bloc) => bloc.dispose(),
       ),
       Provider<HallOfFameBloc>(
