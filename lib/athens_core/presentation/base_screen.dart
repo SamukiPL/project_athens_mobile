@@ -12,6 +12,7 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget with Re
 
   bool get showBackArrow => true;
   bool get shouldShowBottomBar => false;
+  bool get shouldShowTopBar => false;
 
   @override
   Widget build(BuildContext context) {
@@ -71,12 +72,14 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget with Re
           )
         )
         : null,
-      title: Text(
+      title: shouldShowTopBar ? Text(
         getAppBarTitle(localizations, bloc),
         style: TextStyle(
-          color: Colors.white
+          color: Colors.black45
         ),
-      ),
+      ) : Container(),
+      // backgroundColor: Colors.transparent,
+      toolbarHeight: showBackArrow == false && shouldShowTopBar == false ? 0 : kToolbarHeight,
     );
   }
 

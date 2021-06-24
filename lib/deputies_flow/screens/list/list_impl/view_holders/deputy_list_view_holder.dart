@@ -67,7 +67,7 @@ class DeputyListViewHolder extends StatelessWidget with RedirectionDelegate {
                 viewModel.model.name,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: theme.primaryColor,
+                  color: Colors.black87,
                   fontSize: 18,
                 ),
               ),

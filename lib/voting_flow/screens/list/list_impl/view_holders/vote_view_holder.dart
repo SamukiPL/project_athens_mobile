@@ -39,7 +39,7 @@ class VoteViewHolder extends StatelessWidget with RedirectionDelegate {
           Text(
             _viewModel.description != null ? _viewModel.description : "",
             style: TextStyle(
-              color: theme.primaryColor,
+              color: Colors.black87,
               fontSize: 16
             ),
           ),

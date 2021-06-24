@@ -133,7 +133,7 @@ class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
                   child: Text(
                     viewModel.model.title,
                     style: TextStyle(
-                        color: theme.primaryColor,
+                        color: Colors.black87,
                         fontWeight: FontWeight.bold,
                         fontSize: 16),
                     maxLines: 1,

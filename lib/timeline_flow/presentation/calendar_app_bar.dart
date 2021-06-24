@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:project_athens/timeline_flow/presentation/calendar_app_bar_bloc.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +32,13 @@ class _CalendarAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        backwardsCompatibility: false,
+        systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: theme.primaryColor),
         automaticallyImplyLeading: false,
         title: SizedBox(
           height: kToolbarHeight,
@@ -49,7 +56,7 @@ class _CalendarAppBar extends StatelessWidget {
                     height: double.infinity,
                     child: Icon(
                       Icons.arrow_back_ios,
-                      color: Colors.white,
+                      color: Colors.black87,
                     ),
                   ),
                 ),
@@ -64,7 +71,7 @@ class _CalendarAppBar extends StatelessWidget {
                       builder: (context, bloc, _) => Text(
                         DateFormat("d MMMM y", "pl").format(bloc.date),
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black87,
                           fontSize: 24,
                         ),
                       ),
@@ -81,7 +88,7 @@ class _CalendarAppBar extends StatelessWidget {
                     height: double.infinity,
                     child: Icon(
                       Icons.arrow_forward_ios,
-                      color: Colors.white,
+                      color: Colors.black87,
                     ),
                   ),
                 ),

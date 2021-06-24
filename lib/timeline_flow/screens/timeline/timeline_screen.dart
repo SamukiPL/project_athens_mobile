@@ -36,7 +36,7 @@ class TimelineScreen extends BaseScreen<TimelineBloc> {
     final localizations = Provider.of<AppLocalizations>(context);
 
     return Container(
-      color: Theme.of(context).primaryColor,
+      color: Colors.white,
       child: BackdropWidget(
         bottomChild: NounCloud(bloc: bloc.nounCloudBloc),
         topChild: DataLoadingWidget(

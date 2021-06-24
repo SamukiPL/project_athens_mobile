@@ -47,7 +47,7 @@ class NounCloudBloc extends BaseBloc {
         quarterTurns: (model.occurrence % 2).toInt(),
         child: Text(
           "#${model.word}",
-          style: TextStyle(fontSize: model.occurrence, color: Colors.white),
+          style: TextStyle(fontSize: model.occurrence, color: Colors.black45),
         ),
       ));
     });

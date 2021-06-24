@@ -31,7 +31,7 @@ class NounCloud extends StatelessWidget {
             ),
             onRetry: null,
             noDataText: localizations.getText().timelineNounCloudNoNouns(),
-            color: Colors.white,
+            color: Colors.black45,
             invertLoaderColor: true,
           ),
         )

@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:project_athens/athens_core/presentation/search_app_bar/search_app_bar_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/presentation/search_app_bar/search_app_bar_facade.dart';
@@ -39,16 +41,21 @@ class _SearchAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final searchAppBarFacade = Provider.of<SearchAppBarFacade>(context);
+    final theme = Theme.of(context);
 
     return ChangeNotifierProvider<SearchAppBarBloc>(
       create: (_) => SearchAppBarBloc(searchAppBarFacade),
       child: Consumer<SearchAppBarBloc>(
         builder: (context, bloc, _) => AppBar(
           title: _buildAppBarTitle(bloc),
-          actions: <Widget>[
-                _buildAppBarIcon(bloc),
-              ] +
-              additionalIcons,
+          // actions: <Widget>[
+          //       _buildAppBarIcon(bloc),
+          //     ] +
+          //     additionalIcons,
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+          backwardsCompatibility: false,
+          systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: theme.primaryColor),
         ),
       ),
     );
@@ -57,31 +64,72 @@ class _SearchAppBar extends StatelessWidget {
   Widget _buildAppBarTitle(SearchAppBarBloc bloc) {
     switch (bloc.state) {
       case SearchAppBarState.SEARCHING:
-        return TextFormField(
-          initialValue: "",
-          onChanged: (query) {
-            bloc.changeSearchQuery(query);
-          },
-          style: TextStyle(color: Colors.white),
-          decoration: InputDecoration(
-              prefixIcon: Icon(
-                Icons.search,
-                color: Colors.white,
-              ),
-              hintText: hintText,
-              hintStyle: TextStyle(
-                color: Colors.white60
-              ),
-          ),
-          cursorColor: Colors.white60,
-          focusNode: bloc.searchFocusNode,
-        );
-        break;
       default:
-        return Text(
-          title,
-          style: TextStyle(color: Colors.white),
-        );
+            return Container(
+              height: 35,
+              width: 300,
+              margin: EdgeInsets.only(left: 48, right: 48),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(80),
+                border: Border.all(color: Colors.black87, width: 1)
+              ),
+              // height: kToolbarHeight,
+              child: TextFormField(
+
+              initialValue: "",
+                onChanged: (query) {
+                  bloc.changeSearchQuery(query);
+                },
+                style: TextStyle(color: Colors.black87),
+                decoration: InputDecoration(
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Colors.black45,
+                  ),
+                  hintText: hintText,
+                  hintStyle: TextStyle(
+                      color: Colors.black45
+                  ),
+                  border: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  errorBorder: InputBorder.none,
+                  disabledBorder: InputBorder.none,
+                  contentPadding:
+                  EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+                ),
+                cursorColor: Colors.black87,
+                focusNode: bloc.searchFocusNode,
+
+              )
+            );
+        // return Container(
+        //   child: TextFormField(
+        //     initialValue: "",
+        //     onChanged: (query) {
+        //       bloc.changeSearchQuery(query);
+        //     },
+        //     style: TextStyle(color: Colors.white),
+        //     decoration: InputDecoration(
+        //       prefixIcon: Icon(
+        //         Icons.search,
+        //         color: Colors.black87 ,
+        //       ),
+        //       hintText: hintText,
+        //       hintStyle: TextStyle(
+        //           color: Colors.white60
+        //       ),
+        //     ),
+        //     cursorColor: Colors.white60,
+        //     focusNode: bloc.searchFocusNode,
+        //   );
+        // );
+        break;
+      // default:
+      //   return Text(
+      //     title,
+      //     style: TextStyle(color: Colors.white),
+      //   );
     }
   }
 

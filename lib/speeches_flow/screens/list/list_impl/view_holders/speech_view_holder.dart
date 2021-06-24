@@ -93,9 +93,9 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
             child: Text(
               _viewModel.model.personName,
               style: TextStyle(
-                  color: theme.primaryColor,
+                  color: Colors.black87,
                   fontWeight: FontWeight.bold,
-                  fontSize: 18),
+                  fontSize: 16),
               textAlign: TextAlign.left,
             ),
           ),

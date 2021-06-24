@@ -32,7 +32,7 @@ class BackdropWidget extends StatelessWidget {
   Widget buildBottomChild(BuildContext context) {
     return Container(
       key: _cloudKey,
-      color: Theme.of(context).primaryColor,
+      color: Colors.white,
       child: bottomChild,
     );
   }
@@ -48,7 +48,7 @@ class BackdropWidget extends StatelessWidget {
           },
           child: Icon(
             bloc.isBottomShowing ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
-            color: Colors.white,
+            color: Colors.black87,
             size: 30,
           ),
         ),
