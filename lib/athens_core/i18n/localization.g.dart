@@ -364,6 +364,14 @@ class AppLocalizationsGenerated {
     return words['deputies']['voteAccuracy'];
   }
 
+  String deputiesAlignedWithParty() {
+    return words['deputies']['alignedWithParty'];
+  }
+
+  String deputiesNotAlignedWithParty() {
+    return words['deputies']['notAlignedWithParty'];
+  }
+
   String deputiesBasicInfo() {
     return words['deputies']['basicInfo'];
   }

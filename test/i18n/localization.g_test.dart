@@ -461,6 +461,16 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, deputiesVoteAccuracy != "" && deputiesVoteAccuracy != null); 
   }); 
  
+  test("All methods for $locale deputiesAlignedWithParty", () async {
+    String deputiesAlignedWithParty = localization.deputiesAlignedWithParty();
+    expect(true, deputiesAlignedWithParty != "" && deputiesAlignedWithParty != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesNotAlignedWithParty", () async {
+    String deputiesNotAlignedWithParty = localization.deputiesNotAlignedWithParty();
+    expect(true, deputiesNotAlignedWithParty != "" && deputiesNotAlignedWithParty != null); 
+  }); 
+ 
   test("All methods for $locale deputiesBasicInfo", () async {
     String deputiesBasicInfo = localization.deputiesBasicInfo();
     expect(true, deputiesBasicInfo != "" && deputiesBasicInfo != null); 

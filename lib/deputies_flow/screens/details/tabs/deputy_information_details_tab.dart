@@ -9,20 +9,28 @@ import 'package:project_athens/athens_core/data/word_model/word_model.dart';
 import 'package:project_athens/athens_core/data/word_model/word_model_mapper.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
+import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/async_once/async_once.dart';
 import 'package:project_athens/athens_core/presentation/db_source/db_source.dart';
 import 'package:project_athens/athens_core/presentation/full_card/full_card.dart';
 import 'package:project_athens/athens_core/presentation/simple_horizontal_table/simple_horizontal_table.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/deputies_flow/domain/details/get_full_deputy_use_case.dart';
+import 'package:project_athens/deputies_flow/screens/details/presentation/deputy_vote_accuracy_table.dart';
 import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_information_extension.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/data/network/response/deputy_nouns_response.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_full.dart';
+import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:provider/provider.dart';
 
 class DeputyInformationDetailsTab extends StatelessWidget {
+
+  final void Function(BuildContext context, Destination destination) _navigationCallback;
+  final DeputyModel _deputyModel;
+
+  DeputyInformationDetailsTab(this._navigationCallback, this._deputyModel);
 
   @override
   Widget build(BuildContext context) {
@@ -168,51 +176,51 @@ class DeputyInformationDetailsTab extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.only(top: 5, left: 5, right: 5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: EdgeInsets.only(right: 5),
-            alignment: Alignment.center,
-            width: 50,
-            height: 50,
-            child: CachedNetworkImage(
-              imageUrl: voteAccuracy?.parliamentClub?.imageSrc,
-              placeholder: (context, url) => CircularProgressIndicator(),
-              errorWidget: (context, url, error) => Center(child: Text(voteAccuracy?.parliamentClub?.shortName),),
-              width: 40,
-              height: 40,
-              memCacheHeight: 700,
-              memCacheWidth: 700,
-              alignment: Alignment.center,
-              // )
-            ),
-          ),
-          // Expanded(
-          //     flex: 3,
-          //     child:
+      child: GestureDetector(
+        onTap: () {
 
-          Expanded(
-              // flex: 7,
-              child: FractionallySizedBox(
-                alignment: Alignment.topLeft,
-                widthFactor: barWidth,
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: theme.primaryColor,
+        },
+       child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: EdgeInsets.only(right: 5),
+              alignment: Alignment.center,
+              width: 50,
+              height: 50,
+              child: CachedNetworkImage(
+                imageUrl: voteAccuracy?.parliamentClub?.imageSrc,
+                placeholder: (context, url) => CircularProgressIndicator(),
+                errorWidget: (context, url, error) => Center(child: Text(voteAccuracy?.parliamentClub?.shortName),),
+                width: 40,
+                height: 40,
+                memCacheHeight: 700,
+                memCacheWidth: 700,
+                alignment: Alignment.center,
+                // )
+              ),
+            ),
+            Expanded(
+                // flex: 7,
+                child: FractionallySizedBox(
+                  alignment: Alignment.topLeft,
+                  widthFactor: barWidth,
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: theme.primaryColor,
+                    ),
+                    child: Center(
+                      child: Text(accuracyPercentage, style: TextStyle(color: Colors.white),),
+                    ),
                   ),
-                  child: Center(
-                    child: Text(accuracyPercentage, style: TextStyle(color: Colors.white),),
-                  ),
-                ),
-              )
-          ),
-        ],
+                )
+            ),
+          ],
+        )
       )
     );
-
   }
 
   Widget buildVoteAccuracyTable(List<ClubVoteAccuracy> voteAccuracy, AppLocalizations localizations, ThemeData theme) {
@@ -239,7 +247,7 @@ class DeputyInformationDetailsTab extends StatelessWidget {
       children: [
         SimpleHorizontalTable(cells: cells),
         buildCardHeader(localizations.getText().deputiesVoteAccuracy(), theme, 15),
-        buildVoteAccuracyTable(voteAccuracy, localizations, theme)
+        DeputyVoteAccuracyTable(voteAccuracy, _deputyModel, _navigationCallback)
       ],
     );
   }

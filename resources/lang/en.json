@@ -116,6 +116,8 @@
     "voteAbsency": "Vote absency",
     "mostAccuracy": "Most vote accuracy",
     "voteAccuracy": "Vote accuracy",
+    "alignedWithParty": "Aligned with party",
+    "notAlignedWithParty": "Not aligned with party",
     "basicInfo": "Basic information",
     "experience" : "Experience",
     "statistics": "Statistics",

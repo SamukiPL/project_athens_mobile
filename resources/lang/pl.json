@@ -116,6 +116,8 @@
     "voteAbsency": "Nieobecność na głosowaniach",
     "mostAccuracy": "Największa zgodność",
     "voteAccuracy": "Zgodność głosowania",
+    "alignedWithParty": "Zgodnie z partią",
+    "notAlignedWithParty": "Przeciwnie do partii",
     "basicInfo": "Podstawowe informacje",
     "experience" : "Doświadczenie",
     "statistics": "Statystyki",
