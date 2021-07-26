@@ -20,8 +20,7 @@ class WakelockService {
       }
     });
     _config.wakelockOnTimeline.listen((event) => _handleTimelineWakelock(event));
-    Wakelock.isEnabled.asStream().listen((event) => _isLocked = event);
-
+    Wakelock.enabled.asStream().listen((event) => _isLocked = event);
   }
 
   // master lock is used when it comes to lock on main screens

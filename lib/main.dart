@@ -15,9 +15,16 @@ import 'package:project_athens/splash_screen/splash_screen_widget.dart';
 
 import 'athens_core/configuration/configuration_module.dart';
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  print('Handling a background message ${message.messageId}');
+}
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
@@ -26,8 +33,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final FirebaseMessages _firebaseMessages =
-      FirebaseMessages(FirebaseMessaging());
+  final FirebaseMessages _firebaseMessages = FirebaseMessages();
 
   @override
   Widget build(BuildContext context) {
