@@ -9,7 +9,6 @@ import 'package:project_athens/authorization_flow/screens/login/auth_failed_noti
 import 'package:project_athens/authorization_flow/screens/login/login_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:upgrader/upgrader.dart';
 
 class LoginScreen extends BaseLoginScreen<LoginBloc> {
   @override
@@ -36,9 +35,9 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
         ChangeNotifierProvider<AuthFailedNotifier>.value(
           value: bloc.authFailedNotifier,
           child: Consumer<AuthFailedNotifier>(
-            builder: (context, authFailed, _) => _buildErrorBox(localization, bloc, theme),
+            builder: (context, authFailed, _) =>
+                _buildErrorBox(localization, bloc, theme),
           ),
-
         ),
         Container(
           margin: EdgeInsets.fromLTRB(32, 8, 32, 8),
@@ -56,18 +55,17 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
         Container(
           margin: EdgeInsets.fromLTRB(32, 8, 32, 0),
           child: TextFormField(
-            onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
-            onChanged: (password) => bloc.setPassword(password),
-            textInputAction: TextInputAction.done,
-            onEditingComplete: () => bloc(),
-            decoration: InputDecoration(
-                labelText: localization.getText().loginHintsPassword(),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                )),
-            maxLines: 1,
-            obscureText: true
-          ),
+              onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
+              onChanged: (password) => bloc.setPassword(password),
+              textInputAction: TextInputAction.done,
+              onEditingComplete: () => bloc(),
+              decoration: InputDecoration(
+                  labelText: localization.getText().loginHintsPassword(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  )),
+              maxLines: 1,
+              obscureText: true),
         ),
         Container(
           margin: EdgeInsets.only(right: 32),
@@ -115,9 +113,8 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
                     style: TextStyle(color: theme.primaryColor),
                   ),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(32),
-                    side: BorderSide(color: theme.primaryColor)
-                  ),
+                      borderRadius: BorderRadius.circular(32),
+                      side: BorderSide(color: theme.primaryColor)),
                 ),
               )
             ],
@@ -127,7 +124,8 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
     );
   }
 
-  Widget _buildErrorBox(AppLocalizations localization, LoginBloc bloc, ThemeData theme) {
+  Widget _buildErrorBox(
+      AppLocalizations localization, LoginBloc bloc, ThemeData theme) {
     if (bloc.authFailedNotifier.hasFailed) {
       return AnimatedContainer(
           margin: EdgeInsets.fromLTRB(32, 8, 32, 8),
@@ -139,22 +137,16 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
               borderRadius: BorderRadius.circular(5),
               color: theme.errorColor.withOpacity(0.6),
               border: Border.all(
-                  color: Colors.redAccent,
-                  width: 2,
-                  style: BorderStyle.solid
-              )
-          ),
+                  color: Colors.redAccent, width: 2, style: BorderStyle.solid)),
           child: Center(
             child: Text(
               localization.getText().loginErrorPasswordOrLoginDoesNotMatch(),
-              style:  TextStyle(
+              style: TextStyle(
                 color: Colors.white,
               ),
               textAlign: TextAlign.center,
-
             ),
-          )
-      );
+          ));
     } else {
       return Container();
     }

@@ -4,7 +4,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:project_athens/athens_core/auto_updater/auto_updater.dart';
 import 'package:project_athens/athens_core/i18n/localization_delegate.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/utils/firebase/firebase_messaging_module.dart';
@@ -39,26 +38,31 @@ class MyApp extends StatelessWidget {
     // after it starts to checking direction
     Fimber.plantTree(DebugBufferTree());
     return ModuleWidget(
-      providers: [AppModule(context), FirebaseMessagingModule(context, _firebaseMessages), ConfigurationModule(context), MainWidgetModule(context)],
+      providers: [
+        AppModule(context),
+        FirebaseMessagingModule(context, _firebaseMessages),
+        ConfigurationModule(context),
+        MainWidgetModule(context)
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Project Athens',
         theme: ThemeData(
-          primarySwatch: MaterialColor(
-            0xff00bfff,
-            const <int, Color>{
-              50: const Color(0xff00bfff),
-              100: const Color(0xff00bfff),
-              200: const Color(0xff00bfff),
-              300: const Color(0xff00bfff),
-              400: const Color(0xff00bfff),
-              500: const Color(0xff00bfff),
-              600: const Color(0xff00bfff),
-              700: const Color(0xff00bfff),
-              800: const Color(0xff00bfff),
-              900: const Color(0xff00bfff),
-            },
-          ),
+            primarySwatch: MaterialColor(
+              0xff00bfff,
+              const <int, Color>{
+                50: const Color(0xff00bfff),
+                100: const Color(0xff00bfff),
+                200: const Color(0xff00bfff),
+                300: const Color(0xff00bfff),
+                400: const Color(0xff00bfff),
+                500: const Color(0xff00bfff),
+                600: const Color(0xff00bfff),
+                700: const Color(0xff00bfff),
+                800: const Color(0xff00bfff),
+                900: const Color(0xff00bfff),
+              },
+            ),
             backgroundColor: Colors.white,
             dividerColor: Color(0xffaaaaaa),
             primaryColor: Color(0xff00bfff),
