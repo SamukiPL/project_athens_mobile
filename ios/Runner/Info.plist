@@ -11,7 +11,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>projectathens</string>
+	<string>Świadoma&#x2007;Demokracja</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -42,12 +42,13 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSAllowsArbitraryLoads</key>
-    <true/>
-    <key>io.flutter.embedded_views_preview</key>
-    <true/>
-    <key>NSAppTransportSecurity</key>
-        <dict>
-             <key>NSAllowsArbitraryLoads</key><true/>
-        </dict>
+	<true/>
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

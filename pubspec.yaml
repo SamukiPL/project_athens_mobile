@@ -1,6 +1,6 @@
 name: project_athens
 description: Świadoma Demokoracja to aplikacja to śledzenia aktywności poselskiej w sejmie.
-version: 0.0.5
+version: 0.1.0+10
 
 environment:
   sdk: ">=2.6.0 <3.0.0"
