@@ -61,8 +61,8 @@
     "validate": {
       "fieldCannotBeEmpty": "Field cannot be empty",
       "incorrectEmail": "Enter a valid email",
-      "loginIsTaken":"Login is already taken",
-      "emailIsTaken":"Email is already taken",
+      "loginIsTaken": "Login is already taken",
+      "emailIsTaken": "Email is already taken",
       "emailsDontMatch": "Repeated email doesn't match",
       "passwordsDontMatch": "Repeated password doesn't match",
       "wrongData": "Incorrect email or password"
@@ -97,7 +97,7 @@
       "unknown": "Unknown"
     },
     "nounCloud": {
-      "noNouns":  "Ups... we couldn't get nouns for current date. Please try again later."
+      "noNouns": "Ups... we couldn't get nouns for current date. Please try again later."
     },
     "noEvents": "No events for currently selected date."
   },
@@ -117,7 +117,7 @@
     "mostAccuracy": "Most vote accuracy",
     "voteAccuracy": "Vote accuracy",
     "basicInfo": "Basic information",
-    "experience" : "Experience",
+    "experience": "Experience",
     "statistics": "Statistics",
     "statisticsInfo": "TBA",
     "wordCloud": "Word cloud",
@@ -151,6 +151,13 @@
     "subscribedDeputiesVotes": "Subscribed deputies vote",
     "votesNeededToPass": "Votes needed to pass",
     "noData": "No votings for specified criteria."
+  },
+  "more": {
+    "title": "More options",
+    "user": "User",
+    "goToSettings": "Go to settings",
+    "likeApplication": "Like the application?",
+    "supportUs": "Support us ❤"
   },
   "settings": {
     "settingsTitle": "Settings",

@@ -1,7 +1,7 @@
 import 'package:project_athens/athens_core/navigation/navigation_event.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_change_notifier.dart';
 import 'package:project_athens/deputies_flow/navigation/deputies_destinations.dart';
-import 'package:project_athens/settings_flow/navigation/settings_destinations.dart';
+import 'package:project_athens/more_flow/navigation/more_navigation.dart';
 import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
 import 'package:project_athens/timeline_flow/navigation/timeline_destinations.dart';
 import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
@@ -11,7 +11,7 @@ import 'dart:core';
 import 'destination_manager.dart';
 
 enum BottomNavItem {
-  TIMELINE, DEPUTIES, SPEECHES, VOTING, SETTINGS
+  TIMELINE, DEPUTIES, SPEECHES, VOTING, MORE
 }
 
 class BottomNavigationBloc extends BaseChangeNotifier {
@@ -72,8 +72,8 @@ extension BottomNavItemExtension on BottomNavItem {
       case BottomNavItem.VOTING:
         return VotesListDestination();
         break;
-      case BottomNavItem.SETTINGS:
-        return SettingsScreenDestination();
+      case BottomNavItem.MORE:
+        return MoreScreenDestination();
         break;
       default:
         throw new ArgumentError("There is no more BottomNavItems");

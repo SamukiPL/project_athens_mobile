@@ -4,16 +4,16 @@ import 'package:project_athens/athens_core/configuration/configuration.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
-import 'package:project_athens/settings_flow/navigation/settings_destinations.dart';
-import 'package:project_athens/settings_flow/screens/settings/settings_bloc.dart';
+import 'package:project_athens/more_flow/screens/settings/settings_bloc.dart';
 import 'package:provider/provider.dart';
 
 class SettingsScreen extends BaseScreen<SettingsBloc> {
 
   @override
-  bool get showBackArrow => false;
+  bool get showBackArrow => true;
+
   @override
-  bool get shouldShowBottomBar => true;
+  bool get shouldShowBottomBar => false;
 
   String getAppBarTitle(AppLocalizations localizations, SettingsBloc bloc) {
     return localizations.getText().settingsSettingsTitle();
@@ -27,16 +27,6 @@ class SettingsScreen extends BaseScreen<SettingsBloc> {
     return Container(
       child: Column(
       children: [
-        MaterialButton(
-          onPressed: () {
-            bloc.logout();
-          },
-          child: Text(localization.getText().settingsButtonLogout()),
-        ),
-        MaterialButton(
-          onPressed: () => goToDestination(context, SettingsHallOfFameScreenDestination()),
-          child: Text(localization.getText().settingsHallOfFameTitle()),
-        ),
         Row(
           children: [
             StreamProvider.value(
@@ -62,27 +52,6 @@ class SettingsScreen extends BaseScreen<SettingsBloc> {
                             onChanged: configuration.updateWakelockOnTimeline))),
             Text(localization.getText().settingsSwitchWakelockTimeline()),
           ],
-        ),
-        Expanded(child: Container()),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text('Podoba Ci się aplikacja?'),
-            MaterialButton(
-                onPressed: () => bloc.goToCrowdFundingPage(),
-                child: Text(
-                    "Wesprzyj nas ❤",
-                    style: TextStyle(
-                      color: Color.fromRGBO(230, 65, 100, 1)
-                    ),
-                ),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(32),
-                    side: BorderSide(color: Color.fromRGBO(230, 65, 100, 1))
-                ),
-
-            )
-          ]
         )
       ],
     ));
