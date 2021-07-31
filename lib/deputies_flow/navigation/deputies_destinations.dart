@@ -61,7 +61,7 @@ class DeputyDetailsVoteAccuracyDestination extends Destination<DeputyVoteAccurac
   @override
   List<Module> getScreenModules(BuildContext context) => [
     DeputyDetailsModule(context, _deputy),
-    DeputyVoteAccuracyModule(context, _deputy)
+    DeputyVoteAccuracyModule(context, _deputy, this._alignment, this._clubVoteAccuracy)
   ];
 
 }

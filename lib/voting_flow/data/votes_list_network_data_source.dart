@@ -34,6 +34,4 @@ class VotesListNetworkDataSource extends NetworkListDataSource<VotingModel, Base
       return Failure(error);
     }
   }
-
-  
 }
