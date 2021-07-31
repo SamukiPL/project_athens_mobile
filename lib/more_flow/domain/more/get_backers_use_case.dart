@@ -5,7 +5,6 @@ import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/more_flow/domain/more/get_backers_repository.dart';
 
 class GetBackersUseCase extends BaseUseCase<BaseParams> {
-
   final GetBackersRepository _getBackersRepository;
 
   GetBackersUseCase(this._getBackersRepository);

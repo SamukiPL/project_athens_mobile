@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:in_app_update/in_app_update.dart';
 import 'package:package_info/package_info.dart';
 import 'package:project_athens/athens_core/auto_updater/auto_updater.dart';
@@ -10,13 +8,12 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:project_athens/athens_core/domain/base_repository.dart';
 
 class MoreBloc extends BaseBloc {
-
   final LogoutUseCase _logoutUseCase;
   final AutoUpdater _autoUpdater;
   final String _crowdFundingSite = 'https://zrzutka.pl/z/demokracja-app';
 
-  Stream<bool> get checkingForUpdateStream => _autoUpdater.checkingForUpdateStream;
-
+  Stream<bool> get checkingForUpdateStream =>
+      _autoUpdater.checkingForUpdateStream;
 
   MoreBloc(this._logoutUseCase, this._autoUpdater);
 

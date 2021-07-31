@@ -56,8 +56,8 @@
       "name": "Nazwa Użytkownika",
       "password": "Hasło",
       "repeatPassword": "Powtórz Hasło",
-      "firstName":"Imię",
-      "lastName":"Nazwisko"
+      "firstName": "Imię",
+      "lastName": "Nazwisko"
     },
     "other": {
       "forgotRationale": "Podaj nam swój adres email,\n dostaniesz informacje jak zresetować swoje hasło.",
@@ -69,9 +69,9 @@
     },
     "validate": {
       "fieldCannotBeEmpty": "Pole nie może być puste",
-      "incorrectEmail":"Wprowadź prawidłowy email",
-      "loginIsTaken":"Login jest już zajęty",
-      "emailIsTaken":"Email jest już zajęty",
+      "incorrectEmail": "Wprowadź prawidłowy email",
+      "loginIsTaken": "Login jest już zajęty",
+      "emailIsTaken": "Email jest już zajęty",
       "emailsDontMatch": "Powtórzony email nie pasuje",
       "passwordsDontMatch": "Powtórzone hasło nie pasuje",
       "wrongData": "Nieprawidłowy email lub hasło"
@@ -106,7 +106,7 @@
       "unknown": "Nieznany rodzaj głosowania"
     },
     "nounCloud": {
-      "noNouns":  "Ups... Nie udało nam się pobrać chmury tagów dla wybranej daty. Proszę spróbować później."
+      "noNouns": "Ups... Nie udało nam się pobrać chmury tagów dla wybranej daty. Proszę spróbować później."
     },
     "noEvents": "Brak wydarzeń dla obecnej daty.\nProszę spróbować później."
   },
@@ -126,7 +126,7 @@
     "mostAccuracy": "Największa zgodność",
     "voteAccuracy": "Zgodność głosowania",
     "basicInfo": "Podstawowe informacje",
-    "experience" : "Doświadczenie",
+    "experience": "Doświadczenie",
     "statistics": "Statystyki",
     "statisticsInfo": "Zgodność głosowania oznacza ile razy dany poseł zagłosował wraz z większością partii. Proces zgodnośći głosowania jest aktualizowany codziennie o 3 w nocy.",
     "wordCloud": "Chmura słów",
@@ -161,14 +161,12 @@
     "votesNeededToPass": "Głosów poparcia potrzebnych",
     "noData": "Nie znaleziono głosowań dla podanych kryteriów."
   },
-  "more":  {
+  "more": {
     "title": "Więcej",
     "user": "Użytkownik",
     "goToSettings": "Przejdź do ustawień",
     "likeApplication": "Podoba Ci się aplikacja?",
-    "supportUs": "Wesprzyj nas ❤",
-    "checkForUpdates": "Sprawdź dostępność aktualizacji",
-    "appVersion": "Wersja aplikacji"
+    "supportUs": "Wesprzyj nas ❤"
   },
   "settings": {
     "settingsTitle": "Ustawienia",
