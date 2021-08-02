@@ -37,6 +37,7 @@ class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
 
   Widget getHourWidget(BuildContext context, ThemeData theme) {
     return Container(
+      width: 60,
       margin: EdgeInsets.only(left: 4, right: 4),
       child: Center(
         child: Wrap(

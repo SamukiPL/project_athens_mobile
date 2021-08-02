@@ -17,12 +17,8 @@ DeputyResponse _$DeputyResponseFromJson(Map<String, dynamic> json) {
     json['cardNumber'] as int,
     json['deputyId'] as String,
     json['isAcitve'] as bool,
-    json['cv'] == null
-        ? null
-        : CvBean.fromJson(json['cv'] as Map<String, dynamic>),
-    json['contact'] == null
-        ? null
-        : ContactBean.fromJson(json['contact'] as Map<String, dynamic>),
+    CvBean.fromJson(json['cv'] as Map<String, dynamic>),
+    ContactBean.fromJson(json['contact'] as Map<String, dynamic>),
     json['createAt'] as String,
   );
 }
@@ -45,7 +41,7 @@ Map<String, dynamic> _$DeputyResponseToJson(DeputyResponse instance) =>
 
 ContactBean _$ContactBeanFromJson(Map<String, dynamic> json) {
   return ContactBean(
-    (json['offices'] as List)?.map((e) => e as String)?.toList(),
+    (json['offices'] as List<dynamic>).map((e) => e as String).toList(),
   );
 }
 

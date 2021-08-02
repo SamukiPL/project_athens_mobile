@@ -521,14 +521,6 @@ class AppLocalizationsGenerated {
     return words['more']['supportUs'];
   }
 
-  String moreCheckForUpdates() {
-    return words['more']['checkForUpdates'];
-  }
-
-  String moreAppVersion() {
-    return words['more']['appVersion'];
-  }
-
   String settingsSettingsTitle() {
     return words['settings']['settingsTitle'];
   }

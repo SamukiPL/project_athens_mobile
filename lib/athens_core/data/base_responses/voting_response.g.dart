@@ -8,49 +8,39 @@ part of 'voting_response.dart';
 
 VotingResponse _$VotingResponseFromJson(Map<String, dynamic> json) {
   return VotingResponse(
-    json['votingNumbers'] == null
-        ? null
-        : VotingNumbers.fromJson(json['votingNumbers'] as Map<String, dynamic>),
-    json['votedAt'] == null ? null : DateTime.parse(json['votedAt'] as String),
-    json['actualVotedAt'] == null
-        ? null
-        : DateTime.parse(json['actualVotedAt'] as String),
-    json['createAt'] == null
-        ? null
-        : DateTime.parse(json['createAt'] as String),
+    VotingNumbers.fromJson(json['votingNumbers'] as Map<String, dynamic>),
+    DateTime.parse(json['votedAt'] as String),
+    DateTime.parse(json['actualVotedAt'] as String),
+    DateTime.parse(json['createAt'] as String),
     json['cadency'] as int,
     json['orderPoint'] as int,
     json['sessionIId'] as int,
     json['votingIId'] as int,
     json['votingUniqueId'] as String,
     json['topic'] as String,
-    (json['votes'] as List)
-        ?.map(
-            (e) => e == null ? null : Votes.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    _$enumDecodeNullable(_$VotingTypeEnumMap, json['votingType']),
+    (json['votes'] as List<dynamic>)
+        .map((e) => Votes.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    _$enumDecode(_$VotingTypeEnumMap, json['votingType']),
     json['id'] as String,
     json['absoluteMajority'] as int,
     json['qualifyingMajority'] as int,
-    (json['parliamentClubVotingNumbers'] as List)
-        ?.map((e) => e == null
-            ? null
-            : ParliamentClubVotingNumbers.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    (json['parliamentClubVotingNumbers'] as List<dynamic>)
+        .map((e) =>
+            ParliamentClubVotingNumbers.fromJson(e as Map<String, dynamic>))
+        .toList(),
     json['deputyVoteType'] as int,
-    json['updateAt'] == null
-        ? null
-        : DateTime.parse(json['updateAt'] as String),
+    DateTime.parse(json['updateAt'] as String),
   );
 }
 
 Map<String, dynamic> _$VotingResponseToJson(VotingResponse instance) =>
     <String, dynamic>{
       'votingNumbers': instance.votingNumbers,
-      'votedAt': instance.votedAt?.toIso8601String(),
-      'actualVotedAt': instance.actualVotedAt?.toIso8601String(),
-      'createAt': instance.createAt?.toIso8601String(),
-      'updateAt': instance.updateAt?.toIso8601String(),
+      'votedAt': instance.votedAt.toIso8601String(),
+      'actualVotedAt': instance.actualVotedAt.toIso8601String(),
+      'createAt': instance.createAt.toIso8601String(),
+      'updateAt': instance.updateAt.toIso8601String(),
       'cadency': instance.cadency,
       'orderPoint': instance.orderPoint,
       'sessionIId': instance.sessionIId,
@@ -66,36 +56,30 @@ Map<String, dynamic> _$VotingResponseToJson(VotingResponse instance) =>
       'deputyVoteType': instance.deputyVoteType,
     };
 
-T _$enumDecode<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
+K _$enumDecode<K, V>(
+  Map<K, V> enumValues,
+  Object? source, {
+  K? unknownValue,
 }) {
   if (source == null) {
-    throw ArgumentError('A value must be provided. Supported values: '
-        '${enumValues.values.join(', ')}');
+    throw ArgumentError(
+      'A value must be provided. Supported values: '
+      '${enumValues.values.join(', ')}',
+    );
   }
 
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
-
-  if (value == null && unknownValue == null) {
-    throw ArgumentError('`$source` is not one of the supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-  return value ?? unknownValue;
-}
-
-T _$enumDecodeNullable<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
+  return enumValues.entries.singleWhere(
+    (e) => e.value == source,
+    orElse: () {
+      if (unknownValue == null) {
+        throw ArgumentError(
+          '`$source` is not one of the supported values: '
+          '${enumValues.values.join(', ')}',
+        );
+      }
+      return MapEntry(unknownValue, enumValues.values.first);
+    },
+  ).key;
 }
 
 const _$VotingTypeEnumMap = {

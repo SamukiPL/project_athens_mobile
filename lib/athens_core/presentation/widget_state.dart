@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:project_athens/athens_core/chopper/client_errors.dart';
@@ -50,15 +49,15 @@ extension StateExceptionExtension on Exception {
     if (this is DioError) {
       DioError dioError = this;
       switch(dioError.type) {
-        case DioErrorType.RECEIVE_TIMEOUT:
-        case DioErrorType.CONNECT_TIMEOUT:
-        case DioErrorType.SEND_TIMEOUT:
-        case DioErrorType.DEFAULT:
+        case DioErrorType.receiveTimeout:
+        case DioErrorType.connectTimeout:
+        case DioErrorType.sendTimeout:
+        case DioErrorType.other:
           return ErrorType.NETWORK;
           break;
-        case DioErrorType.RESPONSE:
+        case DioErrorType.response:
           return parseServerError();
-        case DioErrorType.CANCEL:
+        case DioErrorType.cancel:
         return ErrorType.SERVER;
           break;
       }

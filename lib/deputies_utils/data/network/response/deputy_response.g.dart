@@ -19,21 +19,11 @@ DeputyResponse _$DeputyResponseFromJson(Map<String, dynamic> json) {
     json['cardId'] as int,
     json['deputyId'] as String,
     json['isActive'] as bool,
-    json['cv'] == null
-        ? null
-        : CvBean.fromJson(json['cv'] as Map<String, dynamic>),
-    json['contact'] == null
-        ? null
-        : ContactBean.fromJson(json['contact'] as Map<String, dynamic>),
-    json['statistics'] == null
-        ? null
-        : StatisticsBean.fromJson(json['statistics'] as Map<String, dynamic>),
-    json['createAt'] == null
-        ? null
-        : DateTime.parse(json['createAt'] as String),
-    json['updateAt'] == null
-        ? null
-        : DateTime.parse(json['updateAt'] as String),
+    CvBean.fromJson(json['cv'] as Map<String, dynamic>),
+    ContactBean.fromJson(json['contact'] as Map<String, dynamic>),
+    StatisticsBean.fromJson(json['statistics'] as Map<String, dynamic>),
+    DateTime.parse(json['createAt'] as String),
+    DateTime.parse(json['updateAt'] as String),
   );
 }
 
@@ -53,17 +43,15 @@ Map<String, dynamic> _$DeputyResponseToJson(DeputyResponse instance) =>
       'cv': instance.cv,
       'contact': instance.contact,
       'statistics': instance.statistics,
-      'createAt': instance.createAt?.toIso8601String(),
-      'updateAt': instance.updateAt?.toIso8601String(),
+      'createAt': instance.createAt.toIso8601String(),
+      'updateAt': instance.updateAt.toIso8601String(),
     };
 
 ContactBean _$ContactBeanFromJson(Map<String, dynamic> json) {
   return ContactBean(
-    (json['offices'] as List)
-        ?.map((e) => e == null
-            ? null
-            : ContactOfficeBean.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    (json['offices'] as List<dynamic>)
+        .map((e) => ContactOfficeBean.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 
@@ -111,28 +99,22 @@ Map<String, dynamic> _$CvBeanToJson(CvBean instance) => <String, dynamic>{
 
 StatisticsBean _$StatisticsBeanFromJson(Map<String, dynamic> json) {
   return StatisticsBean(
-    json['createAt'] == null
-        ? null
-        : DateTime.parse(json['createAt'] as String),
-    json['updateAt'] == null
-        ? null
-        : DateTime.parse(json['updateAt'] as String),
+    DateTime.parse(json['createAt'] as String),
+    DateTime.parse(json['updateAt'] as String),
     json['cadency'] as int,
     json['cadencyDeputy'] as String,
     json['speechesCount'] as int,
     json['voteAbsencyCount'] as int,
-    (json['clubVoteAccuracy'] as List)
-        ?.map((e) => e == null
-            ? null
-            : ClubVoteAccuracyBean.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    (json['clubVoteAccuracy'] as List<dynamic>)
+        .map((e) => ClubVoteAccuracyBean.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 
 Map<String, dynamic> _$StatisticsBeanToJson(StatisticsBean instance) =>
     <String, dynamic>{
-      'createAt': instance.createAt?.toIso8601String(),
-      'updateAt': instance.updateAt?.toIso8601String(),
+      'createAt': instance.createAt.toIso8601String(),
+      'updateAt': instance.updateAt.toIso8601String(),
       'cadency': instance.cadency,
       'cadencyDeputy': instance.cadencyDeputy,
       'speechesCount': instance.speechesCount,
