@@ -75,6 +75,27 @@ class AppLocalizationsGenerated {
     return words['universal']['updatedAt'];
   }
 
+  String universalUpdateCupertinoDialogTitle() {
+    return words['universal']['update']['cupertinoDialog']['title'];
+  }
+
+  String universalUpdateCupertinoDialogButtonIgnore() {
+    return words['universal']['update']['cupertinoDialog']['buttonIgnore'];
+  }
+
+  String universalUpdateCupertinoDialogButtonLater() {
+    return words['universal']['update']['cupertinoDialog']['buttonLater'];
+  }
+
+  String universalUpdateCupertinoDialogButtonUpdateNow() {
+    return words['universal']['update']['cupertinoDialog']['buttonUpdateNow'];
+  }
+
+  String universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow() {
+    return words['universal']['update']['cupertinoDialog']
+        ['wouldYouLikeToUpdateAppNow'];
+  }
+
   String mainMenuSession() {
     return words['main']['menu']['session'];
   }
@@ -498,6 +519,14 @@ class AppLocalizationsGenerated {
 
   String moreSupportUs() {
     return words['more']['supportUs'];
+  }
+
+  String moreCheckForUpdates() {
+    return words['more']['checkForUpdates'];
+  }
+
+  String moreAppVersion() {
+    return words['more']['appVersion'];
   }
 
   String settingsSettingsTitle() {

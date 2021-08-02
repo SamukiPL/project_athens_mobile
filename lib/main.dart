@@ -32,28 +32,37 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _firebaseMessages.setupMessaging();
+
+    // we have to eagerly create auto updater due to
+    // splash screen bloc could access it immediately
+    // after it starts to checking direction
     Fimber.plantTree(DebugBufferTree());
     return ModuleWidget(
-      providers: [AppModule(context), FirebaseMessagingModule(context, _firebaseMessages), ConfigurationModule(context), MainWidgetModule(context)],
+      providers: [
+        AppModule(context),
+        FirebaseMessagingModule(context, _firebaseMessages),
+        ConfigurationModule(context),
+        MainWidgetModule(context)
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Project Athens',
         theme: ThemeData(
-          primarySwatch: MaterialColor(
-            0xff00bfff,
-            const <int, Color>{
-              50: const Color(0xff00bfff),
-              100: const Color(0xff00bfff),
-              200: const Color(0xff00bfff),
-              300: const Color(0xff00bfff),
-              400: const Color(0xff00bfff),
-              500: const Color(0xff00bfff),
-              600: const Color(0xff00bfff),
-              700: const Color(0xff00bfff),
-              800: const Color(0xff00bfff),
-              900: const Color(0xff00bfff),
-            },
-          ),
+            primarySwatch: MaterialColor(
+              0xff00bfff,
+              const <int, Color>{
+                50: const Color(0xff00bfff),
+                100: const Color(0xff00bfff),
+                200: const Color(0xff00bfff),
+                300: const Color(0xff00bfff),
+                400: const Color(0xff00bfff),
+                500: const Color(0xff00bfff),
+                600: const Color(0xff00bfff),
+                700: const Color(0xff00bfff),
+                800: const Color(0xff00bfff),
+                900: const Color(0xff00bfff),
+              },
+            ),
             backgroundColor: Colors.white,
             dividerColor: Color(0xffaaaaaa),
             primaryColor: Color(0xff00bfff),

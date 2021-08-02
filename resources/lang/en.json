@@ -19,7 +19,16 @@
     },
     "source": "Source",
     "createdAt": "Created at",
-    "updatedAt": "Updated At"
+    "updatedAt": "Updated At",
+    "update": {
+      "cupertinoDialog": {
+        "title": "Update application?",
+        "buttonIgnore": "Ignore",
+        "buttonLater": "Later",
+        "buttonUpdateNow": "Update now",
+        "wouldYouLikeToUpdateAppNow": "Would you like to update application now?"
+      }
+    }
   },
   "main": {
     "menu": {
@@ -153,11 +162,13 @@
     "noData": "No votings for specified criteria."
   },
   "more": {
-    "title": "More options",
+    "title": "More",
     "user": "User",
     "goToSettings": "Go to settings",
     "likeApplication": "Like the application?",
-    "supportUs": "Support us ❤"
+    "supportUs": "Support us ❤",
+    "checkForUpdates": "Check for updates",
+    "appVersion": "Application version"
   },
   "settings": {
     "settingsTitle": "Settings",

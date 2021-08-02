@@ -11,20 +11,20 @@ import 'package:provider/provider.dart';
 import 'splash_screen_bloc.dart';
 
 class SplashScreenModule extends Module {
-
   SplashScreenModule(BuildContext context) : super(context);
 
   @override
   List<SingleChildWidget> getProviders() {
     DeputiesCache deputiesCache = Provider.of<DeputiesCache>(context);
     Dio client = Provider.of<SimpleDioClient>(context).client;
+
     AuthApi authApi = AuthApi(client);
     return [
       Provider<SplashScreenBloc>(
-        create: (_) => SplashScreenBloc(AuthRepositoryImpl(authApi), deputiesCache),
+        create: (_) =>
+            SplashScreenBloc(AuthRepositoryImpl(authApi), deputiesCache),
         dispose: (_, bloc) => bloc.dispose(),
       )
     ];
   }
-
 }

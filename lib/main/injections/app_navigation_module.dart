@@ -6,7 +6,6 @@ import 'package:project_athens/main/navigation/app_navigation_impl.dart';
 import 'package:provider/provider.dart';
 
 class AppNavigationModule extends Module {
-
   AppNavigationModule(BuildContext context) : super(context);
 
   @override
@@ -17,5 +16,4 @@ class AppNavigationModule extends Module {
       )
     ];
   }
-
 }
