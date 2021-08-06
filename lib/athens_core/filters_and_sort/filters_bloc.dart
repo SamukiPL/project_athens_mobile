@@ -11,7 +11,7 @@ class FiltersBloc extends BaseBloc {
     getFilters();
   }
 
-  List<BaseFilterType> _filters = List();
+  List<BaseFilterType> _filters = List.empty();
 
   List<BaseFilterType> get filters => _filters;
 

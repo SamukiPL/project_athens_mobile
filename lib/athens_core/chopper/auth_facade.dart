@@ -15,11 +15,11 @@ class AuthFacade {
     initialization = _provideTokens();
   }
 
-  Future initialization;
+  Future? initialization;
 
-  String _accessToken;
-  String _refreshToken;
-  int _tokenExp;
+  String? _accessToken;
+  String? _refreshToken;
+  int? _tokenExp;
 
   Future<String> get accessToken => _manageAccessToken();
 
@@ -30,7 +30,7 @@ class AuthFacade {
 
     _accessToken = tokens.accessToken;
     _refreshToken = tokens.refreshToken;
-    _tokenExp = _jwt.getJwtExp(_accessToken) - 120;
+    _tokenExp = _jwt.getJwtExp(_accessToken!) - 120;
     return true;
   }
 
@@ -41,13 +41,13 @@ class AuthFacade {
       return "";
 
     var now = DateTime.now().millisecondsSinceEpoch / 1000;
-    if (now < _tokenExp) return _accessToken;
+    if (now < _tokenExp!) return _accessToken!;
 
-    var newTokens = await _repository.refreshTokens(_refreshToken);
+    var newTokens = await _repository.refreshTokens(_refreshToken!);
     _accessToken = newTokens.accessToken;
     _tokenExp = _jwt.getJwtExp(newTokens.accessToken);
 
-    return _accessToken;
+    return _accessToken!;
     //JestemDevem19.demokra
   }
 

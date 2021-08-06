@@ -7,29 +7,28 @@ import 'package:project_athens/athens_core/presentation/widget_state.dart';
 import 'package:provider/provider.dart';
 
 class AsyncOnce<T> extends StatelessWidget {
-  final AsyncOnceUseCase asyncOnceUseCase;
+  final AsyncOnceUseCase<T> asyncOnceUseCase;
 
-  final Widget initialLoading;
+  final Widget? initialLoading;
   final Widget Function(T) builder;
-  final Widget noData;
-  final String noDataText;
-  final Function(ErrorType) retryWidget;
+  final Widget? noData;
+  final String? noDataText;
+  final Function(ErrorType)? retryWidget;
   final bool canRetry;
 
   final Color color;
 
-  const AsyncOnce(
-      {Key key,
-      @required this.asyncOnceUseCase,
-      this.initialLoading,
-      @required this.builder,
-      this.noData,
-      this.noDataText,
-      this.retryWidget,
-      this.canRetry = false,
-      this.color})
-      : assert(asyncOnceUseCase != null),
-        super(key: key);
+  const AsyncOnce({
+    Key? key,
+    required this.asyncOnceUseCase,
+    this.initialLoading,
+    required this.builder,
+    this.noData,
+    this.noDataText,
+    this.retryWidget,
+    this.canRetry = false,
+    this.color = Colors.black,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

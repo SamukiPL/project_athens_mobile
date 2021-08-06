@@ -59,7 +59,7 @@ class VotesListScreen extends BaseScreen<BaseListBloc> {
   }
 
   @override
-  Widget buildFloatingActionButton(BuildContext context, BaseListBloc bloc) =>
+  Widget? buildFloatingActionButton(BuildContext context, BaseListBloc bloc) =>
       null;
 
   void showFullScreenDialog(BuildContext context) {

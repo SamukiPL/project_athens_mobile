@@ -13,7 +13,7 @@ class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
   final bool showTopLine;
   final bool showBottomLine;
 
-  const VotingViewHolder(this.viewModel, this.showTopLine, this.showBottomLine, {Key key})
+  const VotingViewHolder(this.viewModel, this.showTopLine, this.showBottomLine, {Key? key})
       : super(key: key);
 
   final double lineThickness = 2;
@@ -122,7 +122,7 @@ class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
                   width: double.infinity,
                   child: Text(
                     viewModel.model.votingDesc,
-                    style: theme.textTheme.overline.copyWith(
+                    style: theme.textTheme.overline?.copyWith(
                         color: theme.dividerColor,
                         fontSize: 10
                     ),

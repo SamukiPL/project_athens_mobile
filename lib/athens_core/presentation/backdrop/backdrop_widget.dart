@@ -11,7 +11,7 @@ class BackdropWidget extends StatelessWidget {
   final GlobalKey _cloudKey = GlobalKey();
 
   BackdropWidget(
-      {Key key, @required this.bottomChild, @required this.topChild})
+      {Key? key, required this.bottomChild, required this.topChild})
       : super(key: key);
 
   @override
@@ -44,7 +44,7 @@ class BackdropWidget extends StatelessWidget {
         margin: EdgeInsets.only(top: 4, left: 4),
         child: GestureDetector(
           onTap: () {
-            bloc.changeState(_cloudKey.currentContext.size.height);
+            bloc.changeState(_cloudKey.currentContext?.size?.height);
           },
           child: Icon(
             bloc.isBottomShowing ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,

@@ -32,18 +32,18 @@ class _DeputiesApi implements DeputiesApi {
   }
 
   @override
-  Future<DeputyResponse> getDeputy(cadencyDeputyId) async {
+  Future<FullDeputyResponse> getDeputy(cadencyDeputyId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DeputyResponse>(
+        _setStreamType<FullDeputyResponse>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options,
                     '/deputy-aggregator/cadency-deputy/$cadencyDeputyId',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = DeputyResponse.fromJson(_result.data!);
+    final value = FullDeputyResponse.fromJson(_result.data!);
     return value;
   }
 

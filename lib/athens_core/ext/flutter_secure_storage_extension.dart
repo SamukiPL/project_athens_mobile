@@ -5,7 +5,7 @@ extension FlutterSecureStorageExtension on FlutterSecureStorage {
     return storageValue != null && storageValue.toLowerCase() == true.toString().toLowerCase();
   }
 
-  Future<bool> readBool({String key}) async {
+  Future<bool> readBool({required String key}) async {
     final storageValue = await this.read(key: key);
 
     return _parseBool(storageValue);

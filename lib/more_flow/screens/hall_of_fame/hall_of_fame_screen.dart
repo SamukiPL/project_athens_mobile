@@ -31,14 +31,16 @@ class HallOfFameScreen extends BaseScreen<HallOfFameBloc> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           FutureProvider(
+            initialData: null,
             create: (context) => bloc.backersCache.hasUserBacked,
-            child: Consumer<bool>(
+            child: Consumer<bool?>(
               builder: (context, isBacker, _) => isBacker != null && isBacker ? _buildBackerCard() : Container(),
             ),
           ),
           FutureProvider(
+            initialData: null,
             create: (context) => bloc.backersCache.backers,
-            child: Consumer<Result<List<BackerModel>>>(
+            child: Consumer<Result<List<BackerModel>>?>(
               builder: (context, backers, _) {
                 if (backers != null && backers is Success<List<BackerModel>>) {
                   return
@@ -174,7 +176,7 @@ class HallOfFameScreen extends BaseScreen<HallOfFameBloc> {
   }
 
   @override
-  Widget buildFloatingActionButton(BuildContext context, HallOfFameBloc bloc) {
+  Widget? buildFloatingActionButton(BuildContext context, HallOfFameBloc bloc) {
     return null;
   }
 }

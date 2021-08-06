@@ -11,7 +11,7 @@ class RegistrationStepperHeader extends StatelessWidget {
 
   final AppLocalizations _localization;
 
-  const RegistrationStepperHeader(this._localization, {Key key}) : super(key: key);
+  const RegistrationStepperHeader(this._localization, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

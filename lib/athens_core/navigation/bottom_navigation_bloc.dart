@@ -17,7 +17,7 @@ enum BottomNavItem {
 class BottomNavigationBloc extends BaseChangeNotifier {
 
   BottomNavItem _currentItem = BottomNavItem.TIMELINE;
-  BottomNavItem _previousItem;
+  BottomNavItem? _previousItem;
 
   BottomNavItem get currentItem => _currentItem;
 

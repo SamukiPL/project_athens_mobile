@@ -13,7 +13,7 @@ VotingResponse _$VotingResponseFromJson(Map<String, dynamic> json) {
     DateTime.parse(json['actualVotedAt'] as String),
     DateTime.parse(json['createAt'] as String),
     json['cadency'] as int,
-    json['orderPoint'] as int,
+    json['orderPoint'] as int?,
     json['sessionIId'] as int,
     json['votingIId'] as int,
     json['votingUniqueId'] as String,
@@ -29,8 +29,10 @@ VotingResponse _$VotingResponseFromJson(Map<String, dynamic> json) {
         .map((e) =>
             ParliamentClubVotingNumbers.fromJson(e as Map<String, dynamic>))
         .toList(),
-    json['deputyVoteType'] as int,
-    DateTime.parse(json['updateAt'] as String),
+    json['deputyVoteType'] as int?,
+    json['updateAt'] == null
+        ? null
+        : DateTime.parse(json['updateAt'] as String),
   );
 }
 
@@ -40,7 +42,7 @@ Map<String, dynamic> _$VotingResponseToJson(VotingResponse instance) =>
       'votedAt': instance.votedAt.toIso8601String(),
       'actualVotedAt': instance.actualVotedAt.toIso8601String(),
       'createAt': instance.createAt.toIso8601String(),
-      'updateAt': instance.updateAt.toIso8601String(),
+      'updateAt': instance.updateAt?.toIso8601String(),
       'cadency': instance.cadency,
       'orderPoint': instance.orderPoint,
       'sessionIId': instance.sessionIId,

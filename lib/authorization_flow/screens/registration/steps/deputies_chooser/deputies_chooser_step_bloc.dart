@@ -21,7 +21,7 @@ class DeputiesChooserBloc extends BaseRegistrationStepBloc
   final StepSearchBarBloc _searchBarBloc;
 
   @override
-  PagingListAdapter adapter;
+  late PagingListAdapter adapter;
 
   @override
   int batchSize = 40;
@@ -35,7 +35,7 @@ class DeputiesChooserBloc extends BaseRegistrationStepBloc
 
   FabBloc get fabBloc => _fabBloc;
 
-  List<DeputyItemViewModel> _items;
+  late List<DeputyItemViewModel> _items;
   String _searchQuery = "";
 
   DeputiesChooserBloc(this._deputiesCache, this._putDeputiesUseCase, this._searchBarBloc) {

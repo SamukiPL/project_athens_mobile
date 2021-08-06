@@ -3,7 +3,6 @@ import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
 import 'package:project_athens/authorization_flow/injections/registration_module.dart';
-import 'package:project_athens/authorization_flow/navigation/login_navigation_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/base_login_screen.dart';
 import 'package:project_athens/authorization_flow/screens/registration/registration_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/stepper/registration_stepper_bloc.dart';
@@ -22,7 +21,7 @@ class RegistrationScreen extends BaseLoginScreen<RegistrationBloc> {
   }
 
   @override
-  Widget generateAppBar(BuildContext context, RegistrationBloc bloc) {
+  Widget? generateAppBar(BuildContext context, RegistrationBloc bloc) {
     return null;
   }
 
@@ -88,7 +87,7 @@ class RegistrationScreen extends BaseLoginScreen<RegistrationBloc> {
   }
 
   @override
-  Widget generateFab(BuildContext context, RegistrationBloc bloc) {
+  Widget? generateFab(BuildContext context, RegistrationBloc bloc) {
     return null;
   }
 

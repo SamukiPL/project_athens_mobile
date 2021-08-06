@@ -75,7 +75,7 @@ class SubscribedDeputyBarView extends StatelessWidget {
   Widget getTypeIcon(
       BuildContext context, Function tapFunction, IconData icon, bool checked) {
     return GestureDetector(
-      onTap: tapFunction,
+      onTap: () => tapFunction(),
       child: Container(
         margin: EdgeInsets.only(right: 4),
         child: Icon(

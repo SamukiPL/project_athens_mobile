@@ -7,11 +7,10 @@ import 'package:project_athens/deputies_flow/injections/details_tabs/deputy_vote
 class DeputyVoteItemViewModelFactory extends ItemViewModelFactory {
 
   @override
-  BaseItemViewModel createWithoutError(BaseModel model) {
+  BaseItemViewModel? createWithoutError(BaseModel model) {
     switch (model.runtimeType) {
       case VotingModel:
-        return DeputyVoteItemViewModel(model);
-        break;
+        return DeputyVoteItemViewModel(model as VotingModel);
     }
 
     return null;

@@ -11,7 +11,7 @@ class RegistrationStepperFooter extends StatelessWidget {
   final VoidCallback _positiveButtonCallback;
   final VoidCallback _negativeButtonCallback;
 
-  const RegistrationStepperFooter(this._positiveButtonCallback, this._negativeButtonCallback, {Key key}) : super(key: key);
+  const RegistrationStepperFooter(this._positiveButtonCallback, this._negativeButtonCallback, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class RegistrationStepperFooter extends StatelessWidget {
                   ),
                   builder: (context, bloc, child) => Visibility(
                     visible: bloc.state == StepperButtonState.IDLE,
-                    child: child,
+                    child: child!,
                   ),
                 ),
                 Consumer<StepperButtonStateBloc>(
@@ -61,7 +61,7 @@ class RegistrationStepperFooter extends StatelessWidget {
                   ),
                   builder: (context, bloc, child) => Visibility(
                     visible: bloc.state == StepperButtonState.LOADING,
-                    child: child,
+                    child: child!,
                   ),
                 )
                 ],

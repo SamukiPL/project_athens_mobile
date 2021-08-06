@@ -8,7 +8,9 @@ part of 'speech_response.dart';
 
 SpeechResponse _$SpeechResponseFromJson(Map<String, dynamic> json) {
   return SpeechResponse(
-    Agenda.fromJson(json['agenda'] as Map<String, dynamic>),
+    json['agenda'] == null
+        ? null
+        : Agenda.fromJson(json['agenda'] as Map<String, dynamic>),
     CisInfo.fromJson(json['cisInfo'] as Map<String, dynamic>),
     DateTime.parse(json['createAt'] as String),
     json['id'] as String,
@@ -17,12 +19,18 @@ SpeechResponse _$SpeechResponseFromJson(Map<String, dynamic> json) {
     json['videoDownloadUrl'] as String,
     json['length'] as int,
     json['personName'] as String,
-    json['cadencyDeputy'] as String,
-    json['parliamentClub'] as String,
+    json['cadencyDeputy'] as String?,
+    json['parliamentClub'] as String?,
     json['cadency'] as int,
     json['rangeId'] as String,
-    PersonSpeech.fromJson(json['previousPersonSpeech'] as Map<String, dynamic>),
-    PersonSpeech.fromJson(json['nextPersonSpeech'] as Map<String, dynamic>),
+    json['previousPersonSpeech'] == null
+        ? null
+        : PersonSpeech.fromJson(
+            json['previousPersonSpeech'] as Map<String, dynamic>),
+    json['nextPersonSpeech'] == null
+        ? null
+        : PersonSpeech.fromJson(
+            json['nextPersonSpeech'] as Map<String, dynamic>),
     DateTime.parse(json['updateAt'] as String),
   );
 }
@@ -138,7 +146,7 @@ const _$GenderEnumMap = {
 
 PersonSpeech _$PersonSpeechFromJson(Map<String, dynamic> json) {
   return PersonSpeech(
-    json['deputyCardId'] as int,
+    json['deputyCardId'] as int?,
     json['fullName'] as String,
     json['speechId'] as String,
   );

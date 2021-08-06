@@ -7,10 +7,10 @@ import 'package:project_athens/voting_flow/screens/list/list_impl/vote_item_view
 class VoteItemViewModelFactory extends ItemViewModelFactory {
 
   @override
-  BaseItemViewModel createWithoutError(BaseModel model) {
+  BaseItemViewModel? createWithoutError(BaseModel model) {
     switch (model.runtimeType) {
       case VotingModel:
-        return VoteItemViewModel(model);
+        return VoteItemViewModel(model as VotingModel);
         break;
     }
 

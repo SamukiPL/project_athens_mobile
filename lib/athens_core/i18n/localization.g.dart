@@ -31,16 +31,16 @@ class AppLocalizationsGenerated {
     return words['universal']['choose'];
   }
 
-  String universalClose() {
-    return words['universal']['close'];
-  }
-
   String universalOk() {
     return words['universal']['ok'];
   }
 
   String universalRetry() {
     return words['universal']['retry'];
+  }
+
+  String universalClose() {
+    return words['universal']['close'];
   }
 
   String universalNoDataDefaultText() {
@@ -132,12 +132,12 @@ class AppLocalizationsGenerated {
     return words['login']['buttons']['register'];
   }
 
-  String loginButtonsSignUp() {
-    return words['login']['buttons']['signUp'];
-  }
-
   String loginButtonsForgot() {
     return words['login']['buttons']['forgot'];
+  }
+
+  String loginButtonsSignUp() {
+    return words['login']['buttons']['signUp'];
   }
 
   String loginButtonsResetPassword() {
@@ -519,6 +519,14 @@ class AppLocalizationsGenerated {
 
   String moreSupportUs() {
     return words['more']['supportUs'];
+  }
+
+  String moreCheckForUpdates() {
+    return words['more']['checkForUpdates'];
+  }
+
+  String moreAppVersion() {
+    return words['more']['appVersion'];
   }
 
   String settingsSettingsTitle() {

@@ -15,7 +15,7 @@ class PagingListAdapter {
 
   List<BaseItemViewModel> _itemsList = [];
 
-  bool _loading;
+  bool _loading = false;
 
   final StreamController<PagingState<BaseItemViewModel>> _stateController = BehaviorSubject();
 

@@ -36,6 +36,6 @@ class GroupDetailsScreen extends BaseScreen<GroupDetailsBloc> {
   }
 
   @override
-  Widget buildFloatingActionButton(BuildContext context, GroupDetailsBloc bloc) => null;
+  Widget? buildFloatingActionButton(BuildContext context, GroupDetailsBloc bloc) => null;
 
 }

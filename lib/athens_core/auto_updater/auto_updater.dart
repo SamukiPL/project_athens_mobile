@@ -19,12 +19,12 @@ class AutoUpdater {
   AutoUpdater();
 
   final Upgrader _upgrader = Upgrader();
-  BuildContext _context;
+  late BuildContext _context;
 
   final BehaviorSubject<bool> _checkingForUpdateSource = BehaviorSubject.seeded(false);
   Stream<bool> get checkingForUpdateStream => _checkingForUpdateSource.stream;
 
-  Timer _timer;
+  late Timer _timer;
 
   void _initiOSUpgrader() {
     _upgrader.countryCode = "pl";
@@ -47,11 +47,11 @@ class AutoUpdater {
       } else {
         await InAppUpdate.startFlexibleUpdate();
         await InAppUpdate.completeFlexibleUpdate();
-        return true;
+        return Future.value(true);
       }
     }
 
-    return false;
+    return Future.value(false);
   }
 
   // Future<void> _updateiOS() async {

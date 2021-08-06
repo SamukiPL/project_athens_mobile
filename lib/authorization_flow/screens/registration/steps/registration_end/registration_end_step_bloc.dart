@@ -47,7 +47,7 @@ class RegistrationEndStepBloc extends BaseRegistrationStepBloc {
   }
 
   Future<void> call() async {
-    final params = RegistrationParams(_firstName, _lastName, _login, _email, _password, List<String>());
+    final params = RegistrationParams(_firstName, _lastName, _login, _email, _password, List<String>.empty());
 
     final result = await _registrationUseCase(params);
     manageState(result);

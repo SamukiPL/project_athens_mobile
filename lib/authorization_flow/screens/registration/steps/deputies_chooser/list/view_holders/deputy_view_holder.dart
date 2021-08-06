@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 class DeputyViewHolder extends StatelessWidget {
   final DeputyItemViewModel viewModel;
 
-  const DeputyViewHolder({Key key, @required this.viewModel}) : super(key: key);
+  const DeputyViewHolder({Key? key, required this.viewModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class DeputyViewHolder extends StatelessWidget {
       width: 55,
       child: Stack(children: <Widget>[
         Center(child: Icon(Icons.photo)),
-        Image.network(viewModel.model.thumbnailUrl),
+        Image.network(viewModel.model.thumbnailUrl ?? ""),
       ]),
     );
   }
@@ -84,7 +84,7 @@ class DeputyViewHolder extends StatelessWidget {
             Container(
               width: double.infinity,
               child: Text(
-                viewModel.model.club,
+                viewModel.model.club ?? "",
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   color: theme.dividerColor,
@@ -126,7 +126,7 @@ class DeputyViewHolder extends StatelessWidget {
 
   Widget getTypeIcon(BuildContext context, Function tapFunction, IconData icon, bool checked) {
     return GestureDetector(
-      onTap: tapFunction,
+      onTap: () => tapFunction(),
       child: Container(
         margin: EdgeInsets.only(right: 4),
         child: Icon(

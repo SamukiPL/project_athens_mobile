@@ -9,9 +9,9 @@ class VotingResponse implements TimelineItem {
   final DateTime votedAt;
   final DateTime actualVotedAt;
   final DateTime createAt;
-  final DateTime updateAt;
+  final DateTime? updateAt;
   final int cadency;
-  final int orderPoint;
+  final int? orderPoint;
   final int sessionIId;
   final int votingIId;
   final String votingUniqueId;
@@ -22,7 +22,7 @@ class VotingResponse implements TimelineItem {
   final int absoluteMajority;
   final int qualifyingMajority;
   final List<ParliamentClubVotingNumbers> parliamentClubVotingNumbers;
-  final int deputyVoteType;
+  final int? deputyVoteType;
 
   int get inFavor => votingNumbers.inFavor;
   int get against => votingNumbers.against;

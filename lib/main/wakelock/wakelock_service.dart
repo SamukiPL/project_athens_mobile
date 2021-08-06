@@ -27,7 +27,7 @@ class WakelockService {
   // e.g. timeline view
   bool _masterLock = false;
   bool _isLocked = false;
-  BottomNavItem _currentScreen;
+  late BottomNavItem _currentScreen;
 
   void _handleTimelineWakelock(bool prevent) {
     _masterLock = prevent;

@@ -7,10 +7,10 @@ class FirebaseMessages {
 
   void setupMessaging() {
     FirebaseMessaging.onMessage.listen((event) {
-      print('AppPushs onMessage : ${event.notification.body}');
+      print('AppPushs onMessage : ${event.notification?.body}');
     });
     FirebaseMessaging.onMessageOpenedApp.listen((event) {
-      print('AppPushs onLaunch : ${event.notification.body}');
+      print('AppPushs onLaunch : ${event.notification?.body}');
     });
     FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
       alert: true,

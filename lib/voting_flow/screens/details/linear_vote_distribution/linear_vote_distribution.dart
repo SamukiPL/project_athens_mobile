@@ -11,7 +11,7 @@ import 'linear_vote_distribution_segment.dart';
 class LinearVoteDistribution extends StatelessWidget {
   final VotingModel voting;
 
-  LinearVoteDistribution({this.voting});
+  LinearVoteDistribution({required this.voting});
 
   Widget build(BuildContext context) {
     final double _diameter = (MediaQuery.of(context).size.width / 1.616);
@@ -105,9 +105,9 @@ class LinearVoteDistribution extends StatelessWidget {
 
   int _getRequiredVotes() {
     if (this.voting.absoluteMajority != 0 && this.voting.absoluteMajority != null) {
-      return this.voting.absoluteMajority;
+      return this.voting.absoluteMajority!;
     } else if (this.voting.qualifyingMajority != 0 && this.voting.qualifyingMajority != null) {
-      return this.voting.qualifyingMajority;
+      return this.voting.qualifyingMajority!;
     } else {
       final int summedVotes = this.voting.results.inFavor + this.voting.results.against;
       final int votesRequired = summedVotes % 2 == 0 ? ((summedVotes / 2 ) + 1).ceil() : (summedVotes / 2).ceil();

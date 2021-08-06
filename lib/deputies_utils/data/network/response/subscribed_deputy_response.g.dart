@@ -9,9 +9,11 @@ part of 'subscribed_deputy_response.dart';
 SubscribedDeputyResponse _$SubscribedDeputyResponseFromJson(
     Map<String, dynamic> json) {
   return SubscribedDeputyResponse(
-    json['id'] as String,
-    DateTime.parse(json['createAt'] as String),
-    json['cadency'] as int,
+    json['id'] as String?,
+    json['createAt'] == null
+        ? null
+        : DateTime.parse(json['createAt'] as String),
+    json['cadency'] as int?,
     json['isPrimary'] as bool,
     json['cadencyDeputyId'] as String,
     Notifications.fromJson(json['notifications'] as Map<String, dynamic>),
@@ -22,7 +24,7 @@ Map<String, dynamic> _$SubscribedDeputyResponseToJson(
         SubscribedDeputyResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'createAt': instance.createAt.toIso8601String(),
+      'createAt': instance.createAt?.toIso8601String(),
       'cadency': instance.cadency,
       'isPrimary': instance.isPrimary,
       'cadencyDeputyId': instance.cadencyDeputyId,

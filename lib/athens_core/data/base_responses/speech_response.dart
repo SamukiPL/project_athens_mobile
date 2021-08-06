@@ -7,7 +7,7 @@ part 'speech_response.g.dart';
 @JsonSerializable()
 class SpeechResponse extends TimelineItem {
 
-  final Agenda agenda;
+  final Agenda? agenda;
   final CisInfo cisInfo;
   final DateTime createAt;
   final DateTime updateAt;
@@ -17,12 +17,12 @@ class SpeechResponse extends TimelineItem {
   final String videoDownloadUrl;
   final int length;
   final String personName;
-  final String cadencyDeputy;
-  final String parliamentClub;
+  final String? cadencyDeputy;
+  final String? parliamentClub;
   final int cadency;
   final String rangeId;
-  final PersonSpeech previousPersonSpeech;
-  final PersonSpeech nextPersonSpeech;
+  final PersonSpeech? previousPersonSpeech;
+  final PersonSpeech? nextPersonSpeech;
 
   SpeechResponse(this.agenda, this.cisInfo, this.createAt, this.id, this.deputyCardIdentifier, this.fileName, this.videoDownloadUrl, this.length, this.personName, this.cadencyDeputy, this.parliamentClub, this.cadency, this.rangeId, this.previousPersonSpeech, this.nextPersonSpeech, this.updateAt);
 
@@ -77,7 +77,7 @@ class Person {
 
 @JsonSerializable()
 class PersonSpeech {
-  final int deputyCardId;
+  final int? deputyCardId;
   final String fullName;
   final String speechId;
 

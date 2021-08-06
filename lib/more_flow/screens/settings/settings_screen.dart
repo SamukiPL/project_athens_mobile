@@ -33,7 +33,7 @@ class SettingsScreen extends BaseScreen<SettingsBloc> {
                 value: configuration.showTechnicalData,
                 initialData: false,
                 child: Consumer<bool>(
-                    builder: (BuildContext context, bool value, Widget child) =>
+                    builder: (BuildContext context, bool value, Widget? child) =>
                         Switch(
                             value: value,
                             onChanged: configuration.updateShowTechnicalData))),
@@ -46,7 +46,7 @@ class SettingsScreen extends BaseScreen<SettingsBloc> {
                 value: configuration.wakelockOnTimeline,
                 initialData: false,
                 child: Consumer<bool>(
-                    builder: (BuildContext context, bool value, Widget child) =>
+                    builder: (BuildContext context, bool value, Widget? child) =>
                         Switch(
                             value: value,
                             onChanged: configuration.updateWakelockOnTimeline))),
@@ -58,7 +58,7 @@ class SettingsScreen extends BaseScreen<SettingsBloc> {
   }
 
   @override
-  Widget buildFloatingActionButton(BuildContext context, SettingsBloc bloc) {
+  Widget? buildFloatingActionButton(BuildContext context, SettingsBloc bloc) {
     return null;
   }
 

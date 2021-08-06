@@ -59,7 +59,7 @@ class Statistics {
 
 class ClubVoteAccuracy {
   final int compatibleVotes;
-  final ParliamentClubModel parliamentClub;
+  final ParliamentClubModel? parliamentClub;
 
   ClubVoteAccuracy(this.compatibleVotes, this.parliamentClub);
 }

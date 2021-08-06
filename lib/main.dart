@@ -85,10 +85,10 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate
         ],
         localeResolutionCallback:
-            (Locale locale, Iterable<Locale> supportedLocales) {
+            (Locale? locale, Iterable<Locale> supportedLocales) {
           return supportedLocales.firstWhere(
               (supportedLocale) =>
-                  supportedLocale.languageCode == locale.languageCode,
+                  supportedLocale.languageCode == locale?.languageCode,
               orElse: () => supportedLocales.first);
         },
       ),
