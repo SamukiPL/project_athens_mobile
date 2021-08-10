@@ -1,3 +1,4 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:project_athens/athens_core/data/base_responses/voting_response.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 
@@ -45,7 +46,19 @@ class VoteModel {
   VoteModel(this.type, this.cadencyDeputy);
 }
 
-enum VoteType { IN_FAVOR, AGAINST, HOLD, ABSENT }
+enum VoteType {
+  @JsonValue(0)
+  IN_FAVOR,
+
+  @JsonValue(1)
+  AGAINST,
+
+  @JsonValue(2)
+  HOLD,
+
+  @JsonValue(3)
+  ABSENT
+}
 
 extension VotingsListExtension on List<VotingModel> {
 

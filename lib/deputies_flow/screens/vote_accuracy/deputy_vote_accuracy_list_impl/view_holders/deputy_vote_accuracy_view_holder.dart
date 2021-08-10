@@ -2,21 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
+import 'package:project_athens/deputies_flow/screens/vote_accuracy/deputy_vote_accuracy_list_impl/deputy_vote_accuracy_item_view_model.dart';
 import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
 import 'package:project_athens/voting_flow/screens/list/list_impl/vote_item_view_model.dart';
 
-class VoteViewHolder extends StatelessWidget with RedirectionDelegate {
+class DeputyVoteAccuracyViewHolder extends StatelessWidget with RedirectionDelegate {
 
-  final VoteItemViewModel _viewModel;
+  final DeputyVoteAccuracyItemViewModel _viewModel;
 
-  VoteViewHolder(this._viewModel);
+  DeputyVoteAccuracyViewHolder(this._viewModel);
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return GestureDetector(
       onTap: () {
-        goToDestination(context, VoteDetailsDestination(_viewModel.model));
+        // TODO
+        // goToDestination(context, VoteDetailsDestination(_viewModel.model));
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,6 +26,7 @@ class VoteViewHolder extends StatelessWidget with RedirectionDelegate {
           _getTypeAndDateRow(theme),
           _getResults(),
           _getTitle(theme),
+          _getVoteDistributionTable(theme),
           TechnicalData(technicalId: _viewModel.id),
         ],
       ),
@@ -88,6 +91,30 @@ class VoteViewHolder extends StatelessWidget with RedirectionDelegate {
         ),
         textAlign: TextAlign.left,
       ),
+    );
+  }
+
+  Widget _getVoteDistributionTable(ThemeData theme) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(child:
+              Text('Poparło'),
+            ),
+            Expanded(child:
+              Text('Poparło'),
+            ),
+            Expanded(child:
+              Text('Poparło'),
+            ),
+            Expanded(child:
+              Text('Poparło'),
+            )
+          ],
+        ),
+        Row(),
+      ],
     );
   }
 

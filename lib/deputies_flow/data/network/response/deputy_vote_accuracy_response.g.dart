@@ -25,6 +25,7 @@ Map<String, dynamic> _$DeputyVoteAccuracyResponseToJson(
 VoteSlimDTO _$VoteSlimDTOFromJson(Map<String, dynamic> json) {
   return VoteSlimDTO(
     json['id'] as String,
+    json['agenda'] as String,
     _$enumDecodeNullable(_$VotingTypeEnumMap, json['type']),
     json['voteAt'] == null ? null : DateTime.parse(json['voteAt'] as String),
     json['voteNumbers'] == null
@@ -39,6 +40,7 @@ VoteSlimDTO _$VoteSlimDTOFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$VoteSlimDTOToJson(VoteSlimDTO instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'agenda': instance.agenda,
       'type': _$VotingTypeEnumMap[instance.type],
       'voteAt': instance.voteAt?.toIso8601String(),
       'voteNumbers': instance.voteNumbers,
@@ -104,10 +106,10 @@ const _$VotingTypeEnumMap = {
 };
 
 const _$VoteTypeEnumMap = {
-  VoteType.IN_FAVOR: 'IN_FAVOR',
-  VoteType.AGAINST: 'AGAINST',
-  VoteType.HOLD: 'HOLD',
-  VoteType.ABSENT: 'ABSENT',
+  VoteType.IN_FAVOR: 0,
+  VoteType.AGAINST: 1,
+  VoteType.HOLD: 2,
+  VoteType.ABSENT: 3,
 };
 
 VoteSlimVotingNumbersDTO _$VoteSlimVotingNumbersDTOFromJson(

@@ -17,13 +17,14 @@ class DeputyVoteAccuracyResponse {
 @JsonSerializable()
 class VoteSlimDTO {
   final String id;
+  final String agenda;
   final VotingType type;
   final DateTime voteAt;
   final VoteSlimVotingNumbersDTO voteNumbers;
   final VoteType desiredClubVoteType;
   final VoteType desiredDeputyVoteType;
 
-  VoteSlimDTO(this.id, this.type, this.voteAt, this.voteNumbers, this.desiredClubVoteType, this.desiredDeputyVoteType);
+  VoteSlimDTO(this.id, this.agenda, this.type, this.voteAt, this.voteNumbers, this.desiredClubVoteType, this.desiredDeputyVoteType);
 
   factory VoteSlimDTO.fromJson(Map<String, dynamic> json) => _$VoteSlimDTOFromJson(json);
   Map<String, dynamic> toJson() => _$VoteSlimDTOToJson(this);
