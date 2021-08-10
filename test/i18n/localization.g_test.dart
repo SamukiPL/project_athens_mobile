@@ -201,6 +201,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginHintsLogin != "" && loginHintsLogin != null); 
   }); 
  
+  test("All methods for $locale loginHintsLoginOrEmail", () async {
+    String loginHintsLoginOrEmail = localization.loginHintsLoginOrEmail();
+    expect(true, loginHintsLoginOrEmail != "" && loginHintsLoginOrEmail != null); 
+  }); 
+ 
   test("All methods for $locale loginHintsName", () async {
     String loginHintsName = localization.loginHintsName();
     expect(true, loginHintsName != "" && loginHintsName != null); 

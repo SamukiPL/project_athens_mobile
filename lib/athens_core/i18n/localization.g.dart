@@ -156,6 +156,10 @@ class AppLocalizationsGenerated {
     return words['login']['hints']['login'];
   }
 
+  String loginHintsLoginOrEmail() {
+    return words['login']['hints']['loginOrEmail'];
+  }
+
   String loginHintsName() {
     return words['login']['hints']['name'];
   }
