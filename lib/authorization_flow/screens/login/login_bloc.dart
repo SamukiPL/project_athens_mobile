@@ -40,7 +40,9 @@ class LoginBloc extends BaseBloc {
 
     authFailedNotifier.state = false;
 
-    var params = LoginParams(_login, _password);
+    final email = _login.contains("@") ? _login : null;
+
+    var params = LoginParams(email != null ? null : _login, email != null ? email : null, _password);
 
     var loginResult = await _loginUseCase(params);
 
