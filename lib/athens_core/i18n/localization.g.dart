@@ -156,6 +156,10 @@ class AppLocalizationsGenerated {
     return words['login']['hints']['login'];
   }
 
+  String loginHintsLoginOrEmail() {
+    return words['login']['hints']['loginOrEmail'];
+  }
+
   String loginHintsName() {
     return words['login']['hints']['name'];
   }
@@ -519,14 +523,6 @@ class AppLocalizationsGenerated {
 
   String moreSupportUs() {
     return words['more']['supportUs'];
-  }
-
-  String moreCheckForUpdates() {
-    return words['more']['checkForUpdates'];
-  }
-
-  String moreAppVersion() {
-    return words['more']['appVersion'];
   }
 
   String settingsSettingsTitle() {

@@ -53,6 +53,7 @@
       "email": "Email",
       "repeatEmail": "Powtórz Email",
       "login": "Login",
+      "loginOrEmail": "Login/Email",
       "name": "Nazwa Użytkownika",
       "password": "Hasło",
       "repeatPassword": "Powtórz Hasło",
