@@ -45,7 +45,7 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
             onChanged: (login) => bloc.setLogin(login),
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
-                labelText: localization.getText().loginHintsLoginOrEmail(),
+                labelText: localization.getText().loginHintsLogin(),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5.0),
                 )),
