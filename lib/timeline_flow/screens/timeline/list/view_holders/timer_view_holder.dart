@@ -11,7 +11,7 @@ class TimerViewHolder extends StatelessWidget with RedirectionDelegate {
   final bool showBottomLine;
 
   const TimerViewHolder(this.viewModel, this.showTopLine, this.showBottomLine,
-      {Key key})
+      {Key? key})
       : super(key: key);
 
   final double lineThickness = 2;
@@ -119,7 +119,7 @@ class TimerViewHolder extends StatelessWidget with RedirectionDelegate {
                 width: double.infinity,
                 child: Text(
                   "Dzisiaj jest dzień posiedzenia",
-                  style: theme.textTheme.overline.copyWith(
+                  style: theme.textTheme.overline?.copyWith(
                       color: theme.dividerColor,
                       fontSize: 10
                   ),

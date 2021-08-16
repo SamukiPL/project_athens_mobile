@@ -6,10 +6,9 @@ import 'package:project_athens/athens_core/presentation/base_blocs/base_change_n
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_bloc.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
 import 'package:project_athens/athens_core/presentation/widget_state.dart';
-import 'package:rxdart/rxdart.dart';
 
 class AsyncOnceBloc<T> extends BaseChangeNotifier {
-  final AsyncOnceUseCase<T> _asyncOnceUseCase;
+  late final AsyncOnceUseCase<T> _asyncOnceUseCase;
 
   AsyncOnceBloc(this._asyncOnceUseCase) {
     asyncOnce();
@@ -19,7 +18,7 @@ class AsyncOnceBloc<T> extends BaseChangeNotifier {
 
   DataLoadingBloc get dataLoadingBloc => _dataLoadingBloc;
 
-  T _value;
+  late T _value;
 
   T get value => _value;
 

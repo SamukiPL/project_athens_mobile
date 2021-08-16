@@ -7,10 +7,10 @@ import 'package:project_athens/speeches_flow/screens/list/list_impl/speech_item_
 class SpeechItemViewModelFactory extends ItemViewModelFactory {
 
   @override
-  BaseItemViewModel createWithoutError(BaseModel model) {
+  BaseItemViewModel? createWithoutError(BaseModel model) {
     switch(model.runtimeType) {
       case SpeechModel:
-        return SpeechItemViewModel(model);
+        return SpeechItemViewModel(model as SpeechModel);
     }
 
     return null;

@@ -1,22 +1,21 @@
+// @dart=2.9
+
 import 'package:project_athens/athens_core/data/word_model/word_model.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/ext/map_extension.dart';
 import 'package:project_athens/deputies_utils/data/network/response/deputy_response.dart';
-import 'package:project_athens/deputies_utils/data/network/response/subscribed_deputy_response.dart';
+import 'package:project_athens/deputies_utils/data/network/response/full_deputy_response.dart';
 import 'package:project_athens/deputies_utils/domain/base_deputies_params.dart';
 import 'package:project_athens/deputies_utils/domain/base_deputy_params.dart';
 import 'package:project_athens/deputies_utils/domain/base_parliament_clubs_params.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_full.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_full_mapper.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
-import 'package:project_athens/deputies_utils/domain/firebase_deputies/firebase_deputies_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputies/get_deputies_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputy/get_deputy_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputy_nouns/get_deputy_nouns_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/get_parliament_clubs/get_parliament_clubs_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/parliament_club_model.dart';
-import 'package:project_athens/deputies_utils/domain/subscribed_deputy_model.dart';
-import 'package:project_athens/deputies_utils/mappers/subscribed_deputy_mapper.dart';
 
 class DeputiesCache {
   final GetDeputiesUseCase _getDeputiesUseCase;
@@ -132,7 +131,7 @@ class DeputiesCache {
     }
 
     final result = await _getDeputyUseCase(BaseDeputyParams(9, id)).then((result) async {
-      if (result is Success<DeputyResponse>) {
+      if (result is Success<FullDeputyResponse>) {
         final clubs = await parliamentClubs;
 
         if (clubs is Success<List<ParliamentClubModel>>) {

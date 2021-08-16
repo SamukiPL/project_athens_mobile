@@ -12,7 +12,7 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
   final bool showBottomLine;
 
   const SpeechViewHolder(this.viewModel, this.showTopLine, this.showBottomLine,
-      {Key key})
+      {Key? key})
       : super(key: key);
 
   final double lineThickness = 2;
@@ -36,6 +36,7 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
 
   Widget getHourWidget(BuildContext context, ThemeData theme) {
     return Container(
+      width: 60,
       margin: EdgeInsets.only(left: 4, right: 4),
       child: Center(
         child: Wrap(
@@ -101,7 +102,7 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
                       color: Colors.white,
                     ),
                     child: Image.network(
-                      viewModel.model.thumbnailUrl,
+                      viewModel.model.thumbnailUrl ?? "",
                       width: 40,
                       errorBuilder:
                           (context, exception, stackTrace) => Icon(
@@ -138,7 +139,7 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
                   width: double.infinity,
                   child: Text(
                     "WYPOWIEDŹ",
-                    style: theme.textTheme.overline.copyWith(
+                    style: theme.textTheme.overline?.copyWith(
                       color: theme.dividerColor,
                       fontSize: 10
                     ),
@@ -172,7 +173,7 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
         ? Container(
             width: double.infinity,
             child: Text(
-              viewModel.model.desc,
+              viewModel.model.desc ?? "",
               style: TextStyle(
                   color: theme.dividerColor, fontSize: 12),
               textAlign: TextAlign.left,

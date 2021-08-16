@@ -29,19 +29,19 @@ class TimelineBloc extends BaseBloc implements PagingBloc {
   }
 
   @override
-  PagingListAdapter adapter;
+  late PagingListAdapter adapter;
 
   @override
-  int batchSize;
+  late int batchSize;
 
   @override
-  int offset;
+  late int offset;
 
-  List<MeetingDate> _dates;
-  DateTime _selectedDate;
+  List<MeetingDate>? _dates;
+  late DateTime _selectedDate;
 
 
-  List<MeetingDate> get dates => _dates;
+  List<MeetingDate> get dates => _dates!;
   DateTime get selectedDate => _selectedDate;
 
   final CalendarAppBarBloc calendarBloc = CalendarAppBarBloc(DateTime.now());
@@ -97,7 +97,7 @@ class TimelineBloc extends BaseBloc implements PagingBloc {
   }
 
   DateTime _getBeforeDate(DateTime referenceDate) {
-    var dates = _dates.toList();
+    var dates = _dates!.toList();
     dates.sort((a, b) => a.meetingDate.compareTo(b.meetingDate));
 
     dates.retainWhere((element) => element.meetingDate.isBefore(referenceDate));
@@ -111,7 +111,7 @@ class TimelineBloc extends BaseBloc implements PagingBloc {
 
   void setNextDate() {
     adapter.updateList([], loading: true);
-    var dates = _dates.toList();
+    var dates = _dates!.toList();
     dates.sort((a, b) => a.meetingDate.compareTo(b.meetingDate));
 
     dates.retainWhere((element) => element.meetingDate.isAfter(_selectedDate));

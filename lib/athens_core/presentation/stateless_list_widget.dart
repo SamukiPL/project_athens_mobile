@@ -14,7 +14,7 @@ abstract class StatelessListWidget<ITEM> extends StatelessWidget {
   @protected
   final List<ITEM> items;
 
-  const StatelessListWidget(this.items, {Key key}) : super(key: key);
+  const StatelessListWidget(this.items, {Key? key}) : super(key: key);
 
   Widget build(BuildContext context) {
     return getList();
@@ -30,12 +30,12 @@ abstract class StatelessListWidget<ITEM> extends StatelessWidget {
     );
   }
 
-  StatelessWidget _itemBuilder(List<ITEM> items, int index) {
+  Widget _itemBuilder(List<ITEM> items, int index) {
     return getItemViewHolder(items[index], index, items.length);
   }
 
   @protected
-  StatelessWidget getItemViewHolder(ITEM item, int index, int length);
+  Widget getItemViewHolder(ITEM item, int index, int length);
 
   @protected
   StatelessWidget buildSeparator(context, index) => Container();

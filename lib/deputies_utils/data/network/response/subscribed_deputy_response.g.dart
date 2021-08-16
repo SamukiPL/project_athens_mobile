@@ -9,16 +9,14 @@ part of 'subscribed_deputy_response.dart';
 SubscribedDeputyResponse _$SubscribedDeputyResponseFromJson(
     Map<String, dynamic> json) {
   return SubscribedDeputyResponse(
-    json['id'] as String,
+    json['id'] as String?,
     json['createAt'] == null
         ? null
         : DateTime.parse(json['createAt'] as String),
-    json['cadency'] as int,
+    json['cadency'] as int?,
     json['isPrimary'] as bool,
     json['cadencyDeputyId'] as String,
-    json['notifications'] == null
-        ? null
-        : Notifications.fromJson(json['notifications'] as Map<String, dynamic>),
+    Notifications.fromJson(json['notifications'] as Map<String, dynamic>),
   );
 }
 

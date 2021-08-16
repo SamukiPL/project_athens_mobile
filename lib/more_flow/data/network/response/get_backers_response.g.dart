@@ -8,10 +8,9 @@ part of 'get_backers_response.dart';
 
 GetBackersResponse _$GetBackersResponseFromJson(Map<String, dynamic> json) {
   return GetBackersResponse(
-    (json['backers'] as List)
-        ?.map((e) =>
-            e == null ? null : Backer.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    (json['backers'] as List<dynamic>)
+        .map((e) => Backer.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 
@@ -26,9 +25,7 @@ Backer _$BackerFromJson(Map<String, dynamic> json) {
     json['amount'] as int,
     json['hasBadge'] as bool,
     json['comment'] as String,
-    json['backedAt'] == null
-        ? null
-        : DateTime.parse(json['backedAt'] as String),
+    DateTime.parse(json['backedAt'] as String),
     json['isCurrentUser'] as bool,
   );
 }
@@ -38,6 +35,6 @@ Map<String, dynamic> _$BackerToJson(Backer instance) => <String, dynamic>{
       'amount': instance.amount,
       'hasBadge': instance.hasBadge,
       'comment': instance.comment,
-      'backedAt': instance.backedAt?.toIso8601String(),
+      'backedAt': instance.backedAt.toIso8601String(),
       'isCurrentUser': instance.isCurrentUser,
     };

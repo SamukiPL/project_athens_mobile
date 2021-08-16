@@ -72,7 +72,7 @@ extension RegistrationStepExt on RegistrationStep {
     }
   }
 
-  IconData getStepIcon() {
+  IconData? getStepIcon() {
     switch(this) {
       case RegistrationStep.DEPUTIES_CHOOSER:
         return Icons.search;

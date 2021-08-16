@@ -12,7 +12,7 @@ class DateFromTo extends BaseFilterType {
   DateTime fromTime;
   DateTime toTime;
 
-  DateFromTo({this.fromTime, this.toTime});
+  DateFromTo({required this.fromTime, required this.toTime});
 
   @override
   BaseFilterType copy() => DateFromTo(fromTime: fromTime, toTime: toTime);

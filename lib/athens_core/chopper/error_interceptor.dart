@@ -8,18 +8,18 @@ import 'package:project_athens/athens_core/chopper/client_errors.dart';
 class ErrorInterceptor extends Interceptor {
 
   void informAboutServerErrors(Response response) {
-    if (response.statusCode >= 500) {
+    if (response.statusCode != null && response.statusCode! >= 500) {
       FirebaseCrashlytics.instance.recordFlutterError(FlutterErrorDetails(exception: response.toString()));
     }
   }
 
   @override
-  Future onResponse(Response<dynamic> response) async {
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
     informAboutServerErrors(response);
     if(response.statusCode == 401) {
       throw AuthException();
     }
-    return response;
+    handler.next(response);
   }
 
 }

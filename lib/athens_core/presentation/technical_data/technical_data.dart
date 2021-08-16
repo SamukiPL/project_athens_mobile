@@ -8,7 +8,7 @@ class TechnicalData extends StatelessWidget {
   final String technicalId;
   final Map<String, String> additionalIds;
 
-  const TechnicalData({Key key, @required this.technicalId, this.additionalIds})
+  const TechnicalData({Key? key, required this.technicalId, this.additionalIds = const {}})
       : super(key: key);
 
   void _copyToClipboard(String text) {
@@ -23,7 +23,7 @@ class TechnicalData extends StatelessWidget {
       value: configuration.showTechnicalData,
       initialData: false,
       child: Consumer<bool>(
-        builder: (BuildContext context, bool value, Widget child) =>
+        builder: (context, value, child) =>
             value
                 ? Container(
                     width: double.infinity,

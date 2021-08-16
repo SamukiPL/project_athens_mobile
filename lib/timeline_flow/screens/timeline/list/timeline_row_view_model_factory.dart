@@ -7,11 +7,11 @@ import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_
 
 extension TimelineModelExtension on List<TimelineModel> {
   List<BaseItemViewModel> toTimelineRowViewModel(
-      {DateTime date, TimerViewModel timerViewModel}) {
+      {DateTime? date, TimerViewModel? timerViewModel}) {
     final list = this.map((model) => _toRowViewModel(model)).toList();
 
     if (date != null && date.isToday) {
-      list.add(timerViewModel);
+      list.add(timerViewModel!);
     }
 
     return list;
@@ -21,15 +21,15 @@ extension TimelineModelExtension on List<TimelineModel> {
     BaseItemViewModel item;
     switch (model.type) {
       case TimelineModelType.VOTING:
-        VotingModel votingModel = model;
+        VotingModel votingModel = model as VotingModel;
         item = VotingRowViewModel(votingModel);
         break;
       case TimelineModelType.SPEECH:
-        SpeechModel speechModel = model;
+        SpeechModel speechModel = model as SpeechModel;
         item = SpeechRowViewModel(speechModel);
         break;
       case TimelineModelType.GROUPED_VOTING:
-        GroupedVotingModel groupedVotingModel = model;
+        GroupedVotingModel groupedVotingModel = model as GroupedVotingModel;
         item = GroupedVotingViewModel(groupedVotingModel);
         break;
       default:

@@ -16,7 +16,7 @@ class SearchAppBarBloc extends BaseChangeNotifier {
 
   FocusNode searchFocusNode = FocusNode();
 
-  Timer _debounce;
+  Timer? _debounce;
 
   void setState(SearchAppBarState state) {
     _state = state;
@@ -24,7 +24,7 @@ class SearchAppBarBloc extends BaseChangeNotifier {
   }
 
   Future<void> changeSearchQuery(String searchQuery) async {
-    if (_debounce?.isActive ?? false) _debounce.cancel();
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
 
     _debounce = Timer(const Duration(milliseconds: 400), () {
       _searchAppBarFacade.changeSearchQuery(searchQuery);

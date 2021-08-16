@@ -8,7 +8,7 @@ class DeputyListItemViewModel extends BaseItemViewModel {
 
   final SubscribedDeputyModel model;
 
-  DeputyListItemViewModel({@required this.model});
+  DeputyListItemViewModel({required this.model});
 
   @override
   Widget buildWidget(int index, int length) {

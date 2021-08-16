@@ -11,8 +11,8 @@ SpeechSearchRequest _$SpeechSearchRequestFromJson(Map<String, dynamic> json) {
     json['limit'] as int,
     json['offset'] as int,
     json['searchPhrase'] as String,
-    json['from'] as String,
-    json['to'] as String,
+    json['from'] as String?,
+    json['to'] as String?,
     json['sort'] as String,
     json['cadency'] as int,
   );

@@ -10,10 +10,10 @@ class VotesGrouper {
             (element) => element is VotingModel && element.orderPoint != null)
         .toList();
     votesToGroup.forEach((element) {
-      VotingModel voting = element;
-      List<VotingModel> group = groupedVotes[voting.orderPoint] ?? List();
+      VotingModel voting = element as VotingModel;
+      List<VotingModel> group = groupedVotes[voting.orderPoint] ?? List.empty();
       group.add(voting);
-      groupedVotes[voting.orderPoint] = group;
+      groupedVotes[voting.orderPoint!] = group;
     });
 
     final newList = models

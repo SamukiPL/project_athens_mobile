@@ -11,6 +11,6 @@ abstract class ItemViewModelFactory {
     throw ArgumentError("Unsupported model for this factory");
   }
 
-  BaseItemViewModel createWithoutError(BaseModel model);
+  BaseItemViewModel? createWithoutError(BaseModel model);
 
 }

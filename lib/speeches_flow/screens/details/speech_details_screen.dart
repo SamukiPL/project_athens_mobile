@@ -10,6 +10,7 @@ import 'package:project_athens/athens_core/presentation/technical_data/technical
 import 'package:project_athens/athens_core/utils/pair.dart';
 import 'package:project_athens/deputies_flow/navigation/deputies_destinations.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
+import 'package:project_athens/deputies_utils/domain/subscribed_deputy_model.dart';
 import 'package:project_athens/speeches_flow/screens/details/clipper_ltrb.dart';
 import 'package:project_athens/speeches_flow/screens/details/speech_details_bloc.dart';
 import 'package:project_athens/speeches_flow/screens/details/video_widget/speech_video_widget.dart';
@@ -63,7 +64,7 @@ class SpeechDetailsScreen extends BaseScreen<SpeechDetailsBloc> {
                   margin: EdgeInsets.all(16),
                   child: TechnicalData(
                       technicalId: bloc.speechModel.id,
-                      additionalIds: {'deputyId': bloc.speechModel.deputyId}),
+                      additionalIds: {'deputyId': bloc.speechModel.deputyId ?? "null"}),
                 ),
               ],
             ),
@@ -171,12 +172,12 @@ class SpeechDetailsScreen extends BaseScreen<SpeechDetailsBloc> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       buildPic(theme,
-                          bloc.speechModel.nextPersonSpeech.thumbnailUrl),
+                          bloc.speechModel.nextPersonSpeech?.thumbnailUrl ?? ""),
                       buildNextDecoration(theme),
                       buildNextPreviousInfo(
                           theme,
                           localization().speechesNextSpeech(),
-                          bloc.speechModel.nextPersonSpeech.name),
+                          bloc.speechModel.nextPersonSpeech?.name ?? ""),
                     ],
                   ),
                 ),
@@ -200,10 +201,10 @@ class SpeechDetailsScreen extends BaseScreen<SpeechDetailsBloc> {
                       buildNextPreviousInfo(
                           theme,
                           localization().speechesPreviousSpeech(),
-                          bloc.speechModel.previousPersonSpeech.name),
+                          bloc.speechModel.previousPersonSpeech?.name ?? ""),
                       buildPreviousDecoration(theme),
                       buildPic(theme,
-                          bloc.speechModel.previousPersonSpeech.thumbnailUrl),
+                          bloc.speechModel.previousPersonSpeech?.thumbnailUrl ?? ""),
                     ],
                   ),
                 ),
@@ -263,7 +264,7 @@ class SpeechDetailsScreen extends BaseScreen<SpeechDetailsBloc> {
           child: Container(
             decoration: BoxDecoration(color: Colors.white),
             child: Image.network(
-              thumbnailUrl ?? "", //TODO
+              thumbnailUrl, //TODO
               width: 65,
               errorBuilder: (context, exception, stackTrace) => Icon(
                 Icons.record_voice_over,
@@ -285,10 +286,10 @@ class SpeechDetailsScreen extends BaseScreen<SpeechDetailsBloc> {
 
   Widget buildDecoration(
       ThemeData theme,
-      Pair<double, double> leftTop,
-      Pair<double, double> rightTop,
-      Pair<double, double> leftBottom,
-      Pair<double, double> rightBottom) {
+      Pair<double, double>? leftTop,
+      Pair<double, double>? rightTop,
+      Pair<double, double>? leftBottom,
+      Pair<double, double>? rightBottom) {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
@@ -316,14 +317,15 @@ class SpeechDetailsScreen extends BaseScreen<SpeechDetailsBloc> {
   }
 
   @override
-  Widget buildFloatingActionButton(
+  Widget? buildFloatingActionButton(
           BuildContext context, SpeechDetailsBloc bloc) =>
       null;
 
   void goToDeputyDetails(BuildContext context, DeputyModel model) { //TODO
     if (model != null) {
-      final destination = DeputyDetailsDestination(model);
-      goToDestination(context, destination);
+      //TODO SubscribedDeputyModel is required!!! We don't have it here
+      // final destination = DeputyDetailsDestination(model);
+      // goToDestination(context, destination);
     }
   }
 }

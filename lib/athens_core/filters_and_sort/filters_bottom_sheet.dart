@@ -19,7 +19,7 @@ class _FiltersBottomSheet extends StatelessWidget {
 
   final BuildContext parentContext;
 
-  const _FiltersBottomSheet({Key key, this.parentContext}) : super(key: key);
+  const _FiltersBottomSheet({Key? key, required this.parentContext}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +47,10 @@ class _FiltersBottomSheet extends StatelessWidget {
             )
           ],
         ),
-        body: StreamProvider<WidgetState>.value(
+        body: StreamProvider<WidgetState?>.value(
+          initialData: null,
           value: bloc.state,
-          child: Consumer<WidgetState>(
+          child: Consumer<WidgetState?>(
             builder: (context, _, child) => ListView.builder(
               itemBuilder: (context, index) => bloc.filters[index].buildFilter(parentContext),
               itemCount: bloc.filters.length,

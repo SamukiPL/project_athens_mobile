@@ -60,7 +60,7 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
                                   ],
                                 ),
                                 Text(
-                                  _deputyModel.club,
+                                  _deputyModel.club ?? "",
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
@@ -76,7 +76,7 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
                         child: Center(
                           child: ClipRRect(
                               borderRadius: BorderRadius.circular(32),
-                              child: Image.network(_deputyModel.thumbnailUrl)),
+                              child: Image.network(_deputyModel.thumbnailUrl ?? "")),
                         ),
                       ),
                     ),
@@ -139,12 +139,12 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
   String get appBarTitle => _deputyModel.name;
 
   @override
-  Widget buildFloatingActionButton(
+  Widget? buildFloatingActionButton(
           BuildContext context, DeputyDetailsBloc bloc) =>
       null;
 
   @override
-  Widget buildAppBar(BuildContext context, DeputyDetailsBloc bloc) => null;
+  Widget? buildAppBar(BuildContext context, DeputyDetailsBloc bloc) => null;
 
   Widget buildBaseTabContainer(Widget tab) {
     return SingleChildScrollView(

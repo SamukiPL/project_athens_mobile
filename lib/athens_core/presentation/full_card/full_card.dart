@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
+import 'package:provider/provider.dart';
 
 class FullCard extends StatelessWidget {
 
@@ -11,7 +12,7 @@ class FullCard extends StatelessWidget {
   final double headerPadding;
   final String dialogText;
 
-  FullCard({@required this.child, this.leftPadding = 0, this.rightPadding = 0, this.header, this.headerPadding = 0, this.dialogText = ''});
+  FullCard({required this.child, this.leftPadding = 0, this.rightPadding = 0, this.header = "", this.headerPadding = 0, this.dialogText = ''});
 
   Widget buildHeader(ThemeData theme, BuildContext context) {
     return Container(
@@ -72,7 +73,7 @@ class FullCard extends StatelessWidget {
   }
 
   openInfoDialog(BuildContext context) {
-    final localizations = AppLocalizations.of(context);
+    final localizations = Provider.of<AppLocalizations>(context);
     showDialog(
         context: context,
         builder: (context) => AlertDialog(

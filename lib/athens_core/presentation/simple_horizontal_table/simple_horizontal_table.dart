@@ -4,12 +4,12 @@ import 'package:project_athens/athens_core/presentation/simple_horizontal_table/
 
 class SimpleHorizontalTable extends StatelessWidget {
   final List<SimpleHorizontalTableCell> cells;
-  final Border border;
+  final Border? border;
 
 
-  SimpleHorizontalTable({@required this.cells, this.border});
+  SimpleHorizontalTable({required this.cells, this.border});
 
-  Widget buildCell(IconData icon, String upperText, String lowerText,
+  Widget buildCell(IconData? icon, String? upperText, String lowerText,
       ThemeData theme, Border border) {
     return Expanded(
       child: Container(
@@ -24,7 +24,7 @@ class SimpleHorizontalTable extends StatelessWidget {
               size: 30,
             )
                 : Text(
-              upperText,
+              upperText ?? "",
               style: TextStyle(
                   color: theme.dividerColor,
                   fontSize: 15,
@@ -62,7 +62,7 @@ class SimpleHorizontalTable extends StatelessWidget {
         children: cells.map((e) {
           final isLast = mapIdx == cells.length - 1;
           return buildCell(e.icon, e.upperText, e.lowerText, theme,
-              isLast ? Border(right: BorderSide(width: 0)) : currBorder);
+              isLast || currBorder == null ? Border(right: BorderSide(width: 0)) : currBorder);
         }).toList(),
       ),
     );

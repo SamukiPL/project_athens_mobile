@@ -17,15 +17,16 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
         child: Consumer<BLOC>(
           builder: (context, bloc, _) {
             return StreamProvider<WidgetState>.value(
+              initialData: WidgetState.empty(),
               value: bloc.state,
               updateShouldNotify: (_, current) {
                 stateListener(context, bloc, current);
                 return false;
               },
               child: Consumer<WidgetState>(
-                builder: (context, _, child) => child,
+                builder: (context, _, child) => child!,
                 child: Scaffold(
-                  appBar: generateAppBar(context, bloc),
+                  appBar: generateAppBar(context, bloc) as PreferredSizeWidget?,
                   body: Builder(builder: (context) => bodyBuilder(context, bloc)),
                   floatingActionButton: generateFab(context, bloc),
                 ),
@@ -50,7 +51,7 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
   }
 
   void stateListener(BuildContext context, BLOC bloc, WidgetState state) {
-      final localizations = AppLocalizations.of(context);
+    final localizations = Provider.of<AppLocalizations>(context);
 
       switch (state.runtimeType) {
         case SuccessState:
@@ -124,11 +125,11 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
     }
   }
 
-  Widget generateAppBar(BuildContext context, BLOC bloc);
+  Widget? generateAppBar(BuildContext context, BLOC bloc);
 
   Widget generateBody(BuildContext context, BLOC bloc);
 
-  Widget generateFab(BuildContext context, BLOC bloc);
+  Widget? generateFab(BuildContext context, BLOC bloc);
 
   void onSuccess(BuildContext context);
 

@@ -8,7 +8,6 @@ import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
 import 'package:provider/provider.dart';
-import 'package:dio_firebase_performance/dio_firebase_performance.dart';
 
 class NetworkModule extends Module {
   NetworkModule(BuildContext context) : super(context);
@@ -27,7 +26,7 @@ class NetworkModule extends Module {
     return [
       Provider<Dio>(
         create: (BuildContext context) => Dio(clientOptions)
-        ..interceptors.addAll([AuthInterceptor(authFacade), DioFirebasePerformanceInterceptor(), ErrorInterceptor(), LogInterceptor(requestBody: true, responseBody: true)]),
+        ..interceptors.addAll([AuthInterceptor(authFacade), ErrorInterceptor(), LogInterceptor(requestBody: true, responseBody: true)]),
         dispose: (context, client) {
           client.close();
         },

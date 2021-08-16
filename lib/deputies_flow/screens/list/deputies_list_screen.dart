@@ -35,7 +35,7 @@ class DeputiesListScreen extends BaseScreen<BaseListBloc> {
   }
 
   @override
-  Widget buildFloatingActionButton(BuildContext context, BaseListBloc bloc) => null;
+  Widget? buildFloatingActionButton(BuildContext context, BaseListBloc bloc) => null;
 
   @override
   Widget buildAppBar(BuildContext context, BaseListBloc bloc) {

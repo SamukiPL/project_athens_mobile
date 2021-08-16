@@ -38,7 +38,7 @@ class MainWidget extends StatelessWidget {
         AutoUpdaterModule(context)
       ],
       child: Consumer<BottomNavigationBloc>(
-        builder: (context, bloc, child) => WillPopScope(child: child, onWillPop: () async {
+        builder: (context, bloc, child) => WillPopScope(child: child!, onWillPop: () async {
           bloc.pop();
           return false;
         }),

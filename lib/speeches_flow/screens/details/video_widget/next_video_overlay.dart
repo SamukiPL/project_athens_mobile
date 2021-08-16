@@ -13,7 +13,7 @@ class NextVideoOverlay extends StatelessWidget with RedirectionDelegate {
   final NextVideoOverlayBloc bloc;
   final bool isNormalSpeech;
 
-  const NextVideoOverlay({Key key, this.bloc, this.isNormalSpeech}) : super(key: key);
+  const NextVideoOverlay({Key? key, required this.bloc, required this.isNormalSpeech}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class NextVideoOverlay extends StatelessWidget with RedirectionDelegate {
     return StreamProvider.value(
       value: bloc.stream,
       initialData: null,
-      child: Consumer<PersonSpeechModel>(
+      child: Consumer<PersonSpeechModel?>(
         builder: (context, model, _) => (model != null) ? AspectRatio(
           aspectRatio: 16 / 9,
           child: Container(
@@ -75,7 +75,7 @@ class NextVideoOverlay extends StatelessWidget with RedirectionDelegate {
           child: Container(
             decoration: BoxDecoration(color: Colors.white),
             child: Image.network(
-              nextPersonSpeech.thumbnailUrl,
+              nextPersonSpeech.thumbnailUrl ?? "",
               width: 45,
               errorBuilder: (context, exception, stackTrace) =>
                   Icon(

@@ -9,14 +9,16 @@ abstract class BaseRegistrationStep<BLOC extends BaseRegistrationStepBloc> exten
   @override
   Widget build(BuildContext context) {
     final bloc = Provider.of<BLOC>(context);
-    return StreamProvider<StepAction>.value(
+    return StreamProvider<StepAction?>.value(
+      initialData: null,
       value: bloc.stepAction,
       updateShouldNotify: (_, current) {
-        listenToAction(context, bloc, current);
+        if (current != null)
+          listenToAction(context, bloc, current);
         return false;
       },
-      child: Consumer<StepAction>(
-        builder: (context, _, child) => child,
+      child: Consumer<StepAction?>(
+        builder: (context, _, child) => child!,
         child: buildStepBody(context, bloc)
       )
     );

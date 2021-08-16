@@ -6,26 +6,26 @@ class VotingModel extends TimelineModel {
   final String title;
   final VoteResultModel results;
   final List<VoteModel> votes;
-  final int absoluteMajority;
-  final int qualifyingMajority;
+  final int? absoluteMajority;
+  final int? qualifyingMajority;
   final List<ParliamentClubVotingNumbers> clubVotes;
-  final int orderPoint;
-  final VoteType deputyVoteType;
+  final int? orderPoint;
+  final VoteType? deputyVoteType;
 
   VotingModel({
-    String id,
-    this.title,
-    DateTime date,
-    this.votingDesc,
-    this.results,
-    this.votes,
+    required String id,
+    required this.title,
+    required DateTime date,
+    required this.votingDesc,
+    required this.results,
+    required this.votes,
     this.absoluteMajority,
     this.qualifyingMajority,
-    this.clubVotes,
+    required this.clubVotes,
     this.orderPoint,
     this.deputyVoteType,
-    DateTime createAt,
-    DateTime updateAt,
+    DateTime? createAt,
+    DateTime? updateAt,
   }) : super(id, TimelineModelType.VOTING, date, createAt, updateAt);
 }
 

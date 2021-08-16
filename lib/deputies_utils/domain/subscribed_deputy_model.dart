@@ -16,21 +16,23 @@ class SubscribedDeputyModel extends DeputyModel {
       String club,
       String clubId,
       int cardId)
-    : super(
-      id: id,
-      name: name,
-      cardId: cardId,
-      club: club,
-      clubId: clubId,
-      thumbnailUrl: thumbnailUrl
-    );
+      : super(
+            id: id,
+            name: name,
+            cardId: cardId,
+            club: club,
+            clubId: clubId,
+            thumbnailUrl: thumbnailUrl);
 
-  SubscribedDeputyModel.fromDeputyModel(
-    DeputyModel model,
-      this.isPrimary,
-      this.cadencyDeputyId,
-      this.notifications
-  ) : super(id: model.id, name: model.name, club: model.club, cardId: model.cardId, thumbnailUrl: model.thumbnailUrl);
+  SubscribedDeputyModel.fromDeputyModel(DeputyModel model, this.isPrimary,
+      this.cadencyDeputyId, this.notifications)
+      : super(
+            id: model.id,
+            name: model.name,
+            club: model.club,
+            clubId: model.clubId,
+            cardId: model.cardId,
+            thumbnailUrl: model.thumbnailUrl);
 
   dispose() {
     notifications.dispose();
@@ -43,9 +45,10 @@ class SubscribedDeputyNotificationsNotifier extends BaseChangeNotifier {
   bool interpolation;
   bool isSubscribed;
 
-  SubscribedDeputyNotificationsNotifier(this.vote, this.speech, this.interpolation, this.isSubscribed);
+  SubscribedDeputyNotificationsNotifier(
+      this.vote, this.speech, this.interpolation, this.isSubscribed);
 
-  Function() updateCallback;
+  Function()? updateCallback;
 
   setIsSubscribed(bool state) {
     if (updateCallback == null) {
@@ -59,7 +62,7 @@ class SubscribedDeputyNotificationsNotifier extends BaseChangeNotifier {
     }
 
     notifyListeners();
-    updateCallback.call();
+    updateCallback?.call();
   }
 
   setSpeech(bool state) {
@@ -70,7 +73,7 @@ class SubscribedDeputyNotificationsNotifier extends BaseChangeNotifier {
     speech = state;
 
     notifyListeners();
-    updateCallback.call();
+    updateCallback?.call();
   }
 
   setInterpolation(bool state) {
@@ -81,7 +84,7 @@ class SubscribedDeputyNotificationsNotifier extends BaseChangeNotifier {
     interpolation = state;
 
     notifyListeners();
-    updateCallback.call();
+    updateCallback?.call();
   }
 
   setVote(bool state) {
@@ -92,6 +95,6 @@ class SubscribedDeputyNotificationsNotifier extends BaseChangeNotifier {
     vote = state;
 
     notifyListeners();
-    updateCallback.call();
+    updateCallback?.call();
   }
 }

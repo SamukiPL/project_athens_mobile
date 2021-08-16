@@ -21,7 +21,7 @@ class BaseListBloc extends BaseBloc implements PagingBloc {
   }
 
   @override
-  PagingListAdapter adapter;
+  late PagingListAdapter adapter;
 
   @override
   int batchSize = 20;
@@ -39,7 +39,7 @@ class BaseListBloc extends BaseBloc implements PagingBloc {
           : DataLoadingState.contentLoaded());
     } else if(result is Refresh<List<BaseModel>>) {
       adapter.updateList([], loading: true);
-    } else if (result is Failure<List<BaseModel>> && result.value.isNotEmpty) {
+    } else if (result is Failure<List<BaseModel>> && result.value != null && result.value!.isNotEmpty) {
       adapter.setLoading(false);
     } else {
       super.manageState(result);

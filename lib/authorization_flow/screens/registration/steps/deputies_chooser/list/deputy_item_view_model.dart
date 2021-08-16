@@ -9,9 +9,9 @@ class DeputyItemViewModel extends BaseItemViewModel {
 
   final String name;
 
-  DeputyItemViewModel({@required this.model, @required this.name});
+  DeputyItemViewModel({required this.model, required this.name});
 
-  bool Function(DeputyItemViewModel) itemClick;
+  late bool Function(DeputyItemViewModel) itemClick;
 
   bool _checked = false;
   bool get checked => _checked;
