@@ -10,13 +10,15 @@ import 'package:project_athens/voting_flow/screens/list/list_impl/view_holders/v
 
 class DeputyVoteAccuracyItemViewModel extends BaseItemViewModel {
 
-  final VoteSlimMajorityModel model;
+  final VoteSlimModel model;
 
   String get id => model.id;
   String get title => model.title != null ? model.title : "";
   String get date => DateFormat("d.MM.y", "pl").format(model.voteAt);
   VoteNumbers get results => model.voteNumbers;
   String get description => model.votingDesc;
+  List<VoteSlimClubMajority> get clubs => model.clubsMajority;
+  List<VoteSlimDeputyVoteType> get deputies => model.deputiesVote;
 
   DeputyVoteAccuracyItemViewModel(this.model);
 

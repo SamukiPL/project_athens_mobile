@@ -38,6 +38,7 @@ class DeputyVoteAccuracyTable extends StatelessWidget {
       width: 50,
       height: 50,
       child: CachedNetworkImage(
+        filterQuality: FilterQuality.high,
         imageUrl: clubVoteAccuracy?.parliamentClub?.imageSrc,
         placeholder: (context, url) => CircularProgressIndicator(),
         errorWidget: (context, url, error) =>

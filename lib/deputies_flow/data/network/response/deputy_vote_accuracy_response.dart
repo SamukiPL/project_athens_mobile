@@ -21,13 +21,35 @@ class VoteSlimDTO {
   final VotingType type;
   final DateTime voteAt;
   final VoteSlimVotingNumbersDTO voteNumbers;
-  final VoteType desiredClubVoteType;
-  final VoteType desiredDeputyVoteType;
+  final List<VoteSlimClubMajorityDTO> clubsMajority;
+  final List<VoteSlimDeputyMajorityVoteDTO> deputiesVoteType;
 
-  VoteSlimDTO(this.id, this.agenda, this.type, this.voteAt, this.voteNumbers, this.desiredClubVoteType, this.desiredDeputyVoteType);
+  VoteSlimDTO(this.id, this.agenda, this.type, this.voteAt, this.voteNumbers, this.clubsMajority, this.deputiesVoteType);
 
   factory VoteSlimDTO.fromJson(Map<String, dynamic> json) => _$VoteSlimDTOFromJson(json);
   Map<String, dynamic> toJson() => _$VoteSlimDTOToJson(this);
+}
+
+@JsonSerializable()
+class VoteSlimClubMajorityDTO {
+  final String parliamentClub;
+  final VoteType voteMajority;
+
+  VoteSlimClubMajorityDTO(this.parliamentClub, this.voteMajority);
+
+  factory VoteSlimClubMajorityDTO.fromJson(Map<String, dynamic> json) => _$VoteSlimClubMajorityDTOFromJson(json);
+  Map<String, dynamic> toJson() => _$VoteSlimClubMajorityDTOToJson(this);
+}
+
+@JsonSerializable()
+class VoteSlimDeputyMajorityVoteDTO {
+  final String cadencyDeputy;
+  final VoteType voteType;
+
+  VoteSlimDeputyMajorityVoteDTO(this.cadencyDeputy, this.voteType);
+
+  factory VoteSlimDeputyMajorityVoteDTO.fromJson(Map<String, dynamic> json) => _$VoteSlimDeputyMajorityVoteDTOFromJson(json);
+  Map<String, dynamic> toJson() => _$VoteSlimDeputyMajorityVoteDTOToJson(this);
 }
 
 @JsonSerializable()

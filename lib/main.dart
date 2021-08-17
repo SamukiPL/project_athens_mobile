@@ -55,6 +55,7 @@ class MyApp extends StatelessWidget {
             },
           ),
             backgroundColor: Colors.white,
+            scaffoldBackgroundColor: Colors.white,
             dividerColor: Color(0xffaaaaaa),
             primaryColor: Color(0xff00bfff),
             primaryColorDark: Color(0xff008ebe),

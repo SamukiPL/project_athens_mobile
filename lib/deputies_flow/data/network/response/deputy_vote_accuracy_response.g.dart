@@ -32,8 +32,16 @@ VoteSlimDTO _$VoteSlimDTOFromJson(Map<String, dynamic> json) {
         ? null
         : VoteSlimVotingNumbersDTO.fromJson(
             json['voteNumbers'] as Map<String, dynamic>),
-    _$enumDecodeNullable(_$VoteTypeEnumMap, json['desiredClubVoteType']),
-    _$enumDecodeNullable(_$VoteTypeEnumMap, json['desiredDeputyVoteType']),
+    (json['clubsMajority'] as List)
+        ?.map((e) => e == null
+            ? null
+            : VoteSlimClubMajorityDTO.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    (json['deputiesVoteType'] as List)
+        ?.map((e) => e == null
+            ? null
+            : VoteSlimDeputyMajorityVoteDTO.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
@@ -44,9 +52,8 @@ Map<String, dynamic> _$VoteSlimDTOToJson(VoteSlimDTO instance) =>
       'type': _$VotingTypeEnumMap[instance.type],
       'voteAt': instance.voteAt?.toIso8601String(),
       'voteNumbers': instance.voteNumbers,
-      'desiredClubVoteType': _$VoteTypeEnumMap[instance.desiredClubVoteType],
-      'desiredDeputyVoteType':
-          _$VoteTypeEnumMap[instance.desiredDeputyVoteType],
+      'clubsMajority': instance.clubsMajority,
+      'deputiesVoteType': instance.deputiesVoteType,
     };
 
 T _$enumDecode<T>(
@@ -105,12 +112,42 @@ const _$VotingTypeEnumMap = {
   VotingType.UNKNOWN: 999,
 };
 
+VoteSlimClubMajorityDTO _$VoteSlimClubMajorityDTOFromJson(
+    Map<String, dynamic> json) {
+  return VoteSlimClubMajorityDTO(
+    json['parliamentClub'] as String,
+    _$enumDecodeNullable(_$VoteTypeEnumMap, json['voteMajority']),
+  );
+}
+
+Map<String, dynamic> _$VoteSlimClubMajorityDTOToJson(
+        VoteSlimClubMajorityDTO instance) =>
+    <String, dynamic>{
+      'parliamentClub': instance.parliamentClub,
+      'voteMajority': _$VoteTypeEnumMap[instance.voteMajority],
+    };
+
 const _$VoteTypeEnumMap = {
   VoteType.IN_FAVOR: 0,
   VoteType.AGAINST: 1,
   VoteType.HOLD: 2,
   VoteType.ABSENT: 3,
 };
+
+VoteSlimDeputyMajorityVoteDTO _$VoteSlimDeputyMajorityVoteDTOFromJson(
+    Map<String, dynamic> json) {
+  return VoteSlimDeputyMajorityVoteDTO(
+    json['cadencyDeputy'] as String,
+    _$enumDecodeNullable(_$VoteTypeEnumMap, json['voteType']),
+  );
+}
+
+Map<String, dynamic> _$VoteSlimDeputyMajorityVoteDTOToJson(
+        VoteSlimDeputyMajorityVoteDTO instance) =>
+    <String, dynamic>{
+      'cadencyDeputy': instance.cadencyDeputy,
+      'voteType': _$VoteTypeEnumMap[instance.voteType],
+    };
 
 VoteSlimVotingNumbersDTO _$VoteSlimVotingNumbersDTOFromJson(
     Map<String, dynamic> json) {
