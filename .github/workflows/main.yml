@@ -44,8 +44,8 @@ jobs:
           tar xvf secrets/api-key.tar -C secrets/
       - run: flutter pub get
       - run: flutter test
-      - run: flutter build appbundle
-      - run: flutter build apk
+      - run: flutter build appbundle --no-sound-null-safety
+      - run: flutter build apk --no-sound-null-safety
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
