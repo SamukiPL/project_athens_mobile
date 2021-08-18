@@ -12,7 +12,7 @@ import 'package:source_gen/source_gen.dart';
 import '../annotations/lang_annotation.dart';
 
 class LangGenerator extends GeneratorForAnnotation<LangAutomation> {
-  Map<String, String> _keysMap;
+  late Map<String, String> _keysMap;
 
   @override
   Future<FutureOr<String>> generateForAnnotatedElement(
@@ -87,7 +87,7 @@ class LangGenerator extends GeneratorForAnnotation<LangAutomation> {
         "\n"
         "void main() {\n"
         "  String scriptPath = Platform.script.path;\n"
-        "  String osPrefix = Platform.isLinux ? '/' : '';\n"
+        "  String osPrefix = Platform.isLinux || Platform.isMacOS ? '/' : '';\n"
         "  String filePathForCoverage = osPrefix + scriptPath.substring(0, scriptPath.indexOf('main.dart')).substring(1) + 'resources/lang/';\n";
 
     allJsonFiles.forEach((FileSystemEntity entity) {
