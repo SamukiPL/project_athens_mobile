@@ -7,7 +7,8 @@ import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:project_athens/main/wakelock/wakelock_service.dart';
 import 'package:project_athens/speeches_flow/domain/get_speech_use_case.dart';
 import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
-import 'package:project_athens/speeches_flow/screens/details/video_widget/managers/video_manager_player.dart';
+import 'package:project_athens/speeches_flow/screens/details/video_widget/managers/video_manager.dart';
+import 'package:project_athens/speeches_flow/screens/details/video_widget/managers/video_manager_factory.dart';
 
 class SpeechDetailsBloc extends BaseBloc {
 
@@ -37,7 +38,7 @@ class SpeechDetailsBloc extends BaseBloc {
 
     if (result is Success<SpeechModel>) {
       _speechModel = result.value;
-      _videoManager = VideoManager(speechModel, isNormalSpeech, _wakelock);
+      _videoManager = VideoManagerFactory.create(speechModel, isNormalSpeech, _wakelock);
 
       await _initDeputyModel();
       setLoadingState(DataLoadingState.contentLoaded());
