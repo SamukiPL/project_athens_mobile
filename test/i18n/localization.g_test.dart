@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   String scriptPath = Platform.script.path;
-  String osPrefix = Platform.isLinux ? '/' : '';
+  String osPrefix = Platform.isLinux || Platform.isMacOS ? '/' : '';
   String filePathForCoverage = osPrefix + scriptPath.substring(0, scriptPath.indexOf('main.dart')).substring(1) + 'resources/lang/';
 
   File plFile = File(filePathForCoverage + 'pl.json');
