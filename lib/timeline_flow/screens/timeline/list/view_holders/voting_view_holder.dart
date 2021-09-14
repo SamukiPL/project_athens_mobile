@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
@@ -44,7 +45,7 @@ class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
             FittedBox(
               fit: BoxFit.contain,
               child: Text(
-                DateFormat("HH:mm").format(viewModel.model.date),
+                DateFormat("HH:mm").format(viewModel.model.voteAt),
                 style: TextStyle(
                     color: theme.dividerColor, fontSize: 24, fontWeight: FontWeight.w300),
               ),
@@ -110,7 +111,9 @@ class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
         elevation: 4,
         child: InkWell(
           onTap: () {
-            goToDestination(context, VoteDetailsDestination(viewModel.model));
+            goToDestination(context, VoteDetailsDestination(
+                VoteSlimModel.fromTimelineVotingModel(viewModel.model)
+                ));
           },
           child: Container(
             margin: EdgeInsets.only(left: 8, top: 8, bottom: 8),

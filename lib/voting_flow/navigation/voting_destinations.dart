@@ -1,4 +1,5 @@
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
@@ -22,14 +23,14 @@ class VotesListDestination extends Destination<VotesListScreen> {
 
 class VoteDetailsDestination extends Destination<VoteDetailsScreen> {
 
-  final VotingModel _votingModel;
+  final VoteSlimModel _voteModel;
 
-  VoteDetailsDestination(this._votingModel): super(BottomNavItem.VOTING);
-
-  @override
-  VoteDetailsScreen getScreen() => VoteDetailsScreen(_votingModel);
+  VoteDetailsDestination(this._voteModel): super(BottomNavItem.VOTING);
 
   @override
-  List<Module> getScreenModules(BuildContext context) => [VoteDetailsModule(context, _votingModel)];
+  VoteDetailsScreen getScreen() => VoteDetailsScreen(_voteModel);
+
+  @override
+  List<Module> getScreenModules(BuildContext context) => [VoteDetailsModule(context, _voteModel)];
 
 }

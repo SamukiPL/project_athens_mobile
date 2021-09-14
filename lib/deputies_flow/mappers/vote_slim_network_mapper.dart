@@ -40,9 +40,12 @@ class VoteSlimNetworkMapper extends AsyncDataMapper<VoteSlimDTO, VoteSlimModel> 
       votingDesc: voteDesc,
       type: data.type,
       voteAt: data.voteAt,
+      absoluteMajority: data.absoluteMajority,
+      qualifyingMajority: data.qualifyingMajority,
       voteNumbers: voteNumbers,
       clubsMajority: clubs,
-      deputiesVote: deputiesVote
+      deputiesVote: deputiesVote,
+      orderPoint: data.orderPoint
     );
 
     return voteSlim;

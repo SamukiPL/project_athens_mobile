@@ -42,7 +42,7 @@ class _TimelineApi implements TimelineApi {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.request<Map<String, dynamic>>(
-        '/user-aggregator/timeline/$cadency/$date',
+        '/user-aggregator/timeline/$cadency/$date/v2',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'GET',

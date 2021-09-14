@@ -42,6 +42,9 @@ VoteSlimDTO _$VoteSlimDTOFromJson(Map<String, dynamic> json) {
             ? null
             : VoteSlimDeputyMajorityVoteDTO.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    json['qualifyingMajority'] as int,
+    json['absoluteMajority'] as int,
+    json['orderPoint'] as int,
   );
 }
 
@@ -52,8 +55,11 @@ Map<String, dynamic> _$VoteSlimDTOToJson(VoteSlimDTO instance) =>
       'type': _$VotingTypeEnumMap[instance.type],
       'voteAt': instance.voteAt?.toIso8601String(),
       'voteNumbers': instance.voteNumbers,
+      'qualifyingMajority': instance.qualifyingMajority,
+      'absoluteMajority': instance.absoluteMajority,
       'clubsMajority': instance.clubsMajority,
       'deputiesVoteType': instance.deputiesVoteType,
+      'orderPoint': instance.orderPoint,
     };
 
 T _$enumDecode<T>(
@@ -109,6 +115,10 @@ const _$VotingTypeEnumMap = {
   VotingType.SELECTION_OF_STATE_TRIBUNAL: 17,
   VotingType.SELECTION_OF_CONSTITUTIONAL_COURT: 18,
   VotingType.SELECTION_OF_DEPUTY_MEMBER_NATIONAL_COUNCIL_JUDICIARY: 19,
+  VotingType.REPEAL_OF_REGULATION: 20,
+  VotingType.RESOLUTION_OF_POINT_OF_DISPUTE: 21,
+  VotingType.REQUEST_OF_REASSUMING_VOTE: 22,
+  VotingType.REQUEST_OF_CLOSING_MEETING: 23,
   VotingType.UNKNOWN: 999,
 };
 

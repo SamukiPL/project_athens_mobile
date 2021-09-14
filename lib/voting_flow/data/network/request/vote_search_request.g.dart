@@ -15,6 +15,7 @@ VoteSearchRequest _$VoteSearchRequestFromJson(Map<String, dynamic> json) {
     json['to'] as String,
     json['sort'] as String,
     json['cadency'] as int,
+    json['v2'] as bool,
   );
 }
 
@@ -27,4 +28,5 @@ Map<String, dynamic> _$VoteSearchRequestToJson(VoteSearchRequest instance) =>
       'to': instance.to,
       'sort': instance.sort,
       'cadency': instance.cadency,
+      'v2': instance.v2,
     };

@@ -15,7 +15,7 @@ abstract class TimelineApi {
   Future<MeetingsResponse> getMeetingsDates(
       @Path("cadency") int cadency);
 
-  @GET("/user-aggregator/timeline/{cadency}/{date}")
+  @GET("/user-aggregator/timeline/{cadency}/{date}/v2")
   Future<TimelineResponse> getAllDeputies(
       @Path("cadency") int cadency, @Path("date") String date);
 

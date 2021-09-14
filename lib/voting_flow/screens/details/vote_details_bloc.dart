@@ -1,14 +1,34 @@
 import 'dart:async';
 
+import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
+import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
 import 'package:project_athens/deputies_flow/navigation/deputies_destinations.dart';
+import 'package:project_athens/voting_flow/data/network/voting_api.dart';
+import 'package:project_athens/voting_flow/domain/get_vote_parameters.dart';
+import 'package:project_athens/voting_flow/domain/use_cases/get_vote_use_case.dart';
+import 'package:rxdart/rxdart.dart';
 
 class VoteDetailsBloc extends BaseBloc {
 
-  final VotingModel _votingModel;
+  final VoteSlimModel _voteModel;
+  final GetVoteUseCase _getVoteUseCase;
 
-  VoteDetailsBloc(this._votingModel);
+  VoteDetailsBloc(this._voteModel, this._getVoteUseCase) {
+    final params = GetVoteParameters(this._voteModel.id);
+    _getVoteUseCase(params).then((value) {
+      if (value is Success<VotingModel>) {
+        votingFullStream.add(value.value);
+      }
+    });
+  }
 
+  final ReplaySubject<VotingModel> votingFullStream = ReplaySubject<VotingModel>();
+
+  @override
+  dispose() {
+    votingFullStream.close();
+  }
 }

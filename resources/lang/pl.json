@@ -94,6 +94,10 @@
       "selectionOfStateTribunal": "Wybór członków trybunały stanu",
       "selectionOfConstitutionalCourt": "Wybór sędziów trybunału konstytucyjnego",
       "selectionOfNationalCouncilJudiciary": "Wybór członków KRS",
+      "repealOfRegulation": "Uchylenie rozporządzenia",
+      "resolutionOfPointOfDispute": "Rozstrzygnięcie punktu spornego",
+      "requestOfReassumingVote": "Reasumpcja głosowania",
+      "requestOfClosingMeeting": "Zamknięcie obrad",
       "unknown": "Nieznany rodzaj głosowania"
     },
     "nounCloud": {

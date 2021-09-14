@@ -296,6 +296,22 @@ class AppLocalizationsGenerated {
         ['selectionOfNationalCouncilJudiciary'];
   }
 
+  String timelineVotingTypesRepealOfRegulation() {
+    return words['timeline']['votingTypes']['repealOfRegulation'];
+  }
+
+  String timelineVotingTypesResolutionOfPointOfDispute() {
+    return words['timeline']['votingTypes']['resolutionOfPointOfDispute'];
+  }
+
+  String timelineVotingTypesRequestOfReassumingVote() {
+    return words['timeline']['votingTypes']['requestOfReassumingVote'];
+  }
+
+  String timelineVotingTypesRequestOfClosingMeeting() {
+    return words['timeline']['votingTypes']['requestOfClosingMeeting'];
+  }
+
   String timelineVotingTypesUnknown() {
     return words['timeline']['votingTypes']['unknown'];
   }

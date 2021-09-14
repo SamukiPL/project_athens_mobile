@@ -1,5 +1,7 @@
+import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
 import 'package:project_athens/athens_core/models/speech_model.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
+import 'package:project_athens/athens_core/models/timeline_voting_model.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/athens_core/ext/date_time_extension.dart';
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
@@ -21,7 +23,7 @@ extension TimelineModelExtension on List<TimelineModel> {
     BaseItemViewModel item;
     switch (model.type) {
       case TimelineModelType.VOTING:
-        VotingModel votingModel = model;
+        TimelineVotingModel votingModel = model;
         item = VotingRowViewModel(votingModel);
         break;
       case TimelineModelType.SPEECH:

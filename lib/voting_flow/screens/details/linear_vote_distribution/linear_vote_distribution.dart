@@ -4,14 +4,15 @@ import 'package:project_athens/athens_core/constants/color_constants.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/voting_flow/screens/details/linear_vote_distribution/linear_vote_distribution_painter.dart';
+import 'package:project_athens/voting_flow/screens/details/linear_vote_distribution/linear_vote_distribution_model.dart';
 import 'package:provider/provider.dart';
 
 import 'linear_vote_distribution_segment.dart';
 
 class LinearVoteDistribution extends StatelessWidget {
-  final VotingModel voting;
+  final LinearVoteDistributionModel model;
 
-  LinearVoteDistribution({this.voting});
+  LinearVoteDistribution({this.model});
 
   Widget build(BuildContext context) {
     final double _diameter = (MediaQuery.of(context).size.width / 1.616);
@@ -86,9 +87,9 @@ class LinearVoteDistribution extends StatelessWidget {
     bool isInFavorUsed = true;
     bool isAgainstUsed = true;
 
-    if (voting.absoluteMajority != 0 && voting.absoluteMajority != null) {
+    if (model.absoluteMajority != 0 && model.absoluteMajority != null) {
       isAbsentUsed = false;
-    } else if (voting.qualifyingMajority != 0 && voting.qualifyingMajority != null) {
+    } else if (model.qualifyingMajority != 0 && model.qualifyingMajority != null) {
       // every is being used
     } else {
       isAbsentUsed = false;
@@ -96,20 +97,20 @@ class LinearVoteDistribution extends StatelessWidget {
     }
 
     return [
-      LinearVoteDistributionSegment(voting.results.inFavor, localizations.getText().votingsVoteTypesInFavor(), ColorConstants.voteInFavorColor, voting.results.inFavor == 0 ? false : isInFavorUsed),
-      LinearVoteDistributionSegment(voting.results.absent, localizations.getText().votingsVoteTypesAbsentPlural(), ColorConstants.voteAbsetColor, voting.results.absent == 0 ? false : isAbsentUsed),
-      LinearVoteDistributionSegment(voting.results.hold, localizations.getText().votingsVoteTypesHoldPlural(), ColorConstants.voteHoldColor, voting.results.hold == 0 ? false : isHoldUsed),
-      LinearVoteDistributionSegment(voting.results.against, localizations.getText().votingsVoteTypesAgainst(), ColorConstants.voteAgainstColor, voting.results.against == 0 ? false : isAgainstUsed),
+      LinearVoteDistributionSegment(model.inFavor, localizations.getText().votingsVoteTypesInFavor(), ColorConstants.voteInFavorColor, model.inFavor == 0 ? false : isInFavorUsed),
+      LinearVoteDistributionSegment(model.absent, localizations.getText().votingsVoteTypesAbsentPlural(), ColorConstants.voteAbsetColor, model.absent == 0 ? false : isAbsentUsed),
+      LinearVoteDistributionSegment(model.hold, localizations.getText().votingsVoteTypesHoldPlural(), ColorConstants.voteHoldColor, model.hold == 0 ? false : isHoldUsed),
+      LinearVoteDistributionSegment(model.against, localizations.getText().votingsVoteTypesAgainst(), ColorConstants.voteAgainstColor, model.against == 0 ? false : isAgainstUsed),
     ];
   }
 
   int _getRequiredVotes() {
-    if (this.voting.absoluteMajority != 0 && this.voting.absoluteMajority != null) {
-      return this.voting.absoluteMajority;
-    } else if (this.voting.qualifyingMajority != 0 && this.voting.qualifyingMajority != null) {
-      return this.voting.qualifyingMajority;
+    if (this.model.absoluteMajority != 0 && this.model.absoluteMajority != null) {
+      return this.model.absoluteMajority;
+    } else if (this.model.qualifyingMajority != 0 && this.model.qualifyingMajority != null) {
+      return this.model.qualifyingMajority;
     } else {
-      final int summedVotes = this.voting.results.inFavor + this.voting.results.against;
+      final int summedVotes = this.model.inFavor + this.model.against;
       final int votesRequired = summedVotes % 2 == 0 ? ((summedVotes / 2 ) + 1).ceil() : (summedVotes / 2).ceil();
 
       return votesRequired;

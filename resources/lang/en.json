@@ -94,6 +94,10 @@
       "selectionOfStateTribunal": "Selection of State Tribunal",
       "selectionOfConstitutionalCourt": "Selection of Constitutional Court",
       "selectionOfNationalCouncilJudiciary": "Selection of KRS members",
+      "repealOfRegulation": "Repeal of regulation",
+      "resolutionOfPointOfDispute": "Resolution of the point of dispute",
+      "requestOfReassumingVote": "Vote reassumption",
+      "requestOfClosingMeeting": "Closing meeting",
       "unknown": "Unknown"
     },
     "nounCloud": {

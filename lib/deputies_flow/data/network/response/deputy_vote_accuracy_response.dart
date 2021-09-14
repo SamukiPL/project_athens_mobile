@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:project_athens/athens_core/data/base_responses/timeline_response.dart';
 import 'package:project_athens/athens_core/data/base_responses/voting_response.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
 
@@ -15,16 +16,19 @@ class DeputyVoteAccuracyResponse {
 }
 
 @JsonSerializable()
-class VoteSlimDTO {
+class VoteSlimDTO extends TimelineItem {
   final String id;
   final String agenda;
   final VotingType type;
   final DateTime voteAt;
   final VoteSlimVotingNumbersDTO voteNumbers;
+  final int qualifyingMajority;
+  final int absoluteMajority;
   final List<VoteSlimClubMajorityDTO> clubsMajority;
   final List<VoteSlimDeputyMajorityVoteDTO> deputiesVoteType;
+  final int orderPoint;
 
-  VoteSlimDTO(this.id, this.agenda, this.type, this.voteAt, this.voteNumbers, this.clubsMajority, this.deputiesVoteType);
+  VoteSlimDTO(this.id, this.agenda, this.type, this.voteAt, this.voteNumbers, this.clubsMajority, this.deputiesVoteType, this.qualifyingMajority, this.absoluteMajority, this.orderPoint);
 
   factory VoteSlimDTO.fromJson(Map<String, dynamic> json) => _$VoteSlimDTOFromJson(json);
   Map<String, dynamic> toJson() => _$VoteSlimDTOToJson(this);

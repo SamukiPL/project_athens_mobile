@@ -63,6 +63,18 @@ String getVoteDescriptionHelper(VotingType type, AppLocalizations _localizations
     case VotingType.SELECTION_OF_DEPUTY_MEMBER_NATIONAL_COUNCIL_JUDICIARY:
       return _localizations.getText().timelineVotingTypesSelectionOfNationalCouncilJudiciary();
       break;
+    case VotingType.REPEAL_OF_REGULATION:
+      return _localizations.getText().timelineVotingTypesRepealOfRegulation();
+      break;
+    case VotingType.RESOLUTION_OF_POINT_OF_DISPUTE:
+      return _localizations.getText().timelineVotingTypesResolutionOfPointOfDispute();
+      break;
+    case VotingType.REQUEST_OF_REASSUMING_VOTE:
+      return _localizations.getText().timelineVotingTypesRequestOfReassumingVote();
+      break;
+    case VotingType.REQUEST_OF_CLOSING_MEETING:
+      return _localizations.getText().timelineVotingTypesRequestOfClosingMeeting();
+      break;
     case VotingType.UNKNOWN:
       return _localizations.getText().timelineVotingTypesUnknown();
       break;

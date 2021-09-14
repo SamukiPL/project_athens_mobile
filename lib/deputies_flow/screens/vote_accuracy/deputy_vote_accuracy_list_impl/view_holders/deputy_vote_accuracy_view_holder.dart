@@ -20,7 +20,7 @@ class DeputyVoteAccuracyViewHolder extends StatelessWidget with RedirectionDeleg
     return GestureDetector(
       onTap: () {
         // TODO
-        // goToDestination(context, VoteDetailsDestination(_viewModel.model));
+        goToDestination(context, VoteDetailsDestination(_viewModel.model));
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
