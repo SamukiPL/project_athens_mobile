@@ -8,10 +8,9 @@ part of 'vote_search_response.dart';
 
 VoteSearchResponse _$VoteSearchResponseFromJson(Map<String, dynamic> json) {
   return VoteSearchResponse(
-    (json['votes'] as List)
-        ?.map((e) =>
-            e == null ? null : VoteSlimDTO.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    (json['votes'] as List<dynamic>)
+        .map((e) => VoteSlimDTO.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

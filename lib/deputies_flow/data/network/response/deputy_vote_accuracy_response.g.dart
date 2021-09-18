@@ -9,10 +9,9 @@ part of 'deputy_vote_accuracy_response.dart';
 DeputyVoteAccuracyResponse _$DeputyVoteAccuracyResponseFromJson(
     Map<String, dynamic> json) {
   return DeputyVoteAccuracyResponse(
-    (json['votes'] as List)
-        ?.map((e) =>
-            e == null ? null : VoteSlimDTO.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    (json['votes'] as List<dynamic>)
+        .map((e) => VoteSlimDTO.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 
@@ -26,22 +25,17 @@ VoteSlimDTO _$VoteSlimDTOFromJson(Map<String, dynamic> json) {
   return VoteSlimDTO(
     json['id'] as String,
     json['agenda'] as String,
-    _$enumDecodeNullable(_$VotingTypeEnumMap, json['type']),
-    json['voteAt'] == null ? null : DateTime.parse(json['voteAt'] as String),
-    json['voteNumbers'] == null
-        ? null
-        : VoteSlimVotingNumbersDTO.fromJson(
-            json['voteNumbers'] as Map<String, dynamic>),
-    (json['clubsMajority'] as List)
-        ?.map((e) => e == null
-            ? null
-            : VoteSlimClubMajorityDTO.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    (json['deputiesVoteType'] as List)
-        ?.map((e) => e == null
-            ? null
-            : VoteSlimDeputyMajorityVoteDTO.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    _$enumDecode(_$VotingTypeEnumMap, json['type']),
+    DateTime.parse(json['voteAt'] as String),
+    VoteSlimVotingNumbersDTO.fromJson(
+        json['voteNumbers'] as Map<String, dynamic>),
+    (json['clubsMajority'] as List<dynamic>)
+        .map((e) => VoteSlimClubMajorityDTO.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    (json['deputiesVoteType'] as List<dynamic>)
+        .map((e) =>
+            VoteSlimDeputyMajorityVoteDTO.fromJson(e as Map<String, dynamic>))
+        .toList(),
     json['qualifyingMajority'] as int,
     json['absoluteMajority'] as int,
     json['orderPoint'] as int,
@@ -53,7 +47,7 @@ Map<String, dynamic> _$VoteSlimDTOToJson(VoteSlimDTO instance) =>
       'id': instance.id,
       'agenda': instance.agenda,
       'type': _$VotingTypeEnumMap[instance.type],
-      'voteAt': instance.voteAt?.toIso8601String(),
+      'voteAt': instance.voteAt.toIso8601String(),
       'voteNumbers': instance.voteNumbers,
       'qualifyingMajority': instance.qualifyingMajority,
       'absoluteMajority': instance.absoluteMajority,
@@ -62,36 +56,30 @@ Map<String, dynamic> _$VoteSlimDTOToJson(VoteSlimDTO instance) =>
       'orderPoint': instance.orderPoint,
     };
 
-T _$enumDecode<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
+K _$enumDecode<K, V>(
+  Map<K, V> enumValues,
+  Object? source, {
+  K? unknownValue,
 }) {
   if (source == null) {
-    throw ArgumentError('A value must be provided. Supported values: '
-        '${enumValues.values.join(', ')}');
+    throw ArgumentError(
+      'A value must be provided. Supported values: '
+      '${enumValues.values.join(', ')}',
+    );
   }
 
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
-
-  if (value == null && unknownValue == null) {
-    throw ArgumentError('`$source` is not one of the supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-  return value ?? unknownValue;
-}
-
-T _$enumDecodeNullable<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
+  return enumValues.entries.singleWhere(
+    (e) => e.value == source,
+    orElse: () {
+      if (unknownValue == null) {
+        throw ArgumentError(
+          '`$source` is not one of the supported values: '
+          '${enumValues.values.join(', ')}',
+        );
+      }
+      return MapEntry(unknownValue, enumValues.values.first);
+    },
+  ).key;
 }
 
 const _$VotingTypeEnumMap = {
@@ -126,7 +114,7 @@ VoteSlimClubMajorityDTO _$VoteSlimClubMajorityDTOFromJson(
     Map<String, dynamic> json) {
   return VoteSlimClubMajorityDTO(
     json['parliamentClub'] as String,
-    _$enumDecodeNullable(_$VoteTypeEnumMap, json['voteMajority']),
+    _$enumDecode(_$VoteTypeEnumMap, json['voteMajority']),
   );
 }
 
@@ -148,7 +136,7 @@ VoteSlimDeputyMajorityVoteDTO _$VoteSlimDeputyMajorityVoteDTOFromJson(
     Map<String, dynamic> json) {
   return VoteSlimDeputyMajorityVoteDTO(
     json['cadencyDeputy'] as String,
-    _$enumDecodeNullable(_$VoteTypeEnumMap, json['voteType']),
+    _$enumDecode(_$VoteTypeEnumMap, json['voteType']),
   );
 }
 
