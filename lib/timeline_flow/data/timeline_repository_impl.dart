@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:project_athens/athens_core/data/word_model/noun_tag.dart';
 import 'package:project_athens/athens_core/data/word_model/word_model.dart';
 import 'package:project_athens/athens_core/data/word_model/word_model_mapper.dart';
@@ -25,6 +26,12 @@ class TimelineRepositoryImpl implements TimelineRepository {
 
   @override
   Future<Result> getMeetingsDates(int cadency) async {
+    try {
+      await timelineApi.test();
+    } catch(e) {
+      Fimber.e(e.toString());
+    }
+
     final response = await timelineApi.getMeetingsDates(cadency);
     List<MeetingDate> resultList = meetingsDatesMapper(response.meetings);
 
@@ -49,7 +56,7 @@ class TimelineRepositoryImpl implements TimelineRepository {
   Future<Result<List<WordModel>>> getNounCloud(int cadency, String date) async {
     final response = await timelineApi.getNounCloud(cadency, date);
 
-    final values = response.nouns.length > 0 ? response.nouns : List<NounTag>();
+    final values = response.nouns.length > 0 ? response.nouns : List<NounTag>.empty();
 
     final List<WordModel> finalWords = mapToWordModel(values);
 

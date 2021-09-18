@@ -7,17 +7,14 @@ part of 'voting_api.dart';
 // **************************************************************************
 
 class _VotingApi implements VotingApi {
-  _VotingApi(this._dio, {this.baseUrl}) {
-    ArgumentError.checkNotNull(_dio, '_dio');
-  }
+  _VotingApi(this._dio, {this.baseUrl});
 
   final Dio _dio;
 
-  String baseUrl;
+  String? baseUrl;
 
   @override
   Future<VoteSearchResponse> getVoting(request) async {
-    ArgumentError.checkNotNull(request, 'request');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};

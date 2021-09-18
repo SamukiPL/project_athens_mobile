@@ -17,15 +17,16 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget with Re
   Widget build(BuildContext context) {
     return Consumer<BLOC>(
       builder: (context, bloc, _) => StreamProvider<WidgetState>.value(
+        initialData: WidgetState.empty(),
         value: bloc.state,
         updateShouldNotify: (_, current) {
           stateListener(context, bloc, current);
           return false;
         },
         child: Consumer<WidgetState>(
-          builder: (context, _, child) => child,
+          builder: (context, _, child) => child!,
           child: Scaffold(
-            appBar: buildAppBar(context, bloc),
+            appBar: buildAppBar(context, bloc) as PreferredSizeWidget?,
             body: buildBody(context, bloc),
             floatingActionButton: buildFloatingActionButton(context, bloc),
             bottomNavigationBar: shouldShowBottomBar ? BottomNavigationWidget() : null,
@@ -47,7 +48,7 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget with Re
         onNetworkFailure(bloc);
         break;
       case Redirection:
-        Redirection redirection = state;
+        Redirection redirection = state as Redirection;
         goToDestination(context, redirection.destination);
         break;
     }
@@ -57,7 +58,7 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget with Re
   Widget buildBody(BuildContext context, BLOC bloc);
 
   @protected
-  Widget buildAppBar(BuildContext context, BLOC bloc) {
+  Widget? buildAppBar(BuildContext context, BLOC bloc) {
     final AppLocalizations localizations = Provider.of<AppLocalizations>(context);
 
     return AppBar(
@@ -86,7 +87,7 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget with Re
   }
 
   @protected
-  Widget buildFloatingActionButton(BuildContext context, BLOC bloc);
+  Widget? buildFloatingActionButton(BuildContext context, BLOC bloc);
 
   @protected
   void onSuccess(BuildContext context) {}

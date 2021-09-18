@@ -8,10 +8,9 @@ part of 'deputy_nouns_response.dart';
 
 DeputyNounsResponse _$DeputyNounsResponseFromJson(Map<String, dynamic> json) {
   return DeputyNounsResponse(
-    (json['nouns'] as List)
-        ?.map((e) =>
-            e == null ? null : NounTag.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    (json['nouns'] as List<dynamic>)
+        .map((e) => NounTag.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

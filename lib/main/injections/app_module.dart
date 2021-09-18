@@ -28,7 +28,10 @@ class AppModule extends Module {
     );
     final client = Dio(clientOptions);
 
-    client.interceptors.addAll([LogInterceptor(requestBody: true, responseBody: true), ErrorInterceptor()]);
+    client.interceptors.addAll([
+      LogInterceptor(requestBody: true, responseBody: true),
+      ErrorInterceptor()
+    ]);
 
     final deputiesApi = DeputiesApi(client);
     final getDeputiesRepository = GetDeputiesRepositoryImpl(deputiesApi);
@@ -36,12 +39,14 @@ class AppModule extends Module {
     final getDeputyRepository = GetDeputyRepositoryImpl(deputiesApi);
     final getDeputyUseCase = GetDeputyUseCase(getDeputyRepository);
     final getDeputyNounsRepository = GetDeputyNounsRepositoryImpl(deputiesApi);
-    final getDeputyNounsUseCase = GetDeputyNounsUseCase(getDeputyNounsRepository);
-
+    final getDeputyNounsUseCase =
+        GetDeputyNounsUseCase(getDeputyNounsRepository);
 
     final parliamentClubsApi = ParliamentClubsApi(client);
-    final getParliamentClubsRepository = GetParliamentClubsRepositoryImpl(parliamentClubsApi);
-    final getParliamentClubsUseCase = GetParliamentClubsUseCase(getParliamentClubsRepository);
+    final getParliamentClubsRepository =
+        GetParliamentClubsRepositoryImpl(parliamentClubsApi);
+    final getParliamentClubsUseCase =
+        GetParliamentClubsUseCase(getParliamentClubsRepository);
 
     return List<SingleChildWidget>.of([
       Provider<SimpleDioClient>(
@@ -49,7 +54,8 @@ class AppModule extends Module {
         dispose: (context, client) => client.dispose(),
       ),
       Provider<DeputiesCache>(
-        create: (_) => DeputiesCache(getDeputiesUseCase, getParliamentClubsUseCase, getDeputyUseCase, getDeputyNounsUseCase),
+        create: (_) => DeputiesCache(getDeputiesUseCase,
+            getParliamentClubsUseCase, getDeputyUseCase, getDeputyNounsUseCase),
         dispose: (context, cache) => cache.dispose(),
       ),
       Provider<SpeechCache>(create: (_) => SpeechCache()),

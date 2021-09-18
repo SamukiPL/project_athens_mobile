@@ -8,10 +8,10 @@ import 'package:project_athens/deputies_utils/domain/subscribed_deputy_model.dar
 class DeputyItemViewModelFactory extends ItemViewModelFactory {
 
   @override
-  BaseItemViewModel createWithoutError(BaseModel model) {
+  BaseItemViewModel? createWithoutError(BaseModel model) {
     switch (model.runtimeType) {
       case SubscribedDeputyModel:
-        return DeputyListItemViewModel(model: model);
+        return DeputyListItemViewModel(model: model as SubscribedDeputyModel);
     }
     return null;
   }

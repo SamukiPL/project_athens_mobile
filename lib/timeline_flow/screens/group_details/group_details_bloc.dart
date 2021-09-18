@@ -11,7 +11,6 @@ import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
 import 'package:rxdart/rxdart.dart';
 
 class GroupDetailsBloc extends BaseBloc {
-
   final GroupedVotingModel _groupedModel;
 
   GroupDetailsBloc(this._groupedModel);
@@ -27,7 +26,8 @@ class GroupDetailsBloc extends BaseBloc {
   }
 
   void itemClick(TimelineModel model) {
-    goToDestination(VoteDetailsDestination(VoteSlimModel.fromVotingModel(model)));
+    goToDestination(
+        VoteDetailsDestination(VoteSlimModel.fromVotingModel(model)));
   }
 
   @override
@@ -35,5 +35,4 @@ class GroupDetailsBloc extends BaseBloc {
     _destination.close();
     super.dispose();
   }
-
 }

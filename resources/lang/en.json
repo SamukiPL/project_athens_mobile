@@ -19,7 +19,16 @@
     },
     "source": "Source",
     "createdAt": "Created at",
-    "updatedAt": "Updated At"
+    "updatedAt": "Updated At",
+    "update": {
+      "cupertinoDialog": {
+        "title": "Update application?",
+        "buttonIgnore": "Ignore",
+        "buttonLater": "Later",
+        "buttonUpdateNow": "Update now",
+        "wouldYouLikeToUpdateAppNow": "Would you like to update application now?"
+      }
+    }
   },
   "main": {
     "menu": {
@@ -61,8 +70,8 @@
     "validate": {
       "fieldCannotBeEmpty": "Field cannot be empty",
       "incorrectEmail": "Enter a valid email",
-      "loginIsTaken":"Login is already taken",
-      "emailIsTaken":"Email is already taken",
+      "loginIsTaken": "Login is already taken",
+      "emailIsTaken": "Email is already taken",
       "emailsDontMatch": "Repeated email doesn't match",
       "passwordsDontMatch": "Repeated password doesn't match",
       "wrongData": "Incorrect email or password"
@@ -101,7 +110,7 @@
       "unknown": "Unknown"
     },
     "nounCloud": {
-      "noNouns":  "Ups... we couldn't get nouns for current date. Please try again later."
+      "noNouns": "Ups... we couldn't get nouns for current date. Please try again later."
     },
     "noEvents": "No events for currently selected date."
   },
@@ -123,7 +132,7 @@
     "alignedWithParty": "Aligned with party",
     "notAlignedWithParty": "Not aligned with party",
     "basicInfo": "Basic information",
-    "experience" : "Experience",
+    "experience": "Experience",
     "statistics": "Statistics",
     "statisticsInfo": "TBA",
     "wordCloud": "Word cloud",
@@ -157,6 +166,15 @@
     "subscribedDeputiesVotes": "Subscribed deputies vote",
     "votesNeededToPass": "Votes needed to pass",
     "noData": "No votings for specified criteria."
+  },
+  "more": {
+    "title": "More",
+    "user": "User",
+    "goToSettings": "Go to settings",
+    "likeApplication": "Like the application?",
+    "supportUs": "Support us ❤",
+    "checkForUpdates": "Check for updates",
+    "appVersion": "Application version"
   },
   "settings": {
     "settingsTitle": "Settings",

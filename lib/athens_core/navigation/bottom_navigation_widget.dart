@@ -36,8 +36,8 @@ class BottomNavigationWidget extends StatelessWidget {
               label: localizations.getText().votingsVotingListTitle()
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: localizations.getText().settingsSettingsTitle()
+              icon: Icon(Icons.more_horiz),
+              label: localizations.getText().moreTitle()
           ),
         ],
       ),

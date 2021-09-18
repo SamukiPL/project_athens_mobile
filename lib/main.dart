@@ -15,9 +15,16 @@ import 'package:project_athens/splash_screen/splash_screen_widget.dart';
 
 import 'athens_core/configuration/configuration_module.dart';
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  print('Handling a background message ${message.messageId}');
+}
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
@@ -26,34 +33,42 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final FirebaseMessages _firebaseMessages =
-      FirebaseMessages(FirebaseMessaging());
+  final FirebaseMessages _firebaseMessages = FirebaseMessages();
 
   @override
   Widget build(BuildContext context) {
     _firebaseMessages.setupMessaging();
+
+    // we have to eagerly create auto updater due to
+    // splash screen bloc could access it immediately
+    // after it starts to checking direction
     Fimber.plantTree(DebugBufferTree());
     return ModuleWidget(
-      providers: [AppModule(context), FirebaseMessagingModule(context, _firebaseMessages), ConfigurationModule(context), MainWidgetModule(context)],
+      providers: [
+        AppModule(context),
+        FirebaseMessagingModule(context, _firebaseMessages),
+        ConfigurationModule(context),
+        MainWidgetModule(context)
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Project Athens',
         theme: ThemeData(
-          primarySwatch: MaterialColor(
-            0xff00bfff,
-            const <int, Color>{
-              50: const Color(0xff00bfff),
-              100: const Color(0xff00bfff),
-              200: const Color(0xff00bfff),
-              300: const Color(0xff00bfff),
-              400: const Color(0xff00bfff),
-              500: const Color(0xff00bfff),
-              600: const Color(0xff00bfff),
-              700: const Color(0xff00bfff),
-              800: const Color(0xff00bfff),
-              900: const Color(0xff00bfff),
-            },
-          ),
+            primarySwatch: MaterialColor(
+              0xff00bfff,
+              const <int, Color>{
+                50: const Color(0xff00bfff),
+                100: const Color(0xff00bfff),
+                200: const Color(0xff00bfff),
+                300: const Color(0xff00bfff),
+                400: const Color(0xff00bfff),
+                500: const Color(0xff00bfff),
+                600: const Color(0xff00bfff),
+                700: const Color(0xff00bfff),
+                800: const Color(0xff00bfff),
+                900: const Color(0xff00bfff),
+              },
+            ),
             backgroundColor: Colors.white,
             scaffoldBackgroundColor: Colors.white,
             dividerColor: Color(0xffaaaaaa),
@@ -71,10 +86,10 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate
         ],
         localeResolutionCallback:
-            (Locale locale, Iterable<Locale> supportedLocales) {
+            (Locale? locale, Iterable<Locale> supportedLocales) {
           return supportedLocales.firstWhere(
               (supportedLocale) =>
-                  supportedLocale.languageCode == locale.languageCode,
+                  supportedLocale.languageCode == locale?.languageCode,
               orElse: () => supportedLocales.first);
         },
       ),

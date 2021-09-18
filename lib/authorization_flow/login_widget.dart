@@ -25,22 +25,19 @@ class LoginWidget extends StatelessWidget {
     );
   }
 
-  StatelessWidget _getScreen(BuildContext context, LoginDestination destination) {
+  StatelessWidget _getScreen(
+      BuildContext context, LoginDestination destination) {
     switch (destination) {
       case LoginDestination.REGISTER:
         return ModuleWidget(
-          providers: [NetworkModule(context)],
-          child: RegistrationScreen()
-        );
+            providers: [NetworkModule(context)], child: RegistrationScreen());
         break;
       case LoginDestination.RESET_PASSWORD:
         return ResetPasswordScreen();
         break;
       default:
         return ModuleWidget(
-            providers: [NetworkModule(context)],
-            child: LoginScreen()
-        );
+            providers: [NetworkModule(context)], child: LoginScreen());
         break;
     }
   }

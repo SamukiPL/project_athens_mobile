@@ -6,18 +6,18 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   String scriptPath = Platform.script.path;
-  String osPrefix = Platform.isLinux ? '/' : '';
+  String osPrefix = Platform.isLinux || Platform.isMacOS ? '/' : '';
   String filePathForCoverage = osPrefix + scriptPath.substring(0, scriptPath.indexOf('main.dart')).substring(1) + 'resources/lang/';
-
-  File enFile = File(filePathForCoverage + 'en.json');
-  String enData = enFile.readAsStringSync();
-  Map<String, dynamic> enWords = json.decode(enData);
-  testAllMethods('en', AppLocalizationsGenerated(enWords));
 
   File plFile = File(filePathForCoverage + 'pl.json');
   String plData = plFile.readAsStringSync();
   Map<String, dynamic> plWords = json.decode(plData);
   testAllMethods('pl', AppLocalizationsGenerated(plWords));
+
+  File enFile = File(filePathForCoverage + 'en.json');
+  String enData = enFile.readAsStringSync();
+  Map<String, dynamic> enWords = json.decode(enData);
+  testAllMethods('en', AppLocalizationsGenerated(enWords));
 }
 
 void testAllMethods(String locale, AppLocalizationsGenerated localization) {
@@ -46,11 +46,6 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalChoose != "" && universalChoose != null); 
   }); 
  
-  test("All methods for $locale universalClose", () async {
-    String universalClose = localization.universalClose();
-    expect(true, universalClose != "" && universalClose != null); 
-  }); 
- 
   test("All methods for $locale universalOk", () async {
     String universalOk = localization.universalOk();
     expect(true, universalOk != "" && universalOk != null); 
@@ -59,6 +54,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale universalRetry", () async {
     String universalRetry = localization.universalRetry();
     expect(true, universalRetry != "" && universalRetry != null); 
+  }); 
+ 
+  test("All methods for $locale universalClose", () async {
+    String universalClose = localization.universalClose();
+    expect(true, universalClose != "" && universalClose != null); 
   }); 
  
   test("All methods for $locale universalNoDataDefaultText", () async {
@@ -99,6 +99,31 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale universalUpdatedAt", () async {
     String universalUpdatedAt = localization.universalUpdatedAt();
     expect(true, universalUpdatedAt != "" && universalUpdatedAt != null); 
+  }); 
+ 
+  test("All methods for $locale universalUpdateCupertinoDialogTitle", () async {
+    String universalUpdateCupertinoDialogTitle = localization.universalUpdateCupertinoDialogTitle();
+    expect(true, universalUpdateCupertinoDialogTitle != "" && universalUpdateCupertinoDialogTitle != null); 
+  }); 
+ 
+  test("All methods for $locale universalUpdateCupertinoDialogButtonIgnore", () async {
+    String universalUpdateCupertinoDialogButtonIgnore = localization.universalUpdateCupertinoDialogButtonIgnore();
+    expect(true, universalUpdateCupertinoDialogButtonIgnore != "" && universalUpdateCupertinoDialogButtonIgnore != null); 
+  }); 
+ 
+  test("All methods for $locale universalUpdateCupertinoDialogButtonLater", () async {
+    String universalUpdateCupertinoDialogButtonLater = localization.universalUpdateCupertinoDialogButtonLater();
+    expect(true, universalUpdateCupertinoDialogButtonLater != "" && universalUpdateCupertinoDialogButtonLater != null); 
+  }); 
+ 
+  test("All methods for $locale universalUpdateCupertinoDialogButtonUpdateNow", () async {
+    String universalUpdateCupertinoDialogButtonUpdateNow = localization.universalUpdateCupertinoDialogButtonUpdateNow();
+    expect(true, universalUpdateCupertinoDialogButtonUpdateNow != "" && universalUpdateCupertinoDialogButtonUpdateNow != null); 
+  }); 
+ 
+  test("All methods for $locale universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow", () async {
+    String universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow = localization.universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow();
+    expect(true, universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow != "" && universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow != null); 
   }); 
  
   test("All methods for $locale mainMenuSession", () async {
@@ -146,14 +171,14 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginButtonsRegister != "" && loginButtonsRegister != null); 
   }); 
  
-  test("All methods for $locale loginButtonsSignUp", () async {
-    String loginButtonsSignUp = localization.loginButtonsSignUp();
-    expect(true, loginButtonsSignUp != "" && loginButtonsSignUp != null); 
-  }); 
- 
   test("All methods for $locale loginButtonsForgot", () async {
     String loginButtonsForgot = localization.loginButtonsForgot();
     expect(true, loginButtonsForgot != "" && loginButtonsForgot != null); 
+  }); 
+ 
+  test("All methods for $locale loginButtonsSignUp", () async {
+    String loginButtonsSignUp = localization.loginButtonsSignUp();
+    expect(true, loginButtonsSignUp != "" && loginButtonsSignUp != null); 
   }); 
  
   test("All methods for $locale loginButtonsResetPassword", () async {
@@ -634,6 +659,41 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale votingsNoData", () async {
     String votingsNoData = localization.votingsNoData();
     expect(true, votingsNoData != "" && votingsNoData != null); 
+  }); 
+ 
+  test("All methods for $locale moreTitle", () async {
+    String moreTitle = localization.moreTitle();
+    expect(true, moreTitle != "" && moreTitle != null); 
+  }); 
+ 
+  test("All methods for $locale moreUser", () async {
+    String moreUser = localization.moreUser();
+    expect(true, moreUser != "" && moreUser != null); 
+  }); 
+ 
+  test("All methods for $locale moreGoToSettings", () async {
+    String moreGoToSettings = localization.moreGoToSettings();
+    expect(true, moreGoToSettings != "" && moreGoToSettings != null); 
+  }); 
+ 
+  test("All methods for $locale moreLikeApplication", () async {
+    String moreLikeApplication = localization.moreLikeApplication();
+    expect(true, moreLikeApplication != "" && moreLikeApplication != null); 
+  }); 
+ 
+  test("All methods for $locale moreSupportUs", () async {
+    String moreSupportUs = localization.moreSupportUs();
+    expect(true, moreSupportUs != "" && moreSupportUs != null); 
+  }); 
+ 
+  test("All methods for $locale moreCheckForUpdates", () async {
+    String moreCheckForUpdates = localization.moreCheckForUpdates();
+    expect(true, moreCheckForUpdates != "" && moreCheckForUpdates != null); 
+  }); 
+ 
+  test("All methods for $locale moreAppVersion", () async {
+    String moreAppVersion = localization.moreAppVersion();
+    expect(true, moreAppVersion != "" && moreAppVersion != null); 
   }); 
  
   test("All methods for $locale settingsSettingsTitle", () async {

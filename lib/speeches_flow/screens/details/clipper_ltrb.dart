@@ -3,10 +3,10 @@ import 'package:project_athens/athens_core/utils/pair.dart';
 
 
 class ClipperLTRB extends CustomClipper<Path> {
-  final Pair<double, double> leftTop;
-  final Pair<double, double> rightTop;
-  final Pair<double, double> rightBottom;
-  final Pair<double, double> leftBottom;
+  final Pair<double, double>? leftTop;
+  final Pair<double, double>? rightTop;
+  final Pair<double, double>? rightBottom;
+  final Pair<double, double>? leftBottom;
 
   ClipperLTRB({this.leftTop, this.rightTop, this.rightBottom, this.leftBottom});
 

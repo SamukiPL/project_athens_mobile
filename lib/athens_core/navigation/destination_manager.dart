@@ -46,7 +46,7 @@ class DestinationManager {
         destination.replace);
   }
 
-  void push<T extends Object>(
+  void push<T>(
       BuildContext context, Route<T> route, bool replace) {
     if (replace) {
       Navigator.pushReplacement(context, route);

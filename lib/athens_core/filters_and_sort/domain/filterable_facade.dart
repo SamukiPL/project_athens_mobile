@@ -8,9 +8,9 @@ import 'package:project_athens/athens_core/filters_and_sort/types/sorting_filter
 
 mixin FilterableFacade {
 
-  FiltersRepository filtersRepository;
+  late FiltersRepository filtersRepository;
 
-  List<BaseFilterType> filters;
+  List<BaseFilterType>? filters;
 
   DateTime from = DateTimeExtension.defaultFrom();
   DateTime to = DateTimeExtension.defaultTo();
@@ -21,7 +21,7 @@ mixin FilterableFacade {
     if (resetFilters || filters == null)
       return filtersRepository.getFilters();
     else
-      return Success(filters);
+      return Success(filters!);
   }
 
   Future<void> changeFilters(List<BaseFilterType> filters) async {
@@ -34,14 +34,14 @@ mixin FilterableFacade {
   }
   
   void _setDates() {
-    final dateTimeTo = filters.firstWhere((element) => element is DateFromTo) as DateFromTo;
+    final dateTimeTo = filters!.firstWhere((element) => element is DateFromTo) as DateFromTo;
 
     from = dateTimeTo.fromTime;
     to = dateTimeTo.toTime;
   }
 
   void _setSort() {
-    final sortingFilter = filters.firstWhere((element) => element is SortingFilter) as SortingFilter;
+    final sortingFilter = filters!.firstWhere((element) => element is SortingFilter) as SortingFilter;
 
     sortingParam = sortingFilter.currentSort.param;
   }

@@ -26,7 +26,7 @@ class Event {
   Event(this.item, this.type);
 
   factory Event.fromJson(Map<String, dynamic> json) {
-    TimelineEventType type = _TimelineEventTypeEnumMap[json["type"]];
+    TimelineEventType type = _TimelineEventTypeEnumMap[json["type"]]!;
     TimelineItem item;
 
     switch (type) {

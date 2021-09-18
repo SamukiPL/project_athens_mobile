@@ -4,15 +4,15 @@ import 'package:rxdart/rxdart.dart';
 
 class NextVideoOverlayBloc {
 
-  final PublishSubject<PersonSpeechModel> _streamController = PublishSubject();
+  final PublishSubject<PersonSpeechModel?> _streamController = PublishSubject();
 
-  Stream<PersonSpeechModel> get stream => _streamController.stream;
+  Stream<PersonSpeechModel?> get stream => _streamController.stream;
 
   final CountDownController _controller = CountDownController();
 
   CountDownController get controller => _controller;
 
-  void pushOnNext(PersonSpeechModel nextPersonSpeech) {
+  void pushOnNext(PersonSpeechModel? nextPersonSpeech) {
     _streamController.add(nextPersonSpeech);
   }
 

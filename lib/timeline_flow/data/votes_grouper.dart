@@ -12,9 +12,9 @@ class VotesGrouper {
         .toList();
     votesToGroup.forEach((element) {
       TimelineVotingModel voting = element;
-      List<TimelineVotingModel> group = groupedVotes[voting.orderPoint] ?? List();
+      List<TimelineVotingModel> group = groupedVotes[voting.orderPoint] ?? List.empty();
       group.add(voting);
-      groupedVotes[voting.orderPoint] = group;
+      groupedVotes[voting.orderPoint!] = group;
     });
 
     final newList = models

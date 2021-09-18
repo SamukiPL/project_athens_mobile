@@ -25,7 +25,7 @@ class VotingNetworkMapper extends AsyncDataMapper<VotingResponse, VotingModel> {
     votes: voteModels,
     clubVotes: data.parliamentClubVotingNumbers,
     orderPoint: data.orderPoint,
-    deputyVoteType: VoteType.values[data.deputyVoteType != null ? data.deputyVoteType : 1],
+    deputyVoteType: VoteType.values[data.deputyVoteType != null ? data.deputyVoteType! : 1],
     createAt: data.createAt,
     // since for now service does NOT provide updates
     // because votes for now are immutable on server side

@@ -10,7 +10,7 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
 
   final SpeechItemViewModel _viewModel;
 
-  const SpeechViewHolder(this._viewModel, {Key key}) : super(key: key);
+  const SpeechViewHolder(this._viewModel, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
                   color: Colors.white,
                 ),
                 child: Image.network(
-                  _viewModel.model.thumbnailUrl,
+                  _viewModel.model.thumbnailUrl ?? "",
                   width: 40,
                   errorBuilder:
                       (context, exception, stackTrace) => Icon(
@@ -131,7 +131,7 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
         ? Container(
       width: double.infinity,
       child: Text(
-        _viewModel.model.desc,
+        _viewModel.model.desc ?? "",
         style: TextStyle(
             color: theme.dividerColor, fontSize: 14),
         textAlign: TextAlign.left,

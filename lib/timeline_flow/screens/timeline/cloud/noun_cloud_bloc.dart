@@ -41,7 +41,7 @@ class NounCloudBloc extends BaseBloc {
   }
 
   Future<List<Widget>> generateWidgets(List<WordModel> nouns) async {
-    List<Widget> widgets = List<Widget>();
+    List<Widget> widgets = List<Widget>.empty(growable: true);
     nouns.forEach((model) {
       widgets.add(RotatedBox(
         quarterTurns: (model.occurrence % 2).toInt(),

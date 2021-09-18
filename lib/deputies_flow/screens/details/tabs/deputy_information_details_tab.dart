@@ -1,12 +1,9 @@
-import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_scatter/flutter_scatter.dart';
-import 'package:project_athens/athens_core/data/word_model/noun_tag.dart';
 import 'package:project_athens/athens_core/data/word_model/word_model.dart';
-import 'package:project_athens/athens_core/data/word_model/word_model_mapper.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
@@ -19,8 +16,6 @@ import 'package:project_athens/deputies_flow/domain/details/get_full_deputy_use_
 import 'package:project_athens/deputies_flow/screens/details/presentation/deputy_vote_accuracy_table.dart';
 import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_information_extension.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
-import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
-import 'package:project_athens/deputies_utils/data/network/response/deputy_nouns_response.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_full.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:provider/provider.dart';
@@ -192,7 +187,7 @@ class DeputyInformationDetailsTab extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: voteAccuracy?.parliamentClub?.imageSrc,
                 placeholder: (context, url) => CircularProgressIndicator(),
-                errorWidget: (context, url, error) => Center(child: Text(voteAccuracy?.parliamentClub?.shortName),),
+                errorWidget: (context, url, error) => Center(child: Text(voteAccuracy?.parliamentClub?.shortName ?? ""),),
                 width: 40,
                 height: 40,
                 memCacheHeight: 700,
@@ -224,7 +219,7 @@ class DeputyInformationDetailsTab extends StatelessWidget {
   }
 
   Widget buildVoteAccuracyTable(List<ClubVoteAccuracy> voteAccuracy, AppLocalizations localizations, ThemeData theme) {
-    final int highestOverallAccuracy = voteAccuracy[0]?.compatibleVotes;
+    final int highestOverallAccuracy = voteAccuracy[0].compatibleVotes;
 
     return Container(
       child: Column(
@@ -274,9 +269,10 @@ class DeputyInformationDetailsTab extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
     final ratio = (screenSize.width - 20) / screenSize.height;
 
-    return FutureProvider<Result<List<WordModel>>>(
+    return FutureProvider<Result<List<WordModel>>?>(
+      initialData: null,
       create: (context) => nounsPromise,
-      child: Consumer<Result<List<WordModel>>>(
+      child: Consumer<Result<List<WordModel>>?>(
           builder: (context, list, _) {
             if (list is Success<List<WordModel>>) {
               final nouns = (list as Success<List<WordModel>>).value;

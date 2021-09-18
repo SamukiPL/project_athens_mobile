@@ -1,38 +1,38 @@
 name: project_athens
 description: Świadoma Demokoracja to aplikacja to śledzenia aktywności poselskiej w sejmie.
-version: 0.0.5
+version: 0.1.0+10
 
 environment:
-  sdk: ">=2.6.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  firebase_core: 0.5.2
-  firebase_crashlytics: ^0.2.1
-  firebase_messaging: ^7.0.2
-  provider: ^4.3.2+2
+  firebase_core: ^1.4.0
+  firebase_crashlytics: ^2.1.1
+  firebase_messaging: ^10.0.4
+  provider: ^5.0.0
   sqflite: ^1.3.1+1
   flutter_fimber: ^0.4.4
-  flutter_vlc_player: ^4.0.1
-  dio: 3.0.10
-  dio_firebase_performance: 0.2.0
-  retrofit: ^1.3.4+1
+  dio: 4.0.0
+#  dio_firebase_performance: 0.2.0
+  retrofit: ^2.0.1
   logger: ^0.9.4
   rxdart: ^0.24.1
   modal_bottom_sheet: ^0.2.2
   percent_indicator: ^2.1.7+4
   material_design_icons_flutter: ^4.0.5755
   intl: ^0.17.0
-  json_annotation: ^3.1.0
+  json_annotation: ^4.0.1
   flutter_secure_storage: ^3.3.4
   email_validator: ^1.0.5
   flutter_scatter: ^0.1.0
-  video_player: ^0.10.12+3
-  flick_video_player: ^0.1.1
-  sortedmap: ^0.4.2+1
+  video_player: ^2.1.12
+  flick_video_player: ^0.3.1
+  flutter_vlc_player: ^6.0.2
+  sortedmap: ^0.5.1
   syncfusion_flutter_datepicker: ^18.4.39-beta
   cached_network_image: ^2.5.1
   circular_countdown_timer: ^0.2.0
@@ -42,20 +42,23 @@ dependencies:
   # fix for ios build
   # error: /Users/runner/work/project_athens_mobile/project_athens_mobile/ios/Flutter/Release.xcconfig:1:
   # could not find included file 'Pods/Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig' in search paths (in target 'Runner' from project 'Runner')
-  path_provider: 1.6.18
+  path_provider: 2.0.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
-  wakelock: ^0.1.4+2
-  url_launcher: ^6.0.4
+  wakelock: ^0.5.2
+  url_launcher: ^6.0.9
+  in_app_update: ^2.0.0
+  package_info: 2.0.2
+  upgrader: 3.4.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.10.0
-  retrofit_generator: ^1.3.4+1
-  json_serializable: ^3.5.0
+  build_runner: ^2.0.6
+  retrofit_generator: ^2.0.1
+  json_serializable: ^4.1.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

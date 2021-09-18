@@ -1,8 +1,9 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/auth/auth_repository_impl.dart';
 import 'package:project_athens/athens_core/auth/network/auth_api.dart';
+import 'package:project_athens/athens_core/auto_updater/auto_updater.dart';
+import 'package:project_athens/athens_core/auto_updater/auto_updater_module.dart';
 import 'package:project_athens/athens_core/chopper/auth_facade.dart';
 import 'package:project_athens/athens_core/chopper/auth_interceptor.dart';
 import 'package:project_athens/athens_core/chopper/error_interceptor.dart';
@@ -33,10 +34,11 @@ class MainWidget extends StatelessWidget {
         NetworkModule(context),
         LocalizationModule(context),
         SubscribedDeputyCacheModule(context, firebaseMessages),
-        WakelockModule(context)
+        WakelockModule(context),
+        AutoUpdaterModule(context)
       ],
       child: Consumer<BottomNavigationBloc>(
-        builder: (context, bloc, child) => WillPopScope(child: child, onWillPop: () async {
+        builder: (context, bloc, child) => WillPopScope(child: child!, onWillPop: () async {
           bloc.pop();
           return false;
         }),

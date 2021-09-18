@@ -1,3 +1,4 @@
+import 'package:project_athens/athens_core/auto_updater/auto_updater.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
@@ -16,6 +17,9 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
 
   @override
   Widget generateBody(BuildContext context, LoginBloc bloc) {
+    final _autoUpdater = Provider.of<AutoUpdater>(context, listen: false);
+    _autoUpdater.checkForUpdates();
+
     var localization = Provider.of<AppLocalizations>(context);
     var loginNavigation = Provider.of<LoginNavigationBloc>(context);
     final theme = Theme.of(context);
@@ -31,9 +35,9 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
         ChangeNotifierProvider<AuthFailedNotifier>.value(
           value: bloc.authFailedNotifier,
           child: Consumer<AuthFailedNotifier>(
-            builder: (context, authFailed, _) => _buildErrorBox(localization, bloc, theme),
+            builder: (context, authFailed, _) =>
+                _buildErrorBox(localization, bloc, theme),
           ),
-
         ),
         Container(
           margin: EdgeInsets.fromLTRB(32, 8, 32, 8),
@@ -51,18 +55,17 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
         Container(
           margin: EdgeInsets.fromLTRB(32, 8, 32, 0),
           child: TextFormField(
-            onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
-            onChanged: (password) => bloc.setPassword(password),
-            textInputAction: TextInputAction.done,
-            onEditingComplete: () => bloc(),
-            decoration: InputDecoration(
-                labelText: localization.getText().loginHintsPassword(),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                )),
-            maxLines: 1,
-            obscureText: true
-          ),
+              onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
+              onChanged: (password) => bloc.setPassword(password),
+              textInputAction: TextInputAction.done,
+              onEditingComplete: () => bloc(),
+              decoration: InputDecoration(
+                  labelText: localization.getText().loginHintsPassword(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  )),
+              maxLines: 1,
+              obscureText: true),
         ),
         Container(
           margin: EdgeInsets.only(right: 32),
@@ -110,19 +113,19 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
                     style: TextStyle(color: theme.primaryColor),
                   ),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(32),
-                    side: BorderSide(color: theme.primaryColor)
-                  ),
+                      borderRadius: BorderRadius.circular(32),
+                      side: BorderSide(color: theme.primaryColor)),
                 ),
               )
             ],
           ),
-        )
+        ),
       ],
     );
   }
 
-  Widget _buildErrorBox(AppLocalizations localization, LoginBloc bloc, ThemeData theme) {
+  Widget _buildErrorBox(
+      AppLocalizations localization, LoginBloc bloc, ThemeData theme) {
     if (bloc.authFailedNotifier.hasFailed) {
       return AnimatedContainer(
           margin: EdgeInsets.fromLTRB(32, 8, 32, 8),
@@ -134,34 +137,28 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
               borderRadius: BorderRadius.circular(5),
               color: theme.errorColor.withOpacity(0.6),
               border: Border.all(
-                  color: Colors.redAccent,
-                  width: 2,
-                  style: BorderStyle.solid
-              )
-          ),
+                  color: Colors.redAccent, width: 2, style: BorderStyle.solid)),
           child: Center(
             child: Text(
               localization.getText().loginErrorPasswordOrLoginDoesNotMatch(),
-              style:  TextStyle(
+              style: TextStyle(
                 color: Colors.white,
               ),
               textAlign: TextAlign.center,
-
             ),
-          )
-      );
+          ));
     } else {
       return Container();
     }
   }
 
   @override
-  Widget generateAppBar(BuildContext context, LoginBloc bloc) {
+  Widget? generateAppBar(BuildContext context, LoginBloc bloc) {
     return null;
   }
 
   @override
-  Widget generateFab(BuildContext context, LoginBloc bloc) {
+  Widget? generateFab(BuildContext context, LoginBloc bloc) {
     return null;
   }
 

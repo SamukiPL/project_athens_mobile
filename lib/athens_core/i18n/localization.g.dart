@@ -31,16 +31,16 @@ class AppLocalizationsGenerated {
     return words['universal']['choose'];
   }
 
-  String universalClose() {
-    return words['universal']['close'];
-  }
-
   String universalOk() {
     return words['universal']['ok'];
   }
 
   String universalRetry() {
     return words['universal']['retry'];
+  }
+
+  String universalClose() {
+    return words['universal']['close'];
   }
 
   String universalNoDataDefaultText() {
@@ -73,6 +73,27 @@ class AppLocalizationsGenerated {
 
   String universalUpdatedAt() {
     return words['universal']['updatedAt'];
+  }
+
+  String universalUpdateCupertinoDialogTitle() {
+    return words['universal']['update']['cupertinoDialog']['title'];
+  }
+
+  String universalUpdateCupertinoDialogButtonIgnore() {
+    return words['universal']['update']['cupertinoDialog']['buttonIgnore'];
+  }
+
+  String universalUpdateCupertinoDialogButtonLater() {
+    return words['universal']['update']['cupertinoDialog']['buttonLater'];
+  }
+
+  String universalUpdateCupertinoDialogButtonUpdateNow() {
+    return words['universal']['update']['cupertinoDialog']['buttonUpdateNow'];
+  }
+
+  String universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow() {
+    return words['universal']['update']['cupertinoDialog']
+        ['wouldYouLikeToUpdateAppNow'];
   }
 
   String mainMenuSession() {
@@ -111,12 +132,12 @@ class AppLocalizationsGenerated {
     return words['login']['buttons']['register'];
   }
 
-  String loginButtonsSignUp() {
-    return words['login']['buttons']['signUp'];
-  }
-
   String loginButtonsForgot() {
     return words['login']['buttons']['forgot'];
+  }
+
+  String loginButtonsSignUp() {
+    return words['login']['buttons']['signUp'];
   }
 
   String loginButtonsResetPassword() {
@@ -502,6 +523,34 @@ class AppLocalizationsGenerated {
 
   String votingsNoData() {
     return words['votings']['noData'];
+  }
+
+  String moreTitle() {
+    return words['more']['title'];
+  }
+
+  String moreUser() {
+    return words['more']['user'];
+  }
+
+  String moreGoToSettings() {
+    return words['more']['goToSettings'];
+  }
+
+  String moreLikeApplication() {
+    return words['more']['likeApplication'];
+  }
+
+  String moreSupportUs() {
+    return words['more']['supportUs'];
+  }
+
+  String moreCheckForUpdates() {
+    return words['more']['checkForUpdates'];
+  }
+
+  String moreAppVersion() {
+    return words['more']['appVersion'];
   }
 
   String settingsSettingsTitle() {

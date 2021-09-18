@@ -9,14 +9,14 @@ import 'package:provider/provider.dart';
 class SortingFilter extends BaseFilterType {
   final List<SortingModel> sortings;
   
-  SortingModel currentSort;
+  late SortingModel currentSort;
 
   SortingFilter(this.sortings) {
     currentSort = sortings.firstWhere((element) => element.isChosen) ?? sortings.first;
     _chosenId = currentSort.id;
   }
 
-  int _chosenId;
+  late int _chosenId;
 
   @override
   SortingFilter copy() => SortingFilter(sortings.map((e) => e.copy(_chosenId)).toList());

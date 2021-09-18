@@ -8,10 +8,9 @@ part of 'put_deputies_request.dart';
 
 PutDeputiesRequest _$PutDeputiesRequestFromJson(Map<String, dynamic> json) {
   return PutDeputiesRequest(
-    (json['deputies'] as List)
-        ?.map((e) =>
-            e == null ? null : Deputy.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    (json['deputies'] as List<dynamic>)
+        .map((e) => Deputy.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 
@@ -23,9 +22,7 @@ Map<String, dynamic> _$PutDeputiesRequestToJson(PutDeputiesRequest instance) =>
 Deputy _$DeputyFromJson(Map<String, dynamic> json) {
   return Deputy(
     json['deputyId'] as String,
-    json['notifications'] == null
-        ? null
-        : Notifications.fromJson(json['notifications'] as Map<String, dynamic>),
+    Notifications.fromJson(json['notifications'] as Map<String, dynamic>),
   );
 }
 

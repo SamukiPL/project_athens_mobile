@@ -8,9 +8,8 @@ part of 'timeline_response.dart';
 
 TimelineResponse _$TimelineResponseFromJson(Map<String, dynamic> json) {
   return TimelineResponse(
-    (json['events'] as List)
-        ?.map(
-            (e) => e == null ? null : Event.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    (json['events'] as List<dynamic>)
+        .map((e) => Event.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }

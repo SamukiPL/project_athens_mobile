@@ -2,11 +2,11 @@ import 'paging_list_adapter.dart';
 
 abstract class PagingBloc {
 
-  int offset;
+  abstract int offset;
 
-  int batchSize;
+  abstract int batchSize;
 
-  PagingListAdapter adapter;
+  abstract PagingListAdapter adapter;
 
   Future<void> loadMore();
 

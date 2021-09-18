@@ -6,9 +6,9 @@ part 'subscribed_deputy_response.g.dart';
 @JsonSerializable()
 class SubscribedDeputyResponse {
 
-  final String id;
-  final DateTime createAt;
-  final int cadency;
+  final String? id;
+  final DateTime? createAt;
+  final int? cadency;
   final bool isPrimary;
   final String cadencyDeputyId;
   final Notifications notifications;
