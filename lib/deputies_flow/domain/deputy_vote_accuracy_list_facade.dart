@@ -21,6 +21,7 @@ class DeputyVoteAccuracyListFacade extends ListFacade<DeputyVoteAccuracyListPara
     parliamentClubId: this.parliamentClubId,
     limit: limit,
     offset: offset,
-    sortingParam: 'ASC'
+    sortingParam: 'ASC',
+    searchQuery: ''
   );
 }

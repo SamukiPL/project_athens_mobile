@@ -17,8 +17,8 @@ class DeputyVoteAccuracyItemViewModel extends BaseItemViewModel {
   String get date => DateFormat("d.MM.y", "pl").format(model.voteAt);
   VoteNumbers get results => model.voteNumbers;
   String get description => model.votingDesc;
-  List<VoteSlimClubMajority> get clubs => model.clubsMajority;
-  List<VoteSlimDeputyVoteType> get deputies => model.deputiesVote;
+  List<VoteSlimClubMajority>? get clubs => model.clubsMajority;
+  List<VoteSlimDeputyVoteType>? get deputies => model.deputiesVote;
 
   DeputyVoteAccuracyItemViewModel(this.model);
 

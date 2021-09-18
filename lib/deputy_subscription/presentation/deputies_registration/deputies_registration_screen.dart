@@ -21,11 +21,11 @@ class DeputiesRegistrationScreen extends BaseScreen<DeputiesRegistrationBloc> {
   @override
   List<Module> getProviders(BuildContext context) {
     // TODO: implement getProviders
-    return null;
+    return List.empty();
   }
 
   @override
-  Widget buildFloatingActionButton(BuildContext context, DeputiesRegistrationBloc bloc) {
+  Widget? buildFloatingActionButton(BuildContext context, DeputiesRegistrationBloc bloc) {
     // TODO: implement buildFloatingActionButton
     return null;
   }

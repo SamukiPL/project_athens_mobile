@@ -22,7 +22,7 @@ class DeputyVoteAccuracyTable extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = Provider.of<AppLocalizations>(context);
     final theme = Theme.of(context);
-    final int highestOverallAccuracy = _voteAccuracy[0]?.compatibleVotes;
+    final int highestOverallAccuracy = _voteAccuracy[0].compatibleVotes;
 
     return Container(
       child: Column(
@@ -39,11 +39,11 @@ class DeputyVoteAccuracyTable extends StatelessWidget {
       height: 50,
       child: CachedNetworkImage(
         filterQuality: FilterQuality.high,
-        imageUrl: clubVoteAccuracy?.parliamentClub?.imageSrc,
+        imageUrl: clubVoteAccuracy.parliamentClub?.imageSrc,
         placeholder: (context, url) => CircularProgressIndicator(),
         errorWidget: (context, url, error) =>
             Center(
-              child: Text(clubVoteAccuracy?.parliamentClub?.shortName),
+              child: Text(clubVoteAccuracy.parliamentClub?.shortName ?? "Err: unkown club"),
             ),
         width: 40,
         height: 40,

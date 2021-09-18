@@ -34,7 +34,7 @@ class DeputyVoteAccuracyScreen extends BaseScreen<BaseListBloc> {
   }
 
   @override
-  Widget buildFloatingActionButton(BuildContext context, BaseListBloc bloc) => null;
+  Widget? buildFloatingActionButton(BuildContext context, BaseListBloc bloc) => null;
 
   @override
   String getAppBarTitle(AppLocalizations localizations, BaseListBloc bloc) {

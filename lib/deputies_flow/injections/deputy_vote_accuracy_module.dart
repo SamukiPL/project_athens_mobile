@@ -43,7 +43,7 @@ class DeputyVoteAccuracyModule extends Module {
 
     final itemsRepository = ItemsRepositoryImpl(networkDataSource);
     final filtersRepository = FiltersRepository(localizations);
-    final listFacade = DeputyVoteAccuracyListFacade(_deputyModel.cadencyDeputyId, _clubVoteAccuracy.parliamentClub.id, _alignment, itemsRepository);
+    final listFacade = DeputyVoteAccuracyListFacade(_deputyModel.cadencyDeputyId, _clubVoteAccuracy.parliamentClub!.id, _alignment, itemsRepository);
 
     final itemFactory = DeputyVoteAccuracyItemViewModelFactory();
 

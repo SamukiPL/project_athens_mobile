@@ -26,7 +26,7 @@ class VoteDetailsModule extends Module {
     final localizations = AppLocalizations.of(context);
 
 
-    final VotingNetworkMapper _votingNetworkMapper = VotingNetworkMapper(localizations);
+    final VotingNetworkMapper _votingNetworkMapper = VotingNetworkMapper(localizations as AppLocalizations);
     final VoteRepositoryImpl repository = VoteRepositoryImpl(votingApi, _votingNetworkMapper);
     final GetVoteUseCase useCase = GetVoteUseCase(repository);
 

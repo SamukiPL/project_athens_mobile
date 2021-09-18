@@ -5,17 +5,17 @@ import 'package:project_athens/deputy_subscription/domain/deputies_registration/
 import 'package:project_athens/deputy_subscription/domain/deputies_registration/deputy_model.dart';
 import 'network/deputies_api.dart';
 
-class DeputiesRegistrationRepositoryImpl implements DeputiesRegistrationRepository {
-
+class DeputiesRegistrationRepositoryImpl
+    implements DeputiesRegistrationRepository {
   // final DeputiesApi deputiesApi;
   //
   // DeputiesRegistrationRepositoryImpl(this.deputiesApi);
 
   @override
-  Future<Result<List<DeputyModel>>> getDeputies(DeputiesRegistrationParams params) async {
+  Future<Result<List<DeputyModel>>> getDeputies(
+      DeputiesRegistrationParams params) async {
     // var response = await deputiesApi.getAllDeputies(params.cadency);
 
-    return Success<List<DeputyModel>>(List());
+    return Success<List<DeputyModel>>(List.empty());
   }
-
 }

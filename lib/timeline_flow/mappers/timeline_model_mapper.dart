@@ -12,6 +12,7 @@ import 'package:project_athens/athens_core/data/base_responses/timeline_response
 import 'package:project_athens/athens_core/data/base_responses/voting_response.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/deputies_utils/cache/subscribed_deputies_cache.dart';
+import 'package:project_athens/deputies_utils/domain/subscribed_deputy_model.dart';
 
 class TimelineModelMapper extends AsyncDataMapper<Event, TimelineModel> {
   final DeputiesCache _deputiesCache;
@@ -41,7 +42,7 @@ class TimelineModelMapper extends AsyncDataMapper<Event, TimelineModel> {
       final deputy = await _subscribedDeputiesCache
           .getDeputyModelById(deputyDTO.cadencyDeputy);
 
-      return VoteSlimDeputyVoteType(deputy, deputyDTO.voteType);
+      return VoteSlimDeputyVoteType(deputy as SubscribedDeputyModel, deputyDTO.voteType);
     }).toList();
 
     final deputiesVote = await Future.wait(deputiesVoteFutures);
@@ -50,7 +51,7 @@ class TimelineModelMapper extends AsyncDataMapper<Event, TimelineModel> {
       final club =
           await _deputiesCache.getParliamentClubModel(clubDTO.parliamentClub);
 
-      return VoteSlimClubMajority(club, clubDTO.voteMajority);
+      return VoteSlimClubMajority(club!, clubDTO.voteMajority);
     });
 
     final clubs = await Future.wait(clubsFutures);
@@ -70,6 +71,9 @@ class TimelineModelMapper extends AsyncDataMapper<Event, TimelineModel> {
         clubsMajority: clubs,
         deputiesVote: deputiesVote,
         createAt: DateTime.now(),
+        absoluteMajority: item.absoluteMajority,
+        voteType: item.type,
+        qualifyingMajority: item.qualifyingMajority,
         // since for now service does NOT provide updates
         // because votes for now are immutable on server side
         updateAt: DateTime.now());
@@ -84,7 +88,7 @@ class TimelineModelMapper extends AsyncDataMapper<Event, TimelineModel> {
         desc: item.agenda?.title,
         date: item.cisInfo.eventDateTime,
         thumbnailUrl:
-            await _deputiesCache.getDeputyThumbnail(item.cadencyDeputy),
+            await _deputiesCache.getDeputyThumbnail(item.cadencyDeputy!),
         videoUrl: item.videoDownloadUrl,
         updateAt: item.updateAt,
         createAt: item.createAt);

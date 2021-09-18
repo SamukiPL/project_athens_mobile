@@ -12,5 +12,19 @@ class VoteSlimMajorityModel extends VoteSlimModel {
   final ParliamentClubModel desiredClub;
   final VoteType desiredClubVote;
 
-  VoteSlimMajorityModel({this.desiredClub, this.desiredDeputy, this.desiredClubVote, this.desiredDeputyVote, String id, VotingType type, DateTime voteAt, VoteNumbers voteNumbers, String votingDesc, String title}) : super(id: id, type: type, voteAt: voteAt, voteNumbers: voteNumbers, votingDesc: votingDesc, title: title);
+  VoteSlimMajorityModel({required this.desiredClub,
+    required this.desiredDeputy,
+    required this.desiredClubVote,
+    required this.desiredDeputyVote,
+    required String id,
+    required VotingType type,
+    required DateTime voteAt,
+    required VoteNumbers voteNumbers,
+    required String votingDesc,
+    required String title}) : super(id: id,
+      type: type,
+      voteAt: voteAt,
+      voteNumbers: voteNumbers,
+      votingDesc: votingDesc,
+      title: title);
 }

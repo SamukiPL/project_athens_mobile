@@ -31,14 +31,14 @@ class HallOfFameScreen extends BaseScreen<HallOfFameBloc> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           FutureProvider(
-            initialData: null,
+            initialData: false,
             create: (context) => bloc.backersCache.hasUserBacked,
             child: Consumer<bool?>(
               builder: (context, isBacker, _) => isBacker != null && isBacker ? _buildBackerCard() : Container(),
             ),
           ),
           FutureProvider(
-            initialData: null,
+            initialData: List.empty(),
             create: (context) => bloc.backersCache.backers,
             child: Consumer<Result<List<BackerModel>>?>(
               builder: (context, backers, _) {

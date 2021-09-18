@@ -11,7 +11,7 @@ class BaseFab extends StatelessWidget {
   final Widget child;
 
   const BaseFab(
-      {Key key, @required this.onPressed, @required this.bloc, this.child})
+      {Key? key, required this.onPressed, required this.bloc, required this.child})
       : super(key: key);
 
   @override

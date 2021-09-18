@@ -7,15 +7,15 @@ class DeputyVoteAccuracyListParams extends BaseListParams {
   final VoteAccuracyAlignment accuracyType;
 
   DeputyVoteAccuracyListParams({
-    this.cadencyDeputyId,
-    this.parliamentClubId,
-    this.accuracyType,
-    int offset,
-    int limit,
-    String searchQuery,
-    DateTime from,
-    DateTime to,
-    String sortingParam
+    required this.cadencyDeputyId,
+    required this.parliamentClubId,
+    required this.accuracyType,
+    required int offset,
+    required int limit,
+    required String searchQuery,
+    DateTime? from,
+    DateTime? to,
+    required String sortingParam
   }) : super(
       limit: limit,
       offset: offset,

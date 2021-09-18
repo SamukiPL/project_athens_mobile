@@ -20,7 +20,7 @@ class VotingModel extends TimelineModel {
     required this.title,
     required DateTime date,
     required this.votingDesc,
-    this.votingType,
+    required this.votingType,
     required this.results,
     required this.votes,
     this.absoluteMajority,

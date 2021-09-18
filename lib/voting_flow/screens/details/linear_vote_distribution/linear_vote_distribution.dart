@@ -120,10 +120,10 @@ class LinearVoteDistribution extends StatelessWidget {
   int _getRequiredVotes() {
     if (this.model.absoluteMajority != 0 &&
         this.model.absoluteMajority != null) {
-      return this.model.absoluteMajority;
+      return this.model.absoluteMajority!;
     } else if (this.model.qualifyingMajority != 0 &&
         this.model.qualifyingMajority != null) {
-      return this.model.qualifyingMajority;
+      return this.model.qualifyingMajority!;
     } else {
       final int summedVotes = this.model.inFavor + this.model.against;
       final int votesRequired = summedVotes % 2 == 0

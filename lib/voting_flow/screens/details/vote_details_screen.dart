@@ -59,7 +59,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
           FullCard(header: 'Opis', headerPadding: 8, child: buildDescription(theme)),
           FullCard(header: 'Rozkład głosów', headerPadding: 8, child: buildClubVoteDistributionView(context, theme, bloc)),
           FullCard(header: 'Obserwowani posłowie', headerPadding: 8, child: buildDeputyVotesView(context, theme, bloc)),
-          StreamProvider.value(
+          StreamProvider<VotingModel?>.value(
               value: bloc.votingFullStream,
               initialData: null,
               child: Consumer<VotingModel>(
@@ -355,7 +355,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
         if (clubsResult == null) {
           return Container();
         } else if (clubsResult is Success<List<ParliamentClubModel>>) {
-          return StreamProvider.value(
+          return StreamProvider<VotingModel?>.value(
               value: bloc.votingFullStream,
               initialData: null,
               child: Consumer<VotingModel>(
@@ -388,7 +388,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
     final AppLocalizations localizations =
         Provider.of<AppLocalizations>(context);
 
-    return StreamProvider.value(
+    return StreamProvider<VotingModel?>.value(
         value: bloc.votingFullStream,
         initialData: null,
         child: Consumer<VotingModel>(
@@ -466,7 +466,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
                                     image: new DecorationImage(
                                       fit: BoxFit.cover,
                                       image: new NetworkImage(
-                                          deputy?.thumbnailUrl ?? ""),
+                                          deputy.thumbnailUrl ?? ""),
                                     ))),
                             Container(
                               alignment: Alignment.center,

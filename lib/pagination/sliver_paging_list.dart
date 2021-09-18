@@ -16,10 +16,10 @@ class SliverPagingList extends StatelessWidget {
 
   final PagingListAdapter _adapter;
 
-  final Widget separator;
+  final Widget? separator;
 
   const SliverPagingList(this._adapter,
-      {Key key,
+      {Key? key,
         this.leftPadding = 8,
         this.topPadding = 8,
         this.rightPadding = 8,
@@ -61,6 +61,6 @@ class SliverPagingList extends StatelessWidget {
   }
 
   StatelessWidget _itemBuilder(List<BaseItemViewModel> items, int index) {
-    return items[index].buildWidget(index, items.length);
+    return items[index].buildWidget(index, items.length) as StatelessWidget;
   }
 }

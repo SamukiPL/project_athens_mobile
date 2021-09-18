@@ -12,7 +12,7 @@ class VoteMajorityDistribution extends StatelessWidget {
   double get avatarSize => 50;
   double get clubNameFontSize => 10;
 
-  VoteMajorityDistribution({this.votesMajority, this.showAbsent});
+  VoteMajorityDistribution({required this.votesMajority, this.showAbsent = false});
 
   Widget buildIconRow(ThemeData theme) {
     return Row(

@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:project_athens/athens_core/data/base_responses/voting_response.dart';
 import 'package:project_athens/athens_core/models/speech_model.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
@@ -113,17 +114,17 @@ List<SpeechModel> _mockSpeechList() => [
 ];
 
 List<TimelineModel> _mockTimelineList() => [
-  VotingModel(votes: [], results: VoteResultModel(0,0,0,0), clubVotes: [], id: '', title: '', votingDesc: '', date: DateTime.now()),
-  VotingModel(votes: [], results: VoteResultModel(0,0,0,0), clubVotes: [], id: '', title: '', votingDesc: '', date: DateTime.now()),
+  VotingModel(votingType: VotingType.REQUEST_OF_CLOSING_MEETING, votes: [], results: VoteResultModel(0,0,0,0), clubVotes: [], id: '', title: '', votingDesc: '', date: DateTime.now()),
+  VotingModel(votingType: VotingType.REQUEST_OF_CLOSING_MEETING, votes: [], results: VoteResultModel(0,0,0,0), clubVotes: [], id: '', title: '', votingDesc: '', date: DateTime.now()),
   SpeechModel(id: "1", previousPersonSpeech: PersonSpeechModel(speechId: '', name: ''), date: DateTime.now().add(Duration(hours: 5)), videoUrl: '', personName: ''),
-  VotingModel(votes: [], results: VoteResultModel(0,0,0,0), clubVotes: [], id: '', title: '', votingDesc: '', date: DateTime.now()),
-  VotingModel(votes: [], results: VoteResultModel(0,0,0,0), clubVotes: [], id: '', title: '', votingDesc: '', date: DateTime.now()),
+  VotingModel(votingType: VotingType.REQUEST_OF_CLOSING_MEETING, votes: [], results: VoteResultModel(0,0,0,0), clubVotes: [], id: '', title: '', votingDesc: '', date: DateTime.now()),
+  VotingModel(votingType: VotingType.REQUEST_OF_CLOSING_MEETING, votes: [], results: VoteResultModel(0,0,0,0), clubVotes: [], id: '', title: '', votingDesc: '', date: DateTime.now()),
   SpeechModel(id: "2", date: DateTime.now().add(Duration(hours: 4)), videoUrl: '', personName: ''),
   SpeechModel(id: "3", date: DateTime.now().add(Duration(hours: 3)), videoUrl: '', personName: ''),
-  VotingModel(votes: [], results: VoteResultModel(0,0,0,0), clubVotes: [], id: '', title: '', votingDesc: '', date: DateTime.now()),
+  VotingModel(votingType: VotingType.REQUEST_OF_CLOSING_MEETING, votes: [], results: VoteResultModel(0,0,0,0), clubVotes: [], id: '', title: '', votingDesc: '', date: DateTime.now()),
   SpeechModel(id: "4", date: DateTime.now().add(Duration(hours: 2)), videoUrl: '', personName: ''),
-  VotingModel(votes: [], results: VoteResultModel(0,0,0,0), clubVotes: [], id: '', title: '', votingDesc: '', date: DateTime.now()),
+  VotingModel(votingType: VotingType.REQUEST_OF_CLOSING_MEETING, votes: [], results: VoteResultModel(0,0,0,0), clubVotes: [], id: '', title: '', votingDesc: '', date: DateTime.now()),
   SpeechModel(id: "5", nextPersonSpeech: PersonSpeechModel(speechId: '', name: ''), date: DateTime.now().add(Duration(hours: 1)), videoUrl: '', personName: ''),
-  VotingModel(votes: [], results: VoteResultModel(0,0,0,0), clubVotes: [], id: '', title: '', votingDesc: '', date: DateTime.now()),
-  VotingModel(votes: [], results: VoteResultModel(0,0,0,0), clubVotes: [], id: '', title: '', votingDesc: '', date: DateTime.now()),
+  VotingModel(votingType: VotingType.REQUEST_OF_CLOSING_MEETING, votes: [], results: VoteResultModel(0,0,0,0), clubVotes: [], id: '', title: '', votingDesc: '', date: DateTime.now()),
+  VotingModel(votingType: VotingType.REQUEST_OF_CLOSING_MEETING, votes: [], results: VoteResultModel(0,0,0,0), clubVotes: [], id: '', title: '', votingDesc: '', date: DateTime.now()),
 ];

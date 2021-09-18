@@ -97,11 +97,11 @@ class DeputyVoteAccuracyViewHolder extends StatelessWidget with RedirectionDeleg
   }
 
   Widget _getVoteDistributionTable(ThemeData theme) {
-    final List<VoteMajorityDistributionModel> models = _viewModel.clubs.map((e) => VoteMajorityDistributionModel(
-      e.parliamentClubModel.imageSrc, e.voteMajority, e.parliamentClubModel.shortName, false
+    final List<VoteMajorityDistributionModel> models = _viewModel.clubs!.map((e) => VoteMajorityDistributionModel(
+      e.parliamentClubModel.imageSrc ?? "", e.voteMajority, e.parliamentClubModel.shortName, false
     )).toList();
 
-    models.addAll(_viewModel.deputies.map((e) => VoteMajorityDistributionModel(e.subscribedDeputy.thumbnailUrl, e.voteType, e.subscribedDeputy.name, true)).toList());
+    models.addAll(_viewModel.deputies!.map((e) => VoteMajorityDistributionModel(e.subscribedDeputy.thumbnailUrl ?? "", e.voteType, e.subscribedDeputy.name, true)).toList());
 
     return VoteMajorityDistribution(votesMajority: models, showAbsent: false);
   }

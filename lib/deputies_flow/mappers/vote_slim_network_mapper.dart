@@ -5,6 +5,7 @@ import 'package:project_athens/athens_core/utils/get_vote_description_helper.dar
 import 'package:project_athens/deputies_flow/data/network/response/deputy_vote_accuracy_response.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/cache/subscribed_deputies_cache.dart';
+import 'package:project_athens/deputies_utils/domain/subscribed_deputy_model.dart';
 
 class VoteSlimNetworkMapper extends AsyncDataMapper<VoteSlimDTO, VoteSlimModel> {
   final SubscribedDeputiesCache _subscribedDeputiesCache;
@@ -16,7 +17,7 @@ class VoteSlimNetworkMapper extends AsyncDataMapper<VoteSlimDTO, VoteSlimModel> 
   @override
   Future<VoteSlimModel> transform(VoteSlimDTO data) async {
     final deputiesVoteFutures = data.deputiesVoteType.map((deputyDTO) async {
-      final deputy = await _subscribedDeputiesCache.getDeputyModelById(deputyDTO.cadencyDeputy);
+      final deputy = await _subscribedDeputiesCache.getDeputyModelById(deputyDTO.cadencyDeputy) as SubscribedDeputyModel;
       
       return VoteSlimDeputyVoteType(deputy, deputyDTO.voteType);
     }).toList();
@@ -26,7 +27,7 @@ class VoteSlimNetworkMapper extends AsyncDataMapper<VoteSlimDTO, VoteSlimModel> 
     final clubsFutures = data.clubsMajority.map((clubDTO) async {
       final club = await _deputiesCache.getParliamentClubModel(clubDTO.parliamentClub);
       
-      return VoteSlimClubMajority(club, clubDTO.voteMajority);
+      return VoteSlimClubMajority(club!, clubDTO.voteMajority);
     });
 
     final clubs = await Future.wait(clubsFutures);

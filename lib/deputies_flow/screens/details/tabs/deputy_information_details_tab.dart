@@ -185,9 +185,9 @@ class DeputyInformationDetailsTab extends StatelessWidget {
               width: 50,
               height: 50,
               child: CachedNetworkImage(
-                imageUrl: voteAccuracy?.parliamentClub?.imageSrc,
+                imageUrl: voteAccuracy.parliamentClub?.imageSrc,
                 placeholder: (context, url) => CircularProgressIndicator(),
-                errorWidget: (context, url, error) => Center(child: Text(voteAccuracy?.parliamentClub?.shortName ?? ""),),
+                errorWidget: (context, url, error) => Center(child: Text(voteAccuracy.parliamentClub?.shortName ?? ""),),
                 width: 40,
                 height: 40,
                 memCacheHeight: 700,

@@ -18,19 +18,19 @@ class TimelineVotingModel extends TimelineModel {
 
 
   TimelineVotingModel(
-      {this.id,
-      this.orderPoint,
-      this.title,
-      this.voteType,
-      this.voteAt,
-      this.voteNumbers,
-      this.votingDesc,
-      this.qualifyingMajority,
-      this.absoluteMajority,
-      this.clubsMajority,
-      this.deputiesVote,
-      DateTime createAt,
-      DateTime updateAt}) : super(id, TimelineModelType.VOTING, voteAt, createAt, updateAt);
+      {required this.id,
+        required this.orderPoint,
+        required this.title,
+        required this.voteType,
+        required this.voteAt,
+        required this.voteNumbers,
+        required this.votingDesc,
+      required this.qualifyingMajority,
+      required this.absoluteMajority,
+      required this.clubsMajority,
+      required this.deputiesVote,
+      DateTime? createAt,
+      DateTime? updateAt}) : super(id, TimelineModelType.VOTING, voteAt, createAt, updateAt);
 }
 
 

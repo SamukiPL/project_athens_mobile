@@ -8,10 +8,10 @@ import 'deputy_vote_accuracy_item_view_model.dart';
 class DeputyVoteAccuracyItemViewModelFactory extends ItemViewModelFactory {
 
   @override
-  BaseItemViewModel createWithoutError(BaseModel model) {
+  BaseItemViewModel? createWithoutError(BaseModel model) {
     switch (model.runtimeType) {
       case VoteSlimModel:
-        return DeputyVoteAccuracyItemViewModel(model);
+        return DeputyVoteAccuracyItemViewModel(model as VoteSlimModel);
         break;
     }
 

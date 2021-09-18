@@ -11,7 +11,7 @@ class VoteNumbers {
   final int hold;
   final int absent;
 
-  VoteNumbers({this.inFavor, this.against, this.hold, this.absent});
+  VoteNumbers({required this.inFavor, required this.against, required this.hold, required this.absent});
 }
 
 class VoteSlimClubMajority {
@@ -35,21 +35,21 @@ class VoteSlimModel extends BaseModel {
   final DateTime voteAt;
   final VoteNumbers voteNumbers;
   final String votingDesc;
-  final int orderPoint;
-  final int qualifyingMajority;
-  final int absoluteMajority;
+  final int? orderPoint;
+  final int? qualifyingMajority;
+  final int? absoluteMajority;
 
-  final List<VoteSlimClubMajority> clubsMajority;
-  final List<VoteSlimDeputyVoteType> deputiesVote;
+  final List<VoteSlimClubMajority>? clubsMajority;
+  final List<VoteSlimDeputyVoteType>? deputiesVote;
 
-  VoteSlimModel({this.id, this.title, this.type, this.voteAt, this.voteNumbers, this.votingDesc, this.clubsMajority, this.deputiesVote, this.qualifyingMajority, this.absoluteMajority, this.orderPoint});
+  VoteSlimModel({required this.id, required this.title, required this.type, required this.voteAt, required this.voteNumbers, required this.votingDesc, this.clubsMajority, this.deputiesVote, this.qualifyingMajority, this.absoluteMajority, this.orderPoint});
 
   factory VoteSlimModel.fromVotingModel(VotingModel model) {
     final voteNumbers = VoteNumbers(
-      inFavor: model.results?.inFavor,
-      hold: model.results?.hold,
-      against: model.results?.against,
-      absent: model.results?.absent
+      inFavor: model.results.inFavor,
+      hold: model.results.hold,
+      against: model.results.against,
+      absent: model.results.absent
     );
 
     final voteSlim = new VoteSlimModel(
@@ -60,7 +60,8 @@ class VoteSlimModel extends BaseModel {
       voteNumbers: voteNumbers,
       orderPoint: model.orderPoint,
       qualifyingMajority: model.qualifyingMajority,
-      absoluteMajority: model.absoluteMajority
+      absoluteMajority: model.absoluteMajority,
+      votingDesc: model.votingDesc
     );
 
     return voteSlim;
