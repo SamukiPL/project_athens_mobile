@@ -7,19 +7,20 @@ class VotesGrouper {
     final groupedVotes = Map<int, List<TimelineVotingModel>>();
 
     List<TimelineModel> votesToGroup = models
-        .where(
-            (element) => element is TimelineVotingModel && element.orderPoint != null)
+        .where((element) =>
+            element is TimelineVotingModel && element.orderPoint != null)
         .toList();
     votesToGroup.forEach((element) {
-      TimelineVotingModel voting = element;
-      List<TimelineVotingModel> group = groupedVotes[voting.orderPoint] ?? List.empty();
+      TimelineVotingModel voting = element as TimelineVotingModel;
+      List<TimelineVotingModel> group =
+          groupedVotes[voting.orderPoint] ?? List.empty();
       group.add(voting);
       groupedVotes[voting.orderPoint!] = group;
     });
 
     final newList = models
         .where((element) =>
-    !(element is TimelineVotingModel && element.orderPoint != null))
+            !(element is TimelineVotingModel && element.orderPoint != null))
         .toList();
 
     groupedVotes.values.forEach((group) {

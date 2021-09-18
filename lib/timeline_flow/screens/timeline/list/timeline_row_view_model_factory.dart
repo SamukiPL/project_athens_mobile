@@ -23,7 +23,7 @@ extension TimelineModelExtension on List<TimelineModel> {
     BaseItemViewModel item;
     switch (model.type) {
       case TimelineModelType.VOTING:
-        TimelineVotingModel votingModel = model;
+        TimelineVotingModel votingModel = model as TimelineVotingModel;
         item = VotingRowViewModel(votingModel);
         break;
       case TimelineModelType.SPEECH:

@@ -26,7 +26,7 @@ class TimelineModelMapper extends AsyncDataMapper<Event, TimelineModel> {
   Future<TimelineModel> transform(Event data) async {
     switch (data.type) {
       case TimelineEventType.VOTING:
-        return await getVotingModel(data.item);
+        return await getVotingModel(data.item as VoteSlimDTO);
         break;
       case TimelineEventType.SPEECH:
         return await getSpeechModel(data.item as SpeechResponse);

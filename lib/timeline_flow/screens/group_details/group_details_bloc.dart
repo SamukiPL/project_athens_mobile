@@ -26,8 +26,8 @@ class GroupDetailsBloc extends BaseBloc {
   }
 
   void itemClick(TimelineModel model) {
-    goToDestination(
-        VoteDetailsDestination(VoteSlimModel.fromVotingModel(model)));
+    goToDestination(VoteDetailsDestination(
+        VoteSlimModel.fromVotingModel(model as VotingModel)));
   }
 
   @override
