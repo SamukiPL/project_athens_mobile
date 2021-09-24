@@ -2,8 +2,13 @@ import 'package:collection/collection.dart';
 import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
 import 'package:project_athens/athens_core/presentation/vote_majority_distribution/vote_majority_distribution_model.dart';
 
-List<VoteMajorityDistributionModel> voteMajorityDistrinutionFromVoteSlim(List<VoteSlimClubMajority> clubsMajority, List<VoteSlimDeputyVoteType> deputiesVote, bool showInaccuracyOnly) {
+List<VoteMajorityDistributionModel> voteMajorityDistrinutionFromVoteSlim(List<VoteSlimClubMajority>? clubsMajority, List<VoteSlimDeputyVoteType>? deputiesVote, bool showInaccuracyOnly) {
+  if (clubsMajority == null || deputiesVote == null) {
+    return List.empty();
+  }
+
   bool shouldHide(VoteSlimDeputyVoteType deputy) {
+
     // deputies can change being member of club, but server will return us votes
     final clubOfDeputyAtThatTime = clubsMajority.firstWhereOrNull((element) => element.deputyCardNumbers.contains(deputy.subscribedDeputy.cardId));
 
