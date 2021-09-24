@@ -11,20 +11,20 @@ class DataLoadingWidget extends StatelessWidget {
 
   final DataLoadingBloc _bloc;
 
-  final Widget initialLoading;
-  final Widget child;
-  final Widget Function() childBuilder;
-  final Widget noData;
-  final String noDataText;
-  final Function(ErrorType) retryWidget;
-  final VoidCallback onRetry;
+  final Widget? initialLoading;
+  final Widget? child;
+  final Widget Function()? childBuilder;
+  final Widget? noData;
+  final String? noDataText;
+  final Function(ErrorType)? retryWidget;
+  final VoidCallback? onRetry;
   final bool invertLoaderColor;
 
   final Color color;
 
   const DataLoadingWidget(
       this._bloc,
-      {Key key,
+      {Key? key,
       this.initialLoading,
       this.child,
       this.childBuilder,
@@ -44,17 +44,13 @@ class DataLoadingWidget extends StatelessWidget {
         switch (bloc.loadingState.runtimeType) {
           case InitialLoading:
             return _getInitialLoading();
-            break;
           case ContentLoaded:
-            return child ?? childBuilder();
-            break;
+            return child ?? childBuilder!();
           case NoDataLoaded:
             return _getNoData();
-            break;
           case LoadingError:
-            LoadingError loadingError = bloc.loadingState;
+            LoadingError loadingError = bloc.loadingState as LoadingError;
             return _getRetryWidget(loadingError.errorType);
-            break;
           default:
             throw ArgumentError();
         }
@@ -98,7 +94,7 @@ class DataLoadingWidget extends StatelessWidget {
 
   Widget _buildBaseRetry(ErrorType errorType) => RetryWidget(
     errorType: errorType,
-    onRetry: onRetry,
+    onRetry: onRetry!,
     color: color,
   );
 }

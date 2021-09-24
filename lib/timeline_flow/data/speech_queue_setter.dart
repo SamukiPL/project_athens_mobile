@@ -40,7 +40,7 @@ class SpeechQueueSetter {
         .toList(growable: false);
   }
 
-  PersonSpeechModel provideNextPersonModel(
+  PersonSpeechModel? provideNextPersonModel(
       int index, List<SpeechModel> oldList) {
     if (index < oldList.length - 1) {
       final speech = oldList[index + 1];
@@ -52,7 +52,7 @@ class SpeechQueueSetter {
     return null;
   }
 
-  PersonSpeechModel providePreviousPersonModel(
+  PersonSpeechModel? providePreviousPersonModel(
       int index, List<SpeechModel> oldList) {
     if (index > 0 && index < oldList.length) {
       final speech = oldList[index - 1];

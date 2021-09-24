@@ -108,8 +108,8 @@ class MoreScreen extends BaseScreen<MoreBloc> {
                       ))),
               FutureProvider.value(
                 value: bloc.getAppVersion(),
-                initialData: '',
-                child: Consumer<String>(
+                initialData: null,
+                child: Consumer<String?>(
                   builder: (context, version, _) {
                     if (version != null && version != '') {
                       return Container(
@@ -181,7 +181,7 @@ class MoreScreen extends BaseScreen<MoreBloc> {
   }
 
   @override
-  Widget buildFloatingActionButton(BuildContext context, MoreBloc bloc) {
+  Widget? buildFloatingActionButton(BuildContext context, MoreBloc bloc) {
     return null;
   }
 

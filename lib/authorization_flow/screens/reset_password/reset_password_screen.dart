@@ -117,7 +117,7 @@ class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
   }
 
   @override
-  Widget generateFab(BuildContext context, ResetPasswordBloc bloc) {
+  Widget? generateFab(BuildContext context, ResetPasswordBloc bloc) {
     return null;
   }
 

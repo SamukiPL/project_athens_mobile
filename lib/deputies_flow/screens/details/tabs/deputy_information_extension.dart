@@ -44,7 +44,7 @@ extension DeputyFullExtension on DeputyFull {
 
     if (voteAccuracy.length > 0) {
       final highestAccuracyClub = voteAccuracy[0];
-      highestAccuracyText = highestAccuracyClub.parliamentClub.shortName;
+      highestAccuracyText = highestAccuracyClub.parliamentClub!.shortName;
     } else {
       highestAccuracyText = localizations.getText().deputiesNoHighestAccuracy();
     }

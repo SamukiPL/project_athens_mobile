@@ -38,7 +38,7 @@ class SplashScreenWidget extends StatelessWidget {
     bloc.checkDirection();
     var navigation = Provider.of<AppNavigation>(context);
 
-    StreamSubscription subscription;
+    late StreamSubscription subscription;
     subscription = bloc.direction.listen((direction) {
       switch (direction) {
         case SplashDirection.MAIN:

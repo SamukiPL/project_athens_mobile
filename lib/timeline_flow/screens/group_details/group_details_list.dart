@@ -7,7 +7,7 @@ class GroupDetailsList extends StatelessListWidget<BaseItemViewModel> {
   GroupDetailsList(List<BaseItemViewModel> items) : super(items);
 
   @override
-  StatelessWidget getItemViewHolder(BaseItemViewModel item, int index, int length) {
+  Widget getItemViewHolder(BaseItemViewModel item, int index, int length) {
     return item.buildWidget(index, length);
   }
 

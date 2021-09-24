@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/data/network/response/subscribed_deputy_response.dart';

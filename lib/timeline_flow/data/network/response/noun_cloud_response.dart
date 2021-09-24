@@ -9,10 +9,10 @@ part 'noun_cloud_response.g.dart';
 class NounCloudResponse {
 
   final String id;
-  final DateTime createAt;
-  final DateTime updateAt;
+  final DateTime? createAt;
+  final DateTime? updateAt;
   final int cadency;
-  final DateTime scheduledAt;
+  final DateTime? scheduledAt;
   final int sessionIId;
   final List<NounTag> nouns;
 

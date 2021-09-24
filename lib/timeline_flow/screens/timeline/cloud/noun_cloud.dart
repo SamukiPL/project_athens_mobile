@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 class NounCloud extends StatelessWidget {
   final NounCloudBloc bloc;
 
-  const NounCloud({Key key, @required this.bloc}) : super(key: key);
+  const NounCloud({Key? key, required this.bloc}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -23,10 +23,10 @@ class _CalendarAppBar extends StatelessWidget {
   final VoidCallback nextClick;
 
   const _CalendarAppBar(
-      {Key key,
-      @required this.bloc,
-      @required this.previousClick,
-      @required this.nextClick})
+      {Key? key,
+      required this.bloc,
+      required this.previousClick,
+      required this.nextClick})
       : super(key: key);
 
   @override

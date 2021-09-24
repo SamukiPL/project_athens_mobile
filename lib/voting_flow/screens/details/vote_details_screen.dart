@@ -334,8 +334,9 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
     final DeputiesCache deputiesCache = Provider.of<DeputiesCache>(context);
 
     return FutureProvider(
+      initialData: Success(List.empty()),
       create: (context) => deputiesCache.parliamentClubs,
-      child: Consumer<Result<List<ParliamentClubModel>>>(
+      child: Consumer<Result<List<ParliamentClubModel>>?>(
           builder: (context, clubsResult, _) {
         if (clubsResult == null) {
           return Container();
@@ -416,8 +417,9 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
     final foundDeputy = deputiesCache.getDeputyModelById(voting.cadencyDeputy);
     // return Container();
     return FutureProvider(
+      initialData: null,
       create: (context) => foundDeputy,
-      child: Consumer<DeputyModel>(
+      child: Consumer<DeputyModel?>(
           builder: (context, deputy, _) => deputy != null
               ? Container(
                   width: circleSize,
@@ -438,7 +440,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
                                     image: new DecorationImage(
                                       fit: BoxFit.cover,
                                       image: new NetworkImage(
-                                          deputy?.thumbnailUrl),
+                                          deputy?.thumbnailUrl ?? ""),
                                     ))),
                             Container(
                               alignment: Alignment.center,
@@ -468,7 +470,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
                       ),
                       Container(
                         child: Text(
-                          deputy.club,
+                          deputy.club ?? "",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: theme.dividerColor,
@@ -483,7 +485,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
   }
 
   @override
-  Widget buildFloatingActionButton(
+  Widget? buildFloatingActionButton(
           BuildContext context, VoteDetailsBloc bloc) =>
       null;
 }

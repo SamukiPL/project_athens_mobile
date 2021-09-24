@@ -1,4 +1,5 @@
 import 'package:project_athens/athens_core/domain/result.dart';
+import 'package:project_athens/deputies_utils/data/network/response/full_deputy_response.dart';
 import 'package:project_athens/deputies_utils/domain/base_deputy_params.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputy/get_deputy_repository.dart';
 
@@ -12,10 +13,10 @@ class GetDeputyRepositoryImpl
   GetDeputyRepositoryImpl(this._deputiesApi);
 
   @override
-  Future<Result<DeputyResponse>> getDeputy(
+  Future<Result<FullDeputyResponse>> getDeputy(
       BaseDeputyParams params) async {
     final response = await _deputiesApi.getDeputy(params.deputyId);
 
-    return Success<DeputyResponse>(response);
+    return Success<FullDeputyResponse>(response);
   }
 }

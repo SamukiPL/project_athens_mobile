@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:project_athens/athens_core/filters_and_sort/filters_bottom_sheet.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_list/base_list.dart';
 import 'package:project_athens/athens_core/presentation/base_list/base_list_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
@@ -60,7 +59,7 @@ class SpeechesListScreen extends BaseScreen<BaseListBloc> {
   }
 
   @override
-  Widget buildFloatingActionButton(BuildContext context, BaseListBloc bloc) =>
+  Widget? buildFloatingActionButton(BuildContext context, BaseListBloc bloc) =>
       null;
 
   void showFullScreenDialog(BuildContext context) {

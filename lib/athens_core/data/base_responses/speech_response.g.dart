@@ -11,20 +11,16 @@ SpeechResponse _$SpeechResponseFromJson(Map<String, dynamic> json) {
     json['agenda'] == null
         ? null
         : Agenda.fromJson(json['agenda'] as Map<String, dynamic>),
-    json['cisInfo'] == null
-        ? null
-        : CisInfo.fromJson(json['cisInfo'] as Map<String, dynamic>),
-    json['createAt'] == null
-        ? null
-        : DateTime.parse(json['createAt'] as String),
+    CisInfo.fromJson(json['cisInfo'] as Map<String, dynamic>),
+    DateTime.parse(json['createAt'] as String),
     json['id'] as String,
     json['deputyCardIdentifier'] as int,
     json['fileName'] as String,
     json['videoDownloadUrl'] as String,
     json['length'] as int,
     json['personName'] as String,
-    json['cadencyDeputy'] as String,
-    json['parliamentClub'] as String,
+    json['cadencyDeputy'] as String?,
+    json['parliamentClub'] as String?,
     json['cadency'] as int,
     json['rangeId'] as String,
     json['previousPersonSpeech'] == null
@@ -35,9 +31,7 @@ SpeechResponse _$SpeechResponseFromJson(Map<String, dynamic> json) {
         ? null
         : PersonSpeech.fromJson(
             json['nextPersonSpeech'] as Map<String, dynamic>),
-    json['updateAt'] == null
-        ? null
-        : DateTime.parse(json['updateAt'] as String),
+    DateTime.parse(json['updateAt'] as String),
   );
 }
 
@@ -45,8 +39,8 @@ Map<String, dynamic> _$SpeechResponseToJson(SpeechResponse instance) =>
     <String, dynamic>{
       'agenda': instance.agenda,
       'cisInfo': instance.cisInfo,
-      'createAt': instance.createAt?.toIso8601String(),
-      'updateAt': instance.updateAt?.toIso8601String(),
+      'createAt': instance.createAt.toIso8601String(),
+      'updateAt': instance.updateAt.toIso8601String(),
       'id': instance.id,
       'deputyCardIdentifier': instance.deputyCardIdentifier,
       'fileName': instance.fileName,
@@ -63,12 +57,8 @@ Map<String, dynamic> _$SpeechResponseToJson(SpeechResponse instance) =>
 
 Agenda _$AgendaFromJson(Map<String, dynamic> json) {
   return Agenda(
-    json['eventDateTime'] == null
-        ? null
-        : DateTime.parse(json['eventDateTime'] as String),
-    json['msgDateTime'] == null
-        ? null
-        : DateTime.parse(json['msgDateTime'] as String),
+    DateTime.parse(json['eventDateTime'] as String),
+    DateTime.parse(json['msgDateTime'] as String),
     json['refId'] as String,
     json['rangeid'] as String,
     json['title'] as String,
@@ -76,8 +66,8 @@ Agenda _$AgendaFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$AgendaToJson(Agenda instance) => <String, dynamic>{
-      'eventDateTime': instance.eventDateTime?.toIso8601String(),
-      'msgDateTime': instance.msgDateTime?.toIso8601String(),
+      'eventDateTime': instance.eventDateTime.toIso8601String(),
+      'msgDateTime': instance.msgDateTime.toIso8601String(),
       'refId': instance.refId,
       'rangeid': instance.rangeid,
       'title': instance.title,
@@ -85,15 +75,9 @@ Map<String, dynamic> _$AgendaToJson(Agenda instance) => <String, dynamic>{
 
 CisInfo _$CisInfoFromJson(Map<String, dynamic> json) {
   return CisInfo(
-    json['person'] == null
-        ? null
-        : Person.fromJson(json['person'] as Map<String, dynamic>),
-    json['eventDateTime'] == null
-        ? null
-        : DateTime.parse(json['eventDateTime'] as String),
-    json['msgDateTime'] == null
-        ? null
-        : DateTime.parse(json['msgDateTime'] as String),
+    Person.fromJson(json['person'] as Map<String, dynamic>),
+    DateTime.parse(json['eventDateTime'] as String),
+    DateTime.parse(json['msgDateTime'] as String),
     json['rangeid'] as String,
     json['refId'] as String,
   );
@@ -101,8 +85,8 @@ CisInfo _$CisInfoFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$CisInfoToJson(CisInfo instance) => <String, dynamic>{
       'person': instance.person,
-      'eventDateTime': instance.eventDateTime?.toIso8601String(),
-      'msgDateTime': instance.msgDateTime?.toIso8601String(),
+      'eventDateTime': instance.eventDateTime.toIso8601String(),
+      'msgDateTime': instance.msgDateTime.toIso8601String(),
       'rangeid': instance.rangeid,
       'refId': instance.refId,
     };
@@ -111,7 +95,7 @@ Person _$PersonFromJson(Map<String, dynamic> json) {
   return Person(
     json['name'] as String,
     json['surname'] as String,
-    _$enumDecodeNullable(_$GenderEnumMap, json['gender']),
+    _$enumDecode(_$GenderEnumMap, json['gender']),
     json['function'] as String,
     json['other'] as String,
     json['deputyCardNumber'] as int,
@@ -129,36 +113,30 @@ Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
       'termOfficeNumber': instance.termOfficeNumber,
     };
 
-T _$enumDecode<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
+K _$enumDecode<K, V>(
+  Map<K, V> enumValues,
+  Object? source, {
+  K? unknownValue,
 }) {
   if (source == null) {
-    throw ArgumentError('A value must be provided. Supported values: '
-        '${enumValues.values.join(', ')}');
+    throw ArgumentError(
+      'A value must be provided. Supported values: '
+      '${enumValues.values.join(', ')}',
+    );
   }
 
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
-
-  if (value == null && unknownValue == null) {
-    throw ArgumentError('`$source` is not one of the supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-  return value ?? unknownValue;
-}
-
-T _$enumDecodeNullable<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
+  return enumValues.entries.singleWhere(
+    (e) => e.value == source,
+    orElse: () {
+      if (unknownValue == null) {
+        throw ArgumentError(
+          '`$source` is not one of the supported values: '
+          '${enumValues.values.join(', ')}',
+        );
+      }
+      return MapEntry(unknownValue, enumValues.values.first);
+    },
+  ).key;
 }
 
 const _$GenderEnumMap = {
@@ -168,7 +146,7 @@ const _$GenderEnumMap = {
 
 PersonSpeech _$PersonSpeechFromJson(Map<String, dynamic> json) {
   return PersonSpeech(
-    json['deputyCardId'] as int,
+    json['deputyCardId'] as int?,
     json['fullName'] as String,
     json['speechId'] as String,
   );

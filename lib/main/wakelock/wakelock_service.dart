@@ -20,15 +20,14 @@ class WakelockService {
       }
     });
     _config.wakelockOnTimeline.listen((event) => _handleTimelineWakelock(event));
-    Wakelock.isEnabled.asStream().listen((event) => _isLocked = event);
-
+    Wakelock.enabled.asStream().listen((event) => _isLocked = event);
   }
 
   // master lock is used when it comes to lock on main screens
   // e.g. timeline view
   bool _masterLock = false;
   bool _isLocked = false;
-  BottomNavItem _currentScreen;
+  late BottomNavItem _currentScreen;
 
   void _handleTimelineWakelock(bool prevent) {
     _masterLock = prevent;

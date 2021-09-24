@@ -9,16 +9,16 @@ class RetryWidget extends StatelessWidget {
   final ErrorType errorType;
   final VoidCallback onRetry;
 
-  final String networkErrorText;
-  final String serverErrorText;
+  final String? networkErrorText;
+  final String? serverErrorText;
 
   final TextAlign textAlign;
   final Color color;
 
   const RetryWidget(
-      {Key key,
-        @required this.errorType,
-        @required this.onRetry,
+      {Key? key,
+        required this.errorType,
+        required this.onRetry,
         this.networkErrorText,
         this.serverErrorText,
         this.textAlign = TextAlign.center,
@@ -49,19 +49,15 @@ class RetryWidget extends StatelessWidget {
   }
 
   String _getCorrectErrorText(AppLocalizations localization) {
-    String errorText;
     switch(errorType) {
       case ErrorType.NETWORK:
-        errorText = networkErrorText ?? localization.getText().universalErrorNetwork();
-        break;
+        return networkErrorText ?? localization.getText().universalErrorNetwork();
       case ErrorType.SERVER:
-        errorText = serverErrorText ?? localization.getText().universalErrorServer();
-        break;
+        return serverErrorText ?? localization.getText().universalErrorServer();
       case ErrorType.UNKNOWN:
-        errorText = localization.getText().universalErrorUnknown();
-        break;
+      default:
+        return localization.getText().universalErrorUnknown();
     }
-    return errorText;
   }
 
 }

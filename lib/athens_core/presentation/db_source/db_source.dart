@@ -20,8 +20,8 @@ class DbSource extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(localizations.getText().universalSource() + ': ' + this._harvestModel.source),
-          Text(localizations.getText().universalCreatedAt() + ': ' + DateFormat("HH:mm dd.MM.y", "pl").format(_harvestModel.createAt)),
-          Text(localizations.getText().universalUpdatedAt() + ': ' + DateFormat("HH:mm dd.MM.y", "pl").format(_harvestModel.updateAt))
+          Text(localizations.getText().universalCreatedAt() + ': ' + DateFormat("HH:mm dd.MM.y", "pl").format(_harvestModel.createAt ?? DateTime.now())),
+          Text(localizations.getText().universalUpdatedAt() + ': ' + DateFormat("HH:mm dd.MM.y", "pl").format(_harvestModel.updateAt ?? DateTime.now()))
         ],
       )
     );

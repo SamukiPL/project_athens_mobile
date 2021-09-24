@@ -1,7 +1,6 @@
 import 'package:project_athens/athens_core/data/base_responses/speech_response.dart';
 import 'package:project_athens/athens_core/domain/data_mapper.dart';
 import 'package:project_athens/athens_core/models/speech_model.dart';
-import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 
 class SpeechesNetworkMapper
@@ -28,7 +27,7 @@ class SpeechesNetworkMapper
     );
   }
 
-  Future<PersonSpeechModel> _transformPersonSpeechResponse(PersonSpeech personSpeech) async {
+  Future<PersonSpeechModel?> _transformPersonSpeechResponse(PersonSpeech? personSpeech) async {
     if (personSpeech == null) return null;
 
     if (personSpeech.deputyCardId != null) {

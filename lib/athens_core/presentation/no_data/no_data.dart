@@ -4,7 +4,7 @@ import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:provider/provider.dart';
 
 class NoData extends StatelessWidget {
-  final String text;
+  final String? text;
   final TextAlign textAlign;
   final Color color;
 

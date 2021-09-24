@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/deputies_flow/navigation/deputies_destinations.dart';
@@ -10,7 +9,8 @@ import 'package:provider/provider.dart';
 class DeputyListViewHolder extends StatelessWidget with RedirectionDelegate {
   final DeputyListItemViewModel viewModel;
 
-  const DeputyListViewHolder({Key key, @required this.viewModel}) : super(key: key);
+  const DeputyListViewHolder({Key? key, required this.viewModel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,8 @@ class DeputyListViewHolder extends StatelessWidget with RedirectionDelegate {
           margin: EdgeInsets.all(8),
           child: InkWell(
             onTap: () {
-              goToDestination(context, DeputyDetailsDestination(viewModel.model));
+              goToDestination(
+                  context, DeputyDetailsDestination(viewModel.model));
             },
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -45,9 +46,10 @@ class DeputyListViewHolder extends StatelessWidget with RedirectionDelegate {
       child: Stack(children: <Widget>[
         Center(child: Icon(Icons.photo)),
         Hero(
-          tag: viewModel.model.id,
-          child: Image.network(viewModel.model.thumbnailUrl)
-        ),
+            tag: viewModel.model.id,
+            child: viewModel.model.thumbnailUrl != null
+                ? Image.network(viewModel.model.thumbnailUrl!)
+                : Container()),
       ]),
     );
   }
@@ -75,7 +77,7 @@ class DeputyListViewHolder extends StatelessWidget with RedirectionDelegate {
             Container(
               width: double.infinity,
               child: Text(
-                viewModel.model.club,
+                viewModel.model.club ?? "",
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   color: theme.dividerColor,

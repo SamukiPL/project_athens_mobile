@@ -4,10 +4,10 @@ import 'package:project_athens/athens_core/presentation/search_app_bar/search_ap
 import 'package:provider/provider.dart';
 
 PreferredSize SearchAppBar(
-    {@required String title,
-    @required String hintText,
-    @required ValueChanged<String> searchQuery,
-    @required bool showBackArrow,
+    {required String title,
+    required String hintText,
+    required ValueChanged<String> searchQuery,
+    required bool showBackArrow,
     List<IconButton> additionalIcons = const []}) {
   return PreferredSize(
     preferredSize: Size.fromHeight(kToolbarHeight),
@@ -29,10 +29,10 @@ class _SearchAppBar extends StatelessWidget {
   final List<IconButton> additionalIcons;
 
   const _SearchAppBar(
-      {Key key,
-      @required this.title,
-      @required this.hintText,
-      @required this.showBackArrow,
+      {Key? key,
+      required this.title,
+      required this.hintText,
+      required this.showBackArrow,
       this.additionalIcons = const []})
       : super(key: key);
 

@@ -1,21 +1,21 @@
 import 'package:project_athens/athens_core/domain/data_mapper.dart';
-import 'package:project_athens/deputies_utils/data/network/response/deputy_response.dart';
+import 'package:project_athens/deputies_utils/data/network/response/full_deputy_response.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_full.dart';
 import 'package:project_athens/deputies_utils/domain/parliament_club_model.dart';
 
-class DeputyFullMapper extends DataMapper<DeputyResponse, DeputyFull> {
+class DeputyFullMapper extends DataMapper<FullDeputyResponse, DeputyFull> {
   List<ParliamentClubModel> _clubs;
 
   final DeputyCvMapper _cvMapper = DeputyCvMapper();
   final ContactMapper _contactMapper = ContactMapper();
-  StatisticsMapper _statisticsMapper;
+  late StatisticsMapper _statisticsMapper;
 
   DeputyFullMapper(this._clubs) {
     _statisticsMapper = StatisticsMapper(_clubs);
   }
 
   @override
-  DeputyFull transform(DeputyResponse data) {
+  DeputyFull transform(FullDeputyResponse data) {
     final currentClub = _clubs.firstWhere((element) => element.id == data.parliamentClub);
 
     return DeputyFull(data.id, data.cadency, data.name, data.reversedName, data.photoUrl, data.politicalParty, currentClub, data.cardNumber, data.deputyId, data.isActive, _cvMapper.transform(data.cv), _contactMapper.transform(data.contact), _statisticsMapper.transform(data.statistics),  data.createAt, data.updateAt);
@@ -25,7 +25,7 @@ class DeputyFullMapper extends DataMapper<DeputyResponse, DeputyFull> {
 class StatisticsMapper extends DataMapper<StatisticsBean, Statistics> {
   List<ParliamentClubModel> _clubs;
 
-  ClubVoteAccuracyMapper _voteAccuracyMapper;
+  late ClubVoteAccuracyMapper _voteAccuracyMapper;
 
   StatisticsMapper(this._clubs) {
     _voteAccuracyMapper = ClubVoteAccuracyMapper(_clubs);

@@ -11,7 +11,7 @@ class SubscribedDeputyMapper extends DataMapper<DeputyModel, SubscribedDeputyMod
 
   @override
   SubscribedDeputyModel transform(DeputyModel data) {
-    SubscribedDeputyResponse subscribedDeputy = subscribedDeputies.firstWhereOrNull((element) => element.cadencyDeputyId == data.id);
+    SubscribedDeputyResponse? subscribedDeputy = subscribedDeputies.firstWhereOrNull((element) => element.cadencyDeputyId == data.id);
 
     bool isSubscribed = true;
     if (subscribedDeputy == null) {

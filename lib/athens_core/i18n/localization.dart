@@ -8,19 +8,19 @@ import 'package:lang_generator/annotations/lang_annotation.dart';
 
 part 'localization.g.dart';
 
-@LangAutomation('resources/lang/pl.json')
+@LangAutomation('resources/lang/en.json')
 class AppLocalizations {
   AppLocalizations(this.locale);
 
   final Locale locale;
 
-  static AppLocalizations of(BuildContext context) {
+  static AppLocalizations? of(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  Map<String, dynamic> _words;
+  late Map<String, dynamic> _words;
 
-  AppLocalizationsGenerated _generated;
+  late AppLocalizationsGenerated _generated;
 
   Future<bool> load() async {
     String data = await rootBundle.loadString('resources/lang/${this.locale.languageCode}.json');

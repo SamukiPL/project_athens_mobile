@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 class StepSearchBar extends StatelessWidget {
   final Function(String) setSearchQuery;
 
-  const StepSearchBar({Key key, @required this.setSearchQuery})
+  const StepSearchBar({Key? key, required this.setSearchQuery})
       : super(key: key);
 
   @override
@@ -20,7 +20,7 @@ class StepSearchBar extends StatelessWidget {
         width: double.infinity,
         height: bloc.isVisible ? 50 : 0,
         color: theme.primaryColor,
-        child: Visibility(visible: bloc.isVisible, child: child),
+        child: Visibility(visible: bloc.isVisible, child: child!),
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 8),

@@ -9,7 +9,7 @@ class LocalizationModule extends Module {
 
   @override
   List<SingleChildWidget> getProviders() {
-    AppLocalizations localization = AppLocalizations.of(context);
+    AppLocalizations localization = AppLocalizations.of(context)!;
     return [Provider<AppLocalizations>.value(value: localization)];
   }
 }

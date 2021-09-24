@@ -15,7 +15,7 @@ class DeputyVoteItemViewModel extends BaseItemViewModel {
   String get date => DateFormat("d.MM.y", "pl").format(model.date);
   VoteResultModel get results => model.results;
   String get description => model.votingDesc;
-  VoteType get deputyVoteType  => model.deputyVoteType;
+  VoteType? get deputyVoteType  => model.deputyVoteType;
 
 
 

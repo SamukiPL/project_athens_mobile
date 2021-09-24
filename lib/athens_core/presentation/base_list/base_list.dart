@@ -6,11 +6,11 @@ import 'package:project_athens/pagination/paging_list.dart';
 class BaseListWidget extends StatelessWidget {
 
   final BaseListBloc listBloc;
-  final String noDataText;
+  final String? noDataText;
 
-  final Widget separator;
+  final Widget? separator;
 
-  const BaseListWidget({Key key, this.listBloc, this.noDataText, this.separator}) : super(key: key);
+  const BaseListWidget({Key? key, required this.listBloc, this.noDataText, this.separator}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

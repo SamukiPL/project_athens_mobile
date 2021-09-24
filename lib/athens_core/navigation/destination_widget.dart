@@ -11,22 +11,23 @@ class DestinationWidget extends StatelessWidget {
   final ModuleWidget moduleWidget;
 
   const DestinationWidget(
-      {Key key, @required this.destinationManager, @required this.moduleWidget})
+      {Key? key, required this.destinationManager, required this.moduleWidget})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final bottomNavigationBloc = Provider.of<BottomNavigationBloc>(context);
-    return StreamProvider<NavigationEvent>.value(
+    return StreamProvider<NavigationEvent?>.value(
+      initialData: null,
       value: bottomNavigationBloc.destination,
       updateShouldNotify: (_, newEvent) {
         if (bottomNavigationBloc.currentItem ==
-            destinationManager.bottomNavItem)
+            destinationManager.bottomNavItem && newEvent != null)
           _manageDestination(context, bottomNavigationBloc, newEvent);
         return false;
       },
-      child: Consumer<NavigationEvent>(
-        builder: (context, _, child) => child,
+      child: Consumer<NavigationEvent?>(
+        builder: (context, _, child) => child!,
         child: moduleWidget,
       ),
     );

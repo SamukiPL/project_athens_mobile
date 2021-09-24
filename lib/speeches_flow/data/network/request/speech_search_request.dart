@@ -8,8 +8,8 @@ class SpeechSearchRequest {
   final int limit;
   final int offset;
   final String searchPhrase;
-  final String from;
-  final String to;
+  final String? from;
+  final String? to;
   final String sort;
   final int cadency;
 

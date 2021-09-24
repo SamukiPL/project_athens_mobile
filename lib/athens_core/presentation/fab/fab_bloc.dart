@@ -2,9 +2,9 @@ import 'package:project_athens/athens_core/presentation/base_blocs/base_change_n
 
 class FabBloc extends BaseChangeNotifier {
 
-  bool visible = true;
+  bool visible;
 
-  FabBloc({this.visible});
+  FabBloc({this.visible = true});
 
   void setVisible(bool visible) {
     this.visible = visible;
