@@ -1,5 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:project_athens/athens_core/ext/to_capital_case.dart';
+import 'package:project_athens/athens_core/ext/string_extension.dart';
 
 final drukRegex = RegExp(
     r"\((druk|druki) (nr ){0,1}[A-Za-z0-9]{1,6}", multiLine: true);
