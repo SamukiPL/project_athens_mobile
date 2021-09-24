@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/domain/base_list/base_model.dart';
 
 class DeputyModel extends BaseModel {
@@ -16,5 +15,4 @@ class DeputyModel extends BaseModel {
   final int? cardId;
 
   DeputyModel({required this.id, required this.name, this.thumbnailUrl, required this.clubId, this.club, this.cardId});
-
 }

@@ -4,8 +4,6 @@ import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
-import 'package:project_athens/athens_core/models/timeline_model.dart';
-import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/voting_flow/data/network/voting_api.dart';
 import 'package:project_athens/voting_flow/data/vote_repository_impl.dart';

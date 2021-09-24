@@ -18,7 +18,7 @@ class VoteSlimModelNetworkDataSource extends NetworkListDataSource<VoteSlimModel
   @override
   Future<Result<List<VoteSlimModel>>> call(DeputyVoteAccuracyListParams params) async {
     try {
-      final alignment = VoteAccuracyEnumToString(params.accuracyType);
+      final alignment = voteAccuracyEnumToString(params.accuracyType);
       final response = await _deputiesDetailsApi.getDeputyVoteAccuracy(
         params.cadencyDeputyId,
           params.parliamentClubId,
@@ -41,6 +41,4 @@ class VoteSlimModelNetworkDataSource extends NetworkListDataSource<VoteSlimModel
       return Failure(error);
     }
   }
-
-
 }

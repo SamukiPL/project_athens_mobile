@@ -51,5 +51,4 @@ class VotesListModule extends Module {
       ),
     ];
   }
-
 }

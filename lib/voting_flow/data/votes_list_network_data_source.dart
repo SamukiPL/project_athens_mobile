@@ -2,9 +2,7 @@ import 'package:project_athens/athens_core/data/base_list/network_data_source.da
 import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
 import 'package:project_athens/athens_core/domain/base_list/base_params.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
-import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/deputies_flow/mappers/vote_slim_network_mapper.dart';
-import 'package:project_athens/voting_flow/mappers/voting_network_mapper.dart';
 
 import 'network/request/vote_search_request.dart';
 import 'network/voting_api.dart';

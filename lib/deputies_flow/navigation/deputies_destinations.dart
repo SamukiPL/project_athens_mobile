@@ -2,7 +2,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
-import 'package:project_athens/authorization_flow/screens/registration/steps/deputies_chooser/list/deputy_item_view_model.dart';
 import 'package:project_athens/deputies_flow/domain/vote_accuracy_alignment_enum.dart';
 import 'package:project_athens/deputies_flow/injections/deputies_list_module.dart';
 import 'package:project_athens/deputies_flow/injections/deputy_details_module.dart';
@@ -63,5 +62,4 @@ class DeputyDetailsVoteAccuracyDestination extends Destination<DeputyVoteAccurac
     DeputyDetailsModule(context, _deputy as SubscribedDeputyModel),
     DeputyVoteAccuracyModule(context, _deputy as SubscribedDeputyModel, this._alignment, this._clubVoteAccuracy)
   ];
-
 }

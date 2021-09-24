@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -275,7 +274,7 @@ class DeputyInformationDetailsTab extends StatelessWidget {
       child: Consumer<Result<List<WordModel>>?>(
           builder: (context, list, _) {
             if (list is Success<List<WordModel>>) {
-              final nouns = (list as Success<List<WordModel>>).value;
+              final nouns = list.value;
               return InteractiveViewer(
                 child: Transform.scale(
                   scale: 0.80,

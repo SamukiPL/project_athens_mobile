@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_step.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_step_bloc.dart';
-import 'package:provider/provider.dart';
 
 abstract class BaseRegistrationFormStep<BLOC extends BaseRegistrationStepBloc> extends BaseRegistrationStep<BLOC> {
 
@@ -67,5 +66,4 @@ abstract class BaseRegistrationFormStep<BLOC extends BaseRegistrationStepBloc> e
 
     return customValidator != null ? customValidator(value) : null;
   }
-
 }

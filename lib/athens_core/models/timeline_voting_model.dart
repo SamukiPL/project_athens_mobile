@@ -54,5 +54,4 @@ extension VotingsListExtension on List<TimelineVotingModel> {
         orderPoint: firstItem.orderPoint
     );
   }
-
 }

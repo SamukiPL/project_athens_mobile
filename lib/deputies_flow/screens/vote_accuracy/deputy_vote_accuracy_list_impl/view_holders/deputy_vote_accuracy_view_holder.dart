@@ -7,7 +7,6 @@ import 'package:project_athens/athens_core/presentation/vote_majority_distributi
 import 'package:project_athens/athens_core/presentation/vote_majority_distribution/vote_majority_distribution_model.dart';
 import 'package:project_athens/deputies_flow/screens/vote_accuracy/deputy_vote_accuracy_list_impl/deputy_vote_accuracy_item_view_model.dart';
 import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
-import 'package:project_athens/voting_flow/screens/list/list_impl/vote_item_view_model.dart';
 
 class DeputyVoteAccuracyViewHolder extends StatelessWidget with RedirectionDelegate {
 
@@ -102,5 +101,4 @@ class DeputyVoteAccuracyViewHolder extends StatelessWidget with RedirectionDeleg
 
     return VoteMajorityDistribution(votesMajority: models, showAbsent: false);
   }
-
 }

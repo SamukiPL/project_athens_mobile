@@ -1,12 +1,8 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl/intl.dart';
 import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
-import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
-import 'package:project_athens/athens_core/utils/get_vote_description_helper.dart';
-import 'package:project_athens/deputies_flow/domain/vote_slim_majority_model.dart';
 import 'package:project_athens/deputies_flow/screens/vote_accuracy/deputy_vote_accuracy_list_impl/view_holders/deputy_vote_accuracy_view_holder.dart';
-import 'package:project_athens/voting_flow/screens/list/list_impl/view_holders/vote_view_holder.dart';
 
 class DeputyVoteAccuracyItemViewModel extends BaseItemViewModel {
 
@@ -24,5 +20,4 @@ class DeputyVoteAccuracyItemViewModel extends BaseItemViewModel {
 
   @override
   Widget buildWidget(int index, int length) => DeputyVoteAccuracyViewHolder(this);
-
 }

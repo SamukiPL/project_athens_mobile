@@ -85,5 +85,4 @@ class VoteSlimModel extends BaseModel {
 
     return voteSlim;
   }
-
 }

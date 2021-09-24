@@ -16,7 +16,8 @@ class DeputyVoteAccuracyTable extends StatelessWidget {
   final void Function(BuildContext context, Destination destination) _navigationCallback;
 
 
-  const DeputyVoteAccuracyTable(this._voteAccuracy, this._deputy, this._navigationCallback);
+  const DeputyVoteAccuracyTable(this._voteAccuracy, this._deputy,
+      this._navigationCallback);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,9 @@ class DeputyVoteAccuracyTable extends StatelessWidget {
 
     return Container(
       child: Column(
-        children: _voteAccuracy.map((e) => _buildVoteAccuracyTableRow(e, highestOverallAccuracy, context)).toList(),
+        children: _voteAccuracy.map((e) =>
+            _buildVoteAccuracyTableRow(e, highestOverallAccuracy, context))
+            .toList(),
       ),
     );
   }
@@ -43,7 +46,8 @@ class DeputyVoteAccuracyTable extends StatelessWidget {
         placeholder: (context, url) => CircularProgressIndicator(),
         errorWidget: (context, url, error) =>
             Center(
-              child: Text(clubVoteAccuracy.parliamentClub?.shortName ?? "Err: unkown club"),
+              child: Text(clubVoteAccuracy.parliamentClub?.shortName ??
+                  "Err: unkown club"),
             ),
         width: 40,
         height: 40,
@@ -54,31 +58,34 @@ class DeputyVoteAccuracyTable extends StatelessWidget {
     );
   }
 
-  Widget _buildAccuracyBar(ClubVoteAccuracy clubVoteAccuracy, int overallHighestAccuracy, ThemeData theme) {
-    final double barWidth = clubVoteAccuracy.compatibleVotes / overallHighestAccuracy;
+  Widget _buildAccuracyBar(ClubVoteAccuracy clubVoteAccuracy,
+      int overallHighestAccuracy, ThemeData theme) {
+    final double barWidth = clubVoteAccuracy.compatibleVotes /
+        overallHighestAccuracy;
     final accuracyPercentage = (barWidth * 100).toStringAsFixed(1) + '%';
 
     return Expanded(
-      child: FractionallySizedBox(
-        alignment: Alignment.topLeft,
-        widthFactor: barWidth,
-        child: Container(
-          height: 50,
-          decoration: BoxDecoration(
-            color: theme.primaryColor,
-          ),
-          child: Center(
-            child: Text(
-              accuracyPercentage,
-              style: TextStyle(color: Colors.white),
+        child: FractionallySizedBox(
+          alignment: Alignment.topLeft,
+          widthFactor: barWidth,
+          child: Container(
+            height: 50,
+            decoration: BoxDecoration(
+              color: theme.primaryColor,
+            ),
+            child: Center(
+              child: Text(
+                accuracyPercentage,
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
-        ),
-      )
+        )
     );
   }
 
-  Widget _buildVoteAccuracyTableRow(ClubVoteAccuracy clubVoteAccuracy, int overallHighestAccuracy, BuildContext context) {
+  Widget _buildVoteAccuracyTableRow(ClubVoteAccuracy clubVoteAccuracy,
+      int overallHighestAccuracy, BuildContext context) {
     final expandChangeNotifier = VoteAccuracyBarExpandNotifier();
     final localizations = Provider.of<AppLocalizations>(context);
     final theme = Theme.of(context);
@@ -95,42 +102,50 @@ class DeputyVoteAccuracyTable extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildClubImage(clubVoteAccuracy),
-                  _buildAccuracyBar(clubVoteAccuracy, overallHighestAccuracy, theme)
+                  _buildAccuracyBar(
+                      clubVoteAccuracy, overallHighestAccuracy, theme)
                 ],
               ),
             ),
             ChangeNotifierProvider<VoteAccuracyBarExpandNotifier>.value(
-                value: expandChangeNotifier,
-                child: Consumer<VoteAccuracyBarExpandNotifier>(
-                  builder: (context, notifier, child) => AnimatedContainer(
-                      duration: Duration(milliseconds: 400),
-                      curve: Curves.ease,
-                      height: notifier.isOpen ? 100 : 0,
-                      width: double.infinity,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          MaterialButton(
-                            onPressed: () => _navigationCallback(context, DeputyDetailsVoteAccuracyDestination(
-                              clubVoteAccuracy,
-                              _deputy,
-                              VoteAccuracyAlignment.ALIGNED
-                            )),
-                            child: Text(localizations.getText().deputiesAlignedWithParty())
-                          ),
-                          MaterialButton(
-                            onPressed: () => _navigationCallback(context, DeputyDetailsVoteAccuracyDestination(
-                              clubVoteAccuracy,
-                              _deputy,
-                              VoteAccuracyAlignment.NOT_ALIGNED
-                            )),
-                            child: Text(localizations.getText().deputiesNotAlignedWithParty())
-                          ),
-                        ],
+              value: expandChangeNotifier,
+              child: Consumer<VoteAccuracyBarExpandNotifier>(
+                  builder: (context, notifier, child) =>
+                      AnimatedContainer(
+                          duration: Duration(milliseconds: 400),
+                          curve: Curves.ease,
+                          height: notifier.isOpen ? 100 : 0,
+                          width: double.infinity,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              MaterialButton(
+                                  onPressed: () =>
+                                      _navigationCallback(context,
+                                          DeputyDetailsVoteAccuracyDestination(
+                                              clubVoteAccuracy,
+                                              _deputy,
+                                              VoteAccuracyAlignment.ALIGNED
+                                          )),
+                                  child: Text(localizations.getText()
+                                      .deputiesAlignedWithParty())
+                              ),
+                              MaterialButton(
+                                  onPressed: () =>
+                                      _navigationCallback(context,
+                                          DeputyDetailsVoteAccuracyDestination(
+                                              clubVoteAccuracy,
+                                              _deputy,
+                                              VoteAccuracyAlignment.NOT_ALIGNED
+                                          )),
+                                  child: Text(localizations.getText()
+                                      .deputiesNotAlignedWithParty())
+                              ),
+                            ],
+                          )
                       )
-                  )
-                ),
+              ),
             )
           ],
         )

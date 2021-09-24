@@ -1,4 +1,3 @@
-import 'package:project_athens/athens_core/data/base_responses/voting_response.dart';
 import 'package:project_athens/athens_core/domain/base_use_case.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
@@ -14,5 +13,4 @@ class GetVoteUseCase extends BaseUseCase<GetVoteParameters> {
 
   @override
   Future<Result<VotingModel>> call(GetVoteParameters params) => repository.getVoteById(params.voteId).safeApiCall();
-
 }

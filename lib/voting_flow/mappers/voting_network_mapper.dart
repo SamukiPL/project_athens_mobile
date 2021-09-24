@@ -102,5 +102,4 @@ class VotingNetworkMapper extends AsyncDataMapper<VotingResponse, VotingModel> {
         throw Exception("There is no other VotingType!");
     }
   }
-
 }

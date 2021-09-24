@@ -5,9 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:project_athens/athens_core/constants/color_constants.dart';
-import 'package:project_athens/athens_core/data/base_responses/voting_response.dart';
 import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
-import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
@@ -18,7 +16,6 @@ import 'package:project_athens/athens_core/presentation/simple_horizontal_table/
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
-import 'package:project_athens/deputies_utils/domain/parliament_club_model.dart';
 import 'package:project_athens/voting_flow/screens/details/linear_vote_distribution/linear_vote_distribution.dart';
 import 'package:project_athens/voting_flow/screens/details/vote_club_distribution_row_data.dart';
 import 'package:project_athens/voting_flow/screens/details/vote_details_bloc.dart';

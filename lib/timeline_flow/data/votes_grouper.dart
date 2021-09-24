@@ -1,4 +1,3 @@
-import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 import 'package:project_athens/athens_core/models/timeline_voting_model.dart';
 

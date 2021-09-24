@@ -3,7 +3,6 @@ import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/deputies_utils/domain/parliament_club_model.dart';
 import 'package:project_athens/deputies_utils/domain/subscribed_deputy_model.dart';
-import 'package:project_athens/deputies_utils/mappers/parliament_club_mapper.dart';
 
 class VoteSlimMajorityModel extends VoteSlimModel {
   final SubscribedDeputyModel desiredDeputy;
