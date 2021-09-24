@@ -80,7 +80,7 @@ class TimelineBloc extends BaseBloc implements PagingBloc {
 
     if (result is Success<List<TimelineModel>>) {
       final items = result.value.toTimelineRowViewModel(
-          date: date, timerViewModel: TimerViewModel(refresh));
+          date: date, timerViewModel: TimerViewModel(refresh), firstLevel: true);
       adapter.updateList(items);
       setLoadingState((items.isEmpty) ? DataLoadingState.noData() : DataLoadingState.contentLoaded());
     }

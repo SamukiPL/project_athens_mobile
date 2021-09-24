@@ -20,6 +20,7 @@ import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:project_athens/deputies_utils/domain/parliament_club_model.dart';
 import 'package:project_athens/voting_flow/screens/details/linear_vote_distribution/linear_vote_distribution.dart';
+import 'package:project_athens/voting_flow/screens/details/vote_club_distribution_row_data.dart';
 import 'package:project_athens/voting_flow/screens/details/vote_details_bloc.dart';
 import 'package:project_athens/voting_flow/screens/details/linear_vote_distribution/linear_vote_distribution_model.dart';
 import 'package:provider/provider.dart';
@@ -62,7 +63,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
           StreamProvider<VotingModel?>.value(
               value: bloc.votingFullStream,
               initialData: null,
-              child: Consumer<VotingModel>(
+              child: Consumer<VotingModel?>(
                 builder: (context, model, _) =>
                     model != null ?
                     FullCard(
@@ -247,14 +248,10 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
         ));
   }
 
-  TableRow buildClubVoteTableRow(List<ParliamentClubModel> clubs,
-      ParliamentClubVotingNumbers votes, ThemeData theme) {
+  TableRow  buildClubVoteTableRow(VoteClubDistributionRowData rowData, ThemeData theme) {
     final dataRowStyle = TextStyle(
       fontSize: 10,
     );
-
-    final club =
-        clubs.firstWhere((element) => element.id == votes.parliamentClub);
 
     return TableRow(
       decoration: BoxDecoration(
@@ -263,32 +260,32 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
       children: [
         Container(
           padding: EdgeInsets.all(4),
-          child: Text(club.shortName,
+          child: Text(rowData.parliamentClubModel.shortName,
               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 11)),
         ),
         Container(
             padding: EdgeInsets.all(4),
-            child: Text(votes.totalDeputies.toString(),
+            child: Text(rowData.votingNumbers.totalDeputies.toString(),
                 textAlign: TextAlign.center, style: dataRowStyle)),
         Container(
             padding: EdgeInsets.all(4),
-            child: Text(votes.actualVoted.toString(),
+            child: Text(rowData.votingNumbers.actualVoted.toString(),
                 textAlign: TextAlign.center, style: dataRowStyle)),
         Container(
             padding: EdgeInsets.all(4),
-            child: Text(votes.absent.toString(),
+            child: Text(rowData.votingNumbers.absent.toString(),
                 textAlign: TextAlign.center, style: dataRowStyle)),
         Container(
             padding: EdgeInsets.all(4),
-            child: Text(votes.inFavor.toString(),
+            child: Text(rowData.votingNumbers.inFavor.toString(),
                 textAlign: TextAlign.center, style: dataRowStyle)),
         Container(
             padding: EdgeInsets.all(4),
-            child: Text(votes.against.toString(),
+            child: Text(rowData.votingNumbers.against.toString(),
                 textAlign: TextAlign.center, style: dataRowStyle)),
         Container(
             padding: EdgeInsets.all(4),
-            child: Text(votes.hold.toString(),
+            child: Text(rowData.votingNumbers.hold.toString(),
                 textAlign: TextAlign.center, style: dataRowStyle)),
       ],
     );
@@ -347,51 +344,35 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
     );
     final DeputiesCache deputiesCache = Provider.of<DeputiesCache>(context);
 
-    return FutureProvider(
-      initialData: Success(List.empty()),
-      create: (context) => deputiesCache.parliamentClubs,
-      child: Consumer<Result<List<ParliamentClubModel>>?>(
-          builder: (context, clubsResult, _) {
-        if (clubsResult == null) {
-          return Container();
-        } else if (clubsResult is Success<List<ParliamentClubModel>>) {
-          return StreamProvider<VotingModel?>.value(
-              value: bloc.votingFullStream,
-              initialData: null,
-              child: Consumer<VotingModel>(
-                  builder: (context, model, _) => model != null ?
-                  Container(
-                    // additional padding on bottom to compensate internal table cells padding
-                      padding: EdgeInsets.only(left: 8, right: 8, bottom: 8),
-                      child: Table(
-                        // set first column with parliament club names a little bigger
-                        // since it's need more space than 3 digit number.
-                        columnWidths: const {
-                          0: FlexColumnWidth(1.5),
-                        },
-                        children: [headingRow]..addAll(model.clubVotes.map(
-                                (clubVotes) => buildClubVoteTableRow(
-                                clubsResult.value, clubVotes, theme))),
-                      )
-                  ) : Container()
-              )
-          );
-        } else {
-          // TODO: handle error, generic error view required
-          return Container();
-        }
-      }),
+    return StreamProvider<List<VoteClubDistributionRowData>?>.value(
+      initialData: null,
+      value: bloc.clubVoteDistribution,
+      child: Consumer<List<VoteClubDistributionRowData>?>(
+        builder: (context, rowsData, _) =>
+            rowsData != null ?
+            Container(
+              // additional padding on bottom to compensate internal table cells padding
+                padding: EdgeInsets.only(left: 8, right: 8, bottom: 8),
+                child: Table(
+                  // set first column with parliament club names a little bigger
+                  // since it's need more space than 3 digit number.
+                  columnWidths: const {
+                    0: FlexColumnWidth(1.5),
+                  },
+                  children: [headingRow]..addAll(rowsData.map(
+                          (rowData) => buildClubVoteTableRow(
+                          rowData, theme))),
+                )
+            ) : Container()
+      )
     );
   }
 
   Widget buildDeputyVotesView(BuildContext context, ThemeData theme, VoteDetailsBloc bloc) {
-    final AppLocalizations localizations =
-        Provider.of<AppLocalizations>(context);
-
     return StreamProvider<VotingModel?>.value(
         value: bloc.votingFullStream,
         initialData: null,
-        child: Consumer<VotingModel>(
+        child: Consumer<VotingModel?>(
             builder: (context, model, _) =>
                 model != null ?
                 FullCard(

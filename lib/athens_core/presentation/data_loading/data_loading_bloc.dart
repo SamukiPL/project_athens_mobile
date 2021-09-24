@@ -10,4 +10,8 @@ class DataLoadingBloc extends BaseChangeNotifier {
     _loadingState = newState;
     notifyListeners();
   }
+
+  void dispose() {
+    super.dispose();
+  }
 }

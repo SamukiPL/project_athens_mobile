@@ -51,7 +51,7 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
   }
 
   void stateListener(BuildContext context, BLOC bloc, WidgetState state) {
-    final localizations = Provider.of<AppLocalizations>(context);
+    final localizations = Provider.of<AppLocalizations>(context, listen: false);
 
       switch (state.runtimeType) {
         case SuccessState:

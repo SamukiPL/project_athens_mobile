@@ -17,8 +17,9 @@ class VoteNumbers {
 class VoteSlimClubMajority {
   final ParliamentClubModel parliamentClubModel;
   final VoteType voteMajority;
+  final List<int> deputyCardNumbers;
 
-  VoteSlimClubMajority(this.parliamentClubModel, this.voteMajority);
+  VoteSlimClubMajority(this.parliamentClubModel, this.voteMajority, this.deputyCardNumbers);
 }
 
 class VoteSlimDeputyVoteType {

@@ -38,8 +38,9 @@ class VoteSlimDTO extends TimelineItem {
 class VoteSlimClubMajorityDTO {
   final String parliamentClub;
   final VoteType voteMajority;
+  final List<int> deputyCardNumbers;
 
-  VoteSlimClubMajorityDTO(this.parliamentClub, this.voteMajority);
+  VoteSlimClubMajorityDTO(this.parliamentClub, this.voteMajority, this.deputyCardNumbers);
 
   factory VoteSlimClubMajorityDTO.fromJson(Map<String, dynamic> json) => _$VoteSlimClubMajorityDTOFromJson(json);
   Map<String, dynamic> toJson() => _$VoteSlimClubMajorityDTOToJson(this);

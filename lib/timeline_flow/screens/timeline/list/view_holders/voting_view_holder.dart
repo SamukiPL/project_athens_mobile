@@ -6,6 +6,9 @@ import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
+import 'package:project_athens/athens_core/presentation/vote_majority_distribution/vote_majority_distribution.dart';
+import 'package:project_athens/athens_core/presentation/vote_majority_distribution/vote_majority_distribution_helper.dart';
+import 'package:project_athens/timeline_flow/helpers/timeline_voting_agenda_helper.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
 import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
 
@@ -13,8 +16,9 @@ class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
   final VotingRowViewModel viewModel;
   final bool showTopLine;
   final bool showBottomLine;
+  final bool firstLevel;
 
-  const VotingViewHolder(this.viewModel, this.showTopLine, this.showBottomLine, {Key? key})
+  const VotingViewHolder(this.viewModel, this.showTopLine, this.showBottomLine, {Key? key, this.firstLevel = false})
       : super(key: key);
 
   final double lineThickness = 2;
@@ -105,7 +109,99 @@ class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
     );
   }
 
+  List<Widget> _getFirstLevelRowTextContent(BuildContext context, ThemeData theme) {
+    Widget agendaDesc = Container();
+
+    final agendaWithoutExtras = getAgendaWithoutExtras(viewModel.model.agenda);
+    if (agendaWithoutExtras != null) {
+      agendaDesc = Container(
+          width: double.infinity,
+          child: Text(
+            agendaWithoutExtras,
+            style: TextStyle(
+                color: theme.dividerColor, fontSize: 12),
+            textAlign: TextAlign.left,
+          )
+      );
+    }
+
+    final String votingDesc = viewModel.model.orderPoint != null
+        ? 'Pkt. ' + viewModel.model.orderPoint.toString() + ' - ' + viewModel.model.votingDesc
+        : viewModel.model.votingDesc;
+
+    return [
+      Container(
+        width: double.infinity,
+        child: Text(
+          "GŁOSOWANIE",
+          style: theme.textTheme.overline?.copyWith(
+              color: theme.dividerColor,
+              fontSize: 10
+          ),
+          textAlign: TextAlign.left,
+        ),
+      ),
+      Container(
+        width: double.infinity,
+        child: Text(
+          votingDesc,
+          style: TextStyle(
+            color: theme.primaryColor,
+            fontWeight: FontWeight.bold,
+            fontSize: 16),
+          maxLines: 1,
+          textAlign: TextAlign.left,
+        ),
+      ),
+      Container(
+          padding: EdgeInsets.only(top: 8),
+          width: double.infinity,
+          child: _getVoteDistributionMajority()
+        ),
+      agendaDesc,
+      TechnicalData(technicalId: viewModel.model.id)
+    ];
+  }
+
+  List<Widget> _getNestedLevelRowTextContent(BuildContext context, ThemeData theme) {
+    final String extras = getAgendaExtras(viewModel.model.agenda) ?? "Brak opisu";
+
+    return <Widget>[
+      Container(
+        width: double.infinity,
+        child: Text(
+          "GŁOSOWANIE",
+          style: theme.textTheme.overline?.copyWith(
+              color: theme.dividerColor,
+              fontSize: 10
+          ),
+          textAlign: TextAlign.left,
+        ),
+      ),
+      Container(
+        width: double.infinity,
+        child: Text(
+          extras,
+          style: TextStyle(
+              color: theme.primaryColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 16),
+          maxLines: 1,
+          textAlign: TextAlign.left,
+        ),
+      ),
+      Container(
+          padding: EdgeInsets.only(top: 8),
+          width: double.infinity,
+          child: _getVoteDistributionMajority()
+      ),
+      TechnicalData(technicalId: viewModel.model.id),
+    ];
+  }
+
   Widget getRowText(BuildContext context, ThemeData theme) {
+
+
     return Expanded(
       child: Card(
         margin: EdgeInsets.only(left: 8, top: 8, bottom: 8,  right: 8),
@@ -119,33 +215,9 @@ class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
           child: Container(
             margin: EdgeInsets.only(left: 8, top: 8, bottom: 8),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  width: double.infinity,
-                  child: Text(
-                    viewModel.model.votingDesc,
-                    style: theme.textTheme.overline?.copyWith(
-                        color: theme.dividerColor,
-                        fontSize: 10
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  child: Text(
-                    viewModel.model.title,
-                    style: TextStyle(
-                        color: theme.primaryColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16),
-                    maxLines: 1,
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-                TechnicalData(technicalId: viewModel.model.id),
-              ],
+              children: firstLevel 
+                ? _getFirstLevelRowTextContent(context, theme)
+                : _getNestedLevelRowTextContent(context, theme)
             ),
           ),
         ),
@@ -153,4 +225,9 @@ class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
     );
   }
 
+  Widget _getVoteDistributionMajority() {
+    final models = voteMajorityDistrinutionFromVoteSlim(viewModel.model.clubsMajority, viewModel.model.deputiesVote, true);
+
+    return VoteMajorityDistribution(votesMajority: models, showAbsent: true, showMiniatures: true);
+  }
 }

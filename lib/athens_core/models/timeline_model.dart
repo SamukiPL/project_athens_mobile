@@ -23,6 +23,8 @@ class GroupedVotingModel extends TimelineModel {
   final List<TimelineVotingModel> groupedVotes;
   final DateTime firstDate;
   final DateTime lastDate;
+  final String? agenda;
+  final int orderPoint;
 
   GroupedVotingModel({
     required this.votingDesc,
@@ -30,6 +32,8 @@ class GroupedVotingModel extends TimelineModel {
     required this.groupedVotes,
     required this.firstDate,
     required this.lastDate,
+    required this.orderPoint,
+    this.agenda,
     required String id,
     required DateTime date
   }) : super(id, TimelineModelType.GROUPED_VOTING, date, null, null);

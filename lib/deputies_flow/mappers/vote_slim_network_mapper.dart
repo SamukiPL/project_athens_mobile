@@ -27,7 +27,7 @@ class VoteSlimNetworkMapper extends AsyncDataMapper<VoteSlimDTO, VoteSlimModel> 
     final clubsFutures = data.clubsMajority.map((clubDTO) async {
       final club = await _deputiesCache.getParliamentClubModel(clubDTO.parliamentClub);
       
-      return VoteSlimClubMajority(club!, clubDTO.voteMajority);
+      return VoteSlimClubMajority(club!, clubDTO.voteMajority, clubDTO.deputyCardNumbers);
     });
 
     final clubs = await Future.wait(clubsFutures);

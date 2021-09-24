@@ -14,12 +14,13 @@ bool showBottomLine(int index, int length) => index != length - 1;
 class VotingRowViewModel extends BaseItemViewModel {
 
   final TimelineVotingModel model;
+  final bool firstLevel;
 
-  VotingRowViewModel(this.model);
+  VotingRowViewModel(this.model, this.firstLevel);
 
   @override
   Widget buildWidget(int index, int length) {
-    return VotingViewHolder(this, showTopLine(index), showBottomLine(index, length));
+    return VotingViewHolder(this, showTopLine(index), showBottomLine(index, length), firstLevel: firstLevel);
   }
 
 }

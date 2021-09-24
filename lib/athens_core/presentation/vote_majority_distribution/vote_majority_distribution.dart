@@ -8,11 +8,20 @@ import 'package:project_athens/athens_core/presentation/vote_majority_distributi
 class VoteMajorityDistribution extends StatelessWidget {
   final List<VoteMajorityDistributionModel> votesMajority;
   final bool showAbsent;
+  final bool showMiniatures;
 
-  double get avatarSize => 50;
-  double get clubNameFontSize => 10;
+  double get avatarSize => showMiniatures ? 35 : 50;
+  double get clubNameFontSize => showMiniatures ? 6 : 10;
+  double get borderSize => showMiniatures ? 1 : 2;
+  MainAxisAlignment get mainAxisAlignment => showMiniatures
+      ? MainAxisAlignment.start
+      : MainAxisAlignment.center;
 
-  VoteMajorityDistribution({required this.votesMajority, this.showAbsent = false});
+  VoteMajorityDistribution({
+    required this.votesMajority,
+    this.showAbsent = false,
+    this.showMiniatures = false
+  });
 
   Widget buildIconRow(ThemeData theme) {
     return Row(
@@ -63,7 +72,7 @@ class VoteMajorityDistribution extends StatelessWidget {
         ? Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: theme.primaryColor, width: 2)
+                border: Border.all(color: theme.primaryColor, width: borderSize)
               ),
               child: ClipOval(
                 child: child,
@@ -167,7 +176,7 @@ class VoteMajorityDistribution extends StatelessWidget {
                 image: imageProvider
               ),
               shape: model.isDeputy ? BoxShape.circle : BoxShape.rectangle,
-              border: Border.all(color: getBorderColor(model.type), width: 2)
+              border: Border.all(color: getBorderColor(model.type), width: borderSize)
             ),
           ),
           placeholder: (context, url) => CircularProgressIndicator(),
@@ -175,7 +184,7 @@ class VoteMajorityDistribution extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(4),
                 decoration: BoxDecoration(
-                    border: Border.all(color: getBorderColor(model.type), width: 2)
+                    border: Border.all(color: getBorderColor(model.type), width: borderSize)
                 ),
                 child: Center(
                     child: Text(
@@ -200,8 +209,8 @@ class VoteMajorityDistribution extends StatelessWidget {
     votesMajority.sort((a, b) => a.type.index.compareTo(b.type.index));
 
     return Container(
-      child: Row(
-        children: votesMajority.map((e) => buildAvatar(e)).toList(),
+      child: Wrap(
+        children: votesMajority.where((element) => element.hidden == false).map((e) => buildAvatar(e)).toList(),
       ),
     );
   }
@@ -213,6 +222,7 @@ class VoteMajorityDistribution extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(bottom: 8),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // buildIconRow(theme),
           // buildVoteTypeRow(theme),

@@ -51,7 +51,7 @@ class TimelineModelMapper extends AsyncDataMapper<Event, TimelineModel> {
       final club =
           await _deputiesCache.getParliamentClubModel(clubDTO.parliamentClub);
 
-      return VoteSlimClubMajority(club!, clubDTO.voteMajority);
+      return VoteSlimClubMajority(club!, clubDTO.voteMajority, clubDTO.deputyCardNumbers);
     });
 
     final clubs = await Future.wait(clubsFutures);
@@ -74,6 +74,7 @@ class TimelineModelMapper extends AsyncDataMapper<Event, TimelineModel> {
         absoluteMajority: item.absoluteMajority,
         voteType: item.type,
         qualifyingMajority: item.qualifyingMajority,
+        agenda: item.agenda,
         // since for now service does NOT provide updates
         // because votes for now are immutable on server side
         updateAt: DateTime.now());

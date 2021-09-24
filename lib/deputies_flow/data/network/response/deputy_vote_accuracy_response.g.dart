@@ -115,6 +115,7 @@ VoteSlimClubMajorityDTO _$VoteSlimClubMajorityDTOFromJson(
   return VoteSlimClubMajorityDTO(
     json['parliamentClub'] as String,
     _$enumDecode(_$VoteTypeEnumMap, json['voteMajority']),
+    (json['deputyCardNumbers'] as List<dynamic>).map((e) => e as int).toList(),
   );
 }
 
@@ -123,6 +124,7 @@ Map<String, dynamic> _$VoteSlimClubMajorityDTOToJson(
     <String, dynamic>{
       'parliamentClub': instance.parliamentClub,
       'voteMajority': _$VoteTypeEnumMap[instance.voteMajority],
+      'deputyCardNumbers': instance.deputyCardNumbers,
     };
 
 const _$VoteTypeEnumMap = {

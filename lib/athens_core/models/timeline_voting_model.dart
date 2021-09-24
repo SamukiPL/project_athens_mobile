@@ -12,6 +12,7 @@ class TimelineVotingModel extends TimelineModel {
   final int orderPoint;
   final int qualifyingMajority;
   final int absoluteMajority;
+  final String agenda;
 
   final List<VoteSlimClubMajority> clubsMajority;
   final List<VoteSlimDeputyVoteType> deputiesVote;
@@ -25,10 +26,11 @@ class TimelineVotingModel extends TimelineModel {
         required this.voteAt,
         required this.voteNumbers,
         required this.votingDesc,
-      required this.qualifyingMajority,
-      required this.absoluteMajority,
-      required this.clubsMajority,
-      required this.deputiesVote,
+        required this.qualifyingMajority,
+        required this.absoluteMajority,
+        required this.clubsMajority,
+        required this.deputiesVote,
+        required this.agenda,
       DateTime? createAt,
       DateTime? updateAt}) : super(id, TimelineModelType.VOTING, voteAt, createAt, updateAt);
 }
@@ -47,7 +49,9 @@ extension VotingsListExtension on List<TimelineVotingModel> {
         firstDate: firstItem.voteAt,
         lastDate: lastItem.voteAt,
         id: firstItem.id,
-        date: firstItem.voteAt
+        date: firstItem.voteAt,
+        agenda: firstItem.agenda,
+        orderPoint: firstItem.orderPoint
     );
   }
 

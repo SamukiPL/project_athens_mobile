@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/athens_core/presentation/vote_majority_distribution/vote_majority_distribution.dart';
+import 'package:project_athens/athens_core/presentation/vote_majority_distribution/vote_majority_distribution_helper.dart';
 import 'package:project_athens/athens_core/presentation/vote_majority_distribution/vote_majority_distribution_model.dart';
 import 'package:project_athens/deputies_flow/screens/vote_accuracy/deputy_vote_accuracy_list_impl/deputy_vote_accuracy_item_view_model.dart';
 import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
@@ -97,11 +98,7 @@ class DeputyVoteAccuracyViewHolder extends StatelessWidget with RedirectionDeleg
   }
 
   Widget _getVoteDistributionTable(ThemeData theme) {
-    final List<VoteMajorityDistributionModel> models = _viewModel.clubs!.map((e) => VoteMajorityDistributionModel(
-      e.parliamentClubModel.imageSrc ?? "", e.voteMajority, e.parliamentClubModel.shortName, false
-    )).toList();
-
-    models.addAll(_viewModel.deputies!.map((e) => VoteMajorityDistributionModel(e.subscribedDeputy.thumbnailUrl ?? "", e.voteType, e.subscribedDeputy.name, true)).toList());
+    final List<VoteMajorityDistributionModel> models = voteMajorityDistrinutionFromVoteSlim(_viewModel.clubs!, _viewModel.deputies!, false);
 
     return VoteMajorityDistribution(votesMajority: models, showAbsent: false);
   }

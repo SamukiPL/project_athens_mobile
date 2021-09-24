@@ -1,7 +1,6 @@
 // Copyright 2014 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
-// @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -27,12 +26,12 @@ const double _headerPaddingLandscape = 16.0;
 class DatePickerHeader extends StatelessWidget {
   /// Creates a header for use in a date picker dialog.
   const DatePickerHeader({
-    Key key,
-    @required this.helpText,
-    @required this.titleText,
+    Key? key,
+    required this.helpText,
+    required this.titleText,
     this.titleSemanticsLabel,
-    @required this.titleStyle,
-    @required this.orientation,
+    required this.titleStyle,
+    required this.orientation,
     this.isShort = false,
   }) : assert(helpText != null),
         assert(orientation != null),
@@ -48,7 +47,7 @@ class DatePickerHeader extends StatelessWidget {
   final String titleText;
 
   /// The semantic label associated with the [titleText].
-  final String titleSemanticsLabel;
+  final String? titleSemanticsLabel;
 
   /// The [TextStyle] that the title text is displayed with.
   final TextStyle titleStyle;
@@ -77,7 +76,7 @@ class DatePickerHeader extends StatelessWidget {
     final Color primarySurfaceColor = isDark ? colorScheme.surface : colorScheme.primary;
     final Color onPrimarySurfaceColor = Colors.white;
 
-    final TextStyle helpStyle = textTheme.overline?.copyWith(
+    final TextStyle? helpStyle = textTheme.overline?.copyWith(
       color: onPrimarySurfaceColor,
     );
 
@@ -159,6 +158,5 @@ class DatePickerHeader extends StatelessWidget {
           ],
         );
     }
-    return null;
   }
 }
