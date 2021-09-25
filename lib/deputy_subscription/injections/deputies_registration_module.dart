@@ -9,7 +9,7 @@ class DeputiesRegistrationModule extends Module {
   @override
   List<SingleChildWidget> getProviders() {
     // TODO: implement getProviders
-    return null;
+    return List.empty();
   }
 
 }

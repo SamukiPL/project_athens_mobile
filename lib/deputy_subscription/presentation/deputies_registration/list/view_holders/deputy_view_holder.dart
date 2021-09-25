@@ -5,7 +5,7 @@ class DeputyViewHolder extends StatelessWidget {
 
   final DeputyItemViewModel viewModel;
 
-  const DeputyViewHolder({Key key, @required this.viewModel}) : super(key: key);
+  const DeputyViewHolder({Key? key, required this.viewModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

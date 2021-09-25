@@ -40,15 +40,15 @@ class LoginBloc extends BaseBloc {
 
     authFailedNotifier.state = false;
 
-    final email = _login.contains("@") ? _login : null;
+    final LoginParams params = _login.contains('@')
+        ? LoginParams(password: _password, email: _login)
+        : LoginParams(password: _password, login: _login);
 
-    var params = LoginParams(email != null ? null : _login, email != null ? email : null, _password);
-
-    var loginResult = await _loginUseCase(params);
+    final loginResult = await _loginUseCase(params);
 
     if (loginResult is Success) {
       final deputiesParams = BaseDeputiesParams(_cadency);
-      var subscribeResult = await _firebaseDeputiesUseCase(deputiesParams);
+      final subscribeResult = await _firebaseDeputiesUseCase(deputiesParams);
 
       return manageState(subscribeResult);
     }

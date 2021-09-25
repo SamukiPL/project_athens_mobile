@@ -8,10 +8,10 @@ class BaseFab extends StatelessWidget {
 
   final FabBloc bloc;
 
-  final Widget child;
+  final Widget? child;
 
   const BaseFab(
-      {Key key, @required this.onPressed, @required this.bloc, this.child})
+      {Key? key, required this.onPressed, required this.bloc, this.child})
       : super(key: key);
 
   @override

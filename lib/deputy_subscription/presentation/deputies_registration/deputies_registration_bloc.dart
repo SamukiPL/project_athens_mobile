@@ -8,7 +8,7 @@ class DeputiesRegistrationBloc extends BaseBloc implements PagingBloc {
   final DeputiesRegistrationUseCase _deputiesRegistrationUseCase;
 
   @override
-  PagingListAdapter adapter;
+  late PagingListAdapter adapter;
 
   @override
   int batchSize = 40;

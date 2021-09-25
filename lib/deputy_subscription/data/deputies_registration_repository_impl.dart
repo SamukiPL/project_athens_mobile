@@ -15,7 +15,7 @@ class DeputiesRegistrationRepositoryImpl implements DeputiesRegistrationReposito
   Future<Result<List<DeputyModel>>> getDeputies(DeputiesRegistrationParams params) async {
     // var response = await deputiesApi.getAllDeputies(params.cadency);
 
-    return Success<List<DeputyModel>>(List());
+    return Success<List<DeputyModel>>(List.empty());
   }
 
 }
