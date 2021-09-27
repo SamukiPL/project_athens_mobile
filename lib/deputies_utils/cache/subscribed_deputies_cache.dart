@@ -43,6 +43,7 @@ class SubscribedDeputiesCache {
 
         subscribedDeputies.forEach((subscribedDeputy) => subscribedDeputy.notifications.updateCallback = () => _updateSubscribedDeputy(subscribedDeputy));
 
+        _cachedSubscribedDeputies = subscribedDeputies;
         return Success(subscribedDeputies);
       } else {
         return result;
