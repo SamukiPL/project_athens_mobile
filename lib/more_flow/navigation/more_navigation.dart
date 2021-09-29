@@ -11,7 +11,7 @@ import 'package:project_athens/more_flow/screens/more/more_screen.dart';
 import 'package:project_athens/more_flow/screens/settings/settings_screen.dart';
 
 class MoreScreenDestination extends Destination<MoreScreen> {
-  MoreScreenDestination() : super(BottomNavItem.MORE);
+  MoreScreenDestination() : super(BottomNavItem.DASHBOARD);
 
   @override
   MoreScreen getScreen() => MoreScreen();
@@ -22,7 +22,7 @@ class MoreScreenDestination extends Destination<MoreScreen> {
 }
 
 class MoreHallOfFameScreenDestination extends Destination<HallOfFameScreen> {
-  MoreHallOfFameScreenDestination() : super(BottomNavItem.MORE);
+  MoreHallOfFameScreenDestination() : super(BottomNavItem.DASHBOARD);
 
   @override
   HallOfFameScreen getScreen() => HallOfFameScreen();
@@ -33,7 +33,7 @@ class MoreHallOfFameScreenDestination extends Destination<HallOfFameScreen> {
 }
 
 class MoreSettingsScreenDestination extends Destination<SettingsScreen> {
-  MoreSettingsScreenDestination() : super(BottomNavItem.MORE);
+  MoreSettingsScreenDestination() : super(BottomNavItem.DASHBOARD);
 
   @override
   SettingsScreen getScreen() => SettingsScreen();

@@ -40,7 +40,7 @@ class SubscribedDeputiesCache {
       return Failure(cachedDeputies.exception);
     }
 
-    final result = _firebaseDeputiesUseCase(BaseDeputiesParams(9)).then((result) {
+    final Future<Result<List<SubscribedDeputyModel>>> result = _firebaseDeputiesUseCase(BaseDeputiesParams(9)).then((result) {
       if (result is Success<List<SubscribedDeputyResponse>>) {
         final SubscribedDeputyMapper mapper = SubscribedDeputyMapper(result.value);
 
@@ -52,12 +52,12 @@ class SubscribedDeputiesCache {
 
         return Success(subscribedDeputies);
       } else {
-        return result;
+        return result as Future<Result<List<SubscribedDeputyModel>>>;
       }
     });
 
-    awaitingFuture = result as Future<Result<List<SubscribedDeputyModel>>>;
-    return result as Future<Result<List<SubscribedDeputyModel>>>;
+    awaitingFuture = result;
+    return result;
   }
 
   Future<DeputyModel> getDeputyModelById(String id) =>

@@ -176,6 +176,18 @@
     "checkForUpdates": "Check for updates",
     "appVersion": "Application version"
   },
+  "dashboard": {
+    "title": "Dashboard",
+    "tiles": {
+      "nearestMeetingTile": {
+        "meetingIsToday": "Parliament meeting is scheduled for today",
+        "meetingWasYesterday": "Parliament meeting was yesterday",
+        "meetingIsTomorrow": "Parliament meeting is scheduled for tomorrow",
+        "meetingInDays": "Closets parliament meeting is scheduled in",
+        "days": "days"
+      }
+    }
+  },
   "settings": {
     "settingsTitle": "Settings",
     "button": {

@@ -176,6 +176,18 @@
     "supportUs": "Wesprzyj nas ❤",
     "appVersion": "Wersja aplikacji"
   },
+  "dashboard": {
+    "title": "Konsola",
+    "tiles": {
+      "nearestMeetingTile": {
+        "meetingIsToday": "Na dzisiaj jest zaplanowane posiedzenie sejmu",
+        "meetingWasYesterday": "Posiedzenie sejmu odbyło sie wczoraj",
+        "meetingIsTomorrow": "Posiedzenie sejmu jest zaplanowane na jutro",
+        "meetingInDays": "Najbliższe posiedzenie sejmu jest za",
+        "days": "dni"
+      }
+    }
+  },
   "settings": {
     "settingsTitle": "Ustawienia",
     "button": {
