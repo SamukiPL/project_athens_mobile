@@ -17,7 +17,7 @@ class LoginRepositoryImpl implements LoginRepository {
 
   @override
   Future<Result> logIn(LoginParams params) async {
-    var response = await api.logIn(LoginRequest(params.login, params.password));
+    var response = await api.logIn(LoginRequest(params.login, params.email, params.password));
 
     await storage.saveTokens(response.accessToken, response.refreshToken);
 
