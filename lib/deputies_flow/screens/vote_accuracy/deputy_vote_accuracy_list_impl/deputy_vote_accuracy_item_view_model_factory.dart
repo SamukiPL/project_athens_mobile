@@ -9,10 +9,8 @@ class DeputyVoteAccuracyItemViewModelFactory extends ItemViewModelFactory {
 
   @override
   BaseItemViewModel? createWithoutError(BaseModel model) {
-    switch (model.runtimeType) {
-      case VoteSlimModel:
-        return DeputyVoteAccuracyItemViewModel(model as VoteSlimModel);
-        break;
+    if (model is VoteSlimModel) {
+        return DeputyVoteAccuracyItemViewModel(model);
     }
 
     return null;

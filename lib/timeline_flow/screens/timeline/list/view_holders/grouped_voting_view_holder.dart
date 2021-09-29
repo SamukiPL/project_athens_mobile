@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/timeline_flow/helpers/timeline_voting_agenda_helper.dart';
@@ -123,6 +124,8 @@ class GroupedVotingViewHolder extends StatelessWidget with RedirectionDelegate {
         ? 'Pkt. ' + viewModel.model.orderPoint.toString() + ' - ' + viewModel.model.votingDesc
         : viewModel.model.votingDesc;
 
+    final AppLocalizations _localizations = AppLocalizations.of(context)!;
+
     return Expanded(
       child: Card(
         margin: EdgeInsets.only(left: 8, top: 8, bottom: 8,  right: 8),
@@ -139,8 +142,7 @@ class GroupedVotingViewHolder extends StatelessWidget with RedirectionDelegate {
                 Container(
                   width: double.infinity,
                   child: Text(
-                    "GŁOSOWANIE",
-                    // viewModel.model.votingDesc,
+                    _localizations.getText().timelineVote(),
                     style: theme.textTheme.overline?.copyWith(
                         color: theme.dividerColor,
                         fontSize: 10

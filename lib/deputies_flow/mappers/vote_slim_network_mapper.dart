@@ -35,7 +35,7 @@ class VoteSlimNetworkMapper extends AsyncDataMapper<VoteSlimDTO, VoteSlimModel> 
     final voteNumbers = VoteNumbers(absent: data.voteNumbers.absent, against: data.voteNumbers.against, hold: data.voteNumbers.hold, inFavor: data.voteNumbers.inFavor);
     final voteDesc = getVoteDescriptionHelper(data.type, _localizations);
     
-    final voteSlim = VoteSlimModel(
+    return VoteSlimModel(
       id: data.id,
       title: data.agenda,
       votingDesc: voteDesc,
@@ -48,7 +48,5 @@ class VoteSlimNetworkMapper extends AsyncDataMapper<VoteSlimDTO, VoteSlimModel> 
       deputiesVote: deputiesVote,
       orderPoint: data.orderPoint
     );
-
-    return voteSlim;
   }
 }

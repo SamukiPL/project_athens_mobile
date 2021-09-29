@@ -111,7 +111,6 @@ class VoteMajorityDistribution extends StatelessWidget {
         memCacheHeight: 700,
         memCacheWidth: 700,
         alignment: Alignment.center,
-        // )
         ),
       )
     );
@@ -200,7 +199,6 @@ class VoteMajorityDistribution extends StatelessWidget {
           memCacheHeight: 700,
           memCacheWidth: 700,
           alignment: Alignment.center,
-          // )
         ),
       );
   }
@@ -224,8 +222,6 @@ class VoteMajorityDistribution extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // buildIconRow(theme),
-          // buildVoteTypeRow(theme),
           buildVoteTypesRow(theme),
         ],
       )

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
@@ -129,11 +130,13 @@ class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
         ? 'Pkt. ' + viewModel.model.orderPoint.toString() + ' - ' + viewModel.model.votingDesc
         : viewModel.model.votingDesc;
 
+    final AppLocalizations _localizations = AppLocalizations.of(context)!;
+
     return [
       Container(
         width: double.infinity,
         child: Text(
-          "GŁOSOWANIE",
+          _localizations.getText().timelineVote(),
           style: theme.textTheme.overline?.copyWith(
               color: theme.dividerColor,
               fontSize: 10
@@ -164,13 +167,15 @@ class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
   }
 
   List<Widget> _getNestedLevelRowTextContent(BuildContext context, ThemeData theme) {
-    final String extras = getAgendaExtras(viewModel.model.agenda) ?? "Brak opisu";
+    final AppLocalizations _localizations = AppLocalizations.of(context)!;
+
+    final String extras = getAgendaExtras(viewModel.model.agenda) ?? _localizations.getText().timelineVoteNoAgenda();
 
     return <Widget>[
       Container(
         width: double.infinity,
         child: Text(
-          "GŁOSOWANIE",
+          _localizations.getText().timelineVote(),
           style: theme.textTheme.overline?.copyWith(
               color: theme.dividerColor,
               fontSize: 10

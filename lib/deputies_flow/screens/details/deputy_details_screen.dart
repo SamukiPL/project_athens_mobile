@@ -152,8 +152,7 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
   }
 
   Widget buildDeputyInformationTab(BuildContext context, DeputyDetailsBloc bloc) {
-    final navigationCallback = (BuildContext context, Destination destination) => goToDestination(context, destination);
-    return DeputyInformationDetailsTab(navigationCallback, bloc.deputyModel);
+    return DeputyInformationDetailsTab(bloc.deputyModel);
   }
 
   Widget buildDeputySpeechesTab(BuildContext context) {

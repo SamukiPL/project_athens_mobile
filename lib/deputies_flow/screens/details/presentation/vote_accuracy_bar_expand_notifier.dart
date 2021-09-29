@@ -6,11 +6,7 @@ class VoteAccuracyBarExpandNotifier extends BaseChangeNotifier {
   bool get isOpen => _state;
 
   toggle() {
-    if (_state == true) {
-      _state = false;
-    } else {
-      _state = true;
-    }
+    _state = !_state;
 
     this.notifyListeners();
   }

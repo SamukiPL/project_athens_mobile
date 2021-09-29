@@ -27,9 +27,13 @@ class VoteDetailsBloc extends BaseBloc {
   }
 
   final ReplaySubject<VotingModel> votingFullStream = ReplaySubject<VotingModel>();
-  Stream<List<VoteClubDistributionRowData>> get clubVoteDistribution => votingFullStream.withLatestFrom(Stream.fromFuture(_deputiesCache.parliamentClubs), (t, s) {
-    if (s is Success<List<ParliamentClubModel>>) {
-      return t.clubVotes.map((e) => VoteClubDistributionRowData(e, s.value.firstWhere((element) => element.id == e.parliamentClub))).toList();
+  Stream<List<VoteClubDistributionRowData>> get clubVoteDistribution => votingFullStream.withLatestFrom(Stream.fromFuture(_deputiesCache.parliamentClubs), (voteFull, parliamentClubs) {
+    if (parliamentClubs is Success<List<ParliamentClubModel>>) {
+      return voteFull.clubVotes.map((clubVote) =>
+        VoteClubDistributionRowData(
+          clubVote,
+          parliamentClubs.value.firstWhere((element) => element.id == clubVote.parliamentClub))
+      ).toList();
     } else {
       return List.empty() as List<VoteClubDistributionRowData>;
     }

@@ -82,6 +82,8 @@
   },
   "timeline": {
     "timelineNavTitle": "Wydarzenia",
+    "vote": "GŁOSOWANIE",
+    "voteNoAgenda": "Brak opisu",
     "votingTypes": {
       "resolutionProject": "Projekt Rezolucji",
       "lawProject": "Projekt Ustawy",

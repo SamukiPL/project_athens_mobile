@@ -5,16 +5,12 @@ import 'package:project_athens/athens_core/presentation/base_list/base_list.dart
 import 'package:project_athens/athens_core/presentation/base_list/base_list_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/deputies_flow/domain/vote_accuracy_alignment_enum.dart';
-import 'package:project_athens/deputies_utils/domain/deputy_full.dart';
-import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:provider/provider.dart';
 
 class DeputyVoteAccuracyScreen extends BaseScreen<BaseListBloc> {
-  final ClubVoteAccuracy _clubVoteAccuracy;
-  final DeputyModel _deputy;
   final VoteAccuracyAlignment _alignment;
 
-  DeputyVoteAccuracyScreen(this._clubVoteAccuracy, this._deputy, this._alignment);
+  DeputyVoteAccuracyScreen(this._alignment);
 
   @override
   Widget buildBody(BuildContext context, BaseListBloc bloc) {

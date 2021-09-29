@@ -1,8 +1,8 @@
 import 'package:project_athens/athens_core/data/base_list/network_data_source.dart';
 import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
-import 'package:project_athens/athens_core/utils/vote_accuracy_enum_to_string.dart';
 import 'package:project_athens/deputies_flow/data/network/deputies_details_api.dart';
+import 'package:project_athens/deputies_flow/domain/vote_accuracy_alignment_enum.dart';
 import 'package:project_athens/deputies_flow/mappers/vote_slim_network_mapper.dart';
 import 'package:project_athens/voting_flow/data/network/request/vote_search_request.dart';
 
@@ -18,7 +18,7 @@ class VoteSlimModelNetworkDataSource extends NetworkListDataSource<VoteSlimModel
   @override
   Future<Result<List<VoteSlimModel>>> call(DeputyVoteAccuracyListParams params) async {
     try {
-      final alignment = voteAccuracyEnumToString(params.accuracyType);
+      final alignment = params.accuracyType.toStringValue();
       final response = await _deputiesDetailsApi.getDeputyVoteAccuracy(
         params.cadencyDeputyId,
           params.parliamentClubId,

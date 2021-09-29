@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_widget.dart';
 import 'package:project_athens/athens_core/presentation/full_card/full_card.dart';
 import 'package:project_athens/timeline_flow/screens/group_details/group_details_bloc.dart';
 import 'package:project_athens/timeline_flow/screens/group_details/group_details_list.dart';
-import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
 import 'package:provider/provider.dart';
 
 class GroupDetailsScreen extends BaseScreen<GroupDetailsBloc> {
@@ -54,8 +52,6 @@ class GroupDetailsScreen extends BaseScreen<GroupDetailsBloc> {
         ],
       ),
     );
-
-    // return
   }
 
   @override
