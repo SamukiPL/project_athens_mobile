@@ -8,7 +8,7 @@ class DeputyItemViewModel extends BaseItemViewModel {
 
   final String lastName;
 
-  DeputyItemViewModel({@required this.firstName, @required this.lastName});
+  DeputyItemViewModel({required this.firstName, required this.lastName});
 
   @override
   Widget buildWidget(int index, int length) {

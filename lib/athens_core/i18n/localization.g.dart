@@ -31,16 +31,16 @@ class AppLocalizationsGenerated {
     return words['universal']['choose'];
   }
 
+  String universalClose() {
+    return words['universal']['close'];
+  }
+
   String universalOk() {
     return words['universal']['ok'];
   }
 
   String universalRetry() {
     return words['universal']['retry'];
-  }
-
-  String universalClose() {
-    return words['universal']['close'];
   }
 
   String universalNoDataDefaultText() {
@@ -132,12 +132,12 @@ class AppLocalizationsGenerated {
     return words['login']['buttons']['register'];
   }
 
-  String loginButtonsForgot() {
-    return words['login']['buttons']['forgot'];
-  }
-
   String loginButtonsSignUp() {
     return words['login']['buttons']['signUp'];
+  }
+
+  String loginButtonsForgot() {
+    return words['login']['buttons']['forgot'];
   }
 
   String loginButtonsResetPassword() {
@@ -154,6 +154,10 @@ class AppLocalizationsGenerated {
 
   String loginHintsLogin() {
     return words['login']['hints']['login'];
+  }
+
+  String loginHintsLoginOrEmail() {
+    return words['login']['hints']['loginOrEmail'];
   }
 
   String loginHintsName() {
@@ -210,6 +214,10 @@ class AppLocalizationsGenerated {
 
   String loginValidateLoginIsTaken() {
     return words['login']['validate']['loginIsTaken'];
+  }
+
+  String loginValidateLoginIsInvalid() {
+    return words['login']['validate']['loginIsInvalid'];
   }
 
   String loginValidateEmailIsTaken() {
@@ -517,12 +525,12 @@ class AppLocalizationsGenerated {
     return words['more']['likeApplication'];
   }
 
-  String moreSupportUs() {
-    return words['more']['supportUs'];
-  }
-
   String moreCheckForUpdates() {
     return words['more']['checkForUpdates'];
+  }
+
+  String moreSupportUs() {
+    return words['more']['supportUs'];
   }
 
   String moreAppVersion() {
