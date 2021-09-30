@@ -22,6 +22,8 @@ class EasyFilterViewHolder extends StatelessWidget {
             label: Text(_viewModel.title),
             selected: viewModel.isSelected,
             onSelected: (_) => _viewModel.itemClicked(),
+            backgroundColor: Colors.transparent,
+            elevation: _viewModel.isSelected ? 4 : 1,
           ),
         ),
       ),
