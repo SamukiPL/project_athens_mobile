@@ -1,9 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:project_athens/athens_core/constants/color_constants.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/voting_flow/screens/details/linear_vote_distribution/linear_vote_distribution_segment.dart';
 
 enum FloatingLabelPosition {

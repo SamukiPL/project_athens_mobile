@@ -14,7 +14,7 @@ class VoteSearchRequest {
   final int cadency;
   final bool v2;
 
-  VoteSearchRequest(this.limit, this.offset, this.searchPhrase, this.from, this.to, this.sort, this.cadency, {this.v2 = false});
+  VoteSearchRequest(this.limit, this.offset, this.searchPhrase, this.from, this.to, this.sort, this.cadency, this.v2);
 
   factory VoteSearchRequest.fromJson(Map<String, dynamic> json) => _$VoteSearchRequestFromJson(json);
   Map<String, dynamic> toJson() => _$VoteSearchRequestToJson(this);

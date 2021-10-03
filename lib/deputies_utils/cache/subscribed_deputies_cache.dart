@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/data/network/response/subscribed_deputy_response.dart';
@@ -22,11 +21,17 @@ class SubscribedDeputiesCache {
 
   SubscribedDeputiesCache(this._deputiesCache, this._firebaseDeputiesUseCase, this._deleteDeputyUseCase, this._putDeputiesUseCase);
 
-  List<SubscribedDeputyModel> _cachedSubscribedDeputies;
+  List<SubscribedDeputyModel>? _cachedSubscribedDeputies;
+
+  Future<Result<List<SubscribedDeputyModel>>>? awaitingFuture;
 
   Future<Result<List<SubscribedDeputyModel>>> get subscribedDeputies async {
+    if (awaitingFuture != null) {
+      return awaitingFuture!;
+    }
+
     if (_cachedSubscribedDeputies != null) {
-      return Success(_cachedSubscribedDeputies.toList());
+      return Success(_cachedSubscribedDeputies!.toList());
     }
 
     final cachedDeputies = await _deputiesCache.deputies;
@@ -35,7 +40,7 @@ class SubscribedDeputiesCache {
       return Failure(cachedDeputies.exception);
     }
 
-    final result = await _firebaseDeputiesUseCase(BaseDeputiesParams(9)).then((result) {
+    final result = _firebaseDeputiesUseCase(BaseDeputiesParams(9)).then((result) {
       if (result is Success<List<SubscribedDeputyResponse>>) {
         final SubscribedDeputyMapper mapper = SubscribedDeputyMapper(result.value);
 
@@ -43,13 +48,16 @@ class SubscribedDeputiesCache {
 
         subscribedDeputies.forEach((subscribedDeputy) => subscribedDeputy.notifications.updateCallback = () => _updateSubscribedDeputy(subscribedDeputy));
 
+        _cachedSubscribedDeputies = subscribedDeputies;
+
         return Success(subscribedDeputies);
       } else {
         return result;
       }
     });
 
-    return result;
+    awaitingFuture = result as Future<Result<List<SubscribedDeputyModel>>>;
+    return result as Future<Result<List<SubscribedDeputyModel>>>;
   }
 
   Future<DeputyModel> getDeputyModelById(String id) =>
@@ -59,12 +67,12 @@ class SubscribedDeputiesCache {
       _getDeputyModel((model) => model.cardId == cardId);
 
   Future<DeputyModel> _getDeputyModel(bool Function(DeputyModel) condition) async {
-    if (_cachedSubscribedDeputies != null && _cachedSubscribedDeputies.isNotEmpty)
-      return _cachedSubscribedDeputies.firstWhere((element) => condition(element));
+    if (_cachedSubscribedDeputies != null && _cachedSubscribedDeputies!.isNotEmpty)
+      return _cachedSubscribedDeputies!.firstWhere((element) => condition(element));
 
     await subscribedDeputies;
 
-    return _cachedSubscribedDeputies.firstWhere((element) => condition(element));
+    return _cachedSubscribedDeputies!.firstWhere((element) => condition(element));
   }
 
   void _updateSubscribedDeputy(SubscribedDeputyModel subscribedDeputy) async {
@@ -85,7 +93,7 @@ class SubscribedDeputiesCache {
 
   dispose () {
     if (_cachedSubscribedDeputies != null) {
-      _cachedSubscribedDeputies.forEach((element) => element.dispose());
+      _cachedSubscribedDeputies!.forEach((element) => element.dispose());
     }
   }
 }

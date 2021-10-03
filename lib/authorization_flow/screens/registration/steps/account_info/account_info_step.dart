@@ -28,7 +28,7 @@ class AccountInfoStep extends BaseRegistrationFormStep<AccountInfoStepBloc> {
           callback: () {},
           onChanged: (login) => bloc.setLogin(login),
           validator: (login) => getBaseValidator(localization, login, customValidator: (value) {
-            if (!loginRegex.hasMatch(login)) return localization.getText().loginValidateLoginIsInvalid();
+            if (login == null || !loginRegex.hasMatch(login)) return localization.getText().loginValidateLoginIsInvalid();
             if (bloc.loginTaken) return localization.getText().loginValidateLoginIsTaken();
 
             return null;

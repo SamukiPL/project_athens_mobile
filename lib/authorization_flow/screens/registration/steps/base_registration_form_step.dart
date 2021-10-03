@@ -1,10 +1,7 @@
-// @dart=2.9
-
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_step.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_step_bloc.dart';
-import 'package:provider/provider.dart';
 
 abstract class BaseRegistrationFormStep<BLOC extends BaseRegistrationStepBloc> extends BaseRegistrationStep<BLOC> {
 
@@ -22,7 +19,7 @@ abstract class BaseRegistrationFormStep<BLOC extends BaseRegistrationStepBloc> e
 
   @override
   void positiveButtonAction(BuildContext context, BLOC bloc) {
-    if (!getFormKey(context).currentState.validate())
+    if (!getFormKey(context).currentState!.validate())
       return;
 
     bloc();
@@ -34,12 +31,12 @@ abstract class BaseRegistrationFormStep<BLOC extends BaseRegistrationStepBloc> e
 
   @protected
   Widget generateFormField(
-      {BuildContext context,
-      String initialValue,
-      VoidCallback callback,
-      ValueChanged<String> onChanged,
-      FormFieldValidator<String> validator,
-      String labelText,
+      {required BuildContext context,
+      required String initialValue,
+      required VoidCallback callback,
+      required ValueChanged<String> onChanged,
+      required FormFieldValidator<String> validator,
+      required String labelText,
       TextInputAction action = TextInputAction.next,
       TextInputType keyboardType = TextInputType.name,
       bool obscureText = false}) =>
@@ -64,10 +61,9 @@ abstract class BaseRegistrationFormStep<BLOC extends BaseRegistrationStepBloc> e
       );
 
   @protected
-  String getBaseValidator(AppLocalizations localization, String value, {String Function(String) customValidator}) {
-    if (value.isEmpty) return localization.getText().loginValidateFieldCannotBeEmpty();
+  String? getBaseValidator(AppLocalizations localization, String? value, {String? Function(String?)? customValidator}) {
+    if (value == null || value.isEmpty) return localization.getText().loginValidateFieldCannotBeEmpty();
 
     return customValidator != null ? customValidator(value) : null;
   }
-
 }

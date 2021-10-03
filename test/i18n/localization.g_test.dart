@@ -311,6 +311,16 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, timelineTimelineNavTitle != "" && timelineTimelineNavTitle != null); 
   }); 
  
+  test("All methods for $locale timelineVote", () async {
+    String timelineVote = localization.timelineVote();
+    expect(true, timelineVote != "" && timelineVote != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVoteNoAgenda", () async {
+    String timelineVoteNoAgenda = localization.timelineVoteNoAgenda();
+    expect(true, timelineVoteNoAgenda != "" && timelineVoteNoAgenda != null); 
+  }); 
+ 
   test("All methods for $locale timelineVotingTypesResolutionProject", () async {
     String timelineVotingTypesResolutionProject = localization.timelineVotingTypesResolutionProject();
     expect(true, timelineVotingTypesResolutionProject != "" && timelineVotingTypesResolutionProject != null); 
@@ -411,6 +421,26 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, timelineVotingTypesSelectionOfNationalCouncilJudiciary != "" && timelineVotingTypesSelectionOfNationalCouncilJudiciary != null); 
   }); 
  
+  test("All methods for $locale timelineVotingTypesRepealOfRegulation", () async {
+    String timelineVotingTypesRepealOfRegulation = localization.timelineVotingTypesRepealOfRegulation();
+    expect(true, timelineVotingTypesRepealOfRegulation != "" && timelineVotingTypesRepealOfRegulation != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesResolutionOfPointOfDispute", () async {
+    String timelineVotingTypesResolutionOfPointOfDispute = localization.timelineVotingTypesResolutionOfPointOfDispute();
+    expect(true, timelineVotingTypesResolutionOfPointOfDispute != "" && timelineVotingTypesResolutionOfPointOfDispute != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesRequestOfReassumingVote", () async {
+    String timelineVotingTypesRequestOfReassumingVote = localization.timelineVotingTypesRequestOfReassumingVote();
+    expect(true, timelineVotingTypesRequestOfReassumingVote != "" && timelineVotingTypesRequestOfReassumingVote != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVotingTypesRequestOfClosingMeeting", () async {
+    String timelineVotingTypesRequestOfClosingMeeting = localization.timelineVotingTypesRequestOfClosingMeeting();
+    expect(true, timelineVotingTypesRequestOfClosingMeeting != "" && timelineVotingTypesRequestOfClosingMeeting != null); 
+  }); 
+ 
   test("All methods for $locale timelineVotingTypesUnknown", () async {
     String timelineVotingTypesUnknown = localization.timelineVotingTypesUnknown();
     expect(true, timelineVotingTypesUnknown != "" && timelineVotingTypesUnknown != null); 
@@ -494,6 +524,16 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale deputiesVoteAccuracy", () async {
     String deputiesVoteAccuracy = localization.deputiesVoteAccuracy();
     expect(true, deputiesVoteAccuracy != "" && deputiesVoteAccuracy != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesAlignedWithParty", () async {
+    String deputiesAlignedWithParty = localization.deputiesAlignedWithParty();
+    expect(true, deputiesAlignedWithParty != "" && deputiesAlignedWithParty != null); 
+  }); 
+ 
+  test("All methods for $locale deputiesNotAlignedWithParty", () async {
+    String deputiesNotAlignedWithParty = localization.deputiesNotAlignedWithParty();
+    expect(true, deputiesNotAlignedWithParty != "" && deputiesNotAlignedWithParty != null); 
   }); 
  
   test("All methods for $locale deputiesBasicInfo", () async {

@@ -128,7 +128,7 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
                 ],
             body: TabBarView(
               children: <Widget>[
-                buildDeputyInformationTab(context),
+                buildDeputyInformationTab(context, bloc),
                 buildDeputySpeechesTab(context),
                 buildDeputyVotingsTab(context),
               ],
@@ -151,8 +151,8 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
         child: Container(color: Colors.grey.shade200, child: tab));
   }
 
-  Widget buildDeputyInformationTab(BuildContext context) {
-    return DeputyInformationDetailsTab();
+  Widget buildDeputyInformationTab(BuildContext context, DeputyDetailsBloc bloc) {
+    return DeputyInformationDetailsTab(bloc.deputyModel);
   }
 
   Widget buildDeputySpeechesTab(BuildContext context) {

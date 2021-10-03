@@ -84,6 +84,8 @@
   },
   "timeline": {
     "timelineNavTitle": "Wydarzenia",
+    "vote": "GŁOSOWANIE",
+    "voteNoAgenda": "Brak opisu",
     "votingTypes": {
       "resolutionProject": "Projekt Rezolucji",
       "lawProject": "Projekt Ustawy",
@@ -96,7 +98,7 @@
       "changeCommissionMembers": "Zmiana Czlonków Komisji",
       "voteForProposal": "Głosowanie Za Propozycją",
       "personVote": "Głosowanie Za Osobą",
-      "voteForPostponementGathering": "Głosowanie nad odroczeniem posiedzenia",
+      "voteForPostponementGathering": "Odroczenie posiedzenia",
       "marshal": "Wybór Marszałka",
       "viceMarshal": "Wybór Wicemarszałka",
       "chooseComissionMembers": "Wybór składu osobowego komisji",
@@ -105,6 +107,10 @@
       "selectionOfStateTribunal": "Wybór członków trybunały stanu",
       "selectionOfConstitutionalCourt": "Wybór sędziów trybunału konstytucyjnego",
       "selectionOfNationalCouncilJudiciary": "Wybór członków KRS",
+      "repealOfRegulation": "Uchylenie rozporządzenia",
+      "resolutionOfPointOfDispute": "Rozstrzygnięcie punktu spornego",
+      "requestOfReassumingVote": "Reasumpcja głosowania",
+      "requestOfClosingMeeting": "Zamknięcie obrad",
       "unknown": "Nieznany rodzaj głosowania"
     },
     "nounCloud": {
@@ -127,6 +133,8 @@
     "voteAbsency": "Nieobecność na głosowaniach",
     "mostAccuracy": "Największa zgodność",
     "voteAccuracy": "Zgodność głosowania",
+    "alignedWithParty": "Zgodnie z partią",
+    "notAlignedWithParty": "Przeciwnie do partii",
     "basicInfo": "Podstawowe informacje",
     "experience": "Doświadczenie",
     "statistics": "Statystyki",

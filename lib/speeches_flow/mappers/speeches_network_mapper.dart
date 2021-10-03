@@ -11,6 +11,8 @@ class SpeechesNetworkMapper
 
   @override
   Future<SpeechModel> transform(SpeechResponse data) async {
+    final String? thumbnailUrl = data.cadencyDeputy != null ? await _deputiesCache.getDeputyThumbnail(data.cadencyDeputy!) : null;
+
     return SpeechModel(
         id: data.id,
         personName: data.personName,
@@ -18,7 +20,7 @@ class SpeechesNetworkMapper
         club: await _deputiesCache.getParliamentClubModel(data.parliamentClub),
         desc: data.agenda?.title,
         date: data.cisInfo.eventDateTime,
-        thumbnailUrl: await _deputiesCache.getDeputyThumbnail(data.cadencyDeputy) ?? "",
+        thumbnailUrl: thumbnailUrl,
         videoUrl: data.videoDownloadUrl,
         nextPersonSpeech: await _transformPersonSpeechResponse(data.nextPersonSpeech),
         previousPersonSpeech: await _transformPersonSpeechResponse(data.previousPersonSpeech),
@@ -31,7 +33,7 @@ class SpeechesNetworkMapper
     if (personSpeech == null) return null;
 
     if (personSpeech.deputyCardId != null) {
-      final deputy = await _deputiesCache.getDeputyModelByCardId(personSpeech.deputyCardId);
+      final deputy = await _deputiesCache.getDeputyModelByCardId(personSpeech.deputyCardId!);
 
       return PersonSpeechModel(name: deputy.name, thumbnailUrl: deputy.thumbnailUrl, speechId: personSpeech.speechId);
     }

@@ -11,5 +11,4 @@ class DeputiesRegistrationModule extends Module {
     // TODO: implement getProviders
     return List.empty();
   }
-
 }

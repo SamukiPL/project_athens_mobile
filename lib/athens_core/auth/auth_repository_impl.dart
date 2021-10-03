@@ -1,9 +1,7 @@
 import 'package:project_athens/athens_core/auth/auth_repository.dart';
 
-import 'package:project_athens/athens_core/auth/auth_repository.dart';
 import 'package:project_athens/athens_core/auth/network/auth_api.dart';
 import 'package:project_athens/athens_core/auth/network/auth_request.dart';
-import 'package:project_athens/athens_core/auth/network/auth_response.dart';
 import 'package:project_athens/athens_core/auth/storage/tokens.dart';
 
 import 'auth_storage.dart';

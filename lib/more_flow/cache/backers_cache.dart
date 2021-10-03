@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:project_athens/athens_core/domain/base_list/base_params.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/more_flow/domain/more/backer_model.dart';
@@ -9,11 +8,11 @@ class BackersCache {
 
   BackersCache(this._getBackersUseCase);
 
-  List<BackerModel> _cachedBackers;
+  List<BackerModel>? _cachedBackers;
 
   Future<Result<List<BackerModel>>> get backers async {
     if (_cachedBackers != null) {
-      return Success(_cachedBackers);
+      return Success(_cachedBackers!);
     }
 
     final result = await _getBackersUseCase(BaseParams()).then((result) {
@@ -25,7 +24,7 @@ class BackersCache {
       }
     });
 
-    return result;
+    return result as Future<Result<List<BackerModel>>>;
   }
   
   Future<bool> get hasUserBacked async {

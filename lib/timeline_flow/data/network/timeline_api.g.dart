@@ -51,7 +51,7 @@ class _TimelineApi implements TimelineApi {
         _setStreamType<TimelineResponse>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(
-                    _dio.options, '/user-aggregator/timeline/$cadency/$date',
+                    _dio.options, '/user-aggregator/timeline/$cadency/$date/v2',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = TimelineResponse.fromJson(_result.data!);

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
@@ -18,7 +19,11 @@ class DeputyVoteViewHolder extends StatelessWidget with RedirectionDelegate {
     final theme = Theme.of(context);
     return GestureDetector(
       onTap: () {
-        goToDestination(context, VoteDetailsDestination(_viewModel.model));
+        goToDestination(context, VoteDetailsDestination(
+            VoteSlimModel.fromVotingModel(
+                _viewModel.model
+            )
+        ));
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

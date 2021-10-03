@@ -83,6 +83,8 @@
     }
   },
   "timeline": {
+    "vote": "VOTE",
+    "voteNoAgenda": "No agenda",
     "timelineNavTitle": "Timeline",
     "votingTypes": {
       "resolutionProject": "Resolution Project",
@@ -105,6 +107,10 @@
       "selectionOfStateTribunal": "Selection of State Tribunal",
       "selectionOfConstitutionalCourt": "Selection of Constitutional Court",
       "selectionOfNationalCouncilJudiciary": "Selection of KRS members",
+      "repealOfRegulation": "Repeal of regulation",
+      "resolutionOfPointOfDispute": "Resolution of the point of dispute",
+      "requestOfReassumingVote": "Vote reassumption",
+      "requestOfClosingMeeting": "Closing meeting",
       "unknown": "Unknown"
     },
     "nounCloud": {
@@ -127,6 +133,8 @@
     "voteAbsency": "Vote absency",
     "mostAccuracy": "Most vote accuracy",
     "voteAccuracy": "Vote accuracy",
+    "alignedWithParty": "Aligned with party",
+    "notAlignedWithParty": "Not aligned with party",
     "basicInfo": "Basic information",
     "experience": "Experience",
     "statistics": "Statistics",

@@ -15,7 +15,7 @@ VoteSearchRequest _$VoteSearchRequestFromJson(Map<String, dynamic> json) {
     json['to'] as String?,
     json['sort'] as String,
     json['cadency'] as int,
-    v2: json['v2'] as bool,
+    json['v2'] as bool,
   );
 }
 

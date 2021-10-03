@@ -32,10 +32,10 @@ class SpeechResponse extends TimelineItem {
 
 @JsonSerializable()
 class Agenda {
-  final DateTime eventDateTime;
-  final DateTime msgDateTime;
-  final String refId;
-  final String rangeid;
+  final DateTime? eventDateTime;
+  final DateTime? msgDateTime;
+  final String? refId;
+  final String? rangeid;
   final String title;
 
   Agenda(this.eventDateTime, this.msgDateTime, this.refId, this.rangeid, this.title);
@@ -46,11 +46,11 @@ class Agenda {
 
 @JsonSerializable()
 class CisInfo {
-  final Person person;
+  final Person? person;
   final DateTime eventDateTime;
-  final DateTime msgDateTime;
-  final String rangeid;
-  final String refId;
+  final DateTime? msgDateTime;
+  final String? rangeid;
+  final String? refId;
 
   CisInfo(this.person, this.eventDateTime, this.msgDateTime, this.rangeid, this.refId);
 

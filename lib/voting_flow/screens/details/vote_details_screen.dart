@@ -5,8 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:project_athens/athens_core/constants/color_constants.dart';
-import 'package:project_athens/athens_core/data/base_responses/voting_response.dart';
-import 'package:project_athens/athens_core/domain/result.dart';
+import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
@@ -17,20 +16,21 @@ import 'package:project_athens/athens_core/presentation/simple_horizontal_table/
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
-import 'package:project_athens/deputies_utils/domain/parliament_club_model.dart';
 import 'package:project_athens/voting_flow/screens/details/linear_vote_distribution/linear_vote_distribution.dart';
+import 'package:project_athens/voting_flow/screens/details/vote_club_distribution_row_data.dart';
 import 'package:project_athens/voting_flow/screens/details/vote_details_bloc.dart';
+import 'package:project_athens/voting_flow/screens/details/linear_vote_distribution/linear_vote_distribution_model.dart';
 import 'package:provider/provider.dart';
 
 class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
 
-  final VotingModel _votingModel;
+  final VoteSlimModel _voteModel;
 
-  VoteDetailsScreen(this._votingModel);
+  VoteDetailsScreen(this._voteModel);
 
   @override
   String getAppBarTitle(AppLocalizations localization, VoteDetailsBloc bloc) {
-    return _votingModel.votingDesc;
+    return _voteModel.votingDesc;
   }
 
   @override
@@ -38,7 +38,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
     final theme = Theme.of(context);
 
     return SingleChildScrollView(
-        child: Container(
+      child: Container(
       color: Colors.grey.shade200,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -55,10 +55,22 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
                 ],
           )),
           FullCard(header: 'Opis', headerPadding: 8, child: buildDescription(theme)),
-          FullCard(header: 'Rozkład głosów', headerPadding: 8, child: buildClubVoteDistributionView(context, theme)),
-          FullCard(header: 'Obserwowani posłowie', headerPadding: 8, child: buildDeputyVotesView(context, theme)),
-          FullCard(leftPadding: 8, rightPadding: 8, child: DbSource(_votingModel),),
-          TechnicalData(technicalId: _votingModel.id),
+          FullCard(header: 'Rozkład głosów', headerPadding: 8, child: buildClubVoteDistributionView(context, theme, bloc)),
+          FullCard(header: 'Obserwowani posłowie', headerPadding: 8, child: buildDeputyVotesView(context, theme, bloc)),
+          StreamProvider<VotingModel?>.value(
+              value: bloc.votingFullStream,
+              initialData: null,
+              child: Consumer<VotingModel?>(
+                builder: (context, model, _) =>
+                    model != null ?
+                    FullCard(
+                    leftPadding: 8,
+                    rightPadding: 8,
+                    child: DbSource(model)
+                ) : Container()
+              )
+          ),
+          TechnicalData(technicalId: _voteModel.id),
 
         ],
       ),
@@ -86,7 +98,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
     return Container(
         padding: EdgeInsets.only(bottom: 20),
         child: Text(
-          DateFormat("HH:mm d.MM.y", "pl").format(_votingModel.date),
+          DateFormat("HH:mm d.MM.y", "pl").format(_voteModel.voteAt),
           style: TextStyle(
             color: theme.primaryColor,
             fontSize: 14,
@@ -97,22 +109,22 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
 
   Widget buildVoteDistributionChart(bloc, context) {
     return Container(
-      child: LinearVoteDistribution(voting: _votingModel),
+      child: LinearVoteDistribution(model: LinearVoteDistributionModel.fromVoteSlim(_voteModel)),
     );
   }
 
   Widget buildDateAndFrequencyTable(BuildContext context, ThemeData theme) {
-    final votingsCount = (_votingModel.results.inFavor +
-        _votingModel.results.hold +
-        _votingModel.results.against);
+    final votingsCount = (_voteModel.voteNumbers.inFavor +
+        _voteModel.voteNumbers.hold +
+        _voteModel.voteNumbers.against);
 
     final cells = [
       SimpleHorizontalTableCell(
-        lowerText: DateFormat("HH:mm", "pl").format(_votingModel.date),
+        lowerText: DateFormat("HH:mm", "pl").format(_voteModel.voteAt),
         icon: Icons.access_time
       ),
       SimpleHorizontalTableCell(
-          lowerText: DateFormat("d.MM.yyyy", "pl").format(_votingModel.date),
+          lowerText: DateFormat("d.MM.yyyy", "pl").format(_voteModel.voteAt),
           icon: Icons.today,
       ),
       SimpleHorizontalTableCell(
@@ -125,7 +137,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
   }
 
   Widget buildVotesResultTable(BuildContext context, ThemeData theme) {
-    final VoteResultModel results = _votingModel.results;
+    final VoteNumbers results = _voteModel.voteNumbers;
 
     return Container(
       margin: EdgeInsets.fromLTRB(8, 8, 8, 8),
@@ -199,11 +211,11 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            _votingModel.votingDesc,
+            _voteModel.votingDesc,
             style: TextStyle(color: theme.primaryColor, fontSize: 18),
           ),
           Text(
-            DateFormat("HH:mm\nd.MM.y", "pl").format(_votingModel.date),
+            DateFormat("HH:mm\nd.MM.y", "pl").format(_voteModel.voteAt),
             style: TextStyle(
               color: theme.primaryColor,
               fontSize: 14,
@@ -223,7 +235,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              _votingModel.title,
+              _voteModel.title,
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 18,
@@ -233,14 +245,10 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
         ));
   }
 
-  TableRow buildClubVoteTableRow(List<ParliamentClubModel> clubs,
-      ParliamentClubVotingNumbers votes, ThemeData theme) {
+  TableRow  buildClubVoteTableRow(VoteClubDistributionRowData rowData, ThemeData theme) {
     final dataRowStyle = TextStyle(
       fontSize: 10,
     );
-
-    final club =
-        clubs.firstWhere((element) => element.id == votes.parliamentClub);
 
     return TableRow(
       decoration: BoxDecoration(
@@ -249,38 +257,38 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
       children: [
         Container(
           padding: EdgeInsets.all(4),
-          child: Text(club.shortName,
+          child: Text(rowData.parliamentClubModel.shortName,
               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 11)),
         ),
         Container(
             padding: EdgeInsets.all(4),
-            child: Text(votes.totalDeputies.toString(),
+            child: Text(rowData.votingNumbers.totalDeputies.toString(),
                 textAlign: TextAlign.center, style: dataRowStyle)),
         Container(
             padding: EdgeInsets.all(4),
-            child: Text(votes.actualVoted.toString(),
+            child: Text(rowData.votingNumbers.actualVoted.toString(),
                 textAlign: TextAlign.center, style: dataRowStyle)),
         Container(
             padding: EdgeInsets.all(4),
-            child: Text(votes.absent.toString(),
+            child: Text(rowData.votingNumbers.absent.toString(),
                 textAlign: TextAlign.center, style: dataRowStyle)),
         Container(
             padding: EdgeInsets.all(4),
-            child: Text(votes.inFavor.toString(),
+            child: Text(rowData.votingNumbers.inFavor.toString(),
                 textAlign: TextAlign.center, style: dataRowStyle)),
         Container(
             padding: EdgeInsets.all(4),
-            child: Text(votes.against.toString(),
+            child: Text(rowData.votingNumbers.against.toString(),
                 textAlign: TextAlign.center, style: dataRowStyle)),
         Container(
             padding: EdgeInsets.all(4),
-            child: Text(votes.hold.toString(),
+            child: Text(rowData.votingNumbers.hold.toString(),
                 textAlign: TextAlign.center, style: dataRowStyle)),
       ],
     );
   }
 
-  Widget buildClubVoteDistributionView(BuildContext context, ThemeData theme) {
+  Widget buildClubVoteDistributionView(BuildContext context, ThemeData theme, VoteDetailsBloc bloc) {
     final localizations = Provider.of<AppLocalizations>(context);
     final headingRowStyle =
         TextStyle(fontSize: 10, fontWeight: FontWeight.w500);
@@ -333,56 +341,52 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
     );
     final DeputiesCache deputiesCache = Provider.of<DeputiesCache>(context);
 
-    return FutureProvider(
-      initialData: Success(List.empty()),
-      create: (context) => deputiesCache.parliamentClubs,
-      child: Consumer<Result<List<ParliamentClubModel>>?>(
-          builder: (context, clubsResult, _) {
-        if (clubsResult == null) {
-          return Container();
-        } else if (clubsResult is Success<List<ParliamentClubModel>>) {
-          return Container(
+    return StreamProvider<List<VoteClubDistributionRowData>?>.value(
+      initialData: null,
+      value: bloc.clubVoteDistribution,
+      child: Consumer<List<VoteClubDistributionRowData>?>(
+        builder: (context, rowsData, _) =>
+            rowsData != null ?
+            Container(
               // additional padding on bottom to compensate internal table cells padding
-              padding: EdgeInsets.only(left: 8, right: 8, bottom: 8),
-              child: Table(
-                // set first column with parliament club names a little bigger
-                // since it's need more space than 3 digit number.
-                columnWidths: const {
-                  0: FlexColumnWidth(1.5),
-                },
-                children: [headingRow]..addAll(_votingModel.clubVotes.map(
-                    (clubVotes) => buildClubVoteTableRow(
-                        clubsResult.value, clubVotes, theme))),
-              ));
-        } else {
-          // TODO: handle error, generic error view required
-          return Container();
-        }
-      }),
+                padding: EdgeInsets.only(left: 8, right: 8, bottom: 8),
+                child: Table(
+                  // set first column with parliament club names a little bigger
+                  // since it's need more space than 3 digit number.
+                  columnWidths: const {
+                    0: FlexColumnWidth(1.5),
+                  },
+                  children: [headingRow]..addAll(rowsData.map(
+                          (rowData) => buildClubVoteTableRow(
+                          rowData, theme))),
+                )
+            ) : Container()
+      )
     );
   }
 
-  Widget buildDeputyVotesView(BuildContext context, ThemeData theme) {
-    final AppLocalizations localizations =
-        Provider.of<AppLocalizations>(context);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Container(
-        //   padding: EdgeInsets.only(left: 8, right: 8),
-        //   child: Text(
-        //     localizations.getText().votingsSubscribedDeputiesVotes(),
-        //     textAlign: TextAlign.left,
-        //     style: TextStyle(color: Colors.black, fontSize: 25),
-        //   ),
-        // ),
-        Wrap(
-            direction: Axis.horizontal,
-            children: _votingModel.votes
-                .map((e) => buildDeputyVotingView(e, context, theme))
-                .toList()),
-      ],
+  Widget buildDeputyVotesView(BuildContext context, ThemeData theme, VoteDetailsBloc bloc) {
+    return StreamProvider<VotingModel?>.value(
+        value: bloc.votingFullStream,
+        initialData: null,
+        child: Consumer<VotingModel?>(
+            builder: (context, model, _) =>
+                model != null ?
+                FullCard(
+                leftPadding: 8,
+                rightPadding: 8,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Wrap(
+                        direction: Axis.horizontal,
+                        children: model.votes
+                            .map((e) => buildDeputyVotingView(e, context, theme))
+                            .toList()),
+                  ],
+                )
+            ) : Container()
+        )
     );
   }
 
@@ -440,7 +444,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
                                     image: new DecorationImage(
                                       fit: BoxFit.cover,
                                       image: new NetworkImage(
-                                          deputy?.thumbnailUrl ?? ""),
+                                          deputy.thumbnailUrl ?? ""),
                                     ))),
                             Container(
                               alignment: Alignment.center,

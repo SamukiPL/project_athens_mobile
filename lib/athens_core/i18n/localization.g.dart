@@ -244,6 +244,14 @@ class AppLocalizationsGenerated {
     return words['timeline']['timelineNavTitle'];
   }
 
+  String timelineVote() {
+    return words['timeline']['vote'];
+  }
+
+  String timelineVoteNoAgenda() {
+    return words['timeline']['voteNoAgenda'];
+  }
+
   String timelineVotingTypesResolutionProject() {
     return words['timeline']['votingTypes']['resolutionProject'];
   }
@@ -325,6 +333,22 @@ class AppLocalizationsGenerated {
         ['selectionOfNationalCouncilJudiciary'];
   }
 
+  String timelineVotingTypesRepealOfRegulation() {
+    return words['timeline']['votingTypes']['repealOfRegulation'];
+  }
+
+  String timelineVotingTypesResolutionOfPointOfDispute() {
+    return words['timeline']['votingTypes']['resolutionOfPointOfDispute'];
+  }
+
+  String timelineVotingTypesRequestOfReassumingVote() {
+    return words['timeline']['votingTypes']['requestOfReassumingVote'];
+  }
+
+  String timelineVotingTypesRequestOfClosingMeeting() {
+    return words['timeline']['votingTypes']['requestOfClosingMeeting'];
+  }
+
   String timelineVotingTypesUnknown() {
     return words['timeline']['votingTypes']['unknown'];
   }
@@ -391,6 +415,14 @@ class AppLocalizationsGenerated {
 
   String deputiesVoteAccuracy() {
     return words['deputies']['voteAccuracy'];
+  }
+
+  String deputiesAlignedWithParty() {
+    return words['deputies']['alignedWithParty'];
+  }
+
+  String deputiesNotAlignedWithParty() {
+    return words['deputies']['notAlignedWithParty'];
   }
 
   String deputiesBasicInfo() {
