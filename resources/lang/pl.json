@@ -53,6 +53,7 @@
       "email": "Email",
       "repeatEmail": "Powtórz Email",
       "login": "Login",
+      "loginOrEmail": "Login/Email",
       "name": "Nazwa Użytkownika",
       "password": "Hasło",
       "repeatPassword": "Powtórz Hasło",
@@ -71,6 +72,7 @@
       "fieldCannotBeEmpty": "Pole nie może być puste",
       "incorrectEmail": "Wprowadź prawidłowy email",
       "loginIsTaken": "Login jest już zajęty",
+      "loginIsInvalid": "Wprowadź prawidłowy login",
       "emailIsTaken": "Email jest już zajęty",
       "emailsDontMatch": "Powtórzony email nie pasuje",
       "passwordsDontMatch": "Powtórzone hasło nie pasuje",
@@ -82,6 +84,8 @@
   },
   "timeline": {
     "timelineNavTitle": "Wydarzenia",
+    "vote": "GŁOSOWANIE",
+    "voteNoAgenda": "Brak opisu",
     "votingTypes": {
       "resolutionProject": "Projekt Rezolucji",
       "lawProject": "Projekt Ustawy",

@@ -156,6 +156,10 @@ class AppLocalizationsGenerated {
     return words['login']['hints']['login'];
   }
 
+  String loginHintsLoginOrEmail() {
+    return words['login']['hints']['loginOrEmail'];
+  }
+
   String loginHintsName() {
     return words['login']['hints']['name'];
   }
@@ -212,6 +216,10 @@ class AppLocalizationsGenerated {
     return words['login']['validate']['loginIsTaken'];
   }
 
+  String loginValidateLoginIsInvalid() {
+    return words['login']['validate']['loginIsInvalid'];
+  }
+
   String loginValidateEmailIsTaken() {
     return words['login']['validate']['emailIsTaken'];
   }
@@ -234,6 +242,14 @@ class AppLocalizationsGenerated {
 
   String timelineTimelineNavTitle() {
     return words['timeline']['timelineNavTitle'];
+  }
+
+  String timelineVote() {
+    return words['timeline']['vote'];
+  }
+
+  String timelineVoteNoAgenda() {
+    return words['timeline']['voteNoAgenda'];
   }
 
   String timelineVotingTypesResolutionProject() {

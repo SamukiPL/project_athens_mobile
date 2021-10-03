@@ -201,6 +201,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginHintsLogin != "" && loginHintsLogin != null); 
   }); 
  
+  test("All methods for $locale loginHintsLoginOrEmail", () async {
+    String loginHintsLoginOrEmail = localization.loginHintsLoginOrEmail();
+    expect(true, loginHintsLoginOrEmail != "" && loginHintsLoginOrEmail != null); 
+  }); 
+ 
   test("All methods for $locale loginHintsName", () async {
     String loginHintsName = localization.loginHintsName();
     expect(true, loginHintsName != "" && loginHintsName != null); 
@@ -271,6 +276,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginValidateLoginIsTaken != "" && loginValidateLoginIsTaken != null); 
   }); 
  
+  test("All methods for $locale loginValidateLoginIsInvalid", () async {
+    String loginValidateLoginIsInvalid = localization.loginValidateLoginIsInvalid();
+    expect(true, loginValidateLoginIsInvalid != "" && loginValidateLoginIsInvalid != null); 
+  }); 
+ 
   test("All methods for $locale loginValidateEmailIsTaken", () async {
     String loginValidateEmailIsTaken = localization.loginValidateEmailIsTaken();
     expect(true, loginValidateEmailIsTaken != "" && loginValidateEmailIsTaken != null); 
@@ -299,6 +309,16 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale timelineTimelineNavTitle", () async {
     String timelineTimelineNavTitle = localization.timelineTimelineNavTitle();
     expect(true, timelineTimelineNavTitle != "" && timelineTimelineNavTitle != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVote", () async {
+    String timelineVote = localization.timelineVote();
+    expect(true, timelineVote != "" && timelineVote != null); 
+  }); 
+ 
+  test("All methods for $locale timelineVoteNoAgenda", () async {
+    String timelineVoteNoAgenda = localization.timelineVoteNoAgenda();
+    expect(true, timelineVoteNoAgenda != "" && timelineVoteNoAgenda != null); 
   }); 
  
   test("All methods for $locale timelineVotingTypesResolutionProject", () async {

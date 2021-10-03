@@ -55,7 +55,7 @@ class DeputyDetailsVoteAccuracyDestination extends Destination<DeputyVoteAccurac
   DeputyDetailsVoteAccuracyDestination(this._clubVoteAccuracy, this._deputy, this._alignment) : super(BottomNavItem.DEPUTIES);
 
   @override
-  DeputyVoteAccuracyScreen getScreen() => DeputyVoteAccuracyScreen(_clubVoteAccuracy, _deputy, _alignment);
+  DeputyVoteAccuracyScreen getScreen() => DeputyVoteAccuracyScreen(_alignment);
 
   @override
   List<Module> getScreenModules(BuildContext context) => [

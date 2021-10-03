@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
+import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/deputies_flow/domain/vote_accuracy_alignment_enum.dart';
 import 'package:project_athens/deputies_flow/navigation/deputies_destinations.dart';
 import 'package:project_athens/deputies_flow/screens/details/presentation/vote_accuracy_bar_expand_notifier.dart';
@@ -10,19 +11,15 @@ import 'package:project_athens/deputies_utils/domain/deputy_full.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:provider/provider.dart';
 
-class DeputyVoteAccuracyTable extends StatelessWidget {
+class DeputyVoteAccuracyTable extends StatelessWidget with RedirectionDelegate {
   final List<ClubVoteAccuracy> _voteAccuracy;
   final DeputyModel _deputy;
-  final void Function(BuildContext context, Destination destination) _navigationCallback;
 
 
-  const DeputyVoteAccuracyTable(this._voteAccuracy, this._deputy,
-      this._navigationCallback);
+  const DeputyVoteAccuracyTable(this._voteAccuracy, this._deputy);
 
   @override
   Widget build(BuildContext context) {
-    final localizations = Provider.of<AppLocalizations>(context);
-    final theme = Theme.of(context);
     final int highestOverallAccuracy = _voteAccuracy[0].compatibleVotes;
 
     return Container(
@@ -122,7 +119,7 @@ class DeputyVoteAccuracyTable extends StatelessWidget {
                             children: [
                               MaterialButton(
                                   onPressed: () =>
-                                      _navigationCallback(context,
+                                      goToDestination(context,
                                           DeputyDetailsVoteAccuracyDestination(
                                               clubVoteAccuracy,
                                               _deputy,
@@ -133,7 +130,7 @@ class DeputyVoteAccuracyTable extends StatelessWidget {
                               ),
                               MaterialButton(
                                   onPressed: () =>
-                                      _navigationCallback(context,
+                                      goToDestination(context,
                                           DeputyDetailsVoteAccuracyDestination(
                                               clubVoteAccuracy,
                                               _deputy,
