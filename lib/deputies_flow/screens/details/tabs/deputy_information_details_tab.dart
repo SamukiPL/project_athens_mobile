@@ -189,7 +189,6 @@ class DeputyInformationDetailsTab extends StatelessWidget {
             ),
           ),
           Expanded(
-              // flex: 7,
               child: FractionallySizedBox(
                 alignment: Alignment.topLeft,
                 widthFactor: barWidth,
@@ -199,14 +198,16 @@ class DeputyInformationDetailsTab extends StatelessWidget {
                     color: theme.primaryColor,
                   ),
                   child: Center(
-                    child: Text(accuracyPercentage, style: TextStyle(color: Colors.white),),
+                    child: Text(
+                      accuracyPercentage, style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 )
+              )
             ),
           ],
         )
-      )
-    );
+      );
   }
 
   Widget buildVoteAccuracyTable(List<ClubVoteAccuracy> voteAccuracy, AppLocalizations localizations, ThemeData theme) {

@@ -49,15 +49,6 @@ class SliverPagingList extends StatelessWidget {
     return SliverList(
         delegate: SliverChildBuilderDelegate(
             (context, index) => _itemBuilder(state.items, index)));
-    // controller: (paginationIncluded) ? adapter.scrollController : null,
-    // separatorBuilder: (context, index) => separator ?? Container(),
-    // padding: EdgeInsets.only(
-    //     left: leftPadding,
-    //     top: topPadding,
-    //     right: rightPadding,
-    //     bottom: bottomPadding),
-    // itemCount: state.items.length,
-    // itemBuilder: (_, index) => _itemBuilder(state.items, index));
   }
 
   Widget _itemBuilder(List<BaseItemViewModel> items, int index) {
