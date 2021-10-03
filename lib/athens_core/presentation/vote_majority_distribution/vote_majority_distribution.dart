@@ -23,6 +23,96 @@ class VoteMajorityDistribution extends StatelessWidget {
     this.showMiniatures = false
   });
 
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
+    return Container(
+        padding: EdgeInsets.only(bottom: 8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            buildVoteTypesRow(theme),
+          ],
+        )
+    );
+  }
+
+  Widget buildVoteTypeRow(ThemeData theme) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(child: buildVoteTypeCell(VoteType.IN_FAVOR, theme)),
+        Expanded(child: buildVoteTypeCell(VoteType.AGAINST, theme)),
+        Expanded(child: buildVoteTypeCell(VoteType.HOLD, theme)),
+        showAbsent ? Expanded(child: buildVoteTypeCell(VoteType.ABSENT, theme)) : Container(),
+      ],
+    );
+  }
+
+  Widget buildVoteTypeCell(VoteType currentType, ThemeData theme) {
+    final votes = votesMajority.where((element) => element.type == currentType).toList();
+
+    return Container(
+        child: Center(
+          child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: votes.map((e) => buildVoteAvatar(e, theme)).toList(),
+          ),
+        )
+    );
+  }
+
+  Widget buildVoteAvatar(VoteMajorityDistributionModel model, ThemeData theme) {
+    final shouldClipToOval = (Widget child) => model.isDeputy
+        ? Container(
+        decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: theme.primaryColor, width: borderSize)
+        ),
+        child: ClipOval(
+          child: child,
+        )
+    )
+        : Container(child: child);
+
+    return Container(
+        padding: EdgeInsets.only(right: 5),
+        alignment: Alignment.center,
+        width: avatarSize,
+        height: avatarSize,
+        child: shouldClipToOval(
+          CachedNetworkImage(
+            imageUrl: model.img,
+            filterQuality: FilterQuality.high,
+            fit: BoxFit.cover,
+            placeholder: (context, url) => CircularProgressIndicator(),
+            errorWidget: (context, url, error) =>
+                Container(
+                  padding: EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 1)
+                  ),
+                  child: Center(
+                      child: Text(
+                        model.alt,
+                        style: TextStyle(
+                            fontSize: clubNameFontSize
+                        ),
+                      )
+                  ),
+                ),
+            width: avatarSize - 5,
+            height: avatarSize - 5,
+            memCacheHeight: 700,
+            memCacheWidth: 700,
+            alignment: Alignment.center,
+          ),
+        )
+    );
+  }
+
   Widget buildIconRow(ThemeData theme) {
     return Row(
       children: [
@@ -67,81 +157,6 @@ class VoteMajorityDistribution extends StatelessWidget {
     );
   }
 
-  Widget buildVoteAvatar(VoteMajorityDistributionModel model, ThemeData theme) {
-    final shouldClipToOval = (Widget child) => model.isDeputy
-        ? Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: theme.primaryColor, width: borderSize)
-              ),
-              child: ClipOval(
-                child: child,
-              )
-            )
-        : Container(child: child);
-
-
-    return Container(
-      padding: EdgeInsets.only(right: 5),
-      alignment: Alignment.center,
-      width: avatarSize,
-      height: avatarSize,
-      child: shouldClipToOval(CachedNetworkImage(
-        imageUrl: model.img,
-        filterQuality: FilterQuality.high,
-        fit: BoxFit.cover,
-        placeholder: (context, url) => CircularProgressIndicator(),
-        errorWidget: (context, url, error) =>
-            Container(
-              padding: EdgeInsets.all(4),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 1)
-              ),
-              child: Center(
-                  child: Text(
-                    model.alt,
-                    style: TextStyle(
-                        fontSize: clubNameFontSize
-                    ),
-                  )
-              ),
-            ),
-        width: avatarSize - 5,
-        height: avatarSize - 5,
-        memCacheHeight: 700,
-        memCacheWidth: 700,
-        alignment: Alignment.center,
-        ),
-      )
-    );
-  }
-
-  Widget buildVoteTypeCell(VoteType currentType, ThemeData theme) {
-    final votes = votesMajority.where((element) => element.type == currentType).toList();
-
-    return Container(
-      child: Center(
-        child: Wrap(
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: votes.map((e) => buildVoteAvatar(e, theme)).toList(),
-        ),
-      )
-    );
-  }
-
-  Widget buildVoteTypeRow(ThemeData theme) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(child: buildVoteTypeCell(VoteType.IN_FAVOR, theme)),
-        Expanded(child: buildVoteTypeCell(VoteType.AGAINST, theme)),
-        Expanded(child: buildVoteTypeCell(VoteType.HOLD, theme)),
-        showAbsent ? Expanded(child: buildVoteTypeCell(VoteType.ABSENT, theme)) : Container(),
-      ],
-    );
-  }
-
   Color getBorderColor(VoteType type) {
     switch(type)  {
       case VoteType.IN_FAVOR:
@@ -157,6 +172,16 @@ class VoteMajorityDistribution extends StatelessWidget {
         return ColorConstants.voteAbsetColor;
         break;
     }
+  }
+
+  Widget buildVoteTypesRow(ThemeData theme) {
+    votesMajority.sort((a, b) => a.type.index.compareTo(b.type.index));
+
+    return Container(
+      child: Wrap(
+        children: votesMajority.where((element) => element.hidden == false).map((e) => buildAvatar(e)).toList(),
+      ),
+    );
   }
 
   Widget buildAvatar(VoteMajorityDistributionModel model) {
@@ -201,30 +226,5 @@ class VoteMajorityDistribution extends StatelessWidget {
           alignment: Alignment.center,
         ),
       );
-  }
-
-  Widget buildVoteTypesRow(ThemeData theme) {
-    votesMajority.sort((a, b) => a.type.index.compareTo(b.type.index));
-
-    return Container(
-      child: Wrap(
-        children: votesMajority.where((element) => element.hidden == false).map((e) => buildAvatar(e)).toList(),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-
-    return Container(
-      padding: EdgeInsets.only(bottom: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          buildVoteTypesRow(theme),
-        ],
-      )
-    );
   }
 }

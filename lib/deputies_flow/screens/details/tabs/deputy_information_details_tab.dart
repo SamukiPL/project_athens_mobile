@@ -185,11 +185,9 @@ class DeputyInformationDetailsTab extends StatelessWidget {
               memCacheHeight: 700,
               memCacheWidth: 700,
               alignment: Alignment.center,
-              // )
             ),
           ),
           Expanded(
-              // flex: 7,
               child: FractionallySizedBox(
                 alignment: Alignment.topLeft,
                 widthFactor: barWidth,
