@@ -31,7 +31,8 @@ class DeputyVotesNetworkDataSource
               null,
               null,
               params.sortingParam,
-              _cadency));
+              _cadency,
+              true));
 
       final modelsList = await _networkMapper(response);
       return Success(modelsList);

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
@@ -51,7 +49,7 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
   }
 
   void stateListener(BuildContext context, BLOC bloc, WidgetState state) {
-    final localizations = Provider.of<AppLocalizations>(context);
+    final localizations = Provider.of<AppLocalizations>(context, listen: false);
 
       switch (state.runtimeType) {
         case SuccessState:

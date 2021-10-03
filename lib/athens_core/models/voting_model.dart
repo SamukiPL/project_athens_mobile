@@ -1,4 +1,6 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:project_athens/athens_core/data/base_responses/voting_response.dart';
+import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 
 class VotingModel extends TimelineModel {
@@ -11,12 +13,14 @@ class VotingModel extends TimelineModel {
   final List<ParliamentClubVotingNumbers> clubVotes;
   final int? orderPoint;
   final VoteType? deputyVoteType;
+  final VotingType votingType;
 
   VotingModel({
     required String id,
     required this.title,
     required DateTime date,
     required this.votingDesc,
+    required this.votingType,
     required this.results,
     required this.votes,
     this.absoluteMajority,
@@ -45,23 +49,16 @@ class VoteModel {
   VoteModel(this.type, this.cadencyDeputy);
 }
 
-enum VoteType { IN_FAVOR, AGAINST, HOLD, ABSENT }
+enum VoteType {
+  @JsonValue(0)
+  IN_FAVOR,
 
-extension VotingsListExtension on List<VotingModel> {
+  @JsonValue(1)
+  AGAINST,
 
-  GroupedVotingModel createGroupedVotingModel() {
-    sort((a, b) => a.date.compareTo(b.date));
-    final firstItem = first;
-    final lastItem = last;
-    return GroupedVotingModel(
-        votingDesc: firstItem.votingDesc,
-        title: firstItem.title,
-        groupedVotes: this,
-        firstDate: firstItem.date,
-        lastDate: lastItem.date,
-        id: firstItem.id,
-        date: firstItem.date
-    );
-  }
+  @JsonValue(2)
+  HOLD,
 
+  @JsonValue(3)
+  ABSENT
 }

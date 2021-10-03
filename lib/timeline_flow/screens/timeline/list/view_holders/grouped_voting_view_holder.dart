@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
+import 'package:project_athens/timeline_flow/helpers/timeline_voting_agenda_helper.dart';
 import 'package:project_athens/timeline_flow/navigation/timeline_destinations.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
 
@@ -103,6 +105,27 @@ class GroupedVotingViewHolder extends StatelessWidget with RedirectionDelegate {
   }
 
   Widget getRowText(BuildContext context, ThemeData theme) {
+    Widget agendaDesc = Container();
+
+    final agendaWithoutExtras = getAgendaWithoutExtras(viewModel.model.agenda);
+    if (agendaWithoutExtras != null) {
+        agendaDesc = Container(
+            width: double.infinity,
+            child: Text(
+              agendaWithoutExtras,
+              style: TextStyle(
+                  color: theme.dividerColor, fontSize: 12),
+              textAlign: TextAlign.left,
+            )
+        );
+    }
+
+    final String votingDesc = viewModel.model.orderPoint != null
+        ? 'Pkt. ' + viewModel.model.orderPoint.toString() + ' - ' + viewModel.model.votingDesc
+        : viewModel.model.votingDesc;
+
+    final AppLocalizations _localizations = AppLocalizations.of(context)!;
+
     return Expanded(
       child: Card(
         margin: EdgeInsets.only(left: 8, top: 8, bottom: 8,  right: 8),
@@ -119,7 +142,7 @@ class GroupedVotingViewHolder extends StatelessWidget with RedirectionDelegate {
                 Container(
                   width: double.infinity,
                   child: Text(
-                    viewModel.model.votingDesc,
+                    _localizations.getText().timelineVote(),
                     style: theme.textTheme.overline?.copyWith(
                         color: theme.dividerColor,
                         fontSize: 10
@@ -130,7 +153,7 @@ class GroupedVotingViewHolder extends StatelessWidget with RedirectionDelegate {
                 Container(
                   width: double.infinity,
                   child: Text(
-                    viewModel.model.title,
+                    votingDesc,
                     style: TextStyle(
                         color: theme.primaryColor,
                         fontWeight: FontWeight.bold,
@@ -139,6 +162,7 @@ class GroupedVotingViewHolder extends StatelessWidget with RedirectionDelegate {
                     textAlign: TextAlign.left,
                   ),
                 ),
+                agendaDesc,
                 TechnicalData(technicalId: viewModel.model.id),
               ],
             ),

@@ -16,17 +16,17 @@ class SliverPagingList extends StatelessWidget {
 
   final PagingListAdapter _adapter;
 
-  final Widget separator;
+  final Widget? separator;
 
   const SliverPagingList(this._adapter,
-      {Key key,
-        this.leftPadding = 8,
-        this.topPadding = 8,
-        this.rightPadding = 8,
-        this.bottomPadding = 8,
-        this.refreshable = false,
-        this.paginationIncluded = true,
-        this.separator})
+      {Key? key,
+      this.leftPadding = 8,
+      this.topPadding = 8,
+      this.rightPadding = 8,
+      this.bottomPadding = 8,
+      this.refreshable = false,
+      this.paginationIncluded = true,
+      this.separator})
       : super(key: key);
 
   Widget build(BuildContext context) {
@@ -36,9 +36,9 @@ class SliverPagingList extends StatelessWidget {
       child: Consumer<PagingState<BaseItemViewModel>>(
         builder: (context, state, _) => refreshable
             ? RefreshIndicator(
-          onRefresh: () => _adapter.refresh(),
-          child: getList(_adapter, state),
-        )
+                onRefresh: () => _adapter.refresh(),
+                child: getList(_adapter, state),
+              )
             : getList(_adapter, state),
       ),
     );
@@ -46,21 +46,21 @@ class SliverPagingList extends StatelessWidget {
 
   Widget getList(
       PagingListAdapter adapter, PagingState<BaseItemViewModel> state) {
-    return SliverList(delegate: SliverChildBuilderDelegate(
-        (context, index) => _itemBuilder(state.items, index)
-    ));
-        // controller: (paginationIncluded) ? adapter.scrollController : null,
-        // separatorBuilder: (context, index) => separator ?? Container(),
-        // padding: EdgeInsets.only(
-        //     left: leftPadding,
-        //     top: topPadding,
-        //     right: rightPadding,
-        //     bottom: bottomPadding),
-        // itemCount: state.items.length,
-        // itemBuilder: (_, index) => _itemBuilder(state.items, index));
+    return SliverList(
+        delegate: SliverChildBuilderDelegate(
+            (context, index) => _itemBuilder(state.items, index)));
+    // controller: (paginationIncluded) ? adapter.scrollController : null,
+    // separatorBuilder: (context, index) => separator ?? Container(),
+    // padding: EdgeInsets.only(
+    //     left: leftPadding,
+    //     top: topPadding,
+    //     right: rightPadding,
+    //     bottom: bottomPadding),
+    // itemCount: state.items.length,
+    // itemBuilder: (_, index) => _itemBuilder(state.items, index));
   }
 
-  StatelessWidget _itemBuilder(List<BaseItemViewModel> items, int index) {
+  Widget _itemBuilder(List<BaseItemViewModel> items, int index) {
     return items[index].buildWidget(index, items.length);
   }
 }

@@ -31,16 +31,16 @@ class AppLocalizationsGenerated {
     return words['universal']['choose'];
   }
 
+  String universalClose() {
+    return words['universal']['close'];
+  }
+
   String universalOk() {
     return words['universal']['ok'];
   }
 
   String universalRetry() {
     return words['universal']['retry'];
-  }
-
-  String universalClose() {
-    return words['universal']['close'];
   }
 
   String universalNoDataDefaultText() {
@@ -132,12 +132,12 @@ class AppLocalizationsGenerated {
     return words['login']['buttons']['register'];
   }
 
-  String loginButtonsForgot() {
-    return words['login']['buttons']['forgot'];
-  }
-
   String loginButtonsSignUp() {
     return words['login']['buttons']['signUp'];
+  }
+
+  String loginButtonsForgot() {
+    return words['login']['buttons']['forgot'];
   }
 
   String loginButtonsResetPassword() {
@@ -154,6 +154,10 @@ class AppLocalizationsGenerated {
 
   String loginHintsLogin() {
     return words['login']['hints']['login'];
+  }
+
+  String loginHintsLoginOrEmail() {
+    return words['login']['hints']['loginOrEmail'];
   }
 
   String loginHintsName() {
@@ -212,6 +216,10 @@ class AppLocalizationsGenerated {
     return words['login']['validate']['loginIsTaken'];
   }
 
+  String loginValidateLoginIsInvalid() {
+    return words['login']['validate']['loginIsInvalid'];
+  }
+
   String loginValidateEmailIsTaken() {
     return words['login']['validate']['emailIsTaken'];
   }
@@ -234,6 +242,14 @@ class AppLocalizationsGenerated {
 
   String timelineTimelineNavTitle() {
     return words['timeline']['timelineNavTitle'];
+  }
+
+  String timelineVote() {
+    return words['timeline']['vote'];
+  }
+
+  String timelineVoteNoAgenda() {
+    return words['timeline']['voteNoAgenda'];
   }
 
   String timelineVotingTypesResolutionProject() {
@@ -317,6 +333,22 @@ class AppLocalizationsGenerated {
         ['selectionOfNationalCouncilJudiciary'];
   }
 
+  String timelineVotingTypesRepealOfRegulation() {
+    return words['timeline']['votingTypes']['repealOfRegulation'];
+  }
+
+  String timelineVotingTypesResolutionOfPointOfDispute() {
+    return words['timeline']['votingTypes']['resolutionOfPointOfDispute'];
+  }
+
+  String timelineVotingTypesRequestOfReassumingVote() {
+    return words['timeline']['votingTypes']['requestOfReassumingVote'];
+  }
+
+  String timelineVotingTypesRequestOfClosingMeeting() {
+    return words['timeline']['votingTypes']['requestOfClosingMeeting'];
+  }
+
   String timelineVotingTypesUnknown() {
     return words['timeline']['votingTypes']['unknown'];
   }
@@ -383,6 +415,14 @@ class AppLocalizationsGenerated {
 
   String deputiesVoteAccuracy() {
     return words['deputies']['voteAccuracy'];
+  }
+
+  String deputiesAlignedWithParty() {
+    return words['deputies']['alignedWithParty'];
+  }
+
+  String deputiesNotAlignedWithParty() {
+    return words['deputies']['notAlignedWithParty'];
   }
 
   String deputiesBasicInfo() {
@@ -517,12 +557,12 @@ class AppLocalizationsGenerated {
     return words['more']['likeApplication'];
   }
 
-  String moreSupportUs() {
-    return words['more']['supportUs'];
-  }
-
   String moreCheckForUpdates() {
     return words['more']['checkForUpdates'];
+  }
+
+  String moreSupportUs() {
+    return words['more']['supportUs'];
   }
 
   String moreAppVersion() {

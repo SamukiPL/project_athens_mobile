@@ -1,7 +1,6 @@
 // Copyright 2014 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
-// @dart=2.9
 import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
@@ -71,11 +70,11 @@ class CalendarDatePickerCustom extends StatefulWidget {
   /// If [selectableDayPredicate] is non-null, it must return `true` for the
   /// [initialDate].
   CalendarDatePickerCustom({
-    Key key,
-    @required DateTime initialDate,
-    @required DateTime firstDate,
-    @required DateTime lastDate,
-    @required this.onDateChanged,
+    Key? key,
+    required DateTime initialDate,
+    required DateTime firstDate,
+    required DateTime lastDate,
+    required this.onDateChanged,
     this.onDisplayedMonthChanged,
     this.initialCalendarMode = DatePickerMode.day,
     this.selectableDayPredicate,
@@ -101,7 +100,7 @@ class CalendarDatePickerCustom extends StatefulWidget {
     'initialDate ${this.initialDate} must be on or before lastDate ${this.lastDate}.'
     );
     assert(
-    selectableDayPredicate == null || selectableDayPredicate(this.initialDate),
+    selectableDayPredicate == null || selectableDayPredicate!(this.initialDate),
     'Provided initialDate ${this.initialDate} must satisfy provided selectableDayPredicate.'
     );
   }
@@ -119,13 +118,13 @@ class CalendarDatePickerCustom extends StatefulWidget {
   final ValueChanged<DateTime> onDateChanged;
 
   /// Called when the user navigates to a new month/year in the picker.
-  final ValueChanged<DateTime> onDisplayedMonthChanged;
+  final ValueChanged<DateTime>? onDisplayedMonthChanged;
 
   /// The initial display of the calendar picker.
   final DatePickerMode initialCalendarMode;
 
   /// Function to provide full control over which dates in the calendar can be selected.
-  final SelectableDayPredicate selectableDayPredicate;
+  final SelectableDayPredicate? selectableDayPredicate;
 
   @override
   _CalendarDatePickerCustomState createState() => _CalendarDatePickerCustomState();
@@ -133,13 +132,13 @@ class CalendarDatePickerCustom extends StatefulWidget {
 
 class _CalendarDatePickerCustomState extends State<CalendarDatePickerCustom> {
   bool _announcedInitialDate = false;
-  DatePickerMode _mode;
-  DateTime _currentDisplayedMonthDate;
-  DateTime _selectedDate;
+  late DatePickerMode _mode;
+  late DateTime _currentDisplayedMonthDate;
+  late DateTime _selectedDate;
   final GlobalKey _monthPickerKey = GlobalKey();
   final GlobalKey _yearPickerKey = GlobalKey();
-  MaterialLocalizations _localizations;
-  TextDirection _textDirection;
+  late MaterialLocalizations _localizations;
+  late TextDirection _textDirection;
 
   @override
   void initState() {
@@ -223,7 +222,7 @@ class _CalendarDatePickerCustomState extends State<CalendarDatePickerCustom> {
     _vibrate();
     setState(() {
       _selectedDate = value;
-      widget.onDateChanged?.call(_selectedDate);
+      widget.onDateChanged.call(_selectedDate);
     });
   }
 
@@ -256,7 +255,6 @@ class _CalendarDatePickerCustomState extends State<CalendarDatePickerCustom> {
           ),
         );
     }
-    return null;
   }
 
   @override
@@ -289,9 +287,9 @@ class _CalendarDatePickerCustomState extends State<CalendarDatePickerCustom> {
 /// [DatePickerMode] to display either the calendar view or the year list.
 class _DatePickerModeToggleButton extends StatefulWidget {
   const _DatePickerModeToggleButton({
-    @required this.mode,
-    @required this.title,
-    @required this.onTitlePressed,
+    required this.mode,
+    required this.title,
+    required this.onTitlePressed,
   });
 
   /// The current display of the calendar picker.
@@ -308,7 +306,7 @@ class _DatePickerModeToggleButton extends StatefulWidget {
 }
 
 class _DatePickerModeToggleButtonState extends State<_DatePickerModeToggleButton> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void initState() {
@@ -401,14 +399,14 @@ class _DatePickerModeToggleButtonState extends State<_DatePickerModeToggleButton
 class _MonthPicker extends StatefulWidget {
   /// Creates a month picker.
   _MonthPicker({
-    Key key,
-    @required this.initialMonth,
-    @required this.currentDate,
-    @required this.firstDate,
-    @required this.lastDate,
-    @required this.selectedDate,
-    @required this.onChanged,
-    @required this.onDisplayedMonthChanged,
+    Key? key,
+    required this.initialMonth,
+    required this.currentDate,
+    required this.firstDate,
+    required this.lastDate,
+    required this.selectedDate,
+    required this.onChanged,
+    required this.onDisplayedMonthChanged,
     this.selectableDayPredicate,
   }) : assert(selectedDate != null),
         assert(currentDate != null),
@@ -450,19 +448,19 @@ class _MonthPicker extends StatefulWidget {
   final ValueChanged<DateTime> onDisplayedMonthChanged;
 
   /// Optional user supplied predicate function to customize selectable days.
-  final SelectableDayPredicate selectableDayPredicate;
+  final SelectableDayPredicate? selectableDayPredicate;
 
   @override
   State<StatefulWidget> createState() => _MonthPickerState();
 }
 
 class _MonthPickerState extends State<_MonthPicker> {
-  DateTime _currentMonth;
-  DateTime _nextMonthDate;
-  DateTime _previousMonthDate;
-  PageController _pageController;
-  MaterialLocalizations _localizations;
-  TextDirection _textDirection;
+  late DateTime _currentMonth;
+  late DateTime _nextMonthDate;
+  late DateTime _previousMonthDate;
+  late PageController _pageController;
+  late MaterialLocalizations _localizations;
+  late TextDirection _textDirection;
 
   @override
   void initState() {
@@ -482,7 +480,7 @@ class _MonthPickerState extends State<_MonthPicker> {
 
   @override
   void dispose() {
-    _pageController?.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
@@ -492,7 +490,7 @@ class _MonthPickerState extends State<_MonthPicker> {
       _currentMonth = DateTime(monthDate.year, monthDate.month);
       _previousMonthDate = addMonthsToMonthDate(_currentMonth, -1);
       _nextMonthDate = addMonthsToMonthDate(_currentMonth, 1);
-      widget.onDisplayedMonthChanged?.call(_currentMonth);
+      widget.onDisplayedMonthChanged.call(_currentMonth);
     }
   }
 
@@ -603,13 +601,13 @@ class _MonthPickerState extends State<_MonthPicker> {
 class _DayPicker extends StatelessWidget {
   /// Creates a day picker.
   _DayPicker({
-    Key key,
-    @required this.currentDate,
-    @required this.displayedMonth,
-    @required this.firstDate,
-    @required this.lastDate,
-    @required this.selectedDate,
-    @required this.onChanged,
+    Key? key,
+    required this.currentDate,
+    required this.displayedMonth,
+    required this.firstDate,
+    required this.lastDate,
+    required this.selectedDate,
+    required this.onChanged,
     this.selectableDayPredicate,
   }) : assert(currentDate != null),
         assert(displayedMonth != null),
@@ -647,14 +645,14 @@ class _DayPicker extends StatelessWidget {
   final DateTime displayedMonth;
 
   /// Optional user supplied predicate function to customize selectable days.
-  final SelectableDayPredicate selectableDayPredicate;
+  final SelectableDayPredicate? selectableDayPredicate;
 
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final MaterialLocalizations localizations = MaterialLocalizations.of(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
-    final TextStyle dayStyle = textTheme.caption;
+    final TextStyle? dayStyle = textTheme.caption;
     final Color enabledDayColor = colorScheme.onSurface.withOpacity(0.87);
     final Color disabledDayColor = colorScheme.onSurface.withOpacity(0.38);
     final Color selectedDayColor = Colors.white;
@@ -679,9 +677,9 @@ class _DayPicker extends StatelessWidget {
         final DateTime dayToBuild = DateTime(year, month, day);
         final bool isDisabled = dayToBuild.isAfter(lastDate) ||
             dayToBuild.isBefore(firstDate) ||
-            (selectableDayPredicate != null && !selectableDayPredicate(dayToBuild));
+            (selectableDayPredicate != null && !selectableDayPredicate!(dayToBuild));
 
-        BoxDecoration decoration;
+        late BoxDecoration decoration;
         Color dayColor = enabledDayColor;
         final bool isSelectedDay = isSameDay(selectedDate, dayToBuild);
         if (isSelectedDay) {
@@ -707,7 +705,7 @@ class _DayPicker extends StatelessWidget {
         Widget dayWidget = Container(
           decoration: decoration,
           child: Center(
-            child: Text(localizations.formatDecimal(day), style: dayStyle.apply(color: dayColor)),
+            child: Text(localizations.formatDecimal(day), style: dayStyle!.apply(color: dayColor)),
           ),
         );
 
@@ -815,11 +813,11 @@ class _DayHeaders extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
-    final TextStyle dayHeaderStyle = theme.textTheme.caption?.apply(
+    final TextStyle? dayHeaderStyle = theme.textTheme.caption?.apply(
       color: colorScheme.onSurface.withOpacity(0.60),
     );
     final MaterialLocalizations localizations = MaterialLocalizations.of(context);
-    final List<Widget> labels = _getDayHeaders(dayHeaderStyle, localizations);
+    final List<Widget> labels = _getDayHeaders(dayHeaderStyle!, localizations);
 
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -844,13 +842,13 @@ class _YearPicker extends StatefulWidget {
   /// The [currentDate, [firstDate], [lastDate], [selectedDate], and [onChanged]
   /// arguments must be non-null. The [lastDate] must be after the [firstDate].
   _YearPicker({
-    Key key,
-    @required this.currentDate,
-    @required this.firstDate,
-    @required this.lastDate,
-    @required this.initialDate,
-    @required this.selectedDate,
-    @required this.onChanged,
+    Key? key,
+    required this.currentDate,
+    required this.firstDate,
+    required this.lastDate,
+    required this.initialDate,
+    required this.selectedDate,
+    required this.onChanged,
   }) : assert(currentDate != null),
         assert(firstDate != null),
         assert(lastDate != null),
@@ -887,7 +885,7 @@ class _YearPicker extends StatefulWidget {
 }
 
 class _YearPickerState extends State<_YearPicker> {
-  ScrollController scrollController;
+  late ScrollController scrollController;
 
   // The approximate number of years necessary to fill the available space.
   static const int minYears = 18;
@@ -928,9 +926,9 @@ class _YearPickerState extends State<_YearPicker> {
     } else {
       textColor = colorScheme.onSurface.withOpacity(0.87);
     }
-    final TextStyle itemStyle = textTheme.bodyText1?.apply(color: textColor);
+    final TextStyle? itemStyle = textTheme.bodyText1?.apply(color: textColor);
 
-    BoxDecoration decoration;
+    late BoxDecoration decoration;
     if (isSelected) {
       decoration = BoxDecoration(
         color: colorScheme.primary,

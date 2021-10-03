@@ -1,5 +1,7 @@
+import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
 import 'package:project_athens/athens_core/models/speech_model.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
+import 'package:project_athens/athens_core/models/timeline_voting_model.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/athens_core/ext/date_time_extension.dart';
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
@@ -7,8 +9,8 @@ import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_
 
 extension TimelineModelExtension on List<TimelineModel> {
   List<BaseItemViewModel> toTimelineRowViewModel(
-      {DateTime? date, TimerViewModel? timerViewModel}) {
-    final list = this.map((model) => _toRowViewModel(model)).toList();
+      {DateTime? date, TimerViewModel? timerViewModel, bool firstLevel = false}) {
+    final list = this.map((model) => _toRowViewModel(model, firstLevel)).toList();
 
     if (date != null && date.isToday) {
       list.add(timerViewModel!);
@@ -17,12 +19,12 @@ extension TimelineModelExtension on List<TimelineModel> {
     return list;
   }
 
-  BaseItemViewModel _toRowViewModel(TimelineModel model) {
+  BaseItemViewModel _toRowViewModel(TimelineModel model, bool firstLevel) {
     BaseItemViewModel item;
     switch (model.type) {
       case TimelineModelType.VOTING:
-        VotingModel votingModel = model as VotingModel;
-        item = VotingRowViewModel(votingModel);
+        TimelineVotingModel votingModel = model as TimelineVotingModel;
+        item = VotingRowViewModel(votingModel, firstLevel);
         break;
       case TimelineModelType.SPEECH:
         SpeechModel speechModel = model as SpeechModel;

@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +11,18 @@ import 'package:project_athens/athens_core/presentation/full_card/full_card.dart
 import 'package:project_athens/athens_core/presentation/simple_horizontal_table/simple_horizontal_table.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/deputies_flow/domain/details/get_full_deputy_use_case.dart';
+import 'package:project_athens/deputies_flow/screens/details/presentation/deputy_vote_accuracy_table.dart';
 import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_information_extension.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_full.dart';
+import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:provider/provider.dart';
 
 class DeputyInformationDetailsTab extends StatelessWidget {
+
+  final DeputyModel _deputyModel;
+
+  DeputyInformationDetailsTab(this._deputyModel);
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +150,6 @@ class DeputyInformationDetailsTab extends StatelessWidget {
 
     final finishedSchools = cv.finishedSchools.trim();
     final experience = cv.parliamentExperience.trim();
-    // final parliamentExperience = bloc.getParliamentExperience();
 
     return
       Column(
@@ -163,7 +167,7 @@ class DeputyInformationDetailsTab extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.only(top: 5, left: 5, right: 5),
-      child: Row(
+     child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -173,9 +177,9 @@ class DeputyInformationDetailsTab extends StatelessWidget {
             width: 50,
             height: 50,
             child: CachedNetworkImage(
-              imageUrl: voteAccuracy?.parliamentClub?.imageSrc,
+              imageUrl: voteAccuracy.parliamentClub?.imageSrc,
               placeholder: (context, url) => CircularProgressIndicator(),
-              errorWidget: (context, url, error) => Center(child: Text(voteAccuracy?.parliamentClub?.shortName ?? ""),),
+              errorWidget: (context, url, error) => Center(child: Text(voteAccuracy.parliamentClub?.shortName ?? ""),),
               width: 40,
               height: 40,
               memCacheHeight: 700,
@@ -184,10 +188,6 @@ class DeputyInformationDetailsTab extends StatelessWidget {
               // )
             ),
           ),
-          // Expanded(
-          //     flex: 3,
-          //     child:
-
           Expanded(
               // flex: 7,
               child: FractionallySizedBox(
@@ -207,7 +207,6 @@ class DeputyInformationDetailsTab extends StatelessWidget {
         ],
       )
     );
-
   }
 
   Widget buildVoteAccuracyTable(List<ClubVoteAccuracy> voteAccuracy, AppLocalizations localizations, ThemeData theme) {
@@ -234,7 +233,7 @@ class DeputyInformationDetailsTab extends StatelessWidget {
       children: [
         SimpleHorizontalTable(cells: cells),
         buildCardHeader(localizations.getText().deputiesVoteAccuracy(), theme, 15),
-        buildVoteAccuracyTable(voteAccuracy, localizations, theme)
+        DeputyVoteAccuracyTable(voteAccuracy, _deputyModel)
       ],
     );
   }
@@ -267,7 +266,7 @@ class DeputyInformationDetailsTab extends StatelessWidget {
       child: Consumer<Result<List<WordModel>>?>(
           builder: (context, list, _) {
             if (list is Success<List<WordModel>>) {
-              final nouns = (list as Success<List<WordModel>>).value;
+              final nouns = list.value;
               return InteractiveViewer(
                 child: Transform.scale(
                   scale: 0.80,

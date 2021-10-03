@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -12,7 +13,7 @@ class SortingFilter extends BaseFilterType {
   late SortingModel currentSort;
 
   SortingFilter(this.sortings) {
-    currentSort = sortings.firstWhere((element) => element.isChosen) ?? sortings.first;
+    currentSort = sortings.firstWhereOrNull((element) => element.isChosen) ?? sortings.first;
     _chosenId = currentSort.id;
   }
 

@@ -20,6 +20,7 @@ class VotingNetworkMapper extends AsyncDataMapper<VotingResponse, VotingModel> {
     absoluteMajority: data.absoluteMajority,
     qualifyingMajority: data.qualifyingMajority,
     votingDesc: getVotingDesc(data.votingType),
+    votingType: data.votingType,
     results: results,
     votes: voteModels,
     clubVotes: data.parliamentClubVotingNumbers,
@@ -101,5 +102,4 @@ class VotingNetworkMapper extends AsyncDataMapper<VotingResponse, VotingModel> {
         throw Exception("There is no other VotingType!");
     }
   }
-
 }

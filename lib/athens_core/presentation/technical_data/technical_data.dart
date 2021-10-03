@@ -60,6 +60,6 @@ class TechnicalData extends StatelessWidget {
   }
 
   List<Widget> buildAdditionalIds(BuildContext context) {
-    return additionalIds?.map((key, value) => MapEntry(key, buildIdField(key, value, context)))?.values?.toList() ?? [];
+    return additionalIds.map((key, value) => MapEntry(key, buildIdField(key, value, context))).values.toList();
   }
 }

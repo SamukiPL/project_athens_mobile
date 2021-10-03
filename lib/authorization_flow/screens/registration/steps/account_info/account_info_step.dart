@@ -13,6 +13,8 @@ import 'package:provider/provider.dart';
 class AccountInfoStep extends BaseRegistrationFormStep<AccountInfoStepBloc> {
 
   AccountInfoStep(bool fieldsEnabled) : super(fieldsEnabled);
+
+  final RegExp loginRegex = RegExp(r'^[a-zA-z0-9]{3,32}$');
   
   @override
   Widget buildFormBody(BuildContext context, AccountInfoStepBloc bloc) {
@@ -26,6 +28,7 @@ class AccountInfoStep extends BaseRegistrationFormStep<AccountInfoStepBloc> {
           callback: () {},
           onChanged: (login) => bloc.setLogin(login),
           validator: (login) => getBaseValidator(localization, login, customValidator: (value) {
+            if (login == null || !loginRegex.hasMatch(login)) return localization.getText().loginValidateLoginIsInvalid();
             if (bloc.loginTaken) return localization.getText().loginValidateLoginIsTaken();
 
             return null;

@@ -57,17 +57,21 @@ Map<String, dynamic> _$SpeechResponseToJson(SpeechResponse instance) =>
 
 Agenda _$AgendaFromJson(Map<String, dynamic> json) {
   return Agenda(
-    DateTime.parse(json['eventDateTime'] as String),
-    DateTime.parse(json['msgDateTime'] as String),
-    json['refId'] as String,
-    json['rangeid'] as String,
+    json['eventDateTime'] == null
+        ? null
+        : DateTime.parse(json['eventDateTime'] as String),
+    json['msgDateTime'] == null
+        ? null
+        : DateTime.parse(json['msgDateTime'] as String),
+    json['refId'] as String?,
+    json['rangeid'] as String?,
     json['title'] as String,
   );
 }
 
 Map<String, dynamic> _$AgendaToJson(Agenda instance) => <String, dynamic>{
-      'eventDateTime': instance.eventDateTime.toIso8601String(),
-      'msgDateTime': instance.msgDateTime.toIso8601String(),
+      'eventDateTime': instance.eventDateTime?.toIso8601String(),
+      'msgDateTime': instance.msgDateTime?.toIso8601String(),
       'refId': instance.refId,
       'rangeid': instance.rangeid,
       'title': instance.title,
@@ -75,18 +79,22 @@ Map<String, dynamic> _$AgendaToJson(Agenda instance) => <String, dynamic>{
 
 CisInfo _$CisInfoFromJson(Map<String, dynamic> json) {
   return CisInfo(
-    Person.fromJson(json['person'] as Map<String, dynamic>),
+    json['person'] == null
+        ? null
+        : Person.fromJson(json['person'] as Map<String, dynamic>),
     DateTime.parse(json['eventDateTime'] as String),
-    DateTime.parse(json['msgDateTime'] as String),
-    json['rangeid'] as String,
-    json['refId'] as String,
+    json['msgDateTime'] == null
+        ? null
+        : DateTime.parse(json['msgDateTime'] as String),
+    json['rangeid'] as String?,
+    json['refId'] as String?,
   );
 }
 
 Map<String, dynamic> _$CisInfoToJson(CisInfo instance) => <String, dynamic>{
       'person': instance.person,
       'eventDateTime': instance.eventDateTime.toIso8601String(),
-      'msgDateTime': instance.msgDateTime.toIso8601String(),
+      'msgDateTime': instance.msgDateTime?.toIso8601String(),
       'rangeid': instance.rangeid,
       'refId': instance.refId,
     };

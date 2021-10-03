@@ -1,24 +1,25 @@
 import 'package:project_athens/athens_core/models/timeline_model.dart';
-import 'package:project_athens/athens_core/models/voting_model.dart';
+import 'package:project_athens/athens_core/models/timeline_voting_model.dart';
 
 class VotesGrouper {
   List<TimelineModel> groupVotes(List<TimelineModel> models) {
-    final groupedVotes = Map<int, List<VotingModel>>();
+    final groupedVotes = Map<int, List<TimelineVotingModel>>();
 
     List<TimelineModel> votesToGroup = models
-        .where(
-            (element) => element is VotingModel && element.orderPoint != null)
+        .where((element) =>
+            element is TimelineVotingModel && element.orderPoint != null)
         .toList();
     votesToGroup.forEach((element) {
-      VotingModel voting = element as VotingModel;
-      List<VotingModel> group = groupedVotes[voting.orderPoint] ?? List.empty();
+      TimelineVotingModel voting = element as TimelineVotingModel;
+      List<TimelineVotingModel> group =
+          groupedVotes[voting.orderPoint] ?? List.empty(growable: true);
       group.add(voting);
-      groupedVotes[voting.orderPoint!] = group;
+      groupedVotes[voting.orderPoint] = group;
     });
 
     final newList = models
         .where((element) =>
-    !(element is VotingModel && element.orderPoint != null))
+            !(element is TimelineVotingModel && element.orderPoint != null))
         .toList();
 
     groupedVotes.values.forEach((group) {

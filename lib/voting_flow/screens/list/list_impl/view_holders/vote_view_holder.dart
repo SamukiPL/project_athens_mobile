@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
+import 'package:project_athens/athens_core/presentation/vote_majority_distribution/vote_majority_distribution.dart';
+import 'package:project_athens/athens_core/presentation/vote_majority_distribution/vote_majority_distribution_helper.dart';
 import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
 import 'package:project_athens/voting_flow/screens/list/list_impl/vote_item_view_model.dart';
 
@@ -24,6 +26,7 @@ class VoteViewHolder extends StatelessWidget with RedirectionDelegate {
           _getTypeAndDateRow(theme),
           _getResults(),
           _getTitle(theme),
+          _getVoteMajorityDistribution(),
           TechnicalData(technicalId: _viewModel.id),
         ],
       ),
@@ -89,6 +92,12 @@ class VoteViewHolder extends StatelessWidget with RedirectionDelegate {
         textAlign: TextAlign.left,
       ),
     );
+  }
+
+  Widget _getVoteMajorityDistribution() {
+    final models = voteMajorityDistrinutionFromVoteSlim(_viewModel.model.clubsMajority!, _viewModel.model.deputiesVote!, true);
+
+    return VoteMajorityDistribution(votesMajority: models, showAbsent: true, showMiniatures: true);
   }
 
 }
