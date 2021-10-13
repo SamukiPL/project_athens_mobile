@@ -7,11 +7,11 @@ import 'package:project_athens/speeches_flow/screens/details/video_widget/manage
 class VideoManagerFactory {
 
   static VideoManager create(speechModel, isNormalSpeech, wakelock) {
-    if (Platform.isIOS) {
+    // if (Platform.isIOS) {
       return VideoManagerVlc(speechModel, isNormalSpeech, wakelock);
-    } else {
-      return VideoManagerPlayer(speechModel, isNormalSpeech, wakelock);
-    }
+    // } else {
+    //   return VideoManagerPlayer(speechModel, isNormalSpeech, wakelock);
+    // }
   }
 
 }
