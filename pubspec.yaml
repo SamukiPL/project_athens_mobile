@@ -52,6 +52,7 @@ dependencies:
   in_app_update: ^2.0.0
   package_info: 2.0.2
   upgrader: 3.4.1
+  better_player: ^0.0.73
 
 dev_dependencies:
   flutter_test:
