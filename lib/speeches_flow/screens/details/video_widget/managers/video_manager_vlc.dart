@@ -92,7 +92,6 @@ class VideoManagerVlc extends VideoManager {
     BetterPlayerDataSource dataSource = BetterPlayerDataSource(
         BetterPlayerDataSourceType.network, url,
         useAsmsSubtitles: true, useAsmsTracks: true,
-        liveStream: true
     );
     final betterPlayerController = BetterPlayerController(betterPlayerConfiguration);
     betterPlayerController.setupDataSource(dataSource);
