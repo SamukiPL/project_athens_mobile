@@ -18,10 +18,12 @@ class SimpleTile extends TileBase with RedirectionDelegate {
     this.boxDecoration,
     this.textStyle,
     this.goTo,
-    this.elevation = 2
-  }) : assert(
-    text != null || icon != null
-  );
+    this.elevation = 2,
+    Key? key
+  }) : super(key: key);
+  //     : assert(
+  //   text != null || icon != null
+  // );
 
   factory SimpleTile.plain() {
     return SimpleTile(text: "");
@@ -68,9 +70,17 @@ class SimpleTile extends TileBase with RedirectionDelegate {
         width: double.infinity,
         margin: EdgeInsets.all(4),
         decoration: decoration,
-        child: Card(
-          elevation: elevation,
+        // child: Card(
+        //   elevation: elevation,
+        //   child: tile,
+        //
+        // ),
+        child: Material(
           child: tile,
+          elevation: elevation?.toDouble() ?? 0.0,
+          shadowColor: theme.primaryColor.withOpacity(0.4),
+          color: Colors.white,
+          borderOnForeground: true,
 
         ),
       // child: tile

@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 class NearestMeetingTile extends SimpleTile {
   final NearestMeetingTileBloc bloc;
 
-  NearestMeetingTile(this.bloc) : super(text: "");
+  NearestMeetingTile(this.bloc) : super(text: "", key: Key('tile_nearest_meeting'));
 
   Widget _getMeetingText(BuildContext context) {
     return StreamProvider<String?>.value(

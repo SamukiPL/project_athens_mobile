@@ -7,6 +7,8 @@ import 'package:project_athens/athens_core/presentation/grid/grid.dart';
 import 'package:project_athens/athens_core/presentation/grid/tile.dart';
 import 'package:project_athens/athens_core/presentation/grid/tiles/simple_tile/simple_tile.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/dashboard_bloc.dart';
+import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/dashboard_configuration.dart';
+import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/dashboard_tiles.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/nearest_meeting_tile/nearest_meeting_tile.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/nearest_meeting_tile/nearest_meeting_tile_bloc.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/user_name_tile/user_name_tile.dart';
@@ -32,66 +34,31 @@ class DashboardScreen extends BaseScreen<DashboardBloc> {
 
   @override
   Widget buildBody(BuildContext context, DashboardBloc bloc) {
-    final _localizations = AppLocalizations.of(context);
-    final nearestMeetingBloc = Provider.of<NearestMeetingTileBloc>(context);
+    final Future<List<TileData>> getTilesFuture = bloc.getTiles();
+
     return Container(
-      child: Grid(
-        gridSize: 6,
-        tiles: [
-          TileData(
-              tileBuilder: (BuildContext context, TileData tile) =>
-                  UserNameTile(),
-              order: 0,
-              sizeX: 5,
-              sizeY: 1),
-          TileData(
-              tileBuilder: (BuildContext context, TileData tile) =>
-                  SimpleTile(
-                    // text: _localizations!.getText().settingsSettingsTitle(),
-                    icon: Icons.settings,
-                    goTo: MoreScreenDestination(),
-                  ),
-              order: 0,
-              sizeX: 1,
-              sizeY: 1),
-          TileData(
-              tileBuilder: (BuildContext context, TileData tile) =>
-                  NearestMeetingTile(nearestMeetingBloc),
-              order: 0,
-              sizeX: 6,
-              sizeY: 2),
-          TileData(
-              tileBuilder: (BuildContext context, TileData tile) =>
-                  SimpleTile(
-                    icon: Icons.person,
-                    text: _localizations!.getText().deputiesDeputiesListTitle(),
-                    goTo: DeputiesListDestination()
-                  ),
-              order: 0,
-              sizeX: 2,
-              sizeY: 2),
-          TileData(
-              tileBuilder: (BuildContext context, TileData tile) =>
-                  SimpleTile(
-                      icon: Icons.record_voice_over,
-                      text: _localizations!.getText().speechesSpeechesListTitle(),
-                      goTo: SpeechesListDestination(),
-                  ),
-              order: 0,
-              sizeX: 2,
-              sizeY: 2),
-          TileData(
-              tileBuilder: (BuildContext context, TileData tile) =>
-                  SimpleTile(
-                      icon: MdiIcons.vote,
-                      text: _localizations!.getText().votingsVotingListTitle(),
-                      goTo: VotesListDestination()
-                  ),
-              order: 0,
-              sizeX: 2,
-              sizeY: 2)
-        ],
+      child: FutureProvider<List<TileData>?>.value(
+          value: getTilesFuture,
+          initialData: null,
+          child: Consumer<List<TileData>?>(
+            builder: (context, tiles, _) => tiles != null
+                ? Grid(
+                  gridSize: 6,
+                  onTileReordered: (List<TileData> tiles) async {
+                    bloc.saveTiles(tiles);
+                  },
+                  tiles: allTiles,
+                )
+              : Container()
+          )
       )
+      // child: Grid(
+      //   gridSize: 6,
+      //   onTileReordered: (List<TileData> tiles) async {
+      //     bloc.saveTiles(tiles);
+      //   },
+      //   tiles: allTiles,
+      // )
     );
   }
 

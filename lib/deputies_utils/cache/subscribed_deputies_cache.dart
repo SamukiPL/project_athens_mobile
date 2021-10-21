@@ -60,13 +60,13 @@ class SubscribedDeputiesCache {
     return result as Future<Result<List<SubscribedDeputyModel>>>;
   }
 
-  Future<DeputyModel> getDeputyModelById(String id) =>
+  Future<SubscribedDeputyModel> getDeputyModelById(String id) =>
       _getDeputyModel((model) => model.id == id);
 
-  Future<DeputyModel> getDeputyModelByCardId(int cardId) =>
+  Future<SubscribedDeputyModel> getDeputyModelByCardId(int cardId) =>
       _getDeputyModel((model) => model.cardId == cardId);
 
-  Future<DeputyModel> _getDeputyModel(bool Function(DeputyModel) condition) async {
+  Future<SubscribedDeputyModel> _getDeputyModel(bool Function(DeputyModel) condition) async {
     if (_cachedSubscribedDeputies != null && _cachedSubscribedDeputies!.isNotEmpty)
       return _cachedSubscribedDeputies!.firstWhere((element) => condition(element));
 

@@ -2,6 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
+import 'package:project_athens/dashboard_flow/data/dashboard_repository_impl.dart';
+import 'package:project_athens/dashboard_flow/data/network/dashboard_api.dart';
+import 'package:project_athens/dashboard_flow/domain/dashboard/get_dashboard_use_case.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/dashboard_bloc.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/nearest_meeting_tile/nearest_meeting_tile_bloc.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
@@ -22,15 +25,10 @@ class DashboardModule extends Module {
   List<SingleChildWidget> getProviders() {
     final AppLocalizations _localizations = AppLocalizations.of(context)!;
     final _dio = Provider.of<Dio>(context);
-    final _subscribedDeputiesCache = Provider.of<SubscribedDeputiesCache>(context);
-    final _deputiesCache = Provider.of<DeputiesCache>(context);
-    final _timelineModelMapper = TimelineModelMapper(_deputiesCache, _subscribedDeputiesCache, _localizations);
-    final _speechCache = SpeechCache();
-    final _speechQueueSetter = SpeechQueueSetter(_speechCache);
 
-    final TimelineApi timelineApi = TimelineApi(_dio);
-    final TimelineRepositoryImpl repository = TimelineRepositoryImpl(timelineApi, _timelineModelMapper, _speechQueueSetter);
-    final GetMeetingsDates _getMeetingsDates = GetMeetingsDates(repository);
+    final DashboardApi dashboardApi = DashboardApi(_dio);
+    final DashboardRepositoryImpl dashboardRepository = DashboardRepositoryImpl(dashboardApi);
+    final GetDashboardUseCase getDashboardUseCase = GetDashboardUseCase(dashboardRepository);
     
     return [
       Provider<DashboardBloc>(
@@ -38,7 +36,7 @@ class DashboardModule extends Module {
         dispose: (context, bloc) => bloc.dispose()
       ),
       Provider<NearestMeetingTileBloc>(
-          create: (context) => NearestMeetingTileBloc(_getMeetingsDates, _localizations),
+          create: (context) => NearestMeetingTileBloc(getDashboardUseCase, _localizations),
           dispose: (context, bloc) => bloc.dispose()
       )
     ];

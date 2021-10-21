@@ -1,5 +1,7 @@
 class ConfigurationStorageNames {
-  static final String SHOW_TECHNICAL_DATA = 'SHOW_TECHNICAL_DATA';
+  static const String SHOW_TECHNICAL_DATA = 'SHOW_TECHNICAL_DATA';
 
-  static final String WAKELOCK_ON_TIMELINE = 'WAKELOCK_ON_TIMELINE';
+  static const String WAKELOCK_ON_TIMELINE = 'WAKELOCK_ON_TIMELINE';
+
+  static const String DASHBOARD_TILES = "DASHBOARD_TILES";
 }

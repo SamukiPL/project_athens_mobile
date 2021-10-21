@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../../athens_core/auth/auth_storage.dart';
 
 class UserNameTile extends SimpleTile {
-  UserNameTile() : super(text: "", textStyle: TextStyle(color: Colors.black87, fontSize: 25, ), elevation: 0);
+  UserNameTile() : super(text: "", textStyle: TextStyle(color: Colors.black87, fontSize: 25, ), elevation: 0, key: Key('tile_username'));
 
   @override
   Widget build(BuildContext context) {

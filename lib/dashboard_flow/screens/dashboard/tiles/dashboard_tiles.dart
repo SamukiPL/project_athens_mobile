@@ -1,0 +1,8 @@
+enum DashboardTiles {
+  NAME,
+  SETTINGS_BUTTON,
+  NEAREST_MEETING,
+  DEPUTIES,
+  SPEECHES,
+  VOTES
+}
