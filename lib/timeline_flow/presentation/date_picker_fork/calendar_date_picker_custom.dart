@@ -692,6 +692,7 @@ class _DayPicker extends StatelessWidget {
           );
         } else if (isDisabled) {
           dayColor = disabledDayColor;
+          decoration = BoxDecoration();
         } else {
           // The current day gets a different text color and a circle stroke
           // border.
