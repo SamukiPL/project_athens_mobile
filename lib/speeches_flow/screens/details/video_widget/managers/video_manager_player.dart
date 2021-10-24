@@ -30,7 +30,7 @@ class VideoManagerPlayer extends VideoManager {
   }
 
   @override
-  Widget buildVideoWidget() {
+  Widget buildVideoWidget(BuildContext context) {
     return FlickVideoPlayer(flickManager: controller);
   }
 

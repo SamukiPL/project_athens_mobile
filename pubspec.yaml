@@ -53,6 +53,9 @@ dependencies:
   package_info: 2.0.2
   upgrader: 3.4.1
   fijkplayer: ^0.10.0
+  fijkplayer_skin:
+    git:
+      url: https://github.com/pbrejdak/fijkplayer_skin.git
 
 dev_dependencies:
   flutter_test:
