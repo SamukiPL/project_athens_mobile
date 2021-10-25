@@ -76,6 +76,7 @@ class TimelineBloc extends BaseBloc implements PagingBloc {
     adapter.updateList([], loading: true);
     _selectedDate = date;
     calendarBloc.setDate(date);
+    nounCloudBloc.loadCloud(params);
     final result = await _getTimelineUseCase(params);
 
     if (result is Success<List<TimelineModel>>) {
@@ -86,7 +87,6 @@ class TimelineBloc extends BaseBloc implements PagingBloc {
     }
     manageState(result);
 
-    nounCloudBloc.loadCloud(params);
   }
 
   @override
