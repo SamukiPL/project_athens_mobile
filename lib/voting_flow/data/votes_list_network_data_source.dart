@@ -49,10 +49,23 @@ class VotesListNetworkDataSource extends NetworkListDataSource<VoteSlimModel, Vo
       final filteredByType = result
           .where((element) => element.type == easyFilter.type)
           .toList();
-
       return filteredByType;
+    } else if (easyFilter is AcceptedVoteFilter) {
+      return result.where((element) => votePassed(element)).toList();
+    } else if (easyFilter is RejectedVoteFilter) {
+      return result.where((element) => !votePassed(element)).toList();
     } else {
       return result;
+    }
+  }
+
+  bool votePassed(VoteSlimModel vote) {
+    if (vote.absoluteMajority != null) {
+      return vote.voteNumbers.inFavor > vote.absoluteMajority!;
+    } else if (vote.qualifyingMajority != null) {
+      return vote.voteNumbers.inFavor > vote.qualifyingMajority!;
+    } else {
+      return vote.voteNumbers.inFavor > vote.voteNumbers.against;
     }
   }
 }

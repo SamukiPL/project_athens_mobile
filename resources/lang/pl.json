@@ -167,6 +167,10 @@
       "holdSingle": "Wstrzymał się",
       "absentSingle": "Nieobecny"
     },
+    "filters": {
+      "accepted": "Przyjęte",
+      "rejected": "Odrzucone"
+    },
     "subscribedDeputiesVotes": "Obserwowani posłowie",
     "votesNeededToPass": "Głosów poparcia potrzebnych",
     "noData": "Nie znaleziono głosowań dla podanych kryteriów."
