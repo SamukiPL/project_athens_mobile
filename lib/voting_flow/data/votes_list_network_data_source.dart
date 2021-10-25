@@ -3,11 +3,14 @@ import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
 import 'package:project_athens/athens_core/domain/base_list/base_params.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/deputies_flow/mappers/vote_slim_network_mapper.dart';
+import 'package:project_athens/voting_flow/domain/filters/votes_easy_filter.dart';
+import 'package:project_athens/voting_flow/domain/votes_list_params.dart';
+import 'package:project_athens/voting_flow/domain/votes_list_params.dart';
 
 import 'network/request/vote_search_request.dart';
 import 'network/voting_api.dart';
 
-class VotesListNetworkDataSource extends NetworkListDataSource<VoteSlimModel, BaseListParams> {
+class VotesListNetworkDataSource extends NetworkListDataSource<VoteSlimModel, VotesListParams> {
 
   final VotingApi _votingApi;
   final VoteSlimNetworkMapper _networkMapper;
@@ -15,7 +18,7 @@ class VotesListNetworkDataSource extends NetworkListDataSource<VoteSlimModel, Ba
   VotesListNetworkDataSource(this._votingApi, this._networkMapper);
 
   @override
-  Future<Result<List<VoteSlimModel>>> call(BaseListParams params) async {
+  Future<Result<List<VoteSlimModel>>> call(VotesListParams params) async {
     try {
       final response = await _votingApi.getVoting(
           VoteSearchRequest(
@@ -30,9 +33,26 @@ class VotesListNetworkDataSource extends NetworkListDataSource<VoteSlimModel, Ba
       );
 
       final modelsList = await _networkMapper(response.votes);
-      return Success(modelsList);
+
+      final filteredResults = _filterByEasyFilter(modelsList, params.easyFilter);
+
+      return Success(filteredResults);
     } catch(error) {
       return Failure(error);
+    }
+  }
+
+  List<VoteSlimModel> _filterByEasyFilter(
+      List<VoteSlimModel> result,
+      VotesEasyFilter? easyFilter) {
+    if (easyFilter is VoteTypeFilter) {
+      final filteredByType = result
+          .where((element) => element.type == easyFilter.type)
+          .toList();
+
+      return filteredByType;
+    } else {
+      return result;
     }
   }
 }
