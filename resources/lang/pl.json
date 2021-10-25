@@ -198,7 +198,8 @@
     "filters": {
       "dateFrom": "Od daty:",
       "dateTo": "Do daty:",
-      "searchPhrase": "Wpisz frazę..."
+      "searchPhrase": "Wpisz frazę...",
+      "subscribed": "Subskrybowani"
     }
   },
   "sort": {

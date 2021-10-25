@@ -2,6 +2,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/data/base_list/items_repository_impl.dart';
 import 'package:project_athens/athens_core/filters_and_sort/add_ons/easy_filters/easy_filters_list_bloc.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/presentation/base_list/base_list_bloc.dart';
 import 'package:project_athens/athens_core/presentation/search_app_bar/search_app_bar_facade.dart';
@@ -20,9 +21,10 @@ class DeputiesListModule extends Module {
   List<SingleChildWidget> getProviders() {
     final deputiesCache = Provider.of<DeputiesCache>(context);
     final subscribedDeputiesCache = Provider.of<SubscribedDeputiesCache>(context);
+    final _localizations = Provider.of<AppLocalizations>(context);
 
     final deputiesDataSource = DeputiesListDataSource(subscribedDeputiesCache);
-    final deputiesEasyFiltersRepository = DeputiesEasyFiltersRepository(deputiesCache);
+    final deputiesEasyFiltersRepository = DeputiesEasyFiltersRepository(deputiesCache, _localizations);
 
     final deputiesListRepository = ItemsRepositoryImpl(deputiesDataSource);
     final listFacade = DeputiesListFacade(
