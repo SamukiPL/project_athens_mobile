@@ -58,5 +58,4 @@ class SpeechesListModule extends Module {
       )
     ];
   }
-
 }

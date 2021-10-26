@@ -27,5 +27,4 @@ class DetailsSpeechNetworkDataSource {
 
     return Success(model);
   }
-
 }
