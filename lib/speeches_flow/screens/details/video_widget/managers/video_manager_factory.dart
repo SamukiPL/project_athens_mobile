@@ -6,5 +6,4 @@ class VideoManagerFactory {
   static VideoManager create(speechModel, isNormalSpeech, wakelock) {
       return VideoManagerFijk(speechModel, isNormalSpeech, wakelock);
   }
-
 }
