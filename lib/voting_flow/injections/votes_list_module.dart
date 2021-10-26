@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/data/base_list/items_repository_impl.dart';
-import 'package:project_athens/athens_core/domain/base_list_facade.dart';
 import 'package:project_athens/athens_core/filters_and_sort/add_ons/easy_filters/easy_filters_list_bloc.dart';
 import 'package:project_athens/athens_core/filters_and_sort/data/filters_repository.dart';
 import 'package:project_athens/athens_core/filters_and_sort/domain/filterable_facade.dart';

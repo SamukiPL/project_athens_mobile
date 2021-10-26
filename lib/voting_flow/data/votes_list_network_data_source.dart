@@ -1,10 +1,8 @@
 import 'package:project_athens/athens_core/data/base_list/network_data_source.dart';
 import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
-import 'package:project_athens/athens_core/domain/base_list/base_params.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/deputies_flow/mappers/vote_slim_network_mapper.dart';
 import 'package:project_athens/voting_flow/domain/filters/votes_easy_filter.dart';
-import 'package:project_athens/voting_flow/domain/votes_list_params.dart';
 import 'package:project_athens/voting_flow/domain/votes_list_params.dart';
 
 import 'network/request/vote_search_request.dart';
