@@ -19,7 +19,7 @@ class VideoManagerFijk extends VideoManager with WidgetsBindingObserver {
     );
 
     player.addListener(() {
-      if (player.value.videoRenderStart == true) {
+      if (player.value.duration.inMilliseconds > 0) {
         wakelock.tryToEnableLock();
       }
     });
@@ -49,6 +49,7 @@ class VideoManagerFijk extends VideoManager with WidgetsBindingObserver {
               playerTitle: "标题",
               showConfig: cfg,
               videoEnd: () {
+                  wakelock.tryToDisableLock();
                   player.exitFullScreen();
                   nextVideoOverlayBloc.pushOnNext(speechModel.nextPersonSpeech);
                 },
