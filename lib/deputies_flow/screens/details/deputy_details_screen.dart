@@ -75,7 +75,6 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
                             )),
                       ),
                       background: Container(
-                        // color: theme.primaryColor,
                         decoration: BoxDecoration(
                           image: new DecorationImage(
                             image: Image.asset("resources/images/parliament/parliament_gathering_512px.jpg").image,

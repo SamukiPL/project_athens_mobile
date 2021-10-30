@@ -107,20 +107,6 @@ class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
                     ),
                     mainPadding: EdgeInsets.all(16),
                   ),
-                  // RaisedButton(
-                  //   child: Container(
-                  //     padding: EdgeInsets.all(16),
-                  //     child: Text(
-                  //       localization.getText().loginButtonsResetPassword(),
-                  //       style: TextStyle(color: Colors.white),
-                  //       textScaleFactor: 1.5,
-                  //     ),
-                  //   ),
-                  //   onPressed: () => bloc(),
-                  //   color: Theme.of(context).primaryColor,
-                  //   shape: RoundedRectangleBorder(
-                  //     borderRadius: BorderRadius.circular(32),
-                  //   ),
                 ),
               ],
             ),
