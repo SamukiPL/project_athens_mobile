@@ -41,33 +41,28 @@ class DeputyInformationDetailsTab extends StatelessWidget {
               children: [
                 FullCard(
                   child: buildBriefInfoTable(localizations, deputyFull),
-                  rightPadding: 10,
-                  leftPadding: 10,
+                  cardPadding: EdgeInsets.only(top: 8, bottom: 8, left: 10, right: 10),
                   header: localizations.getText().deputiesBasicInfo(),
                 ),
                 FullCard(
-                  rightPadding: 10,
-                  leftPadding: 10,
+                  cardPadding: EdgeInsets.only(top: 8, bottom: 8, left: 10, right: 10),
                   child: buildDetailedInfoBlock(localizations, theme, deputyFull),
                   header: localizations.getText().deputiesExperience(),
                 ),
                 FullCard(
-                    rightPadding: 10,
-                    leftPadding: 10,
-                    child: buildStatisticsBlock(localizations, theme, deputyFull),
+                  cardPadding: EdgeInsets.only(top: 8, bottom: 8, left: 10, right: 10),
+                  child: buildStatisticsBlock(localizations, theme, deputyFull),
                     header: localizations.getText().deputiesStatistics(),
                     dialogText: localizations.getText().deputiesStatisticsInfo(),
                 ),
                 FullCard(
-                  rightPadding: 10,
-                  leftPadding: 10,
+                  cardPadding: EdgeInsets.only(top: 8, bottom: 8, left: 10, right: 10),
                   child: buildNounCloud(localizations, theme, deputyFull, deputyCache, context),
                   header: localizations.getText().deputiesWordCloud(),
                   dialogText: localizations.getText().deputiesWordCloudInfo(),
                 ),
                 FullCard(
-                  rightPadding: 10,
-                  leftPadding: 10,
+                  cardPadding: EdgeInsets.only(top: 8, bottom: 8, left: 10, right: 10),
                   child: DbSource(deputyFull),
                 )
               ]

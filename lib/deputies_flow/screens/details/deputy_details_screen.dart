@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -27,12 +29,13 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
             headerSliverBuilder: (context, value) => [
                   SliverAppBar(
                     leading: Consumer<DestinationManager>(
-                        builder: (context, destinationManager, _) => BackButton(
-                              color: Colors.white,
-                              onPressed: () {
-                                destinationManager.goBack(context);
-                              },
-                            )
+                      builder: (context, destinationManager, _) =>
+                        BackButton(
+                          color: Colors.white,
+                          onPressed: () {
+                            destinationManager.goBack(context);
+                          },
+                        )
                     ),
                     key: Key("app-bar"),
                     expandedHeight: 250,
@@ -72,11 +75,20 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
                             )),
                       ),
                       background: Container(
-                        color: theme.primaryColor,
-                        child: Center(
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(32),
-                              child: Image.network(_deputyModel.thumbnailUrl ?? "")),
+                        // color: theme.primaryColor,
+                        decoration: BoxDecoration(
+                          image: new DecorationImage(
+                            image: Image.asset("resources/images/parliament/parliament_gathering_512px.jpg").image,
+                            fit: BoxFit.cover,
+                          )
+                        ),
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 4.4, sigmaY: 4.4),
+                          child: Center(
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(32),
+                                child: Image.network(_deputyModel.thumbnailUrl ?? "")),
+                          ),
                         ),
                       ),
                     ),
@@ -86,7 +98,7 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
                     collapsedHeight: 0,
                     expandedHeight: 0,
                     bottom: PreferredSize(
-                      preferredSize: Size.fromHeight(50),
+                      preferredSize: Size.fromHeight(35),
                       child: Container(),
                     ),
                     flexibleSpace: Padding(
@@ -99,8 +111,8 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
                           value: bloc.deputyModel.notifications,
                           child: Consumer<SubscribedDeputyNotificationsNotifier>(
                             builder: (context, notifier, _) => bloc.deputyModel.notifications.isSubscribed
-                                ? SubscribedDeputyBarView(bloc.deputyModel)
-                                : notObservedDeputyView(bloc, context),
+                              ? SubscribedDeputyBarView(bloc.deputyModel)
+                              : notObservedDeputyView(bloc, context),
                           ),
                         )
                       ),

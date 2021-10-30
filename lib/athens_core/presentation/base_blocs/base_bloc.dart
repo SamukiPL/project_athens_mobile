@@ -12,8 +12,10 @@ import 'package:rxdart/rxdart.dart';
 abstract class BaseBloc {
 
   final DataLoadingBloc _dataLoadingBloc = DataLoadingBloc();
+  final DataLoadingBloc _btnActionAwaitBloc = DataLoadingBloc();
 
   DataLoadingBloc get dataLoadingBloc => _dataLoadingBloc;
+  DataLoadingBloc get btnActionAwaitBloc => _btnActionAwaitBloc;
 
   @protected
   StreamController<WidgetState> stateController = BehaviorSubject<WidgetState>();
@@ -23,10 +25,14 @@ abstract class BaseBloc {
   @protected
   void manageState(Result result) {
     if (result is Success) {
+      _btnActionAwaitBloc.setDataLoadingState(DataLoadingState.contentLoaded());
       stateController.add(WidgetState.success());
     } else if (result is Failure) {
       Failure failure = result;
       final state = failure.exception.getWidgetState();
+      final errorType = failure.exception.getErrorType();
+      _btnActionAwaitBloc.setDataLoadingState(DataLoadingState.error(errorType));
+
       _manageErrorState(state);
       stateController.add(state);
     }

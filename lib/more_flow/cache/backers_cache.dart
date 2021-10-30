@@ -24,7 +24,7 @@ class BackersCache {
       }
     });
 
-    return result as Future<Result<List<BackerModel>>>;
+    return result as Result<List<BackerModel>>;
   }
   
   Future<bool> get hasUserBacked async {

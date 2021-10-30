@@ -1,5 +1,7 @@
 import 'package:project_athens/athens_core/domain/base_repository.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
+import 'package:project_athens/athens_core/presentation/data_loading/data_loading_bloc.dart';
+import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
 import 'package:project_athens/authorization_flow/domain/reset_password/reset_password_params.dart';
 import 'package:project_athens/authorization_flow/domain/reset_password/reset_password_use_case.dart';
 
@@ -17,6 +19,8 @@ class ResetPasswordBloc extends BaseBloc {
 
   Future<void> call() async {
     if (_email.isEmpty) return;
+
+    btnActionAwaitBloc.setDataLoadingState(DataLoadingState.loading());
 
     final params = ResetPasswordParams(_email);
 

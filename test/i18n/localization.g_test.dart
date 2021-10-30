@@ -726,6 +726,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, moreAppVersion != "" && moreAppVersion != null); 
   }); 
  
+  test("All methods for $locale moreCredits", () async {
+    String moreCredits = localization.moreCredits();
+    expect(true, moreCredits != "" && moreCredits != null); 
+  }); 
+ 
   test("All methods for $locale settingsSettingsTitle", () async {
     String settingsSettingsTitle = localization.settingsSettingsTitle();
     expect(true, settingsSettingsTitle != "" && settingsSettingsTitle != null); 

@@ -2,6 +2,7 @@ import 'package:project_athens/athens_core/auto_updater/auto_updater.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
+import 'package:project_athens/athens_core/presentation/button_loader/button_loader.dart';
 import 'package:project_athens/authorization_flow/injections/login_screen_module.dart';
 import 'package:project_athens/authorization_flow/navigation/login_navigation_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/base_login_screen.dart';
@@ -81,21 +82,37 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
             ),
           ),
         ),
-        RaisedButton(
-          child: Container(
-            padding: EdgeInsets.all(16),
-            child: Text(
-              localization.getText().loginButtonsLogin(),
-              style: TextStyle(color: Colors.white),
-              textScaleFactor: 1.5,
+        ButtonLoader(
+            bloc.loginButtonLoadingBloc,
+            callback: () => bloc(),
+            buttonBg: theme.primaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(32),
             ),
-          ),
-          onPressed: () => bloc(),
-          color: theme.primaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(32),
-          ),
+            mainPadding: EdgeInsets.all(16),
+            actionStateWidget: Container(
+              child: Text(
+                localization.getText().loginButtonsLogin(),
+                style: TextStyle(color: Colors.white),
+                textScaleFactor: 1.5,
+              ),
+            )
         ),
+        // RaisedButton(
+        //   child: Container(
+        //     padding: EdgeInsets.all(16),
+        //     child: Text(
+        //       localization.getText().loginButtonsLogin(),
+        //       style: TextStyle(color: Colors.white),
+        //       textScaleFactor: 1.5,
+        //     ),
+        //   ),
+        //   onPressed: () => bloc(),
+        //   color: theme.primaryColor,
+        //   shape: RoundedRectangleBorder(
+        //     borderRadius: BorderRadius.circular(32),
+        //   ),
+        // ),
         Container(
           margin: EdgeInsets.only(top: 16),
           child: Row(
