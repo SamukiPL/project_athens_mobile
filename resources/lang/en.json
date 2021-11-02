@@ -167,6 +167,10 @@
       "holdSingle": "Hold",
       "absentSingle": "Absent"
     },
+    "filters": {
+      "accepted": "Accepted",
+      "rejected": "Rejected"
+    },
     "subscribedDeputiesVotes": "Subscribed deputies vote",
     "votesNeededToPass": "Votes needed to pass",
     "noData": "No votings for specified criteria."

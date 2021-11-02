@@ -666,6 +666,16 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, votingsVoteTypesAbsentSingle != "" && votingsVoteTypesAbsentSingle != null); 
   }); 
  
+  test("All methods for $locale votingsFiltersAccepted", () async {
+    String votingsFiltersAccepted = localization.votingsFiltersAccepted();
+    expect(true, votingsFiltersAccepted != "" && votingsFiltersAccepted != null); 
+  }); 
+ 
+  test("All methods for $locale votingsFiltersRejected", () async {
+    String votingsFiltersRejected = localization.votingsFiltersRejected();
+    expect(true, votingsFiltersRejected != "" && votingsFiltersRejected != null); 
+  }); 
+ 
   test("All methods for $locale votingsSubscribedDeputiesVotes", () async {
     String votingsSubscribedDeputiesVotes = localization.votingsSubscribedDeputiesVotes();
     expect(true, votingsSubscribedDeputiesVotes != "" && votingsSubscribedDeputiesVotes != null); 
