@@ -202,7 +202,8 @@
     "filters": {
       "dateFrom": "Date from:",
       "dateTo": "Date to:",
-      "searchPhrase": "Enter search phrase..."
+      "searchPhrase": "Enter search phrase...",
+      "subscribed": "Subskrybowani"
     }
   },
   "sort": {

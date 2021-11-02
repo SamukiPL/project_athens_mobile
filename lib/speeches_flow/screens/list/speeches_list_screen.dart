@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:project_athens/athens_core/filters_and_sort/add_ons/easy_filters/easy_filters_list.dart';
 import 'package:project_athens/athens_core/filters_and_sort/filters_bottom_sheet.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/base_list/base_list.dart';
@@ -25,6 +26,7 @@ class SpeechesListScreen extends BaseScreen<BaseListBloc> {
     final localizations = Provider.of<AppLocalizations>(context);
 
     return Column(mainAxisSize: MainAxisSize.max, children: [
+      EasyFiltersList(),
       Expanded(
         child: BaseListWidget(
           listBloc: bloc,

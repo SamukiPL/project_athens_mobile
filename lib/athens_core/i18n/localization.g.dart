@@ -613,6 +613,10 @@ class AppLocalizationsGenerated {
     return words['filters']['filters']['searchPhrase'];
   }
 
+  String filtersFiltersSubscribed() {
+    return words['filters']['filters']['subscribed'];
+  }
+
   String sortTitle() {
     return words['sort']['title'];
   }

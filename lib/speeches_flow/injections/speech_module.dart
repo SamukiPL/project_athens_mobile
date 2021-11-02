@@ -38,5 +38,4 @@ class SpeechModule extends Module {
       ),
     ];
   }
-
 }

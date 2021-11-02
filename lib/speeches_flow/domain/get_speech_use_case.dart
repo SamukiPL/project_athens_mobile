@@ -11,5 +11,4 @@ class GetSpeechUseCase extends BaseUseCase {
 
   @override
   Future<Result> call(params) => _dataSource().safeApiCall();
-
 }

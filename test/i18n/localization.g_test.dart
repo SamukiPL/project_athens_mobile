@@ -771,6 +771,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, filtersFiltersSearchPhrase != "" && filtersFiltersSearchPhrase != null); 
   }); 
  
+  test("All methods for $locale filtersFiltersSubscribed", () async {
+    String filtersFiltersSubscribed = localization.filtersFiltersSubscribed();
+    expect(true, filtersFiltersSubscribed != "" && filtersFiltersSubscribed != null); 
+  }); 
+ 
   test("All methods for $locale sortTitle", () async {
     String sortTitle = localization.sortTitle();
     expect(true, sortTitle != "" && sortTitle != null); 

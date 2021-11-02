@@ -66,6 +66,16 @@ class SubscribedDeputiesCache {
   Future<DeputyModel> getDeputyModelByCardId(int cardId) =>
       _getDeputyModel((model) => model.cardId == cardId);
 
+  Future<List<SubscribedDeputyModel>> getSubsribedDeputies() async {
+    final result = await subscribedDeputies;
+
+    if (result is Success<List<SubscribedDeputyModel>>) {
+      return result.value.where((element) => element.notifications.isSubscribed).toList();
+    } else {
+      return List.empty();
+    }
+  }
+
   Future<DeputyModel> _getDeputyModel(bool Function(DeputyModel) condition) async {
     if (_cachedSubscribedDeputies != null && _cachedSubscribedDeputies!.isNotEmpty)
       return _cachedSubscribedDeputies!.firstWhere((element) => condition(element));
