@@ -13,6 +13,9 @@ class DashboardBloc extends BaseBloc with ConfigurationDelegate<List<DashboardTi
   @override
   String get preferenceName => ConfigurationStorageNames.DASHBOARD_TILES;
 
+  @override
+  List<DashboardTileStorage> get defaultStorageValue => allTiles.map((e) => DashboardTileStorage(e.type, e.order)).toList();
+
   final List<TileData> TILES = allTiles;
 
   Future<List<TileData>> getTiles() async {

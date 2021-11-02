@@ -39,7 +39,7 @@ class DashboardNearestMeetingResponse {
 @JsonSerializable()
 class DashboardAbsentVoteCounterResponse {
   final List<DashboardAbsentVoteCounterDeputy> perDeputy;
-  final DateTime updateAt;
+  final DateTime? updateAt;
 
   DashboardAbsentVoteCounterResponse(
     this.perDeputy,
@@ -69,7 +69,7 @@ class DashboardAbsentVoteCounterDeputy {
 @JsonSerializable()
 class DashboardSpeechesCounterResponse {
   final List<DashboardSpeechesCounterDeputy> perDeputy;
-  final DateTime updateAt;
+  final DateTime? updateAt;
 
   DashboardSpeechesCounterResponse(
       this.perDeputy,
@@ -99,7 +99,7 @@ class DashboardSpeechesCounterDeputy {
 @JsonSerializable()
 class DashboardCounterPerYearResponse {
   final List<DashboardDeputyCounter> perDeputy;
-  final DateTime updateAt;
+  final DateTime? updateAt;
 
   DashboardCounterPerYearResponse(
     this.perDeputy,

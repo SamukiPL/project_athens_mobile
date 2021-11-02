@@ -62,7 +62,9 @@ DashboardAbsentVoteCounterResponse _$DashboardAbsentVoteCounterResponseFromJson(
         .map((e) => DashboardAbsentVoteCounterDeputy.fromJson(
             e as Map<String, dynamic>))
         .toList(),
-    DateTime.parse(json['updateAt'] as String),
+    json['updateAt'] == null
+        ? null
+        : DateTime.parse(json['updateAt'] as String),
   );
 }
 
@@ -70,7 +72,7 @@ Map<String, dynamic> _$DashboardAbsentVoteCounterResponseToJson(
         DashboardAbsentVoteCounterResponse instance) =>
     <String, dynamic>{
       'perDeputy': instance.perDeputy,
-      'updateAt': instance.updateAt.toIso8601String(),
+      'updateAt': instance.updateAt?.toIso8601String(),
     };
 
 DashboardAbsentVoteCounterDeputy _$DashboardAbsentVoteCounterDeputyFromJson(
@@ -97,7 +99,9 @@ DashboardSpeechesCounterResponse _$DashboardSpeechesCounterResponseFromJson(
         .map((e) =>
             DashboardSpeechesCounterDeputy.fromJson(e as Map<String, dynamic>))
         .toList(),
-    DateTime.parse(json['updateAt'] as String),
+    json['updateAt'] == null
+        ? null
+        : DateTime.parse(json['updateAt'] as String),
   );
 }
 
@@ -105,7 +109,7 @@ Map<String, dynamic> _$DashboardSpeechesCounterResponseToJson(
         DashboardSpeechesCounterResponse instance) =>
     <String, dynamic>{
       'perDeputy': instance.perDeputy,
-      'updateAt': instance.updateAt.toIso8601String(),
+      'updateAt': instance.updateAt?.toIso8601String(),
     };
 
 DashboardSpeechesCounterDeputy _$DashboardSpeechesCounterDeputyFromJson(
@@ -131,7 +135,9 @@ DashboardCounterPerYearResponse _$DashboardCounterPerYearResponseFromJson(
     (json['perDeputy'] as List<dynamic>)
         .map((e) => DashboardDeputyCounter.fromJson(e as Map<String, dynamic>))
         .toList(),
-    DateTime.parse(json['updateAt'] as String),
+    json['updateAt'] == null
+        ? null
+        : DateTime.parse(json['updateAt'] as String),
   );
 }
 
@@ -139,7 +145,7 @@ Map<String, dynamic> _$DashboardCounterPerYearResponseToJson(
         DashboardCounterPerYearResponse instance) =>
     <String, dynamic>{
       'perDeputy': instance.perDeputy,
-      'updateAt': instance.updateAt.toIso8601String(),
+      'updateAt': instance.updateAt?.toIso8601String(),
     };
 
 DashboardDeputyCounter _$DashboardDeputyCounterFromJson(

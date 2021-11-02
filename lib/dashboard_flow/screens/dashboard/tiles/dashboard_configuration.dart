@@ -51,7 +51,7 @@ final List<TileData> allTiles = [
           SimpleTile(
               key: Key('tile_deputies'),
               icon: Icons.person,
-              text: _localizations!.getText().deputiesDeputiesListTitle(),
+              text: _localizations.getText().deputiesDeputiesListTitle(),
               goTo: DeputiesListDestination()
           ),
       order: 0,
@@ -64,7 +64,7 @@ final List<TileData> allTiles = [
           SimpleTile(
             key: Key('tile_speeches'),
             icon: Icons.record_voice_over,
-            text: _localizations!.getText().speechesSpeechesListTitle(),
+            text: _localizations.getText().speechesSpeechesListTitle(),
             goTo: SpeechesListDestination(),
           ),
       order: 0,
@@ -77,7 +77,7 @@ final List<TileData> allTiles = [
           SimpleTile(
               key: Key('tile_votes'),
               icon: MdiIcons.vote,
-              text: _localizations!.getText().votingsVotingListTitle(),
+              text: _localizations.getText().votingsVotingListTitle(),
               goTo: VotesListDestination()
           ),
       order: 0,

@@ -1,14 +1,43 @@
+import 'dart:async';
+
+import 'package:project_athens/athens_core/domain/result.dart';
+import 'package:project_athens/dashboard_flow/data/network/response/dashboard_response.dart';
+import 'package:project_athens/dashboard_flow/domain/dashboard/dashboard_tiles_data_model.dart';
 import 'package:project_athens/dashboard_flow/domain/dashboard/get_dashboard_use_case.dart';
 import 'package:project_athens/dashboard_flow/domain/dashboard_params.dart';
-import 'package:project_athens/deputies_utils/cache/subscribed_deputies_cache.dart';
+import 'package:project_athens/dashboard_flow/mappers/dashobard_tiles_data_mapper.dart';
 import 'package:rxdart/rxdart.dart';
 
 class DashboardTilesDataCache {
   final GetDashboardUseCase _getDashboardUseCase;
-  final SubscribedDeputiesCache _subscribedDeputiesCache;
+  final DashboardTilesDataMapper _mapper;
 
-  DashboardTilesDataCache(this._getDashboardUseCase, this._subscribedDeputiesCache);
 
+  DashboardTilesDataCache(this._getDashboardUseCase, this._mapper) {
+    _autoRefreshSub = Rx
+        .timer(null, Duration(minutes: 10))
+        .listen((event) => markDirtyParam(DashboardParams.fetchAll(9)));
+
+    _dirtyParamsSource.listen((dirtyParams) => _fetchDashboard(dirtyParams));
+    Rx.combineLatest2(
+      _dirtyParamsSource,
+      _forceRefreshSource,
+      (params, forceRefresh) => params as DashboardParams
+    ).debounceTime(Duration(milliseconds: 500))
+        .listen((DashboardParams dirtyParams) => _fetchDashboard(dirtyParams));
+  }
+
+  Stream<DashboardNearestMeetingTileDataModel?> get nearestMeetingStream => _dashboardTilesDataSource.map((event) => event?.nearestMeeting);
+  Stream<DashboardSimpleDeputiesCounter?> get absentVoteStream => _dashboardTilesDataSource.map((event) => event?.absentVote);
+  Stream<DashboardSimpleDeputiesCounter?> get speechesCounterStream => _dashboardTilesDataSource.map((event) => event?.speechesCounter);
+  Stream<DashboardSimpleDeputiesCounterPerYearDataModel?> get absentVotePerYearStream => _dashboardTilesDataSource.map((event) => event?.absentVotePerYear);
+  Stream<DashboardSimpleDeputiesCounterPerYearDataModel?> get speechesCounterPerYearStream => _dashboardTilesDataSource.map((event) => event?.speechesCounterPerYear);
+
+  DashboardParams? _lastReqParams;
+
+  late StreamSubscription _autoRefreshSub;
+  final BehaviorSubject<DashboardTilesDataModel?> _dashboardTilesDataSource = BehaviorSubject<DashboardTilesDataModel?>.seeded(null);
+  final ReplaySubject<void> _forceRefreshSource = ReplaySubject<void>();
   final BehaviorSubject<DashboardParams> _dirtyParamsSource = BehaviorSubject<DashboardParams>.seeded(
     DashboardParams(
       cadence: 9,
@@ -20,6 +49,8 @@ class DashboardTilesDataCache {
       voteAbsentPerYear: true
     )
   );
+
+
 
   markDirtyParam(DashboardParams dirtyParams) {
     final currentDirtyParams = _dirtyParamsSource.value;
@@ -34,9 +65,29 @@ class DashboardTilesDataCache {
     _dirtyParamsSource.add(dirtyParams);
   }
 
+  forceRefresh() {
+    _forceRefreshSource.add(null);
+  }
+
+  _fetchDashboard(DashboardParams dirtyParams) async {
+    if (!dirtyParams.isAnyDirty()) { return; }
+
+    final result = await _getDashboardUseCase(dirtyParams);
+
+    if (result is Success<DashboardResponse>) {
+       final dashboardTilesData = await _mapper.transform(result.value);
+       _dashboardTilesDataSource.add(dashboardTilesData);
+
+       _dirtyParamsSource.value.resetParams();
+    }
+  }
+
   
 
   void dispose() {
+    _forceRefreshSource.close();
     _dirtyParamsSource.close();
+    _dashboardTilesDataSource.close();
+    _autoRefreshSub.cancel();
   }
 }

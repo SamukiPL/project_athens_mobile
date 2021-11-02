@@ -2,19 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
+import 'package:project_athens/dashboard_flow/cache/dashboard_tiles_data_cache.dart';
 import 'package:project_athens/dashboard_flow/data/dashboard_repository_impl.dart';
 import 'package:project_athens/dashboard_flow/data/network/dashboard_api.dart';
 import 'package:project_athens/dashboard_flow/domain/dashboard/get_dashboard_use_case.dart';
+import 'package:project_athens/dashboard_flow/mappers/dashobard_tiles_data_mapper.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/dashboard_bloc.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/nearest_meeting_tile/nearest_meeting_tile_bloc.dart';
-import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/cache/subscribed_deputies_cache.dart';
-import 'package:project_athens/speeches_flow/data/speech_cache.dart';
-import 'package:project_athens/timeline_flow/data/network/timeline_api.dart';
-import 'package:project_athens/timeline_flow/data/speech_queue_setter.dart';
-import 'package:project_athens/timeline_flow/data/timeline_repository_impl.dart';
-import 'package:project_athens/timeline_flow/domain/use_cases/get_meetings_dates.dart';
-import 'package:project_athens/timeline_flow/mappers/timeline_model_mapper.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -29,16 +24,23 @@ class DashboardModule extends Module {
     final DashboardApi dashboardApi = DashboardApi(_dio);
     final DashboardRepositoryImpl dashboardRepository = DashboardRepositoryImpl(dashboardApi);
     final GetDashboardUseCase getDashboardUseCase = GetDashboardUseCase(dashboardRepository);
+    final SubscribedDeputiesCache _subscribedDeputiesCache = Provider.of<SubscribedDeputiesCache>(context);
+    final DashboardTilesDataMapper _mapper = DashboardTilesDataMapper(_subscribedDeputiesCache);
+
+    final DashboardTilesDataCache _dashboardCache = DashboardTilesDataCache(getDashboardUseCase, _mapper);
     
     return [
       Provider<DashboardBloc>(
         create: (context) => DashboardBloc(),
         dispose: (context, bloc) => bloc.dispose()
       ),
+      Provider<DashboardTilesDataCache>.value(
+        value: _dashboardCache,
+      ),
       Provider<NearestMeetingTileBloc>(
-          create: (context) => NearestMeetingTileBloc(getDashboardUseCase, _localizations),
+          create: (context) => NearestMeetingTileBloc(_dashboardCache, _localizations),
           dispose: (context, bloc) => bloc.dispose()
-      )
+      ),
     ];
   }
 }

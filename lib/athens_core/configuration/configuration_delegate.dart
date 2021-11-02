@@ -5,13 +5,18 @@ import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/dashboard_
 
 mixin ConfigurationDelegate<T, R> {
   String get preferenceName => '';
+
+  T? get defaultStorageValue => null;
+
   FlutterSecureStorage storage = FlutterSecureStorage();
 
   Future<T> fetchPreference(R Function(Map<String, dynamic> json)? createObject) async {
     final String storageValue = await storage.read(key: preferenceName);
     // return storage.read(key: preferenceName);
 
-    final dynamic result;
+    if (storageValue == null || storageValue == '') {
+      return Future.value(defaultStorageValue);
+    }
 
     switch(T) {
       case String: return storageValue as T;
@@ -31,7 +36,6 @@ mixin ConfigurationDelegate<T, R> {
           return storageValue as T;
         }
     }
-    return storageValue as T;
   }
 
   Future<void> updatePreference(List<DashboardTileStorage> tiles) async {

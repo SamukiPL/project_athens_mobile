@@ -27,7 +27,7 @@ class DashboardNearestMeetingTileDataModel {
 
 class DashboardSimpleDeputiesCounter {
   final List<DashboardSimpleDeputyCounter> perDeputy;
-  final DateTime updateAt;
+  final DateTime? updateAt;
 
   DashboardSimpleDeputiesCounter(
     this.perDeputy,
@@ -49,7 +49,7 @@ class DashboardSimpleDeputyCounter {
 
 class DashboardSimpleDeputiesCounterPerYearDataModel {
   final List<DashboardSimpleDeputyCounterPerYear> perDeputy;
-  final DateTime updateAt;
+  final DateTime? updateAt;
 
   DashboardSimpleDeputiesCounterPerYearDataModel(
     this.perDeputy,

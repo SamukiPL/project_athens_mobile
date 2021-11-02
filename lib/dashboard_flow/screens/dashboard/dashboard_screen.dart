@@ -34,7 +34,7 @@ class DashboardScreen extends BaseScreen<DashboardBloc> {
 
   @override
   Widget buildBody(BuildContext context, DashboardBloc bloc) {
-    final Future<List<TileData>> getTilesFuture = bloc.getTiles();
+    final Future<List<TileData>?> getTilesFuture = bloc.getTiles();
 
     return Container(
       child: FutureProvider<List<TileData>?>.value(
