@@ -29,7 +29,7 @@ class NearestMeetingTileBloc extends BaseBloc {
     final todayBeginDay =
       DateTime(today.year, today.month, today.day, 0, 0, 0, 0);
     final closestDateTime =
-      todayBeginDay.getClosestDate([nearestMeetingResponse.nearestPastMeeting, nearestMeetingResponse.nearestMeeting]);
+      todayBeginDay.getClosestDate([nearestMeetingResponse.nearestPastMeeting]);
 
     bool isToday = closestDateTime.isToday;
     bool isYesterday = closestDateTime.isYesterday;
@@ -43,8 +43,9 @@ class NearestMeetingTileBloc extends BaseBloc {
     } else {
       final howManyDaysToGo = today.getDaysBetween(closestDateTime);
 
-      return _localizations.getText().dashboardTilesNearestMeetingTileMeetingInDays()
-          + ' '
+      return ''
+        //   + _localizations.getText().dashboardTilesNearestMeetingTileMeetingInDays()
+        //   + ' '
           + howManyDaysToGo.toString()
           + ' '
           + _localizations.getText().dashboardTilesNearestMeetingTileDays();

@@ -4,6 +4,10 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/grid/tile.dart';
 import 'package:project_athens/athens_core/presentation/grid/tiles/simple_tile/simple_tile.dart';
+import 'package:project_athens/dashboard_flow/cache/dashboard_tiles_data_cache.dart';
+import 'package:project_athens/dashboard_flow/domain/dashboard/dashboard_tiles_data_model.dart';
+import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/chart_tile/chart_tile.dart';
+import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/chart_tile/models/deputy_chart_tile_config_model.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/dashboard_tiles.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/nearest_meeting_tile/nearest_meeting_tile.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/nearest_meeting_tile/nearest_meeting_tile_bloc.dart';
@@ -19,8 +23,8 @@ final List<TileData> allTiles = [
       tileBuilder: (BuildContext context, TileData tile, AppLocalizations _localizations) =>
           UserNameTile(),
       order: 0,
-      sizeX: 5,
-      sizeY: 1,
+      sizeX: 10,
+      sizeY: 2,
       type: DashboardTiles.NAME
   ),
   TileData(
@@ -32,8 +36,8 @@ final List<TileData> allTiles = [
             goTo: MoreScreenDestination(),
           ),
       order: 0,
-      sizeX: 1,
-      sizeY: 1,
+      sizeX: 2,
+      sizeY: 2,
       type: DashboardTiles.SETTINGS_BUTTON
   ),
   TileData(
@@ -42,8 +46,8 @@ final List<TileData> allTiles = [
         return NearestMeetingTile(nearestMeetingBloc);
       },
       order: 0,
-      sizeX: 6,
-      sizeY: 2,
+      sizeX: 3,
+      sizeY: 3,
       type: DashboardTiles.NEAREST_MEETING
   ),
   TileData(
@@ -55,8 +59,8 @@ final List<TileData> allTiles = [
               goTo: DeputiesListDestination()
           ),
       order: 0,
-      sizeX: 2,
-      sizeY: 2,
+      sizeX: 3,
+      sizeY: 3,
       type: DashboardTiles.DEPUTIES
   ),
   TileData(
@@ -68,8 +72,8 @@ final List<TileData> allTiles = [
             goTo: SpeechesListDestination(),
           ),
       order: 0,
-      sizeX: 2,
-      sizeY: 2,
+      sizeX: 3,
+      sizeY: 3,
       type: DashboardTiles.SPEECHES
   ),
   TileData(
@@ -81,8 +85,64 @@ final List<TileData> allTiles = [
               goTo: VotesListDestination()
           ),
       order: 0,
-      sizeX: 2,
-      sizeY: 2,
+      sizeX: 3,
+      sizeY: 3,
       type: DashboardTiles.VOTES
-  )
+  ),
+  TileData(
+    tileBuilder: (BuildContext context, TileData tile, AppLocalizations _localizations) {
+      final dashboardCache = Provider.of<DashboardTilesDataCache>(context);
+      final configStream = dashboardCache.absentVotePerYearStream
+          .map((DashboardSimpleDeputiesCounterPerYearDataModel? data) =>
+            DeputyChartTileConfigModel.fromSimpleCounterPerYear(data));
+
+      return ChartTile(chartConfiguration: configStream, title: 'Opuszczone głosowania na rok');
+    },
+    order: 0,
+    sizeX: 12,
+    sizeY: 6,
+    type: DashboardTiles.CHART_VOTES_ABSENT_PER_YEAR
+  ),
+  TileData(
+      tileBuilder: (BuildContext context, TileData tile, AppLocalizations _localizations) {
+        final dashboardCache = Provider.of<DashboardTilesDataCache>(context);
+        final configStream = dashboardCache.speechesCounterPerYearStream
+            .map((DashboardSimpleDeputiesCounterPerYearDataModel? data) =>
+            DeputyChartTileConfigModel.fromSimpleCounterPerYear(data));
+
+        return ChartTile(chartConfiguration: configStream, title: 'Przemowy na rok');
+      },
+      order: 0,
+      sizeX: 12,
+      sizeY: 6,
+      type: DashboardTiles.CHART_SPEECHES_COUNTER_PER_YEAR
+  ),
+  TileData(
+      tileBuilder: (BuildContext context, TileData tile, AppLocalizations _localizations) {
+        final dashboardCache = Provider.of<DashboardTilesDataCache>(context);
+        final configStream = dashboardCache.absentVoteStream
+            .map((DashboardSimpleDeputiesCounter? data) =>
+            DeputyChartTileConfigModel.fromSimpleCounter(data));
+
+        return ChartTile(chartConfiguration: configStream, title: 'Opuszczone głosowania');
+      },
+      order: 0,
+      sizeX: 6,
+      sizeY: 6,
+      type: DashboardTiles.CHART_VOTES_ABSENT
+  ),
+  TileData(
+      tileBuilder: (BuildContext context, TileData tile, AppLocalizations _localizations) {
+        final dashboardCache = Provider.of<DashboardTilesDataCache>(context);
+        final configStream = dashboardCache.speechesCounterStream
+            .map((DashboardSimpleDeputiesCounter? data) =>
+            DeputyChartTileConfigModel.fromSimpleCounter(data));
+
+        return ChartTile(chartConfiguration: configStream, title: 'Przemowy');
+      },
+      order: 0,
+      sizeX: 6,
+      sizeY: 6,
+      type: DashboardTiles.CHART_SPEECHES_COUNTER
+  ),
 ];

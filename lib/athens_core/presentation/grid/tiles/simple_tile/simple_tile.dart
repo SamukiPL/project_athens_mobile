@@ -18,12 +18,9 @@ class SimpleTile extends TileBase with RedirectionDelegate {
     this.boxDecoration,
     this.textStyle,
     this.goTo,
-    this.elevation = 2,
+    this.elevation = 4,
     Key? key
   }) : super(key: key);
-  //     : assert(
-  //   text != null || icon != null
-  // );
 
   factory SimpleTile.plain() {
     return SimpleTile(text: "");
@@ -45,19 +42,7 @@ class SimpleTile extends TileBase with RedirectionDelegate {
 
     final BoxDecoration decoration = boxDecoration != null
         ? boxDecoration
-        : BoxDecoration(
-        // borderRadius: BorderRadius.all(Radius.circular(8)),
-        // color: Colors.white70,
-        // boxShadow: [
-        //   BoxShadow(
-        //     color: Colors.black.withOpacity(0.3),
-        //     spreadRadius: 1,
-        //     blurRadius: 2,
-        //     offset: Offset(0, 0), // changes position of shadow
-        //   ),
-        // ],
-        // border: Border.all(color: Colors.black, width: 1)
-    );
+        : BoxDecoration();
 
     if (goTo != null) {
       tile = InkWell(
@@ -70,20 +55,19 @@ class SimpleTile extends TileBase with RedirectionDelegate {
         width: double.infinity,
         margin: EdgeInsets.all(4),
         decoration: decoration,
-        // child: Card(
-        //   elevation: elevation,
-        //   child: tile,
-        //
-        // ),
         child: Material(
-          child: tile,
+          child: Container(
+            child: tile,
+            decoration: elevation != null && elevation != 0 ? BoxDecoration(
+              border: Border.all(color: Colors.black.withOpacity(0.05), )
+            ) : BoxDecoration(),
+          ),
           elevation: elevation?.toDouble() ?? 0.0,
-          shadowColor: theme.primaryColor.withOpacity(0.4),
+          shadowColor: Colors.black.withOpacity(0.3),
           color: Colors.white,
           borderOnForeground: true,
-
+          type: MaterialType.card,
         ),
-      // child: tile
     );
   }
 

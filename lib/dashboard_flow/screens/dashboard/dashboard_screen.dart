@@ -37,13 +37,14 @@ class DashboardScreen extends BaseScreen<DashboardBloc> {
     final Future<List<TileData>?> getTilesFuture = bloc.getTiles();
 
     return Container(
+      padding: EdgeInsets.all(8),
       child: FutureProvider<List<TileData>?>.value(
           value: getTilesFuture,
           initialData: null,
           child: Consumer<List<TileData>?>(
             builder: (context, tiles, _) => tiles != null
                 ? Grid(
-                  gridSize: 6,
+                  gridSize: 12,
                   onTileReordered: (List<TileData> tiles) async {
                     bloc.saveTiles(tiles);
                   },
