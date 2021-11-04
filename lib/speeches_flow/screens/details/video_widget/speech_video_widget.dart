@@ -13,7 +13,7 @@ class SpeechVideoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        videoManager.buildVideoWidget(),
+        videoManager.buildVideoWidget(context),
         NextVideoOverlay(
           bloc: videoManager.nextVideoOverlayBloc,
           isNormalSpeech: videoManager.isNormalSpeech,
