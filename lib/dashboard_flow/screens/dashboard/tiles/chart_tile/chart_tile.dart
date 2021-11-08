@@ -6,16 +6,19 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
 import 'package:project_athens/athens_core/presentation/grid/tiles/simple_tile/simple_tile.dart';
+import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/chart_tile/chart_tombstone.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/chart_tile/helpers/chart_image_symbol_renderer.dart';
-import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/chart_tile/models/deputy_chart_tile_config_model.dart';
+import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/chart_tile/blocs/deputy_chart_tile_bloc.dart';
+import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/chart_tile/models/chart_series_thombstone_model.dart';
 import 'package:project_athens/deputies_utils/domain/subscribed_deputy_model.dart';
 import 'package:provider/provider.dart';
 
-class ChartTile extends SimpleTile {
-  final Stream<DeputyChartTileConfigModel> chartConfiguration;
+class ChartTile<SERIES_DATA, FROM_DATA_STREAM> extends SimpleTile {
+  @override
+  final DeputyChartTileBloc<SERIES_DATA, FROM_DATA_STREAM> bloc;
   final String title;
 
-  ChartTile({required this.chartConfiguration, required this.title}) : super(text: "", key: Key('tile_chart'));
+  ChartTile({required this.bloc, required this.title}) : super(text: "", key: Key('tile_chart'), bloc: bloc);
 
   @override
   Widget build(BuildContext context) {
@@ -52,58 +55,33 @@ class ChartTile extends SimpleTile {
             ],
           ),
           Expanded(
-            child: StreamProvider.value(
-            initialData: null,
-            value: chartConfiguration,
-            child: Consumer<DeputyChartTileConfigModel?>(
+            child: StreamProvider<List<charts.Series<dynamic, String>>>.value(
+            initialData: List.empty(),
+            value: bloc.seriesDataStream,
+            child: Consumer<List<charts.Series<dynamic, String>>>(
               builder: (context, data, _) =>
-                  data != null && data.state is ContentLoaded
+                  bloc.currentLoadingState is ContentLoaded
                     ? charts.BarChart(
-                      data.seriesData,
+                      data,
                       animate: true,
-                      barGroupingType: data.barGroupingType,
-                      // behaviors: [
-                      //   charts.SeriesLegend(
-                      //     // Positions for "start" and "end" will be left and right respectively
-                      //     // for widgets with a build context that has directionality ltr.
-                      //     // For rtl, "start" and "end" will be right and left respectively.
-                      //     // Since this example has directionality of ltr, the legend is
-                      //     // positioned on the right side of the chart.
-                      //     position: charts.BehaviorPosition.end,
-                      //     // By default, if the position of the chart is on the left or right of
-                      //     // the chart, [horizontalFirst] is set to false. This means that the
-                      //     // legend entries will grow as new rows first instead of a new column.
-                      //     horizontalFirst: false,
-                      //     // This defines the padding around each legend entry.
-                      //     cellPadding: new EdgeInsets.only(right: 4.0, bottom: 4.0),
-                      //     // Set show measures to true to display measures in series legend,
-                      //     // when the datum is selected.
-                      //     showMeasures: true,
-                      //
-                      //     // Optionally provide a measure formatter to format the measure value.
-                      //     // If none is specified the value is formatted as a decimal.
-                      //     measureFormatter: (num? value) {
-                      //       return value == null ? '-' : '${value}';
-                      //     },
-                      //   )
-                      // ],
+                      barGroupingType: bloc.barGroupingType,
                       defaultRenderer: charts.BarRendererConfig(
-                        symbolRenderer: ChartImageSymbolRenderer(data.legendImageToColorMap),
+                        symbolRenderer: ChartImageSymbolRenderer(bloc.legendImageToColorMap),
                       ),
                     )
-                    : Container(),
+                    : ChartTombstone(),
             ),
           )),
           Container(
-            child: StreamProvider.value(
-              initialData: null,
-              value: chartConfiguration,
-              child: Consumer<DeputyChartTileConfigModel?>(
+            child: StreamProvider<List<charts.Series<dynamic, String>>>.value(
+              initialData: List.empty(),
+              value: bloc.seriesDataStream,
+              child: Consumer<List<charts.Series<dynamic, String>>>(
                 builder: (context, data, _) =>
-                data != null && data.state is ContentLoaded
+                bloc.currentLoadingState is ContentLoaded
                     ? Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: _getLegend(data),
+                      children: _getLegend(bloc),
                     ) : Container(),
               ),
             )
@@ -114,7 +92,7 @@ class ChartTile extends SimpleTile {
     );
   }
 
-  List<Widget> _getLegend(DeputyChartTileConfigModel config) {
+  List<Widget> _getLegend(DeputyChartTileBloc config) {
     final List<Widget> widgets = List.empty(growable: true);
 
     config.legendImageToColorMap.forEach((key, value) {
@@ -160,6 +138,27 @@ class ChartTile extends SimpleTile {
             alignment: Alignment.center,
           ),
         )
+    );
+  }
+
+  Widget _getTombstoneChart() {
+    return StreamProvider<List<charts.Series<ChartSeriesTombstoneModel, String>>>.value(
+        initialData: List.empty(),
+        value: bloc.tombstoneLoadingSeries,
+        child: Consumer<List<charts.Series<ChartSeriesTombstoneModel, String>>>(
+          builder: (context, data, _) =>
+          Expanded(
+            child:
+            charts.BarChart(
+              data,
+              animate: true,
+              barGroupingType: bloc.barGroupingType,
+              defaultRenderer: charts.BarRendererConfig(
+                symbolRenderer: ChartImageSymbolRenderer(bloc.legendImageToColorMap),
+              ),
+            )
+          )
+      )
     );
   }
 }

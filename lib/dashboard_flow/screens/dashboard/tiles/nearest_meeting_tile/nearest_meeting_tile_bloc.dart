@@ -5,6 +5,8 @@ import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/ext/date_time_extension.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
+import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
+import 'package:project_athens/athens_core/presentation/grid/tiles/simple_tile/simple_tile_bloc.dart';
 import 'package:project_athens/dashboard_flow/cache/dashboard_tiles_data_cache.dart';
 import 'package:project_athens/dashboard_flow/data/network/response/dashboard_response.dart';
 import 'package:project_athens/dashboard_flow/domain/dashboard/dashboard_tiles_data_model.dart';
@@ -15,10 +17,13 @@ import 'package:project_athens/timeline_flow/domain/timeline_parameters.dart';
 import 'package:project_athens/timeline_flow/domain/use_cases/get_meetings_dates.dart';
 import 'package:rxdart/rxdart.dart';
 
-class NearestMeetingTileBloc extends BaseBloc {
+class NearestMeetingTileBloc extends SimpleTileBloc {
 
   final DashboardTilesDataCache _dashboardCache;
   final AppLocalizations _localizations;
+
+  @override
+  BehaviorSubject<DataLoadingState> loadingStateSource = BehaviorSubject<DataLoadingState>.seeded(DataLoadingState.initialLoading());
 
   NearestMeetingTileBloc(this._dashboardCache, this._localizations);
 
@@ -33,6 +38,8 @@ class NearestMeetingTileBloc extends BaseBloc {
 
     bool isToday = closestDateTime.isToday;
     bool isYesterday = closestDateTime.isYesterday;
+
+    hideLoader();
 
     if (closestDateTime.isToday) {
       return _localizations.getText().dashboardTilesNearestMeetingTileMeetingIsToday();

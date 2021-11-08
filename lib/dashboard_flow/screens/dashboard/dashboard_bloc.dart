@@ -19,19 +19,18 @@ class DashboardBloc extends BaseBloc with ConfigurationDelegate<List<DashboardTi
   final List<TileData> TILES = allTiles;
 
   Future<List<TileData>> getTiles() async {
-    // final List<DashboardTileStorage> config = await fetchPreference((Map<String, dynamic> json) => DashboardTileStorage.fromJson(json));
+    final List<DashboardTileStorage> config = await fetchPreference((Map<String, dynamic> json) => DashboardTileStorage.fromJson(json));
     // final List<DashboardTileStorage> config = allTiles.map((e) => DashboardTileStorage(e.type, e.order)).toList();
-    //
-    // final List<TileData> result = List.empty(growable: true);
-    // for (final configTile in config) {
-    //     final tileDef = allTiles.firstWhere((element) => element.type == configTile.type);
-    //     tileDef.order = configTile.order;
-    //
-    //     result.add(tileDef);
-    // }
-    //
-    // return result;
-    return allTiles;
+
+    final List<TileData> result = List.empty(growable: true);
+    for (final configTile in config) {
+        final tileDef = allTiles.firstWhere((element) => element.type == configTile.type);
+        tileDef.order = configTile.order;
+
+        result.add(tileDef);
+    }
+
+    return result;
   }
 
   void saveTiles(List<TileData> newTiles) async {

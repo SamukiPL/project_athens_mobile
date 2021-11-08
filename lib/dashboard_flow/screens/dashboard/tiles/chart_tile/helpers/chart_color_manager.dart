@@ -7,12 +7,11 @@ class ChartColorManager {
 
   final List<MaterialColor> _colors = [
     Colors.blue,
+    Colors.pink,
     Colors.amber,
     Colors.deepPurple,
-    Colors.pink,
-    Colors.yellow,
-    Colors.brown,
     Colors.green,
+    Colors.brown,
     Colors.red,
   ];
 

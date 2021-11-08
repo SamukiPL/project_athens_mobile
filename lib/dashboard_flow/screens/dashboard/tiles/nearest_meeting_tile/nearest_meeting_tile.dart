@@ -5,9 +5,10 @@ import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/nearest_me
 import 'package:provider/provider.dart';
 
 class NearestMeetingTile extends SimpleTile {
+  @override
   final NearestMeetingTileBloc bloc;
 
-  NearestMeetingTile(this.bloc) : super(text: "", key: Key('tile_nearest_meeting'));
+  NearestMeetingTile(this.bloc) : super(text: "", key: Key('tile_nearest_meeting'), bloc: bloc);
 
   Widget _getMeetingText(BuildContext context) {
     return StreamProvider<String?>.value(

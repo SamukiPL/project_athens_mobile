@@ -4,10 +4,11 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/grid/tile.dart';
 import 'package:project_athens/athens_core/presentation/grid/tiles/simple_tile/simple_tile.dart';
+import 'package:project_athens/athens_core/presentation/grid/tiles/simple_tile/simple_tile_bloc.dart';
 import 'package:project_athens/dashboard_flow/cache/dashboard_tiles_data_cache.dart';
 import 'package:project_athens/dashboard_flow/domain/dashboard/dashboard_tiles_data_model.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/chart_tile/chart_tile.dart';
-import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/chart_tile/models/deputy_chart_tile_config_model.dart';
+import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/chart_tile/blocs/deputy_chart_tile_bloc.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/dashboard_tiles.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/nearest_meeting_tile/nearest_meeting_tile.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/nearest_meeting_tile/nearest_meeting_tile_bloc.dart';
@@ -18,7 +19,7 @@ import 'package:project_athens/speeches_flow/navigation/speeches_destinations.da
 import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
 import 'package:provider/provider.dart';
 
-final List<TileData> allTiles = [
+final List<TileData> allTiles = List.unmodifiable([
   TileData(
       tileBuilder: (BuildContext context, TileData tile, AppLocalizations _localizations) =>
           UserNameTile(),
@@ -34,6 +35,7 @@ final List<TileData> allTiles = [
             key: Key('tile_more_settings'),
             icon: Icons.settings,
             goTo: MoreScreenDestination(),
+            bloc: SimpleTileBloc()
           ),
       order: 0,
       sizeX: 2,
@@ -56,7 +58,8 @@ final List<TileData> allTiles = [
               key: Key('tile_deputies'),
               icon: Icons.person,
               text: _localizations.getText().deputiesDeputiesListTitle(),
-              goTo: DeputiesListDestination()
+              goTo: DeputiesListDestination(),
+              bloc: SimpleTileBloc()
           ),
       order: 0,
       sizeX: 3,
@@ -70,6 +73,7 @@ final List<TileData> allTiles = [
             icon: Icons.record_voice_over,
             text: _localizations.getText().speechesSpeechesListTitle(),
             goTo: SpeechesListDestination(),
+            bloc: SimpleTileBloc(),
           ),
       order: 0,
       sizeX: 3,
@@ -82,7 +86,8 @@ final List<TileData> allTiles = [
               key: Key('tile_votes'),
               icon: MdiIcons.vote,
               text: _localizations.getText().votingsVotingListTitle(),
-              goTo: VotesListDestination()
+              goTo: VotesListDestination(),
+              bloc: SimpleTileBloc()
           ),
       order: 0,
       sizeX: 3,
@@ -92,11 +97,9 @@ final List<TileData> allTiles = [
   TileData(
     tileBuilder: (BuildContext context, TileData tile, AppLocalizations _localizations) {
       final dashboardCache = Provider.of<DashboardTilesDataCache>(context);
-      final configStream = dashboardCache.absentVotePerYearStream
-          .map((DashboardSimpleDeputiesCounterPerYearDataModel? data) =>
-            DeputyChartTileConfigModel.fromSimpleCounterPerYear(data));
+      final bloc = DeputyChartTileBloc.fromSimpleCounterPerYearStream(dashboardCache.absentVotePerYearStream);
 
-      return ChartTile(chartConfiguration: configStream, title: 'Opuszczone głosowania na rok');
+      return ChartTile(bloc: bloc, title: 'Opuszczone głosowania na rok');
     },
     order: 0,
     sizeX: 12,
@@ -106,11 +109,9 @@ final List<TileData> allTiles = [
   TileData(
       tileBuilder: (BuildContext context, TileData tile, AppLocalizations _localizations) {
         final dashboardCache = Provider.of<DashboardTilesDataCache>(context);
-        final configStream = dashboardCache.speechesCounterPerYearStream
-            .map((DashboardSimpleDeputiesCounterPerYearDataModel? data) =>
-            DeputyChartTileConfigModel.fromSimpleCounterPerYear(data));
+        final bloc = DeputyChartTileBloc.fromSimpleCounterPerYearStream(dashboardCache.speechesCounterPerYearStream);
 
-        return ChartTile(chartConfiguration: configStream, title: 'Przemowy na rok');
+        return ChartTile(bloc: bloc, title: 'Przemowy na rok');
       },
       order: 0,
       sizeX: 12,
@@ -120,11 +121,9 @@ final List<TileData> allTiles = [
   TileData(
       tileBuilder: (BuildContext context, TileData tile, AppLocalizations _localizations) {
         final dashboardCache = Provider.of<DashboardTilesDataCache>(context);
-        final configStream = dashboardCache.absentVoteStream
-            .map((DashboardSimpleDeputiesCounter? data) =>
-            DeputyChartTileConfigModel.fromSimpleCounter(data));
+        final bloc = DeputyChartTileBloc.fromSimpleCounterStream(dashboardCache.absentVoteStream);
 
-        return ChartTile(chartConfiguration: configStream, title: 'Opuszczone głosowania');
+        return ChartTile(bloc: bloc, title: 'Opuszczone głosowania');
       },
       order: 0,
       sizeX: 6,
@@ -134,15 +133,13 @@ final List<TileData> allTiles = [
   TileData(
       tileBuilder: (BuildContext context, TileData tile, AppLocalizations _localizations) {
         final dashboardCache = Provider.of<DashboardTilesDataCache>(context);
-        final configStream = dashboardCache.speechesCounterStream
-            .map((DashboardSimpleDeputiesCounter? data) =>
-            DeputyChartTileConfigModel.fromSimpleCounter(data));
+        final bloc = DeputyChartTileBloc.fromSimpleCounterStream(dashboardCache.speechesCounterStream);
 
-        return ChartTile(chartConfiguration: configStream, title: 'Przemowy');
+        return ChartTile(bloc: bloc, title: 'Przemowy');
       },
       order: 0,
       sizeX: 6,
       sizeY: 6,
       type: DashboardTiles.CHART_SPEECHES_COUNTER
   ),
-];
+]);

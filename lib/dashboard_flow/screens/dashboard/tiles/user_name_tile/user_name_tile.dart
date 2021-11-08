@@ -1,12 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/presentation/grid/tiles/simple_tile/simple_tile.dart';
+import 'package:project_athens/athens_core/presentation/grid/tiles/simple_tile/simple_tile_bloc.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../athens_core/auth/auth_storage.dart';
 
 class UserNameTile extends SimpleTile {
-  UserNameTile() : super(text: "", textStyle: TextStyle(color: Colors.black87, fontSize: 25, ), elevation: 0, key: Key('tile_username'));
+  UserNameTile() : super(text: "",
+      textStyle: TextStyle(
+        color: Colors.black87,
+        fontSize: 25
+      ),
+      elevation: 0,
+      key: Key('tile_username'), bloc: SimpleTileBloc()
+  );
 
   @override
   Widget build(BuildContext context) {
