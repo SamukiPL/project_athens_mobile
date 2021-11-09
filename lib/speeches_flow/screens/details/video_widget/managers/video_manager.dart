@@ -12,7 +12,7 @@ abstract class VideoManager {
 
   VideoManager(this.speechModel, this.isNormalSpeech, this.wakelock);
 
-  Widget buildVideoWidget();
+  Widget buildVideoWidget(BuildContext context);
 
   void dispose() {
     wakelock.tryToDisableLock();

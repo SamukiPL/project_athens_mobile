@@ -529,6 +529,14 @@ class AppLocalizationsGenerated {
     return words['votings']['voteTypes']['absentSingle'];
   }
 
+  String votingsFiltersAccepted() {
+    return words['votings']['filters']['accepted'];
+  }
+
+  String votingsFiltersRejected() {
+    return words['votings']['filters']['rejected'];
+  }
+
   String votingsSubscribedDeputiesVotes() {
     return words['votings']['subscribedDeputiesVotes'];
   }
@@ -629,6 +637,10 @@ class AppLocalizationsGenerated {
 
   String filtersFiltersSearchPhrase() {
     return words['filters']['filters']['searchPhrase'];
+  }
+
+  String filtersFiltersSubscribed() {
+    return words['filters']['filters']['subscribed'];
   }
 
   String sortTitle() {

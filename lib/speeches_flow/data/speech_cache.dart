@@ -28,5 +28,4 @@ class SpeechCache {
   bool hasSpeech(String speechId, bool isNormalSpeech) => (isNormalSpeech) ? _speechesMap.containsKey(speechId) : _timelineMap.containsKey(speechId);
 
   SpeechModel getSpeech(String speechId, bool isNormalSpeech) => (isNormalSpeech) ? _speechesMap[speechId]! : _timelineMap[speechId]!;
-
 }

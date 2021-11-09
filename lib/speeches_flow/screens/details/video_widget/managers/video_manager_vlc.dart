@@ -21,7 +21,7 @@ class VideoManagerVlc extends VideoManager {
   }
 
   @override
-  Widget buildVideoWidget() {
+  Widget buildVideoWidget(BuildContext context) {
     return VlcPlayer(controller: controller, aspectRatio: 16 / 9);
   }
 
