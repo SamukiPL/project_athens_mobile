@@ -8,6 +8,7 @@ class DashboardTileStorage {
   final DashboardTiles type;
   final int order;
 
+
   DashboardTileStorage(this.type, this.order);
 
   factory DashboardTileStorage.fromJson(Map<String, dynamic> json) => _$DashboardTileStorageFromJson(json);

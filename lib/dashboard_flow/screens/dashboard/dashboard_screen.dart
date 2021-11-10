@@ -48,7 +48,7 @@ class DashboardScreen extends BaseScreen<DashboardBloc> {
                   onTileReordered: (List<TileData> tiles) async {
                     bloc.saveTiles(tiles);
                   },
-                  tiles: allTiles,
+                  tiles: tiles,
                 )
               : Container()
           )

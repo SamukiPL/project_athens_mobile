@@ -18,7 +18,7 @@ class ChartTile<SERIES_DATA, FROM_DATA_STREAM> extends SimpleTile {
   final DeputyChartTileBloc<SERIES_DATA, FROM_DATA_STREAM> bloc;
   final String title;
 
-  ChartTile({required this.bloc, required this.title}) : super(text: "", key: Key('tile_chart'), bloc: bloc);
+  ChartTile({required this.bloc, required this.title, required Key key}) : super(text: "", key: key, bloc: bloc);
 
   @override
   Widget build(BuildContext context) {
