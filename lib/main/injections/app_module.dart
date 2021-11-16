@@ -4,6 +4,7 @@ import 'package:project_athens/athens_core/chopper/error_interceptor.dart';
 import 'package:project_athens/athens_core/chopper/network_module.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
+import 'package:project_athens/deputies_utils/cache/parliament_clubs_cache.dart';
 import 'package:project_athens/deputies_utils/data/get_deputies_repository_impl.dart';
 import 'package:project_athens/deputies_utils/data/get_deputy_nouns_repository_impl.dart';
 import 'package:project_athens/deputies_utils/data/get_deputy_repository_impl.dart';
@@ -33,32 +34,42 @@ class AppModule extends Module {
       ErrorInterceptor()
     ]);
 
-    final deputiesApi = DeputiesApi(client);
-    final getDeputiesRepository = GetDeputiesRepositoryImpl(deputiesApi);
-    final getDeputiesUseCase = GetDeputiesUseCase(getDeputiesRepository);
-    final getDeputyRepository = GetDeputyRepositoryImpl(deputiesApi);
-    final getDeputyUseCase = GetDeputyUseCase(getDeputyRepository);
-    final getDeputyNounsRepository = GetDeputyNounsRepositoryImpl(deputiesApi);
-    final getDeputyNounsUseCase =
-        GetDeputyNounsUseCase(getDeputyNounsRepository);
-
-    final parliamentClubsApi = ParliamentClubsApi(client);
-    final getParliamentClubsRepository =
-        GetParliamentClubsRepositoryImpl(parliamentClubsApi);
-    final getParliamentClubsUseCase =
-        GetParliamentClubsUseCase(getParliamentClubsRepository);
+    final clubsCache = _createClubsCache(client);
 
     return List<SingleChildWidget>.of([
       Provider<SimpleDioClient>(
         create: (_) => SimpleDioClient(client),
         dispose: (context, client) => client.dispose(),
       ),
+      Provider<ParliamentClubsCache>.value(
+          value: clubsCache
+      ),
       Provider<DeputiesCache>(
-        create: (_) => DeputiesCache(getDeputiesUseCase,
-            getParliamentClubsUseCase, getDeputyUseCase, getDeputyNounsUseCase),
-        dispose: (context, cache) => cache.dispose(),
+        create: (_) => _createDeputiesCache(client, clubsCache),
       ),
       Provider<SpeechCache>(create: (_) => SpeechCache()),
     ]);
+  }
+
+  ParliamentClubsCache _createClubsCache(Dio client) {
+    final parliamentClubsApi = ParliamentClubsApi(client);
+    final getParliamentClubsRepository =
+    GetParliamentClubsRepositoryImpl(parliamentClubsApi);
+    final getParliamentClubsUseCase =
+    GetParliamentClubsUseCase(getParliamentClubsRepository);
+
+    return ParliamentClubsCache(getParliamentClubsUseCase);
+  }
+
+  DeputiesCache _createDeputiesCache(Dio client, ParliamentClubsCache clubsCache) {
+    final deputiesApi = DeputiesApi(client);
+    final getDeputiesRepository = GetDeputiesRepositoryImpl(deputiesApi, clubsCache);
+    final getDeputiesUseCase = GetDeputiesUseCase(getDeputiesRepository);
+    final getDeputyRepository = GetDeputyRepositoryImpl(deputiesApi, clubsCache);
+    final getDeputyUseCase = GetDeputyUseCase(getDeputyRepository);
+    final getDeputyNounsRepository = GetDeputyNounsRepositoryImpl(deputiesApi);
+    final getDeputyNounsUseCase = GetDeputyNounsUseCase(getDeputyNounsRepository);
+
+    return DeputiesCache(getDeputiesUseCase, getDeputyUseCase, getDeputyNounsUseCase);
   }
 }

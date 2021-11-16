@@ -2,12 +2,14 @@ import 'package:project_athens/athens_core/data/base_responses/speech_response.d
 import 'package:project_athens/athens_core/domain/data_mapper.dart';
 import 'package:project_athens/athens_core/models/speech_model.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
+import 'package:project_athens/deputies_utils/cache/parliament_clubs_cache.dart';
 
 class SpeechesNetworkMapper
     extends AsyncDataMapper<SpeechResponse, SpeechModel> {
   final DeputiesCache _deputiesCache;
+  final ParliamentClubsCache _clubsCache;
 
-  SpeechesNetworkMapper(this._deputiesCache);
+  SpeechesNetworkMapper(this._deputiesCache, this._clubsCache);
 
   @override
   Future<SpeechModel> transform(SpeechResponse data) async {
@@ -17,7 +19,7 @@ class SpeechesNetworkMapper
         id: data.id,
         personName: data.personName,
         deputyId: data.cadencyDeputy,
-        club: await _deputiesCache.getParliamentClubModel(data.parliamentClub),
+        club: await _clubsCache.getParliamentClubModel(data.parliamentClub),
         desc: data.agenda?.title,
         date: data.cisInfo.eventDateTime,
         thumbnailUrl: thumbnailUrl,
