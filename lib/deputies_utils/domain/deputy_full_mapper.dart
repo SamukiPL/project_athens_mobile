@@ -4,14 +4,15 @@ import 'package:project_athens/deputies_utils/domain/deputy_full.dart';
 import 'package:project_athens/deputies_utils/domain/parliament_club_model.dart';
 
 class DeputyFullMapper extends DataMapper<FullDeputyResponse, DeputyFull> {
-  List<ParliamentClubModel> _clubs;
+  late List<ParliamentClubModel> _clubs;
 
   final DeputyCvMapper _cvMapper = DeputyCvMapper();
   final ContactMapper _contactMapper = ContactMapper();
   late StatisticsMapper _statisticsMapper;
 
-  DeputyFullMapper(this._clubs) {
-    _statisticsMapper = StatisticsMapper(_clubs);
+  void setClubs(List<ParliamentClubModel> clubs) {
+    _clubs = clubs;
+    _statisticsMapper = StatisticsMapper(clubs);
   }
 
   @override
