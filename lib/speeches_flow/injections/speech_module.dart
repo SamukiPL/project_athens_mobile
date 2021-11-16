@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
+import 'package:project_athens/deputies_utils/cache/parliament_clubs_cache.dart';
 import 'package:project_athens/main/wakelock/wakelock_service.dart';
 import 'package:project_athens/speeches_flow/data/details_speech_network_data_source.dart';
 import 'package:project_athens/speeches_flow/data/network/speeches_api.dart';
@@ -18,12 +19,15 @@ class SpeechModule extends Module {
 
   SpeechModule(BuildContext context, this.speechId, this.isNormalSpeech) : super(context);
 
+  late final SpeechDetailsBloc bloc;
+
   @override
   List<SingleChildWidget> getProviders() {
     final dio = Provider.of<Dio>(context);
     final speechesApi = SpeechesApi(dio);
     final deputiesCache = Provider.of<DeputiesCache>(context);
-    final networkMapper = SpeechesNetworkMapper(deputiesCache);
+    final clubsCache = Provider.of<ParliamentClubsCache>(context);
+    final networkMapper = SpeechesNetworkMapper(deputiesCache, clubsCache);
     final speechCache = Provider.of<SpeechCache>(context);
 
     final detailsSpeechNetworkDataSource = DetailsSpeechNetworkDataSource(speechesApi, networkMapper, speechId, isNormalSpeech, speechCache);
@@ -31,11 +35,17 @@ class SpeechModule extends Module {
 
     final wakelock = Provider.of<WakelockService>(context);
 
+    bloc = SpeechDetailsBloc(isNormalSpeech, getSpeechUseCase, deputiesCache, wakelock);
+
     return [
-      Provider<SpeechDetailsBloc>(
-        create: (_) => SpeechDetailsBloc(isNormalSpeech, getSpeechUseCase, deputiesCache, wakelock),
-        dispose: (context, bloc) => bloc.dispose(),
+      Provider<SpeechDetailsBloc>.value(
+        value: bloc,
       ),
     ];
+  }
+
+  @override
+  void dispose() {
+    bloc.dispose();
   }
 }

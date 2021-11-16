@@ -10,35 +10,49 @@ import 'package:project_athens/deputies_flow/data/deputies_easy_filters_reposito
 import 'package:project_athens/deputies_flow/data/deputies_list_data_source.dart';
 import 'package:project_athens/deputies_flow/domain/deputie_list_facade.dart';
 import 'package:project_athens/deputies_flow/screens/list/list_impl/deputy_item_view_model_factory.dart';
-import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
+import 'package:project_athens/deputies_utils/cache/parliament_clubs_cache.dart';
 import 'package:project_athens/deputies_utils/cache/subscribed_deputies_cache.dart';
 import 'package:provider/provider.dart';
 
 class DeputiesListModule extends Module {
   DeputiesListModule(BuildContext context) : super(context);
 
+  late final DeputiesListFacade _listFacade;
+  late final BaseListBloc _bloc;
+  late final EasyFiltersListBloc _filtersListBloc;
+
   @override
   List<SingleChildWidget> getProviders() {
-    final deputiesCache = Provider.of<DeputiesCache>(context);
-    final subscribedDeputiesCache = Provider.of<SubscribedDeputiesCache>(context);
+    final clubsCache = Provider.of<ParliamentClubsCache>(context);
+    final subscribedDeputiesCache = Provider.of<SubscribedDeputiesCache>(
+        context);
     final _localizations = Provider.of<AppLocalizations>(context);
 
     final deputiesDataSource = DeputiesListDataSource(subscribedDeputiesCache);
-    final deputiesEasyFiltersRepository = DeputiesEasyFiltersRepository(deputiesCache, _localizations);
+    final deputiesEasyFiltersRepository = DeputiesEasyFiltersRepository(
+        clubsCache, _localizations);
 
     final deputiesListRepository = ItemsRepositoryImpl(deputiesDataSource);
-    final listFacade = DeputiesListFacade(
+    _listFacade = DeputiesListFacade(
         deputiesListRepository, deputiesEasyFiltersRepository);
     final itemFactory = DeputyItemViewModelFactory();
 
+    _bloc = BaseListBloc(_listFacade, itemFactory);
+    _filtersListBloc = EasyFiltersListBloc(_listFacade);
+
     return [
-      Provider<BaseListBloc>(
-        create: (context) => BaseListBloc(listFacade, itemFactory),
-        dispose: (context, bloc) => bloc.dispose(),
+      Provider<BaseListBloc>.value(
+        value: _bloc,
       ),
-      Provider<SearchAppBarFacade>.value(value: listFacade),
+      Provider<SearchAppBarFacade>.value(value: _listFacade),
       Provider<EasyFiltersListBloc>.value(
-          value: EasyFiltersListBloc(listFacade))
+          value: _filtersListBloc)
     ];
+  }
+
+  @override
+  void dispose() {
+    _bloc.dispose();
+    _filtersListBloc.dispose();
   }
 }

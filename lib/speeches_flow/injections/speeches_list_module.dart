@@ -10,6 +10,7 @@ import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/presentation/base_list/base_list_bloc.dart';
 import 'package:project_athens/athens_core/presentation/search_app_bar/search_app_bar_facade.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
+import 'package:project_athens/deputies_utils/cache/parliament_clubs_cache.dart';
 import 'package:project_athens/deputies_utils/cache/subscribed_deputies_cache.dart';
 import 'package:project_athens/speeches_flow/data/network/speeches_api.dart';
 import 'package:project_athens/speeches_flow/data/speech_cache.dart';
@@ -23,39 +24,55 @@ import 'package:provider/provider.dart';
 class SpeechesListModule extends Module {
   SpeechesListModule(BuildContext context) : super(context);
 
+  late final SpeechesListFacade _listFacade;
+  late final BaseListBloc _bloc;
+  late final EasyFiltersListBloc _filtersListBloc;
+
   @override
   List<SingleChildWidget> getProviders() {
     final dio = Provider.of<Dio>(context);
     final localizations = Provider.of<AppLocalizations>(context);
     final speechesApi = SpeechesApi(dio);
     final deputiesCache = Provider.of<DeputiesCache>(context);
-    final subscribedDeputiesCache = Provider.of<SubscribedDeputiesCache>(context);
+    final subscribedDeputiesCache =
+        Provider.of<SubscribedDeputiesCache>(context);
     final speechCache = Provider.of<SpeechCache>(context);
-    final networkMapper = SpeechesNetworkMapper(deputiesCache);
+    final clubsCache = Provider.of<ParliamentClubsCache>(context);
+    final networkMapper = SpeechesNetworkMapper(deputiesCache, clubsCache);
 
-    final networkDataSource = SpeechesListNetworkDataSource(speechesApi, networkMapper, speechCache, subscribedDeputiesCache);
-    final speechesEasyFilters = SpeechesEasyFiltersRepository(deputiesCache, localizations);
+    final networkDataSource = SpeechesListNetworkDataSource(
+        speechesApi, networkMapper, speechCache, subscribedDeputiesCache);
+    final speechesEasyFilters =
+        SpeechesEasyFiltersRepository(clubsCache, localizations);
 
     final speechesRepository = ItemsRepositoryImpl(networkDataSource);
     final filtersRepository = FiltersRepository(localizations);
-    final listFacade = SpeechesListFacade(speechesRepository, filtersRepository, speechesEasyFilters);
+    _listFacade = SpeechesListFacade(
+        speechesRepository, filtersRepository, speechesEasyFilters);
 
     final itemFactory = SpeechItemViewModelFactory();
+    _bloc = BaseListBloc(_listFacade, itemFactory);
+    _filtersListBloc = EasyFiltersListBloc(_listFacade);
 
     return [
-      Provider<BaseListBloc>(
-        create: (context) => BaseListBloc(listFacade, itemFactory),
-        dispose: (context, bloc) => bloc.dispose(),
+      Provider<BaseListBloc>.value(
+        value: _bloc,
       ),
-      Provider<SearchAppBarFacade>(
-        create: (_) => listFacade,
+      Provider<SearchAppBarFacade>.value(
+        value: _listFacade,
       ),
-      Provider<FilterableFacade>(
-        create: (_) => listFacade,
+      Provider<FilterableFacade>.value(
+        value: _listFacade,
       ),
       Provider<EasyFiltersListBloc>.value(
-          value: EasyFiltersListBloc(listFacade)
+          value: _filtersListBloc
       )
     ];
+  }
+
+  @override
+  void dispose() {
+    _bloc.dispose();
+    _filtersListBloc.dispose();
   }
 }
