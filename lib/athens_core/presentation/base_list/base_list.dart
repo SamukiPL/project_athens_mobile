@@ -10,7 +10,9 @@ class BaseListWidget extends StatelessWidget {
 
   final Widget? separator;
 
-  const BaseListWidget({Key? key, required this.listBloc, this.noDataText, this.separator}) : super(key: key);
+  final String? adFactoryId;
+
+  const BaseListWidget({Key? key, required this.listBloc, this.noDataText, this.separator, this.adFactoryId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class BaseListWidget extends StatelessWidget {
         listBloc.adapter,
         refreshable: true,
         separator: separator,
+        adFactoryId: adFactoryId,
       ),
       noDataText: noDataText,
       onRetry: listBloc.refresh,

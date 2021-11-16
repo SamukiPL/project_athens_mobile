@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>103077248308-ciulpoj99h570jutuuv8ao2770ra5lrv.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.103077248308-ciulpoj99h570jutuuv8ao2770ra5lrv</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCWykmCtoA_flDkXuh-xZpEiL8zDVagVyo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>103077248308</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>dev.alpaka.projectathens</string>
+	<key>PROJECT_ID</key>
+	<string>athens-35e8a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>athens-35e8a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:103077248308:ios:e31874a215b792d0d5f961</string>
+	<key>DATABASE_URL</key>
+	<string>https://athens-35e8a.firebaseio.com</string>
+</dict>
+</plist>
