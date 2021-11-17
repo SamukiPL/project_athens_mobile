@@ -8,6 +8,7 @@ import 'package:project_athens/authorization_flow/domain/login/login_use_case.da
 import 'package:project_athens/authorization_flow/screens/login/login_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:nested/nested.dart';
+import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/data/firebase_deputies_repository_impl.dart';
 import 'package:project_athens/deputies_utils/data/network/deputies_api.dart';
 import 'package:project_athens/deputies_utils/domain/firebase_deputies/firebase_deputies_use_case.dart';
@@ -37,11 +38,12 @@ class LoginScreenModule extends Module {
   FirebaseDeputiesUseCase getFirebaseDeputiesUseCase(BuildContext context) {
     final chopperClient = Provider.of<Dio>(context);
     final deputiesApi = DeputiesApi(chopperClient);
+    final deputiesCache = Provider.of<DeputiesCache>(context);
 
     final firebaseMessaging = Provider.of<FirebaseMessages>(context);
     final deputySubscriber = FirebaseDeputySubscriber(firebaseMessaging);
 
-    final firebaseDeputiesRepository = FirebaseDeputiesRepositoryImpl(deputiesApi, deputySubscriber);
+    final firebaseDeputiesRepository = FirebaseDeputiesRepositoryImpl(deputiesApi, deputiesCache, deputySubscriber);
     return FirebaseDeputiesUseCase(firebaseDeputiesRepository);
   }
 

@@ -8,6 +8,9 @@ extension FutureExt<T> on Future<Result<T>> {
         if (result.isSuccess()) {
           return onValue(result.toSuccess());
         }
+        if (result.isFailure()) {
+          throw result.toFailure().exception;
+        }
         throw WrongResultError();
       });
 }

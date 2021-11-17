@@ -1,6 +1,5 @@
 import 'package:project_athens/athens_core/domain/result.dart';
-import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
-import 'package:project_athens/deputies_utils/data/network/response/subscribed_deputy_response.dart';
+import 'package:project_athens/athens_core/ext/future_extension.dart';
 import 'package:project_athens/deputies_utils/domain/base_deputies_params.dart';
 import 'package:project_athens/deputies_utils/domain/delete_deputy/delete_deputy_params.dart';
 import 'package:project_athens/deputies_utils/domain/delete_deputy/delete_deputy_use_case.dart';
@@ -10,54 +9,44 @@ import 'package:project_athens/deputies_utils/domain/put_deputies/deputies_regis
 import 'package:project_athens/deputies_utils/domain/put_deputies/put_deputies_params.dart';
 import 'package:project_athens/deputies_utils/domain/put_deputies/put_deputy_model.dart';
 import 'package:project_athens/deputies_utils/domain/subscribed_deputy_model.dart';
-import 'package:project_athens/deputies_utils/mappers/subscribed_deputy_mapper.dart';
 
 class SubscribedDeputiesCache {
-
-  final DeputiesCache _deputiesCache;
   final FirebaseDeputiesUseCase _firebaseDeputiesUseCase;
   final DeleteDeputyUseCase _deleteDeputyUseCase;
   final PutDeputiesUseCase _putDeputiesUseCase;
 
-  SubscribedDeputiesCache(this._deputiesCache, this._firebaseDeputiesUseCase, this._deleteDeputyUseCase, this._putDeputiesUseCase);
+  SubscribedDeputiesCache(this._firebaseDeputiesUseCase,
+      this._deleteDeputyUseCase, this._putDeputiesUseCase);
 
   List<SubscribedDeputyModel>? _cachedSubscribedDeputies;
 
   Future<Result<List<SubscribedDeputyModel>>>? awaitingFuture;
 
   Future<Result<List<SubscribedDeputyModel>>> get subscribedDeputies async {
-    if (awaitingFuture != null) {
-      return awaitingFuture!;
-    }
-
     if (_cachedSubscribedDeputies != null) {
       return Success(_cachedSubscribedDeputies!.toList());
     }
 
-    final cachedDeputies = await _deputiesCache.deputies;
-
-    if (cachedDeputies is Failure<List<DeputyModel>>) {
-      return Failure(cachedDeputies.exception);
+    if (awaitingFuture != null) {
+      return awaitingFuture!;
     }
 
-    final result = _firebaseDeputiesUseCase(BaseDeputiesParams(9)).then((result) {
-      if (result is Success<List<SubscribedDeputyResponse>>) {
-        final SubscribedDeputyMapper mapper = SubscribedDeputyMapper(result.value);
+    awaitingFuture = _firebaseDeputiesUseCase(BaseDeputiesParams(9))
+        .whenComplete(() {
+          awaitingFuture = null;
+        }).onSuccessThen((result) {
+          final subscribedDeputies = result.value;
 
-        final subscribedDeputies = mapper.call((cachedDeputies as Success<List<DeputyModel>>).value);
+          subscribedDeputies.forEach((subscribedDeputy) => subscribedDeputy
+              .notifications
+              .updateCallback = () => _updateSubscribedDeputy(subscribedDeputy));
 
-        subscribedDeputies.forEach((subscribedDeputy) => subscribedDeputy.notifications.updateCallback = () => _updateSubscribedDeputy(subscribedDeputy));
+          _cachedSubscribedDeputies = subscribedDeputies;
 
-        _cachedSubscribedDeputies = subscribedDeputies;
+          return Success(subscribedDeputies);
+        });
 
-        return Success(subscribedDeputies);
-      } else {
-        return result;
-      }
-    });
-
-    awaitingFuture = result as Future<Result<List<SubscribedDeputyModel>>>;
-    return result as Future<Result<List<SubscribedDeputyModel>>>;
+    return awaitingFuture!;
   }
 
   Future<DeputyModel> getDeputyModelById(String id) =>
@@ -66,24 +55,15 @@ class SubscribedDeputiesCache {
   Future<DeputyModel> getDeputyModelByCardId(int cardId) =>
       _getDeputyModel((model) => model.cardId == cardId);
 
-  Future<List<SubscribedDeputyModel>> getSubsribedDeputies() async {
-    final result = await subscribedDeputies;
+  Future<List<SubscribedDeputyModel>> getSubsribedDeputies() => subscribedDeputies.onSuccessThen((success) {
+    return success.value
+        .where((element) => element.notifications.isSubscribed)
+        .toList();
+  }).onError((error, stackTrace) => List.empty());
 
-    if (result is Success<List<SubscribedDeputyModel>>) {
-      return result.value.where((element) => element.notifications.isSubscribed).toList();
-    } else {
-      return List.empty();
-    }
-  }
-
-  Future<DeputyModel> _getDeputyModel(bool Function(DeputyModel) condition) async {
-    if (_cachedSubscribedDeputies != null && _cachedSubscribedDeputies!.isNotEmpty)
-      return _cachedSubscribedDeputies!.firstWhere((element) => condition(element));
-
-    await subscribedDeputies;
-
-    return _cachedSubscribedDeputies!.firstWhere((element) => condition(element));
-  }
+  Future<DeputyModel> _getDeputyModel(
+      bool Function(DeputyModel) condition) => subscribedDeputies
+      .onSuccessThen((success) => success.value.firstWhere(condition));
 
   void _updateSubscribedDeputy(SubscribedDeputyModel subscribedDeputy) async {
     print('about to perform save operation');
@@ -93,15 +73,15 @@ class SubscribedDeputiesCache {
           subscribedDeputy.id,
           subscribedDeputy.notifications.vote,
           subscribedDeputy.notifications.speech,
-          subscribedDeputy.notifications.interpolation
-      );
+          subscribedDeputy.notifications.interpolation);
       await _putDeputiesUseCase.call(PutDeputiesParams(9, [putModel]));
     } else {
-      await _deleteDeputyUseCase.call(DeleteDeputyParams(9, subscribedDeputy.id));
+      await _deleteDeputyUseCase
+          .call(DeleteDeputyParams(9, subscribedDeputy.id));
     }
   }
 
-  dispose () {
+  dispose() {
     if (_cachedSubscribedDeputies != null) {
       _cachedSubscribedDeputies!.forEach((element) => element.dispose());
     }

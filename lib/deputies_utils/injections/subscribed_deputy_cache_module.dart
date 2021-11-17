@@ -42,10 +42,10 @@ class SubscribedDeputyCacheModule extends Module {
 
     final deputiesApi = DeputiesApi(client);
 
-    final DeputiesCache _deputiesCache = Provider.of<DeputiesCache>(context);
+    final DeputiesCache deputiesCache = Provider.of<DeputiesCache>(context);
 
     final firebaseDeputySubscriber = FirebaseDeputySubscriber(_firebaseMessages);
-    final firebaseDeputiesRepository = FirebaseDeputiesRepositoryImpl(deputiesApi, firebaseDeputySubscriber);
+    final firebaseDeputiesRepository = FirebaseDeputiesRepositoryImpl(deputiesApi, deputiesCache, firebaseDeputySubscriber);
     final firebaseDeputiesUseCase = FirebaseDeputiesUseCase(firebaseDeputiesRepository);
 
     final putDeputyRepository = PutDeputiesRepositoryImpl(deputiesApi, firebaseDeputySubscriber);
@@ -56,7 +56,7 @@ class SubscribedDeputyCacheModule extends Module {
 
     return List<SingleChildWidget>.of([
       Provider<SubscribedDeputiesCache>(
-        create: (_) => SubscribedDeputiesCache(_deputiesCache, firebaseDeputiesUseCase, deleteDeputyUseCase, putDeputyUseCase),
+        create: (_) => SubscribedDeputiesCache(firebaseDeputiesUseCase, deleteDeputyUseCase, putDeputyUseCase),
         dispose: (context, cache) => cache.dispose(),
       )
     ]);

@@ -5,6 +5,7 @@ abstract class Result<T> {
   bool isSuccess() => this is Success<T>;
   Success<T> toSuccess() => this as Success<T>;
   bool isFailure() => this is Failure<T>;
+  Failure<T> toFailure() => this as Failure<T>;
 }
 class Success<T> extends Result<T> {
 
