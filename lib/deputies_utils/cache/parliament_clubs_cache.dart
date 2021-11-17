@@ -1,3 +1,4 @@
+import 'package:collection/src/iterable_extensions.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/ext/future_extension.dart';
 import 'package:project_athens/deputies_utils/cache/cache_errors.dart';
@@ -40,5 +41,5 @@ class ParliamentClubsCache {
 
   Future<ParliamentClubModel?> getParliamentClubModel(String? id) =>
       parliamentClubs.onSuccessThen(
-          (success) => success.value.firstWhere((element) => element.id == id));
+          (success) => success.value.firstWhereOrNull((element) => element.id == id));
 }

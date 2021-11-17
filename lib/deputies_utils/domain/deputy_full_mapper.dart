@@ -10,9 +10,8 @@ class DeputyFullMapper extends DataMapper<FullDeputyResponse, DeputyFull> {
   final ContactMapper _contactMapper = ContactMapper();
   late StatisticsMapper _statisticsMapper;
 
-  void setClubs(List<ParliamentClubModel> clubs) {
-    _clubs = clubs;
-    _statisticsMapper = StatisticsMapper(clubs);
+  DeputyFullMapper(this._clubs) {
+    _statisticsMapper = StatisticsMapper(_clubs);
   }
 
   @override

@@ -7,9 +7,7 @@ class GetDeputiesMapper extends DataMapper<DeputyResponse, DeputyModel> {
 
   late List<ParliamentClubModel> _clubs;
 
-  void setClubs(List<ParliamentClubModel> clubs) {
-    _clubs = clubs;
-  }
+  GetDeputiesMapper(this._clubs)
 
   @override
   DeputyModel transform(DeputyResponse data) =>

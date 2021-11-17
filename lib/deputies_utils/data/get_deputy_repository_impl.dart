@@ -11,14 +11,18 @@ import 'network/deputies_api.dart';
 class GetDeputyRepositoryImpl implements GetDeputyRepository {
   final DeputiesApi _deputiesApi;
   final ParliamentClubsCache _clubsCache;
-  final DeputyFullMapper _deputyFullMapper = DeputyFullMapper();
+  DeputyFullMapper? _deputyFullMapper;
 
   GetDeputyRepositoryImpl(this._deputiesApi, this._clubsCache);
 
   @override
-  Future<Result<DeputyFull>> getDeputy(BaseDeputyParams params) =>
-      _clubsCache.parliamentClubs.onSuccessThen((success) {
-        _deputyFullMapper.setClubs(success.value);
-        return _deputiesApi.getDeputy(params.deputyId);
-      }).then((value) => Success(_deputyFullMapper.transform(value)));
+  Future<Result<DeputyFull>> getDeputy(BaseDeputyParams params) async {
+    if (_deputyFullMapper == null) {
+      final clubs = await _clubsCache.parliamentClubs.onSuccessThen((success) => success.value);
+      _deputyFullMapper = DeputyFullMapper(clubs);
+    }
+
+    return _deputiesApi.getDeputy(params.deputyId)
+        .then((value) => Success(_deputyFullMapper!.transform(value)));
+  }
 }

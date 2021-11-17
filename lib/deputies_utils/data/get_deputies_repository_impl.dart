@@ -9,21 +9,19 @@ import 'package:project_athens/deputies_utils/domain/get_deputies/get_deputies_r
 
 class GetDeputiesRepositoryImpl implements GetDeputiesRepository {
   final DeputiesApi _deputiesApi;
-  final ParliamentClubsCache _parliamentClubsCache;
-  final GetDeputiesMapper _mapper = GetDeputiesMapper();
+  final ParliamentClubsCache _clubsCache;
 
   GetDeputiesRepositoryImpl(
-      this._deputiesApi, this._parliamentClubsCache);
+      this._deputiesApi, this._clubsCache);
 
   @override
-  Future<Result<List<DeputyModel>>> getDeputies(BaseDeputiesParams params) {
-    return _parliamentClubsCache.parliamentClubs
-        .onSuccessThen((success) {
-          _mapper.setClubs(success.value);
-          return _deputiesApi.getAllDeputies(params.cadency);
-        })
+  Future<Result<List<DeputyModel>>> getDeputies(BaseDeputiesParams params) async {
+    final clubs = await _clubsCache.parliamentClubs.onSuccessThen((success) => success.value);
+    final mapper = GetDeputiesMapper(clubs);
+
+    return _deputiesApi.getAllDeputies(params.cadency)
         .then((value) =>
-            value.map((response) => _mapper.transform(response)).toList())
+            value.map((response) => mapper.transform(response)).toList())
         .then((value) => Success(value));
   }
 }
