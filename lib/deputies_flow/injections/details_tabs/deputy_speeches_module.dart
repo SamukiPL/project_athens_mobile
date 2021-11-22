@@ -11,6 +11,7 @@ import 'package:project_athens/deputies_flow/data/deputy_speeches_network_data_s
 import 'package:project_athens/deputies_flow/data/network/deputies_details_api.dart';
 import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_details_list_blocs.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
+import 'package:project_athens/deputies_utils/cache/parliament_clubs_cache.dart';
 import 'package:project_athens/speeches_flow/mappers/speeches_network_mapper.dart';
 import 'package:project_athens/speeches_flow/screens/list/list_impl/speech_item_view_model_factory.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +28,8 @@ class DeputySpeechesModule extends Module {
     final localizations = Provider.of<AppLocalizations>(context);
     final deputiesDetailsApi = DeputiesDetailsApi(dio);
     final deputiesCache = Provider.of<DeputiesCache>(context);
-    final networkMapper = SpeechesNetworkMapper(deputiesCache);
+    final clubsCache = Provider.of<ParliamentClubsCache>(context);
+    final networkMapper = SpeechesNetworkMapper(deputiesCache, clubsCache);
 
     final dataSource = DeputySpeechesNetworkDataSource(deputiesDetailsApi, networkMapper, _deputyId);
     final itemsRepository = ItemsRepositoryImpl(dataSource);

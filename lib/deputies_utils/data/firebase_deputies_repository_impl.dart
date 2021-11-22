@@ -1,5 +1,7 @@
 import 'package:project_athens/athens_core/domain/result.dart';
+import 'package:project_athens/athens_core/ext/future_extension.dart';
 import 'package:project_athens/athens_core/utils/firebase/firebase_deputy_subscriber.dart';
+import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/data/network/deputies_api.dart';
 import 'package:project_athens/deputies_utils/data/network/response/subscribed_deputy_response.dart';
 import 'package:project_athens/deputies_utils/domain/base_deputies_params.dart';
@@ -10,19 +12,25 @@ import 'package:project_athens/deputies_utils/mappers/subscribed_deputy_mapper.d
 class FirebaseDeputiesRepositoryImpl extends FirebaseDeputiesRepository {
 
   final DeputiesApi _deputiesApi;
+  final DeputiesCache _deputiesCache;
 
   final FirebaseDeputySubscriber _deputySubscriber;
 
-  FirebaseDeputiesRepositoryImpl(this._deputiesApi, this._deputySubscriber);
+  FirebaseDeputiesRepositoryImpl(this._deputiesApi, this._deputiesCache, this._deputySubscriber);
 
   @override
-  Future<Result<List<SubscribedDeputyResponse>>> initFirebaseDeputies(BaseDeputiesParams params) async {
+  Future<Result<List<SubscribedDeputyModel>>> initFirebaseDeputies(BaseDeputiesParams params) async {
+    final deputies = await _deputiesCache.deputies.onSuccessThen((success) => success.value);
     final response = await _deputiesApi.getSubscribedDeputies(params.cadency);
+
+    final mapper = SubscribedDeputyMapper(response);
+    final models = mapper(deputies);
+
     await _deputySubscriber.subscribeDeputies(response.map((model) =>
         model.toFirebaseDeputySubscribeModel()
     ).toList());
 
-    return Success<List<SubscribedDeputyResponse>>(response);
+    return Success<List<SubscribedDeputyModel>>(models);
   }
 
 }

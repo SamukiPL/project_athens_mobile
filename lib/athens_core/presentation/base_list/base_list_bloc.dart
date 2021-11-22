@@ -11,11 +11,11 @@ import 'package:project_athens/pagination/paging_bloc.dart';
 import 'package:project_athens/pagination/paging_list_adapter.dart';
 
 class BaseListBloc extends BaseBloc implements PagingBloc {
-  final ListFacade _listUseCase;
+  final ListFacade _listFacade;
 
   final ItemViewModelFactory _itemFactory;
 
-  BaseListBloc(this._listUseCase, this._itemFactory) {
+  BaseListBloc(this._listFacade, this._itemFactory) {
     getItems();
     adapter = PagingListAdapter(this);
   }
@@ -48,7 +48,7 @@ class BaseListBloc extends BaseBloc implements PagingBloc {
 
   @protected
   Future<void> getItems() async {
-    _listUseCase.getItems().listen((Result data) {
+    _listFacade.getItems().listen((Result data) {
       adapter.setLoading(false);
       manageState(data);
     });
@@ -57,12 +57,12 @@ class BaseListBloc extends BaseBloc implements PagingBloc {
   @override
   Future<void> loadMore() {
     adapter.setLoading(true);
-    return _listUseCase.fetchItems(batchSize, offset);
+    return _listFacade.fetchItems(batchSize, offset);
   }
 
   @override
   Future<void> refresh() async {
-    _listUseCase.refreshItems();
+    _listFacade.refreshItems();
   }
 
   List<BaseItemViewModel> _mapItems(List<BaseModel> data) {
@@ -76,6 +76,6 @@ class BaseListBloc extends BaseBloc implements PagingBloc {
   void dispose() {
     super.dispose();
     adapter.dispose();
-    _listUseCase.dispose();
+    _listFacade.dispose();
   }
 }
