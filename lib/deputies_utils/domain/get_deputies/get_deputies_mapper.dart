@@ -5,7 +5,7 @@ import 'package:project_athens/deputies_utils/domain/parliament_club_model.dart'
 
 class GetDeputiesMapper extends DataMapper<DeputyResponse, DeputyModel> {
 
-  late List<ParliamentClubModel> _clubs;
+  final List<ParliamentClubModel> _clubs;
 
   GetDeputiesMapper(this._clubs);
 

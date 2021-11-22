@@ -24,7 +24,6 @@ import 'package:provider/provider.dart';
 class SpeechesListModule extends Module {
   SpeechesListModule(BuildContext context) : super(context);
 
-  late final SpeechesListFacade _listFacade;
   late final BaseListBloc _bloc;
   late final EasyFiltersListBloc _filtersListBloc;
 
@@ -47,22 +46,22 @@ class SpeechesListModule extends Module {
 
     final speechesRepository = ItemsRepositoryImpl(networkDataSource);
     final filtersRepository = FiltersRepository(localizations);
-    _listFacade = SpeechesListFacade(
+    final listFacade = SpeechesListFacade(
         speechesRepository, filtersRepository, speechesEasyFilters);
 
     final itemFactory = SpeechItemViewModelFactory();
-    _bloc = BaseListBloc(_listFacade, itemFactory);
-    _filtersListBloc = EasyFiltersListBloc(_listFacade);
+    _bloc = BaseListBloc(listFacade, itemFactory);
+    _filtersListBloc = EasyFiltersListBloc(listFacade);
 
     return [
       Provider<BaseListBloc>.value(
         value: _bloc,
       ),
       Provider<SearchAppBarFacade>.value(
-        value: _listFacade,
+        value: listFacade,
       ),
       Provider<FilterableFacade>.value(
-        value: _listFacade,
+        value: listFacade,
       ),
       Provider<EasyFiltersListBloc>.value(
           value: _filtersListBloc

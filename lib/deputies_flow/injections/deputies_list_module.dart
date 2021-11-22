@@ -17,7 +17,6 @@ import 'package:provider/provider.dart';
 class DeputiesListModule extends Module {
   DeputiesListModule(BuildContext context) : super(context);
 
-  late final DeputiesListFacade _listFacade;
   late final BaseListBloc _bloc;
   late final EasyFiltersListBloc _filtersListBloc;
 
@@ -33,18 +32,18 @@ class DeputiesListModule extends Module {
         clubsCache, _localizations);
 
     final deputiesListRepository = ItemsRepositoryImpl(deputiesDataSource);
-    _listFacade = DeputiesListFacade(
+    final listFacade = DeputiesListFacade(
         deputiesListRepository, deputiesEasyFiltersRepository);
     final itemFactory = DeputyItemViewModelFactory();
 
-    _bloc = BaseListBloc(_listFacade, itemFactory);
-    _filtersListBloc = EasyFiltersListBloc(_listFacade);
+    _bloc = BaseListBloc(listFacade, itemFactory);
+    _filtersListBloc = EasyFiltersListBloc(listFacade);
 
     return [
       Provider<BaseListBloc>.value(
         value: _bloc,
       ),
-      Provider<SearchAppBarFacade>.value(value: _listFacade),
+      Provider<SearchAppBarFacade>.value(value: listFacade),
       Provider<EasyFiltersListBloc>.value(
           value: _filtersListBloc)
     ];

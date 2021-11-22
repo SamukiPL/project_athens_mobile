@@ -23,7 +23,6 @@ class VotesListModule extends Module {
 
   VotesListModule(BuildContext context) : super(context);
 
-  late final VotesListFacade _listFacade;
   late final BaseListBloc _bloc;
   late final EasyFiltersListBloc _filtersListBloc;
 
@@ -41,21 +40,21 @@ class VotesListModule extends Module {
 
     final itemsRepository = ItemsRepositoryImpl(networkDataSource);
     final filtersRepository = FiltersRepository(localizations);
-    _listFacade = VotesListFacade(itemsRepository, filtersRepository, votesEasyFilters);
+    final listFacade = VotesListFacade(itemsRepository, filtersRepository, votesEasyFilters);
 
     final itemFactory = VoteItemViewModelFactory();
-    _bloc = BaseListBloc(_listFacade, itemFactory);
-    _filtersListBloc = EasyFiltersListBloc(_listFacade);
+    _bloc = BaseListBloc(listFacade, itemFactory);
+    _filtersListBloc = EasyFiltersListBloc(listFacade);
 
     return [
       Provider<BaseListBloc>.value(
         value: _bloc,
       ),
       Provider<SearchAppBarFacade>.value(
-        value: _listFacade,
+        value: listFacade,
       ),
       Provider<FilterableFacade>.value(
-        value: _listFacade,
+        value: listFacade,
       ),
       Provider<EasyFiltersListBloc>.value(
         value: _filtersListBloc
