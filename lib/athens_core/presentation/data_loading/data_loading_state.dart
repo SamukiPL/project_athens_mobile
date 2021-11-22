@@ -1,9 +1,9 @@
 import 'package:project_athens/athens_core/presentation/widget_state.dart';
 
 abstract class DataLoadingState {
- DataLoadingState._();
+ const DataLoadingState._();
  
- factory DataLoadingState.initialLoading() = InitialLoading;
+ const factory DataLoadingState.initialLoading() = InitialLoading;
  factory DataLoadingState.contentLoaded() = ContentLoaded;
  factory DataLoadingState.loading() = Loading;
  factory DataLoadingState.noData() = NoDataLoaded;
@@ -11,7 +11,7 @@ abstract class DataLoadingState {
 }
 
 class InitialLoading extends DataLoadingState {
-  InitialLoading() : super._();
+  const InitialLoading() : super._();
 }
 
 class ContentLoaded extends DataLoadingState {

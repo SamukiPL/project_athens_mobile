@@ -31,7 +31,7 @@ class MoreHallOfFameScreenDestination extends Destination<HallOfFameScreen> {
 
   @override
   List<Module> getScreenModules(BuildContext context) =>
-      [HallOfFameModule(context), AppNavigationModule(context)];
+      [HallOfFameModule(context)];
 }
 
 class MoreSettingsScreenDestination extends Destination<SettingsScreen> {
@@ -52,5 +52,5 @@ class MoreCreditsScreenDestination extends Destination<CreditsScreen> {
   CreditsScreen getScreen() => CreditsScreen();
 
   @override getScreenModules(BuildContext context) =>
-      [CreditsModule(context), AppNavigationModule(context)];
+      [CreditsModule(context)];
 }

@@ -50,7 +50,6 @@ class DeputyVoteViewHolder extends StatelessWidget with RedirectionDelegate {
                 fontSize: 18
             ),
           ),
-          // _getDeputyVoteTypeIcons(theme),
           Text(
             _viewModel.date,
             style: TextStyle(
