@@ -31,8 +31,7 @@ class GroupDetailsScreen extends BaseScreen<GroupDetailsBloc> {
       child: Column(
         children: [
           FullCard(
-            rightPadding: 8,
-            leftPadding: 8,
+            cardPadding: EdgeInsets.only(top: 8, bottom: 8, left: 8, right: 8),
             header: bloc.header,
             child: Text(
               bloc.agenda != null ? bloc.agenda! : 'Brak opisu.',

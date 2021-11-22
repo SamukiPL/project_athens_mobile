@@ -25,10 +25,13 @@ class SettingsScreen extends BaseScreen<SettingsBloc> {
     final configuration = Provider.of<Configuration>(context);
 
     return Container(
+      padding: EdgeInsets.only(left: 8),
       child: Column(
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Text(localization.getText().settingsSwitchTechnicalData()),
             StreamProvider.value(
                 value: configuration.showTechnicalData,
                 initialData: false,
@@ -37,11 +40,12 @@ class SettingsScreen extends BaseScreen<SettingsBloc> {
                         Switch(
                             value: value,
                             onChanged: configuration.updateShowTechnicalData))),
-            Text(localization.getText().settingsSwitchTechnicalData()),
           ],
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Text(localization.getText().settingsSwitchWakelockTimeline()),
             StreamProvider.value(
                 value: configuration.wakelockOnTimeline,
                 initialData: false,
@@ -50,7 +54,6 @@ class SettingsScreen extends BaseScreen<SettingsBloc> {
                         Switch(
                             value: value,
                             onChanged: configuration.updateWakelockOnTimeline))),
-            Text(localization.getText().settingsSwitchWakelockTimeline()),
           ],
         )
       ],

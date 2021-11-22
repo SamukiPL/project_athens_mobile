@@ -182,7 +182,8 @@
     "likeApplication": "Like the application?",
     "supportUs": "Support us ❤",
     "checkForUpdates": "Check for updates",
-    "appVersion": "Application version"
+    "appVersion": "Application version",
+    "credits": "Credits"
   },
   "settings": {
     "settingsTitle": "Settings",

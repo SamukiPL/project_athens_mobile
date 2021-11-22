@@ -27,6 +27,7 @@ abstract class BaseBloc {
     } else if (result is Failure) {
       Failure failure = result;
       final state = failure.exception.getWidgetState();
+
       _manageErrorState(state);
       stateController.add(state);
     }

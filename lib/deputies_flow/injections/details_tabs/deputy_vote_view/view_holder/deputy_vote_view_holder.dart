@@ -29,7 +29,7 @@ class DeputyVoteViewHolder extends StatelessWidget with RedirectionDelegate {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _getTypeAndDateRow(theme),
-          _getResults(),
+          _getResults(theme),
           _getTitle(theme),
           TechnicalData(technicalId: _viewModel.id),
         ],
@@ -50,7 +50,6 @@ class DeputyVoteViewHolder extends StatelessWidget with RedirectionDelegate {
                 fontSize: 18
             ),
           ),
-          _getDeputyVoteTypeIcons(theme),
           Text(
             _viewModel.date,
             style: TextStyle(
@@ -81,26 +80,32 @@ class DeputyVoteViewHolder extends StatelessWidget with RedirectionDelegate {
     );
   }
 
-  Widget _getResults() {
-    return Container(
-      child: RichText(
-          text: TextSpan(
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14
-              ),
-              children: [
-                TextSpan(text: _viewModel.results.inFavor.toString(), style: TextStyle(color: Colors.green)),
-                TextSpan(text: "/",),
-                TextSpan(text: _viewModel.results.against.toString(), style: TextStyle(color: Colors.red)),
-                TextSpan(text: "/",),
-                TextSpan(text: _viewModel.results.hold.toString(), style: TextStyle(color: Colors.grey)),
-                TextSpan(text: "/",),
-                TextSpan(text: _viewModel.results.absent.toString(), style: TextStyle(color: Colors.grey)),
-              ]
-          )
-      ),
-    );
+  Widget _getResults(ThemeData theme) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          child: RichText(
+              text: TextSpan(
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14
+                  ),
+                  children: [
+                    TextSpan(text: _viewModel.results.inFavor.toString(), style: TextStyle(color: Colors.green)),
+                    TextSpan(text: "/",),
+                    TextSpan(text: _viewModel.results.against.toString(), style: TextStyle(color: Colors.red)),
+                    TextSpan(text: "/",),
+                    TextSpan(text: _viewModel.results.hold.toString(), style: TextStyle(color: Colors.grey)),
+                    TextSpan(text: "/",),
+                    TextSpan(text: _viewModel.results.absent.toString(), style: TextStyle(color: Colors.grey)),
+                  ]
+              )
+          ),
+        ),
+        _getDeputyVoteTypeIcons(theme)
+      ],
+    ) ;
   }
 
   Widget _getTitle(ThemeData theme) {

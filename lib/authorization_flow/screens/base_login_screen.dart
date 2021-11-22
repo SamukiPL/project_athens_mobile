@@ -73,7 +73,6 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
                       padding: EdgeInsets.only(bottom: 8),
                       child: Text(
                         errMsg,
-                        // localizations.getText().universalErrorNetwork(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 20

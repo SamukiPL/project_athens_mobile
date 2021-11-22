@@ -64,9 +64,8 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
                 builder: (context, model, _) =>
                     model != null ?
                     FullCard(
-                    leftPadding: 8,
-                    rightPadding: 8,
-                    child: DbSource(model)
+                        cardPadding: EdgeInsets.only(top: 8, bottom: 8, left: 8, right: 8),
+                        child: DbSource(model)
                 ) : Container()
               )
           ),
@@ -373,9 +372,8 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
             builder: (context, model, _) =>
                 model != null ?
                 FullCard(
-                leftPadding: 8,
-                rightPadding: 8,
-                child: Column(
+                    cardPadding: EdgeInsets.only(top: 8, bottom: 8, left: 8, right: 8),
+                    child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Wrap(

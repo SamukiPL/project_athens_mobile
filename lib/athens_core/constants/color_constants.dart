@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ColorConstants {
-  static final int primaryColor = 0xff00bfff;
+  static final int primaryColor = 0xff61a1f3;
 
   static final Color voteInFavorColor = Color(primaryColor);
   static final Color voteAgainstColor = Colors.redAccent.shade700;
