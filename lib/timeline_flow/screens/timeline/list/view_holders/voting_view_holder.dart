@@ -205,8 +205,6 @@ class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
   }
 
   Widget getRowText(BuildContext context, ThemeData theme) {
-
-
     return Expanded(
       child: Card(
         margin: EdgeInsets.only(left: 8, top: 8, bottom: 8,  right: 8),

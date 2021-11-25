@@ -1,7 +1,13 @@
 import 'package:flutter_fimber/flutter_fimber.dart';
 
-abstract class Result<T> {}
-class Success<T> implements Result<T> {
+abstract class Result<T> {
+
+  bool isSuccess() => this is Success<T>;
+  Success<T> toSuccess() => this as Success<T>;
+  bool isFailure() => this is Failure<T>;
+  Failure<T> toFailure() => this as Failure<T>;
+}
+class Success<T> extends Result<T> {
 
   final T value;
 
@@ -9,7 +15,7 @@ class Success<T> implements Result<T> {
 
 }
 
-class Failure<T> implements Result<T> {
+class Failure<T> extends Result<T> {
 
   final T? value;
 
@@ -30,4 +36,9 @@ class Failure<T> implements Result<T> {
 
 }
 
-class Refresh<T> implements Result<T> {}
+class Refresh<T> extends Result<T> {}
+
+class WrongResultError implements Exception {
+  @override
+  String toString() => "WrongResultError: Unexpected Result";
+}

@@ -1,6 +1,7 @@
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
+import 'package:project_athens/athens_core/presentation/button_loader/button_loader.dart';
 import 'package:project_athens/authorization_flow/injections/reset_password_module.dart';
 import 'package:project_athens/authorization_flow/navigation/login_navigation_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/base_login_screen.dart';
@@ -92,20 +93,19 @@ class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
                 ),
                 Container(
                   margin: EdgeInsets.only(bottom: 24),
-                  child: RaisedButton(
-                    child: Container(
-                      padding: EdgeInsets.all(16),
-                      child: Text(
-                        localization.getText().loginButtonsResetPassword(),
-                        style: TextStyle(color: Colors.white),
-                        textScaleFactor: 1.5,
-                      ),
+                  child: ButtonLoader(
+                    bloc.btnActionAwaitBloc,
+                    actionStateWidget: Text(
+                      localization.getText().loginButtonsResetPassword(),
+                      style: TextStyle(color: Colors.white),
+                      textScaleFactor: 1.5,
                     ),
-                    onPressed: () => bloc(),
-                    color: Theme.of(context).primaryColor,
+                    callback: () => bloc(),
+                    buttonBg: Theme.of(context).primaryColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(32),
                     ),
+                    mainPadding: EdgeInsets.all(16),
                   ),
                 ),
               ],

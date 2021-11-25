@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
+import 'package:project_athens/athens_core/presentation/data_loading/data_loading_bloc.dart';
+import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
+import 'package:project_athens/athens_core/presentation/widget_state.dart';
 import 'package:project_athens/authorization_flow/domain/login/login_params.dart';
 import 'package:project_athens/authorization_flow/domain/login/login_use_case.dart';
 import 'package:project_athens/authorization_flow/screens/login/auth_failed_notifier.dart';
@@ -16,6 +19,7 @@ class LoginBloc extends BaseBloc {
 
   final _cadency = 9;
   final AuthFailedNotifier authFailedNotifier = AuthFailedNotifier();
+  final DataLoadingBloc loginButtonLoadingBloc = DataLoadingBloc();
 
   LoginBloc(this._loginUseCase, this._firebaseDeputiesUseCase);
 
@@ -39,6 +43,7 @@ class LoginBloc extends BaseBloc {
     if (_login.isEmpty || _password.isEmpty) return;
 
     authFailedNotifier.state = false;
+    loginButtonLoadingBloc.setDataLoadingState(DataLoadingState.loading());
 
     final LoginParams params = _login.contains('@')
         ? LoginParams(password: _password, email: _login)
@@ -49,8 +54,15 @@ class LoginBloc extends BaseBloc {
     if (loginResult is Success) {
       final deputiesParams = BaseDeputiesParams(_cadency);
       final subscribeResult = await _firebaseDeputiesUseCase(deputiesParams);
+      loginButtonLoadingBloc.setDataLoadingState(DataLoadingState.contentLoaded());
 
       return manageState(subscribeResult);
+    } else {
+      if (loginResult is Failure) {
+        loginButtonLoadingBloc.setDataLoadingState(DataLoadingState.error(loginResult.exception.getErrorType()));
+      } else {
+        loginButtonLoadingBloc.setDataLoadingState(DataLoadingState.initialLoading());
+      }
     }
 
     manageState(loginResult);

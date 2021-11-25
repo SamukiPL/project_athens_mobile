@@ -9,4 +9,6 @@ abstract class Module{
 
   List<SingleChildWidget> getProviders();
 
+  void dispose() {}
+
 }

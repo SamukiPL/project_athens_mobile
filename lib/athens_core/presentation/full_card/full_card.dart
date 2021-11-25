@@ -6,13 +6,19 @@ import 'package:provider/provider.dart';
 class FullCard extends StatelessWidget {
 
   final Widget child;
-  final double leftPadding;
-  final double rightPadding;
+  final EdgeInsets cardPadding;
+  final EdgeInsets cardSpacingPadding;
   final String header;
   final double headerPadding;
   final String dialogText;
 
-  FullCard({required this.child, this.leftPadding = 0, this.rightPadding = 0, this.header = "", this.headerPadding = 0, this.dialogText = ''});
+  FullCard({required this.child,
+    this.header = "",
+    this.cardPadding = const EdgeInsets.only(left: 8, right: 8),
+    this.cardSpacingPadding = const EdgeInsets.only(top: 4, bottom: 4),
+    this.headerPadding = 0,
+    this.dialogText = '',
+  });
 
   Widget buildHeader(ThemeData theme, BuildContext context) {
     return Container(
@@ -48,9 +54,9 @@ class FullCard extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Container(
-        padding: EdgeInsets.only(top: 4, bottom: 4),
+        padding: cardSpacingPadding,
         child: Container(
-          padding: EdgeInsets.only(top: 8, bottom: 8, left: this.leftPadding, right: this.rightPadding),
+          padding: cardPadding,
           decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [BoxShadow(

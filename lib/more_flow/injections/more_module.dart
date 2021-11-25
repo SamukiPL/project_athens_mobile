@@ -12,6 +12,8 @@ import 'package:provider/provider.dart';
 class MoreModule extends Module {
   MoreModule(BuildContext context) : super(context);
 
+  late final MoreBloc _bloc;
+
   @override
   List<SingleChildWidget> getProviders() {
     final client = Provider.of<Dio>(context);
@@ -21,12 +23,17 @@ class MoreModule extends Module {
     final logoutUseCase = LogoutUseCase(logoutRepository);
 
     final AutoUpdater _autoUpdater = Provider.of<AutoUpdater>(context);
+    _bloc = MoreBloc(logoutUseCase, _autoUpdater);
 
     return [
-      Provider<MoreBloc>(
-        create: (_) => MoreBloc(logoutUseCase, _autoUpdater),
-        dispose: (context, bloc) => bloc.dispose(),
+      Provider<MoreBloc>.value(
+        value: _bloc,
       ),
     ];
+  }
+
+  @override
+  void dispose() {
+    _bloc.dispose();
   }
 }

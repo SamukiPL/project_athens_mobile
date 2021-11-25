@@ -577,6 +577,10 @@ class AppLocalizationsGenerated {
     return words['more']['appVersion'];
   }
 
+  String moreCredits() {
+    return words['more']['credits'];
+  }
+
   String dashboardTitle() {
     return words['dashboard']['title'];
   }

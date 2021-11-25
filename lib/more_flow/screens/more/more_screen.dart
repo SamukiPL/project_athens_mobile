@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
+import 'package:project_athens/athens_core/presentation/full_card/full_card.dart';
 import 'package:project_athens/more_flow/navigation/more_navigation.dart';
 import 'package:project_athens/more_flow/screens/more/more_bloc.dart';
 import 'package:provider/provider.dart';
@@ -27,113 +28,105 @@ class MoreScreen extends BaseScreen<MoreBloc> {
       fontWeight: FontWeight.w300,
     );
 
+    final theme = Theme.of(context);
+
     return Container(
-        child: Column(
+      child: Column(
       children: [
-        _buildMoreSegment(localization.getText().moreUser(), [
-          MaterialButton(
-              onPressed: () => bloc.logout(),
-              child: Container(
-                width: double.infinity,
-                child: Text(
-                  localization.getText().settingsButtonLogout(),
-                  textAlign: TextAlign.left,
-                  style: linkTextStyle,
-                ),
-              )),
-          MaterialButton(
+          _buildActionRow(
+            label: localization.getText().settingsButtonLogout(),
+            onPressed: () => bloc.logout(),
+            theme: theme,
+          ),
+          _buildActionRow(
+            label: localization.getText().settingsHallOfFameTitle(),
+            onPressed: () =>
+                goToDestination(context, MoreHallOfFameScreenDestination()),
+            theme: theme,
+          ),
+          _buildActionRow(
+            label: localization.getText().moreGoToSettings(),
+            onPressed: () =>
+                goToDestination(context, MoreSettingsScreenDestination()),
+            theme: theme,
+          ),
+          _buildActionRow(
+              label: localization.getText().moreCredits(),
               onPressed: () =>
-                  goToDestination(context, MoreHallOfFameScreenDestination()),
-              child: Container(
-                width: double.infinity,
-                child: Text(
-                  localization.getText().settingsHallOfFameTitle(),
-                  textAlign: TextAlign.left,
-                  style: linkTextStyle,
-                ),
-              ))
-        ]),
-        _buildMoreSegment(localization.getText().settingsSettingsTitle(), [
-          MaterialButton(
-              onPressed: () =>
-                  goToDestination(context, MoreSettingsScreenDestination()),
-              child: Container(
-                width: double.infinity,
-                child: Text(
-                  localization.getText().moreGoToSettings(),
-                  textAlign: TextAlign.left,
-                  style: linkTextStyle,
-                ),
-              )),
-          Column(
-            children: [
-              MaterialButton(
-                  onPressed: () => bloc.checkForUpdates(),
-                  child: Container(
-                      width: double.infinity,
-                      child: StreamProvider<bool>.value(
-                        value: bloc.checkingForUpdateStream,
-                        initialData: false,
-                        child: Consumer<bool>(
-                            builder: (context, isChecking, bloc) {
-                          if (!isChecking) {
-                            return Text(
-                              localization.getText().moreCheckForUpdates(),
-                              textAlign: TextAlign.left,
-                              style: linkTextStyle,
-                            );
-                          } else {
-                            return Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  localization.getText().moreCheckForUpdates(),
-                                  textAlign: TextAlign.left,
-                                  style: linkTextStyle,
-                                ),
-                                Container(
-                                    padding: EdgeInsets.only(left: 8),
-                                    child: SizedBox(
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 2,
-                                      ),
-                                      height: 18,
-                                      width: 18,
-                                    )),
-                              ],
-                            );
-                          }
-                        }),
-                      ))),
-              FutureProvider.value(
+                goToDestination(context, MoreCreditsScreenDestination()),
+              theme: theme
+          ),
+          _buildActionRow(
+              label: localization.getText().moreCheckForUpdates(),
+              onPressed: () => bloc.checkForUpdates(),
+              theme: theme,
+              drawBottomBorder: false,
+              isNavigation: false,
+              additionalChild: FutureProvider.value(
                 value: bloc.getAppVersion(),
                 initialData: null,
                 child: Consumer<String?>(
                   builder: (context, version, _) {
                     if (version != null && version != '') {
-                      return Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.only(left: 36),
-                          child: Text(
-                            localization.getText().moreAppVersion() +
-                                ": " +
-                                version,
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w300,
-                                color: Colors.black45,
-                                fontSize: 10),
-                          ));
+                      return StreamProvider<bool>.value(
+                        value: bloc.checkingForUpdateStream,
+                        initialData: false,
+                        child: Consumer<bool>(
+                            builder: (context, isChecking, bloc) {
+                              if (!isChecking) {
+                                return Container(
+                                    width: double.infinity,
+                                    padding: EdgeInsets.only(left: 16, top: 12),
+                                    child: Text(
+                                      localization.getText().moreAppVersion() +
+                                          ": " +
+                                          version,
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.black45,
+                                          fontSize: 10),
+                                    ));
+                              } else {
+                                return Container(
+                                  padding: EdgeInsets.only(left: 16, top: 12),
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          child: Text(
+                                            localization.getText().moreAppVersion() +
+                                                ": " +
+                                                version,
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.black45,
+                                                fontSize: 10),
+                                          )),
+                                      Container(
+                                          padding: EdgeInsets.only(left: 8),
+                                          child: SizedBox(
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 1,
+                                            ),
+                                            height: 12,
+                                            width: 12,
+                                          )),
+                                    ],
+                                  )
+                                );
+                              }
+                            }),
+                      );
                     } else {
                       return Container();
                     }
                   },
                 ),
               )
-            ],
-          )
-        ]),
+          ),
         Expanded(child: Container()),
         Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
           Text(localization.getText().moreLikeApplication()),
@@ -156,27 +149,61 @@ class MoreScreen extends BaseScreen<MoreBloc> {
   }
 
   Widget _buildMoreSegment(String title, List<Widget> children) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(12),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 22,
-              color: Colors.black87,
-            ),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: children,
-          )
-        ],
+    return FullCard(
+      header: title,
+      headerPadding: 8,
+      cardPadding: EdgeInsets.only(bottom: 0),
+      child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: children,
+        )
       ),
+    );
+  }
+
+  Widget _buildActionRow(
+      {required String label,
+      required void Function() onPressed,
+      required ThemeData theme,
+      bool drawBottomBorder = true,
+      bool isNavigation = true,
+      Widget? additionalChild
+      }) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: InkWell(
+        child: Container(
+          padding: EdgeInsets.only(left: 8, right: 8, top: 16, bottom: 16),
+          decoration: drawBottomBorder ? BoxDecoration(
+            border: Border(
+              bottom: BorderSide(width: 1, color: theme.dividerColor.withOpacity(0.2))
+            )
+          ) : BoxDecoration(),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      label,
+                      style: TextStyle(
+                          color: theme.dividerColor,
+                          fontSize: 20
+                      ),
+                    ),
+                    isNavigation ? Icon(
+                        Icons.chevron_right,
+                        color: theme.dividerColor.withOpacity(0.4)
+                    ) : Container()
+                  ],
+                ),
+                additionalChild != null ? additionalChild : Container()
+              ],
+            ),
+        )
+      )
     );
   }
 

@@ -1,87 +1,50 @@
+import 'package:collection/src/iterable_extensions.dart';
 import 'package:project_athens/athens_core/data/word_model/word_model.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
+import 'package:project_athens/athens_core/ext/future_extension.dart';
 import 'package:project_athens/athens_core/ext/map_extension.dart';
-import 'package:project_athens/deputies_utils/data/network/response/deputy_response.dart';
-import 'package:project_athens/deputies_utils/data/network/response/full_deputy_response.dart';
+import 'package:project_athens/deputies_utils/cache/cache_errors.dart';
 import 'package:project_athens/deputies_utils/domain/base_deputies_params.dart';
 import 'package:project_athens/deputies_utils/domain/base_deputy_params.dart';
-import 'package:project_athens/deputies_utils/domain/base_parliament_clubs_params.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_full.dart';
-import 'package:project_athens/deputies_utils/domain/deputy_full_mapper.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputies/get_deputies_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputy/get_deputy_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/get_deputy_nouns/get_deputy_nouns_use_case.dart';
-import 'package:project_athens/deputies_utils/domain/get_parliament_clubs/get_parliament_clubs_use_case.dart';
-import 'package:project_athens/deputies_utils/domain/parliament_club_model.dart';
-import 'package:collection/collection.dart';
 
 class DeputiesCache {
   final GetDeputiesUseCase _getDeputiesUseCase;
-  final GetParliamentClubsUseCase _getParliamentClubsUseCase;
   final GetDeputyUseCase _getDeputyUseCase;
   final GetDeputyNounsUseCase _getDeputyNounsUseCase;
 
-  DeputiesCache(this._getDeputiesUseCase, this._getParliamentClubsUseCase, this._getDeputyUseCase, this._getDeputyNounsUseCase);
+  DeputiesCache(this._getDeputiesUseCase, this._getDeputyUseCase, this._getDeputyNounsUseCase);
 
   List<DeputyModel>? _cachedDeputies;
-  List<ParliamentClubModel>? _cachedParliamentClubs;
   Map<String, String> _deputiesThumbnails = Map<String, String>();
-
   Map<String, DeputyFull> _cachedDeputiesResponse = Map<String, DeputyFull>();
   Map<String, List<WordModel>> _cachedDeputyNouns = new Map<String, List<WordModel>>();
 
-  Future<Result<List<DeputyModel>>> get deputies async {
-    if (_cachedDeputies != null) return Success(_cachedDeputies!.toList());
+  Future<Result<List<DeputyModel>>>? result;
 
-    final clubsResponse = await parliamentClubs;
+  Future<Result<List<DeputyModel>>> get deputies {
+    if (_cachedDeputies != null)
+      return Future.value(Success(_cachedDeputies!.toList()));
 
-    if (clubsResponse is Failure<List<ParliamentClubModel>>) {
-      return Failure(clubsResponse.exception);
-    }
+    if (result != null) return result!;
 
-    final clubs = (clubsResponse as Success<List<ParliamentClubModel>>).value;
-
-    final result = await _getDeputiesUseCase(BaseDeputiesParams(9)).then((result) {
-      if (result is Success<List<DeputyResponse>>) {
-        _cachedDeputies = result.value.map((deputy) => _responseToModel(
-            deputy, clubs.firstWhere((club) => club.id == deputy.parliamentClub))).toList();
-
-        return Success(_cachedDeputies);
+    result = _getDeputiesUseCase(BaseDeputiesParams(9)).whenComplete(() {
+      result = null;
+    }).then((result) {
+      if (result.isSuccess()) {
+        _cachedDeputies = result.toSuccess().value;
+        return Success(_cachedDeputies!);
       } else {
-        return result;
+        return Failure(DeputiesCacheError());
       }
     });
 
-    return result as Result<List<DeputyModel>>;
+    return result!;
   }
-
-  Future<Result<List<ParliamentClubModel>>> get parliamentClubs async {
-    if (_cachedParliamentClubs != null)
-      return Success(_cachedParliamentClubs!.toList());
-
-    final clubsResult = await _getParliamentClubsUseCase(BaseParliamentClubsParams(9))
-        .then((clubsResult) {
-      if (clubsResult is Success<List<ParliamentClubModel>>) {
-        _cachedParliamentClubs = clubsResult.value;
-        return Success(_cachedParliamentClubs);
-      } else {
-        return clubsResult;
-      }
-    });
-
-    return clubsResult as Result<List<ParliamentClubModel>>;
-  }
-
-  DeputyModel _responseToModel(
-          DeputyResponse response, ParliamentClubModel club) =>
-      DeputyModel(
-          id: response.id,
-          name: response.name,
-          thumbnailUrl: response.photoUrl,
-          clubId: response.parliamentClub,
-          club: club.shortName,
-          cardId: response.cardId);
 
   Future<DeputyModel> getDeputyModelById(String id) =>
       _getDeputyModel((model) => model.id == id);
@@ -89,43 +52,21 @@ class DeputiesCache {
   Future<DeputyModel> getDeputyModelByCardId(int cardId) =>
       _getDeputyModel((model) => model.cardId == cardId);
 
-  Future<DeputyModel> _getDeputyModel(bool Function(DeputyModel) condition) async {
-    if (_cachedDeputies != null && _cachedDeputies!.isNotEmpty)
-      return _cachedDeputies!.firstWhere((element) => condition(element));
+  Future<DeputyModel> _getDeputyModel(bool Function(DeputyModel) condition) =>
+      deputies.onSuccessThen((success) => success.value.firstWhere(condition));
 
-    await deputies;
+  Future<String> getDeputyThumbnail(String id) {
+    if (_deputiesThumbnails.containsKey(id))
+      return Future.value(_deputiesThumbnails[id]!);
 
-    return _cachedDeputies?.firstWhere((element) => condition(element)) as DeputyModel;
-  }
-
-  Future<String> getDeputyThumbnail(String id) async {
-    if (id == null) {
-      return "";
-    }
-
-    if (_deputiesThumbnails.containsKey(id)) return _deputiesThumbnails[id]!;
-
-    final result = await deputies;
-    String? thumbnailUrl;
-    if (result is Success<List<DeputyModel>>) {
-      thumbnailUrl = result.value
+    return deputies.onSuccessThen((success) {
+      final thumbnailUrl = success.value
           .firstWhereOrNull((element) => element.id == id)
           ?.thumbnailUrl;
       _deputiesThumbnails.putIfNotNull(id, thumbnailUrl!);
-    }
 
-    return thumbnailUrl as String;
-  }
-
-  Future<ParliamentClubModel?> getParliamentClubModel(String? id) async {
-    if (id == null) return null;
-
-    if (_cachedParliamentClubs != null && _cachedParliamentClubs!.isNotEmpty)
-      return _cachedParliamentClubs!.firstWhere((element) => element.id == id);
-
-    await parliamentClubs;
-
-    return _cachedParliamentClubs!.firstWhere((element) => element.id == id);
+      return thumbnailUrl;
+    });
   }
 
   Future<Result<DeputyFull>> getDeputyFull(String id) async {
@@ -133,28 +74,11 @@ class DeputiesCache {
       return Success(_cachedDeputiesResponse[id]!);
     }
 
-    final result = await _getDeputyUseCase(BaseDeputyParams(9, id)).then((result) async {
-      if (result is Success<FullDeputyResponse>) {
-        final clubs = await parliamentClubs;
-
-        if (clubs is Success<List<ParliamentClubModel>>) {
-          final deputyFullMapper = DeputyFullMapper(clubs.value);
-          final deputyFull = deputyFullMapper.transform(result.value);
-
-          _cachedDeputiesResponse.putIfNotNull(deputyFull.id, deputyFull);
-
-          final res = Success<DeputyFull>(deputyFull);
-
-          return res;
-        } else {
-          return null;
-        }
-      } else {
-        return null;
-      }
+    return _getDeputyUseCase(BaseDeputyParams(9, id)).onSuccessThen((success) {
+      final deputyFull = success.value;
+      _cachedDeputiesResponse.putIfNotNull(deputyFull.id, deputyFull);
+      return success;
     });
-
-    return result as Result<DeputyFull>;
   }
 
   Future<Result<List<WordModel>>> getDeputyNouns(String id) async {
@@ -162,23 +86,10 @@ class DeputiesCache {
       return Success(_cachedDeputyNouns[id]!);
     }
 
-    final result = await _getDeputyNounsUseCase(BaseDeputyParams(9, id)).then((result) async {
-      if (result is Success<List<WordModel>>) {
-        final words = result.value;
-
-        _cachedDeputyNouns.putIfNotNull(id, words);
-
-        final res = Success(words);
-
-        return res;
-      } else {
-        return null;
-      }
+    return _getDeputyNounsUseCase(BaseDeputyParams(9, id)).onSuccessThen((success) {
+      final words = success.value;
+      _cachedDeputyNouns.putIfNotNull(id, words);
+      return Success(success.value);
     });
-
-    return result as Result<List<WordModel>>;
-  }
-
-  dispose() {
   }
 }

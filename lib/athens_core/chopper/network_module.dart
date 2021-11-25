@@ -26,7 +26,7 @@ class NetworkModule extends Module {
     return [
       Provider<Dio>(
         create: (BuildContext context) => Dio(clientOptions)
-        ..interceptors.addAll([AuthInterceptor(authFacade), ErrorInterceptor(), LogInterceptor(requestBody: true, responseBody: true)]),
+        ..interceptors.addAll([AuthInterceptor(authFacade), ErrorInterceptor(), LogInterceptor(requestBody: false, responseBody: false)]),
         dispose: (context, client) {
           client.close();
         },

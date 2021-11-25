@@ -3,30 +3,30 @@ import 'package:project_athens/athens_core/domain/data_mapper.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/utils/get_vote_description_helper.dart';
 import 'package:project_athens/deputies_flow/data/network/response/deputy_vote_accuracy_response.dart';
-import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
+import 'package:project_athens/deputies_utils/cache/parliament_clubs_cache.dart';
 import 'package:project_athens/deputies_utils/cache/subscribed_deputies_cache.dart';
 import 'package:project_athens/deputies_utils/domain/subscribed_deputy_model.dart';
 
 class VoteSlimNetworkMapper extends AsyncDataMapper<VoteSlimDTO, VoteSlimModel> {
   final SubscribedDeputiesCache _subscribedDeputiesCache;
-  final DeputiesCache _deputiesCache;
+  final ParliamentClubsCache _clubsCache;
   final AppLocalizations _localizations;
 
-  VoteSlimNetworkMapper(this._subscribedDeputiesCache, this._deputiesCache, this._localizations);
+  VoteSlimNetworkMapper(this._subscribedDeputiesCache, this._clubsCache, this._localizations);
 
   @override
   Future<VoteSlimModel> transform(VoteSlimDTO data) async {
     final deputiesVoteFutures = data.deputiesVoteType.map((deputyDTO) async {
       final deputy = await _subscribedDeputiesCache.getDeputyModelById(deputyDTO.cadencyDeputy) as SubscribedDeputyModel;
-      
+
       return VoteSlimDeputyVoteType(deputy, deputyDTO.voteType);
     }).toList();
-    
+
     final deputiesVote = await Future.wait(deputiesVoteFutures);
-    
+
     final clubsFutures = data.clubsMajority.map((clubDTO) async {
-      final club = await _deputiesCache.getParliamentClubModel(clubDTO.parliamentClub);
-      
+      final club = await _clubsCache.getParliamentClubModel(clubDTO.parliamentClub);
+
       return VoteSlimClubMajority(club!, clubDTO.voteMajority, clubDTO.deputyCardNumbers);
     });
 
@@ -34,7 +34,7 @@ class VoteSlimNetworkMapper extends AsyncDataMapper<VoteSlimDTO, VoteSlimModel> 
 
     final voteNumbers = VoteNumbers(absent: data.voteNumbers.absent, against: data.voteNumbers.against, hold: data.voteNumbers.hold, inFavor: data.voteNumbers.inFavor);
     final voteDesc = getVoteDescriptionHelper(data.type, _localizations);
-    
+
     return VoteSlimModel(
       id: data.id,
       title: data.agenda,
