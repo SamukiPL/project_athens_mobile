@@ -186,6 +186,9 @@
   },
   "dashboard": {
     "title": "Konsola",
+    "nearestMeeting": {
+      "title": "Najbliższe posiedzenie"
+    },
     "tiles": {
       "nearestMeetingTile": {
         "meetingIsToday": "Na dzisiaj jest zaplanowane posiedzenie sejmu",

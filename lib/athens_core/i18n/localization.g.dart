@@ -581,6 +581,10 @@ class AppLocalizationsGenerated {
     return words['dashboard']['title'];
   }
 
+  String dashboardNearestMeetingTitle() {
+    return words['dashboard']['nearestMeeting']['title'];
+  }
+
   String dashboardTilesNearestMeetingTileMeetingIsToday() {
     return words['dashboard']['tiles']['nearestMeetingTile']['meetingIsToday'];
   }

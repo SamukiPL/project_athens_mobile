@@ -186,6 +186,9 @@
   },
   "dashboard": {
     "title": "Dashboard",
+    "nearestMeeting": {
+      "title": "Najbliższe posiedzenie"
+    },
     "tiles": {
       "nearestMeetingTile": {
         "meetingIsToday": "Parliament meeting is scheduled for today",

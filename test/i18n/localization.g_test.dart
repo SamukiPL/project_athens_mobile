@@ -731,6 +731,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, dashboardTitle != "" && dashboardTitle != null); 
   }); 
  
+  test("All methods for $locale dashboardNearestMeetingTitle", () async {
+    String dashboardNearestMeetingTitle = localization.dashboardNearestMeetingTitle();
+    expect(true, dashboardNearestMeetingTitle != "" && dashboardNearestMeetingTitle != null); 
+  }); 
+ 
   test("All methods for $locale dashboardTilesNearestMeetingTileMeetingIsToday", () async {
     String dashboardTilesNearestMeetingTileMeetingIsToday = localization.dashboardTilesNearestMeetingTileMeetingIsToday();
     expect(true, dashboardTilesNearestMeetingTileMeetingIsToday != "" && dashboardTilesNearestMeetingTileMeetingIsToday != null); 
