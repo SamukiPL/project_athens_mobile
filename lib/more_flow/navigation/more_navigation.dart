@@ -46,7 +46,7 @@ class MoreSettingsScreenDestination extends Destination<SettingsScreen> {
 }
 
 class MoreCreditsScreenDestination extends Destination<CreditsScreen> {
-  MoreCreditsScreenDestination() : super(BottomNavItem.MORE);
+  MoreCreditsScreenDestination() : super(BottomNavItem.DASHBOARD);
 
   @override
   CreditsScreen getScreen() => CreditsScreen();
