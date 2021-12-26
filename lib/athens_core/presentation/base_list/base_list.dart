@@ -22,7 +22,6 @@ class BaseListWidget extends StatelessWidget {
         listBloc.adapter,
         refreshable: true,
         separator: separator,
-        adFactoryId: adFactoryId,
       ),
       noDataText: noDataText,
       onRetry: listBloc.refresh,

@@ -13,6 +13,7 @@
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		9095AD3A2725E6BB00132AA2 /* SpeechNativeAd.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9095AD392725E6BB00132AA2 /* SpeechNativeAd.xib */; };
 		90B96C972720B8AE00BBE68A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 90B96C962720B8AE00BBE68A /* GoogleService-Info.plist */; };
+		90F02CAC2774F80F00A52511 /* SpeechNativeAdFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F02CAB2774F80F00A52511 /* SpeechNativeAdFactory.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
@@ -42,6 +43,7 @@
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
 		9095AD392725E6BB00132AA2 /* SpeechNativeAd.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpeechNativeAd.xib; sourceTree = "<group>"; };
 		90B96C962720B8AE00BBE68A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		90F02CAB2774F80F00A52511 /* SpeechNativeAdFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechNativeAdFactory.swift; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
 		97C146EE1CF9000F007C117D /* Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Runner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,6 +121,7 @@
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
 				9095AD392725E6BB00132AA2 /* SpeechNativeAd.xib */,
+				90F02CAB2774F80F00A52511 /* SpeechNativeAdFactory.swift */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 			files = (
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
+				90F02CAC2774F80F00A52511 /* SpeechNativeAdFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
