@@ -51,7 +51,7 @@ class SpeechesListModule extends Module {
     final listFacade = SpeechesListFacade(
         speechesRepository, filtersRepository, speechesEasyFilters);
 
-    final itemFactory = SpeechItemViewModelFactory(NativeAdProvider(NativeAds.speechAd));
+    final itemFactory = SpeechItemViewModelFactory();
     _bloc = BaseListBloc(listFacade, itemFactory);
     _filtersListBloc = EasyFiltersListBloc(listFacade);
 
@@ -67,6 +67,10 @@ class SpeechesListModule extends Module {
       ),
       Provider<EasyFiltersListBloc>.value(
           value: _filtersListBloc
+      ),
+      Provider<NativeAdProvider>(
+        create: (_) => NativeAdProvider(NativeAds.speechAd),
+        dispose: (_, adProvider) => adProvider.dispose(),
       )
     ];
   }

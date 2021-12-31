@@ -37,7 +37,7 @@ class DeputySpeechesModule extends Module {
 
     final listFacade = BaseListFacade(itemsRepository, filtersRepository);
 
-    final itemFactory = SpeechItemViewModelFactory(null);
+    final itemFactory = SpeechItemViewModelFactory();
 
     final listBloc = BaseListBloc(listFacade, itemFactory);
 

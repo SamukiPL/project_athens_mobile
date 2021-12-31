@@ -8,16 +8,13 @@ import 'package:project_athens/athens_core/presentation/base_list/item_view_mode
 import 'package:project_athens/speeches_flow/screens/list/list_impl/speech_item_view_model.dart';
 
 class SpeechItemViewModelFactory extends ItemViewModelFactory {
-  final NativeAdProvider? adProvider;
-
-  SpeechItemViewModelFactory(this.adProvider);
 
   @override
   BaseItemViewModel? createWithoutError(BaseModel model) {
     if (model is SpeechModel) {
       return SpeechItemViewModel(model);
     } else if (model is AdModel) {
-      return NativeAdViewModel(adProvider!.provide());
+      return NativeAdViewModel();
     }
 
     return null;

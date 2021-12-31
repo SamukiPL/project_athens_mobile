@@ -20,4 +20,10 @@ class NativeAdProvider {
   void _generateAd() {
     nativeAds.add(InternalNativeAd(factoryId));
   }
+
+  void dispose() {
+    nativeAds.forEach((element) {
+      element.dispose();
+    });
+  }
 }
