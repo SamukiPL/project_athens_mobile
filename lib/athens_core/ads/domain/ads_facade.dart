@@ -5,7 +5,7 @@ import 'package:project_athens/athens_core/domain/base_list/base_params.dart';
 import 'package:project_athens/athens_core/domain/base_list/list_facade.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 
-mixin AdsFacade on ListFacade<BaseListParams> {
+mixin AdsFacade<T extends BaseParams> on ListFacade<T> {
 
   @override
   Stream<Result<List<BaseModel>>> getItems() {
