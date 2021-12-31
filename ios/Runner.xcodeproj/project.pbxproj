@@ -12,6 +12,8 @@
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		9095AD3A2725E6BB00132AA2 /* SpeechNativeAd.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9095AD392725E6BB00132AA2 /* SpeechNativeAd.xib */; };
+		909E0A96277F9213003C8370 /* DeputyNativeAdFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909E0A94277F9213003C8370 /* DeputyNativeAdFactory.swift */; };
+		909E0A97277F9213003C8370 /* DeputyNativeAd.xib in Resources */ = {isa = PBXBuildFile; fileRef = 909E0A95277F9213003C8370 /* DeputyNativeAd.xib */; };
 		90B96C972720B8AE00BBE68A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 90B96C962720B8AE00BBE68A /* GoogleService-Info.plist */; };
 		90BEBAA3277F4E3B00B4024E /* VoteNativeAd.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90BEBAA2277F4E3B00B4024E /* VoteNativeAd.xib */; };
 		90BEBAA5277F4E4700B4024E /* VoteNativeAdFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BEBAA4277F4E4700B4024E /* VoteNativeAdFactory.swift */; };
@@ -43,6 +45,8 @@
 		77FD303B23D5993D5BBB1853 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
 		9095AD392725E6BB00132AA2 /* SpeechNativeAd.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpeechNativeAd.xib; sourceTree = "<group>"; };
+		909E0A94277F9213003C8370 /* DeputyNativeAdFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeputyNativeAdFactory.swift; sourceTree = "<group>"; };
+		909E0A95277F9213003C8370 /* DeputyNativeAd.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeputyNativeAd.xib; sourceTree = "<group>"; };
 		90B96C962720B8AE00BBE68A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		90BEBAA2277F4E3B00B4024E /* VoteNativeAd.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VoteNativeAd.xib; sourceTree = "<group>"; };
 		90BEBAA4277F4E4700B4024E /* VoteNativeAdFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoteNativeAdFactory.swift; sourceTree = "<group>"; };
@@ -113,6 +117,8 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				909E0A95277F9213003C8370 /* DeputyNativeAd.xib */,
+				909E0A94277F9213003C8370 /* DeputyNativeAdFactory.swift */,
 				90BEBAA4277F4E4700B4024E /* VoteNativeAdFactory.swift */,
 				90BEBAA2277F4E3B00B4024E /* VoteNativeAd.xib */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
@@ -209,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
+				909E0A97277F9213003C8370 /* DeputyNativeAd.xib in Resources */,
 				90BEBAA3277F4E3B00B4024E /* VoteNativeAd.xib in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				90B96C972720B8AE00BBE68A /* GoogleService-Info.plist in Resources */,
@@ -338,6 +345,7 @@
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 				90BEBAA5277F4E4700B4024E /* VoteNativeAdFactory.swift in Sources */,
+				909E0A96277F9213003C8370 /* DeputyNativeAdFactory.swift in Sources */,
 				90F02CAC2774F80F00A52511 /* SpeechNativeAdFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
