@@ -13,7 +13,7 @@ abstract class ItemViewModelFactory {
       return NativeAdViewModel();
     }
 
-    throw ArgumentError("Unsupported model for this factory");
+    throw ArgumentError("Unsupported model for this factory: ${model.runtimeType}");
   }
 
   BaseItemViewModel? createWithoutError(BaseModel model);

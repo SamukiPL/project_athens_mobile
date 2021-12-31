@@ -6,8 +6,8 @@ var View.isInvisible: Boolean
     get() = visibility == View.VISIBLE
     set(value) {
         visibility = if (value) {
-            View.VISIBLE
+            View.INVISIBLE
         } else {
-            View.GONE
+            View.VISIBLE
         }
     }

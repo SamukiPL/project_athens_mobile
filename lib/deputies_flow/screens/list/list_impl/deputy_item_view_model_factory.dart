@@ -9,9 +9,8 @@ class DeputyItemViewModelFactory extends ItemViewModelFactory {
 
   @override
   BaseItemViewModel? createWithoutError(BaseModel model) {
-    switch (model.runtimeType) {
-      case SubscribedDeputyModel:
-        return DeputyListItemViewModel(model: model as SubscribedDeputyModel);
+    if (model is DeputyModel) {
+      return DeputyListItemViewModel(model: SubscribedDeputyModel.fromDeputyModel(model, false, "asdasdawds", SubscribedDeputyNotificationsNotifier(false, false, false, false)));
     }
     return null;
   }

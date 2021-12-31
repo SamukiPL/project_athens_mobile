@@ -14,9 +14,12 @@ import google_mobile_ads
     let speechNativeAdFactory = SpeechNativeAdFactory()
       FLTGoogleMobileAdsPlugin.registerNativeAdFactory(
         self, factoryId: "speechAd", nativeAdFactory: speechNativeAdFactory)
-    let voteNativeAdFactory = VoteNativeAdFactory()
-      FLTGoogleMobileAdsPlugin.registerNativeAdFactory(
-        self, factoryId: "voteAd", nativeAdFactory: voteNativeAdFactory)
+      let voteNativeAdFactory = VoteNativeAdFactory()
+        FLTGoogleMobileAdsPlugin.registerNativeAdFactory(
+          self, factoryId: "voteAd", nativeAdFactory: voteNativeAdFactory)
+      let deputyNativeAdFactory = DeputyNativeAdFactory()
+        FLTGoogleMobileAdsPlugin.registerNativeAdFactory(
+          self, factoryId: "deputyAd", nativeAdFactory: deputyNativeAdFactory)
       
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
