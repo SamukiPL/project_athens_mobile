@@ -13,8 +13,6 @@ class SpeechItemViewModelFactory extends ItemViewModelFactory {
   BaseItemViewModel? createWithoutError(BaseModel model) {
     if (model is SpeechModel) {
       return SpeechItemViewModel(model);
-    } else if (model is AdModel) {
-      return NativeAdViewModel();
     }
 
     return null;

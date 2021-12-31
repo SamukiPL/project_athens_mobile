@@ -2,10 +2,10 @@ package dev.alpaka.projectathens.admob
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import dev.alpaka.projectathens.databinding.AdSpeechBinding
+import dev.alpaka.projectathens.ext.isInvisible
 import io.flutter.plugins.googlemobileads.GoogleMobileAdsPlugin
 
 class SpeechNativeAdFactory(private val context: Context) : GoogleMobileAdsPlugin.NativeAdFactory {
@@ -22,13 +22,3 @@ class SpeechNativeAdFactory(private val context: Context) : GoogleMobileAdsPlugi
         }
     }
 }
-
-var View.isInvisible: Boolean
-    get() = visibility == View.VISIBLE
-    set(value) {
-        visibility = if (value) {
-            View.VISIBLE
-        } else {
-            View.GONE
-        }
-    }
