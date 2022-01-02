@@ -23,7 +23,7 @@ class ChartTombstoneState extends State<ChartTombstone> {
 
   @override
   Widget build(BuildContext context) {
-    timer = Timer(new Duration(milliseconds: 500), () {
+    timer = Timer(new Duration(milliseconds: 700), () {
       setState(() {
         tombstoneSeries = _generateRandomData();
       });
@@ -34,6 +34,7 @@ class ChartTombstoneState extends State<ChartTombstone> {
     return charts.BarChart(
       tombstoneSeries,
       animate: true,
+      animationDuration: new Duration(milliseconds: 500),
       primaryMeasureAxis: charts.NumericAxisSpec(
           showAxisLine: false,
           tickProviderSpec: charts.BasicNumericTickProviderSpec(desiredTickCount: 2)),

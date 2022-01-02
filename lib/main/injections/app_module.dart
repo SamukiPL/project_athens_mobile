@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/chopper/error_interceptor.dart';
 import 'package:project_athens/athens_core/chopper/network_module.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
+import 'package:project_athens/athens_core/utils/notifications_service.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/cache/parliament_clubs_cache.dart';
 import 'package:project_athens/deputies_utils/data/get_deputies_repository_impl.dart';
@@ -47,7 +48,7 @@ class AppModule extends Module {
       Provider<DeputiesCache>(
         create: (_) => _createDeputiesCache(client, clubsCache),
       ),
-      Provider<SpeechCache>(create: (_) => SpeechCache()),
+      Provider<SpeechCache>(create: (_) => SpeechCache())
     ]);
   }
 

@@ -190,6 +190,14 @@
     "nearestMeeting": {
       "title": "Najbliższe posiedzenie"
     },
+    "notifications": {
+      "title": "Notifications",
+      "filters": {
+        "speeches": "Speeches",
+        "votes": "Votes",
+        "notRead": "Not Read"
+      }
+    },
     "tiles": {
       "nearestMeetingTile": {
         "meetingIsToday": "Parliament meeting is scheduled for today",

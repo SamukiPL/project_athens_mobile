@@ -48,6 +48,7 @@ K _$enumDecode<K, V>(
 
 const _$DashboardTilesEnumMap = {
   DashboardTiles.NAME: 'NAME',
+  DashboardTiles.NOTIFICATIONS: 'NOTIFICATIONS',
   DashboardTiles.SETTINGS_BUTTON: 'SETTINGS_BUTTON',
   DashboardTiles.NEAREST_MEETING: 'NEAREST_MEETING',
   DashboardTiles.DEPUTIES: 'DEPUTIES',

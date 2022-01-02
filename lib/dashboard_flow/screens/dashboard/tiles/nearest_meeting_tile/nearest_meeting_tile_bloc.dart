@@ -51,8 +51,8 @@ class NearestMeetingTileBloc extends SimpleTileBloc {
       final howManyDaysToGo = today.getDaysBetween(closestDateTime);
 
       return ''
-        //   + _localizations.getText().dashboardTilesNearestMeetingTileMeetingInDays()
-        //   + ' '
+          + _localizations.getText().dashboardTilesNearestMeetingTileMeetingInDays()
+          + ' '
           + howManyDaysToGo.toString()
           + ' '
           + _localizations.getText().dashboardTilesNearestMeetingTileDays();

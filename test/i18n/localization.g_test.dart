@@ -741,6 +741,26 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, dashboardNearestMeetingTitle != "" && dashboardNearestMeetingTitle != null); 
   }); 
  
+  test("All methods for $locale dashboardNotificationsTitle", () async {
+    String dashboardNotificationsTitle = localization.dashboardNotificationsTitle();
+    expect(true, dashboardNotificationsTitle != "" && dashboardNotificationsTitle != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsFiltersSpeeches", () async {
+    String dashboardNotificationsFiltersSpeeches = localization.dashboardNotificationsFiltersSpeeches();
+    expect(true, dashboardNotificationsFiltersSpeeches != "" && dashboardNotificationsFiltersSpeeches != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsFiltersVotes", () async {
+    String dashboardNotificationsFiltersVotes = localization.dashboardNotificationsFiltersVotes();
+    expect(true, dashboardNotificationsFiltersVotes != "" && dashboardNotificationsFiltersVotes != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsFiltersNotRead", () async {
+    String dashboardNotificationsFiltersNotRead = localization.dashboardNotificationsFiltersNotRead();
+    expect(true, dashboardNotificationsFiltersNotRead != "" && dashboardNotificationsFiltersNotRead != null); 
+  }); 
+ 
   test("All methods for $locale dashboardTilesNearestMeetingTileMeetingIsToday", () async {
     String dashboardTilesNearestMeetingTileMeetingIsToday = localization.dashboardTilesNearestMeetingTileMeetingIsToday();
     expect(true, dashboardTilesNearestMeetingTileMeetingIsToday != "" && dashboardTilesNearestMeetingTileMeetingIsToday != null); 

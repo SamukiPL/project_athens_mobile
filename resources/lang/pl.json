@@ -190,6 +190,14 @@
     "nearestMeeting": {
       "title": "Najbliższe posiedzenie"
     },
+    "notifications": {
+      "title": "Powiadomienia",
+      "filters": {
+        "speeches": "Przemowy",
+        "votes": "Głosowania",
+        "notRead": "Nieprzeczytane"
+      }
+    },
     "tiles": {
       "nearestMeetingTile": {
         "meetingIsToday": "Na dzisiaj jest zaplanowane posiedzenie sejmu",

@@ -12,6 +12,7 @@ import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/chart_tile
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/dashboard_tiles.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/nearest_meeting_tile/nearest_meeting_tile.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/nearest_meeting_tile/nearest_meeting_tile_bloc.dart';
+import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/notifications_tile/notifications_tile.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/user_name_tile/user_name_tile.dart';
 import 'package:project_athens/deputies_flow/navigation/deputies_destinations.dart';
 import 'package:project_athens/more_flow/navigation/more_navigation.dart';
@@ -30,17 +31,11 @@ final List<TileData> allTiles = List.unmodifiable([
   ),
   TileData(
       tileBuilder: (BuildContext context, TileData tile, AppLocalizations _localizations) =>
-          SimpleTile(
-            // text: _localizations!.getText().settingsSettingsTitle(),
-            key: Key('tile_more_settings'),
-            icon: Icons.settings,
-            goTo: MoreScreenDestination(),
-            bloc: SimpleTileBloc()
-          ),
+          NotificationsTile(),
       order: 0,
       sizeX: 2,
       sizeY: 2,
-      type: DashboardTiles.SETTINGS_BUTTON
+      type: DashboardTiles.NOTIFICATIONS
   ),
   TileData(
       tileBuilder: (BuildContext context, TileData tile, AppLocalizations _localizations) {
@@ -48,7 +43,7 @@ final List<TileData> allTiles = List.unmodifiable([
         return NearestMeetingTile(nearestMeetingBloc);
       },
       order: 0,
-      sizeX: 3,
+      sizeX: 12,
       sizeY: 3,
       type: DashboardTiles.NEAREST_MEETING
   ),
@@ -93,6 +88,20 @@ final List<TileData> allTiles = List.unmodifiable([
       sizeX: 3,
       sizeY: 3,
       type: DashboardTiles.VOTES
+  ),
+  TileData(
+      tileBuilder: (BuildContext context, TileData tile, AppLocalizations _localizations) =>
+          SimpleTile(
+              text: _localizations.getText().settingsSettingsTitle(),
+              key: Key('tile_more_settings'),
+              icon: Icons.settings,
+              goTo: MoreScreenDestination(),
+              bloc: SimpleTileBloc()
+          ),
+      order: 0,
+      sizeX: 3,
+      sizeY: 3,
+      type: DashboardTiles.SETTINGS_BUTTON
   ),
   TileData(
     tileBuilder: (BuildContext context, TileData tile, AppLocalizations _localizations) {

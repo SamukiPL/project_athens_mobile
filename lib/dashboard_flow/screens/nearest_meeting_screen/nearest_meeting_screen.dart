@@ -15,7 +15,7 @@ class NearestMeetingScreen extends BaseScreen<NearestMeetingBloc> {
 
   @override
   String getAppBarTitle(AppLocalizations localizations, NearestMeetingBloc bloc) {
-    return localizations.getText().dashboardTitle();
+    return localizations.getText().dashboardNearestMeetingTitle();
   }
 
   @override

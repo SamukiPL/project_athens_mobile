@@ -19,6 +19,8 @@ class SimpleTile extends TileBase with RedirectionDelegate {
 
   final BehaviorSubject<bool> showLoaderStream = BehaviorSubject<bool>.seeded(false);
 
+  static final Color iconColor = Colors.black.withOpacity(0.6);
+
   SimpleTile({
     this.text,
     this.icon,
@@ -115,12 +117,12 @@ class SimpleTile extends TileBase with RedirectionDelegate {
     String? text,
     IconData? icon,
     MainAxisAlignment mainAxisAlignment = MainAxisAlignment.center,
-    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
   }) {
     final List<Widget> widgetsToRender = List.empty(growable: true);
 
     if (icon != null) {
-      final iconWidget = Icon(icon, color: Colors.black.withOpacity(0.6),);
+      final iconWidget = Icon(icon, color: SimpleTile.iconColor,);
       widgetsToRender.add(iconWidget);
     }
 

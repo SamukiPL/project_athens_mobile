@@ -1,5 +1,5 @@
 name: project_athens
-description: Świadoma Demokoracja to aplikacja to śledzenia aktywności poselskiej w sejmie.
+description: Świadoma Demokoracja to aplikacja do śledzenia aktywności poselskiej w sejmie.
 version: 0.1.0+10
 
 environment:
@@ -59,6 +59,7 @@ dependencies:
   fijkplayer_skin:
     git:
       url: https://github.com/pbrejdak/fijkplayer_skin.git
+  badges: ^2.0.1
 
 dev_dependencies:
   flutter_test:

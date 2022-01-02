@@ -1,5 +1,6 @@
 enum DashboardTiles {
   NAME,
+  NOTIFICATIONS,
   SETTINGS_BUTTON,
   NEAREST_MEETING,
   DEPUTIES,

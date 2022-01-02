@@ -589,6 +589,22 @@ class AppLocalizationsGenerated {
     return words['dashboard']['nearestMeeting']['title'];
   }
 
+  String dashboardNotificationsTitle() {
+    return words['dashboard']['notifications']['title'];
+  }
+
+  String dashboardNotificationsFiltersSpeeches() {
+    return words['dashboard']['notifications']['filters']['speeches'];
+  }
+
+  String dashboardNotificationsFiltersVotes() {
+    return words['dashboard']['notifications']['filters']['votes'];
+  }
+
+  String dashboardNotificationsFiltersNotRead() {
+    return words['dashboard']['notifications']['filters']['notRead'];
+  }
+
   String dashboardTilesNearestMeetingTileMeetingIsToday() {
     return words['dashboard']['tiles']['nearestMeetingTile']['meetingIsToday'];
   }

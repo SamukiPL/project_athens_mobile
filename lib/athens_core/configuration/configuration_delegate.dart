@@ -11,8 +11,7 @@ mixin ConfigurationDelegate<T, R> {
   FlutterSecureStorage storage = FlutterSecureStorage();
 
   Future<T> fetchPreference(R Function(Map<String, dynamic> json)? createObject) async {
-    final String storageValue = await storage.read(key: preferenceName);
-    // return storage.read(key: preferenceName);
+    final String? storageValue = await storage.read(key: preferenceName);
 
     if (storageValue == null || storageValue == '') {
       return Future.value(defaultStorageValue);
@@ -20,15 +19,15 @@ mixin ConfigurationDelegate<T, R> {
 
     switch(T) {
       case String: return storageValue as T;
-      case bool: return Future.value(storageValue != null && storageValue.toLowerCase() == true.toString().toLowerCase()) as Future<T>;
+      case bool: return Future.value(storageValue.toLowerCase() == true.toString().toLowerCase()) as Future<T>;
       default:
         final json = jsonDecode(storageValue);
 
         if (createObject != null) {
           if (json is List) {
-            final T list = json.map((jsonObject) => createObject(jsonObject) as R).toList() as T;
+            final T list = json.map((jsonObject) => createObject(jsonObject)).toList() as T;
 
-            return Future.value(list) as Future<T>;
+            return Future.value(list);
           } else {
             return Future.value(createObject(json) as T);
           }
@@ -38,7 +37,7 @@ mixin ConfigurationDelegate<T, R> {
     }
   }
 
-  Future<void> updatePreference(List<DashboardTileStorage> tiles) async {
+  Future<void> updatePreference(T tiles) async {
     final stringified = jsonEncode(tiles);
 
     await storage.write(key: preferenceName, value: stringified);

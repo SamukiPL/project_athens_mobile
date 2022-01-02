@@ -18,7 +18,7 @@ class ChartTileBloc<SERIES_DATA, FROM_DATA_STREAM> extends SimpleTileBloc {
   /// A hack which will allow us to manipulate legend image based on given color
   final Map<Color, SubscribedDeputyModel> legendImageToColorMap;
 
-  Stream<List<charts.Series<ChartSeriesTombstoneModel, String>>> get tombstoneLoadingSeries => Rx.timer(null, Duration(milliseconds: 200)).map((event) {
+  Stream<List<charts.Series<ChartSeriesTombstoneModel, String>>> get tombstoneLoadingSeries => Rx.timer(null, Duration(milliseconds: 600)).map((event) {
     final random = new Random();
 
     final List<charts.Series<ChartSeriesTombstoneModel, String>> tombstoneSeries = [
