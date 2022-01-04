@@ -1,10 +1,10 @@
 class NativeAds {
-  static String timelineAd = "timelineAd";
-  static String deputyAd = "deputyAd";
-  static String speechAd = "speechAd";
-  static String voteAd = "voteAd";
+  static final String timelineAd = "timelineAd";
+  static final String deputyAd = "deputyAd";
+  static final String speechAd = "speechAd";
+  static final String voteAd = "voteAd";
 
   //For now it requires static height :(
-  static double defaultHeight = 72;
-  static double deputyAdHeight = 84;
+  static final double defaultHeight = 72;
+  static final double deputyAdHeight = 84;
 }

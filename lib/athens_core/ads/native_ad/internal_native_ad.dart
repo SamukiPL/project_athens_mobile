@@ -1,4 +1,5 @@
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:project_athens/athens_core/ads/ads_ids.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_change_notifier.dart';
 
 class InternalNativeAd extends BaseChangeNotifier {
@@ -12,7 +13,7 @@ class InternalNativeAd extends BaseChangeNotifier {
 
   InternalNativeAd(String factoryId) {
     _ad = NativeAd(
-      adUnitId: NativeAd.testAdUnitId,
+      adUnitId: AdsIds.nativeAd,
       factoryId: factoryId,
       request: AdRequest(),
       listener: NativeAdListener(onAdLoaded: (_) {

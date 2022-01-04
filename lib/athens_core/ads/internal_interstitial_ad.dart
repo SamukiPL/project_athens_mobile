@@ -1,4 +1,5 @@
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:project_athens/athens_core/ads/ads_ids.dart';
 
 class InternalInterstitialAd {
 
@@ -11,7 +12,7 @@ class InternalInterstitialAd {
 
   InternalInterstitialAd({required this.dismissedCallback}) {
     InterstitialAd.load(
-        adUnitId: InterstitialAd.testAdUnitId,
+        adUnitId: AdsIds.interstitialAd,
         request: AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (ad) {
