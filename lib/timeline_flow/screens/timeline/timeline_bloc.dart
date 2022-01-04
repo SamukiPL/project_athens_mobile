@@ -40,7 +40,6 @@ class TimelineBloc extends BaseBloc implements PagingBloc {
   List<MeetingDate>? _dates;
   late DateTime _selectedDate;
 
-
   List<MeetingDate> get dates => _dates!;
   DateTime get selectedDate => _selectedDate;
 

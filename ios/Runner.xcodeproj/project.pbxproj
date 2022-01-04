@@ -17,6 +17,8 @@
 		90B96C972720B8AE00BBE68A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 90B96C962720B8AE00BBE68A /* GoogleService-Info.plist */; };
 		90BEBAA3277F4E3B00B4024E /* VoteNativeAd.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90BEBAA2277F4E3B00B4024E /* VoteNativeAd.xib */; };
 		90BEBAA5277F4E4700B4024E /* VoteNativeAdFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BEBAA4277F4E4700B4024E /* VoteNativeAdFactory.swift */; };
+		90C166F127849A2C00C53BC3 /* TimelineNativeAd.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90C166EF27849A2C00C53BC3 /* TimelineNativeAd.xib */; };
+		90C166F227849A2C00C53BC3 /* TimelineNativeAdFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C166F027849A2C00C53BC3 /* TimelineNativeAdFactory.swift */; };
 		90F02CAC2774F80F00A52511 /* SpeechNativeAdFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F02CAB2774F80F00A52511 /* SpeechNativeAdFactory.swift */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
@@ -50,6 +52,8 @@
 		90B96C962720B8AE00BBE68A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		90BEBAA2277F4E3B00B4024E /* VoteNativeAd.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VoteNativeAd.xib; sourceTree = "<group>"; };
 		90BEBAA4277F4E4700B4024E /* VoteNativeAdFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoteNativeAdFactory.swift; sourceTree = "<group>"; };
+		90C166EF27849A2C00C53BC3 /* TimelineNativeAd.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimelineNativeAd.xib; sourceTree = "<group>"; };
+		90C166F027849A2C00C53BC3 /* TimelineNativeAdFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineNativeAdFactory.swift; sourceTree = "<group>"; };
 		90F02CAB2774F80F00A52511 /* SpeechNativeAdFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechNativeAdFactory.swift; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
@@ -117,6 +121,8 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				90C166EF27849A2C00C53BC3 /* TimelineNativeAd.xib */,
+				90C166F027849A2C00C53BC3 /* TimelineNativeAdFactory.swift */,
 				909E0A95277F9213003C8370 /* DeputyNativeAd.xib */,
 				909E0A94277F9213003C8370 /* DeputyNativeAdFactory.swift */,
 				90BEBAA4277F4E4700B4024E /* VoteNativeAdFactory.swift */,
@@ -214,6 +220,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90C166F127849A2C00C53BC3 /* TimelineNativeAd.xib in Resources */,
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				909E0A97277F9213003C8370 /* DeputyNativeAd.xib in Resources */,
 				90BEBAA3277F4E3B00B4024E /* VoteNativeAd.xib in Resources */,
@@ -345,6 +352,7 @@
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 				90BEBAA5277F4E4700B4024E /* VoteNativeAdFactory.swift in Sources */,
+				90C166F227849A2C00C53BC3 /* TimelineNativeAdFactory.swift in Sources */,
 				909E0A96277F9213003C8370 /* DeputyNativeAdFactory.swift in Sources */,
 				90F02CAC2774F80F00A52511 /* SpeechNativeAdFactory.swift in Sources */,
 			);

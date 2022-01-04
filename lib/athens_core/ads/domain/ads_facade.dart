@@ -14,7 +14,7 @@ mixin AdsFacade<T extends BaseParams> on ListFacade<T> {
         final mutableModelsList = event.toSuccess().value.toList(growable: true);
         final indexesToAdd = new List<int>.generate((event.toSuccess().value.length / 10).floor(), (index) => 5 + (10 * index));
         indexesToAdd.forEach((index) {
-          mutableModelsList.insert(index, AdModel(NativeAds.speechAd));
+          mutableModelsList.insert(index, AdModel());
         });
         return Success(mutableModelsList.toList(growable: false));
       }
