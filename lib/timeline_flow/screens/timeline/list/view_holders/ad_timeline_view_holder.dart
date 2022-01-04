@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:project_athens/athens_core/ads/native_ad/internal_native_ad.dart';
 import 'package:project_athens/athens_core/ads/native_ad/native_ad_provider.dart';
-import 'package:project_athens/athens_core/ads/native_ad/native_ads.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:provider/provider.dart';
 
@@ -20,18 +19,25 @@ class AdTimelineViewHolder extends StatelessWidget with RedirectionDelegate {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Column(children: <Widget>[
-      IntrinsicHeight(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            getHourWidget(context, theme),
-            getIcon(context, theme),
-            getRowText(context, theme),
-          ],
-        ),
+    final adProvider = Provider.of<NativeAdProvider>(context);
+
+    return ChangeNotifierProvider<InternalNativeAd>.value(
+      value: adProvider.provide(),
+      child: Consumer<InternalNativeAd>(
+        builder: (context, bloc, _) => (bloc.isLoaded) ? Column(children: <Widget>[
+          IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                  getHourWidget(context, theme),
+                  getIcon(context, theme),
+                  getRowText(context, theme, bloc),
+              ],
+            ),
+          ),
+        ]) : Container()
       ),
-    ]);
+    );
   }
 
   Widget getHourWidget(BuildContext context, ThemeData theme) {
@@ -103,25 +109,17 @@ class AdTimelineViewHolder extends StatelessWidget with RedirectionDelegate {
     );
   }
 
-  Widget getRowText(BuildContext context, ThemeData theme) {
-    final adProvider = Provider.of<NativeAdProvider>(context);
+  Widget getRowText(BuildContext context, ThemeData theme, InternalNativeAd bloc) {
     return Expanded(
       child: Card(
         margin: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
         elevation: 4,
         child: Container(
           margin: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
-          child: ChangeNotifierProvider<InternalNativeAd>.value(
-            value: adProvider.provide(),
-            child: Consumer<InternalNativeAd>(
-              builder: (context, bloc, _) {
-                return bloc.isLoaded ? Container(
-                  child: AdWidget(ad: bloc.ad),
-                  height: 60,
-                ) : Container();
-              },
-            ),
-          ),
+          child: Container(
+                child: AdWidget(ad: bloc.ad),
+                height: 60,
+          )
         ),
       ),
     );
