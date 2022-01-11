@@ -1,13 +1,12 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
 import 'package:project_athens/athens_core/presentation/base_list/base_items_view_models/base_progress_view_model.dart';
 import 'package:project_athens/pagination/pagination_listener.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'paging_state.dart';
 import 'paging_bloc.dart';
+import 'paging_state.dart';
 
 class PagingListAdapter {
 
@@ -53,7 +52,8 @@ class PagingListAdapter {
   }
 
   void loadMoreListener() {
-    if ((_itemsList.length % 20) == 0 && _itemsList.length > 0) {
+    //TODO Find how to use pagination without hardcoded values
+    if ((_itemsList.length % 20 == 0 || _itemsList.length % 22 == 0) && _itemsList.length > 0) {
       _paginationController.removeListener(loadMoreListener);
       _loadMore.add({});
     }

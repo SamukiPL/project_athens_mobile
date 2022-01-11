@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
+import 'package:project_athens/athens_core/ads/native_ad/native_ad_provider.dart';
+import 'package:project_athens/athens_core/ads/native_ad/native_ads.dart';
 import 'package:project_athens/athens_core/data/base_list/items_repository_impl.dart';
 import 'package:project_athens/athens_core/filters_and_sort/add_ons/easy_filters/easy_filters_list_bloc.dart';
 import 'package:project_athens/athens_core/filters_and_sort/data/filters_repository.dart';
@@ -58,6 +60,10 @@ class VotesListModule extends Module {
       ),
       Provider<EasyFiltersListBloc>.value(
         value: _filtersListBloc
+      ),
+      Provider<NativeAdProvider>(
+        create: (_) => NativeAdProvider(NativeAds.voteAd),
+        dispose: (_, adProvider) => adProvider.dispose(),
       )
     ];
   }

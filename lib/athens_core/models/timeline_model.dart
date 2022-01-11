@@ -40,4 +40,8 @@ class GroupedVotingModel extends TimelineModel {
 
 }
 
-enum TimelineModelType { VOTING, GROUPED_VOTING, SPEECH }
+class AdTimelineModel extends TimelineModel {
+  AdTimelineModel() : super("ad", TimelineModelType.AD, DateTime.now(), null, null);
+}
+
+enum TimelineModelType { VOTING, GROUPED_VOTING, SPEECH, AD }

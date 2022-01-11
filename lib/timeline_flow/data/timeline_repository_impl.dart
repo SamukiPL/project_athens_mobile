@@ -1,6 +1,4 @@
-import 'dart:math';
 
-import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:project_athens/athens_core/data/word_model/noun_tag.dart';
 import 'package:project_athens/athens_core/data/word_model/word_model.dart';
 import 'package:project_athens/athens_core/data/word_model/word_model_mapper.dart';
@@ -26,12 +24,6 @@ class TimelineRepositoryImpl implements TimelineRepository {
 
   @override
   Future<Result> getMeetingsDates(int cadency) async {
-    try {
-      await timelineApi.test();
-    } catch(e) {
-      Fimber.e(e.toString());
-    }
-
     final response = await timelineApi.getMeetingsDates(cadency);
     List<MeetingDate> resultList = meetingsDatesMapper(response.meetings);
 
@@ -49,7 +41,9 @@ class TimelineRepositoryImpl implements TimelineRepository {
       resultList.sort((a, b) => a.date.compareTo(b.date));
     }
 
-    return Success<List<TimelineModel>>(resultList);
+    final resultListWithAds = addAds(resultList);
+
+    return Success<List<TimelineModel>>(resultListWithAds);
   }
 
   @override
@@ -63,5 +57,14 @@ class TimelineRepositoryImpl implements TimelineRepository {
     return Success<List<WordModel>>(finalWords);
   }
 
+  List<TimelineModel> addAds(List<TimelineModel> resultList) {
+    final mutableModelsList = resultList.toList(growable: true);
+    final indexesToAdd = new List<int>.generate((resultList.length / 5).floor(), (index) => 5 + (5 * index));
+    indexesToAdd.forEach((index) {
+      mutableModelsList.insert(index, AdTimelineModel());
+    });
 
+    return mutableModelsList.toList(growable: false);
+  }
 }
+

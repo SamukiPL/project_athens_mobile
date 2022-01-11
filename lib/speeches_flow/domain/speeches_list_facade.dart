@@ -1,3 +1,5 @@
+import 'package:project_athens/athens_core/ads/domain/ads_facade.dart';
+import 'package:project_athens/athens_core/domain/base_list/base_params.dart';
 import 'package:project_athens/athens_core/domain/base_list/items_repository.dart';
 import 'package:project_athens/athens_core/domain/base_list_facade.dart';
 import 'package:project_athens/athens_core/filters_and_sort/data/easy_filters/easy_filters_repository.dart';
@@ -7,11 +9,9 @@ import 'package:project_athens/speeches_flow/domain/filters/speeches_easy_filter
 import 'package:project_athens/speeches_flow/domain/speeches_list_params.dart';
 
 class SpeechesListFacade extends BaseListFacade
-    with EasyFiltersFacade<SpeechesEasyFilter> {
-  SpeechesListFacade(
-      ItemsRepository itemsRepository,
-      FiltersRepository filtersRepository,
-      this.easyFiltersRepository)
+    with EasyFiltersFacade<SpeechesEasyFilter>, AdsFacade<BaseListParams> {
+  SpeechesListFacade(ItemsRepository itemsRepository,
+      FiltersRepository filtersRepository, this.easyFiltersRepository)
       : super(itemsRepository, filtersRepository);
 
   @override
@@ -26,6 +26,5 @@ class SpeechesListFacade extends BaseListFacade
           offset: offset,
           sortingParam: sortingParam,
           to: to,
-          from: from
-      );
+          from: from);
 }

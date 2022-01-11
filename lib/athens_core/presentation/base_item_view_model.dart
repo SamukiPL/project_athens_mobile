@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 abstract class BaseItemViewModel extends BaseChangeNotifier {
 
+  bool get buildSeparator => true;
+
   Widget buildWidget(int index, int length);
 
 }

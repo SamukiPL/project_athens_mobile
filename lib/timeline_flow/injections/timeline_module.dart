@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
+import 'package:project_athens/athens_core/ads/native_ad/native_ad_provider.dart';
+import 'package:project_athens/athens_core/ads/native_ad/native_ads.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
@@ -47,6 +49,10 @@ class TimelineModule extends Module {
       Provider<TimelineBloc>(
         create: (context) => TimelineBloc(getTimelineUseCase, getMeetingsDates, nounCloudBloc),
         dispose: (context, bloc) => bloc.dispose(),
+      ),
+      Provider<NativeAdProvider>(
+        create: (_) => NativeAdProvider(NativeAds.timelineAd),
+        dispose: (_, provider) => provider.dispose(),
       )
     ];
   }

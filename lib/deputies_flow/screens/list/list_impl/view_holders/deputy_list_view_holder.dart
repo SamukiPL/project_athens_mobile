@@ -17,23 +17,22 @@ class DeputyListViewHolder extends StatelessWidget with RedirectionDelegate {
     return ChangeNotifierProvider.value(
       value: viewModel,
       child: Consumer<DeputyListItemViewModel>(
-        builder: (context, viewModel, _) => Card(
-          elevation: 4,
-          margin: EdgeInsets.all(8),
+        builder: (context, viewModel, _) => Container(
+          margin: EdgeInsets.only(top: 8, bottom: 8),
           child: InkWell(
-            onTap: () {
-              goToDestination(
-                  context, DeputyDetailsDestination(viewModel.model));
-            },
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                getDeputyFace(context),
-                getNameAndClub(context),
-              ],
+              onTap: () {
+                goToDestination(
+                    context, DeputyDetailsDestination(viewModel.model));
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  getDeputyFace(context),
+                  getNameAndClub(context),
+                ],
+              ),
             ),
-          ),
         ),
       ),
     );
