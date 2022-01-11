@@ -37,7 +37,6 @@ dependencies:
   cached_network_image: ^2.5.1
   circular_countdown_timer: ^0.2.0
   google_mobile_ads: ^0.13.0
-  visibility_detector: ^0.2.2
   lang_generator:
     path: lang_generator
 

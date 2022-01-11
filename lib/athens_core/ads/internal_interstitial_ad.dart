@@ -42,4 +42,8 @@ class InternalInterstitialAd {
     }
   }
 
+  void dispose() {
+    _ad?.dispose();
+  }
+
 }

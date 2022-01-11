@@ -10,9 +10,7 @@ class BaseListWidget extends StatelessWidget {
 
   final Widget? separator;
 
-  final String? adFactoryId;
-
-  const BaseListWidget({Key? key, required this.listBloc, this.noDataText, this.separator, this.adFactoryId}) : super(key: key);
+  const BaseListWidget({Key? key, required this.listBloc, this.noDataText, this.separator}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -35,7 +35,6 @@ class SpeechesListScreen extends BaseScreen<BaseListBloc> {
             height: 1,
             indent: 48,
           ),
-          adFactoryId: "speechAd",
         ),
       )
     ]);
