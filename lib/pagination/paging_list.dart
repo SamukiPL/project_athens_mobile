@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/ads/native_ad/native_ad_view_model.dart';
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
 import 'package:project_athens/athens_core/presentation/base_list/base_items_view_models/base_progress_view_model.dart';
 import 'package:provider/provider.dart';
@@ -49,7 +50,7 @@ class PagingList extends StatelessWidget {
   Widget getList(
       PagingListAdapter adapter, PagingState<BaseItemViewModel> state) {
     return ListView.separated(
-        separatorBuilder: (context, index) => separator ?? Container(),
+        separatorBuilder: (context, index) => _separatorBuilder(state.items, index),
         padding: EdgeInsets.only(
             left: leftPadding,
             top: topPadding,
@@ -57,6 +58,11 @@ class PagingList extends StatelessWidget {
             bottom: bottomPadding),
         itemCount: state.items.length,
         itemBuilder: (_, index) => _itemBuilder(state.items, index));
+  }
+
+  Widget _separatorBuilder(List<BaseItemViewModel> items, int index) {
+    final item = items[index];
+    return (item.buildSeparator && separator != null) ? separator! : Container();
   }
 
   Widget _itemBuilder(List<BaseItemViewModel> items, int index) {

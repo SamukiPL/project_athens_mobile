@@ -17,11 +17,8 @@ class NativeAdWidget extends StatelessWidget {
     return ChangeNotifierProvider<InternalNativeAd>.value(
       value: adProvider.provide(),
       child: Consumer<InternalNativeAd>(
-        builder: (context, bloc, _) {
-          return bloc.isLoaded ? Container(
-            child: AdWidget(ad: bloc.ad),
-            height: _getAdHeight(adProvider.factoryId),
-          ) : Container();
+        builder: (context, internalAd, _) {
+          return internalAd.isLoaded ? _buildAd(adProvider, internalAd) : Container();
         },
       ),
     );
@@ -32,5 +29,13 @@ class NativeAdWidget extends StatelessWidget {
       return NativeAds.deputyAdHeight;
     }
     return NativeAds.defaultHeight;
+  }
+
+  Widget _buildAd(NativeAdProvider adProvider, InternalNativeAd internalAd) {
+    viewModel.adLoaded();
+    return Container(
+      child: AdWidget(ad: internalAd.ad),
+      height: _getAdHeight(adProvider.factoryId),
+    );
   }
 }
