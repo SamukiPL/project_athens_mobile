@@ -24,11 +24,11 @@ class ChartTile<SERIES_DATA, FROM_DATA_STREAM> extends SimpleTile {
   Widget build(BuildContext context) {
     return super.buildTile(
         context: context,
-        tile: _getChartTile()
+        tile: _getChartTile(context)
     );
   }
 
-  Widget _getChartTile() {
+  Widget _getChartTile(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(4),
       child: Column(
@@ -46,10 +46,13 @@ class ChartTile<SERIES_DATA, FROM_DATA_STREAM> extends SimpleTile {
                 ),
               ),
               Container(
-                child: Icon(
-                  Icons.settings,
-                  size: 20,
-                  color: Colors.black.withOpacity(0.6),
+                child: GestureDetector(
+                  onTap: () => bloc.openExperimentalInfoDialog(context),
+                  child: Icon(
+                    Icons.science,
+                    size: 20,
+                    color: Colors.black.withOpacity(0.6),
+                  )
                 )
               )
             ],

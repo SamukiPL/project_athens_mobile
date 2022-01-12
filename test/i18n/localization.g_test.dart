@@ -71,6 +71,16 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalInformation != "" && universalInformation != null); 
   }); 
  
+  test("All methods for $locale universalExperimentalFeatureContent", () async {
+    String universalExperimentalFeatureContent = localization.universalExperimentalFeatureContent();
+    expect(true, universalExperimentalFeatureContent != "" && universalExperimentalFeatureContent != null); 
+  }); 
+ 
+  test("All methods for $locale universalExperimentalFeatureTitle", () async {
+    String universalExperimentalFeatureTitle = localization.universalExperimentalFeatureTitle();
+    expect(true, universalExperimentalFeatureTitle != "" && universalExperimentalFeatureTitle != null); 
+  }); 
+ 
   test("All methods for $locale universalErrorNetwork", () async {
     String universalErrorNetwork = localization.universalErrorNetwork();
     expect(true, universalErrorNetwork != "" && universalErrorNetwork != null); 

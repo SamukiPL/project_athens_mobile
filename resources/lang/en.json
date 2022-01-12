@@ -12,6 +12,10 @@
       "defaultText": "No data"
     },
     "information": "Information",
+    "experimentalFeature": {
+      "content": "Dokładamy wszelkich starań, żeby nasze funkcjonalności działały jak najbardziej dokładnie, aczkolwiek mogą odbiegać od rzeczywistości, w razie znalazienia błędu prosimy o kontakt. Statystyki tworzy nasz automat, który dokonuje aktualizacje w określonym odstępie czasowym, z tego względu mogą występować niedokładności.",
+      "title": "Experimental feature"
+    },
     "error": {
       "network": "Something went wrong. Please check your internet connection.",
       "server": "Server is not responding. Please try again later.",

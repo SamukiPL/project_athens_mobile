@@ -51,6 +51,14 @@ class AppLocalizationsGenerated {
     return words['universal']['information'];
   }
 
+  String universalExperimentalFeatureContent() {
+    return words['universal']['experimentalFeature']['content'];
+  }
+
+  String universalExperimentalFeatureTitle() {
+    return words['universal']['experimentalFeature']['title'];
+  }
+
   String universalErrorNetwork() {
     return words['universal']['error']['network'];
   }

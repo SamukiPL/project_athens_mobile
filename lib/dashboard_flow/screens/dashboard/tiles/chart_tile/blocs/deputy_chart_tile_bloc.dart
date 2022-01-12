@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/dashboard_flow/domain/dashboard/dashboard_tiles_data_model.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/chart_tile/helpers/chart_color_manager.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/chart_tile/blocs/chart_tile_bloc.dart';
 import 'package:project_athens/deputies_utils/domain/subscribed_deputy_model.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:provider/provider.dart';
 
 class DeputyChartTileBloc<SERIES_DATA, FROM_DATA_STREAM> extends ChartTileBloc<SERIES_DATA, FROM_DATA_STREAM> {
   DeputyChartTileBloc({
@@ -117,6 +120,24 @@ class DeputyChartTileBloc<SERIES_DATA, FROM_DATA_STREAM> extends ChartTileBloc<S
       dataStream: dataStream,
       legendImageToColorMap: legendImageToColorMap,
       barGroupingType: charts.BarGroupingType.stacked
+    );
+  }
+
+  openExperimentalInfoDialog(BuildContext context) {
+    final localizations = Provider.of<AppLocalizations>(context, listen: false);
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(localizations.getText().universalExperimentalFeatureTitle()),
+        content: Text(localizations.getText().universalExperimentalFeatureContent()),
+        actions: [
+          FlatButton(
+            child: Text(localizations.getText().universalClose()),
+            onPressed: () => Navigator.of(context).pop(),
+          )
+        ],
+      )
     );
   }
 }
