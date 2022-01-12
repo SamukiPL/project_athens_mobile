@@ -20,7 +20,12 @@ class DashboardTilesDataMapper extends AsyncDataMapper<DashboardResponse, Dashbo
   Future<DashboardTilesDataModel> transform(DashboardResponse response) async {
     DashboardNearestMeetingTileDataModel? nearestMeeting;
     if (response.meeting != null) {
-      nearestMeeting = DashboardNearestMeetingTileDataModel(response.meeting!.nearestMeeting, response.meeting!.nearestPastMeeting);
+      nearestMeeting = DashboardNearestMeetingTileDataModel(
+          response.meeting!.nearestMeeting,
+          response.meeting!.nearestPastMeeting,
+          response.meeting!.nearestPastMeetingId,
+          response.meeting!.nearestMeetingId,
+      );
     }
 
     DashboardSimpleDeputiesCounter? absentVote;

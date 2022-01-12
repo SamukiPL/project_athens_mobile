@@ -45,6 +45,8 @@ DashboardNearestMeetingResponse _$DashboardNearestMeetingResponseFromJson(
   return DashboardNearestMeetingResponse(
     DateTime.parse(json['nearestPastMeeting'] as String),
     DateTime.parse(json['nearestMeeting'] as String),
+    json['nearestPastMeetingId'] as String,
+    json['nearestMeetingId'] as String,
   );
 }
 
@@ -53,6 +55,8 @@ Map<String, dynamic> _$DashboardNearestMeetingResponseToJson(
     <String, dynamic>{
       'nearestPastMeeting': instance.nearestPastMeeting.toIso8601String(),
       'nearestMeeting': instance.nearestMeeting.toIso8601String(),
+      'nearestPastMeetingId': instance.nearestPastMeetingId,
+      'nearestMeetingId': instance.nearestMeetingId,
     };
 
 DashboardAbsentVoteCounterResponse _$DashboardAbsentVoteCounterResponseFromJson(

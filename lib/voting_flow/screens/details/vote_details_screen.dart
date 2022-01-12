@@ -97,7 +97,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
     return Container(
         padding: EdgeInsets.only(bottom: 20),
         child: Text(
-          DateFormat("HH:mm d.MM.y", "pl").format(_voteModel.voteAt),
+          DateFormat("HH:mm dd.MM.y", "pl").format(_voteModel.voteAt),
           style: TextStyle(
             color: theme.primaryColor,
             fontSize: 14,

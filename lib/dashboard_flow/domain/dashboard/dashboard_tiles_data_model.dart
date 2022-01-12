@@ -18,10 +18,14 @@ class DashboardTilesDataModel {
 class DashboardNearestMeetingTileDataModel {
   final DateTime nearestPastMeeting;
   final DateTime nearestMeeting;
+  final String nearestPastMeetingId;
+  final String nearestMeetingId;
 
   DashboardNearestMeetingTileDataModel(
     this.nearestMeeting,
-    this.nearestPastMeeting
+    this.nearestPastMeeting,
+    this.nearestPastMeetingId,
+    this.nearestMeetingId
   );
 }
 

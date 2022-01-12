@@ -1,20 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter_fimber/flutter_fimber.dart';
-import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/ext/date_time_extension.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
 import 'package:project_athens/athens_core/presentation/grid/tiles/simple_tile/simple_tile_bloc.dart';
 import 'package:project_athens/dashboard_flow/cache/dashboard_tiles_data_cache.dart';
-import 'package:project_athens/dashboard_flow/data/network/response/dashboard_response.dart';
-import 'package:project_athens/dashboard_flow/domain/dashboard/dashboard_tiles_data_model.dart';
-import 'package:project_athens/dashboard_flow/domain/dashboard/get_dashboard_use_case.dart';
-import 'package:project_athens/dashboard_flow/domain/dashboard_params.dart';
-import 'package:project_athens/timeline_flow/domain/meetings_date.dart';
-import 'package:project_athens/timeline_flow/domain/timeline_parameters.dart';
-import 'package:project_athens/timeline_flow/domain/use_cases/get_meetings_dates.dart';
 import 'package:rxdart/rxdart.dart';
 
 class NearestMeetingTileBloc extends SimpleTileBloc {
@@ -39,6 +30,8 @@ class NearestMeetingTileBloc extends SimpleTileBloc {
     bool isToday = closestDateTime.isToday;
     bool isYesterday = closestDateTime.isYesterday;
 
+    nearestParliamentMeetingId = nearestMeetingResponse.nearestMeetingId;
+
     hideLoader();
 
     if (closestDateTime.isToday) {
@@ -60,6 +53,8 @@ class NearestMeetingTileBloc extends SimpleTileBloc {
   }).handleError((onError) {
     Fimber.e(onError.toString());
   });
+
+  String? nearestParliamentMeetingId;
 
   void dispose() {
     super.dispose();

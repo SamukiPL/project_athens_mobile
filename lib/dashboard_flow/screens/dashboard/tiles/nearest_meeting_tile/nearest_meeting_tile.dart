@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/presentation/grid/tiles/simple_tile/simple_tile.dart';
+import 'package:project_athens/dashboard_flow/navigation/dashboard_destinations.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/nearest_meeting_tile/nearest_meeting_tile_bloc.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +28,9 @@ class NearestMeetingTile extends SimpleTile {
   Widget build(BuildContext context) {
     return super.buildTile(
       context: context,
-      tile: _getMeetingText(context)
+      tile: _getMeetingText(context),
+      // TODO: API needs to be patched in order to properly show agenda points.
+      // goToFn: () => DashboardNearestMeetingScreenDestination(bloc.nearestParliamentMeetingId!)
     );
   }
 }

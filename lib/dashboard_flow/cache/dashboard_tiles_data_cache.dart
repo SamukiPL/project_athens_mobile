@@ -49,8 +49,7 @@ class DashboardTilesDataCache {
       voteAbsentPerYear: true
     )
   );
-
-
+  final PublishSubject<bool> _fetchingFinished = PublishSubject();
 
   markDirtyParam(DashboardParams dirtyParams) {
     final currentDirtyParams = _dirtyParamsSource.value;
@@ -65,14 +64,22 @@ class DashboardTilesDataCache {
     _dirtyParamsSource.add(dirtyParams);
   }
 
-  forceRefresh() {
+  Future<bool?> forceRefresh() {
+    markDirtyParam(DashboardParams.fetchAll(9));
     _forceRefreshSource.add(null);
+
+    return _fetchingFinished.stream.first;
   }
 
   _fetchDashboard(DashboardParams dirtyParams) async {
+    print(dirtyParams.toString());
+    print(dirtyParams.isAnyDirty());
+
     if (!dirtyParams.isAnyDirty()) { return; }
 
     final result = await _getDashboardUseCase(dirtyParams);
+
+    _fetchingFinished.add(true);
 
     if (result is Success<DashboardResponse>) {
        final dashboardTilesData = await _mapper.transform(result.value);
@@ -89,5 +96,6 @@ class DashboardTilesDataCache {
     _dirtyParamsSource.close();
     _dashboardTilesDataSource.close();
     _autoRefreshSub.cancel();
+    _fetchingFinished.close();
   }
 }

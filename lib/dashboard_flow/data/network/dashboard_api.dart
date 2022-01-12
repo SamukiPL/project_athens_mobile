@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:project_athens/dashboard_flow/data/network/response/dashboard_response.dart';
+import 'package:project_athens/dashboard_flow/data/network/response/parliament_meeting_details_response.dart';
 import 'package:retrofit/http.dart';
 
 part 'dashboard_api.g.dart';
@@ -18,4 +19,7 @@ abstract class DashboardApi {
     @Query("speechesCounterPerYear") bool? speechesCounterPerYear,
     @Query("voteAbsentPerYear") bool? voteAbsentPerYear
   );
+
+  @GET("/user-aggregator/timeline/{cadence}/parliament-meetings/{parliamentMeetingId}")
+  Future<ParliamentMeetingDetailsResponse> getParliamentMeetingDetails(@Path("cadence") int cadence, @Path("parliamentMeetingId") String parliamentMeetingId);
 }

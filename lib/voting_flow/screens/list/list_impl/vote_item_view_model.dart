@@ -19,5 +19,4 @@ class VoteItemViewModel extends BaseItemViewModel {
 
   @override
   Widget buildWidget(int index, int length) => VoteViewHolder(this);
-
 }

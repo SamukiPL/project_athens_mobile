@@ -26,10 +26,14 @@ class DashboardResponse {
 class DashboardNearestMeetingResponse {
   final DateTime nearestPastMeeting;
   final DateTime nearestMeeting;
+  final String nearestPastMeetingId;
+  final String nearestMeetingId;
 
   DashboardNearestMeetingResponse(
       this.nearestPastMeeting,
-      this.nearestMeeting
+      this.nearestMeeting,
+      this.nearestPastMeetingId,
+      this.nearestMeetingId
   );
 
   factory DashboardNearestMeetingResponse.fromJson(Map<String, dynamic> json) => _$DashboardNearestMeetingResponseFromJson(json);

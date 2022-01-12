@@ -14,6 +14,7 @@ class SimpleTile extends TileBase with RedirectionDelegate {
   final BoxDecoration? boxDecoration;
   final TextStyle? textStyle;
   final Destination? goTo;
+  final Destination Function()? goToFn;
   final double? elevation;
   final SimpleTileBloc bloc;
 
@@ -27,6 +28,7 @@ class SimpleTile extends TileBase with RedirectionDelegate {
     this.boxDecoration,
     this.textStyle,
     this.goTo,
+    this.goToFn,
     this.elevation = 4,
     required this.bloc,
     Key? key
@@ -42,12 +44,13 @@ class SimpleTile extends TileBase with RedirectionDelegate {
         context: context,
         boxDecoration: boxDecoration,
         tile: buildTextAndIcon(text: text, icon: icon),
-        goTo: goTo
+        goTo: goTo,
+        goToFn: goToFn,
     );
   }
 
   @protected
-  Widget buildTile({required BuildContext context, required Widget tile, BoxDecoration? boxDecoration, Destination? goTo}) {
+  Widget buildTile({required BuildContext context, required Widget tile, BoxDecoration? boxDecoration, Destination? goTo, Destination Function()? goToFn}) {
     final BoxDecoration decoration = boxDecoration != null
         ? boxDecoration
         : BoxDecoration();
@@ -56,6 +59,13 @@ class SimpleTile extends TileBase with RedirectionDelegate {
       tile = InkWell(
         onTap: () => goToDestination(context, goTo),
         child: tile,
+      );
+    }
+
+    if (goToFn != null) {
+      tile = InkWell(
+        onTap: () => goToDestination(context, goToFn()),
+        child: tile
       );
     }
 

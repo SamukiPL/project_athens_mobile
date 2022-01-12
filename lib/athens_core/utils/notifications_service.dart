@@ -160,7 +160,7 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
         message.notification!.title!,
         message.notification!.body,
         imgUrl,
-        message.sentTime,
+        message.sentTime ?? DateTime.now(),
         message.messageId,
         message.collapseKey,
         message.data,
