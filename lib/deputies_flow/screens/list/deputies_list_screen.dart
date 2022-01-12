@@ -29,7 +29,13 @@ class DeputiesListScreen extends BaseScreen<BaseListBloc> {
           Expanded(
             child: Container(
               height: 0,
-              child: PagingList(bloc.adapter, paginationIncluded: false,),
+              child: PagingList(
+                bloc.adapter,
+                paginationIncluded: false,
+                separator: Divider(
+                  height: 1,
+                ),
+              ),
             ),
           )
         ]

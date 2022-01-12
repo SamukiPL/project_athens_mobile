@@ -1,3 +1,5 @@
+import 'package:project_athens/athens_core/ads/domain/ads_facade.dart';
+import 'package:project_athens/athens_core/domain/base_list/base_params.dart';
 import 'package:project_athens/athens_core/domain/base_list/items_repository.dart';
 import 'package:project_athens/athens_core/domain/base_list_facade.dart';
 import 'package:project_athens/athens_core/filters_and_sort/data/easy_filters/easy_filters_repository.dart';
@@ -7,7 +9,7 @@ import 'package:project_athens/voting_flow/domain/filters/votes_easy_filter.dart
 import 'package:project_athens/voting_flow/domain/votes_list_params.dart';
 
 class VotesListFacade extends BaseListFacade
-    with EasyFiltersFacade<VotesEasyFilter> {
+    with EasyFiltersFacade<VotesEasyFilter>, AdsFacade<BaseListParams> {
   VotesListFacade(
       ItemsRepository itemsRepository,
       FiltersRepository filtersRepository,

@@ -10,9 +10,6 @@ part 'timeline_api.g.dart';
 @RestApi()
 abstract class TimelineApi {
   factory TimelineApi(Dio dio, {String baseUrl}) = _TimelineApi;
-
-  @GET("https://google.com")
-  Future<void> test();
   
   @GET("/user-aggregator/timeline/{cadency}/parliament-meetings")
   Future<MeetingsResponse> getMeetingsDates(
