@@ -32,7 +32,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           # flutter-version: '1.9.1+hotfix.6'
-          channel: "dev"
+          channel: "stable"
       - env:
           ADC_API_KEY: ${{secrets.ADC_API_KEY}}
           ADC_API_KEY_NAME: ${{secrets.ADC_API_KEY_NAME}}
