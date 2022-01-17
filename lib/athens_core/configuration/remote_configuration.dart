@@ -2,11 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/configuration/domain/get_remote_configuration_use_case.dart';
+import 'package:project_athens/athens_core/configuration/domain/platform_app_versions_model.dart';
 import 'package:project_athens/athens_core/configuration/network/get_remote_configuration_response.dart';
 import 'package:project_athens/athens_core/domain/base_list/base_params.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:version/version.dart';
+
+import 'domain/platform_app_versions_model.dart';
 
 class RemoteConfiguration {
   final GetRemoteConfigurationUseCase _getRemoteConfigurationUseCase;
@@ -15,16 +18,16 @@ class RemoteConfiguration {
   RemoteConfiguration(this._getRemoteConfigurationUseCase, this.context);
 
   int? _cadence;
-  Version? _androidVersion;
-  Version? _iOSVersion;
-  Version? _iPadOSVersion;
-
+  PlatformAppVersionsModel? _minimalVersions;
+  PlatformAppVersionsModel? _recommendedVersions;
   bool _isInitialized = false;
 
   int get cadence => _cadence!;
-  Version get androidVersion => _androidVersion!;
-  Version get iOSVersion => _iOSVersion!;
-  Version get iPadOSVersion => _iPadOSVersion!;
+
+
+
+  PlatformAppVersionsModel? get minimalVersions => _minimalVersions!;
+  PlatformAppVersionsModel? get recommendedVersions => _recommendedVersions!;
 
   get isInitialized => _isInitialized;
 
@@ -50,9 +53,18 @@ class RemoteConfiguration {
 
     _isInitialized = true;
     _cadence = config.cadence;
-    _androidVersion = Version.parse(config.minimalAppVersion.android);
-    _iOSVersion = Version.parse(config.minimalAppVersion.iOS);
-    _iPadOSVersion = Version.parse(config.minimalAppVersion.iPadOS);
+
+    _minimalVersions = PlatformAppVersionsModel(
+        Version.parse(config.minimalAppVersion.iOS),
+        Version.parse(config.minimalAppVersion.iPadOS),
+        Version.parse(config.minimalAppVersion.android)
+    );
+
+    _recommendedVersions = PlatformAppVersionsModel(
+        Version.parse(config.recommendedAppVersion.iOS),
+        Version.parse(config.recommendedAppVersion.iPadOS),
+        Version.parse(config.recommendedAppVersion.android)
+    );
 
     print('get config');
     

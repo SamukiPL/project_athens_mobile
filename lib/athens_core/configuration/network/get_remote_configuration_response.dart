@@ -16,9 +16,10 @@ class GetRemoteConfigurationResponse {
 class GetRemoteConfigurationConfig {
 
   final int cadence;
-  final RemoteConfigurationMinimalAppVersion minimalAppVersion;
+  final RemoteConfigurationAppVersion minimalAppVersion;
+  final RemoteConfigurationAppVersion recommendedAppVersion;
 
-  GetRemoteConfigurationConfig(this.cadence, this.minimalAppVersion);
+  GetRemoteConfigurationConfig(this.cadence, this.minimalAppVersion, this.recommendedAppVersion);
 
 
   factory GetRemoteConfigurationConfig.fromJson(Map<String, dynamic> json) => _$GetRemoteConfigurationConfigFromJson(json);
@@ -26,13 +27,13 @@ class GetRemoteConfigurationConfig {
 }
 
 @JsonSerializable()
-class RemoteConfigurationMinimalAppVersion {
+class RemoteConfigurationAppVersion {
   final String android;
   final String iOS;
   final String iPadOS;
 
-  RemoteConfigurationMinimalAppVersion(this.android, this.iOS, this.iPadOS);
+  RemoteConfigurationAppVersion(this.android, this.iOS, this.iPadOS);
 
-  factory RemoteConfigurationMinimalAppVersion.fromJson(Map<String, dynamic> json) => _$RemoteConfigurationMinimalAppVersionFromJson(json);
-  Map<String, dynamic> toJson() => _$RemoteConfigurationMinimalAppVersionToJson(this);
+  factory RemoteConfigurationAppVersion.fromJson(Map<String, dynamic> json) => _$RemoteConfigurationAppVersionFromJson(json);
+  Map<String, dynamic> toJson() => _$RemoteConfigurationAppVersionToJson(this);
 }

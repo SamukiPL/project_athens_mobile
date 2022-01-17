@@ -24,8 +24,10 @@ GetRemoteConfigurationConfig _$GetRemoteConfigurationConfigFromJson(
     Map<String, dynamic> json) {
   return GetRemoteConfigurationConfig(
     json['cadence'] as int,
-    RemoteConfigurationMinimalAppVersion.fromJson(
+    RemoteConfigurationAppVersion.fromJson(
         json['minimalAppVersion'] as Map<String, dynamic>),
+    RemoteConfigurationAppVersion.fromJson(
+        json['recommendedAppVersion'] as Map<String, dynamic>),
   );
 }
 
@@ -34,19 +36,20 @@ Map<String, dynamic> _$GetRemoteConfigurationConfigToJson(
     <String, dynamic>{
       'cadence': instance.cadence,
       'minimalAppVersion': instance.minimalAppVersion,
+      'recommendedAppVersion': instance.recommendedAppVersion,
     };
 
-RemoteConfigurationMinimalAppVersion
-    _$RemoteConfigurationMinimalAppVersionFromJson(Map<String, dynamic> json) {
-  return RemoteConfigurationMinimalAppVersion(
+RemoteConfigurationAppVersion _$RemoteConfigurationAppVersionFromJson(
+    Map<String, dynamic> json) {
+  return RemoteConfigurationAppVersion(
     json['android'] as String,
     json['iOS'] as String,
     json['iPadOS'] as String,
   );
 }
 
-Map<String, dynamic> _$RemoteConfigurationMinimalAppVersionToJson(
-        RemoteConfigurationMinimalAppVersion instance) =>
+Map<String, dynamic> _$RemoteConfigurationAppVersionToJson(
+        RemoteConfigurationAppVersion instance) =>
     <String, dynamic>{
       'android': instance.android,
       'iOS': instance.iOS,

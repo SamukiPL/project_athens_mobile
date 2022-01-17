@@ -57,43 +57,93 @@ class AutoUpdater {
     final appInfo = await PackageInfo.fromPlatform();
     Version currentVersion = Version.parse(appInfo.version);
 
-    if (Platform.isIOS && _remoteConfiguration.iOSVersion! > currentVersion) {
-      _handleCupertino(UPDATE_SEVERITY.MAJOR);
+    if (Platform.isIOS && _remoteConfiguration.minimalVersions!.iOS > currentVersion) {
+      return _handleCupertino(UPDATE_SEVERITY.MAJOR);
     }
 
-    if (Platform.isAndroid &&  _remoteConfiguration.androidVersion! > currentVersion) {
-      _handleAndroid(UPDATE_SEVERITY.MAJOR);
+    if (Platform.isAndroid &&  _remoteConfiguration.minimalVersions!.android > currentVersion) {
+      return _handleAndroid(UPDATE_SEVERITY.MAJOR);
+    }
+
+    _checkForRecommendedUpdate();
+  }
+
+  _checkForRecommendedUpdate() async {
+    final appInfo = await PackageInfo.fromPlatform();
+    Version currentVersion = Version.parse(appInfo.version);
+
+    if (Platform.isIOS && _remoteConfiguration.recommendedVersions!.iOS > currentVersion) {
+      return _handleCupertino(_getUpdateSeverity(
+          _remoteConfiguration.recommendedVersions!.iOS,
+          currentVersion)
+      );
+    }
+
+    if (Platform.isAndroid &&  _remoteConfiguration.recommendedVersions!.android > currentVersion) {
+      return _handleAndroid(_getUpdateSeverity(
+          _remoteConfiguration.recommendedVersions!.android,
+          currentVersion)
+      );
     }
   }
 
   void _handleCupertino(UPDATE_SEVERITY updateType) async {
-    if (updateType == UPDATE_SEVERITY.MAJOR) {
-      _openCupertinoUpdateDialog(true);
+    switch(updateType) {
+      case UPDATE_SEVERITY.MAJOR:
+        return _openCupertinoUpdateDialog(true);
+      case UPDATE_SEVERITY.MINOR:
+        return _openCupertinoUpdateDialog(false);
     }
   }
 
   void _handleAndroid(UPDATE_SEVERITY updateType) async {
-    if (updateType == UPDATE_SEVERITY.MAJOR) {
-      await InAppUpdate.performImmediateUpdate();
+    switch(updateType) {
+      case UPDATE_SEVERITY.MAJOR:
+        return await InAppUpdate.performImmediateUpdate();
+      case UPDATE_SEVERITY.MINOR:
+        await InAppUpdate.startFlexibleUpdate();
+        await InAppUpdate.completeFlexibleUpdate();
+        break;
     }
   }
 
   void _openCupertinoUpdateDialog(bool critical) {
+    final String title = critical
+        ? _localizations.getText().universalUpdateCupertinoDialogImmediateUpdateTitle()
+        : _localizations.getText().universalUpdateCupertinoDialogTitle();
+
+    final String content = critical
+        ? _localizations.getText().universalUpdateCupertinoDialogImmediateUpdateContent()
+        : _localizations.getText().universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow();
+
+    final List<CupertinoDialogAction> actions = [
+      CupertinoDialogAction(
+        child: Text(
+          _localizations.getText().universalUpdateCupertinoDialogButtonUpdateNow()
+        ),
+        onPressed: () => _launchAppStore(),
+      )
+    ];
+
+    if (!critical) {
+      actions.insert(
+        0,
+        CupertinoDialogAction(
+          child: Text(
+              _localizations.getText().universalUpdateCupertinoDialogButtonLater()
+          ),
+        )
+      );
+    }
+
     showCupertinoDialog(
         context: _context,
         builder: (_) => CupertinoAlertDialog(
-          title: Text(_localizations.getText().universalUpdateCupertinoDialogImmediateUpdateTitle()),
-          content: Text(_localizations.getText().universalUpdateCupertinoDialogImmediateUpdateTitle()),
-          actions: [
-            CupertinoDialogAction(
-                child: Text(
-                    _localizations.getText().universalUpdateCupertinoDialogButtonUpdateNow()
-                ),
-                onPressed: () => _launchAppStore(),
-            )
-          ],
+          title: Text(title),
+          content: Text(content),
+          actions: actions
         ),
-        barrierDismissible: false
+        barrierDismissible: !critical
     );
   }
 
