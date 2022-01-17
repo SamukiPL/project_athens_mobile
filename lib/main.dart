@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Project Athens',
+        title: 'Świadoma Demokracja',
         theme: ThemeData(
             primarySwatch: MaterialColor(
               0xff61a1f3,

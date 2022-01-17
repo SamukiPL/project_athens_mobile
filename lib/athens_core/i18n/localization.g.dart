@@ -31,16 +31,16 @@ class AppLocalizationsGenerated {
     return words['universal']['choose'];
   }
 
-  String universalClose() {
-    return words['universal']['close'];
-  }
-
   String universalOk() {
     return words['universal']['ok'];
   }
 
   String universalRetry() {
     return words['universal']['retry'];
+  }
+
+  String universalClose() {
+    return words['universal']['close'];
   }
 
   String universalNoDataDefaultText() {
@@ -96,6 +96,16 @@ class AppLocalizationsGenerated {
         ['wouldYouLikeToUpdateAppNow'];
   }
 
+  String universalUpdateCupertinoDialogImmediateUpdateTitle() {
+    return words['universal']['update']['cupertinoDialog']
+        ['immediateUpdateTitle'];
+  }
+
+  String universalUpdateCupertinoDialogImmediateUpdateContent() {
+    return words['universal']['update']['cupertinoDialog']
+        ['immediateUpdateContent'];
+  }
+
   String mainMenuSession() {
     return words['main']['menu']['session'];
   }
@@ -132,12 +142,12 @@ class AppLocalizationsGenerated {
     return words['login']['buttons']['register'];
   }
 
-  String loginButtonsSignUp() {
-    return words['login']['buttons']['signUp'];
-  }
-
   String loginButtonsForgot() {
     return words['login']['buttons']['forgot'];
+  }
+
+  String loginButtonsSignUp() {
+    return words['login']['buttons']['signUp'];
   }
 
   String loginButtonsResetPassword() {
@@ -240,16 +250,16 @@ class AppLocalizationsGenerated {
     return words['login']['error']['passwordOrLoginDoesNotMatch'];
   }
 
-  String timelineTimelineNavTitle() {
-    return words['timeline']['timelineNavTitle'];
-  }
-
   String timelineVote() {
     return words['timeline']['vote'];
   }
 
   String timelineVoteNoAgenda() {
     return words['timeline']['voteNoAgenda'];
+  }
+
+  String timelineTimelineNavTitle() {
+    return words['timeline']['timelineNavTitle'];
   }
 
   String timelineVotingTypesResolutionProject() {
@@ -565,12 +575,12 @@ class AppLocalizationsGenerated {
     return words['more']['likeApplication'];
   }
 
-  String moreCheckForUpdates() {
-    return words['more']['checkForUpdates'];
-  }
-
   String moreSupportUs() {
     return words['more']['supportUs'];
+  }
+
+  String moreCheckForUpdates() {
+    return words['more']['checkForUpdates'];
   }
 
   String moreAppVersion() {

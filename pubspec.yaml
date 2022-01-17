@@ -57,6 +57,7 @@ dependencies:
   fijkplayer_skin:
     git:
       url: https://github.com/pbrejdak/fijkplayer_skin.git
+  version: ^2.0.0
 
 dev_dependencies:
   flutter_test:

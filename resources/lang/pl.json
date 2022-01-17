@@ -23,10 +23,12 @@
     "update": {
       "cupertinoDialog": {
         "title": "Zaktualizować aplikacje?",
+        "immediateUpdateTitle":  "Wymagana aktualizacja aplikacji",
         "buttonIgnore": "Zignoruj",
         "buttonLater": "Później",
         "buttonUpdateNow": "Aktualuzuj",
-        "wouldYouLikeToUpdateAppNow": "Chcesz zaktualizować aplikacje teraz?"
+        "wouldYouLikeToUpdateAppNow": "Chcesz zaktualizować aplikacje teraz?",
+        "immediateUpdateContent": "Aplikacja musi zostać zaktualizowana w celu poprawnego działania, w innym wypadku aplikacja przestanie działać"
       }
     }
   },

@@ -37,5 +37,5 @@ class Configuration {
 
   void dispose() {
     _showTechnicalDataSource.close();
-}
+  }
 }

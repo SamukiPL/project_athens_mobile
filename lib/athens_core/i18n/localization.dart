@@ -8,7 +8,7 @@ import 'package:lang_generator/annotations/lang_annotation.dart';
 
 part 'localization.g.dart';
 
-@LangAutomation('resources/lang/pl.json')
+@LangAutomation('resources/lang/en.json')
 class AppLocalizations {
   AppLocalizations(this.locale);
 

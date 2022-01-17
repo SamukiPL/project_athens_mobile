@@ -26,7 +26,10 @@
         "buttonIgnore": "Ignore",
         "buttonLater": "Later",
         "buttonUpdateNow": "Update now",
-        "wouldYouLikeToUpdateAppNow": "Would you like to update application now?"
+        "wouldYouLikeToUpdateAppNow": "Would you like to update application now?",
+        "immediateUpdateTitle":  "Update required",
+        "immediateUpdateContent": "Application must be updated, it is required to assure that application will work properly."
+
       }
     }
   },
