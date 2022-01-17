@@ -18,8 +18,9 @@ class GetRemoteConfigurationConfig {
   final int cadence;
   final RemoteConfigurationAppVersion minimalAppVersion;
   final RemoteConfigurationAppVersion recommendedAppVersion;
+  final DateTime privacyPolicyVersion;
 
-  GetRemoteConfigurationConfig(this.cadence, this.minimalAppVersion, this.recommendedAppVersion);
+  GetRemoteConfigurationConfig(this.cadence, this.minimalAppVersion, this.recommendedAppVersion, this.privacyPolicyVersion);
 
 
   factory GetRemoteConfigurationConfig.fromJson(Map<String, dynamic> json) => _$GetRemoteConfigurationConfigFromJson(json);

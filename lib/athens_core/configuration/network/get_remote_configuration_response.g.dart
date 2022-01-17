@@ -28,6 +28,7 @@ GetRemoteConfigurationConfig _$GetRemoteConfigurationConfigFromJson(
         json['minimalAppVersion'] as Map<String, dynamic>),
     RemoteConfigurationAppVersion.fromJson(
         json['recommendedAppVersion'] as Map<String, dynamic>),
+    DateTime.parse(json['privacyPolicyVersion'] as String),
   );
 }
 
@@ -37,6 +38,7 @@ Map<String, dynamic> _$GetRemoteConfigurationConfigToJson(
       'cadence': instance.cadence,
       'minimalAppVersion': instance.minimalAppVersion,
       'recommendedAppVersion': instance.recommendedAppVersion,
+      'privacyPolicyVersion': instance.privacyPolicyVersion.toIso8601String(),
     };
 
 RemoteConfigurationAppVersion _$RemoteConfigurationAppVersionFromJson(

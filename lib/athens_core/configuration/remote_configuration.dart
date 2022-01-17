@@ -18,13 +18,13 @@ class RemoteConfiguration {
   RemoteConfiguration(this._getRemoteConfigurationUseCase, this.context);
 
   int? _cadence;
+  DateTime? _privacyPolicyVersion;
   PlatformAppVersionsModel? _minimalVersions;
   PlatformAppVersionsModel? _recommendedVersions;
   bool _isInitialized = false;
 
   int get cadence => _cadence!;
-
-
+  DateTime get privacyPolicyVersion => _privacyPolicyVersion!;
 
   PlatformAppVersionsModel? get minimalVersions => _minimalVersions!;
   PlatformAppVersionsModel? get recommendedVersions => _recommendedVersions!;
@@ -34,12 +34,21 @@ class RemoteConfiguration {
   final ReplaySubject<void> _dataFetchedSource = ReplaySubject<void>(maxSize: 1);
   Stream<void> get dataFetched => _dataFetchedSource.stream;
 
-  late StreamSubscription? refreshSub;
+  late StreamSubscription? _refreshSub;
+
+  final ReplaySubject<void> _forceRefreshSource = ReplaySubject<void>(maxSize: 1);
+  Stream<void> get _forceRefreshStream => _forceRefreshSource.stream;
 
   init() {
-    refreshSub = Rx.timer(null, Duration(hours: 1))
-        .startWith(null)
+    _refreshSub = Rx.combineLatest2(
+        Rx.timer(null, Duration(hours: 1)).startWith(null),
+        _forceRefreshStream.startWith(null),
+        (a, b) => null)
         .listen((event) => _fetchRemoteConfig());
+  }
+
+  refresh() {
+    _forceRefreshSource.add(null);
   }
 
   _fetchRemoteConfig() async {
@@ -53,6 +62,7 @@ class RemoteConfiguration {
 
     _isInitialized = true;
     _cadence = config.cadence;
+    _privacyPolicyVersion = config.privacyPolicyVersion;
 
     _minimalVersions = PlatformAppVersionsModel(
         Version.parse(config.minimalAppVersion.iOS),
@@ -72,8 +82,9 @@ class RemoteConfiguration {
   }
 
   void dispose() {
-    refreshSub?.cancel();
+    _refreshSub?.cancel();
     _dataFetchedSource.close();
+    _forceRefreshSource.close();
   }
 }
 
