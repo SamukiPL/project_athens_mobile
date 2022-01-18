@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/chopper/error_interceptor.dart';
 import 'package:project_athens/athens_core/chopper/network_module.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
+import 'package:project_athens/athens_core/utils/life_cycle_manager/life_cycle_service.dart';
 import 'package:project_athens/athens_core/utils/notifications_service.dart';
 import 'package:project_athens/dashboard_flow/cache/parliament_meeting_cache.dart';
 import 'package:project_athens/dashboard_flow/data/network/dashboard_api.dart';
@@ -27,7 +28,9 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 class AppModule extends Module {
-  AppModule(BuildContext context) : super(context);
+  AppModule(BuildContext context, this.lifeCycle) : super(context);
+
+  final LifeCycleService lifeCycle;
 
   @override
   List<SingleChildWidget> getProviders() {
@@ -48,6 +51,7 @@ class AppModule extends Module {
         create: (_) => SimpleDioClient(client),
         dispose: (context, client) => client.dispose(),
       ),
+      Provider<LifeCycleService>.value(value: lifeCycle),
       Provider<ParliamentClubsCache>.value(
           value: clubsCache
       ),

@@ -10,6 +10,7 @@ import 'package:project_athens/athens_core/i18n/localization_delegate.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/utils/firebase/firebase_messaging_module.dart';
 import 'package:project_athens/athens_core/utils/life_cycle_manager/life_cycle_manager.dart';
+import 'package:project_athens/athens_core/utils/life_cycle_manager/life_cycle_service.dart';
 import 'package:project_athens/athens_core/utils/notifications_service.dart';
 import 'package:project_athens/main/firebase/firebase_messages.dart';
 import 'package:project_athens/main/injections/app_module.dart';
@@ -59,6 +60,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _firebaseMessages.setupMessaging();
+    final LifeCycleService _lifeCycle = LifeCycleService();
 
     // we have to eagerly create auto updater due to
     // splash screen bloc could access it immediately
@@ -66,12 +68,13 @@ class MyApp extends StatelessWidget {
     Fimber.plantTree(DebugBufferTree());
     return ModuleWidget(
       providers: [
-        AppModule(context),
+        AppModule(context, _lifeCycle),
         FirebaseMessagingModule(context, _firebaseMessages),
         ConfigurationModule(context),
         MainWidgetModule(context)
       ],
       child: LifeCycleManager(
+        lifeCycle: _lifeCycle,
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Project Athens',
