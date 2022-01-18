@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -7,6 +9,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:project_athens/athens_core/i18n/localization_delegate.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/utils/firebase/firebase_messaging_module.dart';
+import 'package:project_athens/athens_core/utils/life_cycle_manager/life_cycle_manager.dart';
+import 'package:project_athens/athens_core/utils/notifications_service.dart';
 import 'package:project_athens/main/firebase/firebase_messages.dart';
 import 'package:project_athens/main/injections/app_module.dart';
 import 'package:project_athens/main/injections/app_navigation_module.dart';
@@ -19,12 +23,29 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
   print('Handling a background message ${message.messageId}');
+
+  if (NotificationsService.instance == null) {
+    await NotificationsService.intialize();
+  }
+
+  NotificationsService.instance!.addNotificationFromBackgroundRemoteMessage(message);
 }
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await NotificationsService.intialize();
+
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onMessage.listen((event) {
+    print('handling onMessage, ' + NotificationsService.instance.toString());
+    NotificationsService.instance!.addNotificationFromRemoteMessage(event);
+  });
+  FirebaseMessaging.onMessageOpenedApp.listen((event) {
+    print('handling onMessageOpenedApp, ' + NotificationsService.instance.toString());
+    NotificationsService.instance!.openDestinationFromRemoteMessage(event);
+  });
+
   FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
@@ -50,49 +71,51 @@ class MyApp extends StatelessWidget {
         ConfigurationModule(context),
         MainWidgetModule(context)
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Świadoma Demokracja',
-        theme: ThemeData(
-            primarySwatch: MaterialColor(
-              0xff61a1f3,
-              const <int, Color>{
-                50: const Color(0xff61a1f3),
-                100: const Color(0xff61a1f3),
-                200: const Color(0xff61a1f3),
-                300: const Color(0xff61a1f3),
-                400: const Color(0xff61a1f3),
-                500: const Color(0xff61a1f3),
-                600: const Color(0xff61a1f3),
-                700: const Color(0xff61a1f3),
-                800: const Color(0xff61a1f3),
-                900: const Color(0xff61a1f3),
-              },
-            ),
-            backgroundColor: Colors.white,
-            scaffoldBackgroundColor: Colors.white,
-            dividerColor: Color(0xffaaaaaa),
-            primaryColor: Color(0xff61a1f3),
-            primaryColorDark: Color(0xff008ebe),
-            accentColor: Colors.blueAccent),
-        home: ModuleWidget(
-          providers: [AppNavigationModule(context)],
-          child: SplashScreenWidget(),
+      child: LifeCycleManager(
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Świadoma Demokracja',
+          theme: ThemeData(
+              primarySwatch: MaterialColor(
+                0xff61a1f3,
+                const <int, Color>{
+                  50: const Color(0xff61a1f3),
+                  100: const Color(0xff61a1f3),
+                  200: const Color(0xff61a1f3),
+                  300: const Color(0xff61a1f3),
+                  400: const Color(0xff61a1f3),
+                  500: const Color(0xff61a1f3),
+                  600: const Color(0xff61a1f3),
+                  700: const Color(0xff61a1f3),
+                  800: const Color(0xff61a1f3),
+                  900: const Color(0xff61a1f3),
+                },
+              ),
+              backgroundColor: Colors.white,
+              scaffoldBackgroundColor: Colors.white,
+              dividerColor: Color(0xffaaaaaa),
+              primaryColor: Color(0xff61a1f3),
+              primaryColorDark: Color(0xff008ebe),
+              accentColor: Colors.blueAccent),
+          home: ModuleWidget(
+            providers: [AppNavigationModule(context)],
+            child: SplashScreenWidget(),
+          ),
+          supportedLocales: [const Locale('pl')],
+          localizationsDelegates: [
+            const AppLocalizationsDelegate(),
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate
+          ],
+          localeResolutionCallback:
+              (Locale? locale, Iterable<Locale> supportedLocales) {
+            return supportedLocales.firstWhere(
+                (supportedLocale) =>
+                    supportedLocale.languageCode == locale?.languageCode,
+                orElse: () => supportedLocales.first);
+          },
         ),
-        supportedLocales: [const Locale('pl')],
-        localizationsDelegates: [
-          const AppLocalizationsDelegate(),
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate
-        ],
-        localeResolutionCallback:
-            (Locale? locale, Iterable<Locale> supportedLocales) {
-          return supportedLocales.firstWhere(
-              (supportedLocale) =>
-                  supportedLocale.languageCode == locale?.languageCode,
-              orElse: () => supportedLocales.first);
-        },
-      ),
+      )
     );
   }
 }

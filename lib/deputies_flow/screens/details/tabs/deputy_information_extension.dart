@@ -10,13 +10,13 @@ extension DeputyFullExtension on DeputyFull {
 
     return [
       SimpleHorizontalTableCell(lowerText: bornDate, upperText: localizations.getText().deputiesBirthDate()),
-      SimpleHorizontalTableCell(lowerText: cv.education, upperText: localizations.getText().deputiesEducation()),
-      SimpleHorizontalTableCell(lowerText: cv.profession, upperText: localizations.getText().deputiesProfession())
+      SimpleHorizontalTableCell(lowerText: cv.education ?? "Brak informacji", upperText: localizations.getText().deputiesEducation()),
+      SimpleHorizontalTableCell(lowerText: cv.profession ?? "Brak informacji", upperText: localizations.getText().deputiesProfession())
     ].toList();
   }
 
   String getFinishedSchools() {
-    return cv.finishedSchools.trim();
+    return cv.finishedSchools?.trim() ?? "Brak informacji";
   }
 
   DeputyCv getDeputyCV() {

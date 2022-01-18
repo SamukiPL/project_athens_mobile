@@ -1,6 +1,7 @@
 
 import 'package:project_athens/athens_core/auth/storage/tokens.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:project_athens/athens_core/chopper/jwt_decode.dart';
 
 class AuthStorage {
 
@@ -36,4 +37,23 @@ class AuthStorage {
     await storage.delete(key: refreshTokenKey);
   }
 
+  Future<String> getUserName() async {
+    final Tokens tokens = await provideTokens();
+
+    Map<String, dynamic> decodedToken = Jwt().parseJwt(tokens.accessToken);
+
+    String userName = '';
+
+    if (decodedToken.containsKey('firstName') && decodedToken['firstName'] != null && decodedToken['firstName'] != "") {
+      userName = decodedToken['firstName'];
+
+      if (decodedToken.containsKey('lastName') && decodedToken['lastName'] != null && decodedToken['lastName'] != "") {
+        userName = userName + ' ' + decodedToken['lastName'];
+      }
+    } else {
+      userName = decodedToken['login'];
+    }
+
+    return userName;
+  }
 }

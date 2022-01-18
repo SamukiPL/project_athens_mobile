@@ -71,6 +71,16 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalInformation != "" && universalInformation != null); 
   }); 
  
+  test("All methods for $locale universalExperimentalFeatureContent", () async {
+    String universalExperimentalFeatureContent = localization.universalExperimentalFeatureContent();
+    expect(true, universalExperimentalFeatureContent != "" && universalExperimentalFeatureContent != null); 
+  }); 
+ 
+  test("All methods for $locale universalExperimentalFeatureTitle", () async {
+    String universalExperimentalFeatureTitle = localization.universalExperimentalFeatureTitle();
+    expect(true, universalExperimentalFeatureTitle != "" && universalExperimentalFeatureTitle != null); 
+  }); 
+ 
   test("All methods for $locale universalErrorNetwork", () async {
     String universalErrorNetwork = localization.universalErrorNetwork();
     expect(true, universalErrorNetwork != "" && universalErrorNetwork != null); 
@@ -739,6 +749,61 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale moreCredits", () async {
     String moreCredits = localization.moreCredits();
     expect(true, moreCredits != "" && moreCredits != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardTitle", () async {
+    String dashboardTitle = localization.dashboardTitle();
+    expect(true, dashboardTitle != "" && dashboardTitle != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNearestMeetingTitle", () async {
+    String dashboardNearestMeetingTitle = localization.dashboardNearestMeetingTitle();
+    expect(true, dashboardNearestMeetingTitle != "" && dashboardNearestMeetingTitle != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsTitle", () async {
+    String dashboardNotificationsTitle = localization.dashboardNotificationsTitle();
+    expect(true, dashboardNotificationsTitle != "" && dashboardNotificationsTitle != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsFiltersSpeeches", () async {
+    String dashboardNotificationsFiltersSpeeches = localization.dashboardNotificationsFiltersSpeeches();
+    expect(true, dashboardNotificationsFiltersSpeeches != "" && dashboardNotificationsFiltersSpeeches != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsFiltersVotes", () async {
+    String dashboardNotificationsFiltersVotes = localization.dashboardNotificationsFiltersVotes();
+    expect(true, dashboardNotificationsFiltersVotes != "" && dashboardNotificationsFiltersVotes != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsFiltersNotRead", () async {
+    String dashboardNotificationsFiltersNotRead = localization.dashboardNotificationsFiltersNotRead();
+    expect(true, dashboardNotificationsFiltersNotRead != "" && dashboardNotificationsFiltersNotRead != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardTilesNearestMeetingTileMeetingIsToday", () async {
+    String dashboardTilesNearestMeetingTileMeetingIsToday = localization.dashboardTilesNearestMeetingTileMeetingIsToday();
+    expect(true, dashboardTilesNearestMeetingTileMeetingIsToday != "" && dashboardTilesNearestMeetingTileMeetingIsToday != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardTilesNearestMeetingTileMeetingWasYesterday", () async {
+    String dashboardTilesNearestMeetingTileMeetingWasYesterday = localization.dashboardTilesNearestMeetingTileMeetingWasYesterday();
+    expect(true, dashboardTilesNearestMeetingTileMeetingWasYesterday != "" && dashboardTilesNearestMeetingTileMeetingWasYesterday != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardTilesNearestMeetingTileMeetingIsTomorrow", () async {
+    String dashboardTilesNearestMeetingTileMeetingIsTomorrow = localization.dashboardTilesNearestMeetingTileMeetingIsTomorrow();
+    expect(true, dashboardTilesNearestMeetingTileMeetingIsTomorrow != "" && dashboardTilesNearestMeetingTileMeetingIsTomorrow != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardTilesNearestMeetingTileMeetingInDays", () async {
+    String dashboardTilesNearestMeetingTileMeetingInDays = localization.dashboardTilesNearestMeetingTileMeetingInDays();
+    expect(true, dashboardTilesNearestMeetingTileMeetingInDays != "" && dashboardTilesNearestMeetingTileMeetingInDays != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardTilesNearestMeetingTileDays", () async {
+    String dashboardTilesNearestMeetingTileDays = localization.dashboardTilesNearestMeetingTileDays();
+    expect(true, dashboardTilesNearestMeetingTileDays != "" && dashboardTilesNearestMeetingTileDays != null); 
   }); 
  
   test("All methods for $locale settingsSettingsTitle", () async {

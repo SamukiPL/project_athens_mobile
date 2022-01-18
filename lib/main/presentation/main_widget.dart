@@ -6,6 +6,7 @@ import 'package:project_athens/athens_core/i18n/localization_module.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_navigator.dart';
+import 'package:project_athens/athens_core/utils/notifications_service.dart';
 import 'package:project_athens/deputies_utils/injections/subscribed_deputy_cache_module.dart';
 import 'package:project_athens/main/firebase/firebase_messages.dart';
 import 'package:project_athens/main/injections/wakelock_module.dart';
@@ -15,6 +16,7 @@ class MainWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firebaseMessages = Provider.of<FirebaseMessages>(context);
+    NotificationsService.instance!.updateContext(context, true);
 
     return ModuleWidget(
       providers: [

@@ -3,6 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/chopper/error_interceptor.dart';
 import 'package:project_athens/athens_core/chopper/network_module.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
+import 'package:project_athens/athens_core/utils/notifications_service.dart';
+import 'package:project_athens/dashboard_flow/cache/parliament_meeting_cache.dart';
+import 'package:project_athens/dashboard_flow/data/network/dashboard_api.dart';
+import 'package:project_athens/dashboard_flow/data/parliament_meeting_details_repository_impl.dart';
+import 'package:project_athens/dashboard_flow/domain/parliament_meeting_details/get_parliament_meeting_details_use_case.dart';
+import 'package:project_athens/dashboard_flow/mappers/parliament_meeting_details_network_mapper.dart';
+import 'package:project_athens/deputies_utils/cache/cache_errors.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/cache/parliament_clubs_cache.dart';
 import 'package:project_athens/deputies_utils/data/get_deputies_repository_impl.dart';
@@ -48,7 +55,20 @@ class AppModule extends Module {
         create: (_) => _createDeputiesCache(client, clubsCache),
       ),
       Provider<SpeechCache>(create: (_) => SpeechCache()),
+      Provider<ParliamentMeetingCache>(
+        create: (_) => _createParliamentMeetingCache(client),
+        dispose: (_, cache) => cache.dispose(),
+      )
     ]);
+  }
+
+  ParliamentMeetingCache _createParliamentMeetingCache(Dio client) {
+    final dashboardApi = DashboardApi(client);
+    final networkMapper = ParliamentMeetingNetworkMapper();
+    final getParliamentMeetingRepository = ParliamentMeetingDetailsRepositoryImpl(dashboardApi, networkMapper);
+    final useCase = GetParliamentMeetingDetailsUseCase(getParliamentMeetingRepository);
+
+    return ParliamentMeetingCache(useCase);
   }
 
   ParliamentClubsCache _createClubsCache(Dio client) {

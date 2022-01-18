@@ -23,5 +23,4 @@ class Meeting {
   Meeting(this.id, this.scheduledAt, this.sessionIId, this.cadency, this.createAt);
 
   factory Meeting.fromJson(Map<String, dynamic> json) => _$MeetingFromJson(json);
-
 }
