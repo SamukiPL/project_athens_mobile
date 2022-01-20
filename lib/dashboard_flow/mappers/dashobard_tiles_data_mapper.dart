@@ -31,7 +31,7 @@ class DashboardTilesDataMapper extends AsyncDataMapper<DashboardResponse, Dashbo
     DashboardSimpleDeputiesCounter? absentVote;
     if (response.absentVote != null) {
       absentVote = DashboardSimpleDeputiesCounter(
-        await Future.wait(response.absentVote!.perDeputy.map((deputy) => absentVoteMapper.transform(deputy))),
+        await absentVoteMapper(response.absentVote!.perDeputy),
         response.absentVote!.updateAt,
       );
     }
@@ -39,7 +39,7 @@ class DashboardTilesDataMapper extends AsyncDataMapper<DashboardResponse, Dashbo
     DashboardSimpleDeputiesCounter? speechesCounter;
     if (response.speechesCounter != null) {
       speechesCounter = DashboardSimpleDeputiesCounter(
-        await Future.wait(response.speechesCounter!.perDeputy.map((deputy) => speechesCounterMapper.transform(deputy))),
+        await speechesCounterMapper(response.speechesCounter!.perDeputy),
         response.speechesCounter!.updateAt,
       );
     }
@@ -47,7 +47,7 @@ class DashboardTilesDataMapper extends AsyncDataMapper<DashboardResponse, Dashbo
     DashboardSimpleDeputiesCounterPerYearDataModel? absentVotePerYear;
     if (response.absentVotePerYear != null) {
       absentVotePerYear = DashboardSimpleDeputiesCounterPerYearDataModel(
-        await Future.wait(response.absentVotePerYear!.perDeputy.map((deputy) => counterPerYearMapper.transform(deputy)).toList()),
+        await counterPerYearMapper(response.absentVotePerYear!.perDeputy),
         response.absentVotePerYear!.updateAt
       );
     }
@@ -55,7 +55,7 @@ class DashboardTilesDataMapper extends AsyncDataMapper<DashboardResponse, Dashbo
     DashboardSimpleDeputiesCounterPerYearDataModel? speechesCounterPerYear;
     if (response.speechesCounterPerYear != null) {
       speechesCounterPerYear = DashboardSimpleDeputiesCounterPerYearDataModel(
-          await Future.wait(response.speechesCounterPerYear!.perDeputy.map((deputy) => counterPerYearMapper.transform(deputy)).toList()),
+          await counterPerYearMapper(response.speechesCounterPerYear!.perDeputy),
           response.speechesCounterPerYear!.updateAt
       );
     }

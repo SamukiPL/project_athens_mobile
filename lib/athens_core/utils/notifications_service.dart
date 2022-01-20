@@ -27,9 +27,11 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
 
   NotificationsService();
 
-  BuildContext? _buildContext;
-  SavedNotification? _suspendedRedirection;
-  bool _mainWidgetInitialized = false;
+  ReplaySubject<SavedNotification> _suspendedRedirectionSource = ReplaySubject(maxSize: 1);
+  Stream<SavedNotification> get suspendedRedirectionStream => _suspendedRedirectionSource.stream;
+
+  ReplaySubject<List<SavedNotification>> _notificationsSource = ReplaySubject<List<SavedNotification>>(maxSize: 1);
+  Stream<List<SavedNotification>> get notificationsStream => _notificationsSource.stream.shareReplay(maxSize: 1);
 
   @override
   String get preferenceName => ConfigurationStorageNames.NOTIFICATIONS;
@@ -41,9 +43,6 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
 
   final List<SavedNotification> notifications = List.empty(growable: true);
 
-  ReplaySubject<List<SavedNotification>> notificationsSource = ReplaySubject<List<SavedNotification>>(maxSize: 1);
-  Stream<List<SavedNotification>> get notificationsStream => notificationsSource.stream.shareReplay(maxSize: 1);
-
   Future<void> init() async {
     final List<SavedNotification> _notifications = await fetchPreference((Map<String, dynamic> json) => SavedNotification.fromJson(json));
 
@@ -54,19 +53,6 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
 
     _broadcastNotifications();
     await saveNotifications(notifications);
-  }
-
-  void updateContext(BuildContext context, bool mainWidgetInitialized) {
-    _buildContext = context;
-    print('update context');
-
-    if (mainWidgetInitialized) {
-      _mainWidgetInitialized = mainWidgetInitialized;
-    }
-
-    if (_suspendedRedirection != null) {
-      openDestination(_suspendedRedirection!);
-    }
   }
 
   void onApplicationResumed() async {
@@ -121,26 +107,22 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
   }
 
   Future<void> openDestination(SavedNotification notification) async {
-    if (_buildContext == null || !_mainWidgetInitialized) {
-      print("[NotificationsService]: Currently BuildContext is not defined. Storing current redirection and wait till data is available");
-      _suspendedRedirection = notification;
-      return;
-    }
+    _suspendedRedirectionSource.add(notification);
 
     notification.isRead = true;
 
-    switch (notification.type) {
-      case "SPEECH":
-        goToDestination(_buildContext!, SpeechDetailsDestination(notification.refId!, false));
-        _suspendedRedirection = null;
-        break;
-      // case NotificationType.VOTE:
-        // final partialVoteModel = VoteSlimModel(id: notification.refId, title: title, type: type, voteAt: voteAt, voteNumbers: voteNumbers, votingDesc: votingDesc)
-        // goToDestination(_buildContext!, VoteDetailsDestination(_voteModel));
-        // break;
-      // case NotificationType.DEPUTY:
-        // goToDestination(_buildContext!, DeputyDetailsDestination(_deputyModel))
-    }
+    // switch (notification.type) {
+    //   case "SPEECH":
+    //     goToDestination(_buildContext!, SpeechDetailsDestination(notification.refId!, false));
+    //     _suspendedRedirection = null;
+    //     break;
+    //   // case NotificationType.VOTE:
+    //     // final partialVoteModel = VoteSlimModel(id: notification.refId, title: title, type: type, voteAt: voteAt, voteNumbers: voteNumbers, votingDesc: votingDesc)
+    //     // goToDestination(_buildContext!, VoteDetailsDestination(_voteModel));
+    //     // break;
+    //   // case NotificationType.DEPUTY:
+    //     // goToDestination(_buildContext!, DeputyDetailsDestination(_deputyModel))
+    // }
 
     await saveNotifications(notifications);
     _broadcastNotifications();
@@ -201,10 +183,11 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
   void _broadcastNotifications() {
     notifications.sort((a,b) => b.sentTime!.compareTo(a.sentTime!));
     final List<SavedNotification> newInstanceList = List.of(notifications);
-    notificationsSource.add(newInstanceList);
+    _notificationsSource.add(newInstanceList);
   }
 
   void dispose() {
-    notificationsSource.close();
+    _notificationsSource.close();
+    _suspendedRedirectionSource.close();
   }
 }

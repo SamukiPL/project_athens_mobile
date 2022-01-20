@@ -9,7 +9,7 @@ class NearestMeetingTile extends SimpleTile {
   @override
   final NearestMeetingTileBloc bloc;
 
-  NearestMeetingTile(this.bloc) : super(text: "", key: Key('tile_nearest_meeting'), bloc: bloc);
+  NearestMeetingTile(this.bloc) : super(key: Key('tile_nearest_meeting'), bloc: bloc);
 
   Widget _getMeetingText(BuildContext context) {
     return StreamProvider<String?>.value(

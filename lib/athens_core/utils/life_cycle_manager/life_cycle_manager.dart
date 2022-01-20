@@ -50,6 +50,7 @@ class _LifeCycleManagerState extends State<LifeCycleManager> with WidgetsBinding
   @override
   void dispose() {
     WidgetsBinding.instance?.removeObserver(this);
+    widget.lifeCycle.dispose();
     super.dispose();
   }
 }

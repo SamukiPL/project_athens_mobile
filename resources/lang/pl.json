@@ -9,7 +9,8 @@
     "ok": "Ok",
     "retry": "Spróbuj ponownie",
     "noData": {
-      "defaultText": "Brak danych"
+      "defaultText": "Brak danych",
+      "noInformation": "Brak informacji"
     },
     "information": "Informacja",
     "experimentalFeature": {

@@ -10,13 +10,17 @@ extension DeputyFullExtension on DeputyFull {
 
     return [
       SimpleHorizontalTableCell(lowerText: bornDate, upperText: localizations.getText().deputiesBirthDate()),
-      SimpleHorizontalTableCell(lowerText: cv.education ?? "Brak informacji", upperText: localizations.getText().deputiesEducation()),
-      SimpleHorizontalTableCell(lowerText: cv.profession ?? "Brak informacji", upperText: localizations.getText().deputiesProfession())
+      SimpleHorizontalTableCell(lowerText: cv.education ?? localizations.getText().universalNoDataNoInformation(), upperText: localizations.getText().deputiesEducation()),
+      SimpleHorizontalTableCell(lowerText: cv.profession ?? localizations.getText().universalNoDataNoInformation(), upperText: localizations.getText().deputiesProfession())
     ].toList();
   }
 
-  String getFinishedSchools() {
-    return cv.finishedSchools?.trim() ?? "Brak informacji";
+  String getFinishedSchools(AppLocalizations localizations) {
+    return cv.finishedSchools?.trim() ?? localizations.getText().universalNoDataNoInformation();
+  }
+
+  String getParliamentExperience(AppLocalizations localizations) {
+    return cv.parliamentExperience.trim() ?? localizations.getText().universalNoDataNoInformation();
   }
 
   DeputyCv getDeputyCV() {
@@ -26,10 +30,6 @@ extension DeputyFullExtension on DeputyFull {
   String getDeputyId() {
     return id;
   }
-
-  // String getParliamentExperience() {
-  //   return deputyFull.
-  // }
 
   Statistics getStatistics() {
     return statistics;

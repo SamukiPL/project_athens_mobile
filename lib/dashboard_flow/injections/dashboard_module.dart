@@ -18,7 +18,7 @@ class DashboardModule extends Module {
 
   @override
   List<SingleChildWidget> getProviders() {
-    final AppLocalizations _localizations = AppLocalizations.of(context)!;
+    final AppLocalizations _localizations = Provider.of<AppLocalizations>(context);
     final _dio = Provider.of<Dio>(context);
 
     final DashboardApi dashboardApi = DashboardApi(_dio);

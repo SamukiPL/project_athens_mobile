@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
 import 'package:project_athens/athens_core/presentation/grid/tiles/simple_tile/simple_tile.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/chart_tile/chart_tombstone.dart';
@@ -16,9 +17,8 @@ import 'package:provider/provider.dart';
 class ChartTile<SERIES_DATA, FROM_DATA_STREAM> extends SimpleTile {
   @override
   final DeputyChartTileBloc<SERIES_DATA, FROM_DATA_STREAM> bloc;
-  final String title;
 
-  ChartTile({required this.bloc, required this.title, required Key key}) : super(text: "", key: key, bloc: bloc);
+  ChartTile({required this.bloc, required final String text, required Key key}) : super(text: text, key: key, bloc: bloc);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class ChartTile<SERIES_DATA, FROM_DATA_STREAM> extends SimpleTile {
             children: [
               Container(
                 child: Text(
-                  title,
+                  text!,
                   style: TextStyle(
                     color: Colors.black87,
                     fontSize: 12
@@ -47,7 +47,7 @@ class ChartTile<SERIES_DATA, FROM_DATA_STREAM> extends SimpleTile {
               ),
               Container(
                 child: GestureDetector(
-                  onTap: () => bloc.openExperimentalInfoDialog(context),
+                  onTap: () => _openExperimentalInfoDialog(context),
                   child: Icon(
                     Icons.science,
                     size: 20,
@@ -96,15 +96,10 @@ class ChartTile<SERIES_DATA, FROM_DATA_STREAM> extends SimpleTile {
   }
 
   List<Widget> _getLegend(DeputyChartTileBloc config) {
-    final List<Widget> widgets = List.empty(growable: true);
-
-    config.legendImageToColorMap.forEach((key, value) {
-      final widget = _buildAvatar(key, value);
-
-      widgets.add(widget);
-    });
-
-    return widgets;
+    return config.legendImageToColorMap
+        .keys
+        .map((key) => _buildAvatar(key, config.legendImageToColorMap[key]!))
+        .toList();
   }
 
   Widget _buildAvatar(Color color, SubscribedDeputyModel deputy) {
@@ -144,24 +139,21 @@ class ChartTile<SERIES_DATA, FROM_DATA_STREAM> extends SimpleTile {
     );
   }
 
-  Widget _getTombstoneChart() {
-    return StreamProvider<List<charts.Series<ChartSeriesTombstoneModel, String>>>.value(
-        initialData: List.empty(),
-        value: bloc.tombstoneLoadingSeries,
-        child: Consumer<List<charts.Series<ChartSeriesTombstoneModel, String>>>(
-          builder: (context, data, _) =>
-          Expanded(
-            child:
-            charts.BarChart(
-              data,
-              animate: true,
-              barGroupingType: bloc.barGroupingType,
-              defaultRenderer: charts.BarRendererConfig(
-                symbolRenderer: ChartImageSymbolRenderer(bloc.legendImageToColorMap),
-              ),
+  _openExperimentalInfoDialog(BuildContext context) {
+    final localizations = Provider.of<AppLocalizations>(context, listen: false);
+
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(localizations.getText().universalExperimentalFeatureTitle()),
+          content: Text(localizations.getText().universalExperimentalFeatureContent()),
+          actions: [
+            FlatButton(
+              child: Text(localizations.getText().universalClose()),
+              onPressed: () => Navigator.of(context).pop(),
             )
-          )
-      )
+          ],
+        )
     );
   }
 }

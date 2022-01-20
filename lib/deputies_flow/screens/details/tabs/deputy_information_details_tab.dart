@@ -142,10 +142,8 @@ class DeputyInformationDetailsTab extends StatelessWidget {
   }
 
   Widget buildDetailedInfoBlock(AppLocalizations localizations, ThemeData theme, DeputyFull deputyFull) {
-    final cv = deputyFull.getDeputyCV();
-
-    final finishedSchools = cv.finishedSchools?.trim() ?? "Brak informacji";
-    final experience = cv.parliamentExperience.trim();
+    final finishedSchools = deputyFull.getFinishedSchools(localizations);
+    final experience = deputyFull.getParliamentExperience(localizations);
 
     return
       Column(

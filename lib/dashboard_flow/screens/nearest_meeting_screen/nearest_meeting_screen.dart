@@ -9,6 +9,7 @@ import 'package:project_athens/athens_core/presentation/technical_data/technical
 import 'package:project_athens/dashboard_flow/domain/parliament_meeting_model.dart';
 import 'package:project_athens/dashboard_flow/screens/nearest_meeting_screen/nearest_meeting_bloc.dart';
 import 'package:provider/provider.dart';
+import 'parliament_meeting_order_point_stringify_extension.dart';
 
 class NearestMeetingScreen extends BaseScreen<NearestMeetingBloc> {
   final String parliamentMeetingId;
@@ -37,17 +38,13 @@ class NearestMeetingScreen extends BaseScreen<NearestMeetingBloc> {
           value: bloc.parliamentMeeting,
           initialData: null,
           child: Consumer<Result<ParliamentMeetingModel>?>(
-            builder: (context, res, _) => _getChild(res, theme)
+            builder: (context, result, _) => _getChild(result, theme)
           ),
       )
     );
   }
 
   Widget _getChild(Result<ParliamentMeetingModel>? result, ThemeData theme) {
-    if (result == null) {
-      return Container();
-    }
-
     if (result is Success) {
       final model = (result as Success<ParliamentMeetingModel>).value;
       return Container(
@@ -67,7 +64,6 @@ class NearestMeetingScreen extends BaseScreen<NearestMeetingBloc> {
               TechnicalData(technicalId: model.id),
               DbSource(model)
             ]
-          // )
         )
       );
     }
@@ -96,12 +92,6 @@ class NearestMeetingScreen extends BaseScreen<NearestMeetingBloc> {
             ),
             sessionIIdStr != null ? Text(
               sessionIIdStr.toUpperCase(),
-              // style: TextStyle(
-              //   fontSize: 17,
-              //   color: Colors.black87,
-              //   fontWeight: FontWeight.w500,
-              //
-              // ),
               style: theme.textTheme.overline?.copyWith(
                   color: theme.dividerColor,
                   fontSize: 14
@@ -153,9 +143,7 @@ class NearestMeetingScreen extends BaseScreen<NearestMeetingBloc> {
   }
 
   Widget _getAgendaPoint(ParliamentMeetingAgendaPoint point, ThemeData theme) {
-    final String orderPoint = point.orderPoint != null && point.orderPoint != 0
-        ? "${point.orderPoint.toString()}. "
-        : "";
+    final String orderPoint = point.orderPointToString;
 
     return Container(
       padding: EdgeInsets.only(bottom: 12),

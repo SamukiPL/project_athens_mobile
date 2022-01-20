@@ -2,7 +2,6 @@ import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
-import 'package:project_athens/athens_core/utils/notifications_service.dart';
 import 'package:project_athens/main/navigation/app_navigation_impl.dart';
 import 'package:provider/provider.dart';
 

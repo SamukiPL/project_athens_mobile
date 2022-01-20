@@ -1,9 +1,9 @@
 class DashboardNotificationsEasyFilter {
   DashboardNotificationsEasyFilter._();
 
-  factory DashboardNotificationsEasyFilter.SpeechesEasyFilter() = SpeechesEasyFilter;
-  factory DashboardNotificationsEasyFilter.VotesEasyFilter() = VotesEasyFilter;
-  factory DashboardNotificationsEasyFilter.NotReadEasyFilter() = NotReadEasyFilter;
+  factory DashboardNotificationsEasyFilter.speechesEasyFilter() = SpeechesEasyFilter;
+  factory DashboardNotificationsEasyFilter.votesEasyFilter() = VotesEasyFilter;
+  factory DashboardNotificationsEasyFilter.notReadEasyFilter() = NotReadEasyFilter;
 }
 
 class SpeechesEasyFilter extends DashboardNotificationsEasyFilter {

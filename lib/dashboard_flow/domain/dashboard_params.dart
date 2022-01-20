@@ -29,7 +29,14 @@ class DashboardParams {
     );
   }
 
-  resetParams() {
+  factory DashboardParams.allPristine({required final int cadence}) {
+    final DashboardParams params = DashboardParams(cadence: cadence);
+    params.resetParams();
+
+    return params;
+  }
+
+  void resetParams() {
     meeting = false;
     voteAbsent = false;
     monthMeetings = false;
@@ -38,12 +45,16 @@ class DashboardParams {
     voteAbsentPerYear = false;
   }
 
-  isAnyDirty() {
-    if (meeting != null && meeting == true) { return true; }
-    if (voteAbsent != null && voteAbsent == true) { return true; }
-    if (monthMeetings != null && monthMeetings == true) { return true; }
-    if (speechesCounter != null && speechesCounter == true) { return true; }
-    if (speechesCounterPerYear != null && speechesCounterPerYear == true) { return true; }
-    if (voteAbsentPerYear != null && voteAbsentPerYear == true) { return true; }
+  bool isAnyDirty() {
+    if (
+      meeting == true ||
+      voteAbsent == true ||
+      monthMeetings == true ||
+      speechesCounter == true ||
+      speechesCounterPerYear == true ||
+      voteAbsentPerYear == true
+    ) { return true; }
+
+    return false;
   }
 }

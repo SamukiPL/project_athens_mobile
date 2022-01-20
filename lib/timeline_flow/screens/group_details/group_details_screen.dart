@@ -51,8 +51,6 @@ class GroupDetailsScreen extends BaseScreen<GroupDetailsBloc> {
         ],
       ),
     );
-
-    // return
   }
 
   @override

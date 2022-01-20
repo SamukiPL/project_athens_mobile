@@ -47,5 +47,6 @@ class DashboardNotificationsModule extends Module {
   @override
   void dispose() {
     _bloc.dispose();
+    _filtersListBloc.dispose();
   }
 }

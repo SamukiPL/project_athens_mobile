@@ -37,23 +37,5 @@ class AuthStorage {
     await storage.delete(key: refreshTokenKey);
   }
 
-  Future<String> getUserName() async {
-    final Tokens tokens = await provideTokens();
 
-    Map<String, dynamic> decodedToken = Jwt().parseJwt(tokens.accessToken);
-
-    String userName = '';
-
-    if (decodedToken.containsKey('firstName') && decodedToken['firstName'] != null && decodedToken['firstName'] != "") {
-      userName = decodedToken['firstName'];
-
-      if (decodedToken.containsKey('lastName') && decodedToken['lastName'] != null && decodedToken['lastName'] != "") {
-        userName = userName + ' ' + decodedToken['lastName'];
-      }
-    } else {
-      userName = decodedToken['login'];
-    }
-
-    return userName;
-  }
 }

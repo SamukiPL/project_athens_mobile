@@ -17,10 +17,10 @@ class DashboardNotificationsListDataSource
   @override
   Future<Result<List<SavedNotification>>> call(DashboardNotificationsParams params) async {
     var notificationsResult = Success(await NotificationsService.instance!.notificationsStream.first);
-    if (notificationsResult is Success<List<SavedNotification>>) {
-      notificationsResult = _filterBySearchQuery(notificationsResult, params.searchQuery);
-      notificationsResult = _filterByEasyFilter(notificationsResult, params.easyFilter);
-    }
+
+    notificationsResult = _filterBySearchQuery(notificationsResult, params.searchQuery);
+    notificationsResult = _filterByEasyFilter(notificationsResult, params.easyFilter);
+
     return notificationsResult;
   }
 

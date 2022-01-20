@@ -31,10 +31,6 @@ class AppLocalizationsGenerated {
     return words['universal']['choose'];
   }
 
-  String universalClose() {
-    return words['universal']['close'];
-  }
-
   String universalOk() {
     return words['universal']['ok'];
   }
@@ -43,8 +39,16 @@ class AppLocalizationsGenerated {
     return words['universal']['retry'];
   }
 
+  String universalClose() {
+    return words['universal']['close'];
+  }
+
   String universalNoDataDefaultText() {
     return words['universal']['noData']['defaultText'];
+  }
+
+  String universalNoDataNoInformation() {
+    return words['universal']['noData']['noInformation'];
   }
 
   String universalInformation() {
@@ -140,12 +144,12 @@ class AppLocalizationsGenerated {
     return words['login']['buttons']['register'];
   }
 
-  String loginButtonsSignUp() {
-    return words['login']['buttons']['signUp'];
-  }
-
   String loginButtonsForgot() {
     return words['login']['buttons']['forgot'];
+  }
+
+  String loginButtonsSignUp() {
+    return words['login']['buttons']['signUp'];
   }
 
   String loginButtonsResetPassword() {
@@ -248,16 +252,16 @@ class AppLocalizationsGenerated {
     return words['login']['error']['passwordOrLoginDoesNotMatch'];
   }
 
-  String timelineTimelineNavTitle() {
-    return words['timeline']['timelineNavTitle'];
-  }
-
   String timelineVote() {
     return words['timeline']['vote'];
   }
 
   String timelineVoteNoAgenda() {
     return words['timeline']['voteNoAgenda'];
+  }
+
+  String timelineTimelineNavTitle() {
+    return words['timeline']['timelineNavTitle'];
   }
 
   String timelineVotingTypesResolutionProject() {
@@ -573,12 +577,12 @@ class AppLocalizationsGenerated {
     return words['more']['likeApplication'];
   }
 
-  String moreCheckForUpdates() {
-    return words['more']['checkForUpdates'];
-  }
-
   String moreSupportUs() {
     return words['more']['supportUs'];
+  }
+
+  String moreCheckForUpdates() {
+    return words['more']['checkForUpdates'];
   }
 
   String moreAppVersion() {

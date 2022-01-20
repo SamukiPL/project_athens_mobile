@@ -18,14 +18,16 @@ class DashboardTilesDataCache {
         .timer(null, Duration(minutes: 10))
         .listen((event) => markDirtyParam(DashboardParams.fetchAll(9)));
 
-    _dirtyParamsSource.listen((dirtyParams) => _fetchDashboard(dirtyParams));
     Rx.combineLatest2(
       _dirtyParamsSource,
-      _forceRefreshSource,
+      _forceRefreshSource.startWith(null),
       (params, forceRefresh) => params as DashboardParams
     ).debounceTime(Duration(milliseconds: 500))
         .listen((DashboardParams dirtyParams) => _fetchDashboard(dirtyParams));
   }
+
+  final BehaviorSubject<DashboardTilesDataModel?> _dashboardTilesDataSource = BehaviorSubject<DashboardTilesDataModel?>.seeded(null);
+  final ReplaySubject<void> _forceRefreshSource = ReplaySubject<void>();
 
   Stream<DashboardNearestMeetingTileDataModel?> get nearestMeetingStream => _dashboardTilesDataSource.map((event) => event?.nearestMeeting);
   Stream<DashboardSimpleDeputiesCounter?> get absentVoteStream => _dashboardTilesDataSource.map((event) => event?.absentVote);
@@ -33,11 +35,8 @@ class DashboardTilesDataCache {
   Stream<DashboardSimpleDeputiesCounterPerYearDataModel?> get absentVotePerYearStream => _dashboardTilesDataSource.map((event) => event?.absentVotePerYear);
   Stream<DashboardSimpleDeputiesCounterPerYearDataModel?> get speechesCounterPerYearStream => _dashboardTilesDataSource.map((event) => event?.speechesCounterPerYear);
 
-  DashboardParams? _lastReqParams;
-
   late StreamSubscription _autoRefreshSub;
-  final BehaviorSubject<DashboardTilesDataModel?> _dashboardTilesDataSource = BehaviorSubject<DashboardTilesDataModel?>.seeded(null);
-  final ReplaySubject<void> _forceRefreshSource = ReplaySubject<void>();
+
   final BehaviorSubject<DashboardParams> _dirtyParamsSource = BehaviorSubject<DashboardParams>.seeded(
     DashboardParams(
       cadence: 9,
@@ -54,12 +53,12 @@ class DashboardTilesDataCache {
   markDirtyParam(DashboardParams dirtyParams) {
     final currentDirtyParams = _dirtyParamsSource.value;
 
-    if (dirtyParams.meeting != null && dirtyParams.meeting == true) currentDirtyParams.meeting = true;
-    if (dirtyParams.monthMeetings != null && dirtyParams.monthMeetings == true) currentDirtyParams.monthMeetings = true;
-    if (dirtyParams.speechesCounter != null && dirtyParams.speechesCounter == true) currentDirtyParams.speechesCounter = true;
-    if (dirtyParams.speechesCounterPerYear != null && dirtyParams.speechesCounterPerYear == true) currentDirtyParams.speechesCounterPerYear = true;
-    if (dirtyParams.voteAbsent != null && dirtyParams.voteAbsent == true) currentDirtyParams.voteAbsent = true;
-    if (dirtyParams.voteAbsentPerYear != null && dirtyParams.voteAbsentPerYear == true) currentDirtyParams.voteAbsentPerYear = true;
+    if (dirtyParams.meeting == true) currentDirtyParams.meeting = true;
+    if (dirtyParams.monthMeetings == true) currentDirtyParams.monthMeetings = true;
+    if (dirtyParams.speechesCounter == true) currentDirtyParams.speechesCounter = true;
+    if (dirtyParams.speechesCounterPerYear == true) currentDirtyParams.speechesCounterPerYear = true;
+    if (dirtyParams.voteAbsent == true) currentDirtyParams.voteAbsent = true;
+    if (dirtyParams.voteAbsentPerYear == true) currentDirtyParams.voteAbsentPerYear = true;
 
     _dirtyParamsSource.add(dirtyParams);
   }
@@ -71,25 +70,20 @@ class DashboardTilesDataCache {
     return _fetchingFinished.stream.first;
   }
 
-  _fetchDashboard(DashboardParams dirtyParams) async {
-    print(dirtyParams.toString());
-    print(dirtyParams.isAnyDirty());
-
+  void _fetchDashboard(DashboardParams dirtyParams) async {
     if (!dirtyParams.isAnyDirty()) { return; }
 
     final result = await _getDashboardUseCase(dirtyParams);
 
     _fetchingFinished.add(true);
 
-    if (result is Success<DashboardResponse>) {
-       final dashboardTilesData = await _mapper.transform(result.value);
+    if (result.isSuccess()) {
+       final dashboardTilesData = await _mapper.transform(result.toSuccess().value);
        _dashboardTilesDataSource.add(dashboardTilesData);
 
-       _dirtyParamsSource.value.resetParams();
+       _dirtyParamsSource.add(DashboardParams.allPristine(cadence: 9));
     }
   }
-
-  
 
   void dispose() {
     _forceRefreshSource.close();

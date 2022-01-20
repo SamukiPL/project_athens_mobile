@@ -9,7 +9,8 @@
     "retry": "Try again",
     "close": "Close",
     "noData": {
-      "defaultText": "No data"
+      "defaultText": "No data",
+      "noInformation": "No info"
     },
     "information": "Information",
     "experimentalFeature": {

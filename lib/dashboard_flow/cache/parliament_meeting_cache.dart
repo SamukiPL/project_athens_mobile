@@ -30,6 +30,8 @@ class ParliamentMeetingCache {
       _awaitingParliamentMeeting.remove(parliamentMeetingId);
     }).then((parliamentMeetingResult) {
       if (parliamentMeetingResult is Success<ParliamentMeetingModel>) {
+        parliamentMeetingResult.value.agenda.agendaPoints.sort((a, b) => a.orderPoint.compareTo(b.orderPoint));
+
         _cachedParliamentMeeting[parliamentMeetingId] = parliamentMeetingResult;
         return Success(parliamentMeetingResult.value);
       } else {
