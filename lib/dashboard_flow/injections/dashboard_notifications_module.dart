@@ -8,7 +8,9 @@ import 'package:project_athens/athens_core/presentation/base_list/base_list_bloc
 import 'package:project_athens/athens_core/presentation/search_app_bar/search_app_bar_facade.dart';
 import 'package:project_athens/dashboard_flow/data/dashboard_notifications_easy_filters_repository.dart';
 import 'package:project_athens/dashboard_flow/data/dashboard_notifications_list_data_source.dart';
+import 'package:project_athens/dashboard_flow/data/get_notifications_repository_impl.dart';
 import 'package:project_athens/dashboard_flow/domain/dashboard_notifications_list_facade.dart';
+import 'package:project_athens/dashboard_flow/domain/notifications/get_notifications_use_case.dart';
 import 'package:project_athens/dashboard_flow/screens/notifications_screen/list_impl/notification_item_view_model_factory.dart';
 import 'package:provider/provider.dart';
 
@@ -22,13 +24,16 @@ class DashboardNotificationsModule extends Module {
   List<SingleChildWidget> getProviders() {
     final _localizations = Provider.of<AppLocalizations>(context);
 
-    final notificationsListDataSource = DashboardNotificationsListDataSource();
-    final deputiesEasyFiltersRepository = DashboardNotificationsEasyFiltersRepository(
+    final GetNotificationsRepositoryImpl _repository = GetNotificationsRepositoryImpl();
+    final GetNotificationsUseCase _getNotificationUseCase = GetNotificationsUseCase(_repository);
+
+    final notificationsListDataSource = DashboardNotificationsListDataSource(_getNotificationUseCase);
+    final notificationsEasyFiltersRepository = DashboardNotificationsEasyFiltersRepository(
         _localizations);
 
-    final deputiesListRepository = ItemsRepositoryImpl(notificationsListDataSource);
+    final notificationsListRepository = ItemsRepositoryImpl(notificationsListDataSource);
     final listFacade = DashboardNotificationsListFacade(
-        deputiesListRepository, deputiesEasyFiltersRepository);
+        notificationsListRepository, notificationsEasyFiltersRepository);
     final itemFactory = NotificationItemViewModelFactory();
 
     _bloc = BaseListBloc(listFacade, itemFactory);

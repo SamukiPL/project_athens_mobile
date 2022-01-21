@@ -4,12 +4,12 @@ import 'package:project_athens/athens_core/auto_updater/auto_updater_module.dart
 import 'package:project_athens/athens_core/chopper/network_module.dart';
 import 'package:project_athens/athens_core/i18n/localization_module.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
-import 'package:project_athens/athens_core/models/saved_notification.dart';
+import '../../athens_core/utils/notifications/data/storage/saved_notification.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_navigator.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/utils/life_cycle_manager/life_cycle_service.dart';
-import 'package:project_athens/athens_core/utils/notifications_service.dart';
+import '../../athens_core/utils/notifications/notifications_service.dart';
 import 'package:project_athens/deputies_utils/injections/subscribed_deputy_cache_module.dart';
 import 'package:project_athens/main/firebase/firebase_messages.dart';
 import 'package:project_athens/main/injections/wakelock_module.dart';

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
-import 'package:project_athens/athens_core/utils/notifications_service.dart';
+import '../../../../../athens_core/utils/notifications/notifications_service.dart';
 import 'package:project_athens/dashboard_flow/screens/notifications_screen/list_impl/notification_list_item_view_model.dart';
 import 'package:project_athens/dashboard_flow/screens/notifications_screen/list_impl/notification_list_item_view_model.dart';
 import 'package:project_athens/deputies_flow/navigation/deputies_destinations.dart';
@@ -24,7 +24,7 @@ class NotificationListViewHolder extends StatelessWidget with RedirectionDelegat
       child: Consumer<NotificationListItemViewModel>(
         builder: (context, viewModel, _) => GestureDetector(
           onTap: () {
-            NotificationsService.instance?.openDestination(viewModel.model);
+            NotificationsService.instance?.openDestinationFromNotification(viewModel.model);
             viewModel.model.isRead = true;
             viewModel.notifyListeners();
           },
@@ -56,7 +56,7 @@ class NotificationListViewHolder extends StatelessWidget with RedirectionDelegat
             ),
           ),
           Text(
-            DateFormat("HH:mm dd.MM.y", "pl").format(viewModel.model.sentTime!),
+            DateFormat("HH:mm dd.MM.y", "pl").format(viewModel.model.sentTime),
             style: TextStyle(
                 color: theme.dividerColor,
                 fontSize: 10

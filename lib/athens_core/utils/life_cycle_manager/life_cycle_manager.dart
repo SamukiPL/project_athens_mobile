@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/utils/life_cycle_manager/life_cycle_service.dart';
-import 'package:project_athens/athens_core/utils/notifications_service.dart';
+import '../notifications/notifications_service.dart';
 
 class LifeCycleManager extends StatefulWidget {
   LifeCycleManager({Key? key, required this.child, required this.lifeCycle}) : super(key: key);

@@ -11,7 +11,7 @@ import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/utils/firebase/firebase_messaging_module.dart';
 import 'package:project_athens/athens_core/utils/life_cycle_manager/life_cycle_manager.dart';
 import 'package:project_athens/athens_core/utils/life_cycle_manager/life_cycle_service.dart';
-import 'package:project_athens/athens_core/utils/notifications_service.dart';
+import 'package:project_athens/athens_core/utils/notifications/notifications_service.dart';
 import 'package:project_athens/main/firebase/firebase_messages.dart';
 import 'package:project_athens/main/injections/app_module.dart';
 import 'package:project_athens/main/injections/app_navigation_module.dart';

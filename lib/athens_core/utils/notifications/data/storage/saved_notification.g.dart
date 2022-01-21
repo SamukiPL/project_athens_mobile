@@ -11,10 +11,8 @@ SavedNotification _$SavedNotificationFromJson(Map<String, dynamic> json) {
     json['title'] as String,
     json['body'] as String?,
     json['imgUrl'] as String?,
-    json['sentTime'] == null
-        ? null
-        : DateTime.parse(json['sentTime'] as String),
-    json['messageId'] as String?,
+    DateTime.parse(json['sentTime'] as String),
+    json['messageId'] as String,
     json['collapseKey'] as String?,
     json['data'] as Map<String, dynamic>,
     json['type'] as String?,
@@ -28,7 +26,7 @@ Map<String, dynamic> _$SavedNotificationToJson(SavedNotification instance) =>
       'title': instance.title,
       'body': instance.body,
       'imgUrl': instance.imgUrl,
-      'sentTime': instance.sentTime?.toIso8601String(),
+      'sentTime': instance.sentTime.toIso8601String(),
       'messageId': instance.messageId,
       'collapseKey': instance.collapseKey,
       'data': instance.data,

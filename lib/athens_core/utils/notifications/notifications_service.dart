@@ -6,7 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:project_athens/athens_core/configuration/configuration_delegate.dart';
 import 'package:project_athens/athens_core/configuration/configuration_storage_names.dart';
-import 'package:project_athens/athens_core/models/saved_notification.dart';
+import 'package:project_athens/athens_core/utils/notifications/domain/notification_model.dart';
+import 'data/storage/saved_notification.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
 import 'package:rxdart/rxdart.dart';
@@ -60,7 +61,6 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
 
     final needToSave = await _processSavedNotificationsAtHardDrive();
 
-
     if (needToSave) {
       print('some files where saved. Saving notifcations...');
       _broadcastNotifications();
@@ -92,7 +92,7 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
     final SavedNotification _notification = _mapToSavedNotification(message);
 
     final content = jsonEncode(_notification);
-    final fileName = _notification.messageId!;
+    final fileName = _notification.messageId;
 
     final File file = File("$directory/saved_notification_$fileName.json");
     file.writeAsStringSync(content);
@@ -106,23 +106,16 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
     return openDestination(notification);
   }
 
+  Future<void> openDestinationFromNotification(NotificationModel notification) async {
+     final SavedNotification savedNotification = notifications.firstWhere((element) => element.messageId == notification.messageId);
+
+     return openDestination(savedNotification);
+  }
+
   Future<void> openDestination(SavedNotification notification) async {
     _suspendedRedirectionSource.add(notification);
 
     notification.isRead = true;
-
-    // switch (notification.type) {
-    //   case "SPEECH":
-    //     goToDestination(_buildContext!, SpeechDetailsDestination(notification.refId!, false));
-    //     _suspendedRedirection = null;
-    //     break;
-    //   // case NotificationType.VOTE:
-    //     // final partialVoteModel = VoteSlimModel(id: notification.refId, title: title, type: type, voteAt: voteAt, voteNumbers: voteNumbers, votingDesc: votingDesc)
-    //     // goToDestination(_buildContext!, VoteDetailsDestination(_voteModel));
-    //     // break;
-    //   // case NotificationType.DEPUTY:
-    //     // goToDestination(_buildContext!, DeputyDetailsDestination(_deputyModel))
-    // }
 
     await saveNotifications(notifications);
     _broadcastNotifications();
@@ -143,7 +136,7 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
         message.notification!.body,
         imgUrl,
         message.sentTime ?? DateTime.now(),
-        message.messageId,
+        message.messageId!,
         message.collapseKey,
         message.data,
         type,
@@ -181,7 +174,7 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
   }
 
   void _broadcastNotifications() {
-    notifications.sort((a,b) => b.sentTime!.compareTo(a.sentTime!));
+    notifications.sort((a,b) => b.sentTime.compareTo(a.sentTime));
     final List<SavedNotification> newInstanceList = List.of(notifications);
     _notificationsSource.add(newInstanceList);
   }
