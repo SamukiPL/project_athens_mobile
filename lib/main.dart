@@ -13,13 +13,12 @@ import 'package:project_athens/main/injections/app_module.dart';
 import 'package:project_athens/main/injections/app_navigation_module.dart';
 import 'package:project_athens/main/injections/main_widget_module.dart';
 import 'package:project_athens/splash_screen/splash_screen_widget.dart';
-import 'package:fimber_io/fimber_io.dart';
 import 'athens_core/configuration/configuration_module.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
-  print('Handling a background message ${message.messageId}');
+  Fimber.d('Handling a background message ${message.messageId}');
 
   if (NotificationsService.instance == null) {
     await NotificationsService.initialize();
@@ -49,15 +48,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     _firebaseMessages.setupMessaging();
 
-    // we have to eagerly create auto updater due to
-    // splash screen bloc could access it immediately
-    // after it starts to checking direction
     Fimber.plantTree(DebugBufferTree());
-
-    Fimber.plantTree(FimberFileTree("my-Log-File.txt",
-        logFormat: "${CustomFormatTree.timeElapsedToken} ${CustomFormatTree
-            .messageToken} ${CustomFormatTree.timeStampToken}"
-    ));
     
     return ModuleWidget(
       providers: [

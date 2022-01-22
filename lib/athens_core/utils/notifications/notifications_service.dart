@@ -18,7 +18,7 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
 
   static Future<void> initialize({final bool isInitializedFromApp = false}) async {
     if (_instance != null) {
-      print('[NotificationsService]: Trying to create service that is currently created');
+      Fimber.e('[NotificationsService]: Trying to create service that is currently created');
       return;
     }
 
@@ -49,15 +49,12 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
   final List<SavedNotification> notifications = List.empty(growable: true);
 
   Future<void> init({final bool isInitializedFromApp = false}) async {
-    Fimber.d("initializing app");
-
     final List<SavedNotification> _notifications = await fetchPreference((Map<String, dynamic> json) => SavedNotification.fromJson(json));
 
     notificationsFetched = true;
     notifications.addAll(_notifications);
 
     if (isInitializedFromApp) {
-      Fimber.d('processing saved notifiaction at hard drive');
       _processSavedNotificationsAtHardDrive();
       await _checkForInitialMessage();
 
@@ -69,12 +66,9 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
   }
 
   void onApplicationResumed() async {
-    print('checking notifcaitons on resumed');
-
     final needToSave = await _processSavedNotificationsAtHardDrive();
 
     if (needToSave) {
-      print('some files where saved. Saving notifcations...');
       _broadcastNotifications();
       await _saveNotifications(notifications);
     }
