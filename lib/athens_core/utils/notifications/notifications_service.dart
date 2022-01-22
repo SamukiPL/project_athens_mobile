@@ -18,7 +18,7 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
 
   static Future<void> initialize({final bool isInitializedFromApp = false}) async {
     if (_instance != null) {
-      Fimber.e('[NotificationsService]: Trying to create service that is currently created');
+      Fimber.w('[NotificationsService]: Trying to create service that is currently created');
       return;
     }
 
@@ -63,15 +63,6 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
 
     _broadcastNotifications();
     await _saveNotifications(notifications);
-  }
-
-  void onApplicationResumed() async {
-    final needToSave = await _processSavedNotificationsAtHardDrive();
-
-    if (needToSave) {
-      _broadcastNotifications();
-      await _saveNotifications(notifications);
-    }
   }
 
   Future<void> addNotification(SavedNotification notification) async {
