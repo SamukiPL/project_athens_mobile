@@ -46,6 +46,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalChoose != "" && universalChoose != null); 
   }); 
  
+  test("All methods for $locale universalClose", () async {
+    String universalClose = localization.universalClose();
+    expect(true, universalClose != "" && universalClose != null); 
+  }); 
+ 
   test("All methods for $locale universalOk", () async {
     String universalOk = localization.universalOk();
     expect(true, universalOk != "" && universalOk != null); 
@@ -54,11 +59,6 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale universalRetry", () async {
     String universalRetry = localization.universalRetry();
     expect(true, universalRetry != "" && universalRetry != null); 
-  }); 
- 
-  test("All methods for $locale universalClose", () async {
-    String universalClose = localization.universalClose();
-    expect(true, universalClose != "" && universalClose != null); 
   }); 
  
   test("All methods for $locale universalNoDataDefaultText", () async {
@@ -186,14 +186,14 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginButtonsRegister != "" && loginButtonsRegister != null); 
   }); 
  
-  test("All methods for $locale loginButtonsForgot", () async {
-    String loginButtonsForgot = localization.loginButtonsForgot();
-    expect(true, loginButtonsForgot != "" && loginButtonsForgot != null); 
-  }); 
- 
   test("All methods for $locale loginButtonsSignUp", () async {
     String loginButtonsSignUp = localization.loginButtonsSignUp();
     expect(true, loginButtonsSignUp != "" && loginButtonsSignUp != null); 
+  }); 
+ 
+  test("All methods for $locale loginButtonsForgot", () async {
+    String loginButtonsForgot = localization.loginButtonsForgot();
+    expect(true, loginButtonsForgot != "" && loginButtonsForgot != null); 
   }); 
  
   test("All methods for $locale loginButtonsResetPassword", () async {
@@ -321,6 +321,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginErrorPasswordOrLoginDoesNotMatch != "" && loginErrorPasswordOrLoginDoesNotMatch != null); 
   }); 
  
+  test("All methods for $locale timelineTimelineNavTitle", () async {
+    String timelineTimelineNavTitle = localization.timelineTimelineNavTitle();
+    expect(true, timelineTimelineNavTitle != "" && timelineTimelineNavTitle != null); 
+  }); 
+ 
   test("All methods for $locale timelineVote", () async {
     String timelineVote = localization.timelineVote();
     expect(true, timelineVote != "" && timelineVote != null); 
@@ -329,11 +334,6 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale timelineVoteNoAgenda", () async {
     String timelineVoteNoAgenda = localization.timelineVoteNoAgenda();
     expect(true, timelineVoteNoAgenda != "" && timelineVoteNoAgenda != null); 
-  }); 
- 
-  test("All methods for $locale timelineTimelineNavTitle", () async {
-    String timelineTimelineNavTitle = localization.timelineTimelineNavTitle();
-    expect(true, timelineTimelineNavTitle != "" && timelineTimelineNavTitle != null); 
   }); 
  
   test("All methods for $locale timelineVotingTypesResolutionProject", () async {
@@ -726,14 +726,14 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, moreLikeApplication != "" && moreLikeApplication != null); 
   }); 
  
-  test("All methods for $locale moreSupportUs", () async {
-    String moreSupportUs = localization.moreSupportUs();
-    expect(true, moreSupportUs != "" && moreSupportUs != null); 
-  }); 
- 
   test("All methods for $locale moreCheckForUpdates", () async {
     String moreCheckForUpdates = localization.moreCheckForUpdates();
     expect(true, moreCheckForUpdates != "" && moreCheckForUpdates != null); 
+  }); 
+ 
+  test("All methods for $locale moreSupportUs", () async {
+    String moreSupportUs = localization.moreSupportUs();
+    expect(true, moreSupportUs != "" && moreSupportUs != null); 
   }); 
  
   test("All methods for $locale moreAppVersion", () async {
@@ -794,6 +794,31 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale dashboardNotificationsFiltersNotRead", () async {
     String dashboardNotificationsFiltersNotRead = localization.dashboardNotificationsFiltersNotRead();
     expect(true, dashboardNotificationsFiltersNotRead != "" && dashboardNotificationsFiltersNotRead != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsRemoveAllDialogTitle", () async {
+    String dashboardNotificationsRemoveAllDialogTitle = localization.dashboardNotificationsRemoveAllDialogTitle();
+    expect(true, dashboardNotificationsRemoveAllDialogTitle != "" && dashboardNotificationsRemoveAllDialogTitle != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsRemoveAllDialogContent", () async {
+    String dashboardNotificationsRemoveAllDialogContent = localization.dashboardNotificationsRemoveAllDialogContent();
+    expect(true, dashboardNotificationsRemoveAllDialogContent != "" && dashboardNotificationsRemoveAllDialogContent != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsRemoveAllDialogRemoveNotRead", () async {
+    String dashboardNotificationsRemoveAllDialogRemoveNotRead = localization.dashboardNotificationsRemoveAllDialogRemoveNotRead();
+    expect(true, dashboardNotificationsRemoveAllDialogRemoveNotRead != "" && dashboardNotificationsRemoveAllDialogRemoveNotRead != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsRemoveAllDialogActionsYes", () async {
+    String dashboardNotificationsRemoveAllDialogActionsYes = localization.dashboardNotificationsRemoveAllDialogActionsYes();
+    expect(true, dashboardNotificationsRemoveAllDialogActionsYes != "" && dashboardNotificationsRemoveAllDialogActionsYes != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsRemoveAllDialogActionsNo", () async {
+    String dashboardNotificationsRemoveAllDialogActionsNo = localization.dashboardNotificationsRemoveAllDialogActionsNo();
+    expect(true, dashboardNotificationsRemoveAllDialogActionsNo != "" && dashboardNotificationsRemoveAllDialogActionsNo != null); 
   }); 
  
   test("All methods for $locale dashboardTilesNearestMeetingTileMeetingIsToday", () async {

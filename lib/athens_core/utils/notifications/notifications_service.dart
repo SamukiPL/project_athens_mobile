@@ -121,6 +121,21 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
     _broadcastNotifications();
   }
 
+  /// param bool removeNotRead decides whether remove ALL notifications if set true
+  /// if set false then it will remove only read notifications
+  Future<void> erase(final bool removeNotRead) async {
+    print(removeNotRead);
+
+    if (removeNotRead) {
+      notifications.clear();
+    } else {
+      notifications.removeWhere((element) => element.isRead);
+    }
+
+    _broadcastNotifications();
+    // return _saveNotifications(notifications);
+  }
+
   SavedNotification getSuspendedNavigation() {
     final SavedNotification _notification = _suspendedNotification!;
 

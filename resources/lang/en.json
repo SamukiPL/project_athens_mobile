@@ -205,6 +205,15 @@
         "speeches": "Speeches",
         "votes": "Votes",
         "notRead": "Not Read"
+      },
+      "removeAllDialog": {
+        "title": "Erase notifications",
+        "content": "Are you sure you want to delete all read notifications?",
+        "removeNotRead": "Delete also not read notifications",
+        "actions": {
+          "yes": "Yes",
+          "no": "No"
+        }
       }
     },
     "tiles": {

@@ -205,6 +205,15 @@
         "speeches": "Przemowy",
         "votes": "Głosowania",
         "notRead": "Nieprzeczytane"
+      },
+      "removeAllDialog": {
+        "title": "Wyczyszczenie odczytanych powiadomień",
+        "content": "Czy napewno chcesz usunąć wszystkie odczytane powiadomienia?",
+        "removeNotRead": "Usuń także nieprzeczytane powiadomienia",
+        "actions": {
+          "yes": "Tak",
+          "no": "Nie"
+        }
       }
     },
     "tiles": {
