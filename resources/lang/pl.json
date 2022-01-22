@@ -9,7 +9,8 @@
     "ok": "Ok",
     "retry": "Spróbuj ponownie",
     "noData": {
-      "defaultText": "Brak danych"
+      "defaultText": "Brak danych",
+      "noInformation": "Brak informacji"
     },
     "information": "Informacja",
     "experimentalFeature": {
@@ -194,7 +195,11 @@
   "dashboard": {
     "title": "Konsola",
     "nearestMeeting": {
-      "title": "Najbliższe posiedzenie"
+      "title": "Najbliższe posiedzenie",
+      "agenda": "Porządek obrad",
+      "supplementingAgenda": "Uzupełnienie porządku obrad",
+      "toBeSettled": "Do rozstrzygnięcia",
+      "parliamentMeeting": "Posiedzenie sejmu"
     },
     "notifications": {
       "title": "Powiadomienia",
@@ -202,6 +207,15 @@
         "speeches": "Przemowy",
         "votes": "Głosowania",
         "notRead": "Nieprzeczytane"
+      },
+      "removeAllDialog": {
+        "title": "Wyczyszczenie odczytanych powiadomień",
+        "content": "Czy napewno chcesz usunąć wszystkie odczytane powiadomienia?",
+        "removeNotRead": "Usuń także nieprzeczytane powiadomienia",
+        "actions": {
+          "yes": "Tak",
+          "no": "Nie"
+        }
       }
     },
     "tiles": {

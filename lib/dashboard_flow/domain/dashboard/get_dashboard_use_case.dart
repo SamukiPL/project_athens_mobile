@@ -12,14 +12,6 @@ class GetDashboardUseCase extends BaseUseCase<DashboardParams> {
 
   @override
   Future<Result> call(DashboardParams params) {
-    return repository.getDashboard(
-        params.cadence,
-        params.meeting,
-        params.voteAbsent,
-        params.monthMeetings,
-        params.speechesCounter,
-        params.speechesCounterPerYear,
-        params.voteAbsentPerYear
-    ).safeApiCall();
+    return repository.getDashboard(params).safeApiCall();
   }
 }

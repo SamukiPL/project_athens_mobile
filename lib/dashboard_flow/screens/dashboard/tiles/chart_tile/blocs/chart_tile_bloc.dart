@@ -9,6 +9,13 @@ import 'package:project_athens/deputies_utils/domain/subscribed_deputy_model.dar
 import 'package:rxdart/rxdart.dart';
 
 class ChartTileBloc<SERIES_DATA, FROM_DATA_STREAM> extends SimpleTileBloc {
+  ChartTileBloc({
+    required this.mapToSeriesFn,
+    required this.dataStream,
+    required this.legendImageToColorMap,
+    required this.barGroupingType,
+  });
+
   final List<charts.Series<SERIES_DATA, String>> Function(FROM_DATA_STREAM? model, ChartTileBloc<SERIES_DATA, FROM_DATA_STREAM> bloc) mapToSeriesFn;
   final Stream<FROM_DATA_STREAM?> dataStream;
   final charts.BarGroupingType barGroupingType;
@@ -32,12 +39,5 @@ class ChartTileBloc<SERIES_DATA, FROM_DATA_STREAM> extends SimpleTileBloc {
     ];
 
     return tombstoneSeries;
-  });
-
-  ChartTileBloc({
-    required this.mapToSeriesFn,
-    required this.dataStream,
-    required this.legendImageToColorMap,
-    required this.barGroupingType,
   });
 }

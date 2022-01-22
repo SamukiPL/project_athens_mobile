@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/auth/auth_storage.dart';
+import 'package:project_athens/athens_core/auth/storage/tokens.dart';
+import 'package:project_athens/athens_core/chopper/jwt_decode.dart';
 import 'package:project_athens/athens_core/presentation/grid/tiles/simple_tile/simple_tile.dart';
 import 'package:project_athens/athens_core/presentation/grid/tiles/simple_tile/simple_tile_bloc.dart';
 import 'package:provider/provider.dart';
-
-import '../../../../../athens_core/auth/auth_storage.dart';
 
 class UserNameTile extends SimpleTile {
   UserNameTile() : super(text: "",
@@ -18,14 +19,11 @@ class UserNameTile extends SimpleTile {
 
   @override
   Widget build(BuildContext context) {
-    final authStorage = AuthStorage();
-
     return super.buildTile(
         context: context,
-        boxDecoration: BoxDecoration(),
         tile: FutureProvider<String?>.value(
           initialData: null,
-          value: authStorage.getUserName(),
+          value: getUserName(),
           child: Consumer<String?>(
             builder: (context, text, _) => text == null
                 ? super.buildLoader()
@@ -33,5 +31,27 @@ class UserNameTile extends SimpleTile {
             )
           ),
     );
+  }
+
+  Future<String> getUserName() async {
+    final AuthStorage storage = AuthStorage();
+
+    final Tokens tokens = await storage.provideTokens();
+
+    Map<String, dynamic> decodedToken = Jwt().parseJwt(tokens.accessToken);
+
+    String userName = '';
+
+    if (decodedToken.containsKey('firstName') && decodedToken['firstName'] != null && decodedToken['firstName'] != "") {
+      userName = decodedToken['firstName'];
+
+      if (decodedToken.containsKey('lastName') && decodedToken['lastName'] != null && decodedToken['lastName'] != "") {
+        userName = userName + ' ' + decodedToken['lastName'];
+      }
+    } else {
+      userName = decodedToken['login'];
+    }
+
+    return userName;
   }
 }

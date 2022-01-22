@@ -24,14 +24,13 @@ class DashboardScreen extends BaseScreen<DashboardBloc> {
 
   @override
   Widget buildBody(BuildContext context, DashboardBloc bloc) {
-    final Future<List<TileData>?> getTilesFuture = bloc.getTiles();
     final DashboardTilesDataCache dashboardTilesDataCache =
       Provider.of<DashboardTilesDataCache>(context);
 
     return Container(
       padding: EdgeInsets.all(8),
       child: FutureProvider<List<TileData>?>.value(
-          value: getTilesFuture,
+          value: bloc.getTiles(),
           initialData: null,
           child: Consumer<List<TileData>?>(
             builder: (context, tiles, _) => tiles != null
@@ -47,13 +46,6 @@ class DashboardScreen extends BaseScreen<DashboardBloc> {
             ) : Container()
           )
       )
-      // child: Grid(
-      //   gridSize: 6,
-      //   onTileReordered: (List<TileData> tiles) async {
-      //     bloc.saveTiles(tiles);
-      //   },
-      //   tiles: allTiles,
-      // )
     );
   }
 

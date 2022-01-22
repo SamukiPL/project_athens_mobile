@@ -1,16 +1,21 @@
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:project_athens/athens_core/utils/notifications/notifications_service.dart';
 
 class FirebaseMessages {
   FirebaseMessaging get firebaseMessaging => FirebaseMessaging.instance;
   
   void setupMessaging() {
     FirebaseMessaging.onMessage.listen((event) {
-      // print('AppPushs onMessage : ${event.notification?.body}');
+      print('handling onMessage, ' + NotificationsService.instance.toString());
+      NotificationsService.instance!.addNotificationFromRemoteMessage(event);
     });
+
     FirebaseMessaging.onMessageOpenedApp.listen((event) {
-      print('AppPushs onLaunch : ${event.notification?.body}');
+      print('handling onMessageOpenedApp, ' + NotificationsService.instance.toString());
+      NotificationsService.instance!.openDestinationFromRemoteMessage(event);
     });
+
     FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
       alert: true,
       badge: true,

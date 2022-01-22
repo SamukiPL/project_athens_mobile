@@ -2,34 +2,39 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:project_athens/athens_core/configuration/configuration_delegate.dart';
 import 'package:project_athens/athens_core/configuration/configuration_storage_names.dart';
-import 'package:project_athens/athens_core/models/saved_notification.dart';
+import 'package:project_athens/athens_core/utils/notifications/domain/notification_model.dart';
+import 'data/storage/saved_notification.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
-import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:collection/collection.dart';
 
 class NotificationsService with ConfigurationDelegate<List<SavedNotification>, SavedNotification>, RedirectionDelegate {
   static NotificationsService? _instance;
   static NotificationsService? get instance => _instance;
 
-  static Future<void> intialize() async {
+  static Future<void> initialize({final bool isInitializedFromApp = false}) async {
     if (_instance != null) {
-      print('[NotificationsService]: Trying to create service that is currently created');
+      Fimber.w('[NotificationsService]: Trying to create service that is currently created');
       return;
     }
 
     _instance = NotificationsService();
-    return instance!.init();
+    return instance!.init(isInitializedFromApp: isInitializedFromApp);
   }
 
   NotificationsService();
 
-  BuildContext? _buildContext;
-  SavedNotification? _suspendedRedirection;
-  bool _mainWidgetInitialized = false;
+  late SavedNotification? _suspendedNotification;
+
+  ReplaySubject<void> _suspendedNavigationSource = ReplaySubject(maxSize: 1);
+  Stream<void> get suspendedNavigationStream => _suspendedNavigationSource.stream;
+
+  ReplaySubject<List<SavedNotification>> _notificationsSource = ReplaySubject<List<SavedNotification>>(maxSize: 1);
+  Stream<List<SavedNotification>> get notificationsStream => _notificationsSource.stream.shareReplay(maxSize: 1);
 
   @override
   String get preferenceName => ConfigurationStorageNames.NOTIFICATIONS;
@@ -37,49 +42,27 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
   @override
   List<SavedNotification> get defaultStorageValue => List.empty(growable: true);
 
+  bool get hasSuspendedNavigation => _suspendedNotification != null;
+
   bool notificationsFetched = false;
 
   final List<SavedNotification> notifications = List.empty(growable: true);
 
-  ReplaySubject<List<SavedNotification>> notificationsSource = ReplaySubject<List<SavedNotification>>(maxSize: 1);
-  Stream<List<SavedNotification>> get notificationsStream => notificationsSource.stream.shareReplay(maxSize: 1);
-
-  Future<void> init() async {
+  Future<void> init({final bool isInitializedFromApp = false}) async {
     final List<SavedNotification> _notifications = await fetchPreference((Map<String, dynamic> json) => SavedNotification.fromJson(json));
 
     notificationsFetched = true;
     notifications.addAll(_notifications);
 
-    _processSavedNotificationsAtHardDrive();
+    if (isInitializedFromApp) {
+      _processSavedNotificationsAtHardDrive();
+      await _checkForInitialMessage();
+
+      await _saveNotifications(notifications);
+    }
 
     _broadcastNotifications();
-    await saveNotifications(notifications);
-  }
-
-  void updateContext(BuildContext context, bool mainWidgetInitialized) {
-    _buildContext = context;
-    print('update context');
-
-    if (mainWidgetInitialized) {
-      _mainWidgetInitialized = mainWidgetInitialized;
-    }
-
-    if (_suspendedRedirection != null) {
-      openDestination(_suspendedRedirection!);
-    }
-  }
-
-  void onApplicationResumed() async {
-    print('checking notifcaitons on resumed');
-
-    final needToSave = await _processSavedNotificationsAtHardDrive();
-
-
-    if (needToSave) {
-      print('some files where saved. Saving notifcations...');
-      _broadcastNotifications();
-      await saveNotifications(notifications);
-    }
+    await _saveNotifications(notifications);
   }
 
   Future<void> addNotification(SavedNotification notification) async {
@@ -106,7 +89,7 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
     final SavedNotification _notification = _mapToSavedNotification(message);
 
     final content = jsonEncode(_notification);
-    final fileName = _notification.messageId!;
+    final fileName = _notification.messageId;
 
     final File file = File("$directory/saved_notification_$fileName.json");
     file.writeAsStringSync(content);
@@ -120,33 +103,48 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
     return openDestination(notification);
   }
 
+  Future<void> openDestinationFromNotification(NotificationModel notification) async {
+     final SavedNotification savedNotification = notifications.firstWhere((element) => element.messageId == notification.messageId);
+
+     return openDestination(savedNotification);
+  }
+
   Future<void> openDestination(SavedNotification notification) async {
-    if (_buildContext == null || !_mainWidgetInitialized) {
-      print("[NotificationsService]: Currently BuildContext is not defined. Storing current redirection and wait till data is available");
-      _suspendedRedirection = notification;
-      return;
-    }
+    _suspendedNotification = notification;
 
     notification.isRead = true;
 
-    switch (notification.type) {
-      case "SPEECH":
-        goToDestination(_buildContext!, SpeechDetailsDestination(notification.refId!, false));
-        _suspendedRedirection = null;
-        break;
-      // case NotificationType.VOTE:
-        // final partialVoteModel = VoteSlimModel(id: notification.refId, title: title, type: type, voteAt: voteAt, voteNumbers: voteNumbers, votingDesc: votingDesc)
-        // goToDestination(_buildContext!, VoteDetailsDestination(_voteModel));
-        // break;
-      // case NotificationType.DEPUTY:
-        // goToDestination(_buildContext!, DeputyDetailsDestination(_deputyModel))
-    }
+    await _saveNotifications(notifications);
 
-    await saveNotifications(notifications);
+    _suspendedNavigationSource.add(null);
+
     _broadcastNotifications();
   }
 
-  Future<void> saveNotifications(List<SavedNotification> notificationsToSave) async {
+  /// param bool removeNotRead decides whether remove ALL notifications if set true
+  /// if set false then it will remove only read notifications
+  Future<void> erase(final bool removeNotRead) async {
+    print(removeNotRead);
+
+    if (removeNotRead) {
+      notifications.clear();
+    } else {
+      notifications.removeWhere((element) => element.isRead);
+    }
+
+    _broadcastNotifications();
+    // return _saveNotifications(notifications);
+  }
+
+  SavedNotification getSuspendedNavigation() {
+    final SavedNotification _notification = _suspendedNotification!;
+
+    _suspendedNotification = null;
+
+    return _notification;
+  }
+
+  Future<void> _saveNotifications(List<SavedNotification> notificationsToSave) async {
     return await updatePreference(notificationsToSave);
   }
 
@@ -161,7 +159,7 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
         message.notification!.body,
         imgUrl,
         message.sentTime ?? DateTime.now(),
-        message.messageId,
+        message.messageId!,
         message.collapseKey,
         message.data,
         type,
@@ -198,13 +196,34 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
     return false;
   }
 
+  /// Message that user pressed in notification bar which caused application
+  /// to start from dead.
+  Future<void> _checkForInitialMessage() async {
+    final RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+
+    if (initialMessage != null) {
+      final SavedNotification foundNotification = notifications
+          .firstWhereOrNull((notification) => notification.messageId == initialMessage.messageId!)
+          ?? _mapToSavedNotification(initialMessage);
+
+      foundNotification.isRead = true;
+      _suspendedNotification = foundNotification;
+      _suspendedNavigationSource.add(null);
+
+      if (notifications.firstWhereOrNull((notification) => notification.messageId == initialMessage.messageId!) == null) {
+        notifications.add(foundNotification);
+      }
+    }
+  }
+
   void _broadcastNotifications() {
-    notifications.sort((a,b) => b.sentTime!.compareTo(a.sentTime!));
+    notifications.sort((a,b) => b.sentTime.compareTo(a.sentTime));
     final List<SavedNotification> newInstanceList = List.of(notifications);
-    notificationsSource.add(newInstanceList);
+    _notificationsSource.add(newInstanceList);
   }
 
   void dispose() {
-    notificationsSource.close();
+    _notificationsSource.close();
+    _suspendedNavigationSource.close();
   }
 }

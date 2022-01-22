@@ -122,22 +122,4 @@ class DeputyChartTileBloc<SERIES_DATA, FROM_DATA_STREAM> extends ChartTileBloc<S
       barGroupingType: charts.BarGroupingType.stacked
     );
   }
-
-  openExperimentalInfoDialog(BuildContext context) {
-    final localizations = Provider.of<AppLocalizations>(context, listen: false);
-
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(localizations.getText().universalExperimentalFeatureTitle()),
-        content: Text(localizations.getText().universalExperimentalFeatureContent()),
-        actions: [
-          FlatButton(
-            child: Text(localizations.getText().universalClose()),
-            onPressed: () => Navigator.of(context).pop(),
-          )
-        ],
-      )
-    );
-  }
 }

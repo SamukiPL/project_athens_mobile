@@ -47,6 +47,10 @@ class AppLocalizationsGenerated {
     return words['universal']['noData']['defaultText'];
   }
 
+  String universalNoDataNoInformation() {
+    return words['universal']['noData']['noInformation'];
+  }
+
   String universalInformation() {
     return words['universal']['information'];
   }
@@ -607,6 +611,22 @@ class AppLocalizationsGenerated {
     return words['dashboard']['nearestMeeting']['title'];
   }
 
+  String dashboardNearestMeetingAgenda() {
+    return words['dashboard']['nearestMeeting']['agenda'];
+  }
+
+  String dashboardNearestMeetingSupplementingAgenda() {
+    return words['dashboard']['nearestMeeting']['supplementingAgenda'];
+  }
+
+  String dashboardNearestMeetingToBeSettled() {
+    return words['dashboard']['nearestMeeting']['toBeSettled'];
+  }
+
+  String dashboardNearestMeetingParliamentMeeting() {
+    return words['dashboard']['nearestMeeting']['parliamentMeeting'];
+  }
+
   String dashboardNotificationsTitle() {
     return words['dashboard']['notifications']['title'];
   }
@@ -621,6 +641,29 @@ class AppLocalizationsGenerated {
 
   String dashboardNotificationsFiltersNotRead() {
     return words['dashboard']['notifications']['filters']['notRead'];
+  }
+
+  String dashboardNotificationsRemoveAllDialogTitle() {
+    return words['dashboard']['notifications']['removeAllDialog']['title'];
+  }
+
+  String dashboardNotificationsRemoveAllDialogContent() {
+    return words['dashboard']['notifications']['removeAllDialog']['content'];
+  }
+
+  String dashboardNotificationsRemoveAllDialogRemoveNotRead() {
+    return words['dashboard']['notifications']['removeAllDialog']
+        ['removeNotRead'];
+  }
+
+  String dashboardNotificationsRemoveAllDialogActionsYes() {
+    return words['dashboard']['notifications']['removeAllDialog']['actions']
+        ['yes'];
+  }
+
+  String dashboardNotificationsRemoveAllDialogActionsNo() {
+    return words['dashboard']['notifications']['removeAllDialog']['actions']
+        ['no'];
   }
 
   String dashboardTilesNearestMeetingTileMeetingIsToday() {

@@ -4,12 +4,12 @@ import 'package:project_athens/athens_core/domain/base_list/base_model.dart';
 part 'saved_notification.g.dart';
 
 @JsonSerializable()
-class SavedNotification extends BaseModel {
+class SavedNotification {
   final String title;
   final String? body;
   final String? imgUrl;
-  final DateTime? sentTime;
-  final String? messageId;
+  final DateTime sentTime;
+  final String messageId;
   final String? collapseKey;
   final Map<String, dynamic> data;
   final String? type;

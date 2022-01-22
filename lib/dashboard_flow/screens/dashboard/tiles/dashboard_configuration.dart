@@ -108,7 +108,7 @@ final List<TileData> allTiles = List.unmodifiable([
       final dashboardCache = Provider.of<DashboardTilesDataCache>(context);
       final bloc = DeputyChartTileBloc.fromSimpleCounterPerYearStream(dashboardCache.absentVotePerYearStream);
 
-      return ChartTile(bloc: bloc, title: 'Opuszczone głosowania na rok', key: Key('tile_votes_per_year_chart'));
+      return ChartTile(bloc: bloc, text: 'Opuszczone głosowania na rok', key: Key('tile_votes_per_year_chart'));
     },
     order: 0,
     sizeX: 12,
@@ -120,7 +120,7 @@ final List<TileData> allTiles = List.unmodifiable([
         final dashboardCache = Provider.of<DashboardTilesDataCache>(context);
         final bloc = DeputyChartTileBloc.fromSimpleCounterPerYearStream(dashboardCache.speechesCounterPerYearStream);
 
-        return ChartTile(bloc: bloc, title: 'Przemowy na rok', key: Key('tile_speeches_per_year_chart'));
+        return ChartTile(bloc: bloc, text: 'Przemowy na rok', key: Key('tile_speeches_per_year_chart'));
       },
       order: 0,
       sizeX: 12,
@@ -132,7 +132,7 @@ final List<TileData> allTiles = List.unmodifiable([
         final dashboardCache = Provider.of<DashboardTilesDataCache>(context);
         final bloc = DeputyChartTileBloc.fromSimpleCounterStream(dashboardCache.absentVoteStream);
 
-        return ChartTile(bloc: bloc, title: 'Opuszczone głosowania', key: Key('tile_votes_chart'));
+        return ChartTile(bloc: bloc, text: 'Opuszczone głosowania', key: Key('tile_votes_chart'));
       },
       order: 0,
       sizeX: 6,
@@ -144,7 +144,7 @@ final List<TileData> allTiles = List.unmodifiable([
         final dashboardCache = Provider.of<DashboardTilesDataCache>(context);
         final bloc = DeputyChartTileBloc.fromSimpleCounterStream(dashboardCache.speechesCounterStream);
 
-        return ChartTile(bloc: bloc, title: 'Przemowy',  key: Key('tile_speeches_chart'));
+        return ChartTile(bloc: bloc, text: 'Przemowy',  key: Key('tile_speeches_chart'));
       },
       order: 0,
       sizeX: 6,

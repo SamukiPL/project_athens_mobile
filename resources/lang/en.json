@@ -9,7 +9,8 @@
     "retry": "Try again",
     "close": "Close",
     "noData": {
-      "defaultText": "No data"
+      "defaultText": "No data",
+      "noInformation": "No info"
     },
     "information": "Information",
     "experimentalFeature": {
@@ -195,7 +196,11 @@
   "dashboard": {
     "title": "Dashboard",
     "nearestMeeting": {
-      "title": "Najbliższe posiedzenie"
+      "title": "Najbliższe posiedzenie",
+      "agenda": "Agenda",
+      "supplementingAgenda": "Supplementing of the agenda",
+      "toBeSettled": "To be settled agenda",
+      "parliamentMeeting": "Parliament meeting"
     },
     "notifications": {
       "title": "Notifications",
@@ -203,6 +208,15 @@
         "speeches": "Speeches",
         "votes": "Votes",
         "notRead": "Not Read"
+      },
+      "removeAllDialog": {
+        "title": "Erase notifications",
+        "content": "Are you sure you want to delete all read notifications?",
+        "removeNotRead": "Delete also not read notifications",
+        "actions": {
+          "yes": "Yes",
+          "no": "No"
+        }
       }
     },
     "tiles": {

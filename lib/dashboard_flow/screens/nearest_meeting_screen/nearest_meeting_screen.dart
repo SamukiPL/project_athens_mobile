@@ -9,6 +9,7 @@ import 'package:project_athens/athens_core/presentation/technical_data/technical
 import 'package:project_athens/dashboard_flow/domain/parliament_meeting_model.dart';
 import 'package:project_athens/dashboard_flow/screens/nearest_meeting_screen/nearest_meeting_bloc.dart';
 import 'package:provider/provider.dart';
+import 'parliament_meeting_agenda_point_extension.dart';
 
 class NearestMeetingScreen extends BaseScreen<NearestMeetingBloc> {
   final String parliamentMeetingId;
@@ -30,6 +31,8 @@ class NearestMeetingScreen extends BaseScreen<NearestMeetingBloc> {
   Widget buildBody(BuildContext context, NearestMeetingBloc bloc) {
     final ThemeData theme = Theme.of(context);
 
+    final AppLocalizations _localizations = Provider.of<AppLocalizations>(context);
+
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -37,17 +40,13 @@ class NearestMeetingScreen extends BaseScreen<NearestMeetingBloc> {
           value: bloc.parliamentMeeting,
           initialData: null,
           child: Consumer<Result<ParliamentMeetingModel>?>(
-            builder: (context, res, _) => _getChild(res, theme)
+            builder: (context, result, _) => _getChild(result, theme, _localizations)
           ),
       )
     );
   }
 
-  Widget _getChild(Result<ParliamentMeetingModel>? result, ThemeData theme) {
-    if (result == null) {
-      return Container();
-    }
-
+  Widget _getChild(Result<ParliamentMeetingModel>? result, ThemeData theme, AppLocalizations _localizations) {
     if (result is Success) {
       final model = (result as Success<ParliamentMeetingModel>).value;
       return Container(
@@ -56,31 +55,28 @@ class NearestMeetingScreen extends BaseScreen<NearestMeetingBloc> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _getTitle(model, theme),
+              _getTitle(model, theme, _localizations),
               Expanded(
                   child: SingleChildScrollView(
                       child: Column(
-                          children: _getAgendaPoints(model, theme)
+                          children: _getAgendaPoints(model, theme, _localizations)
                       )
                   )
               ),
               TechnicalData(technicalId: model.id),
               DbSource(model)
             ]
-          // )
         )
       );
-    }
-
-    if (result is Failure) {
-      return Container();
     }
 
     return Container();
   }
 
-  Widget _getTitle(ParliamentMeetingModel model, ThemeData theme) {
-    final String? sessionIIdStr = model.sessionIId != null ? "${model.sessionIId}. Posiedzenie sejmu" : null;
+  Widget _getTitle(ParliamentMeetingModel model, ThemeData theme, AppLocalizations _localizations) {
+    final String? sessionIIdStr = model.sessionIId != null
+        ? "${model.sessionIId}. ${_localizations.getText().dashboardNearestMeetingParliamentMeeting()}"
+        : null;
 
     return Container(
       child: Center(
@@ -96,12 +92,6 @@ class NearestMeetingScreen extends BaseScreen<NearestMeetingBloc> {
             ),
             sessionIIdStr != null ? Text(
               sessionIIdStr.toUpperCase(),
-              // style: TextStyle(
-              //   fontSize: 17,
-              //   color: Colors.black87,
-              //   fontWeight: FontWeight.w500,
-              //
-              // ),
               style: theme.textTheme.overline?.copyWith(
                   color: theme.dividerColor,
                   fontSize: 14
@@ -113,17 +103,23 @@ class NearestMeetingScreen extends BaseScreen<NearestMeetingBloc> {
     );
   }
 
-  List<Widget> _getAgendaPoints(ParliamentMeetingModel model, ThemeData theme) {
-    model.agenda.agendaPoints.sort((a,b) => a.orderPoint.compareTo(b.orderPoint));
-
-    final plannedAgendaPoints = model.agenda.agendaPoints.where((element) => element.planned).toList();
-    final notPlannedAgendaPoints = model.agenda.agendaPoints.where((element) => !element.planned).toList();
-    final toBeSettleAgendaPoints = model.agenda.agendaPoints.where((element) => !element.active).toList();
-
+  List<Widget> _getAgendaPoints(ParliamentMeetingModel model, ThemeData theme, AppLocalizations _localizations) {
     return [
-      _getAgendaPointsSegment(plannedAgendaPoints, "Porządek obrad", theme),
-      _getAgendaPointsSegment(notPlannedAgendaPoints, "Uzupełnienie porządku obrad", theme),
-      _getAgendaPointsSegment(toBeSettleAgendaPoints, "Do rozstrzygnięcia", theme)
+      _getAgendaPointsSegment(
+          model.agenda.agendaPoints.plannedPoints,
+          _localizations.getText().dashboardNearestMeetingAgenda(),
+          theme
+      ),
+      _getAgendaPointsSegment(
+          model.agenda.agendaPoints.notPlannedPoints,
+          _localizations.getText().dashboardNearestMeetingSupplementingAgenda(),
+          theme
+      ),
+      _getAgendaPointsSegment(
+          model.agenda.agendaPoints.toBeSettledPoints,
+          _localizations.getText().dashboardNearestMeetingToBeSettled(),
+          theme
+      )
     ];
   }
 
@@ -153,9 +149,7 @@ class NearestMeetingScreen extends BaseScreen<NearestMeetingBloc> {
   }
 
   Widget _getAgendaPoint(ParliamentMeetingAgendaPoint point, ThemeData theme) {
-    final String orderPoint = point.orderPoint != null && point.orderPoint != 0
-        ? "${point.orderPoint.toString()}. "
-        : "";
+    final String orderPoint = point.orderPointToString;
 
     return Container(
       padding: EdgeInsets.only(bottom: 12),

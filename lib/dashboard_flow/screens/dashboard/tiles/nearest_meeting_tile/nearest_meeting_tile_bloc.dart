@@ -9,7 +9,7 @@ import 'package:project_athens/dashboard_flow/cache/dashboard_tiles_data_cache.d
 import 'package:rxdart/rxdart.dart';
 
 class NearestMeetingTileBloc extends SimpleTileBloc {
-
+  late String? nearestParliamentMeetingId;
   final DashboardTilesDataCache _dashboardCache;
   final AppLocalizations _localizations;
 
@@ -26,9 +26,6 @@ class NearestMeetingTileBloc extends SimpleTileBloc {
       DateTime(today.year, today.month, today.day, 0, 0, 0, 0);
     final closestDateTime =
       todayBeginDay.getClosestDate([nearestMeetingResponse.nearestPastMeeting]);
-
-    bool isToday = closestDateTime.isToday;
-    bool isYesterday = closestDateTime.isYesterday;
 
     nearestParliamentMeetingId = nearestMeetingResponse.nearestMeetingId;
 
@@ -54,9 +51,10 @@ class NearestMeetingTileBloc extends SimpleTileBloc {
     Fimber.e(onError.toString());
   });
 
-  String? nearestParliamentMeetingId;
 
+  @override
   void dispose() {
+    loadingStateSource.close();
     super.dispose();
   }
 }

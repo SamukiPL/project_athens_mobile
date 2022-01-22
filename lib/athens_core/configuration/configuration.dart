@@ -10,12 +10,10 @@ class Configuration {
 
   BehaviorSubject<bool> _showTechnicalDataSource = BehaviorSubject<bool>.seeded(false);
   BehaviorSubject<bool> _wakelockOnTimelineSource = BehaviorSubject<bool>.seeded(false);
-  ReplaySubject<String> _dashboardTilesConfigSource = ReplaySubject<String>();
 
   final storage = new FlutterSecureStorage();
   Stream<bool> get showTechnicalData => _showTechnicalDataSource.stream.shareValue();
   Stream<bool> get wakelockOnTimeline => _wakelockOnTimelineSource.stream.shareValue();
-  Stream<String> get dashboardTilesConfig => _dashboardTilesConfigSource.shareValue();
 
   Future<void> _init() async {
     final showTechnicalDataFlag = await storage.readBool(key: ConfigurationStorageNames.SHOW_TECHNICAL_DATA);
@@ -23,9 +21,6 @@ class Configuration {
 
     final wakelockOnTimelineFlag = await storage.readBool(key: ConfigurationStorageNames.WAKELOCK_ON_TIMELINE);
     _wakelockOnTimelineSource.add(wakelockOnTimelineFlag);
-    
-    final _dashboardTilesConfig = await storage.read(key: ConfigurationStorageNames.DASHBOARD_TILES);
-    _dashboardTilesConfigSource.add(_dashboardTilesConfig);
   }
 
   void updateShowTechnicalData(bool newState) {
@@ -43,6 +38,5 @@ class Configuration {
   void dispose() {
     _showTechnicalDataSource.close();
     _wakelockOnTimelineSource.close();
-    _dashboardTilesConfigSource.close();
   }
 }

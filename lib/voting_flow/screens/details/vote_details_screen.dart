@@ -371,9 +371,6 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
         child: Consumer<VotingModel?>(
             builder: (context, model, _) =>
                 model != null ?
-                // FullCard(
-                //     cardPadding: EdgeInsets.only(bottom: 8, left: 8, right: 8),
-                //     child:
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -383,7 +380,6 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
                             .map((e) => buildDeputyVotingView(e, context, theme))
                             .toList()),
                   ],
-                // )
             ) : Container()
         )
     );
@@ -418,7 +414,6 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
     final circleSize = viewWidth * 0.25;
 
     final foundDeputy = deputiesCache.getDeputyModelById(voting.cadencyDeputy);
-    // return Container();
     return FutureProvider(
       initialData: null,
       create: (context) => foundDeputy,
@@ -489,6 +484,5 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
 
   @override
   Widget? buildFloatingActionButton(
-          BuildContext context, VoteDetailsBloc bloc) =>
-      null;
+          BuildContext context, VoteDetailsBloc bloc) => null;
 }
