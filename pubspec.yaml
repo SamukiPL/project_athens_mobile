@@ -62,6 +62,7 @@ dependencies:
       url: https://github.com/pbrejdak/fijkplayer_skin.git
   badges: ^2.0.1
   table_calendar: ^3.0.3
+  fimber_io: ^0.6.5
 
 dev_dependencies:
   flutter_test:

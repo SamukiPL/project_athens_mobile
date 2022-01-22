@@ -3,10 +3,9 @@ import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/grid/tiles/simple_tile/simple_tile_bloc.dart';
-import 'package:project_athens/athens_core/presentation/grid/tiles/tile_base.dart';
 import 'package:provider/provider.dart';
 
-class SimpleTile extends TileBase with RedirectionDelegate {
+class SimpleTile extends StatelessWidget with RedirectionDelegate {
   final String? text;
   final IconData? icon;
   final BoxDecoration boxDecoration;
@@ -37,20 +36,18 @@ class SimpleTile extends TileBase with RedirectionDelegate {
     return buildTile(
         context: context,
         tile: buildTextAndIcon(text: text, icon: icon),
-        goToFn: goToFn,
     );
   }
 
   @protected
-  Widget buildTile({required BuildContext context, required Widget tile, Destination Function()? goToFn}) {
+  Widget buildTile({required BuildContext context, required Widget tile}) {
     final BoxDecoration decoration = boxDecoration;
 
-    if (goTo != null || goToFn != null) {
-      tile = InkWell(
-        onTap: () => goToDestination(context, goTo ?? goToFn!()),
-        child: tile,
-      );
-    }
+    final Widget childTile = goTo != null || goToFn != null
+        ? InkWell(
+          onTap: () => goToDestination(context, goTo ?? goToFn!()),
+          child: tile,
+        ) : tile;
 
     return Stack(
       children: [
@@ -60,7 +57,7 @@ class SimpleTile extends TileBase with RedirectionDelegate {
           decoration: decoration,
           child: Material(
             child: Container(
-              child: tile,
+              child: childTile,
               decoration: elevation != null && elevation != 0 ? BoxDecoration(
                   border: Border.all(color: Colors.black.withOpacity(0.05), )
               ) : BoxDecoration(),

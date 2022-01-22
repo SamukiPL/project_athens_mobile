@@ -20,7 +20,7 @@ extension DeputyFullExtension on DeputyFull {
   }
 
   String getParliamentExperience(AppLocalizations localizations) {
-    return cv.parliamentExperience.trim() ?? localizations.getText().universalNoDataNoInformation();
+    return cv.parliamentExperience?.trim() ?? localizations.getText().universalNoDataNoInformation();
   }
 
   DeputyCv getDeputyCV() {

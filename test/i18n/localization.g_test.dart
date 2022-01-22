@@ -756,6 +756,26 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, dashboardNearestMeetingTitle != "" && dashboardNearestMeetingTitle != null); 
   }); 
  
+  test("All methods for $locale dashboardNearestMeetingAgenda", () async {
+    String dashboardNearestMeetingAgenda = localization.dashboardNearestMeetingAgenda();
+    expect(true, dashboardNearestMeetingAgenda != "" && dashboardNearestMeetingAgenda != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNearestMeetingSupplementingAgenda", () async {
+    String dashboardNearestMeetingSupplementingAgenda = localization.dashboardNearestMeetingSupplementingAgenda();
+    expect(true, dashboardNearestMeetingSupplementingAgenda != "" && dashboardNearestMeetingSupplementingAgenda != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNearestMeetingToBeSettled", () async {
+    String dashboardNearestMeetingToBeSettled = localization.dashboardNearestMeetingToBeSettled();
+    expect(true, dashboardNearestMeetingToBeSettled != "" && dashboardNearestMeetingToBeSettled != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNearestMeetingParliamentMeeting", () async {
+    String dashboardNearestMeetingParliamentMeeting = localization.dashboardNearestMeetingParliamentMeeting();
+    expect(true, dashboardNearestMeetingParliamentMeeting != "" && dashboardNearestMeetingParliamentMeeting != null); 
+  }); 
+ 
   test("All methods for $locale dashboardNotificationsTitle", () async {
     String dashboardNotificationsTitle = localization.dashboardNotificationsTitle();
     expect(true, dashboardNotificationsTitle != "" && dashboardNotificationsTitle != null); 

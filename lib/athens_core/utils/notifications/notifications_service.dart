@@ -2,34 +2,36 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:project_athens/athens_core/configuration/configuration_delegate.dart';
 import 'package:project_athens/athens_core/configuration/configuration_storage_names.dart';
 import 'package:project_athens/athens_core/utils/notifications/domain/notification_model.dart';
 import 'data/storage/saved_notification.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
-import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:collection/collection.dart';
 
 class NotificationsService with ConfigurationDelegate<List<SavedNotification>, SavedNotification>, RedirectionDelegate {
   static NotificationsService? _instance;
   static NotificationsService? get instance => _instance;
 
-  static Future<void> intialize() async {
+  static Future<void> initialize({final bool isInitializedFromApp = false}) async {
     if (_instance != null) {
       print('[NotificationsService]: Trying to create service that is currently created');
       return;
     }
 
     _instance = NotificationsService();
-    return instance!.init();
+    return instance!.init(isInitializedFromApp: isInitializedFromApp);
   }
 
   NotificationsService();
 
-  ReplaySubject<SavedNotification> _suspendedRedirectionSource = ReplaySubject(maxSize: 1);
-  Stream<SavedNotification> get suspendedRedirectionStream => _suspendedRedirectionSource.stream;
+  late SavedNotification? _suspendedNotification;
+
+  ReplaySubject<void> _suspendedNavigationSource = ReplaySubject(maxSize: 1);
+  Stream<void> get suspendedNavigationStream => _suspendedNavigationSource.stream;
 
   ReplaySubject<List<SavedNotification>> _notificationsSource = ReplaySubject<List<SavedNotification>>(maxSize: 1);
   Stream<List<SavedNotification>> get notificationsStream => _notificationsSource.stream.shareReplay(maxSize: 1);
@@ -40,20 +42,30 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
   @override
   List<SavedNotification> get defaultStorageValue => List.empty(growable: true);
 
+  bool get hasSuspendedNavigation => _suspendedNotification != null;
+
   bool notificationsFetched = false;
 
   final List<SavedNotification> notifications = List.empty(growable: true);
 
-  Future<void> init() async {
+  Future<void> init({final bool isInitializedFromApp = false}) async {
+    Fimber.d("initializing app");
+
     final List<SavedNotification> _notifications = await fetchPreference((Map<String, dynamic> json) => SavedNotification.fromJson(json));
 
     notificationsFetched = true;
     notifications.addAll(_notifications);
 
-    _processSavedNotificationsAtHardDrive();
+    if (isInitializedFromApp) {
+      Fimber.d('processing saved notifiaction at hard drive');
+      _processSavedNotificationsAtHardDrive();
+      await _checkForInitialMessage();
+
+      await _saveNotifications(notifications);
+    }
 
     _broadcastNotifications();
-    await saveNotifications(notifications);
+    await _saveNotifications(notifications);
   }
 
   void onApplicationResumed() async {
@@ -64,7 +76,7 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
     if (needToSave) {
       print('some files where saved. Saving notifcations...');
       _broadcastNotifications();
-      await saveNotifications(notifications);
+      await _saveNotifications(notifications);
     }
   }
 
@@ -113,15 +125,26 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
   }
 
   Future<void> openDestination(SavedNotification notification) async {
-    _suspendedRedirectionSource.add(notification);
+    _suspendedNotification = notification;
 
     notification.isRead = true;
 
-    await saveNotifications(notifications);
+    await _saveNotifications(notifications);
+
+    _suspendedNavigationSource.add(null);
+
     _broadcastNotifications();
   }
 
-  Future<void> saveNotifications(List<SavedNotification> notificationsToSave) async {
+  SavedNotification getSuspendedNavigation() {
+    final SavedNotification _notification = _suspendedNotification!;
+
+    _suspendedNotification = null;
+
+    return _notification;
+  }
+
+  Future<void> _saveNotifications(List<SavedNotification> notificationsToSave) async {
     return await updatePreference(notificationsToSave);
   }
 
@@ -173,6 +196,26 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
     return false;
   }
 
+  /// Message that user pressed in notification bar which caused application
+  /// to start from dead.
+  Future<void> _checkForInitialMessage() async {
+    final RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+
+    if (initialMessage != null) {
+      final SavedNotification foundNotification = notifications
+          .firstWhereOrNull((notification) => notification.messageId == initialMessage.messageId!)
+          ?? _mapToSavedNotification(initialMessage);
+
+      foundNotification.isRead = true;
+      _suspendedNotification = foundNotification;
+      _suspendedNavigationSource.add(null);
+
+      if (notifications.firstWhereOrNull((notification) => notification.messageId == initialMessage.messageId!) == null) {
+        notifications.add(foundNotification);
+      }
+    }
+  }
+
   void _broadcastNotifications() {
     notifications.sort((a,b) => b.sentTime.compareTo(a.sentTime));
     final List<SavedNotification> newInstanceList = List.of(notifications);
@@ -181,6 +224,6 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
 
   void dispose() {
     _notificationsSource.close();
-    _suspendedRedirectionSource.close();
+    _suspendedNavigationSource.close();
   }
 }

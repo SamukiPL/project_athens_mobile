@@ -3,14 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/chopper/error_interceptor.dart';
 import 'package:project_athens/athens_core/chopper/network_module.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
-import 'package:project_athens/athens_core/utils/life_cycle_manager/life_cycle_service.dart';
-import '../../athens_core/utils/notifications/notifications_service.dart';
 import 'package:project_athens/dashboard_flow/cache/parliament_meeting_cache.dart';
 import 'package:project_athens/dashboard_flow/data/network/dashboard_api.dart';
 import 'package:project_athens/dashboard_flow/data/parliament_meeting_details_repository_impl.dart';
 import 'package:project_athens/dashboard_flow/domain/parliament_meeting_details/get_parliament_meeting_details_use_case.dart';
 import 'package:project_athens/dashboard_flow/mappers/parliament_meeting_details_network_mapper.dart';
-import 'package:project_athens/deputies_utils/cache/cache_errors.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/cache/parliament_clubs_cache.dart';
 import 'package:project_athens/deputies_utils/data/get_deputies_repository_impl.dart';
@@ -28,9 +25,7 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 class AppModule extends Module {
-  AppModule(BuildContext context, this.lifeCycle) : super(context);
-
-  final LifeCycleService lifeCycle;
+  AppModule(BuildContext context) : super(context);
 
   @override
   List<SingleChildWidget> getProviders() {
@@ -51,7 +46,6 @@ class AppModule extends Module {
         create: (_) => SimpleDioClient(client),
         dispose: (context, client) => client.dispose(),
       ),
-      Provider<LifeCycleService>.value(value: lifeCycle),
       Provider<ParliamentClubsCache>.value(
           value: clubsCache
       ),

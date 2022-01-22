@@ -46,15 +46,11 @@ class DashboardParams {
   }
 
   bool isAnyDirty() {
-    if (
-      meeting == true ||
+    return meeting == true ||
       voteAbsent == true ||
       monthMeetings == true ||
       speechesCounter == true ||
       speechesCounterPerYear == true ||
-      voteAbsentPerYear == true
-    ) { return true; }
-
-    return false;
+      voteAbsentPerYear == true;
   }
 }

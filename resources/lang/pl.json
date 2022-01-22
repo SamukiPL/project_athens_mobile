@@ -193,7 +193,11 @@
   "dashboard": {
     "title": "Konsola",
     "nearestMeeting": {
-      "title": "Najbliższe posiedzenie"
+      "title": "Najbliższe posiedzenie",
+      "agenda": "Porządek obrad",
+      "supplementingAgenda": "Uzupełnienie porządku obrad",
+      "toBeSettled": "Do rozstrzygnięcia",
+      "parliamentMeeting": "Posiedzenie sejmu"
     },
     "notifications": {
       "title": "Powiadomienia",

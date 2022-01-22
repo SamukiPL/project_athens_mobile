@@ -193,7 +193,11 @@
   "dashboard": {
     "title": "Dashboard",
     "nearestMeeting": {
-      "title": "Najbliższe posiedzenie"
+      "title": "Najbliższe posiedzenie",
+      "agenda": "Agenda",
+      "supplementingAgenda": "Supplementing of the agenda",
+      "toBeSettled": "To be settled agenda",
+      "parliamentMeeting": "Parliament meeting"
     },
     "notifications": {
       "title": "Notifications",

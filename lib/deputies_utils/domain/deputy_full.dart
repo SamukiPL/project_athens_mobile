@@ -40,7 +40,7 @@ class DeputyCv {
   final String? education;
   final String? finishedSchools;
   final String? profession;
-  final String parliamentExperience;
+  final String? parliamentExperience;
 
   DeputyCv(this.born, this.education, this.finishedSchools, this.profession, this.parliamentExperience);
 }

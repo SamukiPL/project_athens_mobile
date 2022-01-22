@@ -601,6 +601,22 @@ class AppLocalizationsGenerated {
     return words['dashboard']['nearestMeeting']['title'];
   }
 
+  String dashboardNearestMeetingAgenda() {
+    return words['dashboard']['nearestMeeting']['agenda'];
+  }
+
+  String dashboardNearestMeetingSupplementingAgenda() {
+    return words['dashboard']['nearestMeeting']['supplementingAgenda'];
+  }
+
+  String dashboardNearestMeetingToBeSettled() {
+    return words['dashboard']['nearestMeeting']['toBeSettled'];
+  }
+
+  String dashboardNearestMeetingParliamentMeeting() {
+    return words['dashboard']['nearestMeeting']['parliamentMeeting'];
+  }
+
   String dashboardNotificationsTitle() {
     return words['dashboard']['notifications']['title'];
   }
