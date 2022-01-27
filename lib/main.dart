@@ -91,6 +91,7 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: [
           const AppLocalizationsDelegate(),
           GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate
         ],
         localeResolutionCallback:

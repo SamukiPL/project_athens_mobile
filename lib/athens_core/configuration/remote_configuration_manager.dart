@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/configuration/remote_configuration_manager_bloc.dart';
@@ -114,8 +113,7 @@ class _RemoteConfigurationManagerState extends State<RemoteConfigurationManager>
   }
 
   _handleShowUpdatePrivacyPolicyDialog(BuildContext context) {
-    final Dio dio = Provider.of<Dio>(context);
-    final AgreementBloc _agreementBloc = AgreementBloc(dio);
+    final AgreementBloc _agreementBloc = Provider.of<AgreementBloc>(context);
     final AppLocalizations l10n = Provider.of<AppLocalizations>(context);
 
     return Scaffold(

@@ -30,6 +30,7 @@ class NetworkModule extends Module {
         dispose: (context, client) {
           client.close();
         },
+        lazy: false,
       )
     ];
   }

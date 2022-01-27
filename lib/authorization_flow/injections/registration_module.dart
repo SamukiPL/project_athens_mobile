@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
-import 'package:project_athens/athens_core/presentation/agreement/agreement_bloc.dart';
 import 'package:project_athens/athens_core/utils/firebase/firebase_deputy_subscriber.dart';
 import 'package:project_athens/authorization_flow/data/network/login_api.dart';
 import 'package:project_athens/authorization_flow/data/registration_repository_impl.dart';
@@ -20,7 +19,6 @@ import 'package:project_athens/authorization_flow/screens/registration/steps/reg
 import 'package:project_athens/authorization_flow/screens/registration/steps/registration_end/registration_end_step_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/registration_end/show_repeat_password_notifier.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/registration_steps.dart';
-import 'package:project_athens/authorization_flow/screens/registration/steps/terms_and_conditions/terms_and_conditions_step_bloc.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/data/network/deputies_api.dart';
 import 'package:project_athens/deputies_utils/data/put_deputies_repository_impl.dart';
@@ -54,12 +52,8 @@ class RegistrationModule extends Module {
     final repeatPasswordNotifier = ShowRepeatPasswordNotifier();
     final registrationEndStepBloc = RegistrationEndStepBloc(registrationUseCase, repeatPasswordNotifier);
 
-    final termsAndConditionsBloc = TermsAndConditionsStepBloc();
-
     final stepSearchBarBloc = StepSearchBarBloc();
     final deputiesChooserBloc = getDeputiesChooserBloc(context, loginApi, deputiesApi, stepSearchBarBloc);
-
-    final AgreementBloc agreementBloc = AgreementBloc(dio);
 
     return [
       Provider<RegistrationBloc>(
@@ -68,7 +62,6 @@ class RegistrationModule extends Module {
             buttonStateBloc,
             accountInfoStepBloc,
             registrationEndStepBloc,
-            termsAndConditionsBloc,
             deputiesChooserBloc
         ),
         dispose: (_, bloc) => bloc.dispose(),
@@ -79,12 +72,8 @@ class RegistrationModule extends Module {
       ChangeNotifierProvider<StepperButtonStateBloc>.value(
           value: buttonStateBloc
       ),
-      ChangeNotifierProvider<AgreementBloc>.value(value: agreementBloc),
       Provider<AccountInfoStepBloc>.value(
         value: accountInfoStepBloc,
-      ),
-      Provider<TermsAndConditionsStepBloc>.value(
-        value: termsAndConditionsBloc
       ),
       Provider<AccountInfoFormKey>(
         create: (_) => AccountInfoFormKey(),

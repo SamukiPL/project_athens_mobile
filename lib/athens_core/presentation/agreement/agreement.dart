@@ -27,10 +27,15 @@ class Agreement extends StatelessWidget {
     return ChangeNotifierProvider.value(
       value: bloc,
       child: Consumer<AgreementBloc>(
-        builder: (context, bloc, _) =>
-            bloc.isLoaded
-              ? _getPDFView(context)
-              : _buildLoader(bloc.downloadProgress == 0.0 ? null : bloc.downloadProgress)
+        builder: (context, bloc, _) {
+          if (bloc.isLoaded) {
+            return _getPDFView(context);
+          } else if (bloc.hasFailure) {
+            return _buildHtmlWidgetError(bloc.failure);
+          } else {
+            return _buildLoader(null);
+          }
+        }
       ),
     );
   }
