@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:project_athens/athens_core/chopper/network_module.dart';
 import 'package:project_athens/athens_core/configuration/data/get_remote_configuration_repository_impl.dart';
 import 'package:project_athens/athens_core/configuration/domain/get_remote_configuration_use_case.dart';
@@ -30,7 +29,6 @@ class ConfigurationModule extends Module {
   }
 
   RemoteConfiguration _createRemoteConfiguration(BuildContext context2) {
-    // final Dio _dio = Dio();
     final _dio = Provider.of<SimpleDioClient>(context2, listen: false);
     final remoteConfigurationApi = RemoteConfigurationApi(_dio.client);
     final repository = GetRemoteConfigurationRepositoryImpl(remoteConfigurationApi);

@@ -2,8 +2,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:package_info/package_info.dart';
 import 'package:project_athens/athens_core/configuration/remote_configuration.dart';
@@ -27,124 +25,64 @@ class AutoUpdater {
   final Upgrader _upgrader = Upgrader();
   final RemoteConfiguration _remoteConfiguration;
   final AppLocalizations _localizations;
-  late BuildContext _context;
   late final StreamSubscription<void> _configChangeSub;
+  late final Timer _timer;
 
   final BehaviorSubject<bool> _checkingForUpdateSource = BehaviorSubject.seeded(false);
   Stream<bool> get checkingForUpdateStream => _checkingForUpdateSource.stream;
 
-  late Timer _timer;
 
   void _initMinimalVersionCheck() {
-    _configChangeSub = _remoteConfiguration.dataFetched.listen((event) => _checkForMinimalUpdate());
+    _configChangeSub = _remoteConfiguration.dataFetched.listen((event) async {
+      final appInfo = await PackageInfo.fromPlatform();
+      Version currentVersion = Version.parse(appInfo.version);
+
+      // final bool updateToPerform = _checkPlatformVersions(_remoteConfiguration.minimalVersions!, currentVersion, true);
+      // if (!updateToPerform) _checkPlatformVersions(_remoteConfiguration.recommendedVersions!, currentVersion, false);
+    });
+    _timer = Timer.periodic(new Duration(minutes: 15), (timer) => checkForUpdates());
   }
 
-  _getUpdateSeverity(Version targetVersion, Version currentVersion) {
-    if (targetVersion.major > currentVersion.major) {
-      return UPDATE_SEVERITY.MAJOR;
-    }
 
-    if (targetVersion.minor > currentVersion.minor) {
-      return UPDATE_SEVERITY.MINOR;
-    }
-
-    if (targetVersion.patch > currentVersion.patch) {
-      return UPDATE_SEVERITY.PATCH;
-    }
-  }
-
-  void _checkForMinimalUpdate() async {
-    final appInfo = await PackageInfo.fromPlatform();
-    Version currentVersion = Version.parse(appInfo.version);
-
-    if (Platform.isIOS && _remoteConfiguration.minimalVersions!.iOS > currentVersion) {
-      return _handleCupertino(UPDATE_SEVERITY.MAJOR);
-    }
-
-    if (Platform.isAndroid &&  _remoteConfiguration.minimalVersions!.android > currentVersion) {
-      return _handleAndroid(UPDATE_SEVERITY.MAJOR);
-    }
-
-    _checkForRecommendedUpdate();
-  }
-
-  _checkForRecommendedUpdate() async {
-    final appInfo = await PackageInfo.fromPlatform();
-    Version currentVersion = Version.parse(appInfo.version);
-
-    if (Platform.isIOS && _remoteConfiguration.recommendedVersions!.iOS > currentVersion) {
-      return _handleCupertino(_getUpdateSeverity(
-          _remoteConfiguration.recommendedVersions!.iOS,
-          currentVersion)
-      );
-    }
-
-    if (Platform.isAndroid &&  _remoteConfiguration.recommendedVersions!.android > currentVersion) {
-      return _handleAndroid(_getUpdateSeverity(
-          _remoteConfiguration.recommendedVersions!.android,
-          currentVersion)
-      );
-    }
-  }
-
-  void _handleCupertino(UPDATE_SEVERITY updateType) async {
-    switch(updateType) {
-      case UPDATE_SEVERITY.MAJOR:
-        return _openCupertinoUpdateDialog(true);
-      case UPDATE_SEVERITY.MINOR:
-        return _openCupertinoUpdateDialog(false);
-    }
-  }
-
-  void _handleAndroid(UPDATE_SEVERITY updateType) async {
-    switch(updateType) {
-      case UPDATE_SEVERITY.MAJOR:
-        return await InAppUpdate.performImmediateUpdate();
-      case UPDATE_SEVERITY.MINOR:
-        await InAppUpdate.startFlexibleUpdate();
-        await InAppUpdate.completeFlexibleUpdate();
-        break;
-    }
-  }
 
   void _openCupertinoUpdateDialog(bool critical) {
-    final String title = critical
-        ? _localizations.getText().universalUpdateCupertinoDialogImmediateUpdateTitle()
-        : _localizations.getText().universalUpdateCupertinoDialogTitle();
+    // final String title = critical
+    //     ? _localizations.getText().universalUpdateCupertinoDialogImmediateUpdateTitle()
+    //     : _localizations.getText().universalUpdateCupertinoDialogTitle();
+    //
+    // final String content = critical
+    //     ? _localizations.getText().universalUpdateCupertinoDialogImmediateUpdateContent()
+    //     : _localizations.getText().universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow();
+    //
+    // final List<CupertinoDialogAction> actions = [
+    //   CupertinoDialogAction(
+    //     child: Text(
+    //       _localizations.getText().universalUpdateCupertinoDialogButtonUpdateNow()
+    //     ),
+    //     onPressed: () => _launchAppStore(),
+    //   )
+    // ];
+    //
+    // if (!critical) {
+    //   actions.insert(
+    //     0,
+    //     CupertinoDialogAction(
+    //       child: Text(
+    //           _localizations.getText().universalUpdateCupertinoDialogButtonLater()
+    //       ),
+    //     )
+    //   );
+    // }
 
-    final String content = critical
-        ? _localizations.getText().universalUpdateCupertinoDialogImmediateUpdateContent()
-        : _localizations.getText().universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow();
-
-    final List<CupertinoDialogAction> actions = [
-      CupertinoDialogAction(
-        child: Text(
-          _localizations.getText().universalUpdateCupertinoDialogButtonUpdateNow()
-        ),
-        onPressed: () => _launchAppStore(),
-      )
-    ];
-
-    if (!critical) {
-      actions.insert(
-        0,
-        CupertinoDialogAction(
-          child: Text(
-              _localizations.getText().universalUpdateCupertinoDialogButtonLater()
-          ),
-        )
-      );
-    }
-
-    showCupertinoDialog(
-        context: _context,
-        builder: (_) => CupertinoAlertDialog(
-          title: Text(title),
-          content: Text(content),
-          actions: actions
-        ),
-        barrierDismissible: !critical
-    );
+    // showCupertinoDialog(
+    //     context: _context,
+    //     builder: (_) => CupertinoAlertDialog(
+    //       title: Text(title),
+    //       content: Text(content),
+    //       actions: actions
+    //     ),
+    //     barrierDismissible: !critical
+    // );
   }
 
   void _launchAppStore() {
@@ -231,13 +169,6 @@ class AutoUpdater {
   //
   //   return false;
   // }
-
-  void init(BuildContext _context) {
-    this._context = _context;
-
-    _initiOSUpgrader();
-    _initUpdateInterval();
-  }
 
   /// Returns whether updater successfully fetched new update
   Future<void> checkForUpdates() async {

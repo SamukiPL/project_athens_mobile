@@ -6,11 +6,20 @@
     "skip": "Skip",
     "choose": "Choose",
     "ok": "Ok",
+    "accept": "Accept",
     "retry": "Try again",
     "close": "Close",
+    "downloadingData": "Downloading data...",
     "noData": {
       "defaultText": "No data",
       "noInformation": "No info"
+    },
+    "agreement": {
+      "orTryToOpenInBrowser": "Try to open in browser.",
+      "youMustAgreeOnTermsAndConditions": "You must agree on terms and conditions",
+      "title": "Terms and conditions",
+      "IAgree": "I've read and accept",
+      "termsAndConditions": "terms and condition and privacy policy."
     },
     "information": "Information",
     "experimentalFeature": {
@@ -191,6 +200,7 @@
     "supportUs": "Support us ❤",
     "checkForUpdates": "Check for updates",
     "appVersion": "Application version",
+    "termsAndAgreement": "Terms and conditions",
     "credits": "Credits"
   },
   "dashboard": {

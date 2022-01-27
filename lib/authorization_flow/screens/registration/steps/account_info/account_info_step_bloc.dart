@@ -20,6 +20,7 @@ class AccountInfoStepBloc extends BaseRegistrationStepBloc {
 
   bool _loginTaken = false;
   bool _emailTaken = false;
+  bool _agreementAccepted = false;
 
   String get login => _login;
   String get email => _email;
@@ -27,6 +28,7 @@ class AccountInfoStepBloc extends BaseRegistrationStepBloc {
 
   bool get loginTaken => _loginTaken;
   bool get emailTaken => _emailTaken;
+  bool get agreementAccepted => _agreementAccepted;
 
   void setLogin(String login) {
     _login = login;
@@ -41,6 +43,10 @@ class AccountInfoStepBloc extends BaseRegistrationStepBloc {
 
   void setRepeatEmail(String repeatEmail) {
     _repeatEmail = repeatEmail;
+  }
+
+  void setAgreementAccepted(bool accepted) {
+    _agreementAccepted = accepted;
   }
 
   @override

@@ -87,7 +87,7 @@ class VoteMajorityDistribution extends StatelessWidget {
       width: avatarSize,
       height: avatarSize,
       child: shouldClipToOval(CachedNetworkImage(
-        imageUrl: model.img,
+        imageUrl: model.img!,
         filterQuality: FilterQuality.high,
         fit: BoxFit.cover,
         placeholder: (context, url) => CircularProgressIndicator(),
@@ -165,41 +165,55 @@ class VoteMajorityDistribution extends StatelessWidget {
         alignment: Alignment.center,
         width: avatarSize,
         height: avatarSize,
-        child: CachedNetworkImage(
-          imageUrl: model.img,
-          filterQuality: FilterQuality.high,
-          fit: model.isDeputy ? BoxFit.cover : BoxFit.contain,
-          imageBuilder: (context, imageProvider) => Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: imageProvider
-              ),
-              shape: model.isDeputy ? BoxShape.circle : BoxShape.rectangle,
-              border: Border.all(color: getBorderColor(model.type), width: borderSize)
-            ),
-          ),
-          placeholder: (context, url) => CircularProgressIndicator(),
-          errorWidget: (context, url, error) =>
-              Container(
-                padding: EdgeInsets.all(4),
-                decoration: BoxDecoration(
+        child: model.img != null
+            ? CachedNetworkImage(
+                imageUrl: model.img! ,
+                filterQuality: FilterQuality.high,
+                fit: model.isDeputy ? BoxFit.cover : BoxFit.contain,
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: imageProvider
+                    ),
+                    shape: model.isDeputy ? BoxShape.circle : BoxShape.rectangle,
                     border: Border.all(color: getBorderColor(model.type), width: borderSize)
+                  ),
                 ),
-                child: Center(
-                    child: Text(
-                      model.alt,
-                      style: TextStyle(
-                          fontSize: clubNameFontSize
+                placeholder: (context, url) => CircularProgressIndicator(),
+                errorWidget: (context, url, error) =>
+                    Container(
+                      padding: EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: getBorderColor(model.type), width: borderSize)
                       ),
-                    )
-                ),
-              ),
-          width: avatarSize - 5,
-          height: avatarSize - 5,
-          memCacheHeight: 700,
-          memCacheWidth: 700,
-          alignment: Alignment.center,
-        ),
+                      child: Center(
+                          child: Text(
+                            model.alt,
+                            style: TextStyle(
+                                fontSize: clubNameFontSize
+                            ),
+                          )
+                      ),
+                    ),
+                width: avatarSize - 5,
+                height: avatarSize - 5,
+                memCacheHeight: 700,
+                memCacheWidth: 700,
+                alignment: Alignment.center,
+              ) : Container(
+                    padding: EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: getBorderColor(model.type), width: borderSize)
+                    ),
+                    child: Center(
+                        child: Text(
+                          model.alt,
+                          style: TextStyle(
+                              fontSize: clubNameFontSize
+                          ),
+                        )
+                    ),
+                  ),
       );
   }
 

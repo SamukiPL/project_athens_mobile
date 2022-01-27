@@ -7,7 +7,9 @@
     "choose": "Wybierz",
     "close": "Zamknij",
     "ok": "Ok",
+    "accept": "Akceptuje",
     "retry": "Spróbuj ponownie",
+    "downloadingData": "Pobieranie...",
     "noData": {
       "defaultText": "Brak danych",
       "noInformation": "Brak informacji"
@@ -21,6 +23,13 @@
       "network": "Coś poszło nie tak. Proszę sprawdzić swoje połączenie z internetem.",
       "server": "Serwer nie odpowiada. Prosimy spróbować później.",
       "unknown": "Coś poszło nie tak, prosimy spróbować później."
+    },
+    "agreement": {
+      "orTryToOpenInBrowser": "Spróbuj otworzyć w przeglądarce.",
+      "youMustAgreeOnTermsAndConditions": "Musisz zaakceptować regulamin oraz politykę prywatności",
+      "title": "Regulamin aplikacji",
+      "IAgree": "Przeczytałem oraz akceptuje",
+      "termsAndConditions": "regulamin oraz politykę prywatności."
     },
     "source": "Źródło danych",
     "createdAt": "Data utworzenia",
@@ -190,7 +199,8 @@
     "checkForUpdates": "Sprawdź aktualizacje",
     "supportUs": "Wesprzyj nas ❤",
     "appVersion": "Wersja aplikacji",
-    "credits": "Credits"
+    "credits": "Credits",
+    "termsAndAgreement": "Regulamin i polityka prywatności"
   },
   "dashboard": {
     "title": "Konsola",

@@ -23,7 +23,7 @@ class RegistrationBloc extends BaseBloc {
       this._stepperBloc, 
       this._buttonStateBloc, 
       this._accountInfoStepBloc, 
-      this._registrationEndStepBloc, 
+      this._registrationEndStepBloc,
       this._deputiesChooserBloc
   ) {
     _listenToAccountInfoBloc();
@@ -69,6 +69,7 @@ class RegistrationBloc extends BaseBloc {
     _registrationEndStepBloc.headingLine.listen((event) {
       _stepperBloc.setHeaderHelperLine(event);
     });
+
   }
   
   void _listenToDeputiesChooserBloc() {

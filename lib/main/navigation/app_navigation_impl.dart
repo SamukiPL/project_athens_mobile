@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:project_athens/athens_core/auto_updater/auto_updater_module.dart';
+import 'package:project_athens/athens_core/chopper/network_module.dart';
 import 'package:project_athens/athens_core/i18n/localization_module.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
@@ -17,6 +18,7 @@ class AppNavigationImpl implements AppNavigation {
         MaterialPageRoute(
             builder: (context) => ModuleWidget(
                   providers: [
+                    NetworkModule(context),
                     AppNavigationModule(context),
                     LocalizationModule(context),
                     AutoUpdaterModule(context)
@@ -28,6 +30,17 @@ class AppNavigationImpl implements AppNavigation {
   @override
   void goToMainWidget(BuildContext context) {
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => MainWidget()));
+        context,
+        MaterialPageRoute(
+            builder: (context) => ModuleWidget(
+                providers: [
+                  NetworkModule(context),
+                  LocalizationModule(context),
+                  AutoUpdaterModule(context)
+                ],
+                child: MainWidget()
+            )
+        )
+    );
   }
 }

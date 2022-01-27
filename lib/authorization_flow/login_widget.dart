@@ -6,6 +6,7 @@ import 'package:project_athens/authorization_flow/injections/login_widget_module
 import 'package:project_athens/authorization_flow/navigation/login_navigation_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/login/login_screen.dart';
 import 'package:project_athens/authorization_flow/screens/registration/registration_screen.dart';
+import 'package:project_athens/authorization_flow/screens/reset_password/reset_password_screen.dart';
 import 'package:provider/provider.dart';
 
 class LoginWidget extends StatelessWidget {
@@ -28,12 +29,16 @@ class LoginWidget extends StatelessWidget {
       BuildContext context, LoginDestination destination) {
     switch (destination) {
       case LoginDestination.REGISTER:
-        return ModuleWidget(
-            providers: [NetworkModule(context)], child: RegistrationScreen());
+        // return ModuleWidget(
+        //     providers: [NetworkModule(context)], child: RegistrationScreen());
+        return RegistrationScreen();
       case LoginDestination.RESET_PASSWORD:
+        return ResetPasswordScreen();
+        break;
       default:
-        return ModuleWidget(
-            providers: [NetworkModule(context)], child: LoginScreen());
+        return LoginScreen();
+        // return ModuleWidget(
+        //     providers: [NetworkModule(context)], child: LoginScreen());
     }
   }
 }

@@ -28,7 +28,7 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
 
   NotificationsService();
 
-  late SavedNotification? _suspendedNotification;
+  SavedNotification? _suspendedNotification;
 
   ReplaySubject<void> _suspendedNavigationSource = ReplaySubject(maxSize: 1);
   Stream<void> get suspendedNavigationStream => _suspendedNavigationSource.stream;

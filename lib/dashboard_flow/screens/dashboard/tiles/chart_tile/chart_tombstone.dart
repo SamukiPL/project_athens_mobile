@@ -48,7 +48,7 @@ class ChartTombstoneState extends State<ChartTombstone> {
   List<charts.Series<ChartSeriesTombstoneModel, String>> _generateRandomData() {
     final random = new Random();
 
-    final models = List.generate(5, (int index) => ChartSeriesTombstoneModel('', 5 + random.nextInt(15)));
+    final models = List.generate(5, (int index) => ChartSeriesTombstoneModel('', 5 + random.nextInt(15 - 5)));
 
     final List<charts.Series<ChartSeriesTombstoneModel, String>> randomTombstoneSeries = [
       charts.Series<ChartSeriesTombstoneModel, String>(
@@ -57,7 +57,6 @@ class ChartTombstoneState extends State<ChartTombstone> {
           domainFn: (model, _) => ((_!) + 1).toString(),
           id: 'tombstone',
           colorFn: (model, int? index) => charts.ColorUtil.fromDartColor(Colors.black.withOpacity(0.05)),
-
       )
     ];
 

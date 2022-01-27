@@ -31,16 +31,24 @@ class AppLocalizationsGenerated {
     return words['universal']['choose'];
   }
 
+  String universalClose() {
+    return words['universal']['close'];
+  }
+
   String universalOk() {
     return words['universal']['ok'];
+  }
+
+  String universalAccept() {
+    return words['universal']['accept'];
   }
 
   String universalRetry() {
     return words['universal']['retry'];
   }
 
-  String universalClose() {
-    return words['universal']['close'];
+  String universalDownloadingData() {
+    return words['universal']['downloadingData'];
   }
 
   String universalNoDataDefaultText() {
@@ -75,6 +83,26 @@ class AppLocalizationsGenerated {
     return words['universal']['error']['unknown'];
   }
 
+  String universalAgreementOrTryToOpenInBrowser() {
+    return words['universal']['agreement']['orTryToOpenInBrowser'];
+  }
+
+  String universalAgreementYouMustAgreeOnTermsAndConditions() {
+    return words['universal']['agreement']['youMustAgreeOnTermsAndConditions'];
+  }
+
+  String universalAgreementTitle() {
+    return words['universal']['agreement']['title'];
+  }
+
+  String universalAgreementIAgree() {
+    return words['universal']['agreement']['IAgree'];
+  }
+
+  String universalAgreementTermsAndConditions() {
+    return words['universal']['agreement']['termsAndConditions'];
+  }
+
   String universalSource() {
     return words['universal']['source'];
   }
@@ -89,6 +117,11 @@ class AppLocalizationsGenerated {
 
   String universalUpdateCupertinoDialogTitle() {
     return words['universal']['update']['cupertinoDialog']['title'];
+  }
+
+  String universalUpdateCupertinoDialogImmediateUpdateTitle() {
+    return words['universal']['update']['cupertinoDialog']
+        ['immediateUpdateTitle'];
   }
 
   String universalUpdateCupertinoDialogButtonIgnore() {
@@ -106,11 +139,6 @@ class AppLocalizationsGenerated {
   String universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow() {
     return words['universal']['update']['cupertinoDialog']
         ['wouldYouLikeToUpdateAppNow'];
-  }
-
-  String universalUpdateCupertinoDialogImmediateUpdateTitle() {
-    return words['universal']['update']['cupertinoDialog']
-        ['immediateUpdateTitle'];
   }
 
   String universalUpdateCupertinoDialogImmediateUpdateContent() {
@@ -154,12 +182,12 @@ class AppLocalizationsGenerated {
     return words['login']['buttons']['register'];
   }
 
-  String loginButtonsForgot() {
-    return words['login']['buttons']['forgot'];
-  }
-
   String loginButtonsSignUp() {
     return words['login']['buttons']['signUp'];
+  }
+
+  String loginButtonsForgot() {
+    return words['login']['buttons']['forgot'];
   }
 
   String loginButtonsResetPassword() {
@@ -262,16 +290,16 @@ class AppLocalizationsGenerated {
     return words['login']['error']['passwordOrLoginDoesNotMatch'];
   }
 
+  String timelineTimelineNavTitle() {
+    return words['timeline']['timelineNavTitle'];
+  }
+
   String timelineVote() {
     return words['timeline']['vote'];
   }
 
   String timelineVoteNoAgenda() {
     return words['timeline']['voteNoAgenda'];
-  }
-
-  String timelineTimelineNavTitle() {
-    return words['timeline']['timelineNavTitle'];
   }
 
   String timelineVotingTypesResolutionProject() {
@@ -587,12 +615,12 @@ class AppLocalizationsGenerated {
     return words['more']['likeApplication'];
   }
 
-  String moreSupportUs() {
-    return words['more']['supportUs'];
-  }
-
   String moreCheckForUpdates() {
     return words['more']['checkForUpdates'];
+  }
+
+  String moreSupportUs() {
+    return words['more']['supportUs'];
   }
 
   String moreAppVersion() {
@@ -601,6 +629,10 @@ class AppLocalizationsGenerated {
 
   String moreCredits() {
     return words['more']['credits'];
+  }
+
+  String moreTermsAndAgreement() {
+    return words['more']['termsAndAgreement'];
   }
 
   String dashboardTitle() {

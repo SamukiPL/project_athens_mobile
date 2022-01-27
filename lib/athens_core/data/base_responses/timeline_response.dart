@@ -1,8 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:project_athens/athens_core/data/base_responses/speech_response.dart';
-import 'package:project_athens/athens_core/data/base_responses/voting_response.dart';
-import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
-import 'package:project_athens/athens_core/models/timeline_voting_model.dart';
 import 'package:project_athens/deputies_flow/data/network/response/deputy_vote_accuracy_response.dart';
 
 part 'timeline_response.g.dart';

@@ -17,7 +17,6 @@ class AutoUpdaterModule extends Module {
           final RemoteConfiguration _config = Provider.of<RemoteConfiguration>(context, listen: false);
           final AppLocalizations _localizations = Provider.of<AppLocalizations>(context, listen: false);
           final AutoUpdater _autoUpdater = AutoUpdater(_config, _localizations);
-          _autoUpdater.init(context);
           _autoUpdater.checkForUpdates();
 
           return _autoUpdater;

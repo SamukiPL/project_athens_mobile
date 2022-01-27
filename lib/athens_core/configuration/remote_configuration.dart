@@ -55,7 +55,7 @@ class RemoteConfiguration {
     final response = await _getRemoteConfigurationUseCase(BaseParams()).catchError((err) => print(err.toString()));
 
     if (response is Failure) { 
-      return;
+      return null;
     }
 
     final GetRemoteConfigurationConfig config = (response as Success<GetRemoteConfigurationResponse>).value.config;

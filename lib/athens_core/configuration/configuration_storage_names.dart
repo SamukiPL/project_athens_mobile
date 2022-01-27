@@ -6,4 +6,6 @@ class ConfigurationStorageNames {
   static const String DASHBOARD_TILES = "DASHBOARD_TILES";
 
   static const String NOTIFICATIONS = "NOTIFICATIONS";
+
+  static const String LAST_PRIVACY_POLICY_VERSION = "LAST_PRIVACY_POLICY_VERSION";
 }

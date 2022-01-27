@@ -3,10 +3,12 @@ import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/main/injections/app_navigation_module.dart';
+import 'package:project_athens/more_flow/injections/agreement_module.dart';
 import 'package:project_athens/more_flow/injections/credits_module.dart';
 import 'package:project_athens/more_flow/injections/hall_of_fame_module.dart';
 import 'package:project_athens/more_flow/injections/more_module.dart';
 import 'package:project_athens/more_flow/injections/settings_module.dart';
+import 'package:project_athens/more_flow/screens/agreement/agreement_screen.dart';
 import 'package:project_athens/more_flow/screens/credits/credits_screen.dart';
 import 'package:project_athens/more_flow/screens/hall_of_fame/hall_of_fame_screen.dart';
 import 'package:project_athens/more_flow/screens/more/more_screen.dart';
@@ -53,4 +55,15 @@ class MoreCreditsScreenDestination extends Destination<CreditsScreen> {
 
   @override getScreenModules(BuildContext context) =>
       [CreditsModule(context)];
+}
+
+class MoreAgreementScreenDestination extends Destination<AgreementScreen> {
+  MoreAgreementScreenDestination() : super(BottomNavItem.DASHBOARD);
+
+  @override
+  AgreementScreen getScreen() => AgreementScreen();
+
+  @override
+  List<Module> getScreenModules(BuildContext context) =>
+      [AgreementModule(context)];
 }
