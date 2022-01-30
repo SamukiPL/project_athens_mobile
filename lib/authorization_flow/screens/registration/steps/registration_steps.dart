@@ -11,8 +11,6 @@ extension RegistrationStepExt on RegistrationStep {
     switch(this) {
       case RegistrationStep.ACCOUNT_INFO:
         return "Dane Konta";
-      // case RegistrationStep.TERMS_AND_CONDITIONS:
-      //   return "Akceptacja regulaminu";
       case RegistrationStep.REGISTRATION_END:
         return "Dokończenie rejestracji";
       case RegistrationStep.DEPUTIES_CHOOSER:
@@ -26,8 +24,6 @@ extension RegistrationStepExt on RegistrationStep {
     switch(this) {
       case RegistrationStep.ACCOUNT_INFO:
         return "Następnie: Dokończenie rejestracji";
-      // case RegistrationStep.TERMS_AND_CONDITIONS:
-      //   return "Następnie: Dokończenie rejestracji";
       case RegistrationStep.REGISTRATION_END:
         return "Następnie: Wybór Posłów";
       default:
@@ -39,8 +35,6 @@ extension RegistrationStepExt on RegistrationStep {
     switch(this) {
       case RegistrationStep.ACCOUNT_INFO:
         return localization.getText().universalNext();
-      // case RegistrationStep.TERMS_AND_CONDITIONS:
-      //   return localization.getText().universalNext();
       case RegistrationStep.REGISTRATION_END:
         return localization.getText().loginButtonsSignUp();
       case RegistrationStep.DEPUTIES_CHOOSER:
@@ -54,8 +48,6 @@ extension RegistrationStepExt on RegistrationStep {
     switch(this) {
       case RegistrationStep.ACCOUNT_INFO:
         return localization.getText().universalCancel();
-      // case RegistrationStep.TERMS_AND_CONDITIONS:
-      //   return localization.getText().universalCancel();
       case RegistrationStep.REGISTRATION_END:
         return localization.getText().universalBack();
       case RegistrationStep.DEPUTIES_CHOOSER:
@@ -69,10 +61,8 @@ extension RegistrationStepExt on RegistrationStep {
     switch(this) {
       case RegistrationStep.DEPUTIES_CHOOSER:
         return Icons.search;
-        break;
       default:
         return null;
-        break;
     }
   }
 

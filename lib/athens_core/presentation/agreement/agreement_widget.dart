@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/presentation/agreement/agreement_bloc.dart';
+import 'package:project_athens/athens_core/presentation/agreement/agreement_widget_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 
 @immutable
-class Agreement extends StatelessWidget {
+class AgreementWidget extends StatelessWidget {
   final bool readonly;
   final bool shouldHandleAccept;
   final AppLocalizations l10n;
   final void Function(bool isConfirmed)? onConfirm;
   final void Function()? hasReachedEndFn;
-  final AgreementBloc bloc;
+  final AgreementWidgetBloc bloc;
 
-  Agreement({
+  AgreementWidget({
     required this.shouldHandleAccept,
     required this.bloc,
     required this.l10n,
@@ -24,9 +24,13 @@ class Agreement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// In case where bloc is created from module, after re-opening progress bar
+    /// will remain same as was previously, so we need to make sure it's 0%.
+    bloc.resetScrollProgress();
+
     return ChangeNotifierProvider.value(
       value: bloc,
-      child: Consumer<AgreementBloc>(
+      child: Consumer<AgreementWidgetBloc>(
         builder: (context, bloc, _) {
           if (bloc.isLoaded) {
             return _getPDFView(context);

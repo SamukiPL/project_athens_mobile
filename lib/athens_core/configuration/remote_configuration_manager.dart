@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/configuration/remote_configuration_manager_bloc.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/presentation/agreement/agreement.dart';
-import 'package:project_athens/athens_core/presentation/agreement/agreement_bloc.dart';
+import 'package:project_athens/athens_core/presentation/agreement/agreement_widget.dart';
+import 'package:project_athens/athens_core/presentation/agreement/agreement_widget_bloc.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:provider/provider.dart';
 
@@ -113,7 +113,7 @@ class _RemoteConfigurationManagerState extends State<RemoteConfigurationManager>
   }
 
   _handleShowUpdatePrivacyPolicyDialog(BuildContext context) {
-    final AgreementBloc _agreementBloc = Provider.of<AgreementBloc>(context);
+    final AgreementWidgetBloc _agreementBloc = Provider.of<AgreementWidgetBloc>(context);
     final AppLocalizations l10n = Provider.of<AppLocalizations>(context);
 
     return Scaffold(
@@ -121,7 +121,7 @@ class _RemoteConfigurationManagerState extends State<RemoteConfigurationManager>
         leading: null,
         title: Text(l10n.getText().universalAgreementTitle(), style: TextStyle(color: Colors.white),),
       ),
-      body: Agreement(
+      body: AgreementWidget(
           shouldHandleAccept: true,
           l10n: l10n,
           onConfirm: (bool confirmed) async {

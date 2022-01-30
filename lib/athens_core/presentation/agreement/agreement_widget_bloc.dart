@@ -8,7 +8,7 @@ import 'package:project_athens/athens_core/presentation/base_blocs/base_change_n
 import 'package:rxdart/rxdart.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class AgreementBloc extends BaseChangeNotifier with ConfigurationDelegate<DateTime, DateTime> {
+class AgreementWidgetBloc extends BaseChangeNotifier with ConfigurationDelegate<DateTime, DateTime> {
   static const String agreementUrl = 'https://swiadoma-demokracja.pl/swiadoma-demokracja-app-terms-agreement.html';
   static const String fallbackUrl = 'TODO?';
 
@@ -39,18 +39,26 @@ class AgreementBloc extends BaseChangeNotifier with ConfigurationDelegate<DateTi
   ScrollController get scrollController => _scrollController;
   Stream<double> get scrollProgressStream => _scrollProgressSource.stream;
 
-  AgreementBloc(this._getAgreementHtmlUseCase) {
+  AgreementWidgetBloc(this._getAgreementHtmlUseCase) {
     _fetchPDF();
     _listenOnScrollPosChange();
   }
 
   Future<void> tryToLaunchInBrowser() {
-    return launch(AgreementBloc.agreementUrl);
+    return launch(AgreementWidgetBloc.agreementUrl);
+  }
+
+  Future<void> updatePolicyVersion() async {
+    await updatePreference(DateTime.now());
+  }
+
+  void resetScrollProgress() {
+    _scrollProgressSource.add(0.0);
   }
 
   void _fetchPDF() async {
     final Result<String> response = await _getAgreementHtmlUseCase(
-        AgreementHtmlParams(AgreementBloc.agreementUrl)
+        AgreementHtmlParams(AgreementWidgetBloc.agreementUrl)
     );
 
     if (response is Success) {
@@ -76,16 +84,10 @@ class AgreementBloc extends BaseChangeNotifier with ConfigurationDelegate<DateTi
     });
   }
 
-  Future<void> updatePolicyVersion() async {
-    await updatePreference(DateTime.now());
-  }
-
   @override
   void dispose() {
     _scrollController.dispose();
 
     super.dispose();
   }
-
-
 }

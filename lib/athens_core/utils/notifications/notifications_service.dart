@@ -124,8 +124,6 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
   /// param bool removeNotRead decides whether remove ALL notifications if set true
   /// if set false then it will remove only read notifications
   Future<void> erase(final bool removeNotRead) async {
-    print(removeNotRead);
-
     if (removeNotRead) {
       notifications.clear();
     } else {

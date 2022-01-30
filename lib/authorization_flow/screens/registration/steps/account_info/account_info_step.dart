@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/presentation/agreement/agreement.dart';
-import 'package:project_athens/athens_core/presentation/agreement/agreement_bloc.dart';
+import 'package:project_athens/athens_core/presentation/agreement/agreement_widget.dart';
+import 'package:project_athens/athens_core/presentation/agreement/agreement_widget_bloc.dart';
 import 'package:project_athens/authorization_flow/navigation/login_navigation_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/account_info/account_info_form_key.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/account_info/account_info_step_bloc.dart';
@@ -101,10 +101,10 @@ class AccountInfoStep extends BaseRegistrationFormStep<AccountInfoStepBloc> {
                       recognizer: TapGestureRecognizer()..onTap = () {
                         showDialog(
                             context: context,
-                            builder: (_context) => Agreement(
+                            builder: (_context) => AgreementWidget(
                               shouldHandleAccept: false,
                               l10n: localization,
-                              bloc: Provider.of<AgreementBloc>(context, listen: false ),
+                              bloc: Provider.of<AgreementWidgetBloc>(context, listen: false ),
                               onConfirm: (bool newValue) => Navigator.pop(_context),
                             ),
                             barrierDismissible: true
