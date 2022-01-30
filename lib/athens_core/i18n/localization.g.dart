@@ -47,8 +47,20 @@ class AppLocalizationsGenerated {
     return words['universal']['noData']['defaultText'];
   }
 
+  String universalNoDataNoInformation() {
+    return words['universal']['noData']['noInformation'];
+  }
+
   String universalInformation() {
     return words['universal']['information'];
+  }
+
+  String universalExperimentalFeatureContent() {
+    return words['universal']['experimentalFeature']['content'];
+  }
+
+  String universalExperimentalFeatureTitle() {
+    return words['universal']['experimentalFeature']['title'];
   }
 
   String universalErrorNetwork() {
@@ -579,6 +591,91 @@ class AppLocalizationsGenerated {
 
   String moreCredits() {
     return words['more']['credits'];
+  }
+
+  String dashboardTitle() {
+    return words['dashboard']['title'];
+  }
+
+  String dashboardNearestMeetingTitle() {
+    return words['dashboard']['nearestMeeting']['title'];
+  }
+
+  String dashboardNearestMeetingAgenda() {
+    return words['dashboard']['nearestMeeting']['agenda'];
+  }
+
+  String dashboardNearestMeetingSupplementingAgenda() {
+    return words['dashboard']['nearestMeeting']['supplementingAgenda'];
+  }
+
+  String dashboardNearestMeetingToBeSettled() {
+    return words['dashboard']['nearestMeeting']['toBeSettled'];
+  }
+
+  String dashboardNearestMeetingParliamentMeeting() {
+    return words['dashboard']['nearestMeeting']['parliamentMeeting'];
+  }
+
+  String dashboardNotificationsTitle() {
+    return words['dashboard']['notifications']['title'];
+  }
+
+  String dashboardNotificationsFiltersSpeeches() {
+    return words['dashboard']['notifications']['filters']['speeches'];
+  }
+
+  String dashboardNotificationsFiltersVotes() {
+    return words['dashboard']['notifications']['filters']['votes'];
+  }
+
+  String dashboardNotificationsFiltersNotRead() {
+    return words['dashboard']['notifications']['filters']['notRead'];
+  }
+
+  String dashboardNotificationsRemoveAllDialogTitle() {
+    return words['dashboard']['notifications']['removeAllDialog']['title'];
+  }
+
+  String dashboardNotificationsRemoveAllDialogContent() {
+    return words['dashboard']['notifications']['removeAllDialog']['content'];
+  }
+
+  String dashboardNotificationsRemoveAllDialogRemoveNotRead() {
+    return words['dashboard']['notifications']['removeAllDialog']
+        ['removeNotRead'];
+  }
+
+  String dashboardNotificationsRemoveAllDialogActionsYes() {
+    return words['dashboard']['notifications']['removeAllDialog']['actions']
+        ['yes'];
+  }
+
+  String dashboardNotificationsRemoveAllDialogActionsNo() {
+    return words['dashboard']['notifications']['removeAllDialog']['actions']
+        ['no'];
+  }
+
+  String dashboardTilesNearestMeetingTileMeetingIsToday() {
+    return words['dashboard']['tiles']['nearestMeetingTile']['meetingIsToday'];
+  }
+
+  String dashboardTilesNearestMeetingTileMeetingWasYesterday() {
+    return words['dashboard']['tiles']['nearestMeetingTile']
+        ['meetingWasYesterday'];
+  }
+
+  String dashboardTilesNearestMeetingTileMeetingIsTomorrow() {
+    return words['dashboard']['tiles']['nearestMeetingTile']
+        ['meetingIsTomorrow'];
+  }
+
+  String dashboardTilesNearestMeetingTileMeetingInDays() {
+    return words['dashboard']['tiles']['nearestMeetingTile']['meetingInDays'];
+  }
+
+  String dashboardTilesNearestMeetingTileDays() {
+    return words['dashboard']['tiles']['nearestMeetingTile']['days'];
   }
 
   String settingsSettingsTitle() {

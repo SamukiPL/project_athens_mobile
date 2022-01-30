@@ -8,8 +8,8 @@ class Configuration {
     _init();
   }
 
-  BehaviorSubject<bool> _showTechnicalDataSource = new BehaviorSubject<bool>.seeded(false);
-  BehaviorSubject<bool> _wakelockOnTimelineSource = new BehaviorSubject<bool>.seeded(false);
+  BehaviorSubject<bool> _showTechnicalDataSource = BehaviorSubject<bool>.seeded(false);
+  BehaviorSubject<bool> _wakelockOnTimelineSource = BehaviorSubject<bool>.seeded(false);
 
   final storage = new FlutterSecureStorage();
   Stream<bool> get showTechnicalData => _showTechnicalDataSource.stream.shareValue();
@@ -37,5 +37,6 @@ class Configuration {
 
   void dispose() {
     _showTechnicalDataSource.close();
-}
+    _wakelockOnTimelineSource.close();
+  }
 }

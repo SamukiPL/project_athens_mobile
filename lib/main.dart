@@ -7,24 +7,33 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:project_athens/athens_core/i18n/localization_delegate.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/utils/firebase/firebase_messaging_module.dart';
+import 'package:project_athens/athens_core/utils/notifications/notifications_service.dart';
 import 'package:project_athens/main/firebase/firebase_messages.dart';
 import 'package:project_athens/main/injections/app_module.dart';
 import 'package:project_athens/main/injections/app_navigation_module.dart';
 import 'package:project_athens/main/injections/main_widget_module.dart';
 import 'package:project_athens/splash_screen/splash_screen_widget.dart';
-
 import 'athens_core/configuration/configuration_module.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
-  print('Handling a background message ${message.messageId}');
+  Fimber.d('Handling a background message ${message.messageId}');
+
+  if (NotificationsService.instance == null) {
+    await NotificationsService.initialize();
+  }
+
+  NotificationsService.instance!.addNotificationFromBackgroundRemoteMessage(message);
 }
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await NotificationsService.initialize(isInitializedFromApp: true);
+
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
   FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
@@ -39,10 +48,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     _firebaseMessages.setupMessaging();
 
-    // we have to eagerly create auto updater due to
-    // splash screen bloc could access it immediately
-    // after it starts to checking direction
     Fimber.plantTree(DebugBufferTree());
+    
     return ModuleWidget(
       providers: [
         AppModule(context),

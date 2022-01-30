@@ -38,5 +38,4 @@ class AppLocalizations {
   AppLocalizationsGenerated call() {
     return _generated;
   }
-
 }

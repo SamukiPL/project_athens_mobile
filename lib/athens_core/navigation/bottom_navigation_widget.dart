@@ -20,6 +20,10 @@ class BottomNavigationWidget extends StatelessWidget {
         },
         items: [
           BottomNavigationBarItem(
+              icon: Icon(Icons.dashboard),
+              label: localizations.getText().dashboardTitle()
+          ),
+          BottomNavigationBarItem(
               icon: Icon(Icons.timeline),
               label: localizations.getText().timelineTimelineNavTitle()
           ),
@@ -34,10 +38,6 @@ class BottomNavigationWidget extends StatelessWidget {
           BottomNavigationBarItem(
               icon: Icon(MdiIcons.vote),
               label: localizations.getText().votingsVotingListTitle()
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.more_horiz),
-              label: localizations.getText().moreTitle()
           ),
         ],
       ),

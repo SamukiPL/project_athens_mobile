@@ -9,9 +9,14 @@
     "ok": "Ok",
     "retry": "Spróbuj ponownie",
     "noData": {
-      "defaultText": "Brak danych"
+      "defaultText": "Brak danych",
+      "noInformation": "Brak informacji"
     },
     "information": "Informacja",
+    "experimentalFeature": {
+      "content": "Dokładamy wszelkich starań, żeby nasze funkcjonalności działały jak najbardziej dokładnie, aczkolwiek mogą odbiegać od rzeczywistości, w razie znalazienia błędu prosimy o kontakt. Statystyki tworzy nasz automat, który dokonuje aktualizacje w określonym odstępie czasowym, z tego względu mogą występować niedokładności.",
+      "title": "Eksperymentalna funkcjonalność"
+    },
     "error": {
       "network": "Coś poszło nie tak. Proszę sprawdzić swoje połączenie z internetem.",
       "server": "Serwer nie odpowiada. Prosimy spróbować później.",
@@ -184,6 +189,42 @@
     "supportUs": "Wesprzyj nas ❤",
     "appVersion": "Wersja aplikacji",
     "credits": "Credits"
+  },
+  "dashboard": {
+    "title": "Konsola",
+    "nearestMeeting": {
+      "title": "Najbliższe posiedzenie",
+      "agenda": "Porządek obrad",
+      "supplementingAgenda": "Uzupełnienie porządku obrad",
+      "toBeSettled": "Do rozstrzygnięcia",
+      "parliamentMeeting": "Posiedzenie sejmu"
+    },
+    "notifications": {
+      "title": "Powiadomienia",
+      "filters": {
+        "speeches": "Przemowy",
+        "votes": "Głosowania",
+        "notRead": "Nieprzeczytane"
+      },
+      "removeAllDialog": {
+        "title": "Wyczyszczenie odczytanych powiadomień",
+        "content": "Czy napewno chcesz usunąć wszystkie odczytane powiadomienia?",
+        "removeNotRead": "Usuń także nieprzeczytane powiadomienia",
+        "actions": {
+          "yes": "Tak",
+          "no": "Nie"
+        }
+      }
+    },
+    "tiles": {
+      "nearestMeetingTile": {
+        "meetingIsToday": "Na dzisiaj jest zaplanowane posiedzenie sejmu",
+        "meetingWasYesterday": "Posiedzenie sejmu odbyło sie wczoraj",
+        "meetingIsTomorrow": "Posiedzenie sejmu jest zaplanowane na jutro",
+        "meetingInDays": "Najbliższe posiedzenie sejmu jest za",
+        "days": "dni"
+      }
+    }
   },
   "settings": {
     "settingsTitle": "Ustawienia",

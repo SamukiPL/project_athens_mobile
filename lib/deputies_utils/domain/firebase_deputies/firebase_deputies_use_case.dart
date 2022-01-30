@@ -14,5 +14,4 @@ class FirebaseDeputiesUseCase extends BaseUseCase<BaseDeputiesParams> {
   Future<Result<List<SubscribedDeputyModel>>> call(BaseDeputiesParams params) {
     return _firebaseDeputiesRepository.initFirebaseDeputies(params);
   }
-
 }

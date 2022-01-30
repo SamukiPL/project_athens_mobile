@@ -1,3 +1,13 @@
+class ParliamentMeetingCacheError implements Exception {
+  final String parliamentMeetingId;
+  ParliamentMeetingCacheError(this.parliamentMeetingId);
+
+  @override
+  String toString() {
+    return "ParliamentMeetingCacheError: There was an error while fetching parliament meeting with id: " + parliamentMeetingId;
+  }
+}
+
 class ParliamentClubsCacheError implements Exception {
   @override
   String toString() {

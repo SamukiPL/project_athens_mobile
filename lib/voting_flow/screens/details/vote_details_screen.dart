@@ -97,7 +97,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
     return Container(
         padding: EdgeInsets.only(bottom: 20),
         child: Text(
-          DateFormat("HH:mm d.MM.y", "pl").format(_voteModel.voteAt),
+          DateFormat("HH:mm dd.MM.y", "pl").format(_voteModel.voteAt),
           style: TextStyle(
             color: theme.primaryColor,
             fontSize: 14,
@@ -228,7 +228,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
 
   Widget buildDescription(ThemeData theme) {
     return Container(
-        margin: EdgeInsets.fromLTRB(8, 16, 8, 16),
+        margin: EdgeInsets.fromLTRB(8, 8, 8, 8),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -371,9 +371,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
         child: Consumer<VotingModel?>(
             builder: (context, model, _) =>
                 model != null ?
-                FullCard(
-                    cardPadding: EdgeInsets.only(top: 8, bottom: 8, left: 8, right: 8),
-                    child: Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Wrap(
@@ -382,7 +380,6 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
                             .map((e) => buildDeputyVotingView(e, context, theme))
                             .toList()),
                   ],
-                )
             ) : Container()
         )
     );
@@ -391,7 +388,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
   Widget buildDeputyVotingView(
       VoteModel voting, BuildContext context, ThemeData theme) {
     final deputiesCache = Provider.of<DeputiesCache>(context);
-    final viewWidth = MediaQuery.of(context).size.width;
+    final viewWidth = MediaQuery.of(context).size.width - 16;
     final localizations = Provider.of<AppLocalizations>(context);
     String voteTypeStr;
     Color borderColor;
@@ -417,7 +414,6 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
     final circleSize = viewWidth * 0.25;
 
     final foundDeputy = deputiesCache.getDeputyModelById(voting.cadencyDeputy);
-    // return Container();
     return FutureProvider(
       initialData: null,
       create: (context) => foundDeputy,
@@ -488,6 +484,5 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
 
   @override
   Widget? buildFloatingActionButton(
-          BuildContext context, VoteDetailsBloc bloc) =>
-      null;
+          BuildContext context, VoteDetailsBloc bloc) => null;
 }

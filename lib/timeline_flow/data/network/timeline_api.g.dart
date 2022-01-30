@@ -14,19 +14,6 @@ class _TimelineApi implements TimelineApi {
   String? baseUrl;
 
   @override
-  Future<void> test() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    await _dio.fetch<void>(_setStreamType<void>(
-        Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-            .compose(_dio.options, 'https://google.com',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    return null;
-  }
-
-  @override
   Future<MeetingsResponse> getMeetingsDates(cadency) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

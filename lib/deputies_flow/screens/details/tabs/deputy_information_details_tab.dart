@@ -5,6 +5,7 @@ import 'package:flutter_scatter/flutter_scatter.dart';
 import 'package:project_athens/athens_core/data/word_model/word_model.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
+import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/async_once/async_once.dart';
 import 'package:project_athens/athens_core/presentation/db_source/db_source.dart';
 import 'package:project_athens/athens_core/presentation/full_card/full_card.dart';
@@ -141,10 +142,8 @@ class DeputyInformationDetailsTab extends StatelessWidget {
   }
 
   Widget buildDetailedInfoBlock(AppLocalizations localizations, ThemeData theme, DeputyFull deputyFull) {
-    final cv = deputyFull.getDeputyCV();
-
-    final finishedSchools = cv.finishedSchools.trim();
-    final experience = cv.parliamentExperience.trim();
+    final finishedSchools = deputyFull.getFinishedSchools(localizations);
+    final experience = deputyFull.getParliamentExperience(localizations);
 
     return
       Column(
@@ -180,11 +179,9 @@ class DeputyInformationDetailsTab extends StatelessWidget {
               memCacheHeight: 700,
               memCacheWidth: 700,
               alignment: Alignment.center,
-              // )
             ),
           ),
           Expanded(
-              // flex: 7,
               child: FractionallySizedBox(
                 alignment: Alignment.topLeft,
                 widthFactor: barWidth,
@@ -194,14 +191,16 @@ class DeputyInformationDetailsTab extends StatelessWidget {
                     color: theme.primaryColor,
                   ),
                   child: Center(
-                    child: Text(accuracyPercentage, style: TextStyle(color: Colors.white),),
+                    child: Text(
+                      accuracyPercentage, style: TextStyle(color: Colors.white),
+                    ),
                   ),
-                ),
+                )
               )
-          ),
-        ],
-      )
-    );
+            ),
+          ],
+        )
+      );
   }
 
   Widget buildVoteAccuracyTable(List<ClubVoteAccuracy> voteAccuracy, AppLocalizations localizations, ThemeData theme) {

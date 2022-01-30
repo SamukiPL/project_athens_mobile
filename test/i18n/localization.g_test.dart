@@ -66,9 +66,24 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalNoDataDefaultText != "" && universalNoDataDefaultText != null); 
   }); 
  
+  test("All methods for $locale universalNoDataNoInformation", () async {
+    String universalNoDataNoInformation = localization.universalNoDataNoInformation();
+    expect(true, universalNoDataNoInformation != "" && universalNoDataNoInformation != null); 
+  }); 
+ 
   test("All methods for $locale universalInformation", () async {
     String universalInformation = localization.universalInformation();
     expect(true, universalInformation != "" && universalInformation != null); 
+  }); 
+ 
+  test("All methods for $locale universalExperimentalFeatureContent", () async {
+    String universalExperimentalFeatureContent = localization.universalExperimentalFeatureContent();
+    expect(true, universalExperimentalFeatureContent != "" && universalExperimentalFeatureContent != null); 
+  }); 
+ 
+  test("All methods for $locale universalExperimentalFeatureTitle", () async {
+    String universalExperimentalFeatureTitle = localization.universalExperimentalFeatureTitle();
+    expect(true, universalExperimentalFeatureTitle != "" && universalExperimentalFeatureTitle != null); 
   }); 
  
   test("All methods for $locale universalErrorNetwork", () async {
@@ -729,6 +744,106 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale moreCredits", () async {
     String moreCredits = localization.moreCredits();
     expect(true, moreCredits != "" && moreCredits != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardTitle", () async {
+    String dashboardTitle = localization.dashboardTitle();
+    expect(true, dashboardTitle != "" && dashboardTitle != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNearestMeetingTitle", () async {
+    String dashboardNearestMeetingTitle = localization.dashboardNearestMeetingTitle();
+    expect(true, dashboardNearestMeetingTitle != "" && dashboardNearestMeetingTitle != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNearestMeetingAgenda", () async {
+    String dashboardNearestMeetingAgenda = localization.dashboardNearestMeetingAgenda();
+    expect(true, dashboardNearestMeetingAgenda != "" && dashboardNearestMeetingAgenda != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNearestMeetingSupplementingAgenda", () async {
+    String dashboardNearestMeetingSupplementingAgenda = localization.dashboardNearestMeetingSupplementingAgenda();
+    expect(true, dashboardNearestMeetingSupplementingAgenda != "" && dashboardNearestMeetingSupplementingAgenda != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNearestMeetingToBeSettled", () async {
+    String dashboardNearestMeetingToBeSettled = localization.dashboardNearestMeetingToBeSettled();
+    expect(true, dashboardNearestMeetingToBeSettled != "" && dashboardNearestMeetingToBeSettled != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNearestMeetingParliamentMeeting", () async {
+    String dashboardNearestMeetingParliamentMeeting = localization.dashboardNearestMeetingParliamentMeeting();
+    expect(true, dashboardNearestMeetingParliamentMeeting != "" && dashboardNearestMeetingParliamentMeeting != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsTitle", () async {
+    String dashboardNotificationsTitle = localization.dashboardNotificationsTitle();
+    expect(true, dashboardNotificationsTitle != "" && dashboardNotificationsTitle != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsFiltersSpeeches", () async {
+    String dashboardNotificationsFiltersSpeeches = localization.dashboardNotificationsFiltersSpeeches();
+    expect(true, dashboardNotificationsFiltersSpeeches != "" && dashboardNotificationsFiltersSpeeches != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsFiltersVotes", () async {
+    String dashboardNotificationsFiltersVotes = localization.dashboardNotificationsFiltersVotes();
+    expect(true, dashboardNotificationsFiltersVotes != "" && dashboardNotificationsFiltersVotes != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsFiltersNotRead", () async {
+    String dashboardNotificationsFiltersNotRead = localization.dashboardNotificationsFiltersNotRead();
+    expect(true, dashboardNotificationsFiltersNotRead != "" && dashboardNotificationsFiltersNotRead != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsRemoveAllDialogTitle", () async {
+    String dashboardNotificationsRemoveAllDialogTitle = localization.dashboardNotificationsRemoveAllDialogTitle();
+    expect(true, dashboardNotificationsRemoveAllDialogTitle != "" && dashboardNotificationsRemoveAllDialogTitle != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsRemoveAllDialogContent", () async {
+    String dashboardNotificationsRemoveAllDialogContent = localization.dashboardNotificationsRemoveAllDialogContent();
+    expect(true, dashboardNotificationsRemoveAllDialogContent != "" && dashboardNotificationsRemoveAllDialogContent != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsRemoveAllDialogRemoveNotRead", () async {
+    String dashboardNotificationsRemoveAllDialogRemoveNotRead = localization.dashboardNotificationsRemoveAllDialogRemoveNotRead();
+    expect(true, dashboardNotificationsRemoveAllDialogRemoveNotRead != "" && dashboardNotificationsRemoveAllDialogRemoveNotRead != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsRemoveAllDialogActionsYes", () async {
+    String dashboardNotificationsRemoveAllDialogActionsYes = localization.dashboardNotificationsRemoveAllDialogActionsYes();
+    expect(true, dashboardNotificationsRemoveAllDialogActionsYes != "" && dashboardNotificationsRemoveAllDialogActionsYes != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardNotificationsRemoveAllDialogActionsNo", () async {
+    String dashboardNotificationsRemoveAllDialogActionsNo = localization.dashboardNotificationsRemoveAllDialogActionsNo();
+    expect(true, dashboardNotificationsRemoveAllDialogActionsNo != "" && dashboardNotificationsRemoveAllDialogActionsNo != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardTilesNearestMeetingTileMeetingIsToday", () async {
+    String dashboardTilesNearestMeetingTileMeetingIsToday = localization.dashboardTilesNearestMeetingTileMeetingIsToday();
+    expect(true, dashboardTilesNearestMeetingTileMeetingIsToday != "" && dashboardTilesNearestMeetingTileMeetingIsToday != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardTilesNearestMeetingTileMeetingWasYesterday", () async {
+    String dashboardTilesNearestMeetingTileMeetingWasYesterday = localization.dashboardTilesNearestMeetingTileMeetingWasYesterday();
+    expect(true, dashboardTilesNearestMeetingTileMeetingWasYesterday != "" && dashboardTilesNearestMeetingTileMeetingWasYesterday != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardTilesNearestMeetingTileMeetingIsTomorrow", () async {
+    String dashboardTilesNearestMeetingTileMeetingIsTomorrow = localization.dashboardTilesNearestMeetingTileMeetingIsTomorrow();
+    expect(true, dashboardTilesNearestMeetingTileMeetingIsTomorrow != "" && dashboardTilesNearestMeetingTileMeetingIsTomorrow != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardTilesNearestMeetingTileMeetingInDays", () async {
+    String dashboardTilesNearestMeetingTileMeetingInDays = localization.dashboardTilesNearestMeetingTileMeetingInDays();
+    expect(true, dashboardTilesNearestMeetingTileMeetingInDays != "" && dashboardTilesNearestMeetingTileMeetingInDays != null); 
+  }); 
+ 
+  test("All methods for $locale dashboardTilesNearestMeetingTileDays", () async {
+    String dashboardTilesNearestMeetingTileDays = localization.dashboardTilesNearestMeetingTileDays();
+    expect(true, dashboardTilesNearestMeetingTileDays != "" && dashboardTilesNearestMeetingTileDays != null); 
   }); 
  
   test("All methods for $locale settingsSettingsTitle", () async {

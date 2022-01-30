@@ -31,39 +31,41 @@ class SubscribedDeputiesCache {
       return awaitingFuture!;
     }
 
-    awaitingFuture = _firebaseDeputiesUseCase(BaseDeputiesParams(9))
-        .whenComplete(() {
-          awaitingFuture = null;
-        }).onSuccessThen((result) {
-          final subscribedDeputies = result.value;
+    awaitingFuture =
+        _firebaseDeputiesUseCase(BaseDeputiesParams(9)).whenComplete(() {
+      awaitingFuture = null;
+    }).onSuccessThen((result) {
+      final subscribedDeputies = result.value;
 
-          subscribedDeputies.forEach((subscribedDeputy) => subscribedDeputy
-              .notifications
-              .updateCallback = () => _updateSubscribedDeputy(subscribedDeputy));
+      subscribedDeputies.forEach((subscribedDeputy) => subscribedDeputy
+          .notifications
+          .updateCallback = () => _updateSubscribedDeputy(subscribedDeputy));
 
-          _cachedSubscribedDeputies = subscribedDeputies;
+      _cachedSubscribedDeputies = subscribedDeputies;
 
-          return Success(subscribedDeputies);
-        });
+      return Success(subscribedDeputies);
+    });
 
     return awaitingFuture!;
   }
 
-  Future<DeputyModel> getDeputyModelById(String id) =>
+  Future<SubscribedDeputyModel> getDeputyModelById(String id) =>
       _getDeputyModel((model) => model.id == id);
 
-  Future<DeputyModel> getDeputyModelByCardId(int cardId) =>
+  Future<SubscribedDeputyModel> getDeputyModelByCardId(int cardId) =>
       _getDeputyModel((model) => model.cardId == cardId);
 
-  Future<List<SubscribedDeputyModel>> getSubsribedDeputies() => subscribedDeputies.onSuccessThen((success) {
-    return success.value
-        .where((element) => element.notifications.isSubscribed)
-        .toList();
-  }).onError((error, stackTrace) => List.empty());
+  Future<List<SubscribedDeputyModel>> getSubsribedDeputies() =>
+      subscribedDeputies.onSuccessThen((success) {
+        return success.value
+            .where((element) => element.notifications.isSubscribed)
+            .toList();
+      }).onError((error, stackTrace) => List.empty());
 
-  Future<DeputyModel> _getDeputyModel(
-      bool Function(DeputyModel) condition) => subscribedDeputies
-      .onSuccessThen((success) => success.value.firstWhere(condition));
+  Future<SubscribedDeputyModel> _getDeputyModel(
+          bool Function(DeputyModel) condition) =>
+      subscribedDeputies
+          .onSuccessThen((success) => success.value.firstWhere(condition));
 
   void _updateSubscribedDeputy(SubscribedDeputyModel subscribedDeputy) async {
     print('about to perform save operation');
