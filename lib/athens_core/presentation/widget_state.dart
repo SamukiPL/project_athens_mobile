@@ -41,33 +41,13 @@ class ErrorState extends WidgetState {
 
 extension StateExceptionExtension on Exception {
 
-  ErrorType parseServerError() {
-    DioError err = this as DioError;
-
-    switch (err.response?.statusCode) {
-      case 401: return ErrorType.AUTH;
-      default: return ErrorType.SERVER;
-    }
-  }
-
   ErrorType getErrorType() {
-    if (this is DioError) {
-      DioError dioError = this as DioError;
-      switch(dioError.type) {
-        case DioErrorType.receiveTimeout:
-        case DioErrorType.connectTimeout:
-        case DioErrorType.sendTimeout:
-        case DioErrorType.other:
-          return ErrorType.NETWORK;
-          break;
-        case DioErrorType.response:
-          return parseServerError();
-        case DioErrorType.cancel:
-        return ErrorType.SERVER;
-          break;
-      }
+    if (this is NetworkException) {
+      return ErrorType.NETWORK;
     } else if (this is AuthException) {
       return ErrorType.AUTH;
+    } else if (this is ServerException) {
+      return ErrorType.SERVER;
     }
     return ErrorType.UNKNOWN;
   }
