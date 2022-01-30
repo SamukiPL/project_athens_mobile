@@ -41,6 +41,7 @@ class SplashScreenBloc extends BaseBloc {
         await _authRepository.refreshTokens(tokens.refreshToken);
       }
       await _subscribedDeputiesCache.subscribedDeputies;
+      _direction.add(SplashDirection.MAIN);
     } on DioError {
       _authStorage.removeTokens();
       _direction.add(SplashDirection.LOGIN);
