@@ -13,6 +13,7 @@ import 'package:project_athens/main/presentation/main_widget.dart';
 class AppNavigationImpl implements AppNavigation {
   @override
   void goToLoginWidget(BuildContext context) {
+    Navigator.of(context).popUntil((route) => route.isFirst);
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
