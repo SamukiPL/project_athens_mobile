@@ -100,32 +100,47 @@ class ChartTile<SERIES_DATA, FROM_DATA_STREAM> extends SimpleTile {
             border: Border.all(color: color, width: 2)
         ),
         child: ClipOval(
-          child: CachedNetworkImage(
-            imageUrl: deputy.thumbnailUrl,
-            filterQuality: FilterQuality.high,
-            fit: BoxFit.cover,
-            placeholder: (context, url) => CircularProgressIndicator(),
-            errorWidget: (context, url, error) =>
-                Container(
-                  padding: EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black, width: 2)
-                  ),
-                  child: Center(
-                      child: Text(
-                        deputy.name,
-                        style: TextStyle(
-                            fontSize: 12
+          child: deputy.thumbnailUrl != null
+              ? CachedNetworkImage(
+                  imageUrl:  deputy.thumbnailUrl!,
+                  filterQuality: FilterQuality.high,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  errorWidget: (context, url, error) =>
+                      Container(
+                        padding: EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black, width: 2)
                         ),
-                      )
-                  ),
+                        child: Center(
+                            child: Text(
+                              deputy.name,
+                              style: TextStyle(
+                                  fontSize: 12
+                              ),
+                            )
+                        ),
+                      ),
+                  width: 25,
+                  height: 25,
+                  memCacheHeight: 700,
+                  memCacheWidth: 700,
+                  alignment: Alignment.center,
+                )
+              : Container(
+                padding: EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 2)
                 ),
-            width: 25,
-            height: 25,
-            memCacheHeight: 700,
-            memCacheWidth: 700,
-            alignment: Alignment.center,
-          ),
+                child: Center(
+                    child: Text(
+                      deputy.name,
+                      style: TextStyle(
+                          fontSize: 12
+                      ),
+                    )
+                ),
+              ),
         )
     );
   }

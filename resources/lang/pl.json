@@ -7,7 +7,9 @@
     "choose": "Wybierz",
     "close": "Zamknij",
     "ok": "Ok",
+    "accept": "Akceptuje",
     "retry": "Spróbuj ponownie",
+    "downloadingData": "Pobieranie...",
     "noData": {
       "defaultText": "Brak danych",
       "noInformation": "Brak informacji"
@@ -22,16 +24,25 @@
       "server": "Serwer nie odpowiada. Prosimy spróbować później.",
       "unknown": "Coś poszło nie tak, prosimy spróbować później."
     },
+    "agreement": {
+      "orTryToOpenInBrowser": "Spróbuj otworzyć w przeglądarce.",
+      "youMustAgreeOnTermsAndConditions": "Musisz zaakceptować regulamin oraz politykę prywatności",
+      "title": "Regulamin aplikacji",
+      "IAgree": "Przeczytałem oraz akceptuje",
+      "termsAndConditions": "regulamin oraz politykę prywatności."
+    },
     "source": "Źródło danych",
     "createdAt": "Data utworzenia",
     "updatedAt": "Data aktualizacji",
     "update": {
       "cupertinoDialog": {
         "title": "Zaktualizować aplikacje?",
+        "immediateUpdateTitle":  "Wymagana aktualizacja aplikacji",
         "buttonIgnore": "Zignoruj",
         "buttonLater": "Później",
         "buttonUpdateNow": "Aktualuzuj",
-        "wouldYouLikeToUpdateAppNow": "Chcesz zaktualizować aplikacje teraz?"
+        "wouldYouLikeToUpdateAppNow": "Chcesz zaktualizować aplikacje teraz?",
+        "immediateUpdateContent": "Aplikacja musi zostać zaktualizowana w celu poprawnego działania, w innym wypadku aplikacja przestanie działać"
       }
     }
   },
@@ -188,7 +199,8 @@
     "checkForUpdates": "Sprawdź aktualizacje",
     "supportUs": "Wesprzyj nas ❤",
     "appVersion": "Wersja aplikacji",
-    "credits": "Credits"
+    "credits": "Credits",
+    "termsAndAgreement": "Regulamin i polityka prywatności"
   },
   "dashboard": {
     "title": "Konsola",

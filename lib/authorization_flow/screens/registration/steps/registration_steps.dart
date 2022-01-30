@@ -11,16 +11,12 @@ extension RegistrationStepExt on RegistrationStep {
     switch(this) {
       case RegistrationStep.ACCOUNT_INFO:
         return "Dane Konta";
-        break;
       case RegistrationStep.REGISTRATION_END:
         return "Dokończenie rejestracji";
-        break;
       case RegistrationStep.DEPUTIES_CHOOSER:
         return "Wybór Posłów";
-        break;
       default:
         throw ArgumentError("Should never occur");
-        break;
     }
   }
 
@@ -28,13 +24,10 @@ extension RegistrationStepExt on RegistrationStep {
     switch(this) {
       case RegistrationStep.ACCOUNT_INFO:
         return "Następnie: Dokończenie rejestracji";
-        break;
       case RegistrationStep.REGISTRATION_END:
         return "Następnie: Wybór Posłów";
-        break;
       default:
         return "";
-        break;
     }
   }
 
@@ -42,16 +35,12 @@ extension RegistrationStepExt on RegistrationStep {
     switch(this) {
       case RegistrationStep.ACCOUNT_INFO:
         return localization.getText().universalNext();
-        break;
       case RegistrationStep.REGISTRATION_END:
         return localization.getText().loginButtonsSignUp();
-        break;
       case RegistrationStep.DEPUTIES_CHOOSER:
         return localization.getText().universalChoose();
-        break;
       default:
         throw ArgumentError("Should never occur");
-        break;
     }
   }
 
@@ -59,16 +48,12 @@ extension RegistrationStepExt on RegistrationStep {
     switch(this) {
       case RegistrationStep.ACCOUNT_INFO:
         return localization.getText().universalCancel();
-        break;
       case RegistrationStep.REGISTRATION_END:
         return localization.getText().universalBack();
-        break;
       case RegistrationStep.DEPUTIES_CHOOSER:
         return localization.getText().universalSkip();
-        break;
       default:
         throw ArgumentError("Should never occur");
-        break;
     }
   }
 
@@ -76,10 +61,8 @@ extension RegistrationStepExt on RegistrationStep {
     switch(this) {
       case RegistrationStep.DEPUTIES_CHOOSER:
         return Icons.search;
-        break;
       default:
         return null;
-        break;
     }
   }
 

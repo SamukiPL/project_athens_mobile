@@ -37,21 +37,25 @@ class DeputyVoteAccuracyTable extends StatelessWidget with RedirectionDelegate {
       alignment: Alignment.center,
       width: 50,
       height: 50,
-      child: CachedNetworkImage(
-        filterQuality: FilterQuality.high,
-        imageUrl: clubVoteAccuracy.parliamentClub?.imageSrc,
-        placeholder: (context, url) => CircularProgressIndicator(),
-        errorWidget: (context, url, error) =>
-            Center(
-              child: Text(clubVoteAccuracy.parliamentClub?.shortName ??
-                  "Err: unkown club"),
-            ),
-        width: 40,
-        height: 40,
-        memCacheHeight: 700,
-        memCacheWidth: 700,
-        alignment: Alignment.center,
-      ),
+      child: clubVoteAccuracy.parliamentClub?.imageSrc != null
+        ? CachedNetworkImage(
+            filterQuality: FilterQuality.high,
+            imageUrl: clubVoteAccuracy.parliamentClub!.imageSrc!,
+            placeholder: (context, url) => CircularProgressIndicator(),
+            errorWidget: (context, url, error) =>
+                Center(
+                  child: Text(clubVoteAccuracy.parliamentClub?.shortName ??
+                      "Err: unkown club"),
+                ),
+            width: 40,
+            height: 40,
+            memCacheHeight: 700,
+            memCacheWidth: 700,
+            alignment: Alignment.center,
+        ) : Center(
+          child: Text(clubVoteAccuracy.parliamentClub?.shortName ??
+              "Err: unkown club"),
+        ),
     );
   }
 

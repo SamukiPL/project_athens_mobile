@@ -28,7 +28,7 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
 
   NotificationsService();
 
-  late SavedNotification? _suspendedNotification;
+  SavedNotification? _suspendedNotification;
 
   ReplaySubject<void> _suspendedNavigationSource = ReplaySubject(maxSize: 1);
   Stream<void> get suspendedNavigationStream => _suspendedNavigationSource.stream;
@@ -124,8 +124,6 @@ class NotificationsService with ConfigurationDelegate<List<SavedNotification>, S
   /// param bool removeNotRead decides whether remove ALL notifications if set true
   /// if set false then it will remove only read notifications
   Future<void> erase(final bool removeNotRead) async {
-    print(removeNotRead);
-
     if (removeNotRead) {
       notifications.clear();
     } else {

@@ -39,8 +39,16 @@ class AppLocalizationsGenerated {
     return words['universal']['ok'];
   }
 
+  String universalAccept() {
+    return words['universal']['accept'];
+  }
+
   String universalRetry() {
     return words['universal']['retry'];
+  }
+
+  String universalDownloadingData() {
+    return words['universal']['downloadingData'];
   }
 
   String universalNoDataDefaultText() {
@@ -75,6 +83,26 @@ class AppLocalizationsGenerated {
     return words['universal']['error']['unknown'];
   }
 
+  String universalAgreementOrTryToOpenInBrowser() {
+    return words['universal']['agreement']['orTryToOpenInBrowser'];
+  }
+
+  String universalAgreementYouMustAgreeOnTermsAndConditions() {
+    return words['universal']['agreement']['youMustAgreeOnTermsAndConditions'];
+  }
+
+  String universalAgreementTitle() {
+    return words['universal']['agreement']['title'];
+  }
+
+  String universalAgreementIAgree() {
+    return words['universal']['agreement']['IAgree'];
+  }
+
+  String universalAgreementTermsAndConditions() {
+    return words['universal']['agreement']['termsAndConditions'];
+  }
+
   String universalSource() {
     return words['universal']['source'];
   }
@@ -89,6 +117,11 @@ class AppLocalizationsGenerated {
 
   String universalUpdateCupertinoDialogTitle() {
     return words['universal']['update']['cupertinoDialog']['title'];
+  }
+
+  String universalUpdateCupertinoDialogImmediateUpdateTitle() {
+    return words['universal']['update']['cupertinoDialog']
+        ['immediateUpdateTitle'];
   }
 
   String universalUpdateCupertinoDialogButtonIgnore() {
@@ -106,6 +139,11 @@ class AppLocalizationsGenerated {
   String universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow() {
     return words['universal']['update']['cupertinoDialog']
         ['wouldYouLikeToUpdateAppNow'];
+  }
+
+  String universalUpdateCupertinoDialogImmediateUpdateContent() {
+    return words['universal']['update']['cupertinoDialog']
+        ['immediateUpdateContent'];
   }
 
   String mainMenuSession() {
@@ -591,6 +629,10 @@ class AppLocalizationsGenerated {
 
   String moreCredits() {
     return words['more']['credits'];
+  }
+
+  String moreTermsAndAgreement() {
+    return words['more']['termsAndAgreement'];
   }
 
   String dashboardTitle() {

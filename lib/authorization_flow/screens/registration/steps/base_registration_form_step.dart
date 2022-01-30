@@ -39,7 +39,9 @@ abstract class BaseRegistrationFormStep<BLOC extends BaseRegistrationStepBloc> e
       required String labelText,
       TextInputAction action = TextInputAction.next,
       TextInputType keyboardType = TextInputType.name,
-      bool obscureText = false}) =>
+      bool obscureText = false,
+      bool isCheckbox = false
+      }) =>
       Container(
         margin: EdgeInsets.fromLTRB(32, 8, 32, 16),
         child: TextFormField(
@@ -61,9 +63,73 @@ abstract class BaseRegistrationFormStep<BLOC extends BaseRegistrationStepBloc> e
       );
 
   @protected
+  Widget generateCheckboxField(
+      {required BuildContext context,
+        required bool initialValue,
+        required VoidCallback callback,
+        required ValueChanged<bool> onChanged,
+        required FormFieldValidator<bool> validator,
+        required Widget labelText,
+        TextInputAction action = TextInputAction.next,
+        TextInputType keyboardType = TextInputType.name,
+        bool obscureText = false,
+        bool isCheckbox = false
+      }) =>
+      Container(
+        margin: EdgeInsets.fromLTRB(32, 0, 32, 8),
+        child: CheckboxFormField(
+          initialValue: initialValue,
+          onChanged: onChanged,
+          validator: validator,
+          enabled: fieldsEnabled,
+          title: labelText,
+        ),
+      );
+
+  @protected
   String? getBaseValidator(AppLocalizations localization, String? value, {String? Function(String?)? customValidator}) {
     if (value == null || value.isEmpty) return localization.getText().loginValidateFieldCannotBeEmpty();
 
     return customValidator != null ? customValidator(value) : null;
   }
+}
+
+class CheckboxFormField extends FormField<bool> {
+  CheckboxFormField(
+      { required Widget title,
+        FormFieldSetter<bool>? onSaved,
+        FormFieldValidator<bool>? validator,
+        bool initialValue = false,
+        bool autovalidate = false,
+        bool enabled = false,
+        required ValueChanged<bool> onChanged,
+      })
+      : super(
+      onSaved: onSaved,
+      validator: validator,
+      initialValue: initialValue,
+      enabled: enabled,
+
+      builder: (FormFieldState<bool> state) {
+        return CheckboxListTile(
+          contentPadding: EdgeInsets.zero,
+
+          dense: state.hasError,
+          title: title,
+          value: state.value,
+          onChanged: (bool? newValue) {
+            onChanged(newValue == true);
+            state.didChange(newValue);
+          },
+          subtitle: state.hasError
+              ? Builder(
+            builder: (BuildContext context) =>  Text(
+              state.errorText ?? "",
+              style: TextStyle(color: Theme.of(context).errorColor),
+            ),
+          )
+              : null,
+          controlAffinity: ListTileControlAffinity.leading,
+        );
+      });
 }

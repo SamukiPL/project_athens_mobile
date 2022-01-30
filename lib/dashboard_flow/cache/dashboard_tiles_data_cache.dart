@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:project_athens/athens_core/domain/result.dart';
-import 'package:project_athens/dashboard_flow/data/network/response/dashboard_response.dart';
 import 'package:project_athens/dashboard_flow/domain/dashboard/dashboard_tiles_data_model.dart';
 import 'package:project_athens/dashboard_flow/domain/dashboard/get_dashboard_use_case.dart';
 import 'package:project_athens/dashboard_flow/domain/dashboard_params.dart';

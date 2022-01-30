@@ -24,7 +24,8 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     await NotificationsService.initialize();
   }
 
-  NotificationsService.instance!.addNotificationFromBackgroundRemoteMessage(message);
+  NotificationsService.instance!
+      .addNotificationFromBackgroundRemoteMessage(message);
 }
 
 Future<void> main() async {
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
     _firebaseMessages.setupMessaging();
 
     Fimber.plantTree(DebugBufferTree());
-    
+
     return ModuleWidget(
       providers: [
         AppModule(context),
@@ -59,7 +60,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Project Athens',
+        title: 'Świadoma Demokracja',
         theme: ThemeData(
             primarySwatch: MaterialColor(
               0xff61a1f3,
@@ -90,6 +91,7 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: [
           const AppLocalizationsDelegate(),
           GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate
         ],
         localeResolutionCallback:

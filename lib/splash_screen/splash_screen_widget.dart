@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:project_athens/athens_core/configuration/remote_configuration.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,6 +22,7 @@ class SplashScreenWidget extends StatelessWidget {
 
   Widget _generateBody(BuildContext context, SplashScreenBloc bloc) {
     final theme = Theme.of(context);
+
     startListening(context, bloc);
     return Container(
       color: theme.primaryColor,

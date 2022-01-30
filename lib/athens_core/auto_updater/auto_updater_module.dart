@@ -13,12 +13,12 @@ class AutoUpdaterModule extends Module {
       Provider<AutoUpdater>(
         create: (context) {
           final AutoUpdater _autoUpdater = AutoUpdater();
-          _autoUpdater.init(context);
           _autoUpdater.checkForUpdates();
 
           return _autoUpdater;
         },
         dispose: (context, autoUpdater) => autoUpdater.dispose(),
+        lazy: false,
       ),
     ];
   }

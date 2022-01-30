@@ -56,9 +56,19 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalOk != "" && universalOk != null); 
   }); 
  
+  test("All methods for $locale universalAccept", () async {
+    String universalAccept = localization.universalAccept();
+    expect(true, universalAccept != "" && universalAccept != null); 
+  }); 
+ 
   test("All methods for $locale universalRetry", () async {
     String universalRetry = localization.universalRetry();
     expect(true, universalRetry != "" && universalRetry != null); 
+  }); 
+ 
+  test("All methods for $locale universalDownloadingData", () async {
+    String universalDownloadingData = localization.universalDownloadingData();
+    expect(true, universalDownloadingData != "" && universalDownloadingData != null); 
   }); 
  
   test("All methods for $locale universalNoDataDefaultText", () async {
@@ -101,6 +111,31 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalErrorUnknown != "" && universalErrorUnknown != null); 
   }); 
  
+  test("All methods for $locale universalAgreementOrTryToOpenInBrowser", () async {
+    String universalAgreementOrTryToOpenInBrowser = localization.universalAgreementOrTryToOpenInBrowser();
+    expect(true, universalAgreementOrTryToOpenInBrowser != "" && universalAgreementOrTryToOpenInBrowser != null); 
+  }); 
+ 
+  test("All methods for $locale universalAgreementYouMustAgreeOnTermsAndConditions", () async {
+    String universalAgreementYouMustAgreeOnTermsAndConditions = localization.universalAgreementYouMustAgreeOnTermsAndConditions();
+    expect(true, universalAgreementYouMustAgreeOnTermsAndConditions != "" && universalAgreementYouMustAgreeOnTermsAndConditions != null); 
+  }); 
+ 
+  test("All methods for $locale universalAgreementTitle", () async {
+    String universalAgreementTitle = localization.universalAgreementTitle();
+    expect(true, universalAgreementTitle != "" && universalAgreementTitle != null); 
+  }); 
+ 
+  test("All methods for $locale universalAgreementIAgree", () async {
+    String universalAgreementIAgree = localization.universalAgreementIAgree();
+    expect(true, universalAgreementIAgree != "" && universalAgreementIAgree != null); 
+  }); 
+ 
+  test("All methods for $locale universalAgreementTermsAndConditions", () async {
+    String universalAgreementTermsAndConditions = localization.universalAgreementTermsAndConditions();
+    expect(true, universalAgreementTermsAndConditions != "" && universalAgreementTermsAndConditions != null); 
+  }); 
+ 
   test("All methods for $locale universalSource", () async {
     String universalSource = localization.universalSource();
     expect(true, universalSource != "" && universalSource != null); 
@@ -121,6 +156,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalUpdateCupertinoDialogTitle != "" && universalUpdateCupertinoDialogTitle != null); 
   }); 
  
+  test("All methods for $locale universalUpdateCupertinoDialogImmediateUpdateTitle", () async {
+    String universalUpdateCupertinoDialogImmediateUpdateTitle = localization.universalUpdateCupertinoDialogImmediateUpdateTitle();
+    expect(true, universalUpdateCupertinoDialogImmediateUpdateTitle != "" && universalUpdateCupertinoDialogImmediateUpdateTitle != null); 
+  }); 
+ 
   test("All methods for $locale universalUpdateCupertinoDialogButtonIgnore", () async {
     String universalUpdateCupertinoDialogButtonIgnore = localization.universalUpdateCupertinoDialogButtonIgnore();
     expect(true, universalUpdateCupertinoDialogButtonIgnore != "" && universalUpdateCupertinoDialogButtonIgnore != null); 
@@ -139,6 +179,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow", () async {
     String universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow = localization.universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow();
     expect(true, universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow != "" && universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow != null); 
+  }); 
+ 
+  test("All methods for $locale universalUpdateCupertinoDialogImmediateUpdateContent", () async {
+    String universalUpdateCupertinoDialogImmediateUpdateContent = localization.universalUpdateCupertinoDialogImmediateUpdateContent();
+    expect(true, universalUpdateCupertinoDialogImmediateUpdateContent != "" && universalUpdateCupertinoDialogImmediateUpdateContent != null); 
   }); 
  
   test("All methods for $locale mainMenuSession", () async {
@@ -744,6 +789,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale moreCredits", () async {
     String moreCredits = localization.moreCredits();
     expect(true, moreCredits != "" && moreCredits != null); 
+  }); 
+ 
+  test("All methods for $locale moreTermsAndAgreement", () async {
+    String moreTermsAndAgreement = localization.moreTermsAndAgreement();
+    expect(true, moreTermsAndAgreement != "" && moreTermsAndAgreement != null); 
   }); 
  
   test("All methods for $locale dashboardTitle", () async {

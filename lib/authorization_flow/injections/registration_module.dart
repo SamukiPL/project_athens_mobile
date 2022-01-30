@@ -57,7 +57,13 @@ class RegistrationModule extends Module {
 
     return [
       Provider<RegistrationBloc>(
-        create: (_) => RegistrationBloc(headerBloc, buttonStateBloc, accountInfoStepBloc, registrationEndStepBloc, deputiesChooserBloc),
+        create: (_) => RegistrationBloc(
+            headerBloc,
+            buttonStateBloc,
+            accountInfoStepBloc,
+            registrationEndStepBloc,
+            deputiesChooserBloc
+        ),
         dispose: (_, bloc) => bloc.dispose(),
       ),
       ChangeNotifierProvider<RegistrationStepperBloc>.value(

@@ -1,7 +1,10 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
+import 'package:project_athens/athens_core/presentation/agreement/agreement_widget.dart';
+import 'package:project_athens/athens_core/presentation/agreement/agreement_widget_bloc.dart';
 import 'package:project_athens/authorization_flow/navigation/login_navigation_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/account_info/account_info_form_key.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/account_info/account_info_step_bloc.dart';
@@ -74,6 +77,44 @@ class AccountInfoStep extends BaseRegistrationFormStep<AccountInfoStepBloc> {
             action: TextInputAction.done,
             keyboardType: TextInputType.emailAddress
           )
+        ),
+        generateCheckboxField(
+          context: context,
+          initialValue: bloc.agreementAccepted,
+          callback: () {} ,
+          onChanged: (bool newValue) { bloc.setAgreementAccepted(newValue); },
+          validator: (accepted) => accepted == false
+              ? localization.getText().universalAgreementYouMustAgreeOnTermsAndConditions()
+              : null,
+          labelText: RichText(
+            text: TextSpan(
+                text: "",
+                children: <TextSpan>[
+                  TextSpan(
+                      text: localization.getText().universalAgreementIAgree(),
+                      style: TextStyle(color: Colors.black)
+                  ),
+                  TextSpan(
+                      text: " "
+                  ),
+                  TextSpan(text: localization.getText().universalAgreementTermsAndConditions(),
+                      recognizer: TapGestureRecognizer()..onTap = () {
+                        showDialog(
+                            context: context,
+                            builder: (_context) => AgreementWidget(
+                              shouldHandleAccept: false,
+                              l10n: localization,
+                              bloc: Provider.of<AgreementWidgetBloc>(context, listen: false ),
+                              onConfirm: (bool newValue) => Navigator.pop(_context),
+                            ),
+                            barrierDismissible: true
+                        );
+                      },
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor)
+                  )
+                ]
+            ),
+          ),
         )
       ],
     );

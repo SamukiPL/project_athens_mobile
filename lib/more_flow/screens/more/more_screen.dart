@@ -57,6 +57,11 @@ class MoreScreen extends BaseScreen<MoreBloc> {
               theme: theme
           ),
           _buildActionRow(
+              label: localization.getText().moreTermsAndAgreement(),
+              onPressed: () => goToDestination(context, MoreAgreementScreenDestination()),
+              theme: theme
+          ),
+          _buildActionRow(
               label: localization.getText().moreCheckForUpdates(),
               onPressed: () => bloc.checkForUpdates(),
               theme: theme,
@@ -189,7 +194,7 @@ class MoreScreen extends BaseScreen<MoreBloc> {
                     Text(
                       label,
                       style: TextStyle(
-                          color: theme.dividerColor,
+                          color: Colors.black54,
                           fontSize: 20
                       ),
                     ),
