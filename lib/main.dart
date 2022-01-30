@@ -8,6 +8,7 @@ import 'package:project_athens/athens_core/i18n/localization_delegate.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/utils/firebase/firebase_messaging_module.dart';
 import 'package:project_athens/athens_core/utils/notifications/notifications_service.dart';
+import 'package:project_athens/deputies_utils/injections/subscribed_deputy_cache_module.dart';
 import 'package:project_athens/main/firebase/firebase_messages.dart';
 import 'package:project_athens/main/injections/app_module.dart';
 import 'package:project_athens/main/injections/app_navigation_module.dart';
@@ -56,7 +57,8 @@ class MyApp extends StatelessWidget {
         AppModule(context),
         FirebaseMessagingModule(context, _firebaseMessages),
         ConfigurationModule(context),
-        MainWidgetModule(context)
+        MainWidgetModule(context),
+        AppNavigationModule(context)
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
