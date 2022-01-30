@@ -14,6 +14,7 @@ import 'package:project_athens/main/injections/app_module.dart';
 import 'package:project_athens/main/injections/app_navigation_module.dart';
 import 'package:project_athens/main/injections/main_widget_module.dart';
 import 'package:project_athens/splash_screen/splash_screen_widget.dart';
+
 import 'athens_core/configuration/configuration_module.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -85,9 +86,11 @@ class MyApp extends StatelessWidget {
             primaryColor: Color(0xff61a1f3),
             primaryColorDark: Color(0xff008ebe),
             accentColor: Colors.blueAccent),
-        home: ModuleWidget(
-          providers: [AppNavigationModule(context)],
-          child: SplashScreenWidget(),
+        home: Builder(
+            builder: (context) => ModuleWidget(
+              providers: [SubscribedDeputyCacheModule(context, _firebaseMessages)],
+              child: SplashScreenWidget(),
+            )
         ),
         supportedLocales: [const Locale('pl')],
         localizationsDelegates: [

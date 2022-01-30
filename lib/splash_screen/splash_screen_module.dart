@@ -6,6 +6,7 @@ import 'package:project_athens/athens_core/auth/network/auth_api.dart';
 import 'package:project_athens/athens_core/chopper/network_module.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
+import 'package:project_athens/deputies_utils/cache/subscribed_deputies_cache.dart';
 import 'package:provider/provider.dart';
 
 import 'splash_screen_bloc.dart';
@@ -15,14 +16,14 @@ class SplashScreenModule extends Module {
 
   @override
   List<SingleChildWidget> getProviders() {
-    DeputiesCache deputiesCache = Provider.of<DeputiesCache>(context);
+    SubscribedDeputiesCache subscribedDeputiesCache = Provider.of<SubscribedDeputiesCache>(context);
     Dio client = Provider.of<SimpleDioClient>(context).client;
 
     AuthApi authApi = AuthApi(client);
     return [
       Provider<SplashScreenBloc>(
         create: (_) =>
-            SplashScreenBloc(AuthRepositoryImpl(authApi), deputiesCache),
+            SplashScreenBloc(AuthRepositoryImpl(authApi), subscribedDeputiesCache),
         dispose: (_, bloc) => bloc.dispose(),
       )
     ];
