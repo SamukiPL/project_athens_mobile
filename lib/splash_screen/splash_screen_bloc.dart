@@ -1,11 +1,12 @@
 import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:project_athens/athens_core/auth/auth_repository.dart';
 import 'package:project_athens/athens_core/auth/auth_storage.dart';
 import 'package:project_athens/athens_core/chopper/jwt_decode.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
-import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
+import 'package:project_athens/deputies_utils/cache/subscribed_deputies_cache.dart';
 import 'package:rxdart/rxdart.dart';
 
 class SplashScreenBloc extends BaseBloc {
@@ -15,9 +16,9 @@ class SplashScreenBloc extends BaseBloc {
 
   final AuthRepository _authRepository;
 
-  final DeputiesCache deputiesCache;
+  final SubscribedDeputiesCache _subscribedDeputiesCache;
 
-  SplashScreenBloc(this._authRepository, this.deputiesCache);
+  SplashScreenBloc(this._authRepository, this._subscribedDeputiesCache);
 
   final StreamController<SplashDirection> _direction =
       BehaviorSubject<SplashDirection>();
@@ -35,21 +36,11 @@ class SplashScreenBloc extends BaseBloc {
     var tokenExp = _jwt.getJwtExp(tokens.accessToken) - 120;
     var now = DateTime.now().millisecondsSinceEpoch / 1000;
 
-    if (tokenExp > now) {
-      final deputies = await deputiesCache.deputies;
-
-      if (deputies is Failure) {
-        _direction.add(SplashDirection.LOGIN);
-        return;
-      }
-
-      _direction.add(SplashDirection.MAIN);
-      return;
-    }
-
     try {
-      await _authRepository.refreshTokens(tokens.refreshToken);
-      await deputiesCache.deputies;
+      if (tokenExp <= now) {
+        await _authRepository.refreshTokens(tokens.refreshToken);
+      }
+      await _subscribedDeputiesCache.subscribedDeputies;
       _direction.add(SplashDirection.MAIN);
     } on DioError {
       _authStorage.removeTokens();

@@ -51,6 +51,10 @@ class AppLocalizationsGenerated {
     return words['universal']['downloadingData'];
   }
 
+  String universalGoToLogin() {
+    return words['universal']['goToLogin'];
+  }
+
   String universalNoDataDefaultText() {
     return words['universal']['noData']['defaultText'];
   }
@@ -77,6 +81,10 @@ class AppLocalizationsGenerated {
 
   String universalErrorServer() {
     return words['universal']['error']['server'];
+  }
+
+  String universalErrorAuth() {
+    return words['universal']['error']['auth'];
   }
 
   String universalErrorUnknown() {

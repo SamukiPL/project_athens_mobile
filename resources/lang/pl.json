@@ -10,6 +10,7 @@
     "accept": "Akceptuje",
     "retry": "Spróbuj ponownie",
     "downloadingData": "Pobieranie...",
+    "goToLogin": "Przejdź do logowania",
     "noData": {
       "defaultText": "Brak danych",
       "noInformation": "Brak informacji"
@@ -22,6 +23,7 @@
     "error": {
       "network": "Coś poszło nie tak. Proszę sprawdzić swoje połączenie z internetem.",
       "server": "Serwer nie odpowiada. Prosimy spróbować później.",
+      "auth": "Coś poszło nie tak i Twoja sesja wygasła!\nZaloguj się ponownie.",
       "unknown": "Coś poszło nie tak, prosimy spróbować później."
     },
     "agreement": {

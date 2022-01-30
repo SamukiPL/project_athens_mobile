@@ -9,15 +9,15 @@ void main() {
   String osPrefix = Platform.isLinux || Platform.isMacOS ? '/' : '';
   String filePathForCoverage = osPrefix + scriptPath.substring(0, scriptPath.indexOf('main.dart')).substring(1) + 'resources/lang/';
 
-  File enFile = File(filePathForCoverage + 'en.json');
-  String enData = enFile.readAsStringSync();
-  Map<String, dynamic> enWords = json.decode(enData);
-  testAllMethods('en', AppLocalizationsGenerated(enWords));
-
   File plFile = File(filePathForCoverage + 'pl.json');
   String plData = plFile.readAsStringSync();
   Map<String, dynamic> plWords = json.decode(plData);
   testAllMethods('pl', AppLocalizationsGenerated(plWords));
+
+  File enFile = File(filePathForCoverage + 'en.json');
+  String enData = enFile.readAsStringSync();
+  Map<String, dynamic> enWords = json.decode(enData);
+  testAllMethods('en', AppLocalizationsGenerated(enWords));
 }
 
 void testAllMethods(String locale, AppLocalizationsGenerated localization) {
@@ -71,6 +71,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalDownloadingData != "" && universalDownloadingData != null); 
   }); 
  
+  test("All methods for $locale universalGoToLogin", () async {
+    String universalGoToLogin = localization.universalGoToLogin();
+    expect(true, universalGoToLogin != "" && universalGoToLogin != null); 
+  }); 
+ 
   test("All methods for $locale universalNoDataDefaultText", () async {
     String universalNoDataDefaultText = localization.universalNoDataDefaultText();
     expect(true, universalNoDataDefaultText != "" && universalNoDataDefaultText != null); 
@@ -104,6 +109,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale universalErrorServer", () async {
     String universalErrorServer = localization.universalErrorServer();
     expect(true, universalErrorServer != "" && universalErrorServer != null); 
+  }); 
+ 
+  test("All methods for $locale universalErrorAuth", () async {
+    String universalErrorAuth = localization.universalErrorAuth();
+    expect(true, universalErrorAuth != "" && universalErrorAuth != null); 
   }); 
  
   test("All methods for $locale universalErrorUnknown", () async {

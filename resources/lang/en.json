@@ -10,6 +10,7 @@
     "retry": "Try again",
     "close": "Close",
     "downloadingData": "Downloading data...",
+    "goToLogin": "Go to login",
     "noData": {
       "defaultText": "No data",
       "noInformation": "No info"
@@ -29,6 +30,7 @@
     "error": {
       "network": "Something went wrong. Please check your internet connection.",
       "server": "Server is not responding. Please try again later.",
+      "auth": "Something went wrong and your session has expired!\nPlease log in again. ",
       "unknown": "Something went wrong, please try again later."
     },
     "source": "Source",

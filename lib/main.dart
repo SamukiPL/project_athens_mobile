@@ -8,11 +8,13 @@ import 'package:project_athens/athens_core/i18n/localization_delegate.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/utils/firebase/firebase_messaging_module.dart';
 import 'package:project_athens/athens_core/utils/notifications/notifications_service.dart';
+import 'package:project_athens/deputies_utils/injections/subscribed_deputy_cache_module.dart';
 import 'package:project_athens/main/firebase/firebase_messages.dart';
 import 'package:project_athens/main/injections/app_module.dart';
 import 'package:project_athens/main/injections/app_navigation_module.dart';
 import 'package:project_athens/main/injections/main_widget_module.dart';
 import 'package:project_athens/splash_screen/splash_screen_widget.dart';
+
 import 'athens_core/configuration/configuration_module.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -56,7 +58,8 @@ class MyApp extends StatelessWidget {
         AppModule(context),
         FirebaseMessagingModule(context, _firebaseMessages),
         ConfigurationModule(context),
-        MainWidgetModule(context)
+        MainWidgetModule(context),
+        AppNavigationModule(context)
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -83,9 +86,11 @@ class MyApp extends StatelessWidget {
             primaryColor: Color(0xff61a1f3),
             primaryColorDark: Color(0xff008ebe),
             accentColor: Colors.blueAccent),
-        home: ModuleWidget(
-          providers: [AppNavigationModule(context)],
-          child: SplashScreenWidget(),
+        home: Builder(
+            builder: (context) => ModuleWidget(
+              providers: [SubscribedDeputyCacheModule(context, _firebaseMessages)],
+              child: SplashScreenWidget(),
+            )
         ),
         supportedLocales: [const Locale('pl')],
         localizationsDelegates: [
