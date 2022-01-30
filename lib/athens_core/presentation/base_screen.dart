@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
+import 'package:project_athens/athens_core/navigation/app_navigation.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_widget.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
@@ -42,7 +43,7 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget with Re
         onSuccess(context);
         break;
       case AuthFailure:
-        onAuthFailure();
+        onAuthFailure(context);
         break;
       case ErrorState:
         onNetworkFailure(bloc);
@@ -96,6 +97,8 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget with Re
   void onNetworkFailure(BLOC bloc) {}
 
   @protected
-  void onAuthFailure() {}
-
+  void onAuthFailure(BuildContext context) {
+    final appNavigation = Provider.of<AppNavigation>(context, listen: false);
+    appNavigation.goToLoginWidget(context);
+  }
 }
