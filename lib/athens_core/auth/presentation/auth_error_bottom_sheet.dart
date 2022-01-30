@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,7 @@ class _AuthErrorBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = Provider.of<AppLocalizations>(context);
     final theme = Theme.of(context);
     return WillPopScope(
       onWillPop: () async => false,
@@ -30,7 +32,7 @@ class _AuthErrorBottomSheet extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(bottom: 8, top: 8),
                 child: Text(
-                  "Coś poszło nie tak i Twoja sesja wygasła!\nZaloguj się ponownie.",
+                  localization().universalErrorAuth(),
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20),
                 ),
@@ -42,7 +44,7 @@ class _AuthErrorBottomSheet extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(16),
                   child: Text(
-                    "Przejdź do logowania",
+                    localization().universalGoToLogin(),
                     style: TextStyle(color: Colors.white),
                     textScaleFactor: 1.5,
                   ),
