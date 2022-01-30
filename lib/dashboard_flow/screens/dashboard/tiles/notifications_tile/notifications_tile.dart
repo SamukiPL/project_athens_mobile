@@ -23,18 +23,15 @@ class NotificationsTile extends SimpleTile {
 
 
   @override
-  Widget build(BuildContext context) {
-    return super.buildTile(
-      context: context,
-      tile: StreamProvider<int?>.value(
-          initialData: null,
-          value: notificationsStream,
-          child: Consumer<int?>(
-              builder: (context, count, _) => count == null
-                  ? super.buildLoader()
-                  : buildBadgeIcon(context, count)
-          )
-      ),
+  Widget buildTileContent(BuildContext context) {
+    return StreamProvider<int?>.value(
+        initialData: null,
+        value: notificationsStream,
+        child: Consumer<int?>(
+            builder: (context, count, _) => count == null
+                ? buildLoader()
+                : buildBadgeIcon(context, count)
+        )
     );
   }
 

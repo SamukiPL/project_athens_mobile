@@ -18,18 +18,15 @@ class UserNameTile extends SimpleTile {
   );
 
   @override
-  Widget build(BuildContext context) {
-    return super.buildTile(
-        context: context,
-        tile: FutureProvider<String?>.value(
-          initialData: null,
-          value: getUserName(),
-          child: Consumer<String?>(
+  Widget buildTileContent(BuildContext context) {
+    return FutureProvider<String?>.value(
+        initialData: null,
+        value: getUserName(),
+        child: Consumer<String?>(
             builder: (context, text, _) => text == null
                 ? super.buildLoader()
                 : super.buildTextAndIcon(text: "Witaj, " + text, crossAxisAlignment: CrossAxisAlignment.start)
-            )
-          ),
+        )
     );
   }
 

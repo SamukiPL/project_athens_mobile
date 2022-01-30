@@ -15,7 +15,8 @@ class NearestMeetingTile extends SimpleTile {
       // goToFn: DashboardNearestMeetingScreenDestination(bloc.nearestParliamentMeetingId!)
   );
 
-  Widget _getMeetingText(BuildContext context) {
+  @override
+  Widget buildTileContent(BuildContext context) {
     return StreamProvider<String?>.value(
         value: bloc.nearestMeetingTextStream,
         initialData: null,
@@ -25,14 +26,6 @@ class NearestMeetingTile extends SimpleTile {
                 ? buildLoader()
                 : buildTextAndIcon(text: text, icon: Icons.calendar_today)
         )
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return buildTile(
-      context: context,
-      tile: _getMeetingText(context),
     );
   }
 }

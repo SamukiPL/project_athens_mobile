@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
@@ -10,7 +9,6 @@ import 'package:project_athens/athens_core/presentation/grid/tiles/simple_tile/s
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/chart_tile/chart_tombstone.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/chart_tile/helpers/chart_image_symbol_renderer.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/chart_tile/blocs/deputy_chart_tile_bloc.dart';
-import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/chart_tile/models/chart_series_thombstone_model.dart';
 import 'package:project_athens/deputies_utils/domain/subscribed_deputy_model.dart';
 import 'package:provider/provider.dart';
 
@@ -21,14 +19,7 @@ class ChartTile<SERIES_DATA, FROM_DATA_STREAM> extends SimpleTile {
   ChartTile({required this.bloc, required final String text, required Key key}) : super(text: text, key: key, bloc: bloc);
 
   @override
-  Widget build(BuildContext context) {
-    return super.buildTile(
-        context: context,
-        tile: _getChartTile(context)
-    );
-  }
-
-  Widget _getChartTile(BuildContext context) {
+  Widget buildTileContent(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(4),
       child: Column(

@@ -35,8 +35,13 @@ class SimpleTile extends StatelessWidget with RedirectionDelegate {
   Widget build(BuildContext context) {
     return buildTile(
         context: context,
-        tile: buildTextAndIcon(text: text, icon: icon),
+        tile: buildTileContent(context),
     );
+  }
+  
+  @protected
+  Widget buildTileContent(BuildContext context) {
+    return buildTextAndIcon(text: text, icon: icon);
   }
 
   @protected
