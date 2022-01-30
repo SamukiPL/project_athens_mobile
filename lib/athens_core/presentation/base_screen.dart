@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/auth/presentation/auth_error_bottom_sheet.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/navigation/app_navigation.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_widget.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
@@ -98,7 +98,6 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget with Re
 
   @protected
   void onAuthFailure(BuildContext context) {
-    final appNavigation = Provider.of<AppNavigation>(context, listen: false);
-    appNavigation.goToLoginWidget(context);
+    showAuthErrorBottomSheet(context);
   }
 }
