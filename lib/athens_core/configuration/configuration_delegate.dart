@@ -40,4 +40,8 @@ mixin ConfigurationDelegate<T, R> {
 
     await storage.write(key: preferenceName, value: stringified);
   }
+
+  Future<void> deletePreference() async {
+    await storage.delete(key: preferenceName);
+  }
 }

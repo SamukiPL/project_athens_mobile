@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
+import 'package:project_athens/athens_core/presentation/data_loading/data_loading_widget.dart';
 import 'package:project_athens/athens_core/presentation/db_source/db_source.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/dashboard_flow/domain/parliament_meeting_model.dart';
@@ -36,41 +35,33 @@ class NearestMeetingScreen extends BaseScreen<NearestMeetingBloc> {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      child: FutureProvider<Result<ParliamentMeetingModel>?>.value(
-          value: bloc.parliamentMeeting,
-          initialData: null,
-          child: Consumer<Result<ParliamentMeetingModel>?>(
-            builder: (context, result, _) => _getChild(result, theme, _localizations)
-          ),
-      )
+      child: DataLoadingWidget(
+        bloc.dataLoadingBloc,
+        child: _getChild(bloc, theme, _localizations)
+      ),
     );
   }
 
-  Widget _getChild(Result<ParliamentMeetingModel>? result, ThemeData theme, AppLocalizations _localizations) {
-    if (result is Success) {
-      final model = (result as Success<ParliamentMeetingModel>).value;
+  Widget _getChild(NearestMeetingBloc bloc, ThemeData theme, AppLocalizations _localizations) {
       return Container(
         padding: EdgeInsets.only(left: 8, right: 8),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _getTitle(model, theme, _localizations),
+              _getTitle(bloc.meetingModel, theme, _localizations),
               Expanded(
                   child: SingleChildScrollView(
                       child: Column(
-                          children: _getAgendaPoints(model, theme, _localizations)
+                          children: _getAgendaPoints(bloc.meetingModel, theme, _localizations)
                       )
                   )
               ),
-              TechnicalData(technicalId: model.id),
-              DbSource(model)
+              TechnicalData(technicalId: bloc.meetingModel.id),
+              DbSource(bloc.meetingModel)
             ]
         )
       );
-    }
-
-    return Container();
   }
 
   Widget _getTitle(ParliamentMeetingModel model, ThemeData theme, AppLocalizations _localizations) {

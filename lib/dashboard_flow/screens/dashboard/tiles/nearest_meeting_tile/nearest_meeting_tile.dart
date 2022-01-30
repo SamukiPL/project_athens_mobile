@@ -22,15 +22,15 @@ class NearestMeetingTile extends SimpleTile {
         child: Consumer<String?>(
           builder: (context, text, child) =>
             text == null
-                ? super.buildLoader()
-                : super.buildTextAndIcon(text: text, icon: Icons.calendar_today)
+                ? buildLoader()
+                : buildTextAndIcon(text: text, icon: Icons.calendar_today)
         )
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return super.buildTile(
+    return buildTile(
       context: context,
       tile: _getMeetingText(context),
     );
