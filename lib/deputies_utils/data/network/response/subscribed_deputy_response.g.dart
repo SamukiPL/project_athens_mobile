@@ -7,18 +7,17 @@ part of 'subscribed_deputy_response.dart';
 // **************************************************************************
 
 SubscribedDeputyResponse _$SubscribedDeputyResponseFromJson(
-    Map<String, dynamic> json) {
-  return SubscribedDeputyResponse(
-    json['id'] as String?,
-    json['createAt'] == null
-        ? null
-        : DateTime.parse(json['createAt'] as String),
-    json['cadency'] as int?,
-    json['isPrimary'] as bool,
-    json['cadencyDeputyId'] as String,
-    Notifications.fromJson(json['notifications'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    SubscribedDeputyResponse(
+      json['id'] as String?,
+      json['createAt'] == null
+          ? null
+          : DateTime.parse(json['createAt'] as String),
+      json['cadency'] as int?,
+      json['isPrimary'] as bool,
+      json['cadencyDeputyId'] as String,
+      Notifications.fromJson(json['notifications'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$SubscribedDeputyResponseToJson(
         SubscribedDeputyResponse instance) =>
@@ -31,13 +30,12 @@ Map<String, dynamic> _$SubscribedDeputyResponseToJson(
       'notifications': instance.notifications,
     };
 
-Notifications _$NotificationsFromJson(Map<String, dynamic> json) {
-  return Notifications(
-    json['vote'] as bool,
-    json['speech'] as bool,
-    json['interpolation'] as bool,
-  );
-}
+Notifications _$NotificationsFromJson(Map<String, dynamic> json) =>
+    Notifications(
+      json['vote'] as bool,
+      json['speech'] as bool,
+      json['interpolation'] as bool,
+    );
 
 Map<String, dynamic> _$NotificationsToJson(Notifications instance) =>
     <String, dynamic>{

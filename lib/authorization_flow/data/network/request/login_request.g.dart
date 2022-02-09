@@ -6,13 +6,11 @@ part of 'login_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-LoginRequest _$LoginRequestFromJson(Map<String, dynamic> json) {
-  return LoginRequest(
-    json['login'] as String?,
-    json['email'] as String?,
-    json['password'] as String,
-  );
-}
+LoginRequest _$LoginRequestFromJson(Map<String, dynamic> json) => LoginRequest(
+      json['login'] as String?,
+      json['email'] as String?,
+      json['password'] as String,
+    );
 
 Map<String, dynamic> _$LoginRequestToJson(LoginRequest instance) =>
     <String, dynamic>{

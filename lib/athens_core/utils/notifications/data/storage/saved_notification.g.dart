@@ -6,20 +6,19 @@ part of 'saved_notification.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SavedNotification _$SavedNotificationFromJson(Map<String, dynamic> json) {
-  return SavedNotification(
-    json['title'] as String,
-    json['body'] as String?,
-    json['imgUrl'] as String?,
-    DateTime.parse(json['sentTime'] as String),
-    json['messageId'] as String,
-    json['collapseKey'] as String?,
-    json['data'] as Map<String, dynamic>,
-    json['type'] as String?,
-    json['refId'] as String?,
-    json['isRead'] as bool,
-  );
-}
+SavedNotification _$SavedNotificationFromJson(Map<String, dynamic> json) =>
+    SavedNotification(
+      json['title'] as String,
+      json['body'] as String?,
+      json['imgUrl'] as String?,
+      DateTime.parse(json['sentTime'] as String),
+      json['messageId'] as String,
+      json['collapseKey'] as String?,
+      json['data'] as Map<String, dynamic>,
+      json['type'] as String?,
+      json['refId'] as String?,
+      json['isRead'] as bool,
+    );
 
 Map<String, dynamic> _$SavedNotificationToJson(SavedNotification instance) =>
     <String, dynamic>{

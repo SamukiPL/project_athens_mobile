@@ -6,35 +6,34 @@ part of 'voting_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-VotingResponse _$VotingResponseFromJson(Map<String, dynamic> json) {
-  return VotingResponse(
-    VotingNumbers.fromJson(json['votingNumbers'] as Map<String, dynamic>),
-    DateTime.parse(json['votedAt'] as String),
-    DateTime.parse(json['actualVotedAt'] as String),
-    DateTime.parse(json['createAt'] as String),
-    json['cadency'] as int,
-    json['orderPoint'] as int?,
-    json['sessionIId'] as int,
-    json['votingIId'] as int,
-    json['votingUniqueId'] as String,
-    json['topic'] as String,
-    (json['votes'] as List<dynamic>)
-        .map((e) => Votes.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    json['votingType'] as int,
-    json['id'] as String,
-    json['absoluteMajority'] as int,
-    json['qualifyingMajority'] as int,
-    (json['parliamentClubVotingNumbers'] as List<dynamic>)
-        .map((e) =>
-            ParliamentClubVotingNumbers.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    json['deputyVoteType'] as int?,
-    json['updateAt'] == null
-        ? null
-        : DateTime.parse(json['updateAt'] as String),
-  );
-}
+VotingResponse _$VotingResponseFromJson(Map<String, dynamic> json) =>
+    VotingResponse(
+      VotingNumbers.fromJson(json['votingNumbers'] as Map<String, dynamic>),
+      DateTime.parse(json['votedAt'] as String),
+      DateTime.parse(json['actualVotedAt'] as String),
+      DateTime.parse(json['createAt'] as String),
+      json['cadency'] as int,
+      json['orderPoint'] as int?,
+      json['sessionIId'] as int,
+      json['votingIId'] as int,
+      json['votingUniqueId'] as String,
+      json['topic'] as String,
+      (json['votes'] as List<dynamic>)
+          .map((e) => Votes.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      json['votingType'] as int,
+      json['id'] as String,
+      json['absoluteMajority'] as int,
+      json['qualifyingMajority'] as int,
+      (json['parliamentClubVotingNumbers'] as List<dynamic>)
+          .map((e) =>
+              ParliamentClubVotingNumbers.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      json['deputyVoteType'] as int?,
+      json['updateAt'] == null
+          ? null
+          : DateTime.parse(json['updateAt'] as String),
+    );
 
 Map<String, dynamic> _$VotingResponseToJson(VotingResponse instance) =>
     <String, dynamic>{
@@ -58,26 +57,23 @@ Map<String, dynamic> _$VotingResponseToJson(VotingResponse instance) =>
       'deputyVoteType': instance.deputyVoteType,
     };
 
-Votes _$VotesFromJson(Map<String, dynamic> json) {
-  return Votes(
-    json['type'] as int,
-    json['cadencyDeputy'] as String,
-  );
-}
+Votes _$VotesFromJson(Map<String, dynamic> json) => Votes(
+      json['type'] as int,
+      json['cadencyDeputy'] as String,
+    );
 
 Map<String, dynamic> _$VotesToJson(Votes instance) => <String, dynamic>{
       'type': instance.type,
       'cadencyDeputy': instance.cadencyDeputy,
     };
 
-VotingNumbers _$VotingNumbersFromJson(Map<String, dynamic> json) {
-  return VotingNumbers(
-    json['inFavor'] as int,
-    json['against'] as int,
-    json['hold'] as int,
-    json['absent'] as int,
-  );
-}
+VotingNumbers _$VotingNumbersFromJson(Map<String, dynamic> json) =>
+    VotingNumbers(
+      json['inFavor'] as int,
+      json['against'] as int,
+      json['hold'] as int,
+      json['absent'] as int,
+    );
 
 Map<String, dynamic> _$VotingNumbersToJson(VotingNumbers instance) =>
     <String, dynamic>{
@@ -88,17 +84,16 @@ Map<String, dynamic> _$VotingNumbersToJson(VotingNumbers instance) =>
     };
 
 ParliamentClubVotingNumbers _$ParliamentClubVotingNumbersFromJson(
-    Map<String, dynamic> json) {
-  return ParliamentClubVotingNumbers(
-    json['inFavor'] as int,
-    json['against'] as int,
-    json['hold'] as int,
-    json['absent'] as int,
-    json['totalDeputies'] as int,
-    json['actualVoted'] as int,
-    json['parliamentClub'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    ParliamentClubVotingNumbers(
+      json['inFavor'] as int,
+      json['against'] as int,
+      json['hold'] as int,
+      json['absent'] as int,
+      json['totalDeputies'] as int,
+      json['actualVoted'] as int,
+      json['parliamentClub'] as String,
+    );
 
 Map<String, dynamic> _$ParliamentClubVotingNumbersToJson(
         ParliamentClubVotingNumbers instance) =>

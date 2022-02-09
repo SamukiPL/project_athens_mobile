@@ -6,6 +6,8 @@ part of 'more_api.dart';
 // RetrofitGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 class _MoreApi implements MoreApi {
   _MoreApi(this._dio, {this.baseUrl});
 
@@ -17,9 +19,10 @@ class _MoreApi implements MoreApi {
   Future<void> logout() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     await _dio.fetch<void>(_setStreamType<void>(
-        Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
+        Options(method: 'POST', headers: _headers, extra: _extra)
             .compose(_dio.options, '/user-aggregator/auth/logout',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
@@ -30,10 +33,11 @@ class _MoreApi implements MoreApi {
   Future<GetBackersResponse> getBackers() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<GetBackersResponse>(
-            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+            Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/user-aggregator/crowd-funding/backers',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
