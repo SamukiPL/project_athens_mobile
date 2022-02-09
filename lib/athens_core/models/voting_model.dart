@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:project_athens/athens_core/data/base_responses/voting_response.dart';
-import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
 import 'package:project_athens/athens_core/models/timeline_model.dart';
 
 class VotingModel extends TimelineModel {

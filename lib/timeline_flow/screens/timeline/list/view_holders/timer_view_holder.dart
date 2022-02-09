@@ -1,5 +1,4 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';

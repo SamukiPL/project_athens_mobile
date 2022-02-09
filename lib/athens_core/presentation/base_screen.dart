@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/auth/presentation/auth_error_bottom_sheet.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';

@@ -1,9 +1,8 @@
 import 'package:badges/badges.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/presentation/grid/tiles/simple_tile/simple_tile.dart';
 import 'package:project_athens/athens_core/presentation/grid/tiles/simple_tile/simple_tile_bloc.dart';
-import '../../../../../athens_core/utils/notifications/notifications_service.dart';
+import 'package:project_athens/athens_core/utils/notifications/notifications_service.dart';
 import 'package:project_athens/dashboard_flow/navigation/dashboard_destinations.dart';
 import 'package:provider/provider.dart';
 

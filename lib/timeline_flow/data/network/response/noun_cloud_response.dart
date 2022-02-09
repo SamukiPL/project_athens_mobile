@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:json_annotation/json_annotation.dart';
 import 'package:project_athens/athens_core/data/word_model/noun_tag.dart';
 

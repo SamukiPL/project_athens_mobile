@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/chart_tile/models/chart_series_thombstone_model.dart';
 import 'package:charts_flutter/flutter.dart' as charts;

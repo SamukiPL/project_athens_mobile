@@ -407,6 +407,20 @@ class AppLocalizationsGenerated {
     return words['timeline']['votingTypes']['requestOfClosingMeeting'];
   }
 
+  String timelineVotingTypesProceedOfProceedAgenda() {
+    return words['timeline']['votingTypes']['proceedOfProceedAgenda'];
+  }
+
+  String timelineVotingTypesChangeConductOfVoting() {
+    return words['timeline']['votingTypes']['changeConductOfVoting'];
+  }
+
+  String
+      timelineVotingTypesAppointmentMemberCollegeInstituteNationalRemembrance() {
+    return words['timeline']['votingTypes']
+        ['appointmentMemberCollegeInstituteNationalRemembrance'];
+  }
+
   String timelineVotingTypesUnknown() {
     return words['timeline']['votingTypes']['unknown'];
   }

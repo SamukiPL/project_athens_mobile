@@ -1,8 +1,7 @@
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
-import 'package:project_athens/main/injections/app_navigation_module.dart';
 import 'package:project_athens/more_flow/injections/agreement_screen_module.dart';
 import 'package:project_athens/more_flow/injections/credits_module.dart';
 import 'package:project_athens/more_flow/injections/hall_of_fame_module.dart';

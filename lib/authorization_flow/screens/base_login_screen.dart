@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
@@ -112,13 +111,12 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
     switch(errType) {
       case ErrorType.NETWORK:
         return localizations.getText().universalErrorNetwork();
-        break;
       case ErrorType.SERVER:
         return localizations.getText().universalErrorServer();
-        break;
       case ErrorType.UNKNOWN:
         return localizations.getText().universalErrorUnknown();
-        break;
+      case ErrorType.AUTH:
+        return localizations.getText().universalErrorAuth();
     }
   }
 

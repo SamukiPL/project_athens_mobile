@@ -1,7 +1,6 @@
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
-import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
 import 'package:project_athens/voting_flow/screens/list/list_impl/view_holders/vote_view_holder.dart';
 

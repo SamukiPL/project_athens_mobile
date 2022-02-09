@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_scatter/flutter_scatter.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
@@ -56,7 +55,9 @@ class NounCloud extends StatelessWidget {
               b: 1.0,
             ),
             children: widgets,
-            overflow: Overflow.visible),
+            clipBehavior: Clip.antiAlias,
+            // overflow: Overflow.visible
+        ),
       ),
     );
   }

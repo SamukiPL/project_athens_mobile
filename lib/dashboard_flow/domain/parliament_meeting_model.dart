@@ -1,4 +1,3 @@
-import 'package:project_athens/athens_core/domain/base_list/base_model.dart';
 import 'package:project_athens/athens_core/models/db_harvest_model.dart';
 
 class ParliamentMeetingModel extends DbHarvestModel {

@@ -1,6 +1,5 @@
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
-import 'package:project_athens/athens_core/navigation/app_navigation.dart';
 import 'package:project_athens/athens_core/presentation/button_loader/button_loader.dart';
 import 'package:project_athens/authorization_flow/injections/reset_password_module.dart';
 import 'package:project_athens/authorization_flow/navigation/login_navigation_bloc.dart';

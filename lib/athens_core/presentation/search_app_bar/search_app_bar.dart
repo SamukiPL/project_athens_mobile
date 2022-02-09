@@ -76,7 +76,6 @@ class _SearchAppBar extends StatelessWidget {
           cursorColor: Colors.white60,
           focusNode: bloc.searchFocusNode,
         );
-        break;
       default:
         return Text(
           title,
@@ -99,7 +98,6 @@ class _SearchAppBar extends StatelessWidget {
             bloc.searchFocusNode.unfocus();
           },
         );
-        break;
       default:
         return IconButton(
           icon: Icon(

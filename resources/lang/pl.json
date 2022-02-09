@@ -20,7 +20,7 @@
       "content": "Dokładamy wszelkich starań, żeby nasze funkcjonalności działały jak najbardziej dokładnie, aczkolwiek mogą odbiegać od rzeczywistości, w razie znalazienia błędu prosimy o kontakt. Statystyki tworzy nasz automat, który dokonuje aktualizacje w określonym odstępie czasowym, z tego względu mogą występować niedokładności.",
       "title": "Eksperymentalna funkcjonalność"
     },
-    "error": {
+    "error":{
       "network": "Coś poszło nie tak. Proszę sprawdzić swoje połączenie z internetem.",
       "server": "Serwer nie odpowiada. Prosimy spróbować później.",
       "auth": "Coś poszło nie tak i Twoja sesja wygasła!\nZaloguj się ponownie.",
@@ -129,6 +129,9 @@
       "resolutionOfPointOfDispute": "Rozstrzygnięcie punktu spornego",
       "requestOfReassumingVote": "Reasumpcja głosowania",
       "requestOfClosingMeeting": "Zamknięcie obrad",
+      "proceedOfProceedAgenda": "Przejście do porządku dziennego",
+      "changeConductOfVoting": "Zmiana w sposobie przeprowadzania głosowania",
+      "appointmentMemberCollegeInstituteNationalRemembrance": "Powołanie członka kolegium Instytutu Pamięci Narodowej",
       "unknown": "Nieznany rodzaj głosowania"
     },
     "nounCloud": {

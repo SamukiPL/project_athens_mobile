@@ -45,7 +45,7 @@ class AuthFacade {
 
     var newTokens = await _repository.refreshTokens(_refreshToken!);
     _accessToken = newTokens.accessToken;
-    _tokenExp = _jwt.getJwtExp(newTokens.accessToken);
+    _tokenExp = _jwt.getJwtExp(newTokens.accessToken!);
 
     return _accessToken!;
     //JestemDevem19.demokra

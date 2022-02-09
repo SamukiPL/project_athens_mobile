@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
@@ -21,7 +20,6 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
 
   @override
   Widget buildBody(BuildContext context, DeputyDetailsBloc bloc) {
-    final theme = Theme.of(context);
     final localizations = Provider.of<AppLocalizations>(context);
     return DefaultTabController(
         length: 3,

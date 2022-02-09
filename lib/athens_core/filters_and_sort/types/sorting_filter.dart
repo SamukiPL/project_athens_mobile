@@ -1,7 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:project_athens/athens_core/filters_and_sort/domain/sorting_model.dart';
 import 'package:project_athens/athens_core/filters_and_sort/types/base_filter_type.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';

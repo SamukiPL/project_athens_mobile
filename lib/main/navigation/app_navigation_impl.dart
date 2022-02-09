@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:project_athens/athens_core/auto_updater/auto_updater_module.dart';
 import 'package:project_athens/athens_core/chopper/network_module.dart';
 import 'package:project_athens/athens_core/i18n/localization_module.dart';
