@@ -11,18 +11,16 @@ class DeputyVotesNetworkDataSource
   final DeputiesDetailsApi _deputiesDetailsApi;
   final VotingNetworkMapper _networkMapper;
 
-  final int _cadency;
   final String _deputyId;
 
   DeputyVotesNetworkDataSource(
-      this._deputiesDetailsApi, this._networkMapper, this._cadency, this._deputyId);
+      this._deputiesDetailsApi, this._networkMapper, this._deputyId);
 
   @override
   Future<Result<List<VotingModel>>> call(
       BaseListParams params) async {
     try {
       final response = await _deputiesDetailsApi.getVotesByDeputy(
-          _cadency,
           _deputyId,
           VoteSearchRequest(
               params.limit,
@@ -31,7 +29,6 @@ class DeputyVotesNetworkDataSource
               null,
               null,
               params.sortingParam,
-              _cadency,
               true));
 
       final modelsList = await _networkMapper(response);

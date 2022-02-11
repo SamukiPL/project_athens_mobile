@@ -59,7 +59,7 @@ class TimelineBloc extends BaseBloc implements PagingBloc {
   }
 
   Future<void> _loadMeetingsDates() async {
-    final result = await _getMeetingsDates(TimelineParameters(9, ""));
+    final result = await _getMeetingsDates(TimelineParameters(""));
 
     if (result is Success<List<MeetingDate>>) {
       _dates = result.value;
@@ -71,7 +71,7 @@ class TimelineBloc extends BaseBloc implements PagingBloc {
 
   Future<void> loadNewDate(DateTime date) async {
     setLoadingState(DataLoadingState.initialLoading());
-    final params = TimelineParameters(9, date.toIso8601String());
+    final params = TimelineParameters(date.toIso8601String());
     adapter.updateList([], loading: true);
     _selectedDate = date;
     calendarBloc.setDate(date);

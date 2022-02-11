@@ -4,13 +4,12 @@ import 'package:project_athens/dashboard_flow/domain/dashboard_params.dart';
 import 'package:project_athens/dashboard_flow/domain/dashboard_repository.dart';
 import 'package:project_athens/athens_core/domain/base_repository.dart';
 
-class GetDashboardUseCase extends BaseUseCase<DashboardParams> {
+class GetDashboardUseCase extends BaseUseCase {
 
   final DashboardRepository repository;
 
   GetDashboardUseCase(this.repository);
 
-  @override
   Future<Result> call(DashboardParams params) {
     return repository.getDashboard(params).safeApiCall();
   }

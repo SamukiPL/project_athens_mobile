@@ -4,7 +4,7 @@ import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/domain/base_use_case.dart';
 import 'package:project_athens/athens_core/domain/base_repository.dart';
 
-class ResetPasswordUseCase implements BaseUseCase<ResetPasswordParams> {
+class ResetPasswordUseCase implements BaseUseCase {
 
   final ResetPasswordRepository repository;
 

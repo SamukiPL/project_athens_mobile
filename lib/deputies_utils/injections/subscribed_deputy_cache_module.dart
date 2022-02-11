@@ -28,8 +28,12 @@ class SubscribedDeputyCacheModule extends Module {
 
   @override
   List<SingleChildWidget> getProviders() {
+    // final clientOptions = BaseOptions(
+    //   baseUrl: "https://api.swiadoma-demokracja.pl",
+    // );
+
     final clientOptions = BaseOptions(
-      baseUrl: "https://api.swiadoma-demokracja.pl",
+      baseUrl: "http://localhost:3505",
     );
     final client = Dio(clientOptions);
 

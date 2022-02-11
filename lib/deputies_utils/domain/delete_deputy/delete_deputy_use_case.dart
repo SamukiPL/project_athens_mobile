@@ -4,13 +4,12 @@ import 'package:project_athens/deputies_utils/domain/delete_deputy/delete_deputy
 
 import 'delete_deputy_repository.dart';
 
-class DeleteDeputyUseCase extends BaseUseCase<DeleteDeputyParams> {
+class DeleteDeputyUseCase extends BaseUseCase {
 
   final DeleteDeputyRepository _deleteDeputyRepository;
 
   DeleteDeputyUseCase(this._deleteDeputyRepository);
 
-  @override
   Future<Result<void>> call(DeleteDeputyParams params) {
     return _deleteDeputyRepository.deleteDeputy(params);
   }

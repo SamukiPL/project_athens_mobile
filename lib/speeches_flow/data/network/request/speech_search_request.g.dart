@@ -14,7 +14,6 @@ SpeechSearchRequest _$SpeechSearchRequestFromJson(Map<String, dynamic> json) {
     json['from'] as String?,
     json['to'] as String?,
     json['sort'] as String,
-    json['cadency'] as int,
   );
 }
 
@@ -27,5 +26,4 @@ Map<String, dynamic> _$SpeechSearchRequestToJson(
       'from': instance.from,
       'to': instance.to,
       'sort': instance.sort,
-      'cadency': instance.cadency,
     };

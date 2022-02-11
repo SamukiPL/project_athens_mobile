@@ -4,7 +4,6 @@ import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/ext/future_extension.dart';
 import 'package:project_athens/athens_core/ext/map_extension.dart';
 import 'package:project_athens/deputies_utils/cache/cache_errors.dart';
-import 'package:project_athens/deputies_utils/domain/base_deputies_params.dart';
 import 'package:project_athens/deputies_utils/domain/base_deputy_params.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_full.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
@@ -32,7 +31,7 @@ class DeputiesCache {
 
     if (result != null) return result!;
 
-    result = _getDeputiesUseCase(BaseDeputiesParams(9)).whenComplete(() {
+    result = _getDeputiesUseCase().whenComplete(() {
       result = null;
     }).then((result) {
       if (result.isSuccess()) {
@@ -74,7 +73,7 @@ class DeputiesCache {
       return Success(_cachedDeputiesResponse[id]!);
     }
 
-    return _getDeputyUseCase(BaseDeputyParams(9, id)).onSuccessThen((success) {
+    return _getDeputyUseCase(BaseDeputyParams(id)).onSuccessThen((success) {
       final deputyFull = success.value;
       _cachedDeputiesResponse.putIfNotNull(deputyFull.id, deputyFull);
       return success;
@@ -86,7 +85,7 @@ class DeputiesCache {
       return Success(_cachedDeputyNouns[id]!);
     }
 
-    return _getDeputyNounsUseCase(BaseDeputyParams(9, id)).onSuccessThen((success) {
+    return _getDeputyNounsUseCase(BaseDeputyParams(id)).onSuccessThen((success) {
       final words = success.value;
       _cachedDeputyNouns.putIfNotNull(id, words);
       return Success(success.value);

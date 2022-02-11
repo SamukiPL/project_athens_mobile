@@ -1,11 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:project_athens/athens_core/configuration/domain/get_remote_configuration_use_case.dart';
 import 'package:project_athens/athens_core/configuration/domain/platform_app_versions_model.dart';
 import 'package:project_athens/athens_core/configuration/network/get_remote_configuration_response.dart';
-import 'package:project_athens/athens_core/domain/base_list/base_params.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:version/version.dart';
@@ -53,7 +51,7 @@ class RemoteConfiguration {
   }
 
   _fetchRemoteConfig() async {
-    final response = await _getRemoteConfigurationUseCase(BaseParams());
+    final response = await _getRemoteConfigurationUseCase();
 
     if (response is Failure) { 
       return null;

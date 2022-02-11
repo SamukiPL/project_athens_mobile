@@ -92,7 +92,6 @@ class DeputiesChooserBloc extends BaseRegistrationStepBloc
 
   Future<void> call() async {
     var result = await _putDeputiesUseCase(PutDeputiesParams(
-        9,
         _items
             .where((item) => item.checked)
             .map((item) => PutDeputyModel(

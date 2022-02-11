@@ -5,14 +5,13 @@ import 'package:project_athens/athens_core/utils/notifications/domain/notificati
 import 'package:project_athens/athens_core/domain/base_repository.dart';
 import 'package:project_athens/dashboard_flow/domain/notifications/get_notifications_repository.dart';
 
-class GetNotificationsUseCase extends BaseUseCase<BaseParams> {
+class GetNotificationsUseCase extends BaseUseCase {
 
   final GetNotificationsRepository repository;
 
   GetNotificationsUseCase(this.repository);
 
-  @override
-  Future<Result<List<NotificationModel>>> call(BaseParams params) {
+  Future<Result<List<NotificationModel>>> call() {
     return repository.getNotifications().safeApiCall();
   }
 }

@@ -45,7 +45,7 @@ class AccountInfoStep extends BaseRegistrationFormStep<AccountInfoStepBloc> {
           onChanged: (email) => bloc.setEmail(email),
           validator: (email) => getBaseValidator(localization, email, customValidator: (value) {
             if (bloc.emailTaken) return localization.getText().loginValidateEmailIsTaken();
-            if (!EmailValidator.validate(email)) return localization.getText().loginValidateIncorrectEmail();
+            if (email == null || !EmailValidator.validate(email)) return localization.getText().loginValidateIncorrectEmail();
 
             return null;
           }),

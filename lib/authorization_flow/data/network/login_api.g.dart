@@ -79,15 +79,15 @@ class _LoginApi implements LoginApi {
   }
 
   @override
-  Future<List<DeputyResponse>> getAllDeputies(cadency) async {
+  Future<List<DeputyResponse>> getAllDeputies() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<DeputyResponse>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options,
-                    '/deputy-aggregator/cadency-deputy/get-all/$cadency',
+                .compose(
+                    _dio.options, '/deputy-aggregator/cadency-deputy/get-all',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!

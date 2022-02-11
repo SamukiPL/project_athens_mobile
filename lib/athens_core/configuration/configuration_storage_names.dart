@@ -8,4 +8,6 @@ class ConfigurationStorageNames {
   static const String NOTIFICATIONS = "NOTIFICATIONS";
 
   static const String LAST_PRIVACY_POLICY_VERSION = "LAST_PRIVACY_POLICY_VERSION";
+
+  static const String LOGIN_OR_EMAIL = 'LOGIN_OR_EMAIL';
 }

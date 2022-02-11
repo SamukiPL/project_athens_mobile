@@ -1,6 +1,5 @@
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/ext/future_extension.dart';
-import 'package:project_athens/deputies_utils/domain/base_deputies_params.dart';
 import 'package:project_athens/deputies_utils/domain/delete_deputy/delete_deputy_params.dart';
 import 'package:project_athens/deputies_utils/domain/delete_deputy/delete_deputy_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
@@ -32,7 +31,7 @@ class SubscribedDeputiesCache {
     }
 
     awaitingFuture =
-        _firebaseDeputiesUseCase(BaseDeputiesParams(9)).whenComplete(() {
+        _firebaseDeputiesUseCase().whenComplete(() {
       awaitingFuture = null;
     }).onSuccessThen((result) {
       final subscribedDeputies = result.value;
@@ -76,10 +75,10 @@ class SubscribedDeputiesCache {
           subscribedDeputy.notifications.vote,
           subscribedDeputy.notifications.speech,
           subscribedDeputy.notifications.interpolation);
-      await _putDeputiesUseCase.call(PutDeputiesParams(9, [putModel]));
+      await _putDeputiesUseCase.call(PutDeputiesParams([putModel]));
     } else {
       await _deleteDeputyUseCase
-          .call(DeleteDeputyParams(9, subscribedDeputy.id));
+          .call(DeleteDeputyParams(subscribedDeputy.id));
     }
   }
 

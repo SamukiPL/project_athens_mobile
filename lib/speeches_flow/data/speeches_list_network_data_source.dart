@@ -24,7 +24,7 @@ class SpeechesListNetworkDataSource extends NetworkListDataSource<SpeechModel, S
     try {
       final response = await _speechesApi.getSpeeches(
           SpeechSearchRequest(params.limit, params.offset, params.searchQuery,
-              params.from?.toIso8601String(), params.to?.toIso8601String(), params.sortingParam, 9)
+              params.from?.toIso8601String(), params.to?.toIso8601String(), params.sortingParam)
       );
 
       final modelsList = await _networkMapper(response.speeches);

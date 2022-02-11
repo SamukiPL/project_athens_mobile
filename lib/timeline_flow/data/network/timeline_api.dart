@@ -11,15 +11,12 @@ part 'timeline_api.g.dart';
 abstract class TimelineApi {
   factory TimelineApi(Dio dio, {String baseUrl}) = _TimelineApi;
   
-  @GET("/user-aggregator/timeline/{cadency}/parliament-meetings")
-  Future<MeetingsResponse> getMeetingsDates(
-      @Path("cadency") int cadency);
+  @GET("/user-aggregator/timeline/parliament-meetings")
+  Future<MeetingsResponse> getMeetingsDates();
 
-  @GET("/user-aggregator/timeline/{cadency}/{date}/v2")
-  Future<TimelineResponse> getAllDeputies(
-      @Path("cadency") int cadency, @Path("date") String date);
+  @GET("/user-aggregator/timeline/{date}/v2")
+  Future<TimelineResponse> getAllDeputies(@Path("date") String date);
 
-  @GET("/user-aggregator/timeline/{cadency}/{date}/noun-cloud")
-  Future<NounCloudResponse> getNounCloud(
-      @Path("cadency") int cadency, @Path("date") String date);
+  @GET("/user-aggregator/timeline/{date}/noun-cloud")
+  Future<NounCloudResponse> getNounCloud(@Path("date") String date);
 }

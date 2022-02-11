@@ -6,7 +6,8 @@ class RegistrationParams {
   final String email;
   final String password;
   final List<String> deputies;
+  final int cadence;
 
-  RegistrationParams(this.firstName, this.lastName, this.login, this.email, this.password, this.deputies);
+  RegistrationParams(this.firstName, this.lastName, this.login, this.email, this.password, this.deputies, this.cadence);
 
 }

@@ -34,19 +34,18 @@ class _DeputiesDetailsApi implements DeputiesDetailsApi {
   }
 
   @override
-  Future<List<VotingResponse>> getVotesByDeputy(
-      cadency, cadencyDeputyId, query) async {
+  Future<List<VotingResponse>> getVotesByDeputy(cadencyDeputyId, query) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(query.toJson());
-    final _result = await _dio.fetch<List<dynamic>>(_setStreamType<
-        List<VotingResponse>>(Options(
-            method: 'POST', headers: <String, dynamic>{}, extra: _extra)
-        .compose(_dio.options,
-            '/deputy-aggregator/cadency-voting/$cadency/deputy/$cadencyDeputyId',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<VotingResponse>>(
+            Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options,
+                    '/deputy-aggregator/cadency-voting/deputy/$cadencyDeputyId',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
         .map((dynamic i) => VotingResponse.fromJson(i as Map<String, dynamic>))
         .toList();

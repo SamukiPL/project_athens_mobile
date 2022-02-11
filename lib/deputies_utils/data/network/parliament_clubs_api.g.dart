@@ -14,15 +14,15 @@ class _ParliamentClubsApi implements ParliamentClubsApi {
   String? baseUrl;
 
   @override
-  Future<ParliamentClubResponse> geParliamentClubs(cadency) async {
+  Future<ParliamentClubResponse> geParliamentClubs() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ParliamentClubResponse>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options,
-                    '/deputy-aggregator/cadency-parliament-club/$cadency',
+                .compose(
+                    _dio.options, '/deputy-aggregator/cadency-parliament-club',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ParliamentClubResponse.fromJson(_result.data!);

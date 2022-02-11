@@ -8,10 +8,11 @@ import 'package:project_athens/authorization_flow/screens/registration/steps/reg
 class RegistrationEndStepBloc extends BaseRegistrationStepBloc with ConfigurationDelegate<DateTime, DateTime> {
 
   final RegistrationUseCase _registrationUseCase;
+  final int _currentCadence;
 
   final ShowRepeatPasswordNotifier _animationNotifier;
 
-  RegistrationEndStepBloc(this._registrationUseCase, this._animationNotifier);
+  RegistrationEndStepBloc(this._registrationUseCase, this._animationNotifier, this._currentCadence);
 
   String _login = "";
   String _email = "";
@@ -56,7 +57,7 @@ class RegistrationEndStepBloc extends BaseRegistrationStepBloc with Configuratio
   }
 
   Future<void> call() async {
-    final params = RegistrationParams(_firstName, _lastName, _login, _email, _password, List<String>.empty());
+    final params = RegistrationParams(_firstName, _lastName, _login, _email, _password, List<String>.empty(), _currentCadence);
 
     final result = await _registrationUseCase(params);
 
