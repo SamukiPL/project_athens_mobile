@@ -1,5 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/auth/auth_repository_impl.dart';
+import 'package:project_athens/athens_core/auth/network/auth_api.dart';
+import 'package:project_athens/athens_core/chopper/auth_facade.dart';
+import 'package:project_athens/athens_core/chopper/auth_interceptor.dart';
 import 'package:project_athens/athens_core/chopper/error_interceptor.dart';
 import 'package:project_athens/athens_core/chopper/network_module.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
@@ -34,16 +38,26 @@ class AppModule extends Module {
     // );
 
     final clientOptions = BaseOptions(
-      baseUrl: "http://localhost:3505",
+      baseUrl: "http://10.0.2.2:3505",
     );
     final client = Dio(clientOptions);
 
-    client.interceptors.addAll([
+    final authenticatedClient = Dio(clientOptions);
+
+    final baseInterceptors = [
       LogInterceptor(requestBody: true, responseBody: true),
       ErrorInterceptor()
-    ]);
+    ];
 
-    final clubsCache = _createClubsCache(client);
+    client.interceptors.addAll(baseInterceptors);
+
+    final authApi = AuthApi(client);
+    final authRepository = AuthRepositoryImpl(authApi);
+    final authFacade = AuthFacade(authRepository);
+
+    authenticatedClient.interceptors.addAll(baseInterceptors + [AuthInterceptor(authFacade)]);
+
+    final clubsCache = _createClubsCache(authenticatedClient);
 
     return List<SingleChildWidget>.of([
       Provider<SimpleDioClient>(
@@ -54,11 +68,11 @@ class AppModule extends Module {
           value: clubsCache
       ),
       Provider<DeputiesCache>(
-        create: (_) => _createDeputiesCache(client, clubsCache),
+        create: (_) => _createDeputiesCache(authenticatedClient, clubsCache),
       ),
       Provider<SpeechCache>(create: (_) => SpeechCache()),
       Provider<ParliamentMeetingCache>(
-        create: (_) => _createParliamentMeetingCache(client),
+        create: (_) => _createParliamentMeetingCache(authenticatedClient),
         dispose: (_, cache) => cache.dispose(),
       )
     ]);

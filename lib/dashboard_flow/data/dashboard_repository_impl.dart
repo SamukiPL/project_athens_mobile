@@ -12,7 +12,6 @@ class DashboardRepositoryImpl implements DashboardRepository {
   @override
   Future<Result<DashboardResponse>> getDashboard(DashboardParams params) async {
     final response = await dashboardApi.getDashboard(
-        params.cadence,
         params.meeting,
         params.voteAbsent,
         params.monthMeetings,

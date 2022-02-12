@@ -16,7 +16,7 @@ class ParliamentMeetingDetailsRepositoryImpl implements ParliamentMeetingDetails
       String parliamentMeetingId,
       ) async {
     final response = await dashboardApi.getParliamentMeetingDetails(
-        cadence, parliamentMeetingId
+        parliamentMeetingId
     );
 
     final ParliamentMeetingModel model = networkMapper.transform(response);

@@ -24,7 +24,7 @@ class NetworkModule extends Module {
     // );
 
     final clientOptions = BaseOptions(
-      baseUrl: "http://localhost:3505",
+      baseUrl: "http://10.0.2.2:3505",
     );
 
     return [
