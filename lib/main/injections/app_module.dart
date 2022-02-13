@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/auth/auth_repository_impl.dart';
 import 'package:project_athens/athens_core/auth/network/auth_api.dart';
 import 'package:project_athens/athens_core/chopper/auth_facade.dart';
+import 'package:project_athens/athens_core/chopper/authenticated_dio_client.dart';
 import 'package:project_athens/athens_core/chopper/auth_interceptor.dart';
 import 'package:project_athens/athens_core/chopper/error_interceptor.dart';
-import 'package:project_athens/athens_core/chopper/network_module.dart';
+import 'package:project_athens/athens_core/chopper/simple_dio_client.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/dashboard_flow/cache/parliament_meeting_cache.dart';
 import 'package:project_athens/dashboard_flow/data/network/dashboard_api.dart';
@@ -33,12 +34,10 @@ class AppModule extends Module {
 
   @override
   List<SingleChildWidget> getProviders() {
-    // final clientOptions = BaseOptions(
-    //   baseUrl: "https://api.swiadoma-demokracja.pl",
-    // );
-
     final clientOptions = BaseOptions(
-      baseUrl: "http://10.0.2.2:3505",
+      baseUrl: "https://api.swiadoma-demokracja.pl",
+      // uncomment this for local service connection.
+      // baseUrl: "http://10.0.2.2:3505",
     );
     final client = Dio(clientOptions);
 
@@ -63,6 +62,10 @@ class AppModule extends Module {
       Provider<SimpleDioClient>(
         create: (_) => SimpleDioClient(client),
         dispose: (context, client) => client.dispose(),
+      ),
+      Provider<AuthenticatedDioClient>(
+        create: (_) => AuthenticatedDioClient(authenticatedClient),
+        dispose: (context, client) => client.dispose()
       ),
       Provider<ParliamentClubsCache>.value(
           value: clubsCache

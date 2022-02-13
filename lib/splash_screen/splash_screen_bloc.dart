@@ -42,7 +42,8 @@ class SplashScreenBloc extends BaseBloc {
         await _authRepository.refreshTokens(tokens.refreshToken);
       }
       await _subscribedDeputiesCache.subscribedDeputies.catchError((err) {
-        Fimber.e(err);
+        print(err.toString());
+        Fimber.e(err.toString());
       });
       _direction.add(SplashDirection.MAIN);
     } on DioError {

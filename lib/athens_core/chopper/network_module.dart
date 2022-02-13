@@ -3,7 +3,9 @@ import 'package:project_athens/athens_core/auth/auth_repository_impl.dart';
 import 'package:project_athens/athens_core/auth/network/auth_api.dart';
 import 'package:project_athens/athens_core/chopper/auth_facade.dart';
 import 'package:project_athens/athens_core/chopper/auth_interceptor.dart';
+import 'package:project_athens/athens_core/chopper/authenticated_dio_client.dart';
 import 'package:project_athens/athens_core/chopper/error_interceptor.dart';
+import 'package:project_athens/athens_core/chopper/simple_dio_client.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
@@ -14,40 +16,32 @@ class NetworkModule extends Module {
 
   @override
   List<SingleChildWidget> getProviders() {
-    final refreshClient = Provider.of<SimpleDioClient>(context).client;
-    final authApi = AuthApi(refreshClient);
-    final authRepository = AuthRepositoryImpl(authApi);
-    final authFacade = AuthFacade(authRepository);
-
+    // final refreshClient = Provider.of<SimpleDioClient>(context).client;
+    // final authApi = AuthApi(refreshClient);
+    // final authRepository = AuthRepositoryImpl(authApi);
+    // final authFacade = AuthFacade(authRepository);
+    //
+    // // final clientOptions = BaseOptions(
+    // //   baseUrl: "https://api.swiadoma-demokracja.pl",
+    // // );
+    //
     // final clientOptions = BaseOptions(
-    //   baseUrl: "https://api.swiadoma-demokracja.pl",
+    //   baseUrl: "http://10.0.2.2:3505",
     // );
-
-    final clientOptions = BaseOptions(
-      baseUrl: "http://10.0.2.2:3505",
-    );
+    final Dio dio = Provider.of<AuthenticatedDioClient>(context).client;
 
     return [
-      Provider<Dio>(
-        create: (BuildContext context) => Dio(clientOptions)
-        ..interceptors.addAll([AuthInterceptor(authFacade), ErrorInterceptor(), LogInterceptor(requestBody: false, responseBody: false)]),
-        dispose: (context, client) {
-          client.close();
-        },
-        lazy: false,
+      // Provider<Dio>(
+      //   create: (BuildContext context) => Dio(clientOptions)
+      //   ..interceptors.addAll([AuthInterceptor(authFacade), ErrorInterceptor(), LogInterceptor(requestBody: false, responseBody: false)]),
+      //   dispose: (context, client) {
+      //     client.close();
+      //   },
+      //   lazy: false,
+      // )
+      Provider<Dio>.value(
+        value: dio,
       )
     ];
   }
-}
-
-class SimpleDioClient {
-
-  final Dio client;
-
-  SimpleDioClient(this.client);
-
-  void dispose() {
-    client.close();
-  }
-
 }

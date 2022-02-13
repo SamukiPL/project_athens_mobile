@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/chopper/network_module.dart';
+import 'package:project_athens/athens_core/chopper/simple_dio_client.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/presentation/agreement/agreement_widget_bloc.dart';
 import 'package:project_athens/athens_core/presentation/agreement/data/get_agreement_html_repository_impl.dart';
