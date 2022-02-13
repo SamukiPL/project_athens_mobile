@@ -6,6 +6,8 @@ part of 'parliament_clubs_api.dart';
 // RetrofitGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 class _ParliamentClubsApi implements ParliamentClubsApi {
   _ParliamentClubsApi(this._dio, {this.baseUrl});
 
@@ -17,10 +19,11 @@ class _ParliamentClubsApi implements ParliamentClubsApi {
   Future<ParliamentClubResponse> geParliamentClubs() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ParliamentClubResponse>(
-            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+            Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(
                     _dio.options, '/deputy-aggregator/cadency-parliament-club',
                     queryParameters: queryParameters, data: _data)

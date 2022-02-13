@@ -1,9 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
-import 'package:project_athens/athens_core/presentation/agreement/agreement_widget.dart';
-import 'package:project_athens/athens_core/presentation/agreement/agreement_widget_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_form_step.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_step_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/registration_end/registration_end_form_key.dart';

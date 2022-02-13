@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
@@ -8,9 +6,7 @@ import 'package:project_athens/athens_core/presentation/data_loading/data_loadin
 import 'package:project_athens/athens_core/presentation/db_source/db_source.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/athens_core/utils/pair.dart';
-import 'package:project_athens/deputies_flow/navigation/deputies_destinations.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
-import 'package:project_athens/deputies_utils/domain/subscribed_deputy_model.dart';
 import 'package:project_athens/speeches_flow/screens/details/clipper_ltrb.dart';
 import 'package:project_athens/speeches_flow/screens/details/speech_details_bloc.dart';
 import 'package:project_athens/speeches_flow/screens/details/video_widget/speech_video_widget.dart';

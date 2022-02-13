@@ -6,6 +6,8 @@ part of 'voting_api.dart';
 // RetrofitGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 class _VotingApi implements VotingApi {
   _VotingApi(this._dio, {this.baseUrl});
 
@@ -17,11 +19,12 @@ class _VotingApi implements VotingApi {
   Future<VoteSearchResponse> getVoting(request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(request.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<VoteSearchResponse>(
-            Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
+            Options(method: 'POST', headers: _headers, extra: _extra)
                 .compose(
                     _dio.options, '/deputy-aggregator/cadency-voting/search/v2',
                     queryParameters: queryParameters, data: _data)
@@ -34,12 +37,13 @@ class _VotingApi implements VotingApi {
   Future<VotingResponse> getVotingLiteById(voteId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<VotingResponse>(Options(
-                method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+                method: 'GET', headers: _headers, extra: _extra)
             .compose(
-                _dio.options, '/deputy-aggregator/cadency-voting/id/$voteId',
+                _dio.options, '/deputy-aggregator/cadency-voting/id/${voteId}',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = VotingResponse.fromJson(_result.data!);

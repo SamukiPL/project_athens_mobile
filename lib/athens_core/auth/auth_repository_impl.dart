@@ -22,7 +22,7 @@ class AuthRepositoryImpl implements AuthRepository {
         ? refreshToken
         : response.refreshToken;
 
-    await storage.saveTokens(newAccessToken, newRefreshToken);
+    await storage.saveTokens(newAccessToken, newRefreshToken!);
 
     return Tokens(newAccessToken, newRefreshToken);
   }

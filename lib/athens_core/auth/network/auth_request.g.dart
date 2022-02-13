@@ -6,11 +6,9 @@ part of 'auth_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AuthRequest _$AuthRequestFromJson(Map<String, dynamic> json) {
-  return AuthRequest(
-    json['refreshToken'] as String,
-  );
-}
+AuthRequest _$AuthRequestFromJson(Map<String, dynamic> json) => AuthRequest(
+      json['refreshToken'] as String,
+    );
 
 Map<String, dynamic> _$AuthRequestToJson(AuthRequest instance) =>
     <String, dynamic>{

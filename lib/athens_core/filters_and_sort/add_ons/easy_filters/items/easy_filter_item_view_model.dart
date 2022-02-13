@@ -1,9 +1,8 @@
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/filters_and_sort/add_ons/easy_filters/items/easy_filter_view_holder.dart';
 import 'package:project_athens/athens_core/filters_and_sort/add_ons/easy_filters/updatable_easy_filter_item.dart';
 import 'package:project_athens/athens_core/filters_and_sort/domain/easy_filters/easy_filter_model.dart';
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
-import 'package:provider/provider.dart';
 
 class EasyFilterItemViewModel<T> extends BaseItemViewModel
     implements UpdatableEasyFilterItem<T> {

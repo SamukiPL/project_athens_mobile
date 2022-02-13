@@ -7,7 +7,7 @@ import 'package:reorderableitemsview/reorderableitemsview.dart';
 class Grid extends StatefulWidget {
   final List<TileData> tiles;
   final int gridSize;
-  void Function(List<TileData> tiles)? onTileReordered;
+  final void Function(List<TileData> tiles)? onTileReordered;
 
   Grid({required this.tiles, this.gridSize = 3, this.onTileReordered});
 

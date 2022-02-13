@@ -1,7 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 extension FlutterSecureStorageExtension on FlutterSecureStorage {
-  bool _parseBool(String storageValue) {
+  bool _parseBool(String? storageValue) {
     return storageValue != null && storageValue.toLowerCase() == true.toString().toLowerCase();
   }
 

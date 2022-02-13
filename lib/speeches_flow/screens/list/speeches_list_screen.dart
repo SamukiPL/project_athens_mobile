@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:project_athens/athens_core/filters_and_sort/add_ons/easy_filters/easy_filters_list.dart';
 import 'package:project_athens/athens_core/filters_and_sort/filters_bottom_sheet.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';

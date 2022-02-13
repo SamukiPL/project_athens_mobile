@@ -1,11 +1,5 @@
-import 'dart:developer';
-
-import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
-import 'package:project_athens/athens_core/domain/base_list/base_model.dart';
 import 'package:project_athens/athens_core/models/db_harvest_model.dart';
 import 'package:project_athens/athens_core/models/timeline_voting_model.dart';
-import 'package:project_athens/athens_core/models/voting_model.dart';
-import 'package:project_athens/deputies_utils/domain/parliament_club_model.dart';
 
 abstract class TimelineModel extends DbHarvestModel {
 

@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:project_athens/athens_core/domain/base_list/base_model.dart';
 
 part 'saved_notification.g.dart';
 

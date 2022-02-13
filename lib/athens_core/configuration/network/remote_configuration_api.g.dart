@@ -6,6 +6,8 @@ part of 'remote_configuration_api.dart';
 // RetrofitGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 class _RemoteConfigurationApi implements RemoteConfigurationApi {
   _RemoteConfigurationApi(this._dio, {this.baseUrl});
 
@@ -17,10 +19,11 @@ class _RemoteConfigurationApi implements RemoteConfigurationApi {
   Future<GetRemoteConfigurationResponse> getRemoteConfiguration() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<GetRemoteConfigurationResponse>(
-            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+            Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/user-aggregator/config',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));

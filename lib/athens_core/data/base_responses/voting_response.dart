@@ -17,7 +17,7 @@ class VotingResponse implements TimelineItem {
   final String votingUniqueId;
   final String topic;
   final List<Votes> votes;
-  final VotingType votingType;
+  final int votingType;
   final String id;
   final int absoluteMajority;
   final int qualifyingMajority;
@@ -149,6 +149,12 @@ enum VotingType {
   REQUEST_OF_REASSUMING_VOTE,
   @JsonValue(23)
   REQUEST_OF_CLOSING_MEETING,
+  @JsonValue(24)
+  PROCEED_OF_PROCEED_AGENDA,
+  @JsonValue(25)
+  CHANGE_CONDUCT_OF_VOTING,
+  @JsonValue(26)
+  APPOINTNMENT_MEMBER_COLLEGE_INSTITUTE_NATIONAL_REMEMBRANCE,
   @JsonValue(999)
   UNKNOWN
 }

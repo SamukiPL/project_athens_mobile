@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
@@ -19,7 +18,6 @@ class DeputyVoteAccuracyViewHolder extends StatelessWidget with RedirectionDeleg
     final theme = Theme.of(context);
     return GestureDetector(
       onTap: () {
-        // TODO
         goToDestination(context, VoteDetailsDestination(_viewModel.model));
       },
       child: Column(

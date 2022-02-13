@@ -7,12 +7,11 @@ part of 'check_pair_usage_request.dart';
 // **************************************************************************
 
 CheckPairUsageRequest _$CheckPairUsageRequestFromJson(
-    Map<String, dynamic> json) {
-  return CheckPairUsageRequest(
-    json['username'] as String,
-    json['email'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    CheckPairUsageRequest(
+      json['username'] as String,
+      json['email'] as String,
+    );
 
 Map<String, dynamic> _$CheckPairUsageRequestToJson(
         CheckPairUsageRequest instance) =>

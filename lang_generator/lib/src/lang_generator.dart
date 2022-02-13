@@ -116,7 +116,7 @@ class LangGenerator extends GeneratorForAnnotation<LangAutomation> {
     _keysMap.forEach((String key, String value) {
       functionCode += "  test(\"All methods for \$locale $key\", () async {\n"
           "    String $key = localization.$key();\n"
-          "    expect(true, $key != \"\" && $key != null); \n"
+          "    expect(true, $key != \"\"); \n"
           "  }); \n \n";
     });
 

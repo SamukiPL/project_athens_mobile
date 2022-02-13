@@ -2,6 +2,7 @@ import 'package:project_athens/athens_core/data/base_responses/voting_response.d
 import 'package:project_athens/athens_core/domain/data_mapper.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
+import 'package:project_athens/athens_core/utils/get_vote_description_helper.dart';
 
 class VotingNetworkMapper extends AsyncDataMapper<VotingResponse, VotingModel> {
 
@@ -13,14 +14,15 @@ class VotingNetworkMapper extends AsyncDataMapper<VotingResponse, VotingModel> {
   Future<VotingModel> transform(VotingResponse data) async {
     final results = VoteResultModel(data.inFavor, data.against, data.hold, data.absent);
     final voteModels = data.votes.map((vote) => VoteModel(VoteType.values[vote.type], vote.cadencyDeputy)).toList();
+    final VotingType votingType = getVotingTypeFromInt(data.votingType);
     return VotingModel(
     id: data.id,
     title: data.topic,
     date: data.votedAt,
     absoluteMajority: data.absoluteMajority,
     qualifyingMajority: data.qualifyingMajority,
-    votingDesc: getVotingDesc(data.votingType),
-    votingType: data.votingType,
+    votingDesc: getVoteDescriptionHelper(votingType, _localizations),
+    votingType: votingType,
     results: results,
     votes: voteModels,
     clubVotes: data.parliamentClubVotingNumbers,
@@ -33,73 +35,66 @@ class VotingNetworkMapper extends AsyncDataMapper<VotingResponse, VotingModel> {
     );
   }
 
-  String getVotingDesc(VotingType type) {
-    switch (type) {
-      case VotingType.RESOLUTION_PROJECT:
-        return _localizations.getText().timelineVotingTypesResolutionProject();
-        break;
-      case VotingType.LAW_PROJECT:
-        return _localizations.getText().timelineVotingTypesLawProject();
-        break;
-      case VotingType.BREAK:
-        return _localizations.getText().timelineVotingTypesBreak();
-        break;
-      case VotingType.QUORUM:
-        return _localizations.getText().timelineVotingTypesQuorum();
-        break;
-      case VotingType.REPORT:
-        return _localizations.getText().timelineVotingTypesReport();
-        break;
-      case VotingType.VOTE_OF_NO_CONFIDENCE:
-        return _localizations.getText().timelineVotingTypesVoteOfNoConfidence();
-        break;
-      case VotingType.COMPLETION_OF_AGENDA:
-        return _localizations.getText().timelineVotingTypesCompletionOfAgenda();
-        break;
-      case VotingType.SHORTENING_DEADLINE:
-        return _localizations.getText().timelineVotingTypesShorteningDeadline();
-        break;
-      case VotingType.CHANGE_COMISSION_MEMBERS:
-        return _localizations.getText().timelineVotingTypesChangeCommissionMembers();
-        break;
-      case VotingType.VOTE_FOR_PROPOSAL:
-        return _localizations.getText().timelineVotingTypesVoteForProposal();
-        break;
-      case VotingType.PERSON_VOTE:
-        return _localizations.getText().timelineVotingTypesPersonVote();
-        break;
-      case VotingType.VOTE_FOR_POSTPONEMENT_GATHERING:
-        return _localizations.getText().timelineVotingTypesVoteForPostponementGathering();
-        break;
-      case VotingType.MARSHAL:
-        return _localizations.getText().timelineVotingTypesMarshal();
-        break;
-      case VotingType.VICE_MARSHAL:
-        return _localizations.getText().timelineVotingTypesViceMarshal();
-        break;
-      case VotingType.CHOOSE_COMISSION_MEMBERS:
-        return _localizations.getText().timelineVotingTypesChooseComissionMembers();
-        break;
-      case VotingType.SELECTION_OF_PARLIAMENT_SECRETARIES:
-        return _localizations.getText().timelineVotingTypesSelectionOfParliamentSecretaries();
-        break;
-      case VotingType.VOTE_OF_CONFIDENCE:
-        return _localizations.getText().timelineVotingTypesVoteOfConfidence();
-        break;
-      case VotingType.SELECTION_OF_STATE_TRIBUNAL:
-        return _localizations.getText().timelineVotingTypesSelectionOfStateTribunal();
-        break;
-      case VotingType.SELECTION_OF_CONSTITUTIONAL_COURT:
-        return _localizations.getText().timelineVotingTypesSelectionOfConstitutionalCourt();
-        break;
-      case VotingType.SELECTION_OF_DEPUTY_MEMBER_NATIONAL_COUNCIL_JUDICIARY:
-        return _localizations.getText().timelineVotingTypesSelectionOfNationalCouncilJudiciary();
-        break;
-      case VotingType.UNKNOWN:
-        return _localizations.getText().timelineVotingTypesUnknown();
-        break;
-      default:
-        throw Exception("There is no other VotingType!");
+  VotingType getVotingTypeFromInt(int votingType) {
+    switch (votingType) {
+      case 0:
+        return VotingType.RESOLUTION_PROJECT;
+      case 1:
+        return VotingType.LAW_PROJECT;
+      case 2:
+        return VotingType.BREAK;
+      case 3:
+        return VotingType.QUORUM;
+      case 4:
+        return VotingType.REPORT;
+      case 5:
+        return VotingType.VOTE_OF_NO_CONFIDENCE;
+      case 6:
+        return VotingType.COMPLETION_OF_AGENDA;
+      case 7:
+        return VotingType.SHORTENING_DEADLINE;
+      case 8:
+        return VotingType.CHANGE_COMISSION_MEMBERS;
+      case 9:
+        return VotingType.VOTE_FOR_PROPOSAL;
+      /// Pkt 19. porz. dzien. Wybór sędziów Trybunału Konstytucyjnego - głosowanie nad wyborem pana Jakuba Steliny na stanowisko sędziego Trybunału Konstytucyjnego
+      case 10:
+        return VotingType.PERSON_VOTE;
+      case 11:
+        return VotingType.VOTE_FOR_POSTPONEMENT_GATHERING;
+      case 12:
+        return VotingType.MARSHAL;
+      case 13:
+        return VotingType.VICE_MARSHAL;
+      case 14:
+        return VotingType.CHOOSE_COMISSION_MEMBERS;
+      case 15:
+        return VotingType.SELECTION_OF_PARLIAMENT_SECRETARIES;
+      case 16:
+        return VotingType.VOTE_OF_CONFIDENCE;
+      case 17:
+        return VotingType.SELECTION_OF_STATE_TRIBUNAL;
+      case 18:
+        return VotingType.SELECTION_OF_CONSTITUTIONAL_COURT;
+      case 19:
+        return VotingType.SELECTION_OF_DEPUTY_MEMBER_NATIONAL_COUNCIL_JUDICIARY;
+      case 20:
+        return VotingType.REPEAL_OF_REGULATION;
+      case 21:
+        return VotingType.RESOLUTION_OF_POINT_OF_DISPUTE;
+      case 22:
+        return VotingType.REQUEST_OF_REASSUMING_VOTE;
+      case 23:
+        return VotingType.REQUEST_OF_CLOSING_MEETING;
+      case 24:
+        return VotingType.PROCEED_OF_PROCEED_AGENDA;
+      case 25:
+        return VotingType.CHANGE_CONDUCT_OF_VOTING;
+      case 26:
+        return VotingType.APPOINTNMENT_MEMBER_COLLEGE_INSTITUTE_NATIONAL_REMEMBRANCE;
+      case 999:
+        default:
+        return VotingType.UNKNOWN;
     }
   }
 }

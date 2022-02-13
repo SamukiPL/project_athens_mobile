@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/constants/color_constants.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
@@ -146,16 +145,12 @@ class VoteMajorityDistribution extends StatelessWidget {
     switch(type)  {
       case VoteType.IN_FAVOR:
         return ColorConstants.voteInFavorColor;
-        break;
       case VoteType.AGAINST:
         return ColorConstants.voteAgainstColor;
-        break;
       case VoteType.HOLD:
         return ColorConstants.voteHoldColor;
-        break;
       case VoteType.ABSENT:
         return ColorConstants.voteAbsetColor;
-        break;
     }
   }
 

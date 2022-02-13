@@ -1,4 +1,4 @@
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/deputies_flow/domain/details/get_full_deputy_use_case.dart';
@@ -21,5 +21,4 @@ class DeputyInformationModule extends Module {
       )
     ];
   }
-
 }

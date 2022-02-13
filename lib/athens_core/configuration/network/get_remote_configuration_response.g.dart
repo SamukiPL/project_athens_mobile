@@ -7,12 +7,11 @@ part of 'get_remote_configuration_response.dart';
 // **************************************************************************
 
 GetRemoteConfigurationResponse _$GetRemoteConfigurationResponseFromJson(
-    Map<String, dynamic> json) {
-  return GetRemoteConfigurationResponse(
-    GetRemoteConfigurationConfig.fromJson(
-        json['config'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    GetRemoteConfigurationResponse(
+      GetRemoteConfigurationConfig.fromJson(
+          json['config'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$GetRemoteConfigurationResponseToJson(
         GetRemoteConfigurationResponse instance) =>
@@ -21,16 +20,15 @@ Map<String, dynamic> _$GetRemoteConfigurationResponseToJson(
     };
 
 GetRemoteConfigurationConfig _$GetRemoteConfigurationConfigFromJson(
-    Map<String, dynamic> json) {
-  return GetRemoteConfigurationConfig(
-    json['cadence'] as int,
-    RemoteConfigurationAppVersion.fromJson(
-        json['minimalAppVersion'] as Map<String, dynamic>),
-    RemoteConfigurationAppVersion.fromJson(
-        json['recommendedAppVersion'] as Map<String, dynamic>),
-    DateTime.parse(json['privacyPolicyVersion'] as String),
-  );
-}
+        Map<String, dynamic> json) =>
+    GetRemoteConfigurationConfig(
+      json['cadence'] as int,
+      RemoteConfigurationAppVersion.fromJson(
+          json['minimalAppVersion'] as Map<String, dynamic>),
+      RemoteConfigurationAppVersion.fromJson(
+          json['recommendedAppVersion'] as Map<String, dynamic>),
+      DateTime.parse(json['privacyPolicyVersion'] as String),
+    );
 
 Map<String, dynamic> _$GetRemoteConfigurationConfigToJson(
         GetRemoteConfigurationConfig instance) =>
@@ -42,13 +40,12 @@ Map<String, dynamic> _$GetRemoteConfigurationConfigToJson(
     };
 
 RemoteConfigurationAppVersion _$RemoteConfigurationAppVersionFromJson(
-    Map<String, dynamic> json) {
-  return RemoteConfigurationAppVersion(
-    json['android'] as String,
-    json['iOS'] as String,
-    json['iPadOS'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    RemoteConfigurationAppVersion(
+      json['android'] as String,
+      json['iOS'] as String,
+      json['iPadOS'] as String,
+    );
 
 Map<String, dynamic> _$RemoteConfigurationAppVersionToJson(
         RemoteConfigurationAppVersion instance) =>
