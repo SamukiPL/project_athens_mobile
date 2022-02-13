@@ -6,6 +6,8 @@ part of 'speeches_api.dart';
 // RetrofitGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 class _SpeechesApi implements SpeechesApi {
   _SpeechesApi(this._dio, {this.baseUrl});
 
@@ -17,14 +19,15 @@ class _SpeechesApi implements SpeechesApi {
   Future<SpeechResponse> getSpeech(speechId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<SpeechResponse>(
-            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-                .compose(
-                    _dio.options, '/deputy-aggregator/cadency-speech/$speechId',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<SpeechResponse>(Options(
+                method: 'GET', headers: _headers, extra: _extra)
+            .compose(
+                _dio.options, '/deputy-aggregator/cadency-speech/${speechId}',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = SpeechResponse.fromJson(_result.data!);
     return value;
   }
@@ -33,11 +36,12 @@ class _SpeechesApi implements SpeechesApi {
   Future<SpeechesSearchResponse> getSpeeches(request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(request.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<SpeechesSearchResponse>(
-            Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
+            Options(method: 'POST', headers: _headers, extra: _extra)
                 .compose(
                     _dio.options, '/deputy-aggregator/cadency-speech/search',
                     queryParameters: queryParameters, data: _data)

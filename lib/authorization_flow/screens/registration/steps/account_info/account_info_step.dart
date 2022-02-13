@@ -1,5 +1,4 @@
 import 'package:email_validator/email_validator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
@@ -45,7 +44,7 @@ class AccountInfoStep extends BaseRegistrationFormStep<AccountInfoStepBloc> {
           onChanged: (email) => bloc.setEmail(email),
           validator: (email) => getBaseValidator(localization, email, customValidator: (value) {
             if (bloc.emailTaken) return localization.getText().loginValidateEmailIsTaken();
-            if (!EmailValidator.validate(email)) return localization.getText().loginValidateIncorrectEmail();
+            if (email == null || !EmailValidator.validate(email)) return localization.getText().loginValidateIncorrectEmail();
 
             return null;
           }),

@@ -1,5 +1,4 @@
 import 'package:project_athens/athens_core/injections/module.dart';
-import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/deputy_subscription/presentation/deputies_registration/deputies_registration_bloc.dart';
 import 'package:flutter/cupertino.dart';

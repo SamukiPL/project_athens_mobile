@@ -6,17 +6,16 @@ part of 'speech_search_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SpeechSearchRequest _$SpeechSearchRequestFromJson(Map<String, dynamic> json) {
-  return SpeechSearchRequest(
-    json['limit'] as int,
-    json['offset'] as int,
-    json['searchPhrase'] as String,
-    json['from'] as String?,
-    json['to'] as String?,
-    json['sort'] as String,
-    json['cadency'] as int,
-  );
-}
+SpeechSearchRequest _$SpeechSearchRequestFromJson(Map<String, dynamic> json) =>
+    SpeechSearchRequest(
+      json['limit'] as int,
+      json['offset'] as int,
+      json['searchPhrase'] as String,
+      json['from'] as String?,
+      json['to'] as String?,
+      json['sort'] as String,
+      json['cadency'] as int,
+    );
 
 Map<String, dynamic> _$SpeechSearchRequestToJson(
         SpeechSearchRequest instance) =>

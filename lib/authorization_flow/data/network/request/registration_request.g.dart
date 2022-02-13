@@ -6,15 +6,14 @@ part of 'registration_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-RegistrationRequest _$RegistrationRequestFromJson(Map<String, dynamic> json) {
-  return RegistrationRequest(
-    firstName: json['firstName'] as String,
-    lastName: json['lastName'] as String,
-    login: json['login'] as String,
-    email: json['email'] as String,
-    password: json['password'] as String,
-  );
-}
+RegistrationRequest _$RegistrationRequestFromJson(Map<String, dynamic> json) =>
+    RegistrationRequest(
+      firstName: json['firstName'] as String,
+      lastName: json['lastName'] as String,
+      login: json['login'] as String,
+      email: json['email'] as String,
+      password: json['password'] as String,
+    );
 
 Map<String, dynamic> _$RegistrationRequestToJson(
         RegistrationRequest instance) =>

@@ -1,5 +1,3 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/filters_and_sort/add_ons/easy_filters/items/easy_filter_item_view_model.dart';
 import 'package:provider/provider.dart';

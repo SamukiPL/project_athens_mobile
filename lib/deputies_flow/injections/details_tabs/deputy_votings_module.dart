@@ -12,7 +12,6 @@ import 'package:project_athens/deputies_flow/data/network/deputies_details_api.d
 import 'package:project_athens/deputies_flow/injections/details_tabs/deputy_vote_view/deputy_vote_item_view_model_factory.dart';
 import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_details_list_blocs.dart';
 import 'package:project_athens/voting_flow/mappers/voting_network_mapper.dart';
-import 'package:project_athens/voting_flow/screens/list/list_impl/vote_item_view_model_factory.dart';
 import 'package:provider/provider.dart';
 
 class DeputyVotingsModule extends Module {

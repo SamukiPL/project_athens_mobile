@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:project_athens/athens_core/data/base_requests/base_fetch_query.dart';
 import 'package:project_athens/deputies_flow/data/network/response/deputy_vote_accuracy_response.dart';
 import 'package:project_athens/speeches_flow/data/network/request/speech_search_request.dart';
 import 'package:project_athens/voting_flow/data/network/request/vote_search_request.dart';

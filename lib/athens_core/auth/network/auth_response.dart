@@ -6,7 +6,7 @@ part 'auth_response.g.dart';
 class AuthResponse {
 
   final String accessToken;
-  final String refreshToken;
+  final String? refreshToken;
 
   AuthResponse(this.accessToken, this.refreshToken);
 

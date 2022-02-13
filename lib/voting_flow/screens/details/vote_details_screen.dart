@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:project_athens/athens_core/constants/color_constants.dart';
@@ -288,9 +285,6 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
   }
 
   Widget buildClubVoteDistributionView(BuildContext context, ThemeData theme, VoteDetailsBloc bloc) {
-    final localizations = Provider.of<AppLocalizations>(context);
-    final headingRowStyle =
-        TextStyle(fontSize: 10, fontWeight: FontWeight.w500);
     final TableRow headingRow = TableRow(
       decoration: BoxDecoration(
           border:
@@ -338,7 +332,6 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
         ),
       ],
     );
-    final DeputiesCache deputiesCache = Provider.of<DeputiesCache>(context);
 
     return StreamProvider<List<VoteClubDistributionRowData>?>.value(
       initialData: null,

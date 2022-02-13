@@ -2,7 +2,6 @@ import 'package:project_athens/athens_core/data/base_list/network_data_source.da
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/deputies_flow/domain/deputies_list_params.dart';
 import 'package:project_athens/deputies_flow/domain/filters/deputies_easy_filter.dart';
-import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/cache/subscribed_deputies_cache.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:project_athens/athens_core/ext/string_extension.dart';

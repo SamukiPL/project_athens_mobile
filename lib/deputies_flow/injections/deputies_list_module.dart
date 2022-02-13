@@ -1,4 +1,4 @@
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/ads/native_ad/native_ad_provider.dart';
 import 'package:project_athens/athens_core/ads/native_ad/native_ads.dart';

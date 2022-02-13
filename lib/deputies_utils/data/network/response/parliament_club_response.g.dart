@@ -7,13 +7,12 @@ part of 'parliament_club_response.dart';
 // **************************************************************************
 
 ParliamentClubResponse _$ParliamentClubResponseFromJson(
-    Map<String, dynamic> json) {
-  return ParliamentClubResponse(
-    (json['parliamentClubs'] as List<dynamic>)
-        .map((e) => ParliamentClubBean.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+        Map<String, dynamic> json) =>
+    ParliamentClubResponse(
+      (json['parliamentClubs'] as List<dynamic>)
+          .map((e) => ParliamentClubBean.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$ParliamentClubResponseToJson(
         ParliamentClubResponse instance) =>
@@ -21,17 +20,16 @@ Map<String, dynamic> _$ParliamentClubResponseToJson(
       'parliamentClubs': instance.parliamentClubs,
     };
 
-ParliamentClubBean _$ParliamentClubBeanFromJson(Map<String, dynamic> json) {
-  return ParliamentClubBean(
-    json['id'] as String,
-    json['name'] as String,
-    json['shortName'] as String,
-    json['imageSrc'] as String,
-    json['cadency'] as int,
-    DateTime.parse(json['updateAt'] as String),
-    DateTime.parse(json['createAt'] as String),
-  );
-}
+ParliamentClubBean _$ParliamentClubBeanFromJson(Map<String, dynamic> json) =>
+    ParliamentClubBean(
+      json['id'] as String,
+      json['name'] as String,
+      json['shortName'] as String,
+      json['imageSrc'] as String,
+      json['cadency'] as int,
+      DateTime.parse(json['updateAt'] as String),
+      DateTime.parse(json['createAt'] as String),
+    );
 
 Map<String, dynamic> _$ParliamentClubBeanToJson(ParliamentClubBean instance) =>
     <String, dynamic>{

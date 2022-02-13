@@ -4,9 +4,7 @@
 
 import 'dart:math' as math;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'calendar_date_picker_custom.dart';
 import 'date_picker_header_custom.dart';
@@ -276,8 +274,9 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
         return _calendarPortraitDialogSize;
       case Orientation.landscape:
         return _calendarLandscapeDialogSize;
+      default:
+        return null;
     }
-    return null;
   }
 
   @override

@@ -6,18 +6,17 @@ part of 'vote_search_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-VoteSearchRequest _$VoteSearchRequestFromJson(Map<String, dynamic> json) {
-  return VoteSearchRequest(
-    json['limit'] as int,
-    json['offset'] as int,
-    json['searchPhrase'] as String,
-    json['from'] as String?,
-    json['to'] as String?,
-    json['sort'] as String,
-    json['cadency'] as int,
-    json['v2'] as bool,
-  );
-}
+VoteSearchRequest _$VoteSearchRequestFromJson(Map<String, dynamic> json) =>
+    VoteSearchRequest(
+      json['limit'] as int,
+      json['offset'] as int,
+      json['searchPhrase'] as String,
+      json['from'] as String?,
+      json['to'] as String?,
+      json['sort'] as String,
+      json['cadency'] as int,
+      json['v2'] as bool,
+    );
 
 Map<String, dynamic> _$VoteSearchRequestToJson(VoteSearchRequest instance) =>
     <String, dynamic>{

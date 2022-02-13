@@ -1,10 +1,5 @@
-import 'dart:async';
-import 'dart:developer';
-import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/configuration/configuration.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
-import 'package:project_athens/athens_core/navigation/destination_manager.dart';
-import 'package:project_athens/athens_core/navigation/navigation_event.dart';
 import 'package:wakelock/wakelock.dart';
 
 class WakelockService {

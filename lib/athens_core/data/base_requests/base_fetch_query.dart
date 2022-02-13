@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class BaseFetchQuery {
   final int offset;
   final int limit;

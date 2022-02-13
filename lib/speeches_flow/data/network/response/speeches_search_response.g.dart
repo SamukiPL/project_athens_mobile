@@ -7,13 +7,12 @@ part of 'speeches_search_response.dart';
 // **************************************************************************
 
 SpeechesSearchResponse _$SpeechesSearchResponseFromJson(
-    Map<String, dynamic> json) {
-  return SpeechesSearchResponse(
-    (json['speeches'] as List<dynamic>)
-        .map((e) => SpeechResponse.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+        Map<String, dynamic> json) =>
+    SpeechesSearchResponse(
+      (json['speeches'] as List<dynamic>)
+          .map((e) => SpeechResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$SpeechesSearchResponseToJson(
         SpeechesSearchResponse instance) =>

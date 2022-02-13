@@ -1,5 +1,3 @@
-
-import 'package:dio/dio.dart';
 import 'package:project_athens/athens_core/chopper/client_errors.dart';
 import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 
@@ -60,5 +58,4 @@ extension StateExceptionExtension on Exception {
 
       return WidgetState.error(type);
   }
-
 }

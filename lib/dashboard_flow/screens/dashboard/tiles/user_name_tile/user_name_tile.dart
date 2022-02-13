@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/auth/auth_storage.dart';
 import 'package:project_athens/athens_core/auth/storage/tokens.dart';
@@ -35,7 +34,11 @@ class UserNameTile extends SimpleTile {
 
     final Tokens tokens = await storage.provideTokens();
 
-    Map<String, dynamic> decodedToken = Jwt().parseJwt(tokens.accessToken);
+    if (tokens.accessToken == null) {
+      return '';
+    }
+
+    Map<String, dynamic> decodedToken = Jwt().parseJwt(tokens.accessToken!);
 
     String userName = '';
 

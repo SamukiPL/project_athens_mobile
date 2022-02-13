@@ -130,6 +130,9 @@
       "resolutionOfPointOfDispute": "Resolution of the point of dispute",
       "requestOfReassumingVote": "Vote reassumption",
       "requestOfClosingMeeting": "Closing meeting",
+      "proceedOfProceedAgenda": "Proceed with agenda",
+      "changeConductOfVoting": "Change conduct of vote",
+      "appointmentMemberCollegeInstituteNationalRemembrance": "Appointment member of college of Institute National Remembrance",
       "unknown": "Unknown"
     },
     "nounCloud": {

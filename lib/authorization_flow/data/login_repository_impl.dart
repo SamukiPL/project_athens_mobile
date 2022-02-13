@@ -1,7 +1,6 @@
 import 'package:project_athens/athens_core/auth/auth_storage.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/authorization_flow/data/network/request/login_request.dart';
-import 'package:project_athens/authorization_flow/data/network/response/login_response.dart';
 import 'package:project_athens/authorization_flow/domain/login/login_params.dart';
 import 'package:project_athens/authorization_flow/domain/login/login_repository.dart';
 

@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project_athens/athens_core/ads/native_ad/native_ad_view_model.dart';
 import 'package:project_athens/athens_core/presentation/base_item_view_model.dart';
 import 'package:project_athens/athens_core/presentation/base_list/base_items_view_models/base_progress_view_model.dart';
 import 'package:provider/provider.dart';

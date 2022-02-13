@@ -7,12 +7,11 @@ part of 'reset_password_response.dart';
 // **************************************************************************
 
 ResetPasswordResponse _$ResetPasswordResponseFromJson(
-    Map<String, dynamic> json) {
-  return ResetPasswordResponse(
-    json['message'] as String,
-    json['status'] as int,
-  );
-}
+        Map<String, dynamic> json) =>
+    ResetPasswordResponse(
+      json['message'] as String,
+      json['status'] as int,
+    );
 
 Map<String, dynamic> _$ResetPasswordResponseToJson(
         ResetPasswordResponse instance) =>

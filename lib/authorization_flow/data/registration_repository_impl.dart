@@ -3,8 +3,6 @@ import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/authorization_flow/data/network/login_api.dart';
 import 'package:project_athens/authorization_flow/data/network/request/check_pair_usage_request.dart';
 import 'package:project_athens/authorization_flow/data/network/request/registration_request.dart';
-import 'package:project_athens/authorization_flow/data/network/response/check_pair_usage_response.dart';
-import 'package:project_athens/authorization_flow/data/network/response/login_response.dart';
 import 'package:project_athens/authorization_flow/domain/registration/check_pair_usage_model.dart';
 import 'package:project_athens/authorization_flow/domain/registration/check_pair_usage_params.dart';
 import 'package:project_athens/authorization_flow/domain/registration/registration_params.dart';

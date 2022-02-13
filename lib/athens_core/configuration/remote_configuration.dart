@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:project_athens/athens_core/configuration/domain/get_remote_configuration_use_case.dart';
 import 'package:project_athens/athens_core/configuration/domain/platform_app_versions_model.dart';
 import 'package:project_athens/athens_core/configuration/network/get_remote_configuration_response.dart';

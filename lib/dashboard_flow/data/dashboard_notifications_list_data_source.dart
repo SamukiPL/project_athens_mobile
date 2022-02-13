@@ -3,8 +3,6 @@ import 'package:project_athens/athens_core/domain/base_list/base_params.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/utils/notifications/domain/notification_model.dart';
 import 'package:project_athens/dashboard_flow/domain/notifications/get_notifications_use_case.dart';
-import '../../athens_core/utils/notifications/data/storage/saved_notification.dart';
-import '../../athens_core/utils/notifications/notifications_service.dart';
 import 'package:project_athens/athens_core/ext/string_extension.dart';
 import 'package:project_athens/dashboard_flow/domain/dashboard_notifications_erasy_filter.dart';
 import 'package:project_athens/dashboard_flow/domain/dashboard_notifications_params.dart';

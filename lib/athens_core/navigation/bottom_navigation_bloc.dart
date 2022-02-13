@@ -2,7 +2,6 @@ import 'package:project_athens/athens_core/navigation/navigation_event.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_change_notifier.dart';
 import 'package:project_athens/dashboard_flow/navigation/dashboard_destinations.dart';
 import 'package:project_athens/deputies_flow/navigation/deputies_destinations.dart';
-import 'package:project_athens/more_flow/navigation/more_navigation.dart';
 import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
 import 'package:project_athens/timeline_flow/navigation/timeline_destinations.dart';
 import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
@@ -63,19 +62,14 @@ extension BottomNavItemExtension on BottomNavItem {
     switch(this) {
       case BottomNavItem.TIMELINE:
         return TimelineScreenDestination();
-        break;
       case BottomNavItem.DEPUTIES:
         return DeputiesListDestination();
-        break;
       case BottomNavItem.SPEECHES:
         return SpeechesListDestination();
-        break;
       case BottomNavItem.VOTING:
         return VotesListDestination();
-        break;
       case BottomNavItem.DASHBOARD:
         return DashboardScreenDestination();
-        break;
       default:
         throw new ArgumentError("There is no more BottomNavItems");
     }
