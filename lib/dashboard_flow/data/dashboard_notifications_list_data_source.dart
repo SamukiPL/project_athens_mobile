@@ -16,7 +16,7 @@ class DashboardNotificationsListDataSource
 
   @override
   Future<Result<List<NotificationModel>>> call(DashboardNotificationsParams params) async {
-    var notificationsResult = await _getNotificationsUseCase(BaseParams());
+    var notificationsResult = await _getNotificationsUseCase();
 
     if (notificationsResult is Success<List<NotificationModel>>) {
       notificationsResult = _filterBySearchQuery(notificationsResult, params.searchQuery);

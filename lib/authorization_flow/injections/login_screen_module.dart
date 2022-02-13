@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:project_athens/athens_core/configuration/remote_configuration.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/utils/firebase/firebase_deputy_subscriber.dart';
 import 'package:project_athens/authorization_flow/data/login_repository_impl.dart';
@@ -25,11 +26,12 @@ class LoginScreenModule extends Module {
     LoginRepository loginRepository = LoginRepositoryImpl(loginApi);
     LoginUseCase loginUseCase = LoginUseCase(loginRepository);
 
+    final _remoteConfiguration = Provider.of<RemoteConfiguration>(context);
     final firebaseDeputiesUseCase = getFirebaseDeputiesUseCase(context);
 
     return List.of([
       Provider<LoginBloc>(
-        create: (_) => LoginBloc(loginUseCase, firebaseDeputiesUseCase),
+        create: (_) => LoginBloc(loginUseCase, firebaseDeputiesUseCase, _remoteConfiguration),
         dispose: (context, bloc) => bloc.dispose(),
       )
     ]);

@@ -4,15 +4,13 @@ import 'package:project_athens/athens_core/domain/base_repository.dart';
 import 'package:project_athens/timeline_flow/domain/timeline_parameters.dart';
 import 'package:project_athens/timeline_flow/domain/timeline_repository.dart';
 
-class GetMeetingsDates extends BaseUseCase<TimelineParameters> {
+class GetMeetingsDates extends BaseUseCase {
 
   final TimelineRepository repository;
 
   GetMeetingsDates(this.repository);
 
-  @override
   Future<Result> call(TimelineParameters params) {
-    return repository.getMeetingsDates(params.cadency).safeApiCall();
+    return repository.getMeetingsDates().safeApiCall();
   }
-
 }

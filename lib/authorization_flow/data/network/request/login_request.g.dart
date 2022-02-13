@@ -10,6 +10,7 @@ LoginRequest _$LoginRequestFromJson(Map<String, dynamic> json) => LoginRequest(
       json['login'] as String?,
       json['email'] as String?,
       json['password'] as String,
+      json['cadence'] as int,
     );
 
 Map<String, dynamic> _$LoginRequestToJson(LoginRequest instance) =>
@@ -17,4 +18,5 @@ Map<String, dynamic> _$LoginRequestToJson(LoginRequest instance) =>
       'login': instance.login,
       'email': instance.email,
       'password': instance.password,
+      'cadence': instance.cadence,
     };

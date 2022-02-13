@@ -28,7 +28,7 @@ class DeputySpeechesNetworkDataSource
               null,
               null,
               params.sortingParam,
-              9));
+              ));
 
       final modelsList = await _networkMapper(response);
       return Success(modelsList);

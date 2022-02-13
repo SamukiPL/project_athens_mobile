@@ -28,7 +28,7 @@ abstract class LoginApi {
   @POST('/user-aggregator/auth/register-pair-usage')
   Future<CheckPairUsageResponse> checkAccountPairUsage(@Body() CheckPairUsageRequest request);
 
-  @GET("/deputy-aggregator/cadency-deputy/get-all/{cadency}")
-  Future<List<DeputyResponse>> getAllDeputies(@Path("cadency") int cadency);
+  @GET("/deputy-aggregator/cadency-deputy/get-all")
+  Future<List<DeputyResponse>> getAllDeputies();
 
 }

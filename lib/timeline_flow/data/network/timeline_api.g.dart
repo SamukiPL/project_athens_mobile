@@ -16,52 +16,51 @@ class _TimelineApi implements TimelineApi {
   String? baseUrl;
 
   @override
-  Future<MeetingsResponse> getMeetingsDates(cadency) async {
+  Future<MeetingsResponse> getMeetingsDates() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<MeetingsResponse>(
-            Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options,
-                    '/user-aggregator/timeline/${cadency}/parliament-meetings',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<MeetingsResponse>(Options(
+                method: 'GET', headers: _headers, extra: _extra)
+            .compose(
+                _dio.options, '/user-aggregator/timeline/parliament-meetings',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MeetingsResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<TimelineResponse> getAllDeputies(cadency, date) async {
+  Future<TimelineResponse> getAllDeputies(date) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<TimelineResponse>(Options(
-                method: 'GET', headers: _headers, extra: _extra)
-            .compose(
-                _dio.options, '/user-aggregator/timeline/${cadency}/${date}/v2',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<TimelineResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/user-aggregator/timeline/${date}/v2',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = TimelineResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<NounCloudResponse> getNounCloud(cadency, date) async {
+  Future<NounCloudResponse> getNounCloud(date) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<NounCloudResponse>(
-            Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options,
-                    '/user-aggregator/timeline/${cadency}/${date}/noun-cloud',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<NounCloudResponse>(Options(
+                method: 'GET', headers: _headers, extra: _extra)
+            .compose(
+                _dio.options, '/user-aggregator/timeline/${date}/noun-cloud',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = NounCloudResponse.fromJson(_result.data!);
     return value;
   }

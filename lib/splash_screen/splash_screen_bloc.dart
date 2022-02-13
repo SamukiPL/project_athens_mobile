@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:project_athens/athens_core/auth/auth_repository.dart';
 import 'package:project_athens/athens_core/auth/auth_storage.dart';
 import 'package:project_athens/athens_core/chopper/jwt_decode.dart';
@@ -39,7 +40,10 @@ class SplashScreenBloc extends BaseBloc {
       if (tokenExp <= now) {
         await _authRepository.refreshTokens(tokens.refreshToken ?? "");
       }
-      await _subscribedDeputiesCache.subscribedDeputies;
+      await _subscribedDeputiesCache.subscribedDeputies.catchError((err) {
+        print(err.toString());
+        Fimber.e(err.toString());
+      });
       _direction.add(SplashDirection.MAIN);
     } on DioError {
       _authStorage.removeTokens();

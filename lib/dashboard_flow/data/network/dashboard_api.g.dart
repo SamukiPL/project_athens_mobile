@@ -16,14 +16,8 @@ class _DashboardApi implements DashboardApi {
   String? baseUrl;
 
   @override
-  Future<DashboardResponse> getDashboard(
-      cadence,
-      meeting,
-      voteAbsent,
-      monthMeetings,
-      speechesCounter,
-      speechesCounterPerYear,
-      voteAbsentPerYear) async {
+  Future<DashboardResponse> getDashboard(meeting, voteAbsent, monthMeetings,
+      speechesCounter, speechesCounterPerYear, voteAbsentPerYear) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'meeting': meeting,
@@ -39,7 +33,7 @@ class _DashboardApi implements DashboardApi {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DashboardResponse>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/user-aggregator/dashboard/${cadence}/',
+                .compose(_dio.options, '/user-aggregator/dashboard',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = DashboardResponse.fromJson(_result.data!);
@@ -48,7 +42,7 @@ class _DashboardApi implements DashboardApi {
 
   @override
   Future<ParliamentMeetingDetailsResponse> getParliamentMeetingDetails(
-      cadence, parliamentMeetingId) async {
+      parliamentMeetingId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -57,7 +51,7 @@ class _DashboardApi implements DashboardApi {
         ParliamentMeetingDetailsResponse>(Options(
             method: 'GET', headers: _headers, extra: _extra)
         .compose(_dio.options,
-            '/user-aggregator/timeline/${cadence}/parliament-meetings/${parliamentMeetingId}',
+            '/user-aggregator/timeline/parliament-meetings/${parliamentMeetingId}',
             queryParameters: queryParameters, data: _data)
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ParliamentMeetingDetailsResponse.fromJson(_result.data!);

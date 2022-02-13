@@ -6,12 +6,11 @@ import 'package:project_athens/deputies_utils/domain/deputy_full.dart';
 
 import 'get_deputy_repository.dart';
 
-class GetDeputyUseCase extends BaseUseCase<BaseDeputyParams> {
+class GetDeputyUseCase extends BaseUseCase {
   final GetDeputyRepository _repository;
 
   GetDeputyUseCase(this._repository);
 
-  @override
   Future<Result<DeputyFull>> call(BaseDeputyParams params) {
     return _repository.getDeputy(params).safeApiCall();
   }

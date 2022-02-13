@@ -23,16 +23,16 @@ class TimelineRepositoryImpl implements TimelineRepository {
   TimelineRepositoryImpl(this.timelineApi, this.networkMapper, this.speechQueueSetter);
 
   @override
-  Future<Result> getMeetingsDates(int cadency) async {
-    final response = await timelineApi.getMeetingsDates(cadency);
+  Future<Result> getMeetingsDates() async {
+    final response = await timelineApi.getMeetingsDates();
     List<MeetingDate> resultList = meetingsDatesMapper(response.meetings);
 
     return Success<List<MeetingDate>>(resultList);
   }
 
   @override
-  Future<Result> getTimelineForDay(int cadency, String date) async {
-    final response = await timelineApi.getAllDeputies(cadency, date);
+  Future<Result> getTimelineForDay(String date) async {
+    final response = await timelineApi.getAllDeputies(date);
     List<TimelineModel> mappedList = await networkMapper(response.events);
     List<TimelineModel> speechesCorrectedList = speechQueueSetter.createQueues(mappedList);
     List<TimelineModel> resultList = votesGrouper.groupVotes(speechesCorrectedList);
@@ -47,8 +47,8 @@ class TimelineRepositoryImpl implements TimelineRepository {
   }
 
   @override
-  Future<Result<List<WordModel>>> getNounCloud(int cadency, String date) async {
-    final response = await timelineApi.getNounCloud(cadency, date);
+  Future<Result<List<WordModel>>> getNounCloud(String date) async {
+    final response = await timelineApi.getNounCloud(date);
 
     final values = response.nouns.length > 0 ? response.nouns : List<NounTag>.empty();
 

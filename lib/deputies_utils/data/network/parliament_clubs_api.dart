@@ -6,10 +6,8 @@ part 'parliament_clubs_api.g.dart';
 
 @RestApi()
 abstract class ParliamentClubsApi {
-
   factory ParliamentClubsApi(Dio dio, {String baseUrl}) = _ParliamentClubsApi;
 
-  @GET("/deputy-aggregator/cadency-parliament-club/{cadency}")
-  Future<ParliamentClubResponse> geParliamentClubs(@Path("cadency") int cadency);
-
+  @GET("/deputy-aggregator/cadency-parliament-club")
+  Future<ParliamentClubResponse> geParliamentClubs();
 }

@@ -18,9 +18,8 @@ abstract class DeputiesDetailsApi {
       @Body() SpeechSearchRequest query
   );
 
-  @POST("/deputy-aggregator/cadency-voting/{cadency}/deputy/{cadencyDeputyId}")
+  @POST("/deputy-aggregator/cadency-voting/deputy/{cadencyDeputyId}")
   Future<List<VotingResponse>> getVotesByDeputy(
-      @Path("cadency") int cadency,
       @Path("cadencyDeputyId") String cadencyDeputyId,
       @Body() VoteSearchRequest query
   );

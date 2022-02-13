@@ -16,7 +16,7 @@ class _DeputiesApi implements DeputiesApi {
   String? baseUrl;
 
   @override
-  Future<List<DeputyResponse>> getAllDeputies(cadency) async {
+  Future<List<DeputyResponse>> getAllDeputies() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -24,8 +24,8 @@ class _DeputiesApi implements DeputiesApi {
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<DeputyResponse>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options,
-                    '/deputy-aggregator/cadency-deputy/get-all/${cadency}',
+                .compose(
+                    _dio.options, '/deputy-aggregator/cadency-deputy/get-all',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
@@ -69,7 +69,7 @@ class _DeputiesApi implements DeputiesApi {
   }
 
   @override
-  Future<void> putDeputies(cadency, request) async {
+  Future<void> putDeputies(request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -77,26 +77,24 @@ class _DeputiesApi implements DeputiesApi {
     _data.addAll(request.toJson());
     await _dio.fetch<void>(_setStreamType<void>(
         Options(method: 'PUT', headers: _headers, extra: _extra)
-            .compose(
-                _dio.options, '/user-aggregator/deputy-subscribe/${cadency}',
+            .compose(_dio.options, '/user-aggregator/deputy-subscribe',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     return null;
   }
 
   @override
-  Future<List<SubscribedDeputyResponse>> getSubscribedDeputies(cadency) async {
+  Future<List<SubscribedDeputyResponse>> getSubscribedDeputies() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<SubscribedDeputyResponse>>(Options(
-                method: 'GET', headers: _headers, extra: _extra)
-            .compose(
-                _dio.options, '/user-aggregator/deputy-subscribe/${cadency}',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<List<SubscribedDeputyResponse>>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/user-aggregator/deputy-subscribe',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
         .map((dynamic i) =>
             SubscribedDeputyResponse.fromJson(i as Map<String, dynamic>))
@@ -105,17 +103,17 @@ class _DeputiesApi implements DeputiesApi {
   }
 
   @override
-  Future<void> deleteDeputy(cadency, cadencyDeputyId) async {
+  Future<void> deleteDeputy(cadencyDeputyId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    await _dio.fetch<void>(_setStreamType<void>(Options(
-            method: 'DELETE', headers: _headers, extra: _extra)
-        .compose(_dio.options,
-            '/user-aggregator/deputy-subscribe/${cadency}/${cadencyDeputyId}',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    await _dio.fetch<void>(_setStreamType<void>(
+        Options(method: 'DELETE', headers: _headers, extra: _extra)
+            .compose(_dio.options,
+                '/user-aggregator/deputy-subscribe/${cadencyDeputyId}',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     return null;
   }
 

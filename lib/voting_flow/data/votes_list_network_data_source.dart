@@ -26,7 +26,6 @@ class VotesListNetworkDataSource extends NetworkListDataSource<VoteSlimModel, Vo
               params.from?.toIso8601String(),
               params.to?.toIso8601String(),
               params.sortingParam,
-              9,
               true)
       );
 

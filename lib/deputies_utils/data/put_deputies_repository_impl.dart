@@ -21,7 +21,7 @@ class PutDeputiesRepositoryImpl
     final request = PutDeputiesRequest(params.deputies
         .map((model) => Deputy(model.deputyId, Notifications(model.vote, model.speech, model.interpolation)))
         .toList());
-    await deputiesApi.putDeputies(params.cadency, request);
+    await deputiesApi.putDeputies(request);
     await deputySubscriber.subscribeDeputies(params.deputies.map((model) =>
         model.toFirebaseDeputySubscribeModel()
     ).toList());

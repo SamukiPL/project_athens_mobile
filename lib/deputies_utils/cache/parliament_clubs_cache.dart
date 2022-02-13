@@ -2,7 +2,6 @@ import 'package:collection/src/iterable_extensions.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/ext/future_extension.dart';
 import 'package:project_athens/deputies_utils/cache/cache_errors.dart';
-import 'package:project_athens/deputies_utils/domain/base_parliament_clubs_params.dart';
 import 'package:project_athens/deputies_utils/domain/get_parliament_clubs/get_parliament_clubs_use_case.dart';
 import 'package:project_athens/deputies_utils/domain/parliament_club_model.dart';
 
@@ -24,7 +23,7 @@ class ParliamentClubsCache {
     }
 
     _parliamentClubsFuture =
-        _getParliamentClubsUseCase(BaseParliamentClubsParams(9))
+        _getParliamentClubsUseCase()
             .whenComplete(() {
       _parliamentClubsFuture = null;
     }).then((clubsResult) {

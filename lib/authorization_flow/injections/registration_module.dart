@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
+import 'package:project_athens/athens_core/configuration/remote_configuration.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/utils/firebase/firebase_deputy_subscriber.dart';
 import 'package:project_athens/authorization_flow/data/network/login_api.dart';
@@ -42,6 +43,7 @@ class RegistrationModule extends Module {
     final repository = RegistrationRepositoryImpl(loginApi);
     final registrationUseCase = RegistrationUseCase(repository);
     final checkPairUsageUseCase = CheckPairUsageUseCase(repository);
+    final remoteConfig = Provider.of<RemoteConfiguration>(context);
 
     final headerBloc = RegistrationStepperBloc(firstStep);
     final buttonStateBloc = StepperButtonStateBloc();
@@ -50,7 +52,7 @@ class RegistrationModule extends Module {
     final accountInfoStepBloc = AccountInfoStepBloc(checkPairUsageUseCase, repeatEmailNotifier);
 
     final repeatPasswordNotifier = ShowRepeatPasswordNotifier();
-    final registrationEndStepBloc = RegistrationEndStepBloc(registrationUseCase, repeatPasswordNotifier);
+    final registrationEndStepBloc = RegistrationEndStepBloc(registrationUseCase, repeatPasswordNotifier, remoteConfig.cadence);
 
     final stepSearchBarBloc = StepSearchBarBloc();
     final deputiesChooserBloc = getDeputiesChooserBloc(context, loginApi, deputiesApi, stepSearchBarBloc);

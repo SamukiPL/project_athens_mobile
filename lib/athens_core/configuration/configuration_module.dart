@@ -1,4 +1,4 @@
-import 'package:project_athens/athens_core/chopper/network_module.dart';
+import 'package:project_athens/athens_core/chopper/simple_dio_client.dart';
 import 'package:project_athens/athens_core/configuration/data/get_remote_configuration_repository_impl.dart';
 import 'package:project_athens/athens_core/configuration/domain/get_remote_configuration_use_case.dart';
 import 'package:project_athens/athens_core/configuration/network/remote_configuration_api.dart';

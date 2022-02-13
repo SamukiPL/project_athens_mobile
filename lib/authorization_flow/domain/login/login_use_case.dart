@@ -4,7 +4,7 @@ import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/domain/base_use_case.dart';
 import 'package:project_athens/athens_core/domain/base_repository.dart';
 
-class LoginUseCase implements BaseUseCase<LoginParams> {
+class LoginUseCase implements BaseUseCase {
 
   final LoginRepository repository;
 

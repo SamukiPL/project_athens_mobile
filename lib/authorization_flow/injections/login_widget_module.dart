@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/chopper/network_module.dart';
+import 'package:project_athens/athens_core/chopper/simple_dio_client.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/authorization_flow/data/network/login_api.dart';
 import 'package:project_athens/authorization_flow/navigation/login_navigation_bloc.dart';

@@ -4,12 +4,11 @@ import 'package:project_athens/athens_core/domain/base_list/base_params.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/more_flow/domain/more/get_backers_repository.dart';
 
-class GetBackersUseCase extends BaseUseCase<BaseParams> {
+class GetBackersUseCase extends BaseUseCase {
   final GetBackersRepository _getBackersRepository;
 
   GetBackersUseCase(this._getBackersRepository);
 
-  @override
   Future<Result> call(BaseParams params) {
     return _getBackersRepository.getBackers();
   }

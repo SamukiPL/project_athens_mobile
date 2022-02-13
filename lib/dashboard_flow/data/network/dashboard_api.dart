@@ -9,9 +9,8 @@ part 'dashboard_api.g.dart';
 abstract class DashboardApi {
   factory DashboardApi(Dio dio, { String baseUrl }) = _DashboardApi;
 
-  @GET("/user-aggregator/dashboard/{cadence}/")
+  @GET("/user-aggregator/dashboard")
   Future<DashboardResponse> getDashboard(
-    @Path('cadence') int cadence,
     @Query("meeting") bool? meeting,
     @Query("voteAbsent") bool? voteAbsent,
     @Query("monthMeetings") bool? monthMeetings,
@@ -20,6 +19,6 @@ abstract class DashboardApi {
     @Query("voteAbsentPerYear") bool? voteAbsentPerYear
   );
 
-  @GET("/user-aggregator/timeline/{cadence}/parliament-meetings/{parliamentMeetingId}")
-  Future<ParliamentMeetingDetailsResponse> getParliamentMeetingDetails(@Path("cadence") int cadence, @Path("parliamentMeetingId") String parliamentMeetingId);
+  @GET("/user-aggregator/timeline/parliament-meetings/{parliamentMeetingId}")
+  Future<ParliamentMeetingDetailsResponse> getParliamentMeetingDetails(@Path("parliamentMeetingId") String parliamentMeetingId);
 }

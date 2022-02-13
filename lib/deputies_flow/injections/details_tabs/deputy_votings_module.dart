@@ -27,7 +27,7 @@ class DeputyVotingsModule extends Module {
     final localizations = Provider.of<AppLocalizations>(context);
     final networkMapper = VotingNetworkMapper(localizations);
 
-    final dataSource = DeputyVotesNetworkDataSource(votesDetailsApi, networkMapper, 9, _deputyId);
+    final dataSource = DeputyVotesNetworkDataSource(votesDetailsApi, networkMapper, _deputyId);
     final itemsRepository = ItemsRepositoryImpl(dataSource);
     final filtersRepository = FiltersRepository(localizations);
 

@@ -8,8 +8,9 @@ class LoginRequest {
   final String? login;
   final String? email;
   final String password;
+  final int cadence;
 
-  LoginRequest(this.login, this.email, this.password) : assert(
+  LoginRequest(this.login, this.email, this.password, this.cadence) : assert(
     login != null || email != null
   );
 

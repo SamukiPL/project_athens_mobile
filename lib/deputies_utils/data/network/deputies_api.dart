@@ -13,8 +13,8 @@ abstract class DeputiesApi {
 
   factory DeputiesApi(Dio dio, {String baseUrl}) = _DeputiesApi;
 
-  @GET("/deputy-aggregator/cadency-deputy/get-all/{cadency}")
-  Future<List<DeputyResponse>> getAllDeputies(@Path("cadency") int cadency);
+  @GET("/deputy-aggregator/cadency-deputy/get-all")
+  Future<List<DeputyResponse>> getAllDeputies();
 
   @GET('/deputy-aggregator/cadency-deputy/{cadencyDeputyId}')
   Future<FullDeputyResponse> getDeputy(@Path("cadencyDeputyId") String cadencyDeputyId);
@@ -22,13 +22,13 @@ abstract class DeputiesApi {
   @GET('/deputy-aggregator/cadency-deputy/{cadencyDeputyId}/noun-cloud')
   Future<DeputyNounsResponse> getDeputyNouns(@Path('cadencyDeputyId') String cadencyDeputyId);
 
-  @PUT("/user-aggregator/deputy-subscribe/{cadency}")
-  Future<void> putDeputies(@Path("cadency") int cadency, @Body() PutDeputiesRequest request);
+  @PUT("/user-aggregator/deputy-subscribe")
+  Future<void> putDeputies(@Body() PutDeputiesRequest request);
 
-  @GET("/user-aggregator/deputy-subscribe/{cadency}")
-  Future<List<SubscribedDeputyResponse>> getSubscribedDeputies(@Path("cadency") int cadency);
+  @GET("/user-aggregator/deputy-subscribe")
+  Future<List<SubscribedDeputyResponse>> getSubscribedDeputies();
 
-  @DELETE("/user-aggregator/deputy-subscribe/{cadency}/{cadencyDeputyId}")
-  Future<void> deleteDeputy(@Path("cadency") int cadency, @Path("cadencyDeputyId") String cadencyDeputyId);
+  @DELETE("/user-aggregator/deputy-subscribe/{cadencyDeputyId}")
+  Future<void> deleteDeputy(@Path("cadencyDeputyId") String cadencyDeputyId);
 
 }

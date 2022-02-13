@@ -11,9 +11,9 @@ abstract class VotingApi {
 
   factory VotingApi(Dio dio, {String baseUrl}) = _VotingApi;
 
-  @POST("/deputy-aggregator/cadency-voting/9/search/v2")
+  @POST("/deputy-aggregator/cadency-voting/search/v2")
   Future<VoteSearchResponse> getVoting(@Body() VoteSearchRequest request);
 
-  @GET("/deputy-aggregator/cadency-voting/9/id/{voteId}")
+  @GET("/deputy-aggregator/cadency-voting/id/{voteId}")
   Future<VotingResponse> getVotingLiteById(@Path("voteId") String voteId);
 }

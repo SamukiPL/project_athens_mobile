@@ -15,7 +15,7 @@ class DeleteDeputyRepositoryImpl
   @override
   Future<Result<void>> deleteDeputy(
       DeleteDeputyParams params) async {
-    final response = await _deputiesApi.deleteDeputy(params.cadency, params.cadencyDeputyId);
+    final response = await _deputiesApi.deleteDeputy(params.cadencyDeputyId);
 
     await _deputySubscriber.unsubscribeDeputy(params.cadencyDeputyId);
 
