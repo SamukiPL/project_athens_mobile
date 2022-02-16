@@ -71,7 +71,7 @@ const Duration _dialogSizeAnimationDuration = Duration(milliseconds: 200);
 /// calendar date picker initially appear in the [DatePickerMode.year] or
 /// [DatePickerMode.day] mode. It defaults to [DatePickerMode.day], and
 /// must be non-null.
-Future<DateTime> showCustomDatePicker({
+Future<DateTime?> showCustomDatePicker({
   required BuildContext context,
   required DateTime initialDate,
   required DateTime firstDate,
@@ -151,14 +151,14 @@ Future<DateTime> showCustomDatePicker({
     );
   }
 
-  return showDialog<DateTime>(
+  return showDialog<DateTime?>(
     context: context,
     useRootNavigator: useRootNavigator,
     routeSettings: routeSettings,
     builder: (BuildContext context) {
       return builder == null ? dialog : builder(context, dialog);
     },
-  ) as Future<DateTime>;
+  ) as Future<DateTime?>;
 }
 
 class _DatePickerDialog extends StatefulWidget {

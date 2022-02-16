@@ -8,18 +8,18 @@ part of 'noun_cloud_response.dart';
 
 NounCloudResponse _$NounCloudResponseFromJson(Map<String, dynamic> json) =>
     NounCloudResponse(
-      json['id'] as String,
+      json['id'] as String?,
       json['createAt'] == null
           ? null
           : DateTime.parse(json['createAt'] as String),
       json['updateAt'] == null
           ? null
           : DateTime.parse(json['updateAt'] as String),
-      json['cadency'] as int,
+      json['cadency'] as int?,
       json['scheduledAt'] == null
           ? null
           : DateTime.parse(json['scheduledAt'] as String),
-      json['sessionIId'] as int,
+      json['sessionIId'] as int?,
       (json['nouns'] as List<dynamic>)
           .map((e) => NounTag.fromJson(e as Map<String, dynamic>))
           .toList(),

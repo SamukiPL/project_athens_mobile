@@ -12,15 +12,15 @@ class SpeechResponse extends TimelineItem {
   final DateTime createAt;
   final DateTime updateAt;
   final String id;
-  final int deputyCardIdentifier;
-  final String fileName;
+  final int? deputyCardIdentifier;
+  final String? fileName;
   final String videoDownloadUrl;
-  final int length;
+  final int? length;
   final String personName;
   final String? cadencyDeputy;
   final String? parliamentClub;
   final int cadency;
-  final String rangeId;
+  final String? rangeId;
   final PersonSpeech? previousPersonSpeech;
   final PersonSpeech? nextPersonSpeech;
 
@@ -63,11 +63,11 @@ class Person {
 
   final String name;
   final String surname;
-  final Gender gender;
-  final String function;
-  final String other;
-  final int deputyCardNumber;
-  final int termOfficeNumber;
+  final Gender? gender;
+  final String? function;
+  final String? other;
+  final int? deputyCardNumber;
+  final int? termOfficeNumber;
 
   Person(this.name, this.surname, this.gender, this.function, this.other, this.deputyCardNumber, this.termOfficeNumber);
 
@@ -78,7 +78,7 @@ class Person {
 @JsonSerializable()
 class PersonSpeech {
   final int? deputyCardId;
-  final String fullName;
+  final String? fullName;
   final String speechId;
 
   PersonSpeech(this.deputyCardId, this.fullName, this.speechId);

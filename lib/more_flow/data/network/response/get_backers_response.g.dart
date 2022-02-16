@@ -21,10 +21,10 @@ Map<String, dynamic> _$GetBackersResponseToJson(GetBackersResponse instance) =>
 Backer _$BackerFromJson(Map<String, dynamic> json) => Backer(
       json['nickname'] as String,
       json['amount'] as int,
-      json['hasBadge'] as bool,
-      json['comment'] as String,
+      json['hasBadge'] as bool?,
+      json['comment'] as String?,
       DateTime.parse(json['backedAt'] as String),
-      json['isCurrentUser'] as bool,
+      json['isCurrentUser'] as bool?,
     );
 
 Map<String, dynamic> _$BackerToJson(Backer instance) => <String, dynamic>{

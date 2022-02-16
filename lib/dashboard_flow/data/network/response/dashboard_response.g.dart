@@ -80,7 +80,7 @@ DashboardAbsentVoteCounterDeputy _$DashboardAbsentVoteCounterDeputyFromJson(
         Map<String, dynamic> json) =>
     DashboardAbsentVoteCounterDeputy(
       json['subscribedDeputyId'] as String,
-      json['cardId'] as int,
+      json['cardId'] as int?,
       json['absentVote'],
     );
 
@@ -115,7 +115,7 @@ DashboardSpeechesCounterDeputy _$DashboardSpeechesCounterDeputyFromJson(
         Map<String, dynamic> json) =>
     DashboardSpeechesCounterDeputy(
       json['subscribedDeputyId'] as String,
-      json['cardId'] as int,
+      json['cardId'] as int?,
       json['speechesCounter'],
     );
 

@@ -14,7 +14,7 @@ class VotesGrouper {
       List<TimelineVotingModel> group =
           groupedVotes[voting.orderPoint] ?? List.empty(growable: true);
       group.add(voting);
-      groupedVotes[voting.orderPoint] = group;
+      groupedVotes[voting.orderPoint!] = group;
     });
 
     final newList = models

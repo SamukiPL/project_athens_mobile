@@ -41,7 +41,7 @@ class DashboardSimpleDeputiesCounter {
 
 class DashboardSimpleDeputyCounter {
   final SubscribedDeputyModel subscribedDeputyModel;
-  final int cardId;
+  final int? cardId;
   final int counter;
 
   DashboardSimpleDeputyCounter(

@@ -14,15 +14,15 @@ SpeechResponse _$SpeechResponseFromJson(Map<String, dynamic> json) =>
       CisInfo.fromJson(json['cisInfo'] as Map<String, dynamic>),
       DateTime.parse(json['createAt'] as String),
       json['id'] as String,
-      json['deputyCardIdentifier'] as int,
-      json['fileName'] as String,
+      json['deputyCardIdentifier'] as int?,
+      json['fileName'] as String?,
       json['videoDownloadUrl'] as String,
-      json['length'] as int,
+      json['length'] as int?,
       json['personName'] as String,
       json['cadencyDeputy'] as String?,
       json['parliamentClub'] as String?,
       json['cadency'] as int,
-      json['rangeId'] as String,
+      json['rangeId'] as String?,
       json['previousPersonSpeech'] == null
           ? null
           : PersonSpeech.fromJson(
@@ -97,11 +97,11 @@ Map<String, dynamic> _$CisInfoToJson(CisInfo instance) => <String, dynamic>{
 Person _$PersonFromJson(Map<String, dynamic> json) => Person(
       json['name'] as String,
       json['surname'] as String,
-      $enumDecode(_$GenderEnumMap, json['gender']),
-      json['function'] as String,
-      json['other'] as String,
-      json['deputyCardNumber'] as int,
-      json['termOfficeNumber'] as int,
+      $enumDecodeNullable(_$GenderEnumMap, json['gender']),
+      json['function'] as String?,
+      json['other'] as String?,
+      json['deputyCardNumber'] as int?,
+      json['termOfficeNumber'] as int?,
     );
 
 Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
@@ -121,7 +121,7 @@ const _$GenderEnumMap = {
 
 PersonSpeech _$PersonSpeechFromJson(Map<String, dynamic> json) => PersonSpeech(
       json['deputyCardId'] as int?,
-      json['fullName'] as String,
+      json['fullName'] as String?,
       json['speechId'] as String,
     );
 

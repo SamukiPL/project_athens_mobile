@@ -16,7 +16,6 @@ FullDeputyResponse _$FullDeputyResponseFromJson(Map<String, dynamic> json) =>
       json['politicalParty'] as String,
       json['parliamentClub'] as String,
       json['cardNumber'] as int,
-      json['cardId'] as int,
       json['deputyId'] as String,
       json['isActive'] as bool,
       CvBean.fromJson(json['cv'] as Map<String, dynamic>),
@@ -37,7 +36,6 @@ Map<String, dynamic> _$FullDeputyResponseToJson(FullDeputyResponse instance) =>
       'cardNumber': instance.cardNumber,
       'reversedName': instance.reversedName,
       'politicalParty': instance.politicalParty,
-      'cardId': instance.cardId,
       'deputyId': instance.deputyId,
       'cv': instance.cv,
       'contact': instance.contact,
@@ -77,10 +75,10 @@ Map<String, dynamic> _$ContactOfficeBeanToJson(ContactOfficeBean instance) =>
 
 CvBean _$CvBeanFromJson(Map<String, dynamic> json) => CvBean(
       json['born'] as String,
-      json['education'] as String,
-      json['finishedSchools'] as String,
-      json['profession'] as String,
-      json['parliamentExperience'] as String,
+      json['education'] as String?,
+      json['finishedSchools'] as String?,
+      json['profession'] as String?,
+      json['parliamentExperience'] as String?,
     );
 
 Map<String, dynamic> _$CvBeanToJson(CvBean instance) => <String, dynamic>{

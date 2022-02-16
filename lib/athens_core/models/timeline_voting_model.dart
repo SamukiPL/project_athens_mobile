@@ -9,9 +9,9 @@ class TimelineVotingModel extends TimelineModel {
   final DateTime voteAt;
   final VoteNumbers voteNumbers;
   final String votingDesc;
-  final int orderPoint;
-  final int qualifyingMajority;
-  final int absoluteMajority;
+  final int? orderPoint;
+  final int? qualifyingMajority;
+  final int? absoluteMajority;
   final String agenda;
 
   final List<VoteSlimClubMajority> clubsMajority;
@@ -26,8 +26,8 @@ class TimelineVotingModel extends TimelineModel {
         required this.voteAt,
         required this.voteNumbers,
         required this.votingDesc,
-        required this.qualifyingMajority,
-        required this.absoluteMajority,
+        this.qualifyingMajority,
+        this.absoluteMajority,
         required this.clubsMajority,
         required this.deputiesVote,
         required this.agenda,

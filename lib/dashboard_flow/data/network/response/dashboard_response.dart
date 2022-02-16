@@ -57,7 +57,7 @@ class DashboardAbsentVoteCounterResponse {
 @JsonSerializable()
 class DashboardAbsentVoteCounterDeputy {
   final String subscribedDeputyId;
-  final int cardId;
+  final int? cardId;
   final absentVote;
 
   DashboardAbsentVoteCounterDeputy(
@@ -87,7 +87,7 @@ class DashboardSpeechesCounterResponse {
 @JsonSerializable()
 class DashboardSpeechesCounterDeputy {
   final String subscribedDeputyId;
-  final int cardId;
+  final int? cardId;
   final speechesCounter;
 
   DashboardSpeechesCounterDeputy(
