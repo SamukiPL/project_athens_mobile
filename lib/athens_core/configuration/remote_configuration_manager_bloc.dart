@@ -11,7 +11,7 @@ import 'package:project_athens/athens_core/presentation/base_blocs/base_change_n
 import 'package:url_launcher/url_launcher.dart';
 import 'package:version/version.dart';
 
-class RemoteConfigurationManagerBloc extends BaseChangeNotifier with ConfigurationDelegate<DateTime, DateTime> {
+class RemoteConfigurationManagerBloc extends BaseChangeNotifier with ConfigurationDelegate<DateTime?, DateTime> {
   final RemoteConfiguration _remoteConfiguration;
   late final StreamSubscription<void> _configChangeSub;
 
