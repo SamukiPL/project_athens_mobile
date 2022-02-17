@@ -26,6 +26,7 @@ class SpeechesNetworkMapper
         videoUrl: data.videoDownloadUrl,
         nextPersonSpeech: await _transformPersonSpeechResponse(data.nextPersonSpeech),
         previousPersonSpeech: await _transformPersonSpeechResponse(data.previousPersonSpeech),
+        viewed: data.viewed == true,
         createAt: data.createAt,
         updateAt: data.updateAt
     );

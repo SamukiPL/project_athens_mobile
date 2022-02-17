@@ -23,8 +23,9 @@ class SpeechResponse extends TimelineItem {
   final String? rangeId;
   final PersonSpeech? previousPersonSpeech;
   final PersonSpeech? nextPersonSpeech;
+  final bool? viewed;
 
-  SpeechResponse(this.agenda, this.cisInfo, this.createAt, this.id, this.deputyCardIdentifier, this.fileName, this.videoDownloadUrl, this.length, this.personName, this.cadencyDeputy, this.parliamentClub, this.cadency, this.rangeId, this.previousPersonSpeech, this.nextPersonSpeech, this.updateAt);
+  SpeechResponse(this.agenda, this.cisInfo, this.createAt, this.id, this.deputyCardIdentifier, this.fileName, this.videoDownloadUrl, this.length, this.personName, this.cadencyDeputy, this.parliamentClub, this.cadency, this.rangeId, this.previousPersonSpeech, this.nextPersonSpeech, this.updateAt, this.viewed);
 
   factory SpeechResponse.fromJson(Map<String, dynamic> json) => _$SpeechResponseFromJson(json);
   Map<String, dynamic> toJson() => _$SpeechResponseToJson(this);

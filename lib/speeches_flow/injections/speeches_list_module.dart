@@ -4,6 +4,7 @@ import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/ads/native_ad/native_ad_provider.dart';
 import 'package:project_athens/athens_core/ads/native_ad/native_ads.dart';
 import 'package:project_athens/athens_core/data/base_list/items_repository_impl.dart';
+import 'package:project_athens/athens_core/db/athens_db.dart';
 import 'package:project_athens/athens_core/filters_and_sort/add_ons/easy_filters/easy_filters_list_bloc.dart';
 import 'package:project_athens/athens_core/filters_and_sort/data/filters_repository.dart';
 import 'package:project_athens/athens_core/filters_and_sort/domain/filterable_facade.dart';
@@ -14,9 +15,12 @@ import 'package:project_athens/athens_core/presentation/search_app_bar/search_ap
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/cache/parliament_clubs_cache.dart';
 import 'package:project_athens/deputies_utils/cache/subscribed_deputies_cache.dart';
+import 'package:project_athens/speeches_flow/data/db/mappers/speech_entity_mapper.dart';
+import 'package:project_athens/speeches_flow/data/db/mappers/speech_model_dao_mapper.dart';
 import 'package:project_athens/speeches_flow/data/network/speeches_api.dart';
 import 'package:project_athens/speeches_flow/data/speech_cache.dart';
 import 'package:project_athens/speeches_flow/data/speeches_easy_filters_repository.dart';
+import 'package:project_athens/speeches_flow/data/speeches_list_local_data_source.dart';
 import 'package:project_athens/speeches_flow/data/speeches_list_network_data_source.dart';
 import 'package:project_athens/speeches_flow/domain/speeches_list_facade.dart';
 import 'package:project_athens/speeches_flow/mappers/speeches_network_mapper.dart';
@@ -41,8 +45,13 @@ class SpeechesListModule extends Module {
     final clubsCache = Provider.of<ParliamentClubsCache>(context);
     final networkMapper = SpeechesNetworkMapper(deputiesCache, clubsCache);
 
+    final database = Provider.of<AthensDatabase>(context);
+    final entityMapper = SpeechEntityMapper();
+    final speechModelDaoMapper = SpeechModelDaoMapper(deputiesCache, clubsCache);
+    final localDataSource = SpeechesListLocalDataSource(database, entityMapper, speechModelDaoMapper, subscribedDeputiesCache);
+
     final networkDataSource = SpeechesListNetworkDataSource(
-        speechesApi, networkMapper, speechCache, subscribedDeputiesCache);
+        speechesApi, networkMapper, speechCache, localDataSource);
     final speechesEasyFilters =
         SpeechesEasyFiltersRepository(clubsCache, localizations);
 

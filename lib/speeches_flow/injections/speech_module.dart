@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
+import 'package:project_athens/athens_core/data/item_was_seen/seen_item_data_source.dart';
+import 'package:project_athens/athens_core/domain/item_was_seen/speech_was_seen_use_case.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/cache/parliament_clubs_cache.dart';
@@ -27,15 +29,18 @@ class SpeechModule extends Module {
     final speechesApi = SpeechesApi(dio);
     final deputiesCache = Provider.of<DeputiesCache>(context);
     final clubsCache = Provider.of<ParliamentClubsCache>(context);
+    final seenDataSource = Provider.of<SeenItemDataSource>(context);
     final networkMapper = SpeechesNetworkMapper(deputiesCache, clubsCache);
     final speechCache = Provider.of<SpeechCache>(context);
 
     final detailsSpeechNetworkDataSource = DetailsSpeechNetworkDataSource(speechesApi, networkMapper, speechId, isNormalSpeech, speechCache);
     final getSpeechUseCase = GetSpeechUseCase(detailsSpeechNetworkDataSource);
 
+    final speechWasSeenUseCase = SpeechWasSeenUseCase(seenDataSource);
+
     final wakelock = Provider.of<WakelockService>(context);
 
-    bloc = SpeechDetailsBloc(isNormalSpeech, getSpeechUseCase, deputiesCache, wakelock);
+    bloc = SpeechDetailsBloc(isNormalSpeech, getSpeechUseCase, deputiesCache, wakelock, speechWasSeenUseCase);
 
     return [
       Provider<SpeechDetailsBloc>.value(

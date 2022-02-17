@@ -32,6 +32,7 @@ SpeechResponse _$SpeechResponseFromJson(Map<String, dynamic> json) =>
           : PersonSpeech.fromJson(
               json['nextPersonSpeech'] as Map<String, dynamic>),
       DateTime.parse(json['updateAt'] as String),
+      json['viewed'] as bool?,
     );
 
 Map<String, dynamic> _$SpeechResponseToJson(SpeechResponse instance) =>
@@ -52,6 +53,7 @@ Map<String, dynamic> _$SpeechResponseToJson(SpeechResponse instance) =>
       'rangeId': instance.rangeId,
       'previousPersonSpeech': instance.previousPersonSpeech,
       'nextPersonSpeech': instance.nextPersonSpeech,
+      'viewed': instance.viewed,
     };
 
 Agenda _$AgendaFromJson(Map<String, dynamic> json) => Agenda(

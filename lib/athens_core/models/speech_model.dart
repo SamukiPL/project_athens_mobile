@@ -10,6 +10,7 @@ class SpeechModel extends TimelineModel {
   final String videoUrl;
   final PersonSpeechModel? nextPersonSpeech;
   final PersonSpeechModel? previousPersonSpeech;
+  final bool viewed;
 
   SpeechModel({
     required String id,
@@ -22,6 +23,7 @@ class SpeechModel extends TimelineModel {
     required this.videoUrl,
     this.nextPersonSpeech,
     this.previousPersonSpeech,
+    this.viewed = false,
     DateTime? createAt,
     DateTime? updateAt,
   }) : super(id, TimelineModelType.SPEECH, date, createAt, updateAt);

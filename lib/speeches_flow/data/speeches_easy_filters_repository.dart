@@ -16,6 +16,9 @@ class SpeechesEasyFiltersRepository extends EasyFiltersRepository<SpeechesEasyFi
 
   @override
   Future<Result<List<EasyFilterModel<SpeechesEasyFilter>>>> getFilters() async {
+    final seen = EasyFilterModel(title: "Zobaczone", filterValue: SpeechesEasyFilter.seen());
+    final notSeen = EasyFilterModel(title: "Nie Zobaczone", filterValue: SpeechesEasyFilter.notSeen());
+
     final subscribed = EasyFilterModel(title: _localizations.getText().filtersFiltersSubscribed(), filterValue: SpeechesEasyFilter.subscribed());
 
     final clubs = await _clubsCache.parliamentClubs.then((result) {
@@ -29,6 +32,6 @@ class SpeechesEasyFiltersRepository extends EasyFiltersRepository<SpeechesEasyFi
       }
     }) ?? List.empty();
 
-    return Success([subscribed] + clubs);
+    return Success([seen, notSeen, subscribed] + clubs);
   }
 }
