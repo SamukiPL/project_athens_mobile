@@ -274,9 +274,7 @@ class DeputyInformationDetailsTab extends StatelessWidget {
                         b: 1.0,
                       ),
                       children: generateNounsWidgets(nouns),
-                      clipBehavior: Clip.antiAlias,
-
-                      // overflow: Overflow.visible
+                      clipBehavior: Clip.antiAlias
                   ),
                 ),
               );

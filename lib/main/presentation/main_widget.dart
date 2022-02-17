@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/configuration/remote_configuration.dart';
 import 'package:project_athens/athens_core/configuration/remote_configuration_manager.dart';
 import 'package:project_athens/athens_core/configuration/remote_configuration_manager_bloc.dart';
+import 'package:project_athens/athens_core/injections/item_was_seen/item_was_seen_module.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/navigation/bottom_navigation_bloc.dart';
 import 'package:project_athens/athens_core/navigation/destination_navigator.dart';
@@ -26,6 +27,7 @@ class MainWidget extends StatelessWidget with RedirectionDelegate {
             providers: [
               SubscribedDeputyCacheModule(context, firebaseMessages),
               WakelockModule(context),
+              ItemWasSeenModule(context)
             ],
             child: Consumer<BottomNavigationBloc>(
               builder: (context, bloc, child) => WillPopScope(

@@ -48,6 +48,7 @@ class DestinationManager {
   void push<T>(
       BuildContext context, Route<T> route, bool replace) {
     if (replace) {
+      Navigator.pop(context);
       Navigator.pushReplacement(context, route);
     } else {
       Navigator.push(context, route);
