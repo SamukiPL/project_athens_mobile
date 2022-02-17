@@ -19,8 +19,10 @@ abstract class BaseRegistrationFormStep<BLOC extends BaseRegistrationStepBloc> e
 
   @override
   void positiveButtonAction(BuildContext context, BLOC bloc) {
-    if (!getFormKey(context).currentState!.validate())
+    if (!getFormKey(context).currentState!.validate()) {
+      bloc.resetFooterButtons();
       return;
+    }
 
     bloc();
   }

@@ -101,5 +101,7 @@ class DeputiesChooserBloc extends BaseRegistrationStepBloc
   }
 
   @override
-  Future<void> refresh() async {}
+  Future<void> refresh() async {
+    _loadFreshData();
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/presentation/button_loader/button_loader.dart';
@@ -79,15 +80,24 @@ class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
                 ),
                 Container(
                   margin: EdgeInsets.fromLTRB(32, 8, 32, 16),
-                  child: TextFormField(
-                    onChanged: (email) => bloc.setEmail(email),
-                    textInputAction: TextInputAction.next,
-                    decoration: InputDecoration(
-                        labelText: localization.getText().loginHintsEmail(),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        )),
-                    maxLines: 1,
+                  child: Form(
+                    key: bloc.resetPasswordForm,
+                    child: TextFormField(
+                      onChanged: (email) => bloc.setEmail(email),
+                      textInputAction: TextInputAction.next,
+                      decoration: InputDecoration(
+                          labelText: localization.getText().loginHintsEmail(),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                          )),
+                      maxLines: 1,
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (email) {
+                        if (email == null || !EmailValidator.validate(email)) return localization.getText().loginValidateIncorrectEmail();
+
+                        return null;
+                      },
+                    ),
                   ),
                 ),
                 Container(
