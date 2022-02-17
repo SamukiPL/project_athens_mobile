@@ -5,6 +5,7 @@ import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:project_athens/athens_core/auth/auth_repository.dart';
 import 'package:project_athens/athens_core/auth/auth_storage.dart';
 import 'package:project_athens/athens_core/chopper/jwt_decode.dart';
+import 'package:project_athens/athens_core/ext/string_extension.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
 import 'package:project_athens/deputies_utils/cache/subscribed_deputies_cache.dart';
 import 'package:rxdart/rxdart.dart';
@@ -28,7 +29,7 @@ class SplashScreenBloc extends BaseBloc {
   Future<void> checkDirection() async {
     var tokens = await _authStorage.provideTokens();
 
-    if (tokens.accessToken == null) {
+    if (tokens.accessToken.isNullOrEmpty) {
       _direction.add(SplashDirection.LOGIN);
       return;
     }
