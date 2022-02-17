@@ -31,9 +31,9 @@ class SpeechesListLocalDataSource {
 
   Future<Expression<bool?> Function($SpeechEntityTable)> _getEasyFilterWhere(
       SpeechesEasyFilter easyFilter) async {
-    if (easyFilter is SeenFilter) {
+    if (easyFilter is SpeechSeenFilter) {
       return ($SpeechEntityTable tbl) => tbl.viewed.equals(true);
-    } else if (easyFilter is NotSeenFilter) {
+    } else if (easyFilter is SpeechNotSeenFilter) {
       return ($SpeechEntityTable tbl) => tbl.viewed.equals(false);
     } else if (easyFilter is SpeechesSubscribedFilter) {
       final subscribedDeputies =

@@ -53,7 +53,9 @@ class VotingModelDaoMapper
       if (grouped[element.parliamentClubId] == null) {
         grouped[element.parliamentClubId] = List.empty(growable: true);
       }
-      grouped[element.parliamentClubId]!.add(element.deputyCardNumber);
+      if (element.deputyCardNumber != null) {
+        grouped[element.parliamentClubId]!.add(element.deputyCardNumber!);
+      }
     });
 
     final clubs = await _clubsCache.parliamentClubs;

@@ -12,6 +12,9 @@ class VotesEasyFiltersRepository extends EasyFiltersRepository<VotesEasyFilter> 
 
   @override
   Future<Result<List<EasyFilterModel<VotesEasyFilter>>>> getFilters() async {
+    final seen = EasyFilterModel(title: "Zobaczone", filterValue: VotesEasyFilter.seen());
+    final notSeen = EasyFilterModel(title: "Nie Zobaczone", filterValue: VotesEasyFilter.notSeen());
+
     final acceptedFilter = EasyFilterModel(title: _localizations.getText().votingsFiltersAccepted(), filterValue: VotesEasyFilter.accepted());
     final rejectedFilter = EasyFilterModel(title: _localizations.getText().votingsFiltersRejected(), filterValue: VotesEasyFilter.rejected());
 
@@ -21,6 +24,6 @@ class VotesEasyFiltersRepository extends EasyFiltersRepository<VotesEasyFilter> 
       )
     ).toList();
 
-    return Success([acceptedFilter, rejectedFilter] + types);
+    return Success([seen, notSeen, acceptedFilter, rejectedFilter] + types);
   }
 }

@@ -1,3 +1,4 @@
+import 'package:drift/drift.dart';
 import 'package:project_athens/athens_core/db/athens_db.dart';
 import 'package:project_athens/athens_core/domain/data_mapper.dart';
 import 'package:project_athens/athens_core/ext/db_value_extension.dart';
@@ -8,9 +9,10 @@ class VotingEntityMapper
     extends DataMapper<VoteSlimDTO, InsertableSlimVoteModel> {
   @override
   InsertableSlimVoteModel transform(VoteSlimDTO data) {
+    final clubs = getClubMajority(data);
     return InsertableSlimVoteModel(
         entity: getVotingEntity(data),
-        clubMajority: getClubMajority(data),
+        clubMajority: clubs,
         deputyVoteType: getClubNumberEntity(data));
   }
 
@@ -31,18 +33,28 @@ class VotingEntityMapper
 
   List<SlimClubMajorityEntityCompanion> getClubMajority(VoteSlimDTO data) =>
       data.clubsMajority
-          .expand((vote) => vote.deputyCardNumbers.map((deputy) =>
-              SlimClubMajorityEntityCompanion.insert(
-                  votingId: data.id,
-                  parliamentClubId: vote.parliamentClub,
-                  voteMajority: vote.voteMajority.index,
-                  deputyCardNumber: deputy)))
+          .expand((club) {
+        if (club.deputyCardNumbers.isEmpty) {
+          return [SlimClubMajorityEntityCompanion.insert(votingId: data.id,
+              parliamentClubId: club.parliamentClub,
+              voteMajority: club.voteMajority.index,
+              deputyCardNumber: Value.absent())
+          ];
+        }
+        return club.deputyCardNumbers.map((deputy) =>
+            SlimClubMajorityEntityCompanion.insert(
+                votingId: data.id,
+                parliamentClubId: club.parliamentClub,
+                voteMajority: club.voteMajority.index,
+                deputyCardNumber: ValueExt.absentIfNull(deputy)));
+      })
           .toList();
 
   List<SlimDeputyVoteTypeEntityCompanion> getClubNumberEntity(
-          VoteSlimDTO data) =>
+      VoteSlimDTO data) =>
       data.deputiesVoteType
-          .map((deputy) => SlimDeputyVoteTypeEntityCompanion.insert(
+          .map((deputy) =>
+          SlimDeputyVoteTypeEntityCompanion.insert(
               votingId: data.id,
               deputyId: deputy.cadencyDeputy,
               type: deputy.voteType.index))

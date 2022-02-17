@@ -792,12 +792,12 @@ class SlimClubMajorityEntityData extends DataClass
   final String votingId;
   final String parliamentClubId;
   final int voteMajority;
-  final int deputyCardNumber;
+  final int? deputyCardNumber;
   SlimClubMajorityEntityData(
       {required this.votingId,
       required this.parliamentClubId,
       required this.voteMajority,
-      required this.deputyCardNumber});
+      this.deputyCardNumber});
   factory SlimClubMajorityEntityData.fromData(Map<String, dynamic> data,
       {String? prefix}) {
     final effectivePrefix = prefix ?? '';
@@ -809,7 +809,7 @@ class SlimClubMajorityEntityData extends DataClass
       voteMajority: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}vote_majority'])!,
       deputyCardNumber: const IntType().mapFromDatabaseResponse(
-          data['${effectivePrefix}deputy_card_number'])!,
+          data['${effectivePrefix}deputy_card_number']),
     );
   }
   @override
@@ -818,7 +818,9 @@ class SlimClubMajorityEntityData extends DataClass
     map['voting_id'] = Variable<String>(votingId);
     map['parliament_club_id'] = Variable<String>(parliamentClubId);
     map['vote_majority'] = Variable<int>(voteMajority);
-    map['deputy_card_number'] = Variable<int>(deputyCardNumber);
+    if (!nullToAbsent || deputyCardNumber != null) {
+      map['deputy_card_number'] = Variable<int?>(deputyCardNumber);
+    }
     return map;
   }
 
@@ -827,7 +829,9 @@ class SlimClubMajorityEntityData extends DataClass
       votingId: Value(votingId),
       parliamentClubId: Value(parliamentClubId),
       voteMajority: Value(voteMajority),
-      deputyCardNumber: Value(deputyCardNumber),
+      deputyCardNumber: deputyCardNumber == null && nullToAbsent
+          ? const Value.absent()
+          : Value(deputyCardNumber),
     );
   }
 
@@ -838,7 +842,7 @@ class SlimClubMajorityEntityData extends DataClass
       votingId: serializer.fromJson<String>(json['votingId']),
       parliamentClubId: serializer.fromJson<String>(json['parliamentClubId']),
       voteMajority: serializer.fromJson<int>(json['voteMajority']),
-      deputyCardNumber: serializer.fromJson<int>(json['deputyCardNumber']),
+      deputyCardNumber: serializer.fromJson<int?>(json['deputyCardNumber']),
     );
   }
   @override
@@ -848,7 +852,7 @@ class SlimClubMajorityEntityData extends DataClass
       'votingId': serializer.toJson<String>(votingId),
       'parliamentClubId': serializer.toJson<String>(parliamentClubId),
       'voteMajority': serializer.toJson<int>(voteMajority),
-      'deputyCardNumber': serializer.toJson<int>(deputyCardNumber),
+      'deputyCardNumber': serializer.toJson<int?>(deputyCardNumber),
     };
   }
 
@@ -892,7 +896,7 @@ class SlimClubMajorityEntityCompanion
   final Value<String> votingId;
   final Value<String> parliamentClubId;
   final Value<int> voteMajority;
-  final Value<int> deputyCardNumber;
+  final Value<int?> deputyCardNumber;
   const SlimClubMajorityEntityCompanion({
     this.votingId = const Value.absent(),
     this.parliamentClubId = const Value.absent(),
@@ -903,16 +907,15 @@ class SlimClubMajorityEntityCompanion
     required String votingId,
     required String parliamentClubId,
     required int voteMajority,
-    required int deputyCardNumber,
+    this.deputyCardNumber = const Value.absent(),
   })  : votingId = Value(votingId),
         parliamentClubId = Value(parliamentClubId),
-        voteMajority = Value(voteMajority),
-        deputyCardNumber = Value(deputyCardNumber);
+        voteMajority = Value(voteMajority);
   static Insertable<SlimClubMajorityEntityData> custom({
     Expression<String>? votingId,
     Expression<String>? parliamentClubId,
     Expression<int>? voteMajority,
-    Expression<int>? deputyCardNumber,
+    Expression<int?>? deputyCardNumber,
   }) {
     return RawValuesInsertable({
       if (votingId != null) 'voting_id': votingId,
@@ -926,7 +929,7 @@ class SlimClubMajorityEntityCompanion
       {Value<String>? votingId,
       Value<String>? parliamentClubId,
       Value<int>? voteMajority,
-      Value<int>? deputyCardNumber}) {
+      Value<int?>? deputyCardNumber}) {
     return SlimClubMajorityEntityCompanion(
       votingId: votingId ?? this.votingId,
       parliamentClubId: parliamentClubId ?? this.parliamentClubId,
@@ -948,7 +951,7 @@ class SlimClubMajorityEntityCompanion
       map['vote_majority'] = Variable<int>(voteMajority.value);
     }
     if (deputyCardNumber.present) {
-      map['deputy_card_number'] = Variable<int>(deputyCardNumber.value);
+      map['deputy_card_number'] = Variable<int?>(deputyCardNumber.value);
     }
     return map;
   }
@@ -992,8 +995,8 @@ class $SlimClubMajorityEntityTable extends SlimClubMajorityEntity
       const VerificationMeta('deputyCardNumber');
   @override
   late final GeneratedColumn<int?> deputyCardNumber = GeneratedColumn<int?>(
-      'deputy_card_number', aliasedName, false,
-      type: const IntType(), requiredDuringInsert: true);
+      'deputy_card_number', aliasedName, true,
+      type: const IntType(), requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns =>
       [votingId, parliamentClubId, voteMajority, deputyCardNumber];
@@ -1034,8 +1037,6 @@ class $SlimClubMajorityEntityTable extends SlimClubMajorityEntity
           _deputyCardNumberMeta,
           deputyCardNumber.isAcceptableOrUnknown(
               data['deputy_card_number']!, _deputyCardNumberMeta));
-    } else if (isInserting) {
-      context.missing(_deputyCardNumberMeta);
     }
     return context;
   }

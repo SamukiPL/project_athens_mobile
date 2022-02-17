@@ -6,8 +6,8 @@ class VotesEasyFilter {
   factory VotesEasyFilter.voteType(VotingType type) = VoteTypeFilter;
   factory VotesEasyFilter.accepted() = AcceptedVoteFilter;
   factory VotesEasyFilter.rejected() = RejectedVoteFilter;
-  factory VotesEasyFilter.seen() = SeenFilter;
-  factory VotesEasyFilter.notSeen() = NotSeenFilter;
+  factory VotesEasyFilter.seen() = VoteSeenFilter;
+  factory VotesEasyFilter.notSeen() = VoteNotSeenFilter;
 }
 
 class VoteTypeFilter extends VotesEasyFilter {
@@ -24,10 +24,10 @@ class RejectedVoteFilter extends VotesEasyFilter {
   RejectedVoteFilter() : super._();
 }
 
-class SeenFilter extends VotesEasyFilter {
-  SeenFilter() : super._();
+class VoteSeenFilter extends VotesEasyFilter {
+  VoteSeenFilter() : super._();
 }
 
-class NotSeenFilter extends VotesEasyFilter {
-  NotSeenFilter() : super._();
+class VoteNotSeenFilter extends VotesEasyFilter {
+  VoteNotSeenFilter() : super._();
 }

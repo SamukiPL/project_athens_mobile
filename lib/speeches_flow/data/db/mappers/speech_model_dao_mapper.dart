@@ -32,10 +32,8 @@ class SpeechModelDaoMapper extends AsyncDataMapper<SpeechEntityData, SpeechModel
 
   Future<PersonSpeechModel?> _transformPersonSpeechResponse(String? name, String? speechId, int? deputyCard) async {
     if (name == null) return null;
-
     if (deputyCard != null) {
       final deputy = await _deputiesCache.getDeputyModelByCardId(deputyCard);
-
       return PersonSpeechModel(name: deputy.name, thumbnailUrl: deputy.thumbnailUrl, speechId: speechId!);
     }
 

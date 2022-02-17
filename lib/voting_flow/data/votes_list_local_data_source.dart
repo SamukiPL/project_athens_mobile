@@ -29,7 +29,11 @@ class VotesListLocalDataSource {
 
   Expression<bool?> Function($VoteSlimEntityTable) _getEasyFilterWhere(
       VotesEasyFilter easyFilter) {
-    if (easyFilter is VoteTypeFilter) {
+    if (easyFilter is VoteSeenFilter) {
+      return (tbl) => tbl.viewed.equals(true);
+    } else if (easyFilter is VoteNotSeenFilter) {
+      return (tbl) => tbl.viewed.equals(false);
+    } else if (easyFilter is VoteTypeFilter) {
       return (tbl) => tbl.votingType.equals(easyFilter.type.index);
     } else if (easyFilter is AcceptedVoteFilter) {
       return (tbl) => _votePassed(tbl);
@@ -41,8 +45,11 @@ class VotesListLocalDataSource {
   }
 
   Expression<bool?> _votePassed($VoteSlimEntityTable tbl) {
-    return tbl.inFavor.isBiggerThan(tbl.absoluteMajority) |
-        tbl.inFavor.isBiggerThan(tbl.qualifyingMajority) |
-        tbl.inFavor.isBiggerThan(tbl.against);
+    if (tbl.absoluteMajority.isNotNull().isLiteral) {
+      return tbl.inFavor.isBiggerThan(tbl.absoluteMajority);
+    } else if (tbl.qualifyingMajority.isNotNull().isLiteral) {
+      tbl.inFavor.isBiggerThan(tbl.qualifyingMajority);
+    }
+    return tbl.inFavor.isBiggerThan(tbl.against);
   }
 }
