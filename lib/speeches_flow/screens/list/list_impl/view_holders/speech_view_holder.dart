@@ -65,7 +65,7 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
     return Expanded(
       child: InkWell(
         onTap: () {
-          goToDestination(context, SpeechDetailsDestination(_viewModel.model.id, false));
+          goToDestination(context, SpeechDetailsDestination(_viewModel.model.id, true));
         },
         child: Container(
           margin: EdgeInsets.only(top: 8, bottom: 8),

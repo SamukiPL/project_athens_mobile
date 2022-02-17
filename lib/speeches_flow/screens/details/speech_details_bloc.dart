@@ -56,12 +56,12 @@ class SpeechDetailsBloc extends BaseBloc {
   }
 
   void goToNextSpeech() {
-    final destination = SpeechDetailsDestination(speechModel.nextPersonSpeech!.speechId, isNormalSpeech);
+    final destination = SpeechDetailsDestination(speechModel.nextPersonSpeech!.speechId, isNormalSpeech, replace: true);
     goToDestination(destination);
   }
 
   void goToPreviousSpeech() {
-    final destination = SpeechDetailsDestination(speechModel.previousPersonSpeech!.speechId, isNormalSpeech);
+    final destination = SpeechDetailsDestination(speechModel.previousPersonSpeech!.speechId, isNormalSpeech, replace: true);
     goToDestination(destination);
   }
 

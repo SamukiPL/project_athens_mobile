@@ -37,7 +37,8 @@ VoteSlimDTO _$VoteSlimDTOFromJson(Map<String, dynamic> json) => VoteSlimDTO(
           .toList(),
       json['qualifyingMajority'] as int?,
       json['absoluteMajority'] as int?,
-      json['orderPoint'] as int?,
+      json['orderPoint'] as int,
+      json['viewed'] as bool?,
     );
 
 Map<String, dynamic> _$VoteSlimDTOToJson(VoteSlimDTO instance) =>
@@ -52,6 +53,7 @@ Map<String, dynamic> _$VoteSlimDTOToJson(VoteSlimDTO instance) =>
       'clubsMajority': instance.clubsMajority,
       'deputiesVoteType': instance.deputiesVoteType,
       'orderPoint': instance.orderPoint,
+      'viewed': instance.viewed,
     };
 
 const _$VotingTypeEnumMap = {
