@@ -18,7 +18,7 @@ class GroupedVotingModel extends TimelineModel {
   final DateTime firstDate;
   final DateTime lastDate;
   final String? agenda;
-  final int orderPoint;
+  final int? orderPoint;
 
   GroupedVotingModel({
     required this.votingDesc,

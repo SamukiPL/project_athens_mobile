@@ -117,7 +117,7 @@ class HallOfFameScreen extends BaseScreen<HallOfFameBloc> {
                         )
                       ),
                       WidgetSpan(
-                        child: backer.hasBadge
+                        child: backer.hasBadge == true
                           ? Icon(
                           MdiIcons.license,
                           color: Colors.black45,

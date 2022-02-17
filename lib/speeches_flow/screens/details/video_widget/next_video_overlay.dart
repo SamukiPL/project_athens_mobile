@@ -105,7 +105,7 @@ class NextVideoOverlay extends StatelessWidget with RedirectionDelegate {
             ),
           ),
           Text(
-            nextPersonSpeech.name,
+            nextPersonSpeech.name ?? "",
             style: TextStyle(color: Colors.white70, fontSize: 16),
           )
         ],

@@ -13,7 +13,6 @@ class FullDeputyResponse {
   final int cardNumber;
   final String reversedName;
   final String politicalParty;
-  final int cardId;
   final String deputyId;
   final CvBean cv;
   final ContactBean contact;
@@ -21,7 +20,7 @@ class FullDeputyResponse {
   final DateTime createAt;
   final DateTime updateAt;
 
-  FullDeputyResponse(this.id, this.cadency, this.name, this.reversedName, this.photoUrl, this.politicalParty, this.parliamentClub, this.cardNumber, this.cardId, this.deputyId, this.isActive, this.cv, this.contact, this.statistics, this.createAt, this.updateAt);
+  FullDeputyResponse(this.id, this.cadency, this.name, this.reversedName, this.photoUrl, this.politicalParty, this.parliamentClub, this.cardNumber, this.deputyId, this.isActive, this.cv, this.contact, this.statistics, this.createAt, this.updateAt);
 
   factory FullDeputyResponse.fromJson(Map<String, dynamic> json) => _$FullDeputyResponseFromJson(json);
   Map<String, dynamic> toJson() => _$FullDeputyResponseToJson(this);
@@ -54,10 +53,10 @@ class ContactOfficeBean {
 @JsonSerializable()
 class CvBean {
   final String born;
-  final String education;
-  final String finishedSchools;
-  final String profession;
-  final String parliamentExperience;
+  final String? education;
+  final String? finishedSchools;
+  final String? profession;
+  final String? parliamentExperience;
 
   CvBean(this.born, this.education, this.finishedSchools, this.profession, this.parliamentExperience);
 

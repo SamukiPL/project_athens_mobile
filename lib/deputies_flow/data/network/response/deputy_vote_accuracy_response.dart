@@ -22,11 +22,11 @@ class VoteSlimDTO extends TimelineItem {
   final VotingType type;
   final DateTime voteAt;
   final VoteSlimVotingNumbersDTO voteNumbers;
-  final int qualifyingMajority;
-  final int absoluteMajority;
+  final int? qualifyingMajority;
+  final int? absoluteMajority;
   final List<VoteSlimClubMajorityDTO> clubsMajority;
   final List<VoteSlimDeputyMajorityVoteDTO> deputiesVoteType;
-  final int orderPoint;
+  final int? orderPoint;
 
   VoteSlimDTO(this.id, this.agenda, this.type, this.voteAt, this.voteNumbers, this.clubsMajority, this.deputiesVoteType, this.qualifyingMajority, this.absoluteMajority, this.orderPoint);
 

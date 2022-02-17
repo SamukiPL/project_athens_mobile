@@ -16,15 +16,14 @@ VotingResponse _$VotingResponseFromJson(Map<String, dynamic> json) =>
       json['orderPoint'] as int?,
       json['sessionIId'] as int,
       json['votingIId'] as int,
-      json['votingUniqueId'] as String,
       json['topic'] as String,
       (json['votes'] as List<dynamic>)
           .map((e) => Votes.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['votingType'] as int,
       json['id'] as String,
-      json['absoluteMajority'] as int,
-      json['qualifyingMajority'] as int,
+      json['absoluteMajority'] as int?,
+      json['qualifyingMajority'] as int?,
       (json['parliamentClubVotingNumbers'] as List<dynamic>)
           .map((e) =>
               ParliamentClubVotingNumbers.fromJson(e as Map<String, dynamic>))
@@ -46,7 +45,6 @@ Map<String, dynamic> _$VotingResponseToJson(VotingResponse instance) =>
       'orderPoint': instance.orderPoint,
       'sessionIId': instance.sessionIId,
       'votingIId': instance.votingIId,
-      'votingUniqueId': instance.votingUniqueId,
       'topic': instance.topic,
       'votes': instance.votes,
       'votingType': instance.votingType,

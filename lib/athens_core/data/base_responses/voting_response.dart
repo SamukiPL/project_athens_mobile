@@ -14,13 +14,12 @@ class VotingResponse implements TimelineItem {
   final int? orderPoint;
   final int sessionIId;
   final int votingIId;
-  final String votingUniqueId;
   final String topic;
   final List<Votes> votes;
   final int votingType;
   final String id;
-  final int absoluteMajority;
-  final int qualifyingMajority;
+  final int? absoluteMajority;
+  final int? qualifyingMajority;
   final List<ParliamentClubVotingNumbers> parliamentClubVotingNumbers;
   final int? deputyVoteType;
 
@@ -38,7 +37,6 @@ class VotingResponse implements TimelineItem {
       this.orderPoint,
       this.sessionIId,
       this.votingIId,
-      this.votingUniqueId,
       this.topic,
       this.votes,
       this.votingType,

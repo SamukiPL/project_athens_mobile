@@ -6,12 +6,12 @@ part 'noun_cloud_response.g.dart';
 @JsonSerializable()
 class NounCloudResponse {
 
-  final String id;
+  final String? id;
   final DateTime? createAt;
   final DateTime? updateAt;
-  final int cadency;
+  final int? cadency;
   final DateTime? scheduledAt;
-  final int sessionIId;
+  final int? sessionIId;
   final List<NounTag> nouns;
 
   NounCloudResponse(this.id, this.createAt, this.updateAt, this.cadency, this.scheduledAt, this.sessionIId, this.nouns);

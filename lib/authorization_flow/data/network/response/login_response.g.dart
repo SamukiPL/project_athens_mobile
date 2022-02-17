@@ -10,7 +10,7 @@ LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>
     LoginResponse(
       json['accessToken'] as String,
       json['refreshToken'] as String,
-      json['error'] as String,
+      json['error'] as String?,
     );
 
 Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>

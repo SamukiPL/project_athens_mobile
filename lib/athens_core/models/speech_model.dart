@@ -45,7 +45,7 @@ class SpeechModel extends TimelineModel {
 }
 
 class PersonSpeechModel {
-  final String name;
+  final String? name;
   final String? thumbnailUrl;
   final String speechId;
 

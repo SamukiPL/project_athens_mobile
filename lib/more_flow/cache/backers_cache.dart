@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:project_athens/athens_core/domain/base_list/base_params.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/more_flow/domain/more/backer_model.dart';
@@ -22,7 +24,10 @@ class BackersCache {
       } else {
         return result;
       }
+    }).catchError((err) {
+      Fimber.e(err.toString());
     });
+
 
     return result as Result<List<BackerModel>>;
   }
@@ -31,7 +36,7 @@ class BackersCache {
     final cachedBackers = await backers;
     
     if (cachedBackers is Success<List<BackerModel>>) {
-      return cachedBackers.value.firstWhere((element) => element.isCurrentUser != null && element.isCurrentUser == true) != null;
+      return cachedBackers.value.firstWhereOrNull((element) => element.isCurrentUser == true) != null;
     } else {
       return false;
     }
