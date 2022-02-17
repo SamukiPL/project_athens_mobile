@@ -4,6 +4,7 @@ import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/ads/native_ad/native_ad_provider.dart';
 import 'package:project_athens/athens_core/ads/native_ad/native_ads.dart';
 import 'package:project_athens/athens_core/data/base_list/items_repository_impl.dart';
+import 'package:project_athens/athens_core/db/athens_db.dart';
 import 'package:project_athens/athens_core/filters_and_sort/add_ons/easy_filters/easy_filters_list_bloc.dart';
 import 'package:project_athens/athens_core/filters_and_sort/data/filters_repository.dart';
 import 'package:project_athens/athens_core/filters_and_sort/domain/filterable_facade.dart';
@@ -14,8 +15,11 @@ import 'package:project_athens/athens_core/presentation/search_app_bar/search_ap
 import 'package:project_athens/deputies_flow/mappers/vote_slim_network_mapper.dart';
 import 'package:project_athens/deputies_utils/cache/parliament_clubs_cache.dart';
 import 'package:project_athens/deputies_utils/cache/subscribed_deputies_cache.dart';
+import 'package:project_athens/voting_flow/data/db/mappers/voting_entity_mapper.dart';
+import 'package:project_athens/voting_flow/data/db/mappers/voting_model_dao_mapper.dart';
 import 'package:project_athens/voting_flow/data/network/voting_api.dart';
 import 'package:project_athens/voting_flow/data/votes_easy_filters_repository.dart';
+import 'package:project_athens/voting_flow/data/votes_list_local_data_source.dart';
 import 'package:project_athens/voting_flow/data/votes_list_network_data_source.dart';
 import 'package:project_athens/voting_flow/domain/votes_list_facade.dart';
 import 'package:project_athens/voting_flow/screens/list/list_impl/vote_item_view_model_factory.dart';
@@ -37,7 +41,12 @@ class VotesListModule extends Module {
     final votingApi = VotingApi(dio);
     final networkMapper = VoteSlimNetworkMapper(subscribedDeputiesCache, clubsCache, localizations);
 
-    final networkDataSource = VotesListNetworkDataSource(votingApi, networkMapper);
+    final database = Provider.of<AthensDatabase>(context);
+    final entityMapper = VotingEntityMapper();
+    final votingModelDaoMapper = VotingModelDaoMapper(database, subscribedDeputiesCache, clubsCache, localizations);
+    final localDataSource = VotesListLocalDataSource(database, entityMapper, votingModelDaoMapper);
+
+    final networkDataSource = VotesListNetworkDataSource(votingApi, networkMapper, localDataSource);
     final votesEasyFilters = VotesEasyFiltersRepository(localizations);
 
     final itemsRepository = ItemsRepositoryImpl(networkDataSource);

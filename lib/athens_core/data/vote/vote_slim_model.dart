@@ -11,7 +11,11 @@ class VoteNumbers {
   final int hold;
   final int absent;
 
-  VoteNumbers({required this.inFavor, required this.against, required this.hold, required this.absent});
+  VoteNumbers(
+      {required this.inFavor,
+      required this.against,
+      required this.hold,
+      required this.absent});
 }
 
 class VoteSlimClubMajority {
@@ -19,7 +23,8 @@ class VoteSlimClubMajority {
   final VoteType voteMajority;
   final List<int> deputyCardNumbers;
 
-  VoteSlimClubMajority(this.parliamentClubModel, this.voteMajority, this.deputyCardNumbers);
+  VoteSlimClubMajority(
+      this.parliamentClubModel, this.voteMajority, this.deputyCardNumbers);
 }
 
 class VoteSlimDeputyVoteType {
@@ -39,49 +44,59 @@ class VoteSlimModel extends BaseModel {
   final int? orderPoint;
   final int? qualifyingMajority;
   final int? absoluteMajority;
+  final bool viewed;
 
   final List<VoteSlimClubMajority>? clubsMajority;
   final List<VoteSlimDeputyVoteType>? deputiesVote;
 
-  VoteSlimModel({required this.id, required this.title, required this.type, required this.voteAt, required this.voteNumbers, required this.votingDesc, this.clubsMajority, this.deputiesVote, this.qualifyingMajority, this.absoluteMajority, this.orderPoint});
+  VoteSlimModel(
+      {required this.id,
+      required this.title,
+      required this.type,
+      required this.voteAt,
+      required this.voteNumbers,
+      required this.votingDesc,
+      this.clubsMajority,
+      this.deputiesVote,
+      this.qualifyingMajority,
+      this.viewed = false,
+      this.absoluteMajority,
+      this.orderPoint});
 
   factory VoteSlimModel.fromVotingModel(VotingModel model) {
     final voteNumbers = VoteNumbers(
-      inFavor: model.results.inFavor,
-      hold: model.results.hold,
-      against: model.results.against,
-      absent: model.results.absent
-    );
+        inFavor: model.results.inFavor,
+        hold: model.results.hold,
+        against: model.results.against,
+        absent: model.results.absent);
 
     final voteSlim = new VoteSlimModel(
-      id: model.id,
-      title: model.title,
-      type: model.votingType,
-      voteAt: model.date,
-      voteNumbers: voteNumbers,
-      orderPoint: model.orderPoint,
-      qualifyingMajority: model.qualifyingMajority,
-      absoluteMajority: model.absoluteMajority,
-      votingDesc: model.votingDesc
-    );
+        id: model.id,
+        title: model.title,
+        type: model.votingType,
+        voteAt: model.date,
+        voteNumbers: voteNumbers,
+        orderPoint: model.orderPoint,
+        qualifyingMajority: model.qualifyingMajority,
+        absoluteMajority: model.absoluteMajority,
+        votingDesc: model.votingDesc);
 
     return voteSlim;
   }
 
   factory VoteSlimModel.fromTimelineVotingModel(TimelineVotingModel model) {
     final voteSlim = VoteSlimModel(
-      id: model.id,
-      absoluteMajority: model.absoluteMajority,
-      qualifyingMajority: model.qualifyingMajority,
-      orderPoint: model.orderPoint,
-      deputiesVote: model.deputiesVote,
-      clubsMajority: model.clubsMajority,
-      voteNumbers: model.voteNumbers,
-      voteAt: model.voteAt,
-      type: model.voteType,
-      votingDesc: model.votingDesc,
-      title: model.title
-    );
+        id: model.id,
+        absoluteMajority: model.absoluteMajority,
+        qualifyingMajority: model.qualifyingMajority,
+        orderPoint: model.orderPoint,
+        deputiesVote: model.deputiesVote,
+        clubsMajority: model.clubsMajority,
+        voteNumbers: model.voteNumbers,
+        voteAt: model.voteAt,
+        type: model.voteType,
+        votingDesc: model.votingDesc,
+        title: model.title);
 
     return voteSlim;
   }
