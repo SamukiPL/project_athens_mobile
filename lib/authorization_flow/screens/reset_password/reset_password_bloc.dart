@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/domain/base_repository.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_bloc.dart';
@@ -13,7 +14,11 @@ class ResetPasswordBloc extends BaseBloc {
 
   final DataLoadingBloc _btnActionAwaitBloc = DataLoadingBloc();
 
+  final GlobalKey<FormState> _resetPasswordForm = GlobalKey<FormState>();
+
   DataLoadingBloc get btnActionAwaitBloc => _btnActionAwaitBloc;
+
+  GlobalKey<FormState> get resetPasswordForm => _resetPasswordForm;
 
   String _email = "";
 
@@ -23,6 +28,10 @@ class ResetPasswordBloc extends BaseBloc {
 
   Future<void> call() async {
     if (_email.isEmpty) return;
+
+    if (resetPasswordForm.currentState?.validate() == false) {
+      return;
+    }
 
     btnActionAwaitBloc.setDataLoadingState(DataLoadingState.loading());
 

@@ -1,3 +1,5 @@
+import 'package:flutter_fimber/flutter_fimber.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:project_athens/athens_core/configuration/configuration_delegate.dart';
 import 'package:project_athens/athens_core/configuration/configuration_storage_names.dart';
 import 'package:project_athens/authorization_flow/domain/registration/registration_params.dart';
@@ -9,6 +11,7 @@ class RegistrationEndStepBloc extends BaseRegistrationStepBloc with Configuratio
 
   final RegistrationUseCase _registrationUseCase;
   final int _currentCadence;
+  final FlutterSecureStorage storage = FlutterSecureStorage();
 
   final ShowRepeatPasswordNotifier _animationNotifier;
 
@@ -59,9 +62,13 @@ class RegistrationEndStepBloc extends BaseRegistrationStepBloc with Configuratio
   Future<void> call() async {
     final params = RegistrationParams(_firstName, _lastName, _login, _email, _password, List<String>.empty(), _currentCadence);
 
-    final result = await _registrationUseCase(params);
+    final result = await _registrationUseCase(params).catchError((err) {
+      Fimber.e(err.toString());
+      resetFooterButtons();
+    });
 
     await updatePreference(DateTime.now());
+    await storage.write(key: ConfigurationStorageNames.LOGIN_OR_EMAIL, value: _login);
 
     manageState(result);
   }

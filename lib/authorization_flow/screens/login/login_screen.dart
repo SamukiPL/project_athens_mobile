@@ -24,106 +24,119 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
     var localization = Provider.of<AppLocalizations>(context);
     var loginNavigation = Provider.of<LoginNavigationBloc>(context);
     final theme = Theme.of(context);
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(92, 0, 92, 0),
-          child: Image.asset("resources/images/logo.png"),
-        ),
-        ChangeNotifierProvider<AuthFailedNotifier>.value(
-          value: bloc.authFailedNotifier,
-          child: Consumer<AuthFailedNotifier>(
-            builder: (context, authFailed, _) =>
-                _buildErrorBox(localization, bloc, theme),
+    return Form(
+      key: bloc.loginScreenForm,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.fromLTRB(92, 0, 92, 0),
+            child: Image.asset("resources/images/logo.png"),
           ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(32, 8, 32, 8),
-          child: TextFormField(
-            initialValue: bloc.login,
-            onChanged: (login) => bloc.setLogin(login),
-            textInputAction: TextInputAction.next,
-            decoration: InputDecoration(
-                labelText: localization.getText().loginHintsLoginOrEmail(),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                )),
-            maxLines: 1,
+          ChangeNotifierProvider<AuthFailedNotifier>.value(
+            value: bloc.authFailedNotifier,
+            child: Consumer<AuthFailedNotifier>(
+              builder: (context, authFailed, _) =>
+                  _buildErrorBox(localization, bloc, theme),
+            ),
           ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(32, 8, 32, 0),
-          child: TextFormField(
-              onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
-              onChanged: (password) => bloc.setPassword(password),
-              textInputAction: TextInputAction.done,
-              onEditingComplete: () => bloc(),
+          Container(
+            margin: EdgeInsets.fromLTRB(32, 8, 32, 8),
+            child: TextFormField(
+              controller: bloc.textEditingController,
+              onChanged: (login) => bloc.setLogin(login),
+              textInputAction: TextInputAction.next,
               decoration: InputDecoration(
-                  labelText: localization.getText().loginHintsPassword(),
+                  labelText: localization.getText().loginHintsLoginOrEmail(),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   )),
               maxLines: 1,
-              obscureText: true),
-        ),
-        Container(
-          margin: EdgeInsets.only(right: 32),
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: FlatButton(
-              onPressed: () =>
-                  loginNavigation.addItem(LoginDestination.RESET_PASSWORD),
-              child: Text(
-                localization.getText().loginButtonsForgot(),
-                style: TextStyle(color: theme.primaryColor),
+              validator: (String? login) {
+                if (login == null || login == '') return localization.getText().loginValidateFieldCannotBeEmpty();
+
+                return null;
+              },
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(32, 8, 32, 0),
+            child: TextFormField(
+                onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
+                onChanged: (password) => bloc.setPassword(password),
+                textInputAction: TextInputAction.done,
+                onEditingComplete: () => bloc(),
+                decoration: InputDecoration(
+                    labelText: localization.getText().loginHintsPassword(),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    )),
+                maxLines: 1,
+                validator: (String? password) {
+                  if (password == null || password == '') return localization.getText().loginValidateFieldCannotBeEmpty();
+
+                  return null;
+                },
+                obscureText: true),
+          ),
+          Container(
+            margin: EdgeInsets.only(right: 32),
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: FlatButton(
+                onPressed: () =>
+                    loginNavigation.addItem(LoginDestination.RESET_PASSWORD),
+                child: Text(
+                  localization.getText().loginButtonsForgot(),
+                  style: TextStyle(color: theme.primaryColor),
+                ),
               ),
             ),
           ),
-        ),
-        ButtonLoader(
-            bloc.loginButtonLoadingBloc,
-            callback: () => bloc(),
-            buttonBg: theme.primaryColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(32),
-            ),
-            mainPadding: EdgeInsets.all(16),
-            actionStateWidget: Container(
-              child: Text(
-                localization.getText().loginButtonsLogin(),
-                style: TextStyle(color: Colors.white),
-                textScaleFactor: 1.5,
+          ButtonLoader(
+              bloc.loginButtonLoadingBloc,
+              callback: () => bloc(),
+              buttonBg: theme.primaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(32),
               ),
-            )
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(localization.getText().loginOtherNotAMember()),
-              Container(
-                margin: EdgeInsets.only(left: 16, right: 16),
-                child: MaterialButton(
-                  onPressed: () =>
-                      loginNavigation.addItem(LoginDestination.REGISTER),
-                  child: Text(
-                    localization.getText().loginButtonsRegister(),
-                    style: TextStyle(color: theme.primaryColor),
-                  ),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(32),
-                      side: BorderSide(color: theme.primaryColor)),
+              mainPadding: EdgeInsets.all(16),
+              actionStateWidget: Container(
+                child: Text(
+                  localization.getText().loginButtonsLogin(),
+                  style: TextStyle(color: Colors.white),
+                  textScaleFactor: 1.5,
                 ),
               )
-            ],
           ),
-        ),
-      ],
+          Container(
+            margin: EdgeInsets.only(top: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(localization.getText().loginOtherNotAMember()),
+                Container(
+                  margin: EdgeInsets.only(left: 16, right: 16),
+                  child: MaterialButton(
+                    onPressed: () =>
+                        loginNavigation.addItem(LoginDestination.REGISTER),
+                    child: Text(
+                      localization.getText().loginButtonsRegister(),
+                      style: TextStyle(color: theme.primaryColor),
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32),
+                        side: BorderSide(color: theme.primaryColor)),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      )
     );
   }
 

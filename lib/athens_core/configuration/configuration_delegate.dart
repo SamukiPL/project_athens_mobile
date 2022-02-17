@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+
 mixin ConfigurationDelegate<DATA_TYPE, OUTPUT> {
   String get preferenceName;
 
@@ -15,10 +16,11 @@ mixin ConfigurationDelegate<DATA_TYPE, OUTPUT> {
       return Future.value(defaultStorageValue);
     }
 
-    switch(DATA_TYPE) {
-      case String: return storageValue as DATA_TYPE;
+    switch(OUTPUT) {
+      case String: return jsonDecode(storageValue);
       case bool: return Future.value(storageValue.toLowerCase() == true.toString().toLowerCase()) as Future<DATA_TYPE>;
-      case DateTime: return Future.value(DateTime.parse(storageValue)) as Future<DATA_TYPE>;
+      case DateTime:
+        return Future.value(DateTime.parse(storageValue)) as Future<DATA_TYPE>;
       default:
         final json = jsonDecode(storageValue);
 

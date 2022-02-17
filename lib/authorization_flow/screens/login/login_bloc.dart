@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/configuration/configuration_delegate.dart';
 import 'package:project_athens/athens_core/configuration/configuration_storage_names.dart';
 import 'package:project_athens/athens_core/configuration/remote_configuration.dart';
@@ -13,7 +14,7 @@ import 'package:project_athens/authorization_flow/domain/login/login_use_case.da
 import 'package:project_athens/authorization_flow/screens/login/auth_failed_notifier.dart';
 import 'package:project_athens/deputies_utils/domain/firebase_deputies/firebase_deputies_use_case.dart';
 
-class LoginBloc extends BaseBloc with ConfigurationDelegate {
+class LoginBloc extends BaseBloc with ConfigurationDelegate<String?, String> {
 
   final LoginUseCase _loginUseCase;
 
@@ -28,11 +29,19 @@ class LoginBloc extends BaseBloc with ConfigurationDelegate {
     _initSavedLoginOrEmail();
   }
 
+  GlobalKey<FormState> _loginScreenForm = GlobalKey<FormState>();
+
   String _login = "";
 
   String _password = "";
 
+  TextEditingController _textEditingController = TextEditingController();
+
   String get login => _login;
+
+  GlobalKey<FormState> get loginScreenForm => _loginScreenForm;
+
+  TextEditingController get textEditingController => _textEditingController;
 
   @override
   get defaultStorageValue => "";
@@ -41,9 +50,9 @@ class LoginBloc extends BaseBloc with ConfigurationDelegate {
   String get preferenceName => ConfigurationStorageNames.LOGIN_OR_EMAIL;
 
   void _initSavedLoginOrEmail() async {
-    final String? loginOrEmail = await fetchPreference((json) => null);
-
+    final String? loginOrEmail = await fetchPreference(null);
     setLogin(loginOrEmail ?? "");
+    textEditingController.text = login;
   }
 
   void setLogin(String login) {
@@ -59,7 +68,7 @@ class LoginBloc extends BaseBloc with ConfigurationDelegate {
   }
 
   Future<void> call() async {
-    if (_login.isEmpty || _password.isEmpty) return;
+    if (loginScreenForm.currentState?.validate() == false) return;
 
     authFailedNotifier.state = false;
     loginButtonLoadingBloc.setDataLoadingState(DataLoadingState.loading());
@@ -73,7 +82,7 @@ class LoginBloc extends BaseBloc with ConfigurationDelegate {
     if (loginResult is Success) {
       final subscribeResult = await _firebaseDeputiesUseCase();
       loginButtonLoadingBloc.setDataLoadingState(DataLoadingState.contentLoaded());
-
+      await updatePreference(_login);
       return manageState(subscribeResult);
     } else {
       if (loginResult is Failure) {

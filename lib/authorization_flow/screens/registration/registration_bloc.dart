@@ -61,6 +61,7 @@ class RegistrationBloc extends BaseBloc {
         case SuccessState:
           _buttonStateBloc.changeState(StepperButtonState.IDLE);
           _stepperBloc.setStep(RegistrationStep.DEPUTIES_CHOOSER);
+          _deputiesChooserBloc.refresh();
           break;
         default:
           stateController.add(screenState);
@@ -68,6 +69,9 @@ class RegistrationBloc extends BaseBloc {
     });
     _registrationEndStepBloc.headingLine.listen((event) {
       _stepperBloc.setHeaderHelperLine(event);
+    });
+    _registrationEndStepBloc.resetFooterButtonState.listen((event) {
+      _buttonStateBloc.changeState(StepperButtonState.IDLE);
     });
 
   }
@@ -79,6 +83,9 @@ class RegistrationBloc extends BaseBloc {
     });
     _deputiesChooserBloc.headingLine.listen((event) {
       _stepperBloc.setHeaderHelperLine(event);
+    });
+    _deputiesChooserBloc.resetFooterButtonState.listen((event) {
+      _buttonStateBloc.changeState(StepperButtonState.IDLE);
     });
   }
 

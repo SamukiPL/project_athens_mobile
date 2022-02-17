@@ -24,7 +24,7 @@ class RegistrationStepperHeader extends StatelessWidget {
         child: Row(
           children: <Widget>[
             CircularPercentIndicator(
-              radius: 50,
+              radius: 25,
               lineWidth: 5,
               percent: (bloc.currentStep.index + 1)/3,
               backgroundColor: Colors.white,
