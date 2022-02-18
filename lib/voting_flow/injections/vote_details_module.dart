@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
+import 'package:project_athens/athens_core/data/item_was_seen/seen_item_data_source.dart';
 import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
+import 'package:project_athens/athens_core/domain/item_was_seen/vote_was_seen_use_case.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/deputies_utils/cache/parliament_clubs_cache.dart';
@@ -29,9 +31,12 @@ class VoteDetailsModule extends Module {
     final VoteRepositoryImpl repository = VoteRepositoryImpl(votingApi, _votingNetworkMapper);
     final GetVoteUseCase useCase = GetVoteUseCase(repository);
 
+    final seenDataSource = Provider.of<SeenItemDataSource>(context);
+    final voteWasSeenUseCase = VoteWasSeenUseCase(seenDataSource);
+
     return [
       Provider<VoteDetailsBloc>(
-        create: (_) => VoteDetailsBloc(_voteModel, useCase, clubsCache),
+        create: (_) => VoteDetailsBloc(_voteModel, useCase, clubsCache, voteWasSeenUseCase),
         dispose: (_, bloc) => bloc.dispose(),
       )
     ];

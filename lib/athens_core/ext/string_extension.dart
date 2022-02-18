@@ -12,3 +12,8 @@ extension StringExtension on String {
     }
   }
 }
+
+extension NullStringExtension on String? {
+  bool get isNullOrEmpty => this == null || this!.isEmpty;
+  bool get isNotNullOrEmpty => this != null && this!.isNotEmpty;
+}

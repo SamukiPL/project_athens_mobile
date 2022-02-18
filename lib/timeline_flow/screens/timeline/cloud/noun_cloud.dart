@@ -55,8 +55,7 @@ class NounCloud extends StatelessWidget {
               b: 1.0,
             ),
             children: widgets,
-            clipBehavior: Clip.antiAlias,
-            // overflow: Overflow.visible
+            clipBehavior: Clip.antiAlias
         ),
       ),
     );

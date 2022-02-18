@@ -46,7 +46,8 @@ class VoteSlimNetworkMapper extends AsyncDataMapper<VoteSlimDTO, VoteSlimModel> 
       voteNumbers: voteNumbers,
       clubsMajority: clubs,
       deputiesVote: deputiesVote,
-      orderPoint: data.orderPoint
+      orderPoint: data.orderPoint,
+      viewed: data.viewed == true
     );
   }
 }

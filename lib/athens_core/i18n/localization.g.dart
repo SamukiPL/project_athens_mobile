@@ -154,6 +154,14 @@ class AppLocalizationsGenerated {
         ['immediateUpdateContent'];
   }
 
+  String universalSeen() {
+    return words['universal']['seen'];
+  }
+
+  String universalNotSeen() {
+    return words['universal']['notSeen'];
+  }
+
   String mainMenuSession() {
     return words['main']['menu']['session'];
   }

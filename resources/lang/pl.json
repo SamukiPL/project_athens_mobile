@@ -46,7 +46,9 @@
         "wouldYouLikeToUpdateAppNow": "Chcesz zaktualizować aplikacje teraz?",
         "immediateUpdateContent": "Aplikacja musi zostać zaktualizowana w celu poprawnego działania, w innym wypadku aplikacja przestanie działać"
       }
-    }
+    },
+    "seen": "Wyświetlone",
+    "notSeen": "Nie wyświetlone"
   },
   "main": {
     "menu": {

@@ -1,3 +1,4 @@
+import 'package:project_athens/athens_core/domain/item_was_seen/speech_was_seen_use_case.dart';
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/models/speech_model.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
@@ -20,7 +21,9 @@ class SpeechDetailsBloc extends BaseBloc {
 
   final WakelockService _wakelock;
 
-  SpeechDetailsBloc(this.isNormalSpeech, this._getSpeechUseCase, this._deputiesCache, this._wakelock) {
+  final SpeechWasSeenUseCase _speechWasSeenUseCase;
+
+  SpeechDetailsBloc(this.isNormalSpeech, this._getSpeechUseCase, this._deputiesCache, this._wakelock, this._speechWasSeenUseCase) {
     _getSpeechModel();
   }
 
@@ -42,6 +45,7 @@ class SpeechDetailsBloc extends BaseBloc {
 
       await _initDeputyModel();
       setLoadingState(DataLoadingState.contentLoaded());
+      _speechWasSeenUseCase(result.value.id);
     }
     manageState(result);
   }
@@ -52,12 +56,12 @@ class SpeechDetailsBloc extends BaseBloc {
   }
 
   void goToNextSpeech() {
-    final destination = SpeechDetailsDestination(speechModel.nextPersonSpeech!.speechId, isNormalSpeech);
+    final destination = SpeechDetailsDestination(speechModel.nextPersonSpeech!.speechId, isNormalSpeech, replace: true);
     goToDestination(destination);
   }
 
   void goToPreviousSpeech() {
-    final destination = SpeechDetailsDestination(speechModel.previousPersonSpeech!.speechId, isNormalSpeech);
+    final destination = SpeechDetailsDestination(speechModel.previousPersonSpeech!.speechId, isNormalSpeech, replace: true);
     goToDestination(destination);
   }
 

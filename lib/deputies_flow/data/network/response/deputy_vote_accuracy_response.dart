@@ -26,9 +26,10 @@ class VoteSlimDTO extends TimelineItem {
   final int? absoluteMajority;
   final List<VoteSlimClubMajorityDTO> clubsMajority;
   final List<VoteSlimDeputyMajorityVoteDTO> deputiesVoteType;
-  final int? orderPoint;
+  final int orderPoint;
+  final bool? viewed;
 
-  VoteSlimDTO(this.id, this.agenda, this.type, this.voteAt, this.voteNumbers, this.clubsMajority, this.deputiesVoteType, this.qualifyingMajority, this.absoluteMajority, this.orderPoint);
+  VoteSlimDTO(this.id, this.agenda, this.type, this.voteAt, this.voteNumbers, this.clubsMajority, this.deputiesVoteType, this.qualifyingMajority, this.absoluteMajority, this.orderPoint, this.viewed);
 
   factory VoteSlimDTO.fromJson(Map<String, dynamic> json) => _$VoteSlimDTOFromJson(json);
   Map<String, dynamic> toJson() => _$VoteSlimDTOToJson(this);

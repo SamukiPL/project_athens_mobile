@@ -1,5 +1,6 @@
 import 'package:project_athens/athens_core/auth/auth_repository.dart';
 import 'package:project_athens/athens_core/auth/auth_storage.dart';
+import 'package:project_athens/athens_core/ext/string_extension.dart';
 
 import 'jwt_decode.dart';
 
@@ -25,7 +26,7 @@ class AuthFacade {
 
   Future<bool> _provideTokens() async {
     var tokens = await _storage.provideTokens();
-    if (tokens.accessToken == null)
+    if (tokens.accessToken.isNullOrEmpty)
       return false;
 
     _accessToken = tokens.accessToken;
