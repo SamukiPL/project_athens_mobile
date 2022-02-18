@@ -13,6 +13,7 @@ class VotingModel extends TimelineModel {
   final int? orderPoint;
   final VoteType? deputyVoteType;
   final VotingType votingType;
+  final bool viewed;
 
   VotingModel({
     required String id,
@@ -27,6 +28,7 @@ class VotingModel extends TimelineModel {
     required this.clubVotes,
     this.orderPoint,
     this.deputyVoteType,
+    this.viewed = false,
     DateTime? createAt,
     DateTime? updateAt,
   }) : super(id, TimelineModelType.VOTING, date, createAt, updateAt);
