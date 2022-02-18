@@ -42,6 +42,19 @@ class PagingListAdapter {
     return itemsList.length;
   }
 
+  int addToList(List<BaseItemViewModel> itemsList, {bool loading = false}) {
+    _itemsList = _itemsList + itemsList;
+    _loading = loading;
+    _addStateToStream();
+    return itemsList.length;
+  }
+
+  void clearList({bool loading = false}) {
+    _itemsList = [];
+    _loading = loading;
+    _addStateToStream();
+  }
+
   Future<void> refresh()  {
     return _bloc.refresh();
   }

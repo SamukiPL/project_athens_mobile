@@ -29,6 +29,7 @@ VotingResponse _$VotingResponseFromJson(Map<String, dynamic> json) =>
               ParliamentClubVotingNumbers.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['deputyVoteType'] as int?,
+      json['viewed'] as bool?,
       json['updateAt'] == null
           ? null
           : DateTime.parse(json['updateAt'] as String),
@@ -53,6 +54,7 @@ Map<String, dynamic> _$VotingResponseToJson(VotingResponse instance) =>
       'qualifyingMajority': instance.qualifyingMajority,
       'parliamentClubVotingNumbers': instance.parliamentClubVotingNumbers,
       'deputyVoteType': instance.deputyVoteType,
+      'viewed': instance.viewed,
     };
 
 Votes _$VotesFromJson(Map<String, dynamic> json) => Votes(

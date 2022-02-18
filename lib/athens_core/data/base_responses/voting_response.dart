@@ -22,6 +22,7 @@ class VotingResponse implements TimelineItem {
   final int? qualifyingMajority;
   final List<ParliamentClubVotingNumbers> parliamentClubVotingNumbers;
   final int? deputyVoteType;
+  final bool? viewed;
 
   int get inFavor => votingNumbers.inFavor;
   int get against => votingNumbers.against;
@@ -45,6 +46,7 @@ class VotingResponse implements TimelineItem {
       this.qualifyingMajority,
       this.parliamentClubVotingNumbers,
       this.deputyVoteType,
+      this.viewed,
       this.updateAt);
 
   factory VotingResponse.fromJson(Map<String, dynamic> json) => _$VotingResponseFromJson(json);

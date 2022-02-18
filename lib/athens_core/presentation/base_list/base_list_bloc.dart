@@ -33,12 +33,12 @@ class BaseListBloc extends BaseBloc implements PagingBloc {
   void manageState(Result result) {
     if (result is Success<List<BaseModel>>) {
       stateController.add(WidgetState.success());
-      offset = adapter.updateList(_mapItems(result.value));
+      offset = adapter.addToList(_mapItems(result.value));
       setLoadingState((result.value.isEmpty)
           ? DataLoadingState.noData()
           : DataLoadingState.contentLoaded());
     } else if(result is Refresh<List<BaseModel>>) {
-      adapter.updateList([], loading: true);
+      adapter.clearList(loading: true);
     } else if (result is Failure<List<BaseModel>> && result.value != null && result.value!.isNotEmpty) {
       adapter.setLoading(false);
     } else {
@@ -62,6 +62,7 @@ class BaseListBloc extends BaseBloc implements PagingBloc {
 
   @override
   Future<void> refresh() async {
+    adapter.clearList(loading: true);
     _listFacade.refreshItems();
   }
 

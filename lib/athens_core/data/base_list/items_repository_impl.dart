@@ -15,8 +15,6 @@ class ItemsRepositoryImpl extends ItemsRepository {
   final StreamController<Result<List<BaseModel>>> _streamController =
       BehaviorSubject<Result<List<BaseModel>>>();
 
-  List<BaseModel> _cache = List.empty();
-
   @override
   Future<void> fetchItems(BaseParams params) {
     return networkCall(params);
@@ -30,7 +28,6 @@ class ItemsRepositoryImpl extends ItemsRepository {
 
   @override
   Future<void> refreshItems(BaseParams params) async {
-    _cache = List.empty();
     _streamController.add(Refresh());
     networkCall(params);
   }
@@ -38,10 +35,9 @@ class ItemsRepositoryImpl extends ItemsRepository {
   Future<void> networkCall(BaseParams params) {
     return _networkDataSource(params).then((result) {
       if (result is Success<List<BaseModel>>) {
-        _cache = _cache + result.value;
-        _streamController.add(Success(_cache));
+        _streamController.add(Success(result.value));
       } else if (result is Failure<List<BaseModel>>) {
-        _streamController.add(Failure(result.exception, value: _cache));
+        _streamController.add(Failure(result.exception));
       }
     });
   }
