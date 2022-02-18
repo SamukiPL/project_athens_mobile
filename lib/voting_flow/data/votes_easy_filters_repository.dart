@@ -12,11 +12,11 @@ class VotesEasyFiltersRepository extends EasyFiltersRepository<VotesEasyFilter> 
 
   @override
   Future<Result<List<EasyFilterModel<VotesEasyFilter>>>> getFilters() async {
-    final seen = EasyFilterModel(title: "Zobaczone", filterValue: VotesEasyFilter.seen());
-    final notSeen = EasyFilterModel(title: "Nie Zobaczone", filterValue: VotesEasyFilter.notSeen());
+    final seen = EasyFilterModel(title: _localizations().universalSeen(), filterValue: VotesEasyFilter.seen());
+    final notSeen = EasyFilterModel(title: _localizations().universalNotSeen(), filterValue: VotesEasyFilter.notSeen());
 
-    final acceptedFilter = EasyFilterModel(title: _localizations.getText().votingsFiltersAccepted(), filterValue: VotesEasyFilter.accepted());
-    final rejectedFilter = EasyFilterModel(title: _localizations.getText().votingsFiltersRejected(), filterValue: VotesEasyFilter.rejected());
+    final acceptedFilter = EasyFilterModel(title: _localizations().votingsFiltersAccepted(), filterValue: VotesEasyFilter.accepted());
+    final rejectedFilter = EasyFilterModel(title: _localizations().votingsFiltersRejected(), filterValue: VotesEasyFilter.rejected());
 
     final List<EasyFilterModel<VotesEasyFilter>> types = VotingType.values.map((type) => EasyFilterModel(
         title: getVoteDescriptionHelper(type, _localizations),

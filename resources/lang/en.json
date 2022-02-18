@@ -47,7 +47,9 @@
         "immediateUpdateContent": "Application must be updated, it is required to assure that application will work properly."
 
       }
-    }
+    },
+    "seen": "Diplayed",
+    "notSeen": "Not displayed"
   },
   "main": {
     "menu": {

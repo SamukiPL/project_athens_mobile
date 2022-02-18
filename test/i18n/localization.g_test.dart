@@ -196,6 +196,16 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalUpdateCupertinoDialogImmediateUpdateContent != ""); 
   }); 
  
+  test("All methods for $locale universalSeen", () async {
+    String universalSeen = localization.universalSeen();
+    expect(true, universalSeen != ""); 
+  }); 
+ 
+  test("All methods for $locale universalNotSeen", () async {
+    String universalNotSeen = localization.universalNotSeen();
+    expect(true, universalNotSeen != ""); 
+  }); 
+ 
   test("All methods for $locale mainMenuSession", () async {
     String mainMenuSession = localization.mainMenuSession();
     expect(true, mainMenuSession != ""); 
