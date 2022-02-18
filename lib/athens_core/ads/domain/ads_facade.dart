@@ -10,7 +10,7 @@ mixin AdsFacade<T extends BaseParams> on ListFacade<T> {
   Stream<Result<List<BaseModel>>> getItems() {
     return super.getItems().map((event) {
       if (event.isSuccess()) {
-        final mutableModelsList = event.toSuccess().value.toList(growable: true);
+        final mutableModelsList = event.toSuccess().value.map((e) => e as BaseModel).toList(growable: true);
         final indexesToAdd = new List<int>.generate((event.toSuccess().value.length / 10).floor(), (index) => 5 + (10 * index));
         indexesToAdd.forEach((index) {
           mutableModelsList.insert(index, AdModel());

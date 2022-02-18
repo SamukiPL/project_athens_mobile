@@ -53,7 +53,7 @@ class TimelineBloc extends BaseBloc implements PagingBloc {
     if (_dates == null) {
       return _loadMeetingsDates();
     } else {
-      adapter.updateList([]);
+      adapter.clearList();
       return loadNewDate(_selectedDate);
     }
   }
@@ -72,7 +72,7 @@ class TimelineBloc extends BaseBloc implements PagingBloc {
   Future<void> loadNewDate(DateTime date) async {
     setLoadingState(DataLoadingState.initialLoading());
     final params = TimelineParameters(date.toIso8601String());
-    adapter.updateList([], loading: true);
+    adapter.clearList(loading: true);
     _selectedDate = date;
     calendarBloc.setDate(date);
     nounCloudBloc.loadCloud(params);
@@ -104,12 +104,12 @@ class TimelineBloc extends BaseBloc implements PagingBloc {
   }
 
   void setPreviousDate() {
-    adapter.updateList([], loading: true);
+    adapter.clearList(loading: true);
     loadNewDate(_getBeforeDate(_selectedDate));
   }
 
   void setNextDate() {
-    adapter.updateList([], loading: true);
+    adapter.clearList(loading: true);
     var dates = _dates!.toList();
     dates.sort((a, b) => a.meetingDate.compareTo(b.meetingDate));
 
