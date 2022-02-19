@@ -37,7 +37,7 @@ VoteSlimDTO _$VoteSlimDTOFromJson(Map<String, dynamic> json) => VoteSlimDTO(
           .toList(),
       json['qualifyingMajority'] as int?,
       json['absoluteMajority'] as int?,
-      json['orderPoint'] as int,
+      json['orderPoint'] as int?,
       json['viewed'] as bool?,
     );
 

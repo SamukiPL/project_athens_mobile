@@ -21,6 +21,7 @@ class ErrorInterceptor extends Interceptor {
           removeInvalidToken();
           throw AuthException(err.requestOptions);
         }
+
         informAboutServerErrors(err);
         throw ServerException(err.requestOptions);
     }

@@ -4,9 +4,11 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
+import 'package:project_athens/athens_core/presentation/item_was_seen/item_seen_state_holder.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/deputies_flow/injections/details_tabs/deputy_vote_view/deputy_vote_item_view_model.dart';
 import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
+import 'package:provider/provider.dart';
 
 class DeputyVoteViewHolder extends StatelessWidget with RedirectionDelegate {
 
@@ -24,6 +26,7 @@ class DeputyVoteViewHolder extends StatelessWidget with RedirectionDelegate {
                 _viewModel.model
             )
         ));
+        _viewModel.itemWasSeen();
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,12 +46,19 @@ class DeputyVoteViewHolder extends StatelessWidget with RedirectionDelegate {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            _viewModel.description,
-            style: TextStyle(
-                color: theme.primaryColor,
-                fontSize: 18
-            ),
+          ChangeNotifierProvider<ItemSeenStateHolder>.value(
+              value: _viewModel,
+              child: Consumer<ItemSeenStateHolder>(
+                builder: (_, model, child) => Text(
+                  _viewModel.description,
+                  maxLines: 1,
+                  style: TextStyle(
+                      color: theme.primaryColor,
+                      fontWeight: model.viewed ? FontWeight.normal : FontWeight.bold,
+                      fontSize: 16),
+                  textAlign: TextAlign.left,
+                ),
+              )
           ),
           Text(
             _viewModel.date,

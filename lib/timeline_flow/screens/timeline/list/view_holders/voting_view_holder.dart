@@ -4,12 +4,14 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:project_athens/athens_core/data/vote/vote_slim_model.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
+import 'package:project_athens/athens_core/presentation/item_was_seen/item_seen_state_holder.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/athens_core/presentation/vote_majority_distribution/vote_majority_distribution.dart';
 import 'package:project_athens/athens_core/presentation/vote_majority_distribution/vote_majority_distribution_helper.dart';
 import 'package:project_athens/timeline_flow/helpers/timeline_voting_agenda_helper.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
 import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
+import 'package:provider/provider.dart';
 
 class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
   final VotingRowViewModel viewModel;
@@ -144,14 +146,19 @@ class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
       ),
       Container(
         width: double.infinity,
-        child: Text(
-          votingDesc,
-          style: TextStyle(
-            color: theme.primaryColor,
-            fontWeight: FontWeight.bold,
-            fontSize: 16),
-          maxLines: 1,
-          textAlign: TextAlign.left,
+        child: ChangeNotifierProvider<ItemSeenStateHolder>.value(
+            value: viewModel,
+            child: Consumer<ItemSeenStateHolder>(
+              builder: (_, model, child) => Text(
+                votingDesc,
+                maxLines: 1,
+                style: TextStyle(
+                    color: theme.primaryColor,
+                    fontWeight: model.viewed ? FontWeight.normal : FontWeight.bold,
+                    fontSize: 16),
+                textAlign: TextAlign.left,
+              ),
+            )
         ),
       ),
       Container(
@@ -212,6 +219,8 @@ class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
             goToDestination(context, VoteDetailsDestination(
                 VoteSlimModel.fromTimelineVotingModel(viewModel.model)
                 ));
+            viewModel.itemWasSeen();
+
           },
           child: Container(
             margin: EdgeInsets.only(left: 8, top: 8, bottom: 8),

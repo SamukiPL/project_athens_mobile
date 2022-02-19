@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
+import 'package:project_athens/athens_core/presentation/item_was_seen/item_seen_state_holder.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
 import 'package:project_athens/speeches_flow/screens/list/list_impl/speech_item_view_model.dart';
+import 'package:provider/provider.dart';
 
 class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
 
@@ -66,6 +68,7 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
       child: InkWell(
         onTap: () {
           goToDestination(context, SpeechDetailsDestination(_viewModel.model.id, true));
+          _viewModel.itemWasSeen();
         },
         child: Container(
           margin: EdgeInsets.only(top: 8, bottom: 8),
@@ -90,14 +93,19 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            child: Text(
-              _viewModel.model.personName,
-              style: TextStyle(
-                  color: theme.primaryColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18),
-              textAlign: TextAlign.left,
-            ),
+            child: ChangeNotifierProvider<ItemSeenStateHolder>.value(
+                value: _viewModel,
+                child: Consumer<ItemSeenStateHolder>(
+                    builder: (_, model, child) => Text(
+                      _viewModel.model.personName,
+                      style: TextStyle(
+                          color: theme.primaryColor,
+                          fontWeight: model.viewed ? FontWeight.normal : FontWeight.bold,
+                          fontSize: 16),
+                      textAlign: TextAlign.left,
+                    ),
+                )
+            )
           ),
           Text(
             DateFormat("d.MM.y", "pl").format(_viewModel.model.date),

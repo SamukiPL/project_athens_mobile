@@ -8,9 +8,9 @@ import 'package:project_athens/pagination/paging_list.dart';
 import 'package:provider/provider.dart';
 
 class DeputiesListScreen extends BaseScreen<BaseListBloc> {
-
   @override
   bool get showBackArrow => false;
+
   @override
   bool get shouldShowBottomBar => true;
 
@@ -21,34 +21,43 @@ class DeputiesListScreen extends BaseScreen<BaseListBloc> {
 
   @override
   Widget buildBody(BuildContext context, BaseListBloc bloc) {
-    return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          EasyFiltersList(),
-          Expanded(
-            child: Container(
-              height: 0,
-              child: PagingList(
-                bloc.adapter,
-                paginationIncluded: false,
-                separator: Divider(
-                  height: 1,
+    return Stack(
+      children: [
+        Container(
+          padding: EdgeInsets.only(top: 26),
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+            Expanded(
+              child: Container(
+                height: 0,
+                child: PagingList(
+                  bloc.adapter,
+                  paginationIncluded: false,
+                  separator: Divider(
+                    height: 1,
+                  ),
                 ),
               ),
-            ),
-          )
-        ]
+            )
+          ]),
+        ),
+        EasyFiltersList(),
+      ],
     );
   }
 
   @override
-  Widget? buildFloatingActionButton(BuildContext context, BaseListBloc bloc) => null;
+  Widget? buildFloatingActionButton(BuildContext context, BaseListBloc bloc) =>
+      null;
 
   @override
   Widget buildAppBar(BuildContext context, BaseListBloc bloc) {
-    final AppLocalizations localizations = Provider.of<AppLocalizations>(context);
+    final AppLocalizations localizations =
+        Provider.of<AppLocalizations>(context);
 
-    return SearchAppBar(title: getAppBarTitle(localizations, bloc), hintText: getAppBarTitle(localizations, bloc), searchQuery: (query) {}, showBackArrow: showBackArrow);
+    return SearchAppBar(
+        title: getAppBarTitle(localizations, bloc),
+        hintText: getAppBarTitle(localizations, bloc),
+        searchQuery: (query) {},
+        showBackArrow: showBackArrow);
   }
-
 }

@@ -12,6 +12,7 @@ class TimelineVotingModel extends TimelineModel {
   final int? orderPoint;
   final int? qualifyingMajority;
   final int? absoluteMajority;
+  final bool viewed;
   final String agenda;
 
   final List<VoteSlimClubMajority> clubsMajority;
@@ -31,6 +32,7 @@ class TimelineVotingModel extends TimelineModel {
         required this.clubsMajority,
         required this.deputiesVote,
         required this.agenda,
+        required this.viewed,
       DateTime? createAt,
       DateTime? updateAt}) : super(id, TimelineModelType.VOTING, voteAt, createAt, updateAt);
 }

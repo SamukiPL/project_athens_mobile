@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
+import 'package:project_athens/athens_core/presentation/item_was_seen/item_seen_state_holder.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/athens_core/presentation/vote_majority_distribution/vote_majority_distribution.dart';
 import 'package:project_athens/athens_core/presentation/vote_majority_distribution/vote_majority_distribution_helper.dart';
 import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
 import 'package:project_athens/voting_flow/screens/list/list_impl/vote_item_view_model.dart';
+import 'package:provider/provider.dart';
 
 class VoteViewHolder extends StatelessWidget with RedirectionDelegate {
 
@@ -18,6 +20,7 @@ class VoteViewHolder extends StatelessWidget with RedirectionDelegate {
     return GestureDetector(
       onTap: () {
         goToDestination(context, VoteDetailsDestination(_viewModel.model));
+        _viewModel.itemWasSeen();
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,12 +41,18 @@ class VoteViewHolder extends StatelessWidget with RedirectionDelegate {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            _viewModel.description != null ? _viewModel.description : "",
-            style: TextStyle(
-              color: theme.primaryColor,
-              fontSize: 16
-            ),
+          ChangeNotifierProvider<ItemSeenStateHolder>.value(
+              value: _viewModel,
+              child: Consumer<ItemSeenStateHolder>(
+                builder: (_, model, child) => Text(
+                  _viewModel.description,
+                  style: TextStyle(
+                      color: theme.primaryColor,
+                      fontWeight: model.viewed ? FontWeight.normal : FontWeight.bold,
+                      fontSize: 16),
+                  textAlign: TextAlign.left,
+                ),
+              )
           ),
           Text(
             _viewModel.date,
