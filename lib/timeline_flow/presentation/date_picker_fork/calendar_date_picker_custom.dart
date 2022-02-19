@@ -943,6 +943,8 @@ class _YearPickerState extends State<_YearPicker> {
         borderRadius: BorderRadius.circular(decorationHeight / 2),
         shape: BoxShape.rectangle,
       );
+    } else {
+      decoration = BoxDecoration();
     }
 
     Widget yearItem = Center(
