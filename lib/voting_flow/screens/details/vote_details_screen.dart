@@ -7,19 +7,23 @@ import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/models/voting_model.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/presentation/db_source/db_source.dart';
+import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
 import 'package:project_athens/athens_core/presentation/full_card/full_card.dart';
 import 'package:project_athens/athens_core/presentation/simple_horizontal_table/simple_horizontal_table.dart';
 import 'package:project_athens/athens_core/presentation/simple_horizontal_table/simple_horizontal_table_cell.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
+import 'package:project_athens/deputies_flow/navigation/deputies_destinations.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
+import 'package:project_athens/deputies_utils/cache/subscribed_deputies_cache.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
+import 'package:project_athens/deputies_utils/domain/subscribed_deputy_model.dart';
 import 'package:project_athens/voting_flow/screens/details/linear_vote_distribution/linear_vote_distribution.dart';
 import 'package:project_athens/voting_flow/screens/details/vote_club_distribution_row_data.dart';
 import 'package:project_athens/voting_flow/screens/details/vote_details_bloc.dart';
 import 'package:project_athens/voting_flow/screens/details/linear_vote_distribution/linear_vote_distribution_model.dart';
 import 'package:provider/provider.dart';
 
-class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
+class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> with RedirectionDelegate {
 
   final VoteSlimModel _voteModel;
 
@@ -380,7 +384,7 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
 
   Widget buildDeputyVotingView(
       VoteModel voting, BuildContext context, ThemeData theme) {
-    final deputiesCache = Provider.of<DeputiesCache>(context);
+    final deputiesCache = Provider.of<SubscribedDeputiesCache>(context);
     final viewWidth = MediaQuery.of(context).size.width - 16;
     final localizations = Provider.of<AppLocalizations>(context);
     String voteTypeStr;
@@ -410,67 +414,71 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> {
     return FutureProvider(
       initialData: null,
       create: (context) => foundDeputy,
-      child: Consumer<DeputyModel?>(
+      child: Consumer<SubscribedDeputyModel?>(
           builder: (context, deputy, _) => deputy != null
-              ? Container(
-                  width: circleSize,
-                  padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
-                  child: Column(
-                    children: [
-                      Container(
-                        height: circleSize * 0.8,
-                        width: circleSize * 0.8,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        child: Stack(
-                          children: [
-                            Container(
+              ? GestureDetector(
+                onTap: () => goToDestination(context, DeputyDetailsDestination(deputy)),
+                child: Container(
+                    width: circleSize,
+                    padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
+                    child: Column(
+                      children: [
+                        Container(
+                          height: circleSize * 0.8,
+                          width: circleSize * 0.8,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: Stack(
+                            children: [
+                              Container(
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: new DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: new NetworkImage(
+                                            deputy.thumbnailUrl ?? ""),
+                                      ))),
+                              Container(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  voteTypeStr,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.white),
+                                ),
                                 decoration: BoxDecoration(
+                                    color: borderColor.withOpacity(0.3),
                                     shape: BoxShape.circle,
-                                    image: new DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: new NetworkImage(
-                                          deputy.thumbnailUrl ?? ""),
-                                    ))),
-                            Container(
-                              alignment: Alignment.center,
-                              child: Text(
-                                voteTypeStr,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              decoration: BoxDecoration(
-                                  color: borderColor.withOpacity(0.3),
-                                  shape: BoxShape.circle,
-                                  border:
-                                      Border.all(color: borderColor, width: 2)),
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(top: 8),
-                        child: Text(
-                          deputy.name,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
+                                    border:
+                                    Border.all(color: borderColor, width: 2)),
+                              )
+                            ],
                           ),
                         ),
-                      ),
-                      Container(
-                        child: Text(
-                          deputy.club ?? "",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: theme.dividerColor,
-                              fontWeight: FontWeight.w300,
-                              fontSize: 12),
+                        Container(
+                          padding: EdgeInsets.only(top: 8),
+                          child: Text(
+                            deputy.name,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
-                  ))
+                        Container(
+                          child: Text(
+                            deputy.club ?? "",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: theme.dividerColor,
+                                fontWeight: FontWeight.w300,
+                                fontSize: 12),
+                          ),
+                        ),
+                      ],
+                    )
+                )
+              )
               : Container()),
     );
   }

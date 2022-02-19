@@ -190,14 +190,19 @@ class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
       ),
       Container(
         width: double.infinity,
-        child: Text(
-          extras,
-          style: TextStyle(
-              color: theme.primaryColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 16),
-          maxLines: 1,
-          textAlign: TextAlign.left,
+        child: ChangeNotifierProvider<ItemSeenStateHolder>.value(
+            value: viewModel,
+            child: Consumer<ItemSeenStateHolder>(
+              builder: (_, model, child) => Text(
+                extras,
+                maxLines: 1,
+                style: TextStyle(
+                    color: theme.primaryColor,
+                    fontWeight: model.viewed ? FontWeight.normal : FontWeight.bold,
+                    fontSize: 16),
+                textAlign: TextAlign.left,
+              ),
+            )
         ),
       ),
       Container(
@@ -217,8 +222,8 @@ class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
         child: InkWell(
           onTap: () {
             goToDestination(context, VoteDetailsDestination(
-                VoteSlimModel.fromTimelineVotingModel(viewModel.model)
-                ));
+              VoteSlimModel.fromTimelineVotingModel(viewModel.model)
+            ));
             viewModel.itemWasSeen();
 
           },
