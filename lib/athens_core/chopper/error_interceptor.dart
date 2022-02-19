@@ -22,7 +22,6 @@ class ErrorInterceptor extends Interceptor {
           throw AuthException(err.requestOptions);
         }
 
-
         informAboutServerErrors(err);
         throw ServerException(err.requestOptions);
     }
