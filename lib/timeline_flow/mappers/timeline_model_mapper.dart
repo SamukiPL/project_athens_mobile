@@ -73,6 +73,7 @@ class TimelineModelMapper extends AsyncDataMapper<Event, TimelineModel> {
         voteType: item.type,
         qualifyingMajority: item.qualifyingMajority,
         agenda: item.agenda,
+        viewed: item.viewed == true,
         // since for now service does NOT provide updates
         // because votes for now are immutable on server side
         updateAt: DateTime.now());
@@ -90,6 +91,7 @@ class TimelineModelMapper extends AsyncDataMapper<Event, TimelineModel> {
             await _deputiesCache.getDeputyThumbnail(item.cadencyDeputy!),
         videoUrl: item.videoDownloadUrl,
         updateAt: item.updateAt,
+        viewed: item.viewed == true,
         createAt: item.createAt);
   }
 }

@@ -4,10 +4,12 @@ import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
+import 'package:project_athens/athens_core/presentation/item_was_seen/item_seen_state_holder.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/timeline_flow/helpers/timeline_voting_agenda_helper.dart';
 import 'package:project_athens/timeline_flow/navigation/timeline_destinations.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
+import 'package:provider/provider.dart';
 
 class GroupedVotingViewHolder extends StatelessWidget with RedirectionDelegate {
   final GroupedVotingViewModel viewModel;
@@ -153,15 +155,20 @@ class GroupedVotingViewHolder extends StatelessWidget with RedirectionDelegate {
                 ),
                 Container(
                   width: double.infinity,
-                  child: Text(
-                    votingDesc,
-                    style: TextStyle(
-                        color: theme.primaryColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16),
-                    maxLines: 1,
-                    textAlign: TextAlign.left,
-                  ),
+                  child: ChangeNotifierProvider<ItemSeenStateHolder>.value(
+                        value: viewModel,
+                        child: Consumer<ItemSeenStateHolder>(
+                          builder: (_, model, child) => Text(
+                            votingDesc,
+                            maxLines: 1,
+                            style: TextStyle(
+                                color: theme.primaryColor,
+                                fontWeight: model.viewed ? FontWeight.normal : FontWeight.bold,
+                                fontSize: 16),
+                            textAlign: TextAlign.left,
+                          ),
+                        )
+                    )
                 ),
                 agendaDesc,
                 TechnicalData(technicalId: viewModel.model.id),

@@ -43,7 +43,8 @@ class DeputyVoteAccuracyViewHolder extends StatelessWidget with RedirectionDeleg
             _viewModel.description != null ? _viewModel.description : "",
             style: TextStyle(
               color: theme.primaryColor,
-              fontSize: 18
+              fontSize: 16,
+              fontWeight: _viewModel.model.viewed ? FontWeight.normal : FontWeight.bold
             ),
           ),
           Text(

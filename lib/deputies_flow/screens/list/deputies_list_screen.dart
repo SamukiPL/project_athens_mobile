@@ -21,24 +21,34 @@ class DeputiesListScreen extends BaseScreen<BaseListBloc> {
 
   @override
   Widget buildBody(BuildContext context, BaseListBloc bloc) {
-    return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          EasyFiltersList(),
-          Expanded(
-            child: Container(
-              height: 0,
-              child: PagingList(
-                bloc.adapter,
-                paginationIncluded: false,
-                separator: Divider(
-                  height: 1,
-                ),
-              ),
-            ),
-          )
-        ]
-    );
+    return Stack(
+      children: [
+        Container(
+          padding: EdgeInsets.only(top: 26),
+          child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 0,
+                    child: PagingList(
+                      bloc.adapter,
+                      paginationIncluded: false,
+                      separator: Divider(
+                        height: 1,
+                      ),
+                    ),
+                  ),
+                )
+              ]
+          ),
+        ),
+
+        EasyFiltersList(),
+
+      ],
+    )
+      ;
   }
 
   @override

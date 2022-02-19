@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
+import 'package:project_athens/athens_core/presentation/item_was_seen/item_seen_state_holder.dart';
 import 'package:project_athens/athens_core/presentation/technical_data/technical_data.dart';
 import 'package:project_athens/timeline_flow/navigation/timeline_destinations.dart';
 import 'package:project_athens/timeline_flow/screens/timeline/list/timeline_row_view_model.dart';
+import 'package:provider/provider.dart';
 
 class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
   final SpeechRowViewModel viewModel;
@@ -128,6 +130,7 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
         child: InkWell(
           onTap: () {
             goToDestination(context, SpeechScreenDestination(viewModel.model.id));
+            viewModel.itemWasSeen();
           },
           child: Container(
             margin: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
@@ -147,15 +150,19 @@ class SpeechViewHolder extends StatelessWidget with RedirectionDelegate {
                 ),
                 Container(
                   width: double.infinity,
-                  child: Text(
-                    viewModel.model.personName,
-                    style: TextStyle(
-                        color: theme.primaryColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16),
-                    maxLines: 2,
-                    textAlign: TextAlign.left,
-                  ),
+                  child: ChangeNotifierProvider<ItemSeenStateHolder>.value(
+                      value: viewModel,
+                      child: Consumer<ItemSeenStateHolder>(
+                        builder: (_, model, child) => Text(
+                          viewModel.model.personName,
+                          style: TextStyle(
+                              color: theme.primaryColor,
+                              fontWeight: model.viewed ? FontWeight.normal : FontWeight.bold,
+                              fontSize: 16),
+                          textAlign: TextAlign.left,
+                        ),
+                      )
+                  )
                 ),
                 getDescription(context, theme),
                 TechnicalData(technicalId: viewModel.model.id)
