@@ -83,7 +83,6 @@ dev_dependencies:
 # The following section is specific to Flutter.
 
 flutter_icons:
-  android: "ic_launcher"
   ios: true
   image_path_android: "icon_launcher/ios.png"
   adaptive_icon_foreground: "icon_launcher/android.png"
