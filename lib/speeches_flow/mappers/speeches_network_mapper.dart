@@ -33,14 +33,14 @@ class SpeechesNetworkMapper
   }
 
   Future<PersonSpeechModel?> _transformPersonSpeechResponse(PersonSpeech? personSpeech) async {
-    if (personSpeech == null) return null;
+    if (personSpeech == null || personSpeech!.speechId == null) return null;
 
     if (personSpeech.deputyCardId != null) {
       final deputy = await _deputiesCache.getDeputyModelByCardId(personSpeech.deputyCardId!);
 
-      return PersonSpeechModel(name: deputy.name, thumbnailUrl: deputy.thumbnailUrl, speechId: personSpeech.speechId);
+      return PersonSpeechModel(name: deputy.name, thumbnailUrl: deputy.thumbnailUrl, speechId: personSpeech.speechId!);
     }
 
-    return PersonSpeechModel(name: personSpeech.fullName, speechId: personSpeech.speechId);
+    return PersonSpeechModel(name: personSpeech.fullName, speechId: personSpeech.speechId!);
   }
 }
