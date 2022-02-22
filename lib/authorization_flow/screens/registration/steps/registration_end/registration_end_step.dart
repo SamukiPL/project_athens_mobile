@@ -60,7 +60,7 @@ class RegistrationEndStep extends BaseRegistrationFormStep<RegistrationEndStepBl
               callback: () { bloc.invokeAction(StepAction.POSITIVE); },
               onChanged: (repeatPassword) => bloc.setRepeatPassword(repeatPassword),
               validator: (repeatPassword) => getBaseValidator(localization, repeatPassword, customValidator: (value) {
-                if (value != bloc.password) return localization.getText().loginValidateEmailsDontMatch();
+                if (value != bloc.password) return localization.getText().loginValidatePasswordsDontMatch();
 
                 return null;
               }),

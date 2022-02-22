@@ -65,7 +65,7 @@ Agenda _$AgendaFromJson(Map<String, dynamic> json) => Agenda(
           : DateTime.parse(json['msgDateTime'] as String),
       json['refId'] as String?,
       json['rangeid'] as String?,
-      json['title'] as String,
+      json['title'] as String?,
     );
 
 Map<String, dynamic> _$AgendaToJson(Agenda instance) => <String, dynamic>{
@@ -124,7 +124,7 @@ const _$GenderEnumMap = {
 PersonSpeech _$PersonSpeechFromJson(Map<String, dynamic> json) => PersonSpeech(
       json['deputyCardId'] as int?,
       json['fullName'] as String?,
-      json['speechId'] as String,
+      json['speechId'] as String?,
     );
 
 Map<String, dynamic> _$PersonSpeechToJson(PersonSpeech instance) =>

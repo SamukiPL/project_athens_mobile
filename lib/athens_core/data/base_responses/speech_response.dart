@@ -37,7 +37,7 @@ class Agenda {
   final DateTime? msgDateTime;
   final String? refId;
   final String? rangeid;
-  final String title;
+  final String? title;
 
   Agenda(this.eventDateTime, this.msgDateTime, this.refId, this.rangeid, this.title);
 
@@ -80,7 +80,7 @@ class Person {
 class PersonSpeech {
   final int? deputyCardId;
   final String? fullName;
-  final String speechId;
+  final String? speechId;
 
   PersonSpeech(this.deputyCardId, this.fullName, this.speechId);
 
