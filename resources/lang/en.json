@@ -28,6 +28,7 @@
       "title": "Experimental feature"
     },
     "error": {
+      "justError": "Error",
       "network": "Something went wrong. Please check your internet connection.",
       "server": "Server is not responding. Please try again later.",
       "auth": "Something went wrong and your session has expired!\nPlease log in again. ",
@@ -208,7 +209,28 @@
     "checkForUpdates": "Check for updates",
     "appVersion": "Application version",
     "termsAndAgreement": "Terms and conditions",
-    "credits": "Credits"
+    "credits": "Credits",
+    "deleteAccount": {
+      "title" : "Delete account",
+      "content": "We are deeply sad that you want to delete your account. Please let us know what's the reason behind this action, so we can make this application better.",
+      "reasons": {
+        "doNotLikeApp": "I don't like this application",
+        "slowApp": "Application is slow",
+        "notInterested": "I'm not interested in this kind of information",
+        "appHasErrors": "Application has lots of errors",
+        "otherReason": "Another reason",
+        "declinePointReason": "I do not want to give a reason"
+      },
+      "confirmDeleteAccount": "I'm sure that I want to complete erase my data and delete my account",
+      "atLeastOneReasonRequired": "At least one reason is required to be selected.",
+      "youHaveToConfirm": "You have to select confirm checkbox to proceed",
+      "afterSuccessfulRequest": "After successful delete account request you will receive e-mail with further instruction to delete account.",
+      "additionalNotes": "How can we improve application? (Optional)"
+    },
+    "deleteAccountDialog": {
+      "title": "Delete account",
+      "content": "This will cause irreversible deletation account and erase all linked data to it. Are you sure?"
+    }
   },
   "dashboard": {
     "title": "Dashboard",

@@ -62,6 +62,10 @@ class MoreScreen extends BaseScreen<MoreBloc> {
               theme: theme
           ),
           _buildActionRow(
+              label: localization.getText().moreDeleteAccountTitle(),
+              onPressed: () => goToDestination(context, MoreDeleteAccountScreenDestination()),
+              theme: theme),
+          _buildActionRow(
               label: localization.getText().moreCheckForUpdates(),
               onPressed: () => bloc.checkForUpdates(),
               theme: theme,
@@ -211,6 +215,21 @@ class MoreScreen extends BaseScreen<MoreBloc> {
       )
     );
   }
+  
+  // void _openRemoveAccountDialog(BuildContext context) {
+  //   final localizations = Provider.of<AppLocalizations>(context);
+  //   showDialog(
+  //     context: context,
+  //     barrierDismissible: true,
+  //     builder: (context) => AlertDialog(
+  //       title: Text(localizations.getText().moreDeleteAccountDialogTitle()),
+  //       content: Text(localizations.getText().moreDeleteAccountDialogContent()),
+  //       actions: [
+  //         TextButton(onPressed:  , child: child),
+  //       ],
+  //     )
+  //   );
+  // }
 
   @override
   Widget? buildFloatingActionButton(BuildContext context, MoreBloc bloc) {

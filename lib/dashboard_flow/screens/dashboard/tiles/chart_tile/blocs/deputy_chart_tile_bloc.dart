@@ -86,7 +86,8 @@ class DeputyChartTileBloc<SERIES_DATA, FROM_DATA_STREAM> extends ChartTileBloc<S
         bloc.showLoader();
         return resultSeries;
       } else {
-        for (final perDeputy in model.perDeputy) {
+        final cutIdx = model.perDeputy.length > 10 ? 10 : model.perDeputy.length;
+        for (final perDeputy in model.perDeputy.sublist(0, cutIdx)) {
           final Color deputyColorShade = _colorManager.getColorForKey(
           perDeputy.subscribedDeputyModel.id);
 
@@ -98,7 +99,7 @@ class DeputyChartTileBloc<SERIES_DATA, FROM_DATA_STREAM> extends ChartTileBloc<S
           id: 'Per deputy',
           domainFn: (entry, idx) =>  ((idx ?? 0) + 1).toString(),
           measureFn: (entry, idx) => entry.counter,
-          data: model.perDeputy,
+          data: model.perDeputy.sublist(0, cutIdx),
           colorFn: (entry, _) => charts.ColorUtil.fromDartColor(_colorManager.getColorForKey(
           entry.subscribedDeputyModel.id)),
           displayName: '',

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:project_athens/more_flow/data/network/request/delete_account_request.dart';
 import 'package:project_athens/more_flow/data/network/response/get_backers_response.dart';
 import 'package:retrofit/http.dart';
 
@@ -16,4 +17,7 @@ abstract class MoreApi {
 
   @GET('/user-aggregator/crowd-funding/backers')
   Future<GetBackersResponse> getBackers();
+
+  @POST('/user-aggregator/user-manage/delete-account-request')
+  Future<void> deleteAccountRequest(@Body() DeleteAccountRequest request);
 }

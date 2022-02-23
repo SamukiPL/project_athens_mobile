@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
+import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:project_athens/athens_core/presentation/grid/tiles/simple_tile/simple_tile_bloc.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/chart_tile/models/chart_series_thombstone_model.dart';
 import 'package:project_athens/deputies_utils/domain/subscribed_deputy_model.dart';
@@ -19,7 +20,7 @@ class ChartTileBloc<SERIES_DATA, FROM_DATA_STREAM> extends SimpleTileBloc {
   final Stream<FROM_DATA_STREAM?> dataStream;
   final charts.BarGroupingType barGroupingType;
   Stream<List<charts.Series<dynamic, String>>> get seriesDataStream =>
-      dataStream.map((model) => mapToSeriesFn(model, this));
+      dataStream.map((model) => mapToSeriesFn(model, this)).handleError((dynamic error) => Fimber.e(error.toString(), stacktrace: error?.stackTrace));
 
   /// A hack which will allow us to manipulate legend image based on given color
   final Map<Color, SubscribedDeputyModel> legendImageToColorMap;
