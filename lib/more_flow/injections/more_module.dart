@@ -22,7 +22,7 @@ class MoreModule extends Module {
     final logoutRepository = LogoutRepositoryImpl(moreApi);
     final logoutUseCase = LogoutUseCase(logoutRepository);
 
-    final AutoUpdater _autoUpdater = Provider.of<AutoUpdater>(context);
+    final AutoUpdater _autoUpdater = AutoUpdater();
     _bloc = MoreBloc(logoutUseCase, _autoUpdater);
 
     return [

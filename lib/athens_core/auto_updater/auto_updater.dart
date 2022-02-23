@@ -12,19 +12,9 @@ enum CupertinoDialogResponse {
 }
 
 class AutoUpdater {
-  AutoUpdater() {
-    _initMinimalVersionCheck();
-  }
-
-  late final Timer _timer;
 
   final BehaviorSubject<bool> _checkingForUpdateSource = BehaviorSubject.seeded(false);
   Stream<bool> get checkingForUpdateStream => _checkingForUpdateSource.stream;
-
-
-  void _initMinimalVersionCheck() {
-    _timer = Timer.periodic(new Duration(minutes: 15), (timer) => checkForUpdates());
-  }
 
   Future<void> _updateAndroid() async {
     _checkingForUpdateSource.add(true);
@@ -58,6 +48,5 @@ class AutoUpdater {
 
   dispose() {
     _checkingForUpdateSource.close();
-    _timer.cancel();
   }
 }
