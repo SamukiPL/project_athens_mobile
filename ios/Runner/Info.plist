@@ -20,8 +20,17 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-6413711847127285~2301781048</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAllowsArbitraryLoads</key>
+	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -41,16 +50,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSAllowsArbitraryLoads</key>
-	<true/>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
-	<key>GADApplicationIdentifier</key>
-    <string>ca-app-pub-6413711847127285~2301781048</string>
 </dict>
 </plist>
