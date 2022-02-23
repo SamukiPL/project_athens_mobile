@@ -8,6 +8,8 @@ class LoginNavigationBloc extends BaseChangeNotifier {
 
   LoginDestination get currentScreen => _popStack.last;
 
+  bool _systemBackActive = true;
+
   void addItem(LoginDestination destination) {
     _popStack.add(destination);
     notifyListeners();
@@ -18,8 +20,14 @@ class LoginNavigationBloc extends BaseChangeNotifier {
     notifyListeners();
   }
 
+  /// Should be used only after successful registration! On Deputies Chooser Step
+  void disableGoBack() {
+    _popStack = List.of([LoginDestination.REGISTER]);
+    _systemBackActive = false;
+  }
+
   bool goBack() {
-    if (_popStack.length == 1) return true;
+    if (_popStack.length == 1) return _systemBackActive;
 
     _popStack.removeLastIfPossible();
     notifyListeners();

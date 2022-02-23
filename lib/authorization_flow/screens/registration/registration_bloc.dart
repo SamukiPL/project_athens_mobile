@@ -59,7 +59,7 @@ class RegistrationBloc extends BaseBloc {
     _registrationEndStepBloc.state.listen((screenState) {
       switch (screenState.runtimeType) {
         case SuccessState:
-          _buttonStateBloc.changeState(StepperButtonState.IDLE);
+          _buttonStateBloc.changeState(StepperButtonState.DISABLE);
           _stepperBloc.setStep(RegistrationStep.DEPUTIES_CHOOSER);
           _deputiesChooserBloc.refresh();
           break;

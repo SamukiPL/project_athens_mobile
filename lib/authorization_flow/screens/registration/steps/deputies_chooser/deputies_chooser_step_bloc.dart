@@ -1,6 +1,6 @@
 import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/ext/list_extension.dart';
-import 'package:project_athens/athens_core/presentation/fab/fab_bloc.dart';
+import 'package:project_athens/authorization_flow/screens/registration/stepper/stepper_button_state_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_step_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/deputies_chooser/list/deputy_item_view_model.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/deputies_chooser/list/deputy_item_view_model_factory.dart';
@@ -19,6 +19,7 @@ class DeputiesChooserBloc extends BaseRegistrationStepBloc
   final DeputiesCache _deputiesCache;
   final PutDeputiesUseCase _putDeputiesUseCase;
   final StepSearchBarBloc _searchBarBloc;
+  final StepperButtonStateBloc _stepperButtonStateBloc;
 
   @override
   late PagingListAdapter adapter;
@@ -31,14 +32,10 @@ class DeputiesChooserBloc extends BaseRegistrationStepBloc
 
   final int maxDeputyListen = 40;
 
-  FabBloc _fabBloc = FabBloc(visible: false);
-
-  FabBloc get fabBloc => _fabBloc;
-
   late List<DeputyItemViewModel> _items;
   String _searchQuery = "";
 
-  DeputiesChooserBloc(this._deputiesCache, this._putDeputiesUseCase, this._searchBarBloc) {
+  DeputiesChooserBloc(this._deputiesCache, this._putDeputiesUseCase, this._searchBarBloc, this._stepperButtonStateBloc) {
     adapter = PagingListAdapter(this);
     _loadFreshData();
   }
@@ -62,12 +59,14 @@ class DeputiesChooserBloc extends BaseRegistrationStepBloc
   }
 
   bool itemClick(DeputyItemViewModel item) {
-    _fabBloc.setVisible(_items.any((item) => item.checked));
+    _stepperButtonStateBloc.changeState((_items.any((item) => item.checked))
+        ? StepperButtonState.IDLE
+        : StepperButtonState.DISABLE);
 
     final checkedCount = _items.where((item) => item.checked).length;
 
     updateHeaderHelperLine("Możesz zaznaczyć jeszcze " + (maxDeputyListen - checkedCount).toString() + ' posłów.');
-    
+
     return _items.where((item) => item.checked).length <= maxDeputyListen;
   }
 

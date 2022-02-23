@@ -1,6 +1,6 @@
 import 'package:project_athens/athens_core/presentation/base_blocs/base_change_notifier.dart';
 
-enum StepperButtonState { IDLE, LOADING }
+enum StepperButtonState { DISABLE, IDLE, LOADING }
 
 class StepperButtonStateBloc extends BaseChangeNotifier {
 
