@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
+import 'package:project_athens/authorization_flow/navigation/login_navigation_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_step.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/deputies_chooser/deputies_chooser_step_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/deputies_chooser/step_search_bar.dart';
@@ -10,6 +11,7 @@ class DeputiesChooserStep extends BaseRegistrationStep<DeputiesChooserBloc> {
 
   @override
   Widget buildStepBody(BuildContext context, DeputiesChooserBloc bloc) {
+    _disableGoBack(context);
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
@@ -37,4 +39,8 @@ class DeputiesChooserStep extends BaseRegistrationStep<DeputiesChooserBloc> {
     appNavigation.goToMainWidget(context);
   }
 
+  void _disableGoBack(BuildContext context) {
+    final loginNavigation = Provider.of<LoginNavigationBloc>(context, listen: false);
+    loginNavigation.disableGoBack();
+  }
 }

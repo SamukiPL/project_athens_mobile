@@ -55,7 +55,7 @@ class RegistrationModule extends Module {
     final registrationEndStepBloc = RegistrationEndStepBloc(registrationUseCase, repeatPasswordNotifier, remoteConfig.cadence);
 
     final stepSearchBarBloc = StepSearchBarBloc();
-    final deputiesChooserBloc = getDeputiesChooserBloc(context, loginApi, deputiesApi, stepSearchBarBloc);
+    final deputiesChooserBloc = getDeputiesChooserBloc(context, loginApi, deputiesApi, stepSearchBarBloc, buttonStateBloc);
 
     return [
       Provider<RegistrationBloc>(
@@ -105,7 +105,8 @@ class RegistrationModule extends Module {
       BuildContext context,
       LoginApi loginApi,
       DeputiesApi deputiesApi,
-      StepSearchBarBloc stepSearchBarBloc) {
+      StepSearchBarBloc stepSearchBarBloc,
+      StepperButtonStateBloc buttonStateBloc) {
     final firebaseMessaging = Provider.of<FirebaseMessages>(context);
     final deputiesCache = Provider.of<DeputiesCache>(context);
 
@@ -114,7 +115,7 @@ class RegistrationModule extends Module {
     final putDeputiesRepository = PutDeputiesRepositoryImpl(deputiesApi, deputySubscriber);
     final putDeputiesUseCase = PutDeputiesUseCase(putDeputiesRepository);
 
-    return DeputiesChooserBloc(deputiesCache, putDeputiesUseCase, stepSearchBarBloc);
+    return DeputiesChooserBloc(deputiesCache, putDeputiesUseCase, stepSearchBarBloc, buttonStateBloc);
   }
 
 }
