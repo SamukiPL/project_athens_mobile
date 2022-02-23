@@ -49,7 +49,10 @@ class AuthFacade {
     _tokenExp = _jwt.getJwtExp(newTokens.accessToken!);
 
     return _accessToken!;
-    //JestemDevem19.demokra
   }
 
+  void clearTokens() {
+    _accessToken = null;
+    _refreshToken = null;
+  }
 }

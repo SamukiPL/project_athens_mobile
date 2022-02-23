@@ -334,8 +334,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: main
-      resolved-ref: "09066ba08c06238d1b44e758b73100a49b8ffc85"
+      ref: a2aa683
+      resolved-ref: a2aa68376b507aae4116a0fac583c7e1db0c509d
       url: "https://github.com/pbrejdak/fijkplayer_skin.git"
     source: git
     version: "2.2.6"
