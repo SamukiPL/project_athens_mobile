@@ -59,6 +59,7 @@ class AppModule extends Module {
     final clubsCache = _createClubsCache(authenticatedClient);
 
     return List<SingleChildWidget>.of([
+      Provider<AuthFacade>.value(value: authFacade),
       Provider<SimpleDioClient>(
         create: (_) => SimpleDioClient(client),
         dispose: (context, client) => client.dispose(),
