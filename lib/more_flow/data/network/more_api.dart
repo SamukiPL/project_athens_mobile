@@ -3,8 +3,6 @@ import 'package:project_athens/more_flow/data/network/request/delete_account_req
 import 'package:project_athens/more_flow/data/network/response/get_backers_response.dart';
 import 'package:retrofit/http.dart';
 
-
-
 part 'more_api.g.dart';
 
 @RestApi()
