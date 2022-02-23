@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
@@ -37,7 +36,6 @@ class DeleteAccountScreen extends BaseScreen<DeleteAccountBloc> {
                 alignment: Alignment.center,
               ),
             ),
-          // ),
           Expanded(
             child: SingleChildScrollView(
                 child: Container(
@@ -55,7 +53,6 @@ class DeleteAccountScreen extends BaseScreen<DeleteAccountBloc> {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
-                      // Spacer(),
                     ],
                   ),
                 )
@@ -114,7 +111,6 @@ class DeleteAccountScreen extends BaseScreen<DeleteAccountBloc> {
 
                     return null;
                   },
-                  // value: false
                 ),
               )
             ],
@@ -132,7 +128,6 @@ class DeleteAccountScreen extends BaseScreen<DeleteAccountBloc> {
 
                     return null;
                   },
-                  // value: false
                 ),
               )
             ],
@@ -150,7 +145,6 @@ class DeleteAccountScreen extends BaseScreen<DeleteAccountBloc> {
 
                     return null;
                   },
-                  // value: false
                 ),
               )
             ],
@@ -168,7 +162,6 @@ class DeleteAccountScreen extends BaseScreen<DeleteAccountBloc> {
 
                     return null;
                   },
-                  // value: false
                 ),
               )
             ],
@@ -225,7 +218,6 @@ class DeleteAccountScreen extends BaseScreen<DeleteAccountBloc> {
 
                           return null;
                         },
-                        // value: false,
                       )
                   )
                 ],
