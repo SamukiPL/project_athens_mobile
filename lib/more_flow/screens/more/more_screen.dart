@@ -62,6 +62,10 @@ class MoreScreen extends BaseScreen<MoreBloc> {
               theme: theme
           ),
           _buildActionRow(
+              label: localization.getText().moreDeleteAccountTitle(),
+              onPressed: () => goToDestination(context, MoreDeleteAccountScreenDestination()),
+              theme: theme),
+          _buildActionRow(
               label: localization.getText().moreCheckForUpdates(),
               onPressed: () => bloc.checkForUpdates(),
               theme: theme,

@@ -101,6 +101,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalExperimentalFeatureTitle != ""); 
   }); 
  
+  test("All methods for $locale universalErrorJustError", () async {
+    String universalErrorJustError = localization.universalErrorJustError();
+    expect(true, universalErrorJustError != ""); 
+  }); 
+ 
   test("All methods for $locale universalErrorNetwork", () async {
     String universalErrorNetwork = localization.universalErrorNetwork();
     expect(true, universalErrorNetwork != ""); 
@@ -829,6 +834,81 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale moreTermsAndAgreement", () async {
     String moreTermsAndAgreement = localization.moreTermsAndAgreement();
     expect(true, moreTermsAndAgreement != ""); 
+  }); 
+ 
+  test("All methods for $locale moreDeleteAccountTitle", () async {
+    String moreDeleteAccountTitle = localization.moreDeleteAccountTitle();
+    expect(true, moreDeleteAccountTitle != ""); 
+  }); 
+ 
+  test("All methods for $locale moreDeleteAccountContent", () async {
+    String moreDeleteAccountContent = localization.moreDeleteAccountContent();
+    expect(true, moreDeleteAccountContent != ""); 
+  }); 
+ 
+  test("All methods for $locale moreDeleteAccountReasonsDoNotLikeApp", () async {
+    String moreDeleteAccountReasonsDoNotLikeApp = localization.moreDeleteAccountReasonsDoNotLikeApp();
+    expect(true, moreDeleteAccountReasonsDoNotLikeApp != ""); 
+  }); 
+ 
+  test("All methods for $locale moreDeleteAccountReasonsSlowApp", () async {
+    String moreDeleteAccountReasonsSlowApp = localization.moreDeleteAccountReasonsSlowApp();
+    expect(true, moreDeleteAccountReasonsSlowApp != ""); 
+  }); 
+ 
+  test("All methods for $locale moreDeleteAccountReasonsNotInterested", () async {
+    String moreDeleteAccountReasonsNotInterested = localization.moreDeleteAccountReasonsNotInterested();
+    expect(true, moreDeleteAccountReasonsNotInterested != ""); 
+  }); 
+ 
+  test("All methods for $locale moreDeleteAccountReasonsAppHasErrors", () async {
+    String moreDeleteAccountReasonsAppHasErrors = localization.moreDeleteAccountReasonsAppHasErrors();
+    expect(true, moreDeleteAccountReasonsAppHasErrors != ""); 
+  }); 
+ 
+  test("All methods for $locale moreDeleteAccountReasonsOtherReason", () async {
+    String moreDeleteAccountReasonsOtherReason = localization.moreDeleteAccountReasonsOtherReason();
+    expect(true, moreDeleteAccountReasonsOtherReason != ""); 
+  }); 
+ 
+  test("All methods for $locale moreDeleteAccountReasonsDeclinePointReason", () async {
+    String moreDeleteAccountReasonsDeclinePointReason = localization.moreDeleteAccountReasonsDeclinePointReason();
+    expect(true, moreDeleteAccountReasonsDeclinePointReason != ""); 
+  }); 
+ 
+  test("All methods for $locale moreDeleteAccountConfirmDeleteAccount", () async {
+    String moreDeleteAccountConfirmDeleteAccount = localization.moreDeleteAccountConfirmDeleteAccount();
+    expect(true, moreDeleteAccountConfirmDeleteAccount != ""); 
+  }); 
+ 
+  test("All methods for $locale moreDeleteAccountAtLeastOneReasonRequired", () async {
+    String moreDeleteAccountAtLeastOneReasonRequired = localization.moreDeleteAccountAtLeastOneReasonRequired();
+    expect(true, moreDeleteAccountAtLeastOneReasonRequired != ""); 
+  }); 
+ 
+  test("All methods for $locale moreDeleteAccountYouHaveToConfirm", () async {
+    String moreDeleteAccountYouHaveToConfirm = localization.moreDeleteAccountYouHaveToConfirm();
+    expect(true, moreDeleteAccountYouHaveToConfirm != ""); 
+  }); 
+ 
+  test("All methods for $locale moreDeleteAccountAfterSuccessfulRequest", () async {
+    String moreDeleteAccountAfterSuccessfulRequest = localization.moreDeleteAccountAfterSuccessfulRequest();
+    expect(true, moreDeleteAccountAfterSuccessfulRequest != ""); 
+  }); 
+ 
+  test("All methods for $locale moreDeleteAccountAdditionalNotes", () async {
+    String moreDeleteAccountAdditionalNotes = localization.moreDeleteAccountAdditionalNotes();
+    expect(true, moreDeleteAccountAdditionalNotes != ""); 
+  }); 
+ 
+  test("All methods for $locale moreDeleteAccountDialogTitle", () async {
+    String moreDeleteAccountDialogTitle = localization.moreDeleteAccountDialogTitle();
+    expect(true, moreDeleteAccountDialogTitle != ""); 
+  }); 
+ 
+  test("All methods for $locale moreDeleteAccountDialogContent", () async {
+    String moreDeleteAccountDialogContent = localization.moreDeleteAccountDialogContent();
+    expect(true, moreDeleteAccountDialogContent != ""); 
   }); 
  
   test("All methods for $locale dashboardTitle", () async {

@@ -21,6 +21,7 @@
       "title": "Eksperymentalna funkcjonalność"
     },
     "error":{
+      "justError": "Błąd",
       "network": "Coś poszło nie tak. Proszę sprawdzić swoje połączenie z internetem.",
       "server": "Serwer nie odpowiada. Prosimy spróbować później.",
       "auth": "Coś poszło nie tak i Twoja sesja wygasła!\nZaloguj się ponownie.",
@@ -207,7 +208,28 @@
     "supportUs": "Wesprzyj nas ❤",
     "appVersion": "Wersja aplikacji",
     "credits": "Credits",
-    "termsAndAgreement": "Regulamin i polityka prywatności"
+    "termsAndAgreement": "Regulamin i polityka prywatności",
+    "deleteAccount": {
+      "title" : "Usuń konto",
+      "content": "Jest nam bardzo przykro z powodu że chcesz usunąć konto, proszę wskaż nam powód dla którego chcesz usunąć konto, pomoże nam to udoskonalać aplikację.",
+      "reasons": {
+        "doNotLikeApp": "Nie podoba mi się aplikacja",
+        "slowApp": "Aplikacja jest za mało wydajna",
+        "notInterested": "Nie interesują mnie takie informacje",
+        "appHasErrors" :"Aplikacja posiada dużo błędów",
+        "otherReason": "Inny powód",
+        "declinePointReason": "Nie chcę podawać powodu"
+      },
+      "confirmDeleteAccount": "Jestem pewien że chcę trwale usunąć konto",
+      "atLeastOneReasonRequired": "Przynajmniej jeden powód jest wymagany.",
+      "youHaveToConfirm": "Musisz zaznaczyć że jesteś pewien, aby wysłać zgłoszenie z usunięciem konta",
+      "afterSuccessfulRequest": "Po poprawnym wysłaniu zgłoszeniu o usunięcie konta, dostaniesz e-mail z dalszymi instrukcjami",
+      "additionalNotes": "Jak możemy jeszcze usprawnić aplikacje? (Opcjonalnie)"
+    },
+    "deleteAccountDialog": {
+      "title": "Usuń konto",
+      "content": "Spowoduje to całkowite oraz nieodwracalne usunięcie konta oraz wszystkie dane, które są powiązane z kontem. Czy jesteś pewien tej operacji?"
+    }
   },
   "dashboard": {
     "title": "Konsola",

@@ -75,6 +75,10 @@ class AppLocalizationsGenerated {
     return words['universal']['experimentalFeature']['title'];
   }
 
+  String universalErrorJustError() {
+    return words['universal']['error']['justError'];
+  }
+
   String universalErrorNetwork() {
     return words['universal']['error']['network'];
   }
@@ -663,6 +667,66 @@ class AppLocalizationsGenerated {
 
   String moreTermsAndAgreement() {
     return words['more']['termsAndAgreement'];
+  }
+
+  String moreDeleteAccountTitle() {
+    return words['more']['deleteAccount']['title'];
+  }
+
+  String moreDeleteAccountContent() {
+    return words['more']['deleteAccount']['content'];
+  }
+
+  String moreDeleteAccountReasonsDoNotLikeApp() {
+    return words['more']['deleteAccount']['reasons']['doNotLikeApp'];
+  }
+
+  String moreDeleteAccountReasonsSlowApp() {
+    return words['more']['deleteAccount']['reasons']['slowApp'];
+  }
+
+  String moreDeleteAccountReasonsNotInterested() {
+    return words['more']['deleteAccount']['reasons']['notInterested'];
+  }
+
+  String moreDeleteAccountReasonsAppHasErrors() {
+    return words['more']['deleteAccount']['reasons']['appHasErrors'];
+  }
+
+  String moreDeleteAccountReasonsOtherReason() {
+    return words['more']['deleteAccount']['reasons']['otherReason'];
+  }
+
+  String moreDeleteAccountReasonsDeclinePointReason() {
+    return words['more']['deleteAccount']['reasons']['declinePointReason'];
+  }
+
+  String moreDeleteAccountConfirmDeleteAccount() {
+    return words['more']['deleteAccount']['confirmDeleteAccount'];
+  }
+
+  String moreDeleteAccountAtLeastOneReasonRequired() {
+    return words['more']['deleteAccount']['atLeastOneReasonRequired'];
+  }
+
+  String moreDeleteAccountYouHaveToConfirm() {
+    return words['more']['deleteAccount']['youHaveToConfirm'];
+  }
+
+  String moreDeleteAccountAfterSuccessfulRequest() {
+    return words['more']['deleteAccount']['afterSuccessfulRequest'];
+  }
+
+  String moreDeleteAccountAdditionalNotes() {
+    return words['more']['deleteAccount']['additionalNotes'];
+  }
+
+  String moreDeleteAccountDialogTitle() {
+    return words['more']['deleteAccountDialog']['title'];
+  }
+
+  String moreDeleteAccountDialogContent() {
+    return words['more']['deleteAccountDialog']['content'];
   }
 
   String dashboardTitle() {

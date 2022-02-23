@@ -13,6 +13,9 @@ class ChartColorManager {
     Colors.green,
     Colors.brown,
     Colors.red,
+    Colors.teal,
+    Colors.purple,
+    Colors.cyan
   ];
 
   int _currentColorIdx = 0;
@@ -34,6 +37,10 @@ class ChartColorManager {
     if (_currentShadeIdx == 700) {
       _currentShadeIdx = 100;
       _currentColorIdx++;
+    }
+
+    if (_currentColorIdx >= _colors.length) {
+      _currentColorIdx = 0;
     }
 
     final palette = _colors[_currentColorIdx];
