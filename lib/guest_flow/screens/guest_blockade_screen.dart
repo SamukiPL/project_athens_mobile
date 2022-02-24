@@ -3,7 +3,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
-import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/guest_flow/screens/guest_blockade_bloc.dart';
 import 'package:provider/provider.dart';
@@ -43,6 +42,7 @@ class GuestBlockadeScreen extends BaseScreen<GuestBlockadeBloc> {
                 ),
               ),
               onPressed: (() {
+                bloc.clearTokens();
                 final appNavigation = Provider.of<AppNavigation>(context, listen: false);
                 appNavigation.goToLoginWidget(context);
               }),
