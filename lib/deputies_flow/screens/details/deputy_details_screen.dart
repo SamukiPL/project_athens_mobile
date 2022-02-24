@@ -11,6 +11,7 @@ import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_informa
 import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_speeches_details_tab.dart';
 import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_votings_details_tab.dart';
 import 'package:project_athens/deputies_utils/domain/subscribed_deputy_model.dart';
+import 'package:project_athens/guest_flow/domain/logged_state.dart';
 import 'package:provider/provider.dart';
 
 class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
@@ -90,34 +91,7 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
                       ),
                     ),
                   ),
-                  SliverAppBar(
-                    toolbarHeight: 0,
-                    collapsedHeight: 0,
-                    expandedHeight: 0,
-                    bottom: PreferredSize(
-                      preferredSize: Size.fromHeight(35),
-                      child: Container(),
-                    ),
-                    flexibleSpace: Padding(
-                      padding: EdgeInsets.only(left: 0),
-                      child: Container(
-                        height: double.infinity,
-                        width: double.infinity,
-                        padding: EdgeInsets.only(left: 12, right: 12),
-                        child: ChangeNotifierProvider<SubscribedDeputyNotificationsNotifier>.value(
-                          value: bloc.deputyModel.notifications,
-                          child: Consumer<SubscribedDeputyNotificationsNotifier>(
-                            builder: (context, notifier, _) => bloc.deputyModel.notifications.isSubscribed
-                              ? SubscribedDeputyBarView(bloc.deputyModel)
-                              : notObservedDeputyView(bloc, context),
-                          ),
-                        )
-                      ),
-                    ),
-                    backgroundColor: Colors.white,
-                    pinned: true,
-                    elevation: 0,
-                  ),
+                  null,
                   SliverPersistentHeader(
                     delegate: _SliverAppBarDelegate(TabBar(
                       tabs: [
@@ -134,7 +108,7 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
                     )),
                     pinned: true,
                   )
-                ],
+                ].where((element) => element != null).cast<Widget>().toList(),
             body: TabBarView(
               children: <Widget>[
                 buildDeputyInformationTab(context, bloc),
@@ -170,6 +144,40 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
 
   Widget buildDeputyVotingsTab(BuildContext context) {
     return DeputyVotingsDetailsTab();
+  }
+
+  Widget? buildObserverDeputyView(DeputyDetailsBloc bloc, BuildContext context) {
+    final loggedState = Provider.of<LoggedState>(context);
+    if (loggedState.isGuest) return null;
+
+    return SliverAppBar(
+      toolbarHeight: 0,
+      collapsedHeight: 0,
+      expandedHeight: 0,
+      bottom: PreferredSize(
+        preferredSize: Size.fromHeight(35),
+        child: Container(),
+      ),
+      flexibleSpace: Padding(
+        padding: EdgeInsets.only(left: 0),
+        child: Container(
+            height: double.infinity,
+            width: double.infinity,
+            padding: EdgeInsets.only(left: 12, right: 12),
+            child: ChangeNotifierProvider<SubscribedDeputyNotificationsNotifier>.value(
+              value: bloc.deputyModel.notifications,
+              child: Consumer<SubscribedDeputyNotificationsNotifier>(
+                builder: (context, notifier, _) => bloc.deputyModel.notifications.isSubscribed
+                    ? SubscribedDeputyBarView(bloc.deputyModel)
+                    : notObservedDeputyView(bloc, context),
+              ),
+            )
+        ),
+      ),
+      backgroundColor: Colors.white,
+      pinned: true,
+      elevation: 0,
+    );
   }
 
   Widget notObservedDeputyView(DeputyDetailsBloc bloc, BuildContext context) {

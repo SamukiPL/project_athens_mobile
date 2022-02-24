@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:nested/nested.dart';
 import 'package:project_athens/athens_core/configuration/remote_configuration.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/utils/firebase/firebase_deputy_subscriber.dart';
@@ -8,8 +10,6 @@ import 'package:project_athens/authorization_flow/domain/login/login_as_guest_us
 import 'package:project_athens/authorization_flow/domain/login/login_repository.dart';
 import 'package:project_athens/authorization_flow/domain/login/login_use_case.dart';
 import 'package:project_athens/authorization_flow/screens/login/login_bloc.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:nested/nested.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/data/firebase_deputies_repository_impl.dart';
 import 'package:project_athens/deputies_utils/data/network/deputies_api.dart';
