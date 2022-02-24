@@ -16,11 +16,14 @@ class AuthStorage {
     return Tokens(accessToken, refreshToken);
   }
 
-  Future<void> saveTokens(String accessToken, String refreshToken) async {
+  Future<void> saveTokens(String accessToken, String? refreshToken) async {
     final storage = FlutterSecureStorage();
 
     await storage.write(key: accessTokenKey, value: accessToken);
-    await storage.write(key: refreshTokenKey, value: refreshToken);
+
+    if (refreshToken != null) {
+      await storage.write(key: refreshTokenKey, value: refreshToken);
+    }
   }
 
   Future<void> saveAccessToken(String accessToken) async {

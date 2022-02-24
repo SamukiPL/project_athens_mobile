@@ -3,6 +3,8 @@ import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
 import 'package:project_athens/athens_core/presentation/button_loader/button_loader.dart';
+import 'package:project_athens/athens_core/presentation/data_loading/data_loading_bloc.dart';
+import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
 import 'package:project_athens/authorization_flow/injections/login_screen_module.dart';
 import 'package:project_athens/authorization_flow/navigation/login_navigation_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/base_login_screen.dart';
@@ -17,124 +19,62 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
 
   @override
   Widget generateBody(BuildContext context, LoginBloc bloc) {
-    var localization = Provider.of<AppLocalizations>(context);
-    var loginNavigation = Provider.of<LoginNavigationBloc>(context);
+    final l10n = Provider.of<AppLocalizations>(context);
     final theme = Theme.of(context);
-    return Form(
-      key: bloc.loginScreenForm,
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
+    return IntrinsicHeight(
+      child: SafeArea(child: Column(
+        children: [
           Container(
-            margin: EdgeInsets.fromLTRB(92, 0, 92, 0),
-            child: Image.asset("resources/images/logo.png"),
-          ),
-          ChangeNotifierProvider<AuthFailedNotifier>.value(
-            value: bloc.authFailedNotifier,
-            child: Consumer<AuthFailedNotifier>(
-              builder: (context, authFailed, _) =>
-                  _buildErrorBox(localization, bloc, theme),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(32, 8, 32, 8),
-            child: TextFormField(
-              controller: bloc.textEditingController,
-              onChanged: (login) => bloc.setLogin(login),
-              textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
-                  labelText: localization.getText().loginHintsLoginOrEmail(),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  )),
-              maxLines: 1,
-              validator: (String? login) {
-                if (login == null || login == '') return localization.getText().loginValidateFieldCannotBeEmpty();
-
-                return null;
-              },
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(32, 8, 32, 0),
-            child: TextFormField(
-                onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
-                onChanged: (password) => bloc.setPassword(password),
-                textInputAction: TextInputAction.done,
-                onEditingComplete: () => bloc(),
-                decoration: InputDecoration(
-                    labelText: localization.getText().loginHintsPassword(),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                    )),
-                maxLines: 1,
-                validator: (String? password) {
-                  if (password == null || password == '') return localization.getText().loginValidateFieldCannotBeEmpty();
-
-                  return null;
-                },
-                obscureText: true),
-          ),
-          Container(
-            margin: EdgeInsets.only(right: 32),
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: FlatButton(
-                onPressed: () =>
-                    loginNavigation.addItem(LoginDestination.RESET_PASSWORD),
-                child: Text(
-                  localization.getText().loginButtonsForgot(),
-                  style: TextStyle(color: theme.primaryColor),
-                ),
-              ),
-            ),
-          ),
-          ButtonLoader(
-              bloc.loginButtonLoadingBloc,
-              callback: () => bloc(),
-              buttonBg: theme.primaryColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(32),
-              ),
-              mainPadding: EdgeInsets.all(16),
-              actionStateWidget: Container(
-                child: Text(
-                  localization.getText().loginButtonsLogin(),
-                  style: TextStyle(color: Colors.white),
-                  textScaleFactor: 1.5,
-                ),
-              )
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(localization.getText().loginOtherNotAMember()),
-                Container(
-                  margin: EdgeInsets.only(left: 16, right: 16),
-                  child: MaterialButton(
-                    onPressed: () =>
-                        loginNavigation.addItem(LoginDestination.REGISTER),
-                    child: Text(
-                      localization.getText().loginButtonsRegister(),
-                      style: TextStyle(color: theme.primaryColor),
-                    ),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32),
-                        side: BorderSide(color: theme.primaryColor)),
+            padding: EdgeInsets.all(16),
+            child: GestureDetector(
+              onTap: () => bloc.loginAsGuest(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ChangeNotifierProvider<DataLoadingBloc>.value(
+                      value: bloc.loginGuestLoadingBloc,
+                      child: Consumer<DataLoadingBloc>(
+                        builder: (context, loadingBloc, _) {
+                          if (loadingBloc.loadingState is Loading) {
+                            return Container(
+                              padding: EdgeInsets.only(right: 8),
+                              child: SizedBox(
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
+                                height: 16,
+                                width: 16,
+                              )
+                            );
+                          } else {
+                            return Container();
+                          }
+                        },
+                      ),
                   ),
-                )
-              ],
-            ),
+                  Text(
+                    l10n.getText().loginButtonsContinueWithoutSignIn(),
+                    style: TextStyle(
+                        color: theme.dividerColor
+                    ),
+                  ),
+                  Icon(
+                    Icons.chevron_right,
+                    color: theme.dividerColor,
+                    size: 32,
+                  )
+                ],
+              ),
+            )
+
           ),
-          _buildEnterAsGuest(localization, bloc, theme),
+          Expanded(
+              child: _buildForm(context, bloc)
+          )
         ],
       )
-    );
+    ));
   }
 
   Widget _buildErrorBox(
@@ -163,6 +103,128 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
     } else {
       return Container();
     }
+  }
+
+  Widget _buildForm(BuildContext context, LoginBloc bloc) {
+    var localization = Provider.of<AppLocalizations>(context);
+    var loginNavigation = Provider.of<LoginNavigationBloc>(context);
+    final theme = Theme.of(context);
+
+    return Form(
+        key: bloc.loginScreenForm,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.fromLTRB(92, 0, 92, 0),
+              child: Image.asset("resources/images/logo.png"),
+            ),
+            ChangeNotifierProvider<AuthFailedNotifier>.value(
+              value: bloc.authFailedNotifier,
+              child: Consumer<AuthFailedNotifier>(
+                builder: (context, authFailed, _) =>
+                    _buildErrorBox(localization, bloc, theme),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(32, 8, 32, 8),
+              child: TextFormField(
+                controller: bloc.textEditingController,
+                onChanged: (login) => bloc.setLogin(login),
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                    labelText: localization.getText().loginHintsLoginOrEmail(),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    )),
+                maxLines: 1,
+                validator: (String? login) {
+                  if (login == null || login == '') return localization.getText().loginValidateFieldCannotBeEmpty();
+
+                  return null;
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(32, 8, 32, 0),
+              child: TextFormField(
+                  onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
+                  onChanged: (password) => bloc.setPassword(password),
+                  textInputAction: TextInputAction.done,
+                  onEditingComplete: () => bloc(),
+                  decoration: InputDecoration(
+                      labelText: localization.getText().loginHintsPassword(),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      )),
+                  maxLines: 1,
+                  validator: (String? password) {
+                    if (password == null || password == '') return localization.getText().loginValidateFieldCannotBeEmpty();
+
+                    return null;
+                  },
+                  obscureText: true),
+            ),
+            Container(
+              margin: EdgeInsets.only(right: 32),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: FlatButton(
+                  onPressed: () =>
+                      loginNavigation.addItem(LoginDestination.RESET_PASSWORD),
+                  child: Text(
+                    localization.getText().loginButtonsForgot(),
+                    style: TextStyle(color: theme.primaryColor),
+                  ),
+                ),
+              ),
+            ),
+            ButtonLoader(
+                bloc.loginButtonLoadingBloc,
+                callback: () => bloc(),
+                buttonBg: theme.primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(32),
+                ),
+                mainPadding: EdgeInsets.all(16),
+                actionStateWidget: Container(
+                  child: Text(
+                    localization.getText().loginButtonsLogin(),
+                    style: TextStyle(color: Colors.white),
+                    textScaleFactor: 1.5,
+                  ),
+                )
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(localization.getText().loginOtherNotAMember()),
+                  Container(
+                    margin: EdgeInsets.only(left: 16, right: 16),
+                    child: MaterialButton(
+                      onPressed: () =>
+                          loginNavigation.addItem(LoginDestination.REGISTER),
+                      child: Text(
+                        localization.getText().loginButtonsRegister(),
+                        style: TextStyle(color: theme.primaryColor),
+                      ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(32),
+                          side: BorderSide(color: theme.primaryColor)),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            // _buildEnterAsGuest(localization, bloc, theme),
+          ],
+        )
+    );
   }
 
   Widget _buildEnterAsGuest(AppLocalizations localization, LoginBloc bloc, ThemeData theme) {

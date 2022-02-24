@@ -69,7 +69,8 @@
       "register": "Register now!",
       "forgot": "Forgot password?",
       "signUp": "Sign Up",
-      "resetPassword": "Reset"
+      "resetPassword": "Reset",
+      "continueWithoutSignIn": "Continue without sign in"
     },
     "hints": {
       "email": "Email",

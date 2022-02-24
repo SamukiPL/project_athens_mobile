@@ -68,7 +68,8 @@
       "register": "Zarejestruj się!",
       "signUp": "Stwórz konto",
       "forgot": "Zapomniałeś hasła?",
-      "resetPassword": "Resetuj"
+      "resetPassword": "Resetuj",
+      "continueWithoutSignIn": "Przejdź do aplikacji bez logowania"
     },
     "hints": {
       "email": "Email",

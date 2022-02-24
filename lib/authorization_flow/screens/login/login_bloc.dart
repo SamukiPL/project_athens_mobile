@@ -27,6 +27,7 @@ class LoginBloc extends BaseBloc with ConfigurationDelegate<String?, String> {
 
   final AuthFailedNotifier authFailedNotifier = AuthFailedNotifier();
   final DataLoadingBloc loginButtonLoadingBloc = DataLoadingBloc();
+  final DataLoadingBloc loginGuestLoadingBloc = DataLoadingBloc();
 
   LoginBloc(this._loginUseCase, this._loginAsGuestUseCase, this._firebaseDeputiesUseCase,
       this._remoteConfiguration) {
@@ -104,16 +105,16 @@ class LoginBloc extends BaseBloc with ConfigurationDelegate<String?, String> {
   }
 
   Future<void> loginAsGuest() async {
-    if (!(loginButtonLoadingBloc.loadingState is InitialLoading)) return;
-    loginButtonLoadingBloc.setDataLoadingState(DataLoadingState.loading());
+    if (!(loginGuestLoadingBloc.loadingState is InitialLoading)) return;
+    loginGuestLoadingBloc.setDataLoadingState(DataLoadingState.loading());
     final loginResult = await _loginAsGuestUseCase();
 
     if (loginResult is Success) {
-      loginButtonLoadingBloc.setDataLoadingState(DataLoadingState.contentLoaded());
+      loginGuestLoadingBloc.setDataLoadingState(DataLoadingState.contentLoaded());
       await updatePreference(_login);
       _loggedState = LoggedState.guestLogged();
     } else {
-      loginButtonLoadingBloc.setDataLoadingState(DataLoadingState.initialLoading());
+      loginGuestLoadingBloc.setDataLoadingState(DataLoadingState.initialLoading());
     }
     return manageState(loginResult);
   }

@@ -214,6 +214,10 @@ class AppLocalizationsGenerated {
     return words['login']['buttons']['resetPassword'];
   }
 
+  String loginButtonsContinueWithoutSignIn() {
+    return words['login']['buttons']['continueWithoutSignIn'];
+  }
+
   String loginHintsEmail() {
     return words['login']['hints']['email'];
   }

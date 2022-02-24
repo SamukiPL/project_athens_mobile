@@ -9,15 +9,15 @@ void main() {
   String osPrefix = Platform.isLinux || Platform.isMacOS ? '/' : '';
   String filePathForCoverage = osPrefix + scriptPath.substring(0, scriptPath.indexOf('main.dart')).substring(1) + 'resources/lang/';
 
-  File plFile = File(filePathForCoverage + 'pl.json');
-  String plData = plFile.readAsStringSync();
-  Map<String, dynamic> plWords = json.decode(plData);
-  testAllMethods('pl', AppLocalizationsGenerated(plWords));
-
   File enFile = File(filePathForCoverage + 'en.json');
   String enData = enFile.readAsStringSync();
   Map<String, dynamic> enWords = json.decode(enData);
   testAllMethods('en', AppLocalizationsGenerated(enWords));
+
+  File plFile = File(filePathForCoverage + 'pl.json');
+  String plData = plFile.readAsStringSync();
+  Map<String, dynamic> plWords = json.decode(plData);
+  testAllMethods('pl', AppLocalizationsGenerated(plWords));
 }
 
 void testAllMethods(String locale, AppLocalizationsGenerated localization) {
@@ -269,6 +269,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale loginButtonsResetPassword", () async {
     String loginButtonsResetPassword = localization.loginButtonsResetPassword();
     expect(true, loginButtonsResetPassword != ""); 
+  }); 
+ 
+  test("All methods for $locale loginButtonsContinueWithoutSignIn", () async {
+    String loginButtonsContinueWithoutSignIn = localization.loginButtonsContinueWithoutSignIn();
+    expect(true, loginButtonsContinueWithoutSignIn != ""); 
   }); 
  
   test("All methods for $locale loginHintsEmail", () async {
