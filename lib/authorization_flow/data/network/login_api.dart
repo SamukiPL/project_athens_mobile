@@ -31,4 +31,7 @@ abstract class LoginApi {
   @GET("/deputy-aggregator/cadency-deputy/get-all")
   Future<List<DeputyResponse>> getAllDeputies();
 
+  @GET("/user-aggregator/auth/guest-login/{cadence}")
+  Future<LoginResponse> guestLogin(@Path("cadence") int cadence);
+
 }

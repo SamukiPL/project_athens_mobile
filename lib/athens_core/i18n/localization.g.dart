@@ -214,6 +214,10 @@ class AppLocalizationsGenerated {
     return words['login']['buttons']['resetPassword'];
   }
 
+  String loginButtonsContinueWithoutSignIn() {
+    return words['login']['buttons']['continueWithoutSignIn'];
+  }
+
   String loginHintsEmail() {
     return words['login']['hints']['email'];
   }
@@ -864,5 +868,17 @@ class AppLocalizationsGenerated {
 
   String sortDescending() {
     return words['sort']['descending'];
+  }
+
+  String guestExplanation() {
+    return words['guest']['explanation'];
+  }
+
+  String guestGoToLogin() {
+    return words['guest']['goToLogin'];
+  }
+
+  String guestLogAsGuest() {
+    return words['guest']['logAsGuest'];
   }
 }

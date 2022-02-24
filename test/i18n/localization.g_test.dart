@@ -271,6 +271,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginButtonsResetPassword != ""); 
   }); 
  
+  test("All methods for $locale loginButtonsContinueWithoutSignIn", () async {
+    String loginButtonsContinueWithoutSignIn = localization.loginButtonsContinueWithoutSignIn();
+    expect(true, loginButtonsContinueWithoutSignIn != ""); 
+  }); 
+ 
   test("All methods for $locale loginHintsEmail", () async {
     String loginHintsEmail = localization.loginHintsEmail();
     expect(true, loginHintsEmail != ""); 
@@ -1074,6 +1079,21 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale sortDescending", () async {
     String sortDescending = localization.sortDescending();
     expect(true, sortDescending != ""); 
+  }); 
+ 
+  test("All methods for $locale guestExplanation", () async {
+    String guestExplanation = localization.guestExplanation();
+    expect(true, guestExplanation != ""); 
+  }); 
+ 
+  test("All methods for $locale guestGoToLogin", () async {
+    String guestGoToLogin = localization.guestGoToLogin();
+    expect(true, guestGoToLogin != ""); 
+  }); 
+ 
+  test("All methods for $locale guestLogAsGuest", () async {
+    String guestLogAsGuest = localization.guestLogAsGuest();
+    expect(true, guestLogAsGuest != ""); 
   }); 
  
 }

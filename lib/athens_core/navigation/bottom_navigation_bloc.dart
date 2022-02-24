@@ -1,12 +1,14 @@
+import 'dart:core';
+
 import 'package:project_athens/athens_core/navigation/navigation_event.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_change_notifier.dart';
 import 'package:project_athens/dashboard_flow/navigation/dashboard_destinations.dart';
 import 'package:project_athens/deputies_flow/navigation/deputies_destinations.dart';
+import 'package:project_athens/guest_flow/navigation/guest_destinations.dart';
 import 'package:project_athens/speeches_flow/navigation/speeches_destinations.dart';
 import 'package:project_athens/timeline_flow/navigation/timeline_destinations.dart';
 import 'package:project_athens/voting_flow/navigation/voting_destinations.dart';
 import 'package:rxdart/rxdart.dart';
-import 'dart:core';
 
 import 'destination_manager.dart';
 
@@ -61,10 +63,10 @@ class BottomNavigationBloc extends BaseChangeNotifier {
 
 extension BottomNavItemExtension on BottomNavItem {
 
-  Destination getInitialDestination() {
+  Destination getInitialDestination(bool isLogged) {
     switch(this) {
       case BottomNavItem.TIMELINE:
-        return TimelineScreenDestination();
+        return getBlockadeIfNotLogged(TimelineScreenDestination(), BottomNavItem.TIMELINE, isLogged);
       case BottomNavItem.DEPUTIES:
         return DeputiesListDestination();
       case BottomNavItem.SPEECHES:
@@ -72,10 +74,13 @@ extension BottomNavItemExtension on BottomNavItem {
       case BottomNavItem.VOTING:
         return VotesListDestination();
       case BottomNavItem.DASHBOARD:
-        return DashboardScreenDestination();
+        return getBlockadeIfNotLogged(DashboardScreenDestination(), BottomNavItem.DASHBOARD, isLogged);
       default:
         throw new ArgumentError("There is no more BottomNavItems");
     }
   }
+
+  Destination getBlockadeIfNotLogged(Destination correctDestination,
+      BottomNavItem navItem, bool isLogged) => (isLogged) ? correctDestination : GuestBlockadeDestination(navItem);
 
 }

@@ -9,14 +9,17 @@ import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dar
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_bloc.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
 import 'package:project_athens/athens_core/presentation/widget_state.dart';
+import 'package:project_athens/authorization_flow/domain/login/login_as_guest_use_case.dart';
 import 'package:project_athens/authorization_flow/domain/login/login_params.dart';
 import 'package:project_athens/authorization_flow/domain/login/login_use_case.dart';
 import 'package:project_athens/authorization_flow/screens/login/auth_failed_notifier.dart';
 import 'package:project_athens/deputies_utils/domain/firebase_deputies/firebase_deputies_use_case.dart';
+import 'package:project_athens/guest_flow/domain/logged_state.dart';
 
 class LoginBloc extends BaseBloc with ConfigurationDelegate<String?, String> {
 
   final LoginUseCase _loginUseCase;
+  final LoginAsGuestUseCase _loginAsGuestUseCase;
 
   final FirebaseDeputiesUseCase _firebaseDeputiesUseCase;
 
@@ -24,8 +27,10 @@ class LoginBloc extends BaseBloc with ConfigurationDelegate<String?, String> {
 
   final AuthFailedNotifier authFailedNotifier = AuthFailedNotifier();
   final DataLoadingBloc loginButtonLoadingBloc = DataLoadingBloc();
+  final DataLoadingBloc loginGuestLoadingBloc = DataLoadingBloc();
 
-  LoginBloc(this._loginUseCase, this._firebaseDeputiesUseCase, this._remoteConfiguration) {
+  LoginBloc(this._loginUseCase, this._loginAsGuestUseCase, this._firebaseDeputiesUseCase,
+      this._remoteConfiguration) {
     _initSavedLoginOrEmail();
   }
 
@@ -48,6 +53,9 @@ class LoginBloc extends BaseBloc with ConfigurationDelegate<String?, String> {
 
   @override
   String get preferenceName => ConfigurationStorageNames.LOGIN_OR_EMAIL;
+
+  late LoggedState _loggedState;
+  LoggedState get loggedState => _loggedState;
 
   void _initSavedLoginOrEmail() async {
     final String? loginOrEmail = await fetchPreference(null);
@@ -83,6 +91,7 @@ class LoginBloc extends BaseBloc with ConfigurationDelegate<String?, String> {
       final subscribeResult = await _firebaseDeputiesUseCase();
       loginButtonLoadingBloc.setDataLoadingState(DataLoadingState.contentLoaded());
       await updatePreference(_login);
+      _loggedState = LoggedState.userLogged();
       return manageState(subscribeResult);
     } else {
       if (loginResult is Failure) {
@@ -95,6 +104,18 @@ class LoginBloc extends BaseBloc with ConfigurationDelegate<String?, String> {
     manageState(loginResult);
   }
 
+  Future<void> loginAsGuest() async {
+    if (!(loginGuestLoadingBloc.loadingState is InitialLoading)) return;
+    loginGuestLoadingBloc.setDataLoadingState(DataLoadingState.loading());
+    final loginResult = await _loginAsGuestUseCase();
 
-
+    if (loginResult is Success) {
+      loginGuestLoadingBloc.setDataLoadingState(DataLoadingState.contentLoaded());
+      await updatePreference(_login);
+      _loggedState = LoggedState.guestLogged();
+    } else {
+      loginGuestLoadingBloc.setDataLoadingState(DataLoadingState.initialLoading());
+    }
+    return manageState(loginResult);
+  }
 }

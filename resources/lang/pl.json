@@ -68,7 +68,8 @@
       "register": "Zarejestruj się!",
       "signUp": "Stwórz konto",
       "forgot": "Zapomniałeś hasła?",
-      "resetPassword": "Resetuj"
+      "resetPassword": "Resetuj",
+      "continueWithoutSignIn": "Przejdź do aplikacji bez logowania"
     },
     "hints": {
       "email": "Email",
@@ -293,5 +294,10 @@
     "title": "Sortuj według:",
     "ascending": "Rosnąco",
     "descending": "Malejąco"
+  },
+  "guest": {
+    "explanation": "Dostępne po zalogowaniu.\nBędąc niezalogowanym masz dostęp jedynie do listy posłów, przemów i głosowań, bez możliwości obserwowania wybranych posłów.",
+    "goToLogin": "Powróć do logowania",
+    "logAsGuest": "Wejdź bez logowania"
   }
 }
