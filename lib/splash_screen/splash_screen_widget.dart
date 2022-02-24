@@ -44,6 +44,9 @@ class SplashScreenWidget extends StatelessWidget {
         case SplashDirection.MAIN:
           navigation.goToMainWidget(context);
           break;
+        case SplashDirection.MAIN_GUEST:
+          navigation.goToMainWidget(context, isLogged: false);
+          break;
         case SplashDirection.LOGIN:
           navigation.goToLoginWidget(context);
           break;
