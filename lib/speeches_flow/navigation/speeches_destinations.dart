@@ -16,6 +16,12 @@ class SpeechesListDestination extends Destination<SpeechesListScreen> {
   @override
   List<Module> getScreenModules(BuildContext context) =>
       [SpeechesListModule(context)];
+
+  @override
+  bool operator ==(Object other) => other is SpeechesListDestination;
+
+  @override
+  int get hashCode => super.hashCode;
 }
 
 class SpeechDetailsDestination extends Destination<SpeechDetailsScreen> {
@@ -34,4 +40,13 @@ class SpeechDetailsDestination extends Destination<SpeechDetailsScreen> {
   @override
   List<Module> getScreenModules(BuildContext context) =>
       [SpeechModule(context, _speechId, _isNormalSpeech)];
+
+  @override
+  bool operator ==(Object other) =>
+      other is SpeechDetailsDestination &&
+      other._speechId == _speechId &&
+      other._isNormalSpeech == _isNormalSpeech;
+
+  @override
+  int get hashCode => Object.hashAll([_speechId, _isNormalSpeech]);
 }

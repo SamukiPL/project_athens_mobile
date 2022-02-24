@@ -34,7 +34,7 @@ class DestinationManager {
   }
 
   void goToDestination(BuildContext context, Destination destination) {
-    popStack.add(destination);
+    if (popStack.last == destination) return;
 
     push(
         context,
@@ -42,17 +42,18 @@ class DestinationManager {
           builder: (context) => ModuleWidget(
               providers: getScreenModules(context), child: currentScreen()),
         ),
-        destination.replace);
+        destination);
   }
 
   void push<T>(
-      BuildContext context, Route<T> route, bool replace) {
-    if (replace) {
+      BuildContext context, Route<T> route, Destination destination) {
+    if (destination.replace) {
       popStack.removeLast();
       Navigator.pushReplacement(context, route);
     } else {
       Navigator.push(context, route);
     }
+    popStack.add(destination);
   }
 }
 

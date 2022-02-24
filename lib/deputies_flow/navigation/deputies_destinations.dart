@@ -27,6 +27,12 @@ class DeputiesListDestination extends Destination<DeputiesListScreen> {
   @override
   List<Module> getScreenModules(BuildContext context) =>
       [DeputiesListModule(context)];
+
+  @override
+  bool operator ==(Object other) => other is DeputiesListDestination;
+
+  @override
+  int get hashCode => super.hashCode;
 }
 
 class DeputyDetailsDestination extends Destination<DeputyDetailsScreen> {
@@ -45,6 +51,13 @@ class DeputyDetailsDestination extends Destination<DeputyDetailsScreen> {
     DeputySpeechesModule(context, _deputyModel.id),
     DeputyVotingsModule(context, _deputyModel.id),
       ];
+
+  @override
+  bool operator ==(Object other) =>
+      other is DeputyDetailsDestination && other._deputyModel == _deputyModel;
+
+  @override
+  int get hashCode => Object.hashAll([_deputyModel]);
 }
 
 class DeputyDetailsVoteAccuracyDestination extends Destination<DeputyVoteAccuracyScreen> {
@@ -62,4 +75,14 @@ class DeputyDetailsVoteAccuracyDestination extends Destination<DeputyVoteAccurac
     DeputyDetailsModule(context, _deputy as SubscribedDeputyModel),
     DeputyVoteAccuracyModule(context, _deputy as SubscribedDeputyModel, this._alignment, this._clubVoteAccuracy)
   ];
+
+  @override
+  bool operator ==(Object other) =>
+      other is DeputyDetailsVoteAccuracyDestination &&
+      other._clubVoteAccuracy == _clubVoteAccuracy &&
+      other._deputy == _deputy &&
+      _alignment == _alignment;
+
+  @override
+  int get hashCode => Object.hashAll([_clubVoteAccuracy, _deputy, _alignment]);
 }

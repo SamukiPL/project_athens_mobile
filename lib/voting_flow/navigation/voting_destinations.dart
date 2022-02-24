@@ -17,7 +17,12 @@ class VotesListDestination extends Destination<VotesListScreen> {
 
   @override
   List<Module> getScreenModules(BuildContext context) => [VotesListModule(context)];
-  
+
+  @override
+  bool operator ==(Object other) => other is VotesListDestination;
+
+  @override
+  int get hashCode => super.hashCode;
 }
 
 class VoteDetailsDestination extends Destination<VoteDetailsScreen> {
@@ -32,4 +37,9 @@ class VoteDetailsDestination extends Destination<VoteDetailsScreen> {
   @override
   List<Module> getScreenModules(BuildContext context) => [VoteDetailsModule(context, _voteModel)];
 
+  @override
+  bool operator ==(Object other) => other is VoteDetailsDestination && other._voteModel == _voteModel;
+
+  @override
+  int get hashCode => Object.hashAll([_voteModel]);
 }
