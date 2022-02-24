@@ -23,4 +23,16 @@ class LoginRepositoryImpl implements LoginRepository {
     return Success<bool>(true);
   }
 
+  @override
+  Future<Result> loginAsGuest() async {
+    try {
+      var response = await api.guestLogin(9);
+
+      await storage.saveTokens(response.accessToken, response.refreshToken);
+
+      return Success<bool>(true);
+    } catch (e) {
+      return Failure(e);
+    }
+  }
 }

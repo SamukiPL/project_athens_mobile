@@ -131,6 +131,28 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
               ],
             ),
           ),
+          Container(
+            margin: EdgeInsets.only(top: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(left: 16, right: 16),
+                  child: MaterialButton(
+                    onPressed: () => bloc.loginAsGuest(),
+                    child: Text(
+                      "Wejdź jako gość",
+                      style: TextStyle(color: theme.primaryColor),
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32),
+                        side: BorderSide(color: theme.primaryColor)),
+                  ),
+                )
+              ],
+            ),
+          ),
         ],
       )
     );
@@ -186,7 +208,8 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
 
   @override
   void onSuccess(BuildContext context) {
+    final bloc = Provider.of<LoginBloc>(context, listen: false);
     var appNavigation = Provider.of<AppNavigation>(context, listen: false);
-    appNavigation.goToMainWidget(context);
+    appNavigation.goToMainWidget(context, isLogged: bloc.wasLoggedNormally);
   }
 }
