@@ -91,7 +91,7 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
                       ),
                     ),
                   ),
-                  null,
+                  buildObserverDeputyView(bloc, context),
                   SliverPersistentHeader(
                     delegate: _SliverAppBarDelegate(TabBar(
                       tabs: [

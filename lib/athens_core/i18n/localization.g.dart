@@ -865,4 +865,16 @@ class AppLocalizationsGenerated {
   String sortDescending() {
     return words['sort']['descending'];
   }
+
+  String guestExplanation() {
+    return words['guest']['explanation'];
+  }
+
+  String guestGoToLogin() {
+    return words['guest']['goToLogin'];
+  }
+
+  String guestLogAsGuest() {
+    return words['guest']['logAsGuest'];
+  }
 }

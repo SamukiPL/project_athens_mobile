@@ -25,9 +25,9 @@ class GuestBlockadeScreen extends BaseScreen<GuestBlockadeBloc> {
               child: Icon(Icons.sentiment_dissatisfied, size: 100, color: theme.primaryColor,),
             ),
             Container(
-              padding: EdgeInsets.only(bottom: 8, top: 8),
+              padding: EdgeInsets.only(bottom: 32, top: 8),
               child: Text(
-                "Treść dostępna po zalogowaniu",
+                localization().guestExplanation(),
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20),
               ),
@@ -36,7 +36,7 @@ class GuestBlockadeScreen extends BaseScreen<GuestBlockadeBloc> {
               child: Container(
                 padding: EdgeInsets.all(16),
                 child: Text(
-                  "Przejdź do logowania",
+                  localization().guestGoToLogin(),
                   style: TextStyle(color: Colors.white),
                   textScaleFactor: 1.5,
                 ),

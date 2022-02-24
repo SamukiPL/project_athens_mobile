@@ -13,8 +13,8 @@ import 'package:project_athens/authorization_flow/domain/login/login_as_guest_us
 import 'package:project_athens/authorization_flow/domain/login/login_params.dart';
 import 'package:project_athens/authorization_flow/domain/login/login_use_case.dart';
 import 'package:project_athens/authorization_flow/screens/login/auth_failed_notifier.dart';
-import 'package:project_athens/authorization_flow/screens/login/login_type.dart';
 import 'package:project_athens/deputies_utils/domain/firebase_deputies/firebase_deputies_use_case.dart';
+import 'package:project_athens/guest_flow/domain/logged_state.dart';
 
 class LoginBloc extends BaseBloc with ConfigurationDelegate<String?, String> {
 
@@ -53,8 +53,8 @@ class LoginBloc extends BaseBloc with ConfigurationDelegate<String?, String> {
   @override
   String get preferenceName => ConfigurationStorageNames.LOGIN_OR_EMAIL;
 
-  late LoginType _loginType;
-  bool get wasLoggedNormally => _loginType is NormalLogin;
+  late LoggedState _loggedState;
+  LoggedState get loggedState => _loggedState;
 
   void _initSavedLoginOrEmail() async {
     final String? loginOrEmail = await fetchPreference(null);
@@ -90,7 +90,7 @@ class LoginBloc extends BaseBloc with ConfigurationDelegate<String?, String> {
       final subscribeResult = await _firebaseDeputiesUseCase();
       loginButtonLoadingBloc.setDataLoadingState(DataLoadingState.contentLoaded());
       await updatePreference(_login);
-      _loginType = LoginType.normal();
+      _loggedState = LoggedState.userLogged();
       return manageState(subscribeResult);
     } else {
       if (loginResult is Failure) {
@@ -111,7 +111,7 @@ class LoginBloc extends BaseBloc with ConfigurationDelegate<String?, String> {
     if (loginResult is Success) {
       loginButtonLoadingBloc.setDataLoadingState(DataLoadingState.contentLoaded());
       await updatePreference(_login);
-      _loginType = LoginType.guest();
+      _loggedState = LoggedState.guestLogged();
     } else {
       loginButtonLoadingBloc.setDataLoadingState(DataLoadingState.initialLoading());
     }

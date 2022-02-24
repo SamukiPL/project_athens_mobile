@@ -293,5 +293,10 @@
     "title": "Sortuj według:",
     "ascending": "Rosnąco",
     "descending": "Malejąco"
+  },
+  "guest": {
+    "explanation": "Dostępne po zalogowaniu.\nBędąc niezalogowanym masz dostęp jedynie do listy posłów, przemów i głosowań, bez możliwości obserwowania wybranych posłów.",
+    "goToLogin": "Powróć do logowania",
+    "logAsGuest": "Wejdź bez logowania"
   }
 }

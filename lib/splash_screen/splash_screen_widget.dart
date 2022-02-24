@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:project_athens/guest_flow/domain/logged_state.dart';
 import 'package:provider/provider.dart';
 import 'splash_screen_bloc.dart';
 import 'splash_screen_module.dart';
@@ -45,7 +46,7 @@ class SplashScreenWidget extends StatelessWidget {
           navigation.goToMainWidget(context);
           break;
         case SplashDirection.MAIN_GUEST:
-          navigation.goToMainWidget(context, isLogged: false);
+          navigation.goToMainWidget(context, loggedState: LoggedState.guestLogged());
           break;
         case SplashDirection.LOGIN:
           navigation.goToLoginWidget(context);

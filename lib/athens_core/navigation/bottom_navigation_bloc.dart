@@ -66,7 +66,7 @@ extension BottomNavItemExtension on BottomNavItem {
   Destination getInitialDestination(bool isLogged) {
     switch(this) {
       case BottomNavItem.TIMELINE:
-        return getBlockadeIfNotLogged(TimelineScreenDestination(), isLogged);
+        return getBlockadeIfNotLogged(TimelineScreenDestination(), BottomNavItem.TIMELINE, isLogged);
       case BottomNavItem.DEPUTIES:
         return DeputiesListDestination();
       case BottomNavItem.SPEECHES:
@@ -74,13 +74,13 @@ extension BottomNavItemExtension on BottomNavItem {
       case BottomNavItem.VOTING:
         return VotesListDestination();
       case BottomNavItem.DASHBOARD:
-        return getBlockadeIfNotLogged(DashboardScreenDestination(), isLogged);
+        return getBlockadeIfNotLogged(DashboardScreenDestination(), BottomNavItem.DASHBOARD, isLogged);
       default:
         throw new ArgumentError("There is no more BottomNavItems");
     }
   }
 
-  Destination getBlockadeIfNotLogged(
-          Destination correctDestination, bool isLogged) => (isLogged) ? correctDestination : GuestBlockadeDestination(BottomNavItem.TIMELINE);
+  Destination getBlockadeIfNotLogged(Destination correctDestination,
+      BottomNavItem navItem, bool isLogged) => (isLogged) ? correctDestination : GuestBlockadeDestination(navItem);
 
 }

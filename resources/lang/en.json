@@ -294,5 +294,10 @@
     "title": "Sort by:",
     "ascending": "Ascending",
     "descending": "Descending"
+  },
+  "guest": {
+    "explanation": "Available after logging in.\nIf you are not logged in you only have access to the list of deputies, speeches and votes, without subscribing to deputies",
+    "goToLogin": "Return to login",
+    "logAsGuest": "Enter without logging in"
   }
 }

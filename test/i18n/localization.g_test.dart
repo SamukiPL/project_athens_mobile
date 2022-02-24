@@ -1076,4 +1076,19 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, sortDescending != ""); 
   }); 
  
+  test("All methods for $locale guestExplanation", () async {
+    String guestExplanation = localization.guestExplanation();
+    expect(true, guestExplanation != ""); 
+  }); 
+ 
+  test("All methods for $locale guestGoToLogin", () async {
+    String guestGoToLogin = localization.guestGoToLogin();
+    expect(true, guestGoToLogin != ""); 
+  }); 
+ 
+  test("All methods for $locale guestLogAsGuest", () async {
+    String guestLogAsGuest = localization.guestLogAsGuest();
+    expect(true, guestLogAsGuest != ""); 
+  }); 
+ 
 }
