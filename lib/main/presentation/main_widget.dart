@@ -14,6 +14,10 @@ import 'package:project_athens/main/presentation/notifications_manager.dart';
 import 'package:provider/provider.dart';
 
 class MainWidget extends StatelessWidget with RedirectionDelegate {
+  final bool isLogged;
+
+  const MainWidget({Key? key, this.isLogged = true}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final firebaseMessages = Provider.of<FirebaseMessages>(context);
@@ -39,7 +43,7 @@ class MainWidget extends StatelessWidget with RedirectionDelegate {
               child: Stack(
                 children: BottomNavItem.values
                     .map((item) =>
-                    DestinationNavigator(item, item.getInitialDestination()))
+                    DestinationNavigator(item, item.getInitialDestination(isLogged)))
                     .toList(),
               ),
             ),

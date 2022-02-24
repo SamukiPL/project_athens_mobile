@@ -28,7 +28,7 @@ class AppNavigationImpl implements AppNavigation {
   }
 
   @override
-  void goToMainWidget(BuildContext context) {
+  void goToMainWidget(BuildContext context, {bool isLogged = true}) {
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -39,7 +39,7 @@ class AppNavigationImpl implements AppNavigation {
                   AgreementModule(context),
                   DatabaseModule(context)
                 ],
-                child: MainWidget(),
+                child: MainWidget(isLogged: isLogged),
             )
         )
     );
