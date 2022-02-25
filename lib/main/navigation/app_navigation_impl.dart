@@ -8,6 +8,7 @@ import 'package:project_athens/athens_core/presentation/agreement/injections/agr
 import 'package:project_athens/authorization_flow/login_widget.dart';
 import 'package:project_athens/guest_flow/domain/logged_state.dart';
 import 'package:project_athens/guest_flow/injections/logged_state_module.dart';
+import 'package:project_athens/main/injections/main_widget_module.dart';
 import 'package:project_athens/main/presentation/main_widget.dart';
 
 
@@ -31,6 +32,7 @@ class AppNavigationImpl implements AppNavigation {
 
   @override
   void goToMainWidget(BuildContext context, {LoggedState loggedState = const LoggedState.userLogged()}) {
+    Navigator.of(context).popUntil((route) => route.isFirst);
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -39,7 +41,7 @@ class AppNavigationImpl implements AppNavigation {
                   NetworkModule(context),
                   LocalizationModule(context),
                   AgreementModule(context),
-                  DatabaseModule(context),
+                  MainWidgetModule(context),
                   LoggedStateModule(context, loggedState)
                 ],
                 child: MainWidget(),

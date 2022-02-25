@@ -1,12 +1,12 @@
-import 'package:project_athens/athens_core/chopper/auth_facade.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
+import 'package:project_athens/guest_flow/domain/logout_guest_use_case.dart';
 
 class GuestBlockadeBloc extends BaseBloc {
-  final AuthFacade _authFacade;
+  final LogoutGuestUseCase _logoutGuestUseCase;
 
-  GuestBlockadeBloc(this._authFacade);
+  GuestBlockadeBloc(this._logoutGuestUseCase);
 
   Future<void> clearTokens() async {
-    _authFacade.clearTokens();
+    _logoutGuestUseCase();
   }
 }
