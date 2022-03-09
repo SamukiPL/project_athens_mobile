@@ -15,7 +15,8 @@ class NotificationManager extends StatefulWidget {
   _NotificationManagerState createState() => _NotificationManagerState();
 }
 
-class _NotificationManagerState extends State<NotificationManager> with WidgetsBindingObserver, RedirectionDelegate {
+class _NotificationManagerState extends State<NotificationManager>
+    with WidgetsBindingObserver, RedirectionDelegate {
   late StreamSubscription<void> _suspendedNavigationSub;
 
   SavedNotification? _suspendedNavigation;
@@ -25,8 +26,7 @@ class _NotificationManagerState extends State<NotificationManager> with WidgetsB
     super.initState();
 
     _suspendedNavigationSub = NotificationsService
-        .instance!
-        .suspendedNavigationStream
+        .instance!.suspendedNavigationStream
         .listen((event) => _updateSuspendedNavigation());
 
     WidgetsBinding.instance?.addObserver(this);
@@ -46,15 +46,19 @@ class _NotificationManagerState extends State<NotificationManager> with WidgetsB
     if (_suspendedNavigation != null) {
       switch (_suspendedNavigation!.type) {
         case "SPEECH":
-          goToDestination(context, SpeechDetailsDestination(_suspendedNavigation!.refId!, false));
+          final SavedNotification? targetNavigation = _suspendedNavigation;
+          _suspendedNavigation = null;
+
+          goToDestination(context,
+              SpeechDetailsDestination(targetNavigation!.refId!, false));
           break;
-          // TODO: rewrite views to handle open destination just by id of requested element
-          // case NotificationType.VOTE:
-          // final partialVoteModel = VoteSlimModel(id: notification.refId, title: title, type: type, voteAt: voteAt, voteNumbers: voteNumbers, votingDesc: votingDesc)
-          // goToDestination(_buildContext!, VoteDetailsDestination(_voteModel));
-          // break;
-          // case NotificationType.DEPUTY:
-          // goToDestination(_buildContext!, DeputyDetailsDestination(_deputyModel))
+        // TODO: rewrite views to handle open destination just by id of requested element
+        // case NotificationType.VOTE:
+        // final partialVoteModel = VoteSlimModel(id: notification.refId, title: title, type: type, voteAt: voteAt, voteNumbers: voteNumbers, votingDesc: votingDesc)
+        // goToDestination(_buildContext!, VoteDetailsDestination(_voteModel));
+        // break;
+        // case NotificationType.DEPUTY:
+        // goToDestination(_buildContext!, DeputyDetailsDestination(_deputyModel))
       }
     }
 
@@ -64,7 +68,8 @@ class _NotificationManagerState extends State<NotificationManager> with WidgetsB
   void _updateSuspendedNavigation() {
     if (NotificationsService.instance!.hasSuspendedNavigation) {
       setState(() {
-        _suspendedNavigation = NotificationsService.instance!.getSuspendedNavigation();
+        _suspendedNavigation =
+            NotificationsService.instance!.getSuspendedNavigation();
       });
     }
   }
