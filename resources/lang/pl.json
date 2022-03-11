@@ -11,6 +11,7 @@
     "retry": "Spróbuj ponownie",
     "downloadingData": "Pobieranie...",
     "goToLogin": "Przejdź do logowania",
+    "success": "Sukces",
     "noData": {
       "defaultText": "Brak danych",
       "noInformation": "Brak informacji"
@@ -20,7 +21,7 @@
       "content": "Dokładamy wszelkich starań, żeby nasze funkcjonalności działały jak najbardziej dokładnie, aczkolwiek mogą odbiegać od rzeczywistości, w razie znalazienia błędu prosimy o kontakt. Statystyki tworzy nasz automat, który dokonuje aktualizacje w określonym odstępie czasowym, z tego względu mogą występować niedokładności.",
       "title": "Eksperymentalna funkcjonalność"
     },
-    "error":{
+    "error": {
       "justError": "Błąd",
       "network": "Coś poszło nie tak. Proszę sprawdzić swoje połączenie z internetem.",
       "server": "Serwer nie odpowiada. Prosimy spróbować później.",
@@ -40,7 +41,7 @@
     "update": {
       "cupertinoDialog": {
         "title": "Zaktualizować aplikacje?",
-        "immediateUpdateTitle":  "Wymagana aktualizacja aplikacji",
+        "immediateUpdateTitle": "Wymagana aktualizacja aplikacji",
         "buttonIgnore": "Zignoruj",
         "buttonLater": "Później",
         "buttonUpdateNow": "Aktualuzuj",
@@ -88,7 +89,8 @@
       "twitter": "Twitter",
       "google": "Google",
       "notAMember": "Nie masz jeszcze konta?",
-      "connectWith": "Zaloguj się z"
+      "connectWith": "Zaloguj się z",
+      "ifAccountExistEmailIsSent": "Jeśli istnieje u nas konto powiązane z podanym adresem e-mail, wyślemy Ci dalsze instrukcje resetowania hasła na podany adres e-mail. Prosimy również o sprawdzenie skrzynki spam'u"
     },
     "validate": {
       "fieldCannotBeEmpty": "Pole nie może być puste",
@@ -211,13 +213,13 @@
     "credits": "Credits",
     "termsAndAgreement": "Regulamin i polityka prywatności",
     "deleteAccount": {
-      "title" : "Usuń konto",
+      "title": "Usuń konto",
       "content": "Jest nam bardzo przykro z powodu że chcesz usunąć konto, proszę wskaż nam powód dla którego chcesz usunąć konto, pomoże nam to udoskonalać aplikację.",
       "reasons": {
         "doNotLikeApp": "Nie podoba mi się aplikacja",
         "slowApp": "Aplikacja jest za mało wydajna",
         "notInterested": "Nie interesują mnie takie informacje",
-        "appHasErrors" :"Aplikacja posiada dużo błędów",
+        "appHasErrors": "Aplikacja posiada dużo błędów",
         "otherReason": "Inny powód",
         "declinePointReason": "Nie chcę podawać powodu"
       },
