@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/alert_bottom_sheet/alert_bottom_sheet_mode.dart';
-import 'package:provider/provider.dart';
 
 void showAlertBottomSheet(BuildContext parentContext,
     {required AlertBottomSheetMode mode,
@@ -123,8 +121,6 @@ class _AlertBottomSheet extends StatelessWidget {
   }
 
   Widget _buildCloseButton(BuildContext context) {
-    // final AppLocalizations l10n =
-    //     Provider.of<AppLocalizations>(context, listen: false);
     return Container(
       padding: EdgeInsets.only(top: 8, bottom: 8),
       child: TextButton(
