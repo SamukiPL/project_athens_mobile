@@ -101,6 +101,8 @@ class ChartTile<SERIES_DATA, FROM_DATA_STREAM> extends SimpleTile {
 
   List<Widget> _getLegend(DeputyChartTileBloc config) {
     return config.legendImageToColorMap.keys
+        .where((key) =>
+            config.legendImageToColorMap[key]!.notifications.isSubscribed)
         .map((key) => _buildAvatar(key, config.legendImageToColorMap[key]!))
         .toList();
   }
