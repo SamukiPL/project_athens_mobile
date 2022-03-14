@@ -12,12 +12,12 @@ class ChartTombstone extends StatefulWidget {
 
 class ChartTombstoneState extends State<ChartTombstone> {
   final random = Random();
-  List<charts.Series<ChartSeriesTombstoneModel, String>> tombstoneSeries = List.empty();
+  List<charts.Series<ChartSeriesTombstoneModel, String>> tombstoneSeries =
+      List.empty();
   Timer? timer;
 
   void changeData() {
-    setState(() {
-    });
+    setState(() {});
   }
 
   @override
@@ -36,10 +36,12 @@ class ChartTombstoneState extends State<ChartTombstone> {
       animationDuration: new Duration(milliseconds: 500),
       primaryMeasureAxis: charts.NumericAxisSpec(
           showAxisLine: false,
-          tickProviderSpec: charts.BasicNumericTickProviderSpec(desiredTickCount: 2)),
+          tickProviderSpec:
+              charts.BasicNumericTickProviderSpec(desiredTickCount: 2)),
       secondaryMeasureAxis: charts.NumericAxisSpec(
           showAxisLine: false,
-          tickProviderSpec: charts.BasicNumericTickProviderSpec(desiredTickCount: 2)),
+          tickProviderSpec:
+              charts.BasicNumericTickProviderSpec(desiredTickCount: 2)),
       barGroupingType: charts.BarGroupingType.stacked,
     );
   }
@@ -47,15 +49,18 @@ class ChartTombstoneState extends State<ChartTombstone> {
   List<charts.Series<ChartSeriesTombstoneModel, String>> _generateRandomData() {
     final random = new Random();
 
-    final models = List.generate(5, (int index) => ChartSeriesTombstoneModel('', 5 + random.nextInt(15 - 5)));
+    final models = List.generate(5,
+        (int index) => ChartSeriesTombstoneModel('', 10 + random.nextInt(5)));
 
-    final List<charts.Series<ChartSeriesTombstoneModel, String>> randomTombstoneSeries = [
+    final List<charts.Series<ChartSeriesTombstoneModel, String>>
+        randomTombstoneSeries = [
       charts.Series<ChartSeriesTombstoneModel, String>(
-          data: models,
-          measureFn: (model, _) => model.measure,
-          domainFn: (model, _) => ((_!) + 1).toString(),
-          id: 'tombstone',
-          colorFn: (model, int? index) => charts.ColorUtil.fromDartColor(Colors.black.withOpacity(0.05)),
+        data: models,
+        measureFn: (model, _) => model.measure,
+        domainFn: (model, _) => ((_!) + 1).toString(),
+        id: 'tombstone',
+        colorFn: (model, int? index) =>
+            charts.ColorUtil.fromDartColor(Colors.black.withOpacity(0.05)),
       )
     ];
 
