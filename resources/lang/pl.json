@@ -13,6 +13,7 @@
     "retry": "Spróbuj ponownie",
     "downloadingData": "Pobieranie...",
     "goToLogin": "Przejdź do logowania",
+    "success": "Sukces",
     "noData": {
       "defaultText": "Brak danych",
       "noInformation": "Brak informacji"
@@ -90,7 +91,8 @@
       "twitter": "Twitter",
       "google": "Google",
       "notAMember": "Nie masz jeszcze konta?",
-      "connectWith": "Zaloguj się z"
+      "connectWith": "Zaloguj się z",
+      "ifAccountExistEmailIsSent": "Jeśli istnieje u nas konto powiązane z podanym adresem e-mail, wyślemy Ci dalsze instrukcje resetowania hasła na podany adres e-mail. Prosimy również o sprawdzenie skrzynki spam'u"
     },
     "validate": {
       "fieldCannotBeEmpty": "Pole nie może być puste",

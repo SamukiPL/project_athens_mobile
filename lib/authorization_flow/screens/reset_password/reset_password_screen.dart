@@ -1,6 +1,8 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
+import 'package:project_athens/athens_core/presentation/alert_bottom_sheet/alert_bottom_sheet.dart';
+import 'package:project_athens/athens_core/presentation/alert_bottom_sheet/alert_bottom_sheet_mode.dart';
 import 'package:project_athens/athens_core/presentation/button_loader/button_loader.dart';
 import 'package:project_athens/authorization_flow/injections/reset_password_module.dart';
 import 'package:project_athens/authorization_flow/navigation/login_navigation_bloc.dart';
@@ -68,7 +70,8 @@ class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 8),
+                  margin:
+                      EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 8),
                   child: Text(
                     localization.getText().loginOtherForgotRationale(),
                     style: TextStyle(
@@ -93,7 +96,10 @@ class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
                       maxLines: 1,
                       keyboardType: TextInputType.emailAddress,
                       validator: (email) {
-                        if (email == null || !EmailValidator.validate(email)) return localization.getText().loginValidateIncorrectEmail();
+                        if (email == null || !EmailValidator.validate(email))
+                          return localization
+                              .getText()
+                              .loginValidateIncorrectEmail();
 
                         return null;
                       },
@@ -142,8 +148,17 @@ class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
 
   @override
   void onSuccess(BuildContext context) {
-    var loginNavigation =
-        Provider.of<LoginNavigationBloc>(context, listen: false);
-    loginNavigation.setItem(LoginDestination.LOGIN);
+    final AppLocalizations l10n =
+        Provider.of<AppLocalizations>(context, listen: false);
+
+    showAlertBottomSheet(context,
+        mode: AlertBottomSheetMode.SUCCESS,
+        title: l10n.getText().universalSuccess(),
+        description: l10n.getText().loginOtherIfAccountExistEmailIsSent(),
+        closeButtonTitle: l10n.getText().universalClose(), onClose: () {
+      final loginNavigation =
+          Provider.of<LoginNavigationBloc>(context, listen: false);
+      loginNavigation.setItem(LoginDestination.LOGIN);
+    });
   }
 }

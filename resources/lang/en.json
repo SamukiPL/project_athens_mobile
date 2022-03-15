@@ -13,6 +13,7 @@
     "close": "Close",
     "downloadingData": "Downloading data...",
     "goToLogin": "Go to login",
+    "success": "Success",
     "noData": {
       "defaultText": "No data",
       "noInformation": "No info"
@@ -90,7 +91,8 @@
       "twitter": "Twitter",
       "google": "Google",
       "notAMember": "Not a member yet?",
-      "connectWith": "Connect with"
+      "connectWith": "Connect with",
+      "ifAccountExistEmailIsSent": "If we have account with given e-mail account, then we will send you e-mail with furhter instructions how to reset your password. Please check also in spam folder."
     },
     "validate": {
       "fieldCannotBeEmpty": "Field cannot be empty",

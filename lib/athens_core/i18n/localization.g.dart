@@ -63,6 +63,10 @@ class AppLocalizationsGenerated {
     return words['universal']['goToLogin'];
   }
 
+  String universalSuccess() {
+    return words['universal']['success'];
+  }
+
   String universalNoDataDefaultText() {
     return words['universal']['noData']['defaultText'];
   }
@@ -284,6 +288,10 @@ class AppLocalizationsGenerated {
 
   String loginOtherConnectWith() {
     return words['login']['other']['connectWith'];
+  }
+
+  String loginOtherIfAccountExistEmailIsSent() {
+    return words['login']['other']['ifAccountExistEmailIsSent'];
   }
 
   String loginValidateFieldCannotBeEmpty() {

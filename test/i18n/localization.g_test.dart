@@ -86,6 +86,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalGoToLogin != ""); 
   }); 
  
+  test("All methods for $locale universalSuccess", () async {
+    String universalSuccess = localization.universalSuccess();
+    expect(true, universalSuccess != ""); 
+  }); 
+ 
   test("All methods for $locale universalNoDataDefaultText", () async {
     String universalNoDataDefaultText = localization.universalNoDataDefaultText();
     expect(true, universalNoDataDefaultText != ""); 
@@ -359,6 +364,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale loginOtherConnectWith", () async {
     String loginOtherConnectWith = localization.loginOtherConnectWith();
     expect(true, loginOtherConnectWith != ""); 
+  }); 
+ 
+  test("All methods for $locale loginOtherIfAccountExistEmailIsSent", () async {
+    String loginOtherIfAccountExistEmailIsSent = localization.loginOtherIfAccountExistEmailIsSent();
+    expect(true, loginOtherIfAccountExistEmailIsSent != ""); 
   }); 
  
   test("All methods for $locale loginValidateFieldCannotBeEmpty", () async {
