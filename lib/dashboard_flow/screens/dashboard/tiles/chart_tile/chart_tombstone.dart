@@ -16,10 +16,6 @@ class ChartTombstoneState extends State<ChartTombstone> {
       List.empty();
   Timer? timer;
 
-  void changeData() {
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     timer = Timer(new Duration(milliseconds: 700), () {

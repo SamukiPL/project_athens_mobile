@@ -7,6 +7,8 @@
     "choose": "Wybierz",
     "close": "Zamknij",
     "ok": "Ok",
+    "refresh": "Odśwież",
+    "newDataAvailable": "Dostepne są nowe dane",
     "accept": "Akceptuje",
     "retry": "Spróbuj ponownie",
     "downloadingData": "Pobieranie...",
@@ -20,7 +22,7 @@
       "content": "Dokładamy wszelkich starań, żeby nasze funkcjonalności działały jak najbardziej dokładnie, aczkolwiek mogą odbiegać od rzeczywistości, w razie znalazienia błędu prosimy o kontakt. Statystyki tworzy nasz automat, który dokonuje aktualizacje w określonym odstępie czasowym, z tego względu mogą występować niedokładności.",
       "title": "Eksperymentalna funkcjonalność"
     },
-    "error":{
+    "error": {
       "justError": "Błąd",
       "network": "Coś poszło nie tak. Proszę sprawdzić swoje połączenie z internetem.",
       "server": "Serwer nie odpowiada. Prosimy spróbować później.",
@@ -40,7 +42,7 @@
     "update": {
       "cupertinoDialog": {
         "title": "Zaktualizować aplikacje?",
-        "immediateUpdateTitle":  "Wymagana aktualizacja aplikacji",
+        "immediateUpdateTitle": "Wymagana aktualizacja aplikacji",
         "buttonIgnore": "Zignoruj",
         "buttonLater": "Później",
         "buttonUpdateNow": "Aktualuzuj",
@@ -211,13 +213,13 @@
     "credits": "Credits",
     "termsAndAgreement": "Regulamin i polityka prywatności",
     "deleteAccount": {
-      "title" : "Usuń konto",
+      "title": "Usuń konto",
       "content": "Jest nam bardzo przykro z powodu że chcesz usunąć konto, proszę wskaż nam powód dla którego chcesz usunąć konto, pomoże nam to udoskonalać aplikację.",
       "reasons": {
         "doNotLikeApp": "Nie podoba mi się aplikacja",
         "slowApp": "Aplikacja jest za mało wydajna",
         "notInterested": "Nie interesują mnie takie informacje",
-        "appHasErrors" :"Aplikacja posiada dużo błędów",
+        "appHasErrors": "Aplikacja posiada dużo błędów",
         "otherReason": "Inny powód",
         "declinePointReason": "Nie chcę podawać powodu"
       },

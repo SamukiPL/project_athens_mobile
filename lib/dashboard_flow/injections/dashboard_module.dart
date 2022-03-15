@@ -18,29 +18,35 @@ class DashboardModule extends Module {
 
   @override
   List<SingleChildWidget> getProviders() {
-    final AppLocalizations _localizations = Provider.of<AppLocalizations>(context);
+    final AppLocalizations _localizations =
+        Provider.of<AppLocalizations>(context);
     final _dio = Provider.of<Dio>(context);
 
     final DashboardApi dashboardApi = DashboardApi(_dio);
-    final DashboardRepositoryImpl dashboardRepository = DashboardRepositoryImpl(dashboardApi);
-    final GetDashboardUseCase getDashboardUseCase = GetDashboardUseCase(dashboardRepository);
-    final SubscribedDeputiesCache _subscribedDeputiesCache = Provider.of<SubscribedDeputiesCache>(context);
-    final DashboardTilesDataMapper _mapper = DashboardTilesDataMapper(_subscribedDeputiesCache);
+    final DashboardRepositoryImpl dashboardRepository =
+        DashboardRepositoryImpl(dashboardApi);
+    final GetDashboardUseCase getDashboardUseCase =
+        GetDashboardUseCase(dashboardRepository);
+    final SubscribedDeputiesCache _subscribedDeputiesCache =
+        Provider.of<SubscribedDeputiesCache>(context);
+    final DashboardTilesDataMapper _mapper =
+        DashboardTilesDataMapper(_subscribedDeputiesCache);
 
-    final DashboardTilesDataCache _dashboardCache = DashboardTilesDataCache(getDashboardUseCase, _mapper);
-    
+    final DashboardTilesDataCache _dashboardCache =
+        DashboardTilesDataCache(getDashboardUseCase, _mapper);
+
     return [
       Provider<DashboardBloc>(
-        create: (context) => DashboardBloc(),
-        dispose: (context, bloc) => bloc.dispose()
-      ),
+          create: (context) =>
+              DashboardBloc(_subscribedDeputiesCache, _dashboardCache),
+          dispose: (context, bloc) => bloc.dispose()),
       Provider<DashboardTilesDataCache>.value(
         value: _dashboardCache,
       ),
       Provider<NearestMeetingTileBloc>(
-          create: (context) => NearestMeetingTileBloc(_dashboardCache, _localizations),
-          dispose: (context, bloc) => bloc.dispose()
-      ),
+          create: (context) =>
+              NearestMeetingTileBloc(_dashboardCache, _localizations),
+          dispose: (context, bloc) => bloc.dispose()),
     ];
   }
 }

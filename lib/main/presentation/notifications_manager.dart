@@ -49,8 +49,11 @@ class _NotificationManagerState extends State<NotificationManager>
           final SavedNotification? targetNavigation = _suspendedNavigation;
           _suspendedNavigation = null;
 
-          goToDestination(context,
-              SpeechDetailsDestination(targetNavigation!.refId!, false));
+          Timer(
+              Duration(milliseconds: 10),
+              () => goToDestination(context,
+                  SpeechDetailsDestination(targetNavigation!.refId!, false)));
+
           break;
         // TODO: rewrite views to handle open destination just by id of requested element
         // case NotificationType.VOTE:

@@ -15,44 +15,40 @@ class ButtonLoader extends StatelessWidget {
   final EdgeInsetsGeometry? mainPadding;
   final bool handleError;
 
-  const ButtonLoader(this._bloc, {
-    required this.actionStateWidget,
-    required this.callback,
-    this.buttonBg,
-    this.handleError = false,
-    this.shape,
-    this.mainPadding
-  });
+  const ButtonLoader(this._bloc,
+      {required this.actionStateWidget,
+      required this.callback,
+      this.buttonBg,
+      this.handleError = false,
+      this.shape,
+      this.mainPadding});
 
-  @override build(BuildContext context) {
+  @override
+  build(BuildContext context) {
     final l10n = Provider.of<AppLocalizations>(context);
     return ElevatedButton(
-      child: ChangeNotifierProvider<DataLoadingBloc>.value(
-          value: _bloc,
-          child: Consumer<DataLoadingBloc>(
-            builder: (context, bloc, _) => AnimatedSize(
-                duration: Duration(milliseconds: 250),
-                curve: Curves.easeOut,
-                child: Container(
-                  padding: mainPadding,
-                  child: _getChild(bloc, l10n)
-                )
-            ),
-          )
-      ),
-      onPressed: callback,
-      style: ElevatedButton.styleFrom(
-        primary: buttonBg,
-        shape: shape
-      )
-    );
+        child: ChangeNotifierProvider<DataLoadingBloc>.value(
+            value: _bloc,
+            child: Consumer<DataLoadingBloc>(
+              builder: (context, bloc, _) => AnimatedSize(
+                  duration: Duration(milliseconds: 250),
+                  curve: Curves.easeOut,
+                  child: Container(
+                      padding: mainPadding, child: _getChild(bloc, l10n))),
+            )),
+        onPressed: callback,
+        style: ElevatedButton.styleFrom(
+          primary: buttonBg,
+          shape: shape,
+        ));
   }
 
   Widget _getChild(DataLoadingBloc bloc, AppLocalizations l10n) {
-    switch(bloc.loadingState.runtimeType) {
+    switch (bloc.loadingState.runtimeType) {
       case LoadingError:
         if (handleError) {
-          return _buildErrorButton((bloc.loadingState as LoadingError).errorType, l10n);
+          return _buildErrorButton(
+              (bloc.loadingState as LoadingError).errorType, l10n);
         }
         return actionStateWidget;
       case InitialLoading:
@@ -72,7 +68,8 @@ class ButtonLoader extends StatelessWidget {
           color: Colors.white,
         );
       default:
-        throw new UnsupportedError("Unsupported state " + bloc.loadingState.runtimeType.toString());
+        throw new UnsupportedError(
+            "Unsupported state " + bloc.loadingState.runtimeType.toString());
     }
   }
 
@@ -80,8 +77,14 @@ class ButtonLoader extends StatelessWidget {
     return Container(
       child: Row(
         children: [
-          Icon(Icons.warning_amber_outlined, color: Colors.white,),
-          Text(l10n.getText().universalErrorJustError(), style: TextStyle(color: Colors.white),)
+          Icon(
+            Icons.warning_amber_outlined,
+            color: Colors.white,
+          ),
+          Text(
+            l10n.getText().universalErrorJustError(),
+            style: TextStyle(color: Colors.white),
+          )
         ],
       ),
     );

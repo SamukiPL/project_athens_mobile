@@ -7,6 +7,8 @@
     "choose": "Choose",
     "ok": "Ok",
     "accept": "Accept",
+    "refresh": "Refresh",
+    "newDataAvailable": "New data available",
     "retry": "Try again",
     "close": "Close",
     "downloadingData": "Downloading data...",
@@ -44,9 +46,8 @@
         "buttonLater": "Later",
         "buttonUpdateNow": "Update now",
         "wouldYouLikeToUpdateAppNow": "Would you like to update application now?",
-        "immediateUpdateTitle":  "Update required",
+        "immediateUpdateTitle": "Update required",
         "immediateUpdateContent": "Application must be updated, it is required to assure that application will work properly."
-
       }
     },
     "seen": "Diplayed",
@@ -212,7 +213,7 @@
     "termsAndAgreement": "Terms and conditions",
     "credits": "Credits",
     "deleteAccount": {
-      "title" : "Delete account",
+      "title": "Delete account",
       "content": "We are deeply sad that you want to delete your account. Please let us know what's the reason behind this action, so we can make this application better.",
       "reasons": {
         "doNotLikeApp": "I don't like this application",
