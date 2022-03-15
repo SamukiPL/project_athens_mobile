@@ -11,6 +11,7 @@
     "close": "Close",
     "downloadingData": "Downloading data...",
     "goToLogin": "Go to login",
+    "success": "Success",
     "noData": {
       "defaultText": "No data",
       "noInformation": "No info"
@@ -44,9 +45,8 @@
         "buttonLater": "Later",
         "buttonUpdateNow": "Update now",
         "wouldYouLikeToUpdateAppNow": "Would you like to update application now?",
-        "immediateUpdateTitle":  "Update required",
+        "immediateUpdateTitle": "Update required",
         "immediateUpdateContent": "Application must be updated, it is required to assure that application will work properly."
-
       }
     },
     "seen": "Diplayed",
@@ -89,7 +89,8 @@
       "twitter": "Twitter",
       "google": "Google",
       "notAMember": "Not a member yet?",
-      "connectWith": "Connect with"
+      "connectWith": "Connect with",
+      "ifAccountExistEmailIsSent": "If we have account with given e-mail account, then we will send you e-mail with furhter instructions how to reset your password. Please check also in spam folder."
     },
     "validate": {
       "fieldCannotBeEmpty": "Field cannot be empty",
@@ -212,7 +213,7 @@
     "termsAndAgreement": "Terms and conditions",
     "credits": "Credits",
     "deleteAccount": {
-      "title" : "Delete account",
+      "title": "Delete account",
       "content": "We are deeply sad that you want to delete your account. Please let us know what's the reason behind this action, so we can make this application better.",
       "reasons": {
         "doNotLikeApp": "I don't like this application",

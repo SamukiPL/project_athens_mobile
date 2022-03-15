@@ -46,11 +46,6 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalChoose != ""); 
   }); 
  
-  test("All methods for $locale universalClose", () async {
-    String universalClose = localization.universalClose();
-    expect(true, universalClose != ""); 
-  }); 
- 
   test("All methods for $locale universalOk", () async {
     String universalOk = localization.universalOk();
     expect(true, universalOk != ""); 
@@ -66,6 +61,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalRetry != ""); 
   }); 
  
+  test("All methods for $locale universalClose", () async {
+    String universalClose = localization.universalClose();
+    expect(true, universalClose != ""); 
+  }); 
+ 
   test("All methods for $locale universalDownloadingData", () async {
     String universalDownloadingData = localization.universalDownloadingData();
     expect(true, universalDownloadingData != ""); 
@@ -76,6 +76,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalGoToLogin != ""); 
   }); 
  
+  test("All methods for $locale universalSuccess", () async {
+    String universalSuccess = localization.universalSuccess();
+    expect(true, universalSuccess != ""); 
+  }); 
+ 
   test("All methods for $locale universalNoDataDefaultText", () async {
     String universalNoDataDefaultText = localization.universalNoDataDefaultText();
     expect(true, universalNoDataDefaultText != ""); 
@@ -84,6 +89,31 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale universalNoDataNoInformation", () async {
     String universalNoDataNoInformation = localization.universalNoDataNoInformation();
     expect(true, universalNoDataNoInformation != ""); 
+  }); 
+ 
+  test("All methods for $locale universalAgreementOrTryToOpenInBrowser", () async {
+    String universalAgreementOrTryToOpenInBrowser = localization.universalAgreementOrTryToOpenInBrowser();
+    expect(true, universalAgreementOrTryToOpenInBrowser != ""); 
+  }); 
+ 
+  test("All methods for $locale universalAgreementYouMustAgreeOnTermsAndConditions", () async {
+    String universalAgreementYouMustAgreeOnTermsAndConditions = localization.universalAgreementYouMustAgreeOnTermsAndConditions();
+    expect(true, universalAgreementYouMustAgreeOnTermsAndConditions != ""); 
+  }); 
+ 
+  test("All methods for $locale universalAgreementTitle", () async {
+    String universalAgreementTitle = localization.universalAgreementTitle();
+    expect(true, universalAgreementTitle != ""); 
+  }); 
+ 
+  test("All methods for $locale universalAgreementIAgree", () async {
+    String universalAgreementIAgree = localization.universalAgreementIAgree();
+    expect(true, universalAgreementIAgree != ""); 
+  }); 
+ 
+  test("All methods for $locale universalAgreementTermsAndConditions", () async {
+    String universalAgreementTermsAndConditions = localization.universalAgreementTermsAndConditions();
+    expect(true, universalAgreementTermsAndConditions != ""); 
   }); 
  
   test("All methods for $locale universalInformation", () async {
@@ -126,31 +156,6 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalErrorUnknown != ""); 
   }); 
  
-  test("All methods for $locale universalAgreementOrTryToOpenInBrowser", () async {
-    String universalAgreementOrTryToOpenInBrowser = localization.universalAgreementOrTryToOpenInBrowser();
-    expect(true, universalAgreementOrTryToOpenInBrowser != ""); 
-  }); 
- 
-  test("All methods for $locale universalAgreementYouMustAgreeOnTermsAndConditions", () async {
-    String universalAgreementYouMustAgreeOnTermsAndConditions = localization.universalAgreementYouMustAgreeOnTermsAndConditions();
-    expect(true, universalAgreementYouMustAgreeOnTermsAndConditions != ""); 
-  }); 
- 
-  test("All methods for $locale universalAgreementTitle", () async {
-    String universalAgreementTitle = localization.universalAgreementTitle();
-    expect(true, universalAgreementTitle != ""); 
-  }); 
- 
-  test("All methods for $locale universalAgreementIAgree", () async {
-    String universalAgreementIAgree = localization.universalAgreementIAgree();
-    expect(true, universalAgreementIAgree != ""); 
-  }); 
- 
-  test("All methods for $locale universalAgreementTermsAndConditions", () async {
-    String universalAgreementTermsAndConditions = localization.universalAgreementTermsAndConditions();
-    expect(true, universalAgreementTermsAndConditions != ""); 
-  }); 
- 
   test("All methods for $locale universalSource", () async {
     String universalSource = localization.universalSource();
     expect(true, universalSource != ""); 
@@ -171,11 +176,6 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalUpdateCupertinoDialogTitle != ""); 
   }); 
  
-  test("All methods for $locale universalUpdateCupertinoDialogImmediateUpdateTitle", () async {
-    String universalUpdateCupertinoDialogImmediateUpdateTitle = localization.universalUpdateCupertinoDialogImmediateUpdateTitle();
-    expect(true, universalUpdateCupertinoDialogImmediateUpdateTitle != ""); 
-  }); 
- 
   test("All methods for $locale universalUpdateCupertinoDialogButtonIgnore", () async {
     String universalUpdateCupertinoDialogButtonIgnore = localization.universalUpdateCupertinoDialogButtonIgnore();
     expect(true, universalUpdateCupertinoDialogButtonIgnore != ""); 
@@ -194,6 +194,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow", () async {
     String universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow = localization.universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow();
     expect(true, universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow != ""); 
+  }); 
+ 
+  test("All methods for $locale universalUpdateCupertinoDialogImmediateUpdateTitle", () async {
+    String universalUpdateCupertinoDialogImmediateUpdateTitle = localization.universalUpdateCupertinoDialogImmediateUpdateTitle();
+    expect(true, universalUpdateCupertinoDialogImmediateUpdateTitle != ""); 
   }); 
  
   test("All methods for $locale universalUpdateCupertinoDialogImmediateUpdateContent", () async {
@@ -256,14 +261,14 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginButtonsRegister != ""); 
   }); 
  
-  test("All methods for $locale loginButtonsSignUp", () async {
-    String loginButtonsSignUp = localization.loginButtonsSignUp();
-    expect(true, loginButtonsSignUp != ""); 
-  }); 
- 
   test("All methods for $locale loginButtonsForgot", () async {
     String loginButtonsForgot = localization.loginButtonsForgot();
     expect(true, loginButtonsForgot != ""); 
+  }); 
+ 
+  test("All methods for $locale loginButtonsSignUp", () async {
+    String loginButtonsSignUp = localization.loginButtonsSignUp();
+    expect(true, loginButtonsSignUp != ""); 
   }); 
  
   test("All methods for $locale loginButtonsResetPassword", () async {
@@ -351,6 +356,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginOtherConnectWith != ""); 
   }); 
  
+  test("All methods for $locale loginOtherIfAccountExistEmailIsSent", () async {
+    String loginOtherIfAccountExistEmailIsSent = localization.loginOtherIfAccountExistEmailIsSent();
+    expect(true, loginOtherIfAccountExistEmailIsSent != ""); 
+  }); 
+ 
   test("All methods for $locale loginValidateFieldCannotBeEmpty", () async {
     String loginValidateFieldCannotBeEmpty = localization.loginValidateFieldCannotBeEmpty();
     expect(true, loginValidateFieldCannotBeEmpty != ""); 
@@ -396,11 +406,6 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, loginErrorPasswordOrLoginDoesNotMatch != ""); 
   }); 
  
-  test("All methods for $locale timelineTimelineNavTitle", () async {
-    String timelineTimelineNavTitle = localization.timelineTimelineNavTitle();
-    expect(true, timelineTimelineNavTitle != ""); 
-  }); 
- 
   test("All methods for $locale timelineVote", () async {
     String timelineVote = localization.timelineVote();
     expect(true, timelineVote != ""); 
@@ -409,6 +414,11 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
   test("All methods for $locale timelineVoteNoAgenda", () async {
     String timelineVoteNoAgenda = localization.timelineVoteNoAgenda();
     expect(true, timelineVoteNoAgenda != ""); 
+  }); 
+ 
+  test("All methods for $locale timelineTimelineNavTitle", () async {
+    String timelineTimelineNavTitle = localization.timelineTimelineNavTitle();
+    expect(true, timelineTimelineNavTitle != ""); 
   }); 
  
   test("All methods for $locale timelineVotingTypesResolutionProject", () async {
@@ -816,14 +826,14 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, moreLikeApplication != ""); 
   }); 
  
-  test("All methods for $locale moreCheckForUpdates", () async {
-    String moreCheckForUpdates = localization.moreCheckForUpdates();
-    expect(true, moreCheckForUpdates != ""); 
-  }); 
- 
   test("All methods for $locale moreSupportUs", () async {
     String moreSupportUs = localization.moreSupportUs();
     expect(true, moreSupportUs != ""); 
+  }); 
+ 
+  test("All methods for $locale moreCheckForUpdates", () async {
+    String moreCheckForUpdates = localization.moreCheckForUpdates();
+    expect(true, moreCheckForUpdates != ""); 
   }); 
  
   test("All methods for $locale moreAppVersion", () async {
@@ -831,14 +841,14 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, moreAppVersion != ""); 
   }); 
  
-  test("All methods for $locale moreCredits", () async {
-    String moreCredits = localization.moreCredits();
-    expect(true, moreCredits != ""); 
-  }); 
- 
   test("All methods for $locale moreTermsAndAgreement", () async {
     String moreTermsAndAgreement = localization.moreTermsAndAgreement();
     expect(true, moreTermsAndAgreement != ""); 
+  }); 
+ 
+  test("All methods for $locale moreCredits", () async {
+    String moreCredits = localization.moreCredits();
+    expect(true, moreCredits != ""); 
   }); 
  
   test("All methods for $locale moreDeleteAccountTitle", () async {

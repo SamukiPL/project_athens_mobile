@@ -19,7 +19,7 @@ class MoreBloc extends BaseBloc {
   MoreBloc(this._logoutUseCase, this._autoUpdater, this._authFacade);
 
   Future<void> logout() async {
-    await _logoutUseCase(null).safeApiCall();
+    _logoutUseCase(null).safeApiCall();
     _authFacade.clearTokens();
     stateController.add(WidgetState.success());
   }
