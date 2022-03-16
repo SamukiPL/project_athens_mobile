@@ -31,7 +31,7 @@ class DashboardScreen extends BaseScreen<DashboardBloc> {
             child: Consumer<List<TileData>?>(
                 builder: (context, tiles, _) => tiles != null
                     ? RefreshIndicator(
-                        onRefresh: () => bloc.forceRefresh(),
+                        onRefresh: () => bloc.forceRefresh(context),
                         child: Column(
                           children: [
                             StreamProvider<bool>.value(
@@ -66,7 +66,7 @@ class DashboardScreen extends BaseScreen<DashboardBloc> {
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(l10n.getText().universalNewDataAvailable()),
         ButtonLoader(bloc.refreshDataButtonLoaderBloc,
-            callback: bloc.forceRefresh,
+            callback: () => bloc.forceRefresh(context),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(32),
                 side: BorderSide(

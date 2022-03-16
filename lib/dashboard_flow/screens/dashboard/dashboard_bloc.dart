@@ -1,11 +1,14 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:project_athens/athens_core/configuration/configuration_delegate.dart';
 import 'package:project_athens/athens_core/configuration/configuration_storage_names.dart';
+import 'package:project_athens/athens_core/presentation/alert_bottom_sheet/alert_bottom_sheet.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_bloc.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
 import 'package:project_athens/athens_core/presentation/grid/tile.dart';
+import 'package:project_athens/athens_core/presentation/widget_state.dart';
 import 'package:project_athens/dashboard_flow/cache/dashboard_tiles_data_cache.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/dashboard_configuration.dart';
 import 'package:project_athens/dashboard_flow/screens/dashboard/tiles/dashboard_tile_storage.dart';
@@ -60,7 +63,7 @@ class DashboardBloc extends BaseBloc
     await updatePreference(storageTiles);
   }
 
-  Future<void> forceRefresh() {
+  Future<void> forceRefresh(BuildContext context) {
     _refreshDataButtonLoaderBloc
         .setDataLoadingState(DataLoadingState.loading());
 
@@ -71,9 +74,13 @@ class DashboardBloc extends BaseBloc
 
       _dataOutdatedSubject.add(false);
     }).catchError((err) {
-      _refreshDataButtonLoaderBloc
-          .setDataLoadingState(DataLoadingState.error(err));
-      return err;
+      _refreshDataButtonLoaderBloc.setDataLoadingState(
+          DataLoadingState.error((err as Exception).getErrorType()));
+
+      showErrorBottomSheet(context,
+          error: err,
+          onClose: () => _refreshDataButtonLoaderBloc
+              .setDataLoadingState(DataLoadingState.initialLoading()));
     });
   }
 

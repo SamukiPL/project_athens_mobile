@@ -4,6 +4,7 @@ import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
 import 'package:project_athens/athens_core/presentation/widget_state.dart';
+import 'package:project_athens/athens_core/utils/get_error_message_helper.dart';
 import 'package:provider/provider.dart';
 
 abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
@@ -24,7 +25,8 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
                 builder: (context, _, child) => child!,
                 child: Scaffold(
                   appBar: generateAppBar(context, bloc) as PreferredSizeWidget?,
-                  body: Builder(builder: (context) => bodyBuilder(context, bloc)),
+                  body:
+                      Builder(builder: (context) => bodyBuilder(context, bloc)),
                   floatingActionButton: generateFab(context, bloc),
                 ),
               ),
@@ -39,10 +41,9 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
   Widget bodyBuilder(BuildContext context, BLOC bloc) {
     return LayoutBuilder(
       builder: (context, constraints) => SingleChildScrollView(
-        padding: EdgeInsets.all(0),
+          padding: EdgeInsets.all(0),
           child: ConstrainedBox(
-              constraints:
-                  BoxConstraints(minHeight: constraints.maxHeight),
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
               child: generateBody(context, bloc))),
     );
   }
@@ -50,74 +51,64 @@ abstract class BaseLoginScreen<BLOC extends BaseBloc> extends StatelessWidget {
   void stateListener(BuildContext context, BLOC bloc, WidgetState state) {
     final localizations = Provider.of<AppLocalizations>(context, listen: false);
 
-      switch (state.runtimeType) {
-        case SuccessState:
-          onSuccess(context);
-          break;
-        case AuthFailure:
-          onAuthFailure(context, bloc);
-          break;
-        case ErrorState:
-          String errMsg = _getErrorMessage(state as ErrorState, localizations);
-          showModalBottomSheet(context: context, builder: (context) =>
-              Container(
-                padding: EdgeInsets.all(12),
-                child:Column(
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.only(bottom: 8),
-                      child: Icon(Icons.sentiment_dissatisfied, size: 75),
+    switch (state.runtimeType) {
+      case SuccessState:
+        onSuccess(context);
+        break;
+      case AuthFailure:
+        onAuthFailure(context, bloc);
+        break;
+      case ErrorState:
+        String errMsg = _getErrorMessage(state as ErrorState, localizations);
+        showModalBottomSheet(
+          context: context,
+          builder: (context) => Container(
+              padding: EdgeInsets.all(12),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(bottom: 8),
+                    child: Icon(Icons.sentiment_dissatisfied, size: 75),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(bottom: 8),
+                    child: Text(
+                      errMsg,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20),
                     ),
-                    Container(
-                      padding: EdgeInsets.only(bottom: 8),
+                  ),
+                  Expanded(
+                    child: Container(),
+                  ),
+                  RaisedButton(
+                    child: Container(
+                      padding: EdgeInsets.all(16),
                       child: Text(
-                        errMsg,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 20
-                        ),
+                        localizations.getText().universalRetry(),
+                        style: TextStyle(color: Colors.white),
+                        textScaleFactor: 1.5,
                       ),
                     ),
-                    Expanded(child: Container(),),
-
-                    RaisedButton(
-                      child: Container(
-                        padding: EdgeInsets.all(16),
-                        child: Text(
-                          localizations.getText().universalRetry(),
-                          style: TextStyle(color: Colors.white),
-                          textScaleFactor: 1.5,
-                        ),
-                      ),
-                      onPressed: ((){
-                        Navigator.pop(context);
-                        onNetworkFailure(bloc);
-                      }),
-                      color: Theme.of(context).primaryColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32),
-                      ),
-                    )
-                  ],
-                )
-              ),
-            );
-          break;
-      }
+                    onPressed: (() {
+                      Navigator.pop(context);
+                      onNetworkFailure(bloc);
+                    }),
+                    color: Theme.of(context).primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                  )
+                ],
+              )),
+        );
+        break;
+    }
   }
 
   _getErrorMessage(ErrorState state, AppLocalizations localizations) {
     final errType = state.type;
-    switch(errType) {
-      case ErrorType.NETWORK:
-        return localizations.getText().universalErrorNetwork();
-      case ErrorType.SERVER:
-        return localizations.getText().universalErrorServer();
-      case ErrorType.UNKNOWN:
-        return localizations.getText().universalErrorUnknown();
-      case ErrorType.AUTH:
-        return localizations.getText().universalErrorAuth();
-    }
+    return getErrorMessage(errType, localizations);
   }
 
   Widget? generateAppBar(BuildContext context, BLOC bloc);

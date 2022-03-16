@@ -1,5 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/alert_bottom_sheet/alert_bottom_sheet_mode.dart';
+import 'package:project_athens/athens_core/presentation/widget_state.dart';
+import 'package:project_athens/athens_core/utils/get_error_message_helper.dart';
+import 'package:provider/provider.dart';
+
+void showErrorBottomSheet(BuildContext parentContext,
+    {required Exception error,
+    String? closeButtonTitle,
+    void Function()? onClose}) {
+  final AppLocalizations l10n =
+      Provider.of<AppLocalizations>(parentContext, listen: false);
+
+  showModalBottomSheet(
+    context: parentContext,
+    builder: (childContext) => _AlertBottomSheet(
+        mode: AlertBottomSheetMode.ERROR,
+        title: l10n.getText().universalErrorJustError(),
+        description: getErrorMessage(error.getErrorType(), l10n),
+        closeButtonTitle: closeButtonTitle == null
+            ? l10n.getText().universalClose()
+            : closeButtonTitle),
+    enableDrag: false,
+    isDismissible: true,
+  );
+}
 
 void showAlertBottomSheet(BuildContext parentContext,
     {required AlertBottomSheetMode mode,
