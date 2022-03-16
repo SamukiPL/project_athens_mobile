@@ -22,7 +22,7 @@ class SubscribedDeputiesCache {
 
   Future<Result<List<SubscribedDeputyModel>>>? awaitingFuture;
 
-  ReplaySubject<void> _subscribedDeputiesChanged = ReplaySubject<void>();
+  PublishSubject<void> _subscribedDeputiesChanged = PublishSubject<void>();
   Stream<void> get subscribedDeputiesChangedStream =>
       _subscribedDeputiesChanged.stream;
 
