@@ -8,6 +8,7 @@ import 'package:project_athens/deputies_utils/domain/put_deputies/deputies_regis
 import 'package:project_athens/deputies_utils/domain/put_deputies/put_deputies_params.dart';
 import 'package:project_athens/deputies_utils/domain/put_deputies/put_deputy_model.dart';
 import 'package:project_athens/deputies_utils/domain/subscribed_deputy_model.dart';
+import 'package:rxdart/rxdart.dart';
 
 class SubscribedDeputiesCache {
   final FirebaseDeputiesUseCase _firebaseDeputiesUseCase;
@@ -21,6 +22,10 @@ class SubscribedDeputiesCache {
 
   Future<Result<List<SubscribedDeputyModel>>>? awaitingFuture;
 
+  PublishSubject<void> _subscribedDeputiesChanged = PublishSubject<void>();
+  Stream<void> get subscribedDeputiesChangedStream =>
+      _subscribedDeputiesChanged.stream;
+
   Future<Result<List<SubscribedDeputyModel>>> get subscribedDeputies async {
     if (_cachedSubscribedDeputies != null) {
       return Success(_cachedSubscribedDeputies!.toList());
@@ -30,8 +35,7 @@ class SubscribedDeputiesCache {
       return awaitingFuture!;
     }
 
-    awaitingFuture =
-        _firebaseDeputiesUseCase().whenComplete(() {
+    awaitingFuture = _firebaseDeputiesUseCase().whenComplete(() {
       awaitingFuture = null;
     }).onSuccessThen((result) {
       final subscribedDeputies = result.value;
@@ -67,8 +71,6 @@ class SubscribedDeputiesCache {
           .onSuccessThen((success) => success.value.firstWhere(condition));
 
   void _updateSubscribedDeputy(SubscribedDeputyModel subscribedDeputy) async {
-    print('about to perform save operation');
-
     if (subscribedDeputy.notifications.isSubscribed) {
       final putModel = PutDeputyModel(
           subscribedDeputy.id,
@@ -77,14 +79,17 @@ class SubscribedDeputiesCache {
           subscribedDeputy.notifications.interpolation);
       await _putDeputiesUseCase.call(PutDeputiesParams([putModel]));
     } else {
-      await _deleteDeputyUseCase
-          .call(DeleteDeputyParams(subscribedDeputy.id));
+      await _deleteDeputyUseCase.call(DeleteDeputyParams(subscribedDeputy.id));
     }
+
+    _subscribedDeputiesChanged.add(null);
   }
 
   dispose() {
     if (_cachedSubscribedDeputies != null) {
       _cachedSubscribedDeputies!.forEach((element) => element.dispose());
     }
+
+    _subscribedDeputiesChanged.close();
   }
 }

@@ -56,6 +56,16 @@ void testAllMethods(String locale, AppLocalizationsGenerated localization) {
     expect(true, universalAccept != ""); 
   }); 
  
+  test("All methods for $locale universalRefresh", () async {
+    String universalRefresh = localization.universalRefresh();
+    expect(true, universalRefresh != ""); 
+  }); 
+ 
+  test("All methods for $locale universalNewDataAvailable", () async {
+    String universalNewDataAvailable = localization.universalNewDataAvailable();
+    expect(true, universalNewDataAvailable != ""); 
+  }); 
+ 
   test("All methods for $locale universalRetry", () async {
     String universalRetry = localization.universalRetry();
     expect(true, universalRetry != ""); 

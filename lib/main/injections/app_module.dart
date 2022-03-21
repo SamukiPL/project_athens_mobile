@@ -35,10 +35,12 @@ class AppModule extends Module {
   @override
   List<SingleChildWidget> getProviders() {
     final clientOptions = BaseOptions(
-      baseUrl: "https://api.swiadoma-demokracja.pl",
-      // uncomment this for local service connection.
-      // baseUrl: "http://10.0.2.2:3505",
-    );
+        baseUrl: "https://api.swiadoma-demokracja.pl",
+        connectTimeout: 2 * 60 * 1000, // 2 minutes,
+        receiveTimeout: 2 * 60 * 1000 // 2 minutes
+        // uncomment this for local service connection.
+        // baseUrl: "http://10.0.2.2:3505",
+        );
     final client = Dio(clientOptions);
 
     final authenticatedClient = Dio(clientOptions);
@@ -54,7 +56,8 @@ class AppModule extends Module {
     final authRepository = AuthRepositoryImpl(authApi);
     final authFacade = AuthFacade(authRepository);
 
-    authenticatedClient.interceptors.addAll(baseInterceptors + [AuthInterceptor(authFacade)]);
+    authenticatedClient.interceptors
+        .addAll(baseInterceptors + [AuthInterceptor(authFacade)]);
 
     final clubsCache = _createClubsCache(authenticatedClient);
 
@@ -65,12 +68,9 @@ class AppModule extends Module {
         dispose: (context, client) => client.dispose(),
       ),
       Provider<AuthenticatedDioClient>(
-        create: (_) => AuthenticatedDioClient(authenticatedClient),
-        dispose: (context, client) => client.dispose()
-      ),
-      Provider<ParliamentClubsCache>.value(
-          value: clubsCache
-      ),
+          create: (_) => AuthenticatedDioClient(authenticatedClient),
+          dispose: (context, client) => client.dispose()),
+      Provider<ParliamentClubsCache>.value(value: clubsCache),
       Provider<DeputiesCache>(
         create: (_) => _createDeputiesCache(authenticatedClient, clubsCache),
       ),
@@ -85,8 +85,10 @@ class AppModule extends Module {
   ParliamentMeetingCache _createParliamentMeetingCache(Dio client) {
     final dashboardApi = DashboardApi(client);
     final networkMapper = ParliamentMeetingNetworkMapper();
-    final getParliamentMeetingRepository = ParliamentMeetingDetailsRepositoryImpl(dashboardApi, networkMapper);
-    final useCase = GetParliamentMeetingDetailsUseCase(getParliamentMeetingRepository);
+    final getParliamentMeetingRepository =
+        ParliamentMeetingDetailsRepositoryImpl(dashboardApi, networkMapper);
+    final useCase =
+        GetParliamentMeetingDetailsUseCase(getParliamentMeetingRepository);
 
     return ParliamentMeetingCache(useCase);
   }
@@ -94,22 +96,27 @@ class AppModule extends Module {
   ParliamentClubsCache _createClubsCache(Dio client) {
     final parliamentClubsApi = ParliamentClubsApi(client);
     final getParliamentClubsRepository =
-    GetParliamentClubsRepositoryImpl(parliamentClubsApi);
+        GetParliamentClubsRepositoryImpl(parliamentClubsApi);
     final getParliamentClubsUseCase =
-    GetParliamentClubsUseCase(getParliamentClubsRepository);
+        GetParliamentClubsUseCase(getParliamentClubsRepository);
 
     return ParliamentClubsCache(getParliamentClubsUseCase);
   }
 
-  DeputiesCache _createDeputiesCache(Dio client, ParliamentClubsCache clubsCache) {
+  DeputiesCache _createDeputiesCache(
+      Dio client, ParliamentClubsCache clubsCache) {
     final deputiesApi = DeputiesApi(client);
-    final getDeputiesRepository = GetDeputiesRepositoryImpl(deputiesApi, clubsCache);
+    final getDeputiesRepository =
+        GetDeputiesRepositoryImpl(deputiesApi, clubsCache);
     final getDeputiesUseCase = GetDeputiesUseCase(getDeputiesRepository);
-    final getDeputyRepository = GetDeputyRepositoryImpl(deputiesApi, clubsCache);
+    final getDeputyRepository =
+        GetDeputyRepositoryImpl(deputiesApi, clubsCache);
     final getDeputyUseCase = GetDeputyUseCase(getDeputyRepository);
     final getDeputyNounsRepository = GetDeputyNounsRepositoryImpl(deputiesApi);
-    final getDeputyNounsUseCase = GetDeputyNounsUseCase(getDeputyNounsRepository);
+    final getDeputyNounsUseCase =
+        GetDeputyNounsUseCase(getDeputyNounsRepository);
 
-    return DeputiesCache(getDeputiesUseCase, getDeputyUseCase, getDeputyNounsUseCase);
+    return DeputiesCache(
+        getDeputiesUseCase, getDeputyUseCase, getDeputyNounsUseCase);
   }
 }

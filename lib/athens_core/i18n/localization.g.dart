@@ -39,6 +39,14 @@ class AppLocalizationsGenerated {
     return words['universal']['accept'];
   }
 
+  String universalRefresh() {
+    return words['universal']['refresh'];
+  }
+
+  String universalNewDataAvailable() {
+    return words['universal']['newDataAvailable'];
+  }
+
   String universalRetry() {
     return words['universal']['retry'];
   }

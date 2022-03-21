@@ -59,6 +59,7 @@ class SubscribedDeputyNotificationsNotifier extends BaseChangeNotifier {
 
     if (isSubscribed) {
       speech = true;
+      vote = true;
     }
 
     notifyListeners();
