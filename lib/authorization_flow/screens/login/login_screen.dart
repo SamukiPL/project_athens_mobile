@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/navigation/app_navigation.dart';
 import 'package:project_athens/athens_core/presentation/button_loader/button_loader.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_bloc.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
+import 'package:project_athens/athens_core/utils/base_input_formatters.dart';
 import 'package:project_athens/authorization_flow/injections/login_screen_module.dart';
 import 'package:project_athens/authorization_flow/navigation/login_navigation_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/base_login_screen.dart';
@@ -131,6 +133,7 @@ class LoginScreen extends BaseLoginScreen<LoginBloc> {
             Container(
               margin: EdgeInsets.fromLTRB(32, 8, 32, 8),
               child: TextFormField(
+                inputFormatters: [BaseInputFormatters.emailLoginFormatter()],
                 controller: bloc.textEditingController,
                 onChanged: (login) => bloc.setLogin(login),
                 textInputAction: TextInputAction.next,

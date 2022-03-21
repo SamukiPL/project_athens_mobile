@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/agreement/agreement_widget.dart';
 import 'package:project_athens/athens_core/presentation/agreement/agreement_widget_bloc.dart';
+import 'package:project_athens/athens_core/utils/base_input_formatters.dart';
 import 'package:project_athens/authorization_flow/navigation/login_navigation_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/account_info/account_info_form_key.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/account_info/account_info_step_bloc.dart';
@@ -36,6 +37,7 @@ class AccountInfoStep extends BaseRegistrationFormStep<AccountInfoStepBloc> {
             return null;
           }),
           labelText: localization.getText().loginHintsLogin(),
+          inputFormatters: [BaseInputFormatters.emailLoginFormatter()]
         ),
         generateFormField(
           context: context,
@@ -49,7 +51,8 @@ class AccountInfoStep extends BaseRegistrationFormStep<AccountInfoStepBloc> {
             return null;
           }),
           labelText: localization.getText().loginHintsEmail(),
-          keyboardType: TextInputType.emailAddress
+          keyboardType: TextInputType.emailAddress,
+            inputFormatters: [BaseInputFormatters.emailLoginFormatter()]
         ),
         Consumer<ShowRepeatEmailNotifier>(
           builder: (context, animationNotifier, child) => AnimatedOpacity(
@@ -74,7 +77,8 @@ class AccountInfoStep extends BaseRegistrationFormStep<AccountInfoStepBloc> {
             }),
             labelText: localization.getText().loginHintsRepeatEmail(),
             action: TextInputAction.done,
-            keyboardType: TextInputType.emailAddress
+            keyboardType: TextInputType.emailAddress,
+              inputFormatters: [BaseInputFormatters.emailLoginFormatter()]
           )
         ),
         generateCheckboxField(
