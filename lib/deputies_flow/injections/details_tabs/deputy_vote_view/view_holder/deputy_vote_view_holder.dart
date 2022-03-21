@@ -25,7 +25,7 @@ class DeputyVoteViewHolder extends StatelessWidget with RedirectionDelegate {
             VoteSlimModel.fromVotingModel(
                 _viewModel.model
             )
-        ));
+        ), replaceBottomNavItem: false);
         _viewModel.itemWasSeen();
       },
       child: Column(

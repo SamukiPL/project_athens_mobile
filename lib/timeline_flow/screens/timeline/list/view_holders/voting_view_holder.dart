@@ -223,7 +223,7 @@ class VotingViewHolder extends StatelessWidget with RedirectionDelegate {
           onTap: () {
             goToDestination(context, VoteDetailsDestination(
               VoteSlimModel.fromTimelineVotingModel(viewModel.model)
-            ));
+            ), replaceBottomNavItem: false);
             viewModel.itemWasSeen();
 
           },

@@ -144,7 +144,6 @@ class NextVideoOverlay extends StatelessWidget with RedirectionDelegate {
 
   void goToNextVideo(BuildContext context, PersonSpeechModel nextPersonSpeech) {
     final destination = SpeechDetailsDestination.nextSpeechReplacement(nextPersonSpeech.speechId, isNormalSpeech);
-    goToDestination(context, destination);
+    goToDestination(context, destination, replaceBottomNavItem: false);
   }
-
 }

@@ -8,7 +8,7 @@ class WidgetState {
   factory WidgetState.success() = SuccessState;
   factory WidgetState.error(ErrorType type) = ErrorState;
   factory WidgetState.authFailure() = AuthFailure;
-  factory WidgetState.redirection(Destination destination) = Redirection;
+  factory WidgetState.redirection(Destination destination, {bool replaceBottomNavItem}) = Redirection;
 }
 
 class EmptyState extends WidgetState {
@@ -25,7 +25,8 @@ class AuthFailure extends WidgetState {
 
 class Redirection extends WidgetState {
   final Destination destination;
-  Redirection(this.destination): super._();
+  bool replaceBottomNavItem;
+  Redirection(this.destination, {this.replaceBottomNavItem = true}): super._();
 }
 
 enum ErrorType {
