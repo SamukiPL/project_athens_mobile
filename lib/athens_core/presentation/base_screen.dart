@@ -49,7 +49,8 @@ abstract class BaseScreen<BLOC extends BaseBloc> extends StatelessWidget with Re
         break;
       case Redirection:
         Redirection redirection = state as Redirection;
-        goToDestination(context, redirection.destination);
+        goToDestination(context, redirection.destination,
+            replaceBottomNavItem: redirection.replaceBottomNavItem);
         break;
     }
   }

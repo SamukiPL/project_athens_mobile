@@ -3,6 +3,7 @@ import 'package:project_athens/athens_core/domain/result.dart';
 import 'package:project_athens/athens_core/models/speech_model.dart';
 import 'package:project_athens/athens_core/presentation/base_blocs/base_bloc.dart';
 import 'package:project_athens/athens_core/presentation/data_loading/data_loading_state.dart';
+import 'package:project_athens/athens_core/presentation/widget_state.dart';
 import 'package:project_athens/deputies_utils/cache/deputies_cache.dart';
 import 'package:project_athens/deputies_utils/domain/deputy_model.dart';
 import 'package:project_athens/main/wakelock/wakelock_service.dart';
@@ -57,12 +58,12 @@ class SpeechDetailsBloc extends BaseBloc {
 
   void goToNextSpeech() {
     final destination = SpeechDetailsDestination(speechModel.nextPersonSpeech!.speechId, isNormalSpeech, replace: true);
-    goToDestination(destination);
+    stateController.add(WidgetState.redirection(destination, replaceBottomNavItem: false));
   }
 
   void goToPreviousSpeech() {
     final destination = SpeechDetailsDestination(speechModel.previousPersonSpeech!.speechId, isNormalSpeech, replace: true);
-    goToDestination(destination);
+    stateController.add(WidgetState.redirection(destination, replaceBottomNavItem: false));
   }
 
   @override
