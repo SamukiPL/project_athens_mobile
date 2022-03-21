@@ -4,6 +4,7 @@ import 'package:project_athens/athens_core/injections/module.dart';
 import 'package:project_athens/athens_core/presentation/alert_bottom_sheet/alert_bottom_sheet.dart';
 import 'package:project_athens/athens_core/presentation/alert_bottom_sheet/alert_bottom_sheet_mode.dart';
 import 'package:project_athens/athens_core/presentation/button_loader/button_loader.dart';
+import 'package:project_athens/athens_core/utils/base_input_formatters.dart';
 import 'package:project_athens/authorization_flow/injections/reset_password_module.dart';
 import 'package:project_athens/authorization_flow/navigation/login_navigation_bloc.dart';
 import 'package:project_athens/authorization_flow/screens/base_login_screen.dart';
@@ -103,6 +104,7 @@ class ResetPasswordScreen extends BaseLoginScreen<ResetPasswordBloc> {
 
                         return null;
                       },
+                      inputFormatters: [BaseInputFormatters.emailLoginFormatter()]
                     ),
                   ),
                 ),

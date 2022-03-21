@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_step.dart';
 import 'package:project_athens/authorization_flow/screens/registration/steps/base_registration_step_bloc.dart';
@@ -42,11 +43,13 @@ abstract class BaseRegistrationFormStep<BLOC extends BaseRegistrationStepBloc> e
       TextInputAction action = TextInputAction.next,
       TextInputType keyboardType = TextInputType.name,
       bool obscureText = false,
-      bool isCheckbox = false
+      bool isCheckbox = false,
+      List<FilteringTextInputFormatter>? inputFormatters
       }) =>
       Container(
         margin: EdgeInsets.fromLTRB(32, 8, 32, 16),
         child: TextFormField(
+          inputFormatters: inputFormatters,
           initialValue: initialValue,
           onFieldSubmitted: (_) => (action == TextInputAction.next) ? {} : callback(),
           onChanged: onChanged,
