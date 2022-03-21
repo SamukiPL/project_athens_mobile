@@ -28,64 +28,50 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
             headerSliverBuilder: (context, value) => [
                   SliverAppBar(
                     leading: Consumer<DestinationManager>(
-                      builder: (context, destinationManager, _) =>
-                        BackButton(
-                          color: Colors.white,
-                          onPressed: () {
-                            destinationManager.goBack(context);
-                          },
-                        )
-                    ),
+                        builder: (context, destinationManager, _) => BackButton(
+                              color: Colors.white,
+                              onPressed: () {
+                                destinationManager.goBack(context);
+                              },
+                            )),
                     key: Key("app-bar"),
                     expandedHeight: 250,
                     pinned: true,
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
-                      title: Container(
-                        margin: EdgeInsets.only(left: 8, right: 8, top: 8),
-                        child: FittedBox(
-                            fit: BoxFit.fitWidth,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                      title: RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                              text: _deputyModel.name,
+                              style: TextStyle(
+                                fontSize: 20,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                               children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      _deputyModel.name,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Text(
-                                  _deputyModel.club ?? "",
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            )),
-                      ),
+                                TextSpan(
+                                    text: _deputyModel.club != null
+                                        ? '\n' + _deputyModel.club!
+                                        : "",
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400))
+                              ])),
                       background: Container(
                         decoration: BoxDecoration(
-                          image: new DecorationImage(
-                            image: Image.asset("resources/images/parliament/parliament_gathering_512px.jpg").image,
-                            fit: BoxFit.cover,
-                          )
-                        ),
+                            image: new DecorationImage(
+                          image: Image.asset(
+                                  "resources/images/parliament/parliament_gathering_512px.jpg")
+                              .image,
+                          fit: BoxFit.cover,
+                        )),
                         child: BackdropFilter(
                           filter: ImageFilter.blur(sigmaX: 4.4, sigmaY: 4.4),
                           child: Center(
                             child: ClipRRect(
                                 borderRadius: BorderRadius.circular(32),
-                                child: Image.network(_deputyModel.thumbnailUrl ?? "")),
+                                child: Image.network(
+                                    _deputyModel.thumbnailUrl ?? "")),
                           ),
                         ),
                       ),
@@ -134,7 +120,8 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
         child: Container(color: Colors.grey.shade200, child: tab));
   }
 
-  Widget buildDeputyInformationTab(BuildContext context, DeputyDetailsBloc bloc) {
+  Widget buildDeputyInformationTab(
+      BuildContext context, DeputyDetailsBloc bloc) {
     return DeputyInformationDetailsTab(bloc.deputyModel);
   }
 
@@ -146,7 +133,8 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
     return DeputyVotingsDetailsTab();
   }
 
-  Widget? buildObserverDeputyView(DeputyDetailsBloc bloc, BuildContext context) {
+  Widget? buildObserverDeputyView(
+      DeputyDetailsBloc bloc, BuildContext context) {
     final loggedState = Provider.of<LoggedState>(context);
     if (loggedState.isGuest) return null;
 
@@ -164,15 +152,16 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
             height: double.infinity,
             width: double.infinity,
             padding: EdgeInsets.only(left: 12, right: 12),
-            child: ChangeNotifierProvider<SubscribedDeputyNotificationsNotifier>.value(
+            child: ChangeNotifierProvider<
+                SubscribedDeputyNotificationsNotifier>.value(
               value: bloc.deputyModel.notifications,
               child: Consumer<SubscribedDeputyNotificationsNotifier>(
-                builder: (context, notifier, _) => bloc.deputyModel.notifications.isSubscribed
-                    ? SubscribedDeputyBarView(bloc.deputyModel)
-                    : notObservedDeputyView(bloc, context),
+                builder: (context, notifier, _) =>
+                    bloc.deputyModel.notifications.isSubscribed
+                        ? SubscribedDeputyBarView(bloc.deputyModel)
+                        : notObservedDeputyView(bloc, context),
               ),
-            )
-        ),
+            )),
       ),
       backgroundColor: Colors.white,
       pinned: true,
@@ -185,34 +174,31 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
     final localizations = Provider.of<AppLocalizations>(context);
     return Container(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            localizations.getText().deputiesNotSubscribingDeputy(),
-            style: TextStyle(
-                color: theme.dividerColor,
-                fontSize: 14
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              localizations.getText().deputiesNotSubscribingDeputy(),
+              style: TextStyle(color: theme.dividerColor, fontSize: 14),
             ),
-          ),
-          MaterialButton(
-            onPressed: () => bloc.deputyModel.notifications.setIsSubscribed(!bloc.deputyModel.notifications.isSubscribed),
-            child: Row(
-              children: [
+            MaterialButton(
+              onPressed: () => bloc.deputyModel.notifications.setIsSubscribed(
+                  !bloc.deputyModel.notifications.isSubscribed),
+              child: Row(children: [
                 Text(
                   localizations.getText().deputiesSubscribe(),
                   style: TextStyle(color: theme.primaryColor),
                 ),
-                Icon(MdiIcons.bookmarkPlusOutline, color: theme.primaryColor,)
-              ]
+                Icon(
+                  MdiIcons.bookmarkPlusOutline,
+                  color: theme.primaryColor,
+                )
+              ]),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(32),
+                  side: BorderSide(color: theme.primaryColor)),
             ),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(32),
-                side: BorderSide(color: theme.primaryColor)
-            ),
-          ),
-        ]
-      ),
+          ]),
     );
   }
 }
