@@ -63,7 +63,7 @@ class DashboardBloc extends BaseBloc
     await updatePreference(storageTiles);
   }
 
-  Future<void> forceRefresh(BuildContext context) {
+  Future<void> forceRefresh() {
     _refreshDataButtonLoaderBloc
         .setDataLoadingState(DataLoadingState.loading());
 
@@ -77,11 +77,13 @@ class DashboardBloc extends BaseBloc
       _refreshDataButtonLoaderBloc.setDataLoadingState(
           DataLoadingState.error((err as Exception).getErrorType()));
 
-      showErrorBottomSheet(context,
-          error: err,
-          onClose: () => _refreshDataButtonLoaderBloc
-              .setDataLoadingState(DataLoadingState.initialLoading()));
+      throw err;
     });
+  }
+
+  void resetRefreshButtonLoadingState() {
+    _refreshDataButtonLoaderBloc
+        .setDataLoadingState(DataLoadingState.initialLoading());
   }
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
+import 'package:project_athens/athens_core/presentation/alert_bottom_sheet/alert_bottom_sheet.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/athens_core/presentation/button_loader/button_loader.dart';
 import 'package:project_athens/athens_core/presentation/grid/grid.dart';
@@ -31,7 +32,12 @@ class DashboardScreen extends BaseScreen<DashboardBloc> {
             child: Consumer<List<TileData>?>(
                 builder: (context, tiles, _) => tiles != null
                     ? RefreshIndicator(
-                        onRefresh: () => bloc.forceRefresh(context),
+                        onRefresh: () => bloc.forceRefresh().catchError((err) {
+                              showErrorBottomSheet(context,
+                                  error: err,
+                                  onClose: () =>
+                                      bloc.resetRefreshButtonLoadingState());
+                            }),
                         child: Column(
                           children: [
                             StreamProvider<bool>.value(
@@ -66,7 +72,11 @@ class DashboardScreen extends BaseScreen<DashboardBloc> {
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(l10n.getText().universalNewDataAvailable()),
         ButtonLoader(bloc.refreshDataButtonLoaderBloc,
-            callback: () => bloc.forceRefresh(context),
+            callback: () => bloc.forceRefresh().catchError((err) {
+                  showErrorBottomSheet(context,
+                      error: err,
+                      onClose: () => bloc.resetRefreshButtonLoadingState());
+                }),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(32),
                 side: BorderSide(

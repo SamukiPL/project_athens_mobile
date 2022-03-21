@@ -76,18 +76,21 @@ class _AlertBottomSheet extends StatelessWidget {
   }
 
   Widget _buildBottomSheetContent(BuildContext context) {
-    return Container(
-        padding: EdgeInsets.all(12),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            _getIcon(Theme.of(context)),
-            _getTitle(),
-            _getDescription(),
-            _buildCloseButton(context)
-          ],
-        ));
+    final ThemeData theme = Theme.of(context);
+
+    return Center(
+        child: Container(
+            padding: EdgeInsets.all(12),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                _getIcon(theme),
+                _getTitle(theme),
+                _getDescription(theme),
+                _buildCloseButton(context, theme)
+              ],
+            )));
   }
 
   Widget _getIcon(ThemeData theme) {
@@ -114,30 +117,33 @@ class _AlertBottomSheet extends StatelessWidget {
       child: Icon(
         icon,
         color: theme.primaryColor,
-        size: 50,
+        size: theme.iconTheme.size ?? 50,
       ),
     );
   }
 
-  Widget _getTitle() {
+  Widget _getTitle(ThemeData theme) {
     return Container(
       padding: EdgeInsets.only(bottom: 8),
       child: Text(
         title,
         textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 20),
+        style: TextStyle(
+            fontSize: theme.primaryTextTheme.headlineMedium?.fontSize),
       ),
     );
   }
 
-  Widget _getDescription() {
+  Widget _getDescription(ThemeData theme) {
     if (description != null) {
       return Container(
         padding: EdgeInsets.only(bottom: 8, top: 8, left: 16, right: 16),
         child: Text(
           description!,
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
+          style: TextStyle(
+              fontSize: theme.primaryTextTheme.headlineSmall?.fontSize ?? 14,
+              fontWeight: FontWeight.w300),
         ),
       );
     } else {
@@ -145,11 +151,14 @@ class _AlertBottomSheet extends StatelessWidget {
     }
   }
 
-  Widget _buildCloseButton(BuildContext context) {
+  Widget _buildCloseButton(BuildContext context, ThemeData theme) {
     return Container(
       padding: EdgeInsets.only(top: 8, bottom: 8),
       child: TextButton(
-        child: Text(closeButtonTitle),
+        child: Text(closeButtonTitle,
+            style: TextStyle(
+                fontSize:
+                    theme.primaryTextTheme.headlineSmall?.fontSize ?? 12)),
         onPressed: () => Navigator.pop(context),
       ),
     );
