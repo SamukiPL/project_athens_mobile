@@ -6,6 +6,7 @@ import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:project_athens/athens_core/db/database_module.dart';
 import 'package:project_athens/athens_core/i18n/localization_delegate.dart';
+import 'package:project_athens/athens_core/i18n/localization_module.dart';
 import 'package:project_athens/athens_core/injections/module_widget.dart';
 import 'package:project_athens/athens_core/utils/firebase/firebase_messaging_module.dart';
 import 'package:project_athens/athens_core/utils/notifications/notifications_service.dart';
@@ -88,10 +89,12 @@ class MyApp extends StatelessWidget {
             accentColor: Colors.blueAccent),
         home: Builder(
             builder: (context) => ModuleWidget(
-              providers: [SubscribedDeputyCacheModule(context, _firebaseMessages)],
-              child: SplashScreenWidget(),
-            )
-        ),
+                  providers: [
+                    SubscribedDeputyCacheModule(context, _firebaseMessages),
+                    LocalizationModule(context)
+                  ],
+                  child: SplashScreenWidget(),
+                )),
         supportedLocales: [const Locale('pl')],
         localizationsDelegates: [
           const AppLocalizationsDelegate(),

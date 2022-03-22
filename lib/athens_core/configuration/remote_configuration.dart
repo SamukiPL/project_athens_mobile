@@ -30,34 +30,39 @@ class RemoteConfiguration {
 
   get isInitialized => _isInitialized;
 
-  final ReplaySubject<void> _dataFetchedSource = ReplaySubject<void>(maxSize: 1);
-  Stream<void> get dataFetched => _dataFetchedSource.stream;
+  final PublishSubject<bool> _dataFetchedSource = PublishSubject<bool>();
+  Stream<bool> get dataFetched =>
+      _dataFetchedSource.stream.publishReplay(maxSize: 1);
 
   late StreamSubscription? _refreshSub;
 
-  final ReplaySubject<void> _forceRefreshSource = ReplaySubject<void>(maxSize: 1);
+  final ReplaySubject<void> _forceRefreshSource =
+      ReplaySubject<void>(maxSize: 1);
   Stream<void> get _forceRefreshStream => _forceRefreshSource.stream;
 
-  init() {
+  void init() {
     _refreshSub = Rx.combineLatest2(
         Rx.timer(null, Duration(hours: 1)).startWith(null),
         _forceRefreshStream.startWith(null),
-        (a, b) => null)
-        .listen((event) => _fetchRemoteConfig());
+        (a, b) => null).listen((event) => _fetchRemoteConfig());
   }
 
-  refresh() {
+  Future<bool> refresh() {
     _forceRefreshSource.add(null);
+
+    return _dataFetchedSource.first;
   }
 
-  _fetchRemoteConfig() async {
+  void _fetchRemoteConfig() async {
     final response = await _getRemoteConfigurationUseCase();
 
-    if (response is Failure) { 
+    if (response is Failure) {
+      _dataFetchedSource.addError((response as Failure));
       return null;
     }
 
-    final GetRemoteConfigurationConfig config = (response as Success<GetRemoteConfigurationResponse>).value.config;
+    final GetRemoteConfigurationConfig config =
+        (response as Success<GetRemoteConfigurationResponse>).value.config;
 
     _isInitialized = true;
     _cadence = config.cadence;
@@ -66,16 +71,14 @@ class RemoteConfiguration {
     _minimalVersions = PlatformAppVersionsModel(
         Version.parse(config.minimalAppVersion.iOS),
         Version.parse(config.minimalAppVersion.iPadOS),
-        Version.parse(config.minimalAppVersion.android)
-    );
+        Version.parse(config.minimalAppVersion.android));
 
     _recommendedVersions = PlatformAppVersionsModel(
         Version.parse(config.recommendedAppVersion.iOS),
         Version.parse(config.recommendedAppVersion.iPadOS),
-        Version.parse(config.recommendedAppVersion.android)
-    );
+        Version.parse(config.recommendedAppVersion.android));
 
-    _dataFetchedSource.add(null);
+    _dataFetchedSource.add(true);
   }
 
   void dispose() {
@@ -85,8 +88,4 @@ class RemoteConfiguration {
   }
 }
 
-enum UPDATE_SEVERITY {
-  MAJOR,
-  MINOR,
-  PATCH
-}
+enum UPDATE_SEVERITY { MAJOR, MINOR, PATCH }

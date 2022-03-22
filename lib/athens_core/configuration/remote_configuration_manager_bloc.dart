@@ -11,7 +11,8 @@ import 'package:project_athens/athens_core/presentation/base_blocs/base_change_n
 import 'package:url_launcher/url_launcher.dart';
 import 'package:version/version.dart';
 
-class RemoteConfigurationManagerBloc extends BaseChangeNotifier with ConfigurationDelegate<DateTime?, DateTime> {
+class RemoteConfigurationManagerBloc extends BaseChangeNotifier
+    with ConfigurationDelegate<DateTime?, DateTime> {
   final RemoteConfiguration _remoteConfiguration;
   late final StreamSubscription<void> _configChangeSub;
 
@@ -23,12 +24,13 @@ class RemoteConfigurationManagerBloc extends BaseChangeNotifier with Configurati
   get defaultStorageValue => null;
 
   @override
-  String get preferenceName => ConfigurationStorageNames.LAST_PRIVACY_POLICY_VERSION;
+  String get preferenceName =>
+      ConfigurationStorageNames.LAST_PRIVACY_POLICY_VERSION;
 
-  RemoteConfigurationManagerBloc(
-    this._remoteConfiguration
-  ) {
-    _configChangeSub = _remoteConfiguration.dataFetched.listen((event) => _configRefreshed());
+  RemoteConfigurationManagerBloc(this._remoteConfiguration) {
+    _configChangeSub = _remoteConfiguration.dataFetched
+        .handleError((err) {})
+        .listen((event) => _configRefreshed());
   }
 
   void forceRefreshConfig() {
@@ -50,11 +52,11 @@ class RemoteConfigurationManagerBloc extends BaseChangeNotifier with Configurati
   }
 
   void handleAndroid() async {
-      if (isCriticalUpdate) {
-        return await InAppUpdate.performImmediateUpdate();
-      } else {
-        await InAppUpdate.startFlexibleUpdate();
-        await InAppUpdate.completeFlexibleUpdate();
+    if (isCriticalUpdate) {
+      return await InAppUpdate.performImmediateUpdate();
+    } else {
+      await InAppUpdate.startFlexibleUpdate();
+      await InAppUpdate.completeFlexibleUpdate();
     }
   }
 
@@ -64,14 +66,20 @@ class RemoteConfigurationManagerBloc extends BaseChangeNotifier with Configurati
 
   String getCupertinoUpdateTitle(AppLocalizations localizations) {
     return isCriticalUpdate
-        ? localizations.getText().universalUpdateCupertinoDialogImmediateUpdateTitle()
+        ? localizations
+            .getText()
+            .universalUpdateCupertinoDialogImmediateUpdateTitle()
         : localizations.getText().universalUpdateCupertinoDialogTitle();
   }
 
   String getCupertinoUpdateContent(AppLocalizations localizations) {
     return isCriticalUpdate
-        ? localizations.getText().universalUpdateCupertinoDialogImmediateUpdateContent()
-        : localizations.getText().universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow();
+        ? localizations
+            .getText()
+            .universalUpdateCupertinoDialogImmediateUpdateContent()
+        : localizations
+            .getText()
+            .universalUpdateCupertinoDialogWouldYouLikeToUpdateAppNow();
   }
 
   void _configRefreshed() {
@@ -107,9 +115,11 @@ class RemoteConfigurationManagerBloc extends BaseChangeNotifier with Configurati
       return;
     }
 
-    final DateTime currentAgreementVersion = _remoteConfiguration.privacyPolicyVersion;
+    final DateTime currentAgreementVersion =
+        _remoteConfiguration.privacyPolicyVersion;
 
-    if (currentAgreementVersion.millisecondsSinceEpoch > agreementVersion.millisecondsSinceEpoch) {
+    if (currentAgreementVersion.millisecondsSinceEpoch >
+        agreementVersion.millisecondsSinceEpoch) {
       showUpdatedPrivacyPolicy = true;
     }
   }
@@ -128,20 +138,26 @@ class RemoteConfigurationManagerBloc extends BaseChangeNotifier with Configurati
     }
   }
 
-  UPDATE_SEVERITY? _checkPlatformVersions(Version targetVersion, Version currentVersion, bool enforceMajor) {
+  UPDATE_SEVERITY? _checkPlatformVersions(
+      Version targetVersion, Version currentVersion, bool enforceMajor) {
     if (targetVersion > currentVersion) {
-      return enforceMajor ? UPDATE_SEVERITY.MAJOR : _getUpdateSeverity(targetVersion, currentVersion);
+      return enforceMajor
+          ? UPDATE_SEVERITY.MAJOR
+          : _getUpdateSeverity(targetVersion, currentVersion);
     }
 
     return null;
   }
 
-  void _isUpdateAvailable(Version minimalVersion, Version recommendedVersion) async {
+  void _isUpdateAvailable(
+      Version minimalVersion, Version recommendedVersion) async {
     final appInfo = await PackageInfo.fromPlatform();
     Version currentVersion = Version.parse(appInfo.version);
 
-    final UPDATE_SEVERITY? requiredUpdate = _checkPlatformVersions(minimalVersion, currentVersion, true);
-    final UPDATE_SEVERITY? recommendedUpdate = _checkPlatformVersions(recommendedVersion, currentVersion, false);
+    final UPDATE_SEVERITY? requiredUpdate =
+        _checkPlatformVersions(minimalVersion, currentVersion, true);
+    final UPDATE_SEVERITY? recommendedUpdate =
+        _checkPlatformVersions(recommendedVersion, currentVersion, false);
 
     isCriticalUpdate = requiredUpdate == UPDATE_SEVERITY.MAJOR;
     showUpdateDialog = requiredUpdate != null || recommendedUpdate != null;
