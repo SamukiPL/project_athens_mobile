@@ -12,23 +12,19 @@ class VotesListLocalDataSource {
   final VotingEntityMapper _toEntityMapper;
   final VotingModelDaoMapper _toModelMapper;
 
-  VotesListLocalDataSource(
-      this._database, this._toEntityMapper, this._toModelMapper);
+  VotesListLocalDataSource(this._database, this._toEntityMapper, this._toModelMapper);
 
   Future<void> saveVotingModels(List<VoteSlimDTO> models) async {
     final insertables = _toEntityMapper(models);
     _database.insertVotingModelsList(insertables);
   }
 
-  Future<List<VoteSlimModel>> getVotingModels(
-      int limit, int offset, VotesEasyFilter easyFilter) async {
-    final entities = await _database.getVotings(
-        limit, offset, _getEasyFilterWhere(easyFilter));
+  Future<List<VoteSlimModel>> getVotingModels(int limit, int offset, VotesEasyFilter easyFilter) async {
+    final entities = await _database.getVotings(limit, offset, [_getEasyFilterWhere(easyFilter)]);
     return _toModelMapper(entities);
   }
 
-  Expression<bool?> Function($VoteSlimEntityTable) _getEasyFilterWhere(
-      VotesEasyFilter easyFilter) {
+  Expression<bool?> Function($VoteSlimEntityTable) _getEasyFilterWhere(VotesEasyFilter easyFilter) {
     if (easyFilter is VoteSeenFilter) {
       return (tbl) => tbl.viewed.equals(true);
     } else if (easyFilter is VoteNotSeenFilter) {

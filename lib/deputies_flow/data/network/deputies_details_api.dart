@@ -10,25 +10,20 @@ part 'deputies_details_api.g.dart';
 
 @RestApi()
 abstract class DeputiesDetailsApi {
-  factory DeputiesDetailsApi(Dio dio, { String baseUrl }) = _DeputiesDetailsApi;
+  factory DeputiesDetailsApi(Dio dio, {String baseUrl}) = _DeputiesDetailsApi;
 
   @POST("/deputy-aggregator/cadency-speech/deputy/{cadencyDeputyId}")
   Future<List<SpeechResponse>> getSpeechesByDeputy(
-      @Path("cadencyDeputyId") String cadencyDeputyId,
-      @Body() SpeechSearchRequest query
-  );
+      @Path("cadencyDeputyId") String cadencyDeputyId, @Body() SpeechSearchRequest query);
 
   @POST("/deputy-aggregator/cadency-voting/deputy/{cadencyDeputyId}")
-  Future<List<VotingResponse>> getVotesByDeputy(
-      @Path("cadencyDeputyId") String cadencyDeputyId,
-      @Body() VoteSearchRequest query
-  );
+  Future<List<VoteSlimDTO>> getVotesByDeputy(
+      @Path("cadencyDeputyId") String cadencyDeputyId, @Body() VoteSearchRequest query);
 
   @POST('/deputy-aggregator/cadency-deputy/{cadencyDeputyId}/vote-accuracy/{parliamentClubId}/{accuracyType}')
   Future<DeputyVoteAccuracyResponse> getDeputyVoteAccuracy(
       @Path("cadencyDeputyId") String cadencyDeputyId,
       @Path("parliamentClubId") String parliamentClubId,
       @Path('accuracyType') String accuracyType,
-      @Body() VoteSearchRequest query
-  );
+      @Body() VoteSearchRequest query);
 }

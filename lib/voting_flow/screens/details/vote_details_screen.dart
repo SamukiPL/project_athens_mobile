@@ -24,7 +24,6 @@ import 'package:project_athens/voting_flow/screens/details/linear_vote_distribut
 import 'package:provider/provider.dart';
 
 class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> with RedirectionDelegate {
-
   final VoteSlimModel _voteModel;
 
   VoteDetailsScreen(this._voteModel);
@@ -39,14 +38,14 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> with RedirectionDele
     final theme = Theme.of(context);
 
     return SingleChildScrollView(
-      child: Container(
+        child: Container(
       color: Colors.grey.shade200,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // vote distribution card
           FullCard(
-            header: 'Podstawowe informacje',
+              header: 'Podstawowe informacje',
               headerPadding: 10,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -54,24 +53,20 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> with RedirectionDele
                   buildDateAndFrequencyTable(context, theme),
                   Container(child: buildVoteDistributionChart(bloc, context))
                 ],
-          )),
+              )),
           FullCard(header: 'Opis', headerPadding: 8, child: buildDescription(theme)),
-          FullCard(header: 'Rozkład głosów', headerPadding: 8, child: buildClubVoteDistributionView(context, theme, bloc)),
+          FullCard(
+              header: 'Rozkład głosów', headerPadding: 8, child: buildClubVoteDistributionView(context, theme, bloc)),
           FullCard(header: 'Obserwowani posłowie', headerPadding: 8, child: buildDeputyVotesView(context, theme, bloc)),
           StreamProvider<VotingModel?>.value(
               value: bloc.votingFullStream,
               initialData: null,
               child: Consumer<VotingModel?>(
-                builder: (context, model, _) =>
-                    model != null ?
-                    FullCard(
-                        cardPadding: EdgeInsets.only(top: 8, bottom: 8, left: 8, right: 8),
-                        child: DbSource(model)
-                ) : Container()
-              )
-          ),
+                  builder: (context, model, _) => model != null
+                      ? FullCard(
+                          cardPadding: EdgeInsets.only(top: 8, bottom: 8, left: 8, right: 8), child: DbSource(model))
+                      : Container())),
           TechnicalData(technicalId: _voteModel.id),
-
         ],
       ),
     ));
@@ -114,23 +109,17 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> with RedirectionDele
   }
 
   Widget buildDateAndFrequencyTable(BuildContext context, ThemeData theme) {
-    final votingsCount = (_voteModel.voteNumbers.inFavor +
-        _voteModel.voteNumbers.hold +
-        _voteModel.voteNumbers.against);
+    final votingsCount =
+        (_voteModel.voteNumbers.inFavor + _voteModel.voteNumbers.hold + _voteModel.voteNumbers.against);
 
     final cells = [
       SimpleHorizontalTableCell(
-        lowerText: DateFormat("HH:mm", "pl").format(_voteModel.voteAt),
-        icon: Icons.access_time
-      ),
+          lowerText: DateFormat("HH:mm", "pl").format(_voteModel.voteAt), icon: Icons.access_time),
       SimpleHorizontalTableCell(
-          lowerText: DateFormat("d.MM.yyyy", "pl").format(_voteModel.voteAt),
-          icon: Icons.today,
+        lowerText: DateFormat("dd.MM.yyyy", "pl").format(_voteModel.voteAt),
+        icon: Icons.today,
       ),
-      SimpleHorizontalTableCell(
-          lowerText: votingsCount.toString() + "/460",
-          icon: Icons.how_to_reg
-      ),
+      SimpleHorizontalTableCell(lowerText: votingsCount.toString() + "/460", icon: Icons.how_to_reg),
     ];
 
     return SimpleHorizontalTable(cells: cells.toList());
@@ -236,129 +225,103 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> with RedirectionDele
           children: [
             Text(
               _voteModel.title,
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w300),
+              style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w300),
             ),
           ],
         ));
   }
 
-  TableRow  buildClubVoteTableRow(VoteClubDistributionRowData rowData, ThemeData theme) {
+  TableRow buildClubVoteTableRow(VoteClubDistributionRowData rowData, ThemeData theme) {
     final dataRowStyle = TextStyle(
       fontSize: 10,
     );
 
     return TableRow(
-      decoration: BoxDecoration(
-          border:
-              Border(bottom: BorderSide(color: theme.dividerColor, width: 1))),
+      decoration: BoxDecoration(border: Border(bottom: BorderSide(color: theme.dividerColor, width: 1))),
       children: [
         Container(
           padding: EdgeInsets.all(4),
-          child: Text(rowData.parliamentClubModel.shortName,
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 11)),
+          child:
+              Text(rowData.parliamentClubModel.shortName, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 11)),
         ),
         Container(
             padding: EdgeInsets.all(4),
-            child: Text(rowData.votingNumbers.totalDeputies.toString(),
-                textAlign: TextAlign.center, style: dataRowStyle)),
+            child:
+                Text(rowData.votingNumbers.totalDeputies.toString(), textAlign: TextAlign.center, style: dataRowStyle)),
         Container(
             padding: EdgeInsets.all(4),
-            child: Text(rowData.votingNumbers.actualVoted.toString(),
-                textAlign: TextAlign.center, style: dataRowStyle)),
+            child:
+                Text(rowData.votingNumbers.actualVoted.toString(), textAlign: TextAlign.center, style: dataRowStyle)),
         Container(
             padding: EdgeInsets.all(4),
-            child: Text(rowData.votingNumbers.absent.toString(),
-                textAlign: TextAlign.center, style: dataRowStyle)),
+            child: Text(rowData.votingNumbers.absent.toString(), textAlign: TextAlign.center, style: dataRowStyle)),
         Container(
             padding: EdgeInsets.all(4),
-            child: Text(rowData.votingNumbers.inFavor.toString(),
-                textAlign: TextAlign.center, style: dataRowStyle)),
+            child: Text(rowData.votingNumbers.inFavor.toString(), textAlign: TextAlign.center, style: dataRowStyle)),
         Container(
             padding: EdgeInsets.all(4),
-            child: Text(rowData.votingNumbers.against.toString(),
-                textAlign: TextAlign.center, style: dataRowStyle)),
+            child: Text(rowData.votingNumbers.against.toString(), textAlign: TextAlign.center, style: dataRowStyle)),
         Container(
             padding: EdgeInsets.all(4),
-            child: Text(rowData.votingNumbers.hold.toString(),
-                textAlign: TextAlign.center, style: dataRowStyle)),
+            child: Text(rowData.votingNumbers.hold.toString(), textAlign: TextAlign.center, style: dataRowStyle)),
       ],
     );
   }
 
   Widget buildClubVoteDistributionView(BuildContext context, ThemeData theme, VoteDetailsBloc bloc) {
     final TableRow headingRow = TableRow(
-      decoration: BoxDecoration(
-          border:
-              Border(bottom: BorderSide(color: theme.primaryColor, width: 2))),
+      decoration: BoxDecoration(border: Border(bottom: BorderSide(color: theme.primaryColor, width: 2))),
       children: [
         TableCell(child: Container()), // just to fill empty space
         TableCell(
-          child: Container(
-              padding: EdgeInsets.all(4),
-              child: Icon(Icons.group, color: theme.dividerColor, size: 20)),
+          child: Container(padding: EdgeInsets.all(4), child: Icon(Icons.group, color: theme.dividerColor, size: 20)),
+          verticalAlignment: TableCellVerticalAlignment.middle,
+        ),
+        TableCell(
+          child:
+              Container(padding: EdgeInsets.all(4), child: Icon(Icons.how_to_reg, color: theme.dividerColor, size: 20)),
           verticalAlignment: TableCellVerticalAlignment.middle,
         ),
         TableCell(
           child: Container(
-              padding: EdgeInsets.all(4),
-              child:
-                  Icon(Icons.how_to_reg, color: theme.dividerColor, size: 20)),
+              padding: EdgeInsets.all(4), child: Icon(MdiIcons.accountOff, color: theme.dividerColor, size: 20)),
           verticalAlignment: TableCellVerticalAlignment.middle,
         ),
         TableCell(
-          child: Container(
-              padding: EdgeInsets.all(4),
-              child: Icon(MdiIcons.accountOff,
-                  color: theme.dividerColor, size: 20)),
+          child:
+              Container(padding: EdgeInsets.all(4), child: Icon(Icons.thumb_up, color: theme.dividerColor, size: 17)),
           verticalAlignment: TableCellVerticalAlignment.middle,
         ),
         TableCell(
-          child: Container(
-              padding: EdgeInsets.all(4),
-              child: Icon(Icons.thumb_up, color: theme.dividerColor, size: 17)),
+          child:
+              Container(padding: EdgeInsets.all(4), child: Icon(Icons.thumb_down, color: theme.dividerColor, size: 17)),
           verticalAlignment: TableCellVerticalAlignment.middle,
         ),
         TableCell(
-          child: Container(
-              padding: EdgeInsets.all(4),
-              child:
-                  Icon(Icons.thumb_down, color: theme.dividerColor, size: 17)),
-          verticalAlignment: TableCellVerticalAlignment.middle,
-        ),
-        TableCell(
-          child: Container(
-              padding: EdgeInsets.all(4),
-              child: Icon(Icons.pan_tool, color: theme.dividerColor, size: 15)),
+          child:
+              Container(padding: EdgeInsets.all(4), child: Icon(Icons.pan_tool, color: theme.dividerColor, size: 15)),
           verticalAlignment: TableCellVerticalAlignment.middle,
         ),
       ],
     );
 
     return StreamProvider<List<VoteClubDistributionRowData>?>.value(
-      initialData: null,
-      value: bloc.clubVoteDistribution,
-      child: Consumer<List<VoteClubDistributionRowData>?>(
-        builder: (context, rowsData, _) =>
-            rowsData != null ?
-            Container(
-              // additional padding on bottom to compensate internal table cells padding
-                padding: EdgeInsets.only(left: 8, right: 8, bottom: 8),
-                child: Table(
-                  // set first column with parliament club names a little bigger
-                  // since it's need more space than 3 digit number.
-                  columnWidths: const {
-                    0: FlexColumnWidth(1.5),
-                  },
-                  children: [headingRow]..addAll(rowsData.map(
-                          (rowData) => buildClubVoteTableRow(
-                          rowData, theme))),
-                )
-            ) : Container()
-      )
-    );
+        initialData: null,
+        value: bloc.clubVoteDistribution,
+        child: Consumer<List<VoteClubDistributionRowData>?>(
+            builder: (context, rowsData, _) => rowsData != null
+                ? Container(
+                    // additional padding on bottom to compensate internal table cells padding
+                    padding: EdgeInsets.only(left: 8, right: 8, bottom: 8),
+                    child: Table(
+                      // set first column with parliament club names a little bigger
+                      // since it's need more space than 3 digit number.
+                      columnWidths: const {
+                        0: FlexColumnWidth(1.5),
+                      },
+                      children: [headingRow]..addAll(rowsData.map((rowData) => buildClubVoteTableRow(rowData, theme))),
+                    ))
+                : Container()));
   }
 
   Widget buildDeputyVotesView(BuildContext context, ThemeData theme, VoteDetailsBloc bloc) {
@@ -366,24 +329,19 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> with RedirectionDele
         value: bloc.votingFullStream,
         initialData: null,
         child: Consumer<VotingModel?>(
-            builder: (context, model, _) =>
-                model != null ?
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Wrap(
-                        direction: Axis.horizontal,
-                        children: model.votes
-                            .map((e) => buildDeputyVotingView(e, context, theme))
-                            .toList()),
-                  ],
-            ) : Container()
-        )
-    );
+            builder: (context, model, _) => model != null
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Wrap(
+                          direction: Axis.horizontal,
+                          children: model.votes.map((e) => buildDeputyVotingView(e, context, theme)).toList()),
+                    ],
+                  )
+                : Container()));
   }
 
-  Widget buildDeputyVotingView(
-      VoteModel voting, BuildContext context, ThemeData theme) {
+  Widget buildDeputyVotingView(VoteModel voting, BuildContext context, ThemeData theme) {
     final deputiesCache = Provider.of<SubscribedDeputiesCache>(context);
     final viewWidth = MediaQuery.of(context).size.width - 16;
     final localizations = Provider.of<AppLocalizations>(context);
@@ -417,73 +375,65 @@ class VoteDetailsScreen extends BaseScreen<VoteDetailsBloc> with RedirectionDele
       child: Consumer<SubscribedDeputyModel?>(
           builder: (context, deputy, _) => deputy != null
               ? GestureDetector(
-                onTap: () => goToDestination(context, DeputyDetailsDestination(deputy)),
-                child: Container(
-                    width: circleSize,
-                    padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
-                    child: Column(
-                      children: [
-                        Container(
-                          height: circleSize * 0.8,
-                          width: circleSize * 0.8,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                          ),
-                          child: Stack(
-                            children: [
-                              Container(
+                  onTap: () => goToDestination(context, DeputyDetailsDestination(deputy)),
+                  child: Container(
+                      width: circleSize,
+                      padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: circleSize * 0.8,
+                            width: circleSize * 0.8,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: Stack(
+                              children: [
+                                Container(
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: new DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: new NetworkImage(deputy.thumbnailUrl ?? ""),
+                                        ))),
+                                Container(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    voteTypeStr,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                   decoration: BoxDecoration(
+                                      color: borderColor.withOpacity(0.3),
                                       shape: BoxShape.circle,
-                                      image: new DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: new NetworkImage(
-                                            deputy.thumbnailUrl ?? ""),
-                                      ))),
-                              Container(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  voteTypeStr,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                decoration: BoxDecoration(
-                                    color: borderColor.withOpacity(0.3),
-                                    shape: BoxShape.circle,
-                                    border:
-                                    Border.all(color: borderColor, width: 2)),
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(top: 8),
-                          child: Text(
-                            deputy.name,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.black,
+                                      border: Border.all(color: borderColor, width: 2)),
+                                )
+                              ],
                             ),
                           ),
-                        ),
-                        Container(
-                          child: Text(
-                            deputy.club ?? "",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: theme.dividerColor,
-                                fontWeight: FontWeight.w300,
-                                fontSize: 12),
+                          Container(
+                            padding: EdgeInsets.only(top: 8),
+                            child: Text(
+                              deputy.name,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
                           ),
-                        ),
-                      ],
-                    )
-                )
-              )
+                          Container(
+                            child: Text(
+                              deputy.club ?? "",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: theme.dividerColor, fontWeight: FontWeight.w300, fontSize: 12),
+                            ),
+                          ),
+                        ],
+                      )))
               : Container()),
     );
   }
 
   @override
-  Widget? buildFloatingActionButton(
-          BuildContext context, VoteDetailsBloc bloc) => null;
+  Widget? buildFloatingActionButton(BuildContext context, VoteDetailsBloc bloc) => null;
 }

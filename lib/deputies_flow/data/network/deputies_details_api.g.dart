@@ -37,21 +37,21 @@ class _DeputiesDetailsApi implements DeputiesDetailsApi {
   }
 
   @override
-  Future<List<VotingResponse>> getVotesByDeputy(cadencyDeputyId, query) async {
+  Future<List<VoteSlimDTO>> getVotesByDeputy(cadencyDeputyId, query) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(query.toJson());
     final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<VotingResponse>>(Options(
+        _setStreamType<List<VoteSlimDTO>>(Options(
                 method: 'POST', headers: _headers, extra: _extra)
             .compose(_dio.options,
                 '/deputy-aggregator/cadency-voting/deputy/${cadencyDeputyId}',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
-        .map((dynamic i) => VotingResponse.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => VoteSlimDTO.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }

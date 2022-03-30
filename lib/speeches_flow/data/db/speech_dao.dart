@@ -12,18 +12,17 @@ extension SpeechDao on AthensDatabase {
     });
   }
 
-  Future<List<SpeechEntityData>> getSpeeches(int limit, int offset, Expression<bool?> Function($SpeechEntityTable tbl)? where) async {
+  Future<List<SpeechEntityData>> getSpeeches(
+      int limit, int offset, List<Expression<bool?> Function($SpeechEntityTable tbl)>? where) async {
     final query = select(speechEntity);
-    if (where != null) {
-      query.where(where);
-    }
+
+    where?.forEach((whereClause) => query.where(whereClause));
+
     query.limit(limit, offset: offset);
     return query.get();
   }
-  
+
   Future<void> speechWasSeen(String speechId) async {
-    (update(speechEntity)..where((tbl) => tbl.id.equals(speechId))).write(SpeechEntityCompanion(
-      viewed: Value(true)
-    ));
+    (update(speechEntity)..where((tbl) => tbl.id.equals(speechId))).write(SpeechEntityCompanion(viewed: Value(true)));
   }
 }

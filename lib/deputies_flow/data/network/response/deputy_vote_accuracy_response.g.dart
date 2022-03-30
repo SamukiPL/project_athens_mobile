@@ -39,6 +39,7 @@ VoteSlimDTO _$VoteSlimDTOFromJson(Map<String, dynamic> json) => VoteSlimDTO(
       json['absoluteMajority'] as int?,
       json['orderPoint'] as int?,
       json['viewed'] as bool?,
+      $enumDecodeNullable(_$VoteTypeEnumMap, json['deputyVoteType']),
     );
 
 Map<String, dynamic> _$VoteSlimDTOToJson(VoteSlimDTO instance) =>
@@ -54,6 +55,7 @@ Map<String, dynamic> _$VoteSlimDTOToJson(VoteSlimDTO instance) =>
       'deputiesVoteType': instance.deputiesVoteType,
       'orderPoint': instance.orderPoint,
       'viewed': instance.viewed,
+      'deputyVoteType': _$VoteTypeEnumMap[instance.deputyVoteType],
     };
 
 const _$VotingTypeEnumMap = {
@@ -87,6 +89,13 @@ const _$VotingTypeEnumMap = {
   VotingType.UNKNOWN: 999,
 };
 
+const _$VoteTypeEnumMap = {
+  VoteType.IN_FAVOR: 0,
+  VoteType.AGAINST: 1,
+  VoteType.HOLD: 2,
+  VoteType.ABSENT: 3,
+};
+
 VoteSlimClubMajorityDTO _$VoteSlimClubMajorityDTOFromJson(
         Map<String, dynamic> json) =>
     VoteSlimClubMajorityDTO(
@@ -104,13 +113,6 @@ Map<String, dynamic> _$VoteSlimClubMajorityDTOToJson(
       'voteMajority': _$VoteTypeEnumMap[instance.voteMajority],
       'deputyCardNumbers': instance.deputyCardNumbers,
     };
-
-const _$VoteTypeEnumMap = {
-  VoteType.IN_FAVOR: 0,
-  VoteType.AGAINST: 1,
-  VoteType.HOLD: 2,
-  VoteType.ABSENT: 3,
-};
 
 VoteSlimDeputyMajorityVoteDTO _$VoteSlimDeputyMajorityVoteDTOFromJson(
         Map<String, dynamic> json) =>

@@ -68,6 +68,7 @@ dependencies:
   table_calendar: ^3.0.3
   flutter_widget_from_html_core: ^0.8.5
   connectivity_plus: ^2.2.1
+  extended_nested_scroll_view: ^5.0.0
 
 dev_dependencies:
   flutter_test:

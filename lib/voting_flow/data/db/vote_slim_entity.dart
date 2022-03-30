@@ -5,6 +5,7 @@ class VoteSlimEntity extends Table {
   TextColumn get title => text()();
   IntColumn get votingType => integer()();
   DateTimeColumn get date => dateTime()();
+  IntColumn get deputyVoteType => integer().nullable()();
 
   IntColumn get inFavor => integer()();
   IntColumn get against => integer()();

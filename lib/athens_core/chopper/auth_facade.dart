@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:project_athens/athens_core/auth/auth_repository.dart';
 import 'package:project_athens/athens_core/auth/auth_storage.dart';
 import 'package:project_athens/athens_core/ext/string_extension.dart';
@@ -5,7 +7,6 @@ import 'package:project_athens/athens_core/ext/string_extension.dart';
 import 'jwt_decode.dart';
 
 class AuthFacade {
-
   final Jwt _jwt = Jwt();
 
   final AuthStorage _storage = AuthStorage();
@@ -26,8 +27,7 @@ class AuthFacade {
 
   Future<bool> _provideTokens() async {
     var tokens = await _storage.provideTokens();
-    if (tokens.accessToken.isNullOrEmpty)
-      return false;
+    if (tokens.accessToken.isNullOrEmpty) return false;
 
     _accessToken = tokens.accessToken;
     _refreshToken = tokens.refreshToken;
@@ -37,14 +37,23 @@ class AuthFacade {
 
   Future<String> _manageAccessToken() async {
     await initialization;
-    if (_accessToken == null &&
-        !await _provideTokens())
-      return "";
+    if (_accessToken == null && !await _provideTokens()) return "";
 
-    var now = DateTime.now().millisecondsSinceEpoch / 1000;
+    final now = DateTime.now().millisecondsSinceEpoch / 1000;
     if (now < _tokenExp!) return _accessToken!;
 
-    var newTokens = await _repository.refreshTokens(_refreshToken!);
+    final newTokens = await _repository.refreshTokens(_refreshToken!).catchError((err) async {
+      print('An error occured while trying to refresh tokens');
+      Fimber.e(err.toString());
+
+      if (err is DioError && err.response?.statusCode == 401) {
+        await _storage.removeTokens();
+        clearTokens();
+      }
+
+      throw err;
+    });
+
     _accessToken = newTokens.accessToken;
     _tokenExp = _jwt.getJwtExp(newTokens.accessToken!);
 

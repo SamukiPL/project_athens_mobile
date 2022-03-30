@@ -11,11 +11,7 @@ class VoteNumbers {
   final int hold;
   final int absent;
 
-  VoteNumbers(
-      {required this.inFavor,
-      required this.against,
-      required this.hold,
-      required this.absent});
+  VoteNumbers({required this.inFavor, required this.against, required this.hold, required this.absent});
 }
 
 class VoteSlimClubMajority {
@@ -23,8 +19,7 @@ class VoteSlimClubMajority {
   final VoteType voteMajority;
   final List<int> deputyCardNumbers;
 
-  VoteSlimClubMajority(
-      this.parliamentClubModel, this.voteMajority, this.deputyCardNumbers);
+  VoteSlimClubMajority(this.parliamentClubModel, this.voteMajority, this.deputyCardNumbers);
 }
 
 class VoteSlimDeputyVoteType {
@@ -46,6 +41,9 @@ class VoteSlimModel extends BaseModel {
   final int? absoluteMajority;
   final bool viewed;
 
+  /// set only when downloading deputy votes
+  final VoteType? deputyVoteType;
+
   final List<VoteSlimClubMajority>? clubsMajority;
   final List<VoteSlimDeputyVoteType>? deputiesVote;
 
@@ -61,7 +59,8 @@ class VoteSlimModel extends BaseModel {
       this.qualifyingMajority,
       this.viewed = false,
       this.absoluteMajority,
-      this.orderPoint});
+      this.orderPoint,
+      this.deputyVoteType});
 
   factory VoteSlimModel.fromVotingModel(VotingModel model) {
     final voteNumbers = VoteNumbers(

@@ -7,12 +7,12 @@ import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/base_screen.dart';
 import 'package:project_athens/deputies_flow/screens/details/deputy_details_bloc.dart';
 import 'package:project_athens/deputies_flow/screens/details/presentation/subscribed_deputy_bar_view.dart';
+import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_acitivities_tab.dart';
 import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_information_details_tab.dart';
-import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_speeches_details_tab.dart';
-import 'package:project_athens/deputies_flow/screens/details/tabs/deputy_votings_details_tab.dart';
 import 'package:project_athens/deputies_utils/domain/subscribed_deputy_model.dart';
 import 'package:project_athens/guest_flow/domain/logged_state.dart';
 import 'package:provider/provider.dart';
+import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 
 class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
   final SubscribedDeputyModel _deputyModel;
@@ -22,9 +22,22 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
   @override
   Widget buildBody(BuildContext context, DeputyDetailsBloc bloc) {
     final localizations = Provider.of<AppLocalizations>(context);
+
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
+//var tabBarHeight = primaryTabBar.preferredSize.height;
+    var pinnedHeaderHeight =
+//statusBar height
+        statusBarHeight +
+            //pinned SliverAppBar height in header
+            (kToolbarHeight * 2);
+
     return DefaultTabController(
-        length: 3,
-        child: NestedScrollView(
+        length: 2,
+        child: ExtendedNestedScrollView(
+            // onlyOneScrollInBody: true,
+            pinnedHeaderSliverHeightBuilder: () {
+              return pinnedHeaderHeight;
+            },
             headerSliverBuilder: (context, value) => [
                   SliverAppBar(
                     leading: Consumer<DestinationManager>(
@@ -37,8 +50,11 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
                     key: Key("app-bar"),
                     expandedHeight: 250,
                     pinned: true,
+                    primary: true,
+                    stretch: true,
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
+                      titlePadding: EdgeInsets.only(bottom: 6),
                       title: RichText(
                           textAlign: TextAlign.center,
                           text: TextSpan(
@@ -49,20 +65,14 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
                               ),
                               children: [
                                 TextSpan(
-                                    text: _deputyModel.club != null
-                                        ? '\n' + _deputyModel.club!
-                                        : "",
+                                    text: _deputyModel.club != null ? '\n' + _deputyModel.club! : "",
                                     style: TextStyle(
-                                        overflow: TextOverflow.ellipsis,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400))
+                                        overflow: TextOverflow.ellipsis, fontSize: 16, fontWeight: FontWeight.w400))
                               ])),
                       background: Container(
                         decoration: BoxDecoration(
                             image: new DecorationImage(
-                          image: Image.asset(
-                                  "resources/images/parliament/parliament_gathering_512px.jpg")
-                              .image,
+                          image: Image.asset("resources/images/parliament/parliament_gathering_512px.jpg").image,
                           fit: BoxFit.cover,
                         )),
                         child: BackdropFilter(
@@ -70,8 +80,7 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
                           child: Center(
                             child: ClipRRect(
                                 borderRadius: BorderRadius.circular(32),
-                                child: Image.network(
-                                    _deputyModel.thumbnailUrl ?? "")),
+                                child: Image.network(_deputyModel.thumbnailUrl ?? "")),
                           ),
                         ),
                       ),
@@ -84,12 +93,7 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
                         Tab(
                           text: localizations.getText().deputiesInformation(),
                         ),
-                        Tab(
-                          text: localizations.getText().deputiesSpeeches(),
-                        ),
-                        Tab(
-                          text: localizations.getText().deputiesVotings(),
-                        )
+                        Tab(text: localizations.getText().deputiesActivities())
                       ],
                     )),
                     pinned: true,
@@ -98,8 +102,7 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
             body: TabBarView(
               children: <Widget>[
                 buildDeputyInformationTab(context, bloc),
-                buildDeputySpeechesTab(context),
-                buildDeputyVotingsTab(context),
+                buildDeputyActivitiesTab(context, bloc),
               ],
             )));
   }
@@ -108,33 +111,24 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
   String get appBarTitle => _deputyModel.name;
 
   @override
-  Widget? buildFloatingActionButton(
-          BuildContext context, DeputyDetailsBloc bloc) =>
-      null;
+  Widget? buildFloatingActionButton(BuildContext context, DeputyDetailsBloc bloc) => null;
 
   @override
   Widget? buildAppBar(BuildContext context, DeputyDetailsBloc bloc) => null;
 
   Widget buildBaseTabContainer(Widget tab) {
-    return SingleChildScrollView(
-        child: Container(color: Colors.grey.shade200, child: tab));
+    return SingleChildScrollView(child: Container(color: Colors.grey.shade200, child: tab));
   }
 
-  Widget buildDeputyInformationTab(
-      BuildContext context, DeputyDetailsBloc bloc) {
+  Widget buildDeputyInformationTab(BuildContext context, DeputyDetailsBloc bloc) {
     return DeputyInformationDetailsTab(bloc.deputyModel);
   }
 
-  Widget buildDeputySpeechesTab(BuildContext context) {
-    return DeputySpeechesDetailsTab();
+  Widget buildDeputyActivitiesTab(BuildContext context, DeputyDetailsBloc bloc) {
+    return DeputyActivitiesTab(bloc.deputyModel);
   }
 
-  Widget buildDeputyVotingsTab(BuildContext context) {
-    return DeputyVotingsDetailsTab();
-  }
-
-  Widget? buildObserverDeputyView(
-      DeputyDetailsBloc bloc, BuildContext context) {
+  Widget? buildObserverDeputyView(DeputyDetailsBloc bloc, BuildContext context) {
     final loggedState = Provider.of<LoggedState>(context);
     if (loggedState.isGuest) return null;
 
@@ -142,24 +136,18 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
       toolbarHeight: 0,
       collapsedHeight: 0,
       expandedHeight: 0,
-      bottom: PreferredSize(
-        preferredSize: Size.fromHeight(35),
-        child: Container(),
-      ),
       flexibleSpace: Padding(
         padding: EdgeInsets.only(left: 0),
         child: Container(
             height: double.infinity,
             width: double.infinity,
             padding: EdgeInsets.only(left: 12, right: 12),
-            child: ChangeNotifierProvider<
-                SubscribedDeputyNotificationsNotifier>.value(
+            child: ChangeNotifierProvider<SubscribedDeputyNotificationsNotifier>.value(
               value: bloc.deputyModel.notifications,
               child: Consumer<SubscribedDeputyNotificationsNotifier>(
-                builder: (context, notifier, _) =>
-                    bloc.deputyModel.notifications.isSubscribed
-                        ? SubscribedDeputyBarView(bloc.deputyModel)
-                        : notObservedDeputyView(bloc, context),
+                builder: (context, notifier, _) => bloc.deputyModel.notifications.isSubscribed
+                    ? SubscribedDeputyBarView(bloc.deputyModel)
+                    : notObservedDeputyView(bloc, context),
               ),
             )),
       ),
@@ -182,8 +170,8 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
               style: TextStyle(color: theme.dividerColor, fontSize: 14),
             ),
             MaterialButton(
-              onPressed: () => bloc.deputyModel.notifications.setIsSubscribed(
-                  !bloc.deputyModel.notifications.isSubscribed),
+              onPressed: () =>
+                  bloc.deputyModel.notifications.setIsSubscribed(!bloc.deputyModel.notifications.isSubscribed),
               child: Row(children: [
                 Text(
                   localizations.getText().deputiesSubscribe(),
@@ -195,8 +183,7 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
                 )
               ]),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(32),
-                  side: BorderSide(color: theme.primaryColor)),
+                  borderRadius: BorderRadius.circular(32), side: BorderSide(color: theme.primaryColor)),
             ),
           ]),
     );
@@ -215,8 +202,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => _tabBar.preferredSize.height;
 
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return new Container(
       child: _tabBar,
       color: Colors.white,

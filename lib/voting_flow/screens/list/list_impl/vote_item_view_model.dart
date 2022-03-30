@@ -6,12 +6,11 @@ import 'package:project_athens/athens_core/presentation/item_was_seen/item_seen_
 import 'package:project_athens/voting_flow/screens/list/list_impl/view_holders/vote_view_holder.dart';
 
 class VoteItemViewModel extends BaseItemViewModel with ItemSeenStateHolder {
-
   final VoteSlimModel model;
 
   String get id => model.id;
   String get title => model.title;
-  String get date => DateFormat("d.MM.y", "pl").format(model.voteAt);
+  String get date => DateFormat("dd.MM.y", "pl").format(model.voteAt);
   VoteNumbers get results => model.voteNumbers;
   String get description => model.votingDesc;
 

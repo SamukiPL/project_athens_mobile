@@ -231,6 +231,7 @@ class VoteSlimEntityData extends DataClass
   final String title;
   final int votingType;
   final DateTime date;
+  final int? deputyVoteType;
   final int inFavor;
   final int against;
   final int hold;
@@ -244,6 +245,7 @@ class VoteSlimEntityData extends DataClass
       required this.title,
       required this.votingType,
       required this.date,
+      this.deputyVoteType,
       required this.inFavor,
       required this.against,
       required this.hold,
@@ -264,6 +266,8 @@ class VoteSlimEntityData extends DataClass
           .mapFromDatabaseResponse(data['${effectivePrefix}voting_type'])!,
       date: const DateTimeType()
           .mapFromDatabaseResponse(data['${effectivePrefix}date'])!,
+      deputyVoteType: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}deputy_vote_type']),
       inFavor: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}in_favor'])!,
       against: const IntType()
@@ -289,6 +293,9 @@ class VoteSlimEntityData extends DataClass
     map['title'] = Variable<String>(title);
     map['voting_type'] = Variable<int>(votingType);
     map['date'] = Variable<DateTime>(date);
+    if (!nullToAbsent || deputyVoteType != null) {
+      map['deputy_vote_type'] = Variable<int?>(deputyVoteType);
+    }
     map['in_favor'] = Variable<int>(inFavor);
     map['against'] = Variable<int>(against);
     map['hold'] = Variable<int>(hold);
@@ -312,6 +319,9 @@ class VoteSlimEntityData extends DataClass
       title: Value(title),
       votingType: Value(votingType),
       date: Value(date),
+      deputyVoteType: deputyVoteType == null && nullToAbsent
+          ? const Value.absent()
+          : Value(deputyVoteType),
       inFavor: Value(inFavor),
       against: Value(against),
       hold: Value(hold),
@@ -337,6 +347,7 @@ class VoteSlimEntityData extends DataClass
       title: serializer.fromJson<String>(json['title']),
       votingType: serializer.fromJson<int>(json['votingType']),
       date: serializer.fromJson<DateTime>(json['date']),
+      deputyVoteType: serializer.fromJson<int?>(json['deputyVoteType']),
       inFavor: serializer.fromJson<int>(json['inFavor']),
       against: serializer.fromJson<int>(json['against']),
       hold: serializer.fromJson<int>(json['hold']),
@@ -355,6 +366,7 @@ class VoteSlimEntityData extends DataClass
       'title': serializer.toJson<String>(title),
       'votingType': serializer.toJson<int>(votingType),
       'date': serializer.toJson<DateTime>(date),
+      'deputyVoteType': serializer.toJson<int?>(deputyVoteType),
       'inFavor': serializer.toJson<int>(inFavor),
       'against': serializer.toJson<int>(against),
       'hold': serializer.toJson<int>(hold),
@@ -371,6 +383,7 @@ class VoteSlimEntityData extends DataClass
           String? title,
           int? votingType,
           DateTime? date,
+          int? deputyVoteType,
           int? inFavor,
           int? against,
           int? hold,
@@ -384,6 +397,7 @@ class VoteSlimEntityData extends DataClass
         title: title ?? this.title,
         votingType: votingType ?? this.votingType,
         date: date ?? this.date,
+        deputyVoteType: deputyVoteType ?? this.deputyVoteType,
         inFavor: inFavor ?? this.inFavor,
         against: against ?? this.against,
         hold: hold ?? this.hold,
@@ -400,6 +414,7 @@ class VoteSlimEntityData extends DataClass
           ..write('title: $title, ')
           ..write('votingType: $votingType, ')
           ..write('date: $date, ')
+          ..write('deputyVoteType: $deputyVoteType, ')
           ..write('inFavor: $inFavor, ')
           ..write('against: $against, ')
           ..write('hold: $hold, ')
@@ -413,8 +428,20 @@ class VoteSlimEntityData extends DataClass
   }
 
   @override
-  int get hashCode => Object.hash(id, title, votingType, date, inFavor, against,
-      hold, absent, orderPoint, qualifyingMajority, absoluteMajority, viewed);
+  int get hashCode => Object.hash(
+      id,
+      title,
+      votingType,
+      date,
+      deputyVoteType,
+      inFavor,
+      against,
+      hold,
+      absent,
+      orderPoint,
+      qualifyingMajority,
+      absoluteMajority,
+      viewed);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -423,6 +450,7 @@ class VoteSlimEntityData extends DataClass
           other.title == this.title &&
           other.votingType == this.votingType &&
           other.date == this.date &&
+          other.deputyVoteType == this.deputyVoteType &&
           other.inFavor == this.inFavor &&
           other.against == this.against &&
           other.hold == this.hold &&
@@ -438,6 +466,7 @@ class VoteSlimEntityCompanion extends UpdateCompanion<VoteSlimEntityData> {
   final Value<String> title;
   final Value<int> votingType;
   final Value<DateTime> date;
+  final Value<int?> deputyVoteType;
   final Value<int> inFavor;
   final Value<int> against;
   final Value<int> hold;
@@ -451,6 +480,7 @@ class VoteSlimEntityCompanion extends UpdateCompanion<VoteSlimEntityData> {
     this.title = const Value.absent(),
     this.votingType = const Value.absent(),
     this.date = const Value.absent(),
+    this.deputyVoteType = const Value.absent(),
     this.inFavor = const Value.absent(),
     this.against = const Value.absent(),
     this.hold = const Value.absent(),
@@ -465,6 +495,7 @@ class VoteSlimEntityCompanion extends UpdateCompanion<VoteSlimEntityData> {
     required String title,
     required int votingType,
     required DateTime date,
+    this.deputyVoteType = const Value.absent(),
     required int inFavor,
     required int against,
     required int hold,
@@ -487,6 +518,7 @@ class VoteSlimEntityCompanion extends UpdateCompanion<VoteSlimEntityData> {
     Expression<String>? title,
     Expression<int>? votingType,
     Expression<DateTime>? date,
+    Expression<int?>? deputyVoteType,
     Expression<int>? inFavor,
     Expression<int>? against,
     Expression<int>? hold,
@@ -501,6 +533,7 @@ class VoteSlimEntityCompanion extends UpdateCompanion<VoteSlimEntityData> {
       if (title != null) 'title': title,
       if (votingType != null) 'voting_type': votingType,
       if (date != null) 'date': date,
+      if (deputyVoteType != null) 'deputy_vote_type': deputyVoteType,
       if (inFavor != null) 'in_favor': inFavor,
       if (against != null) 'against': against,
       if (hold != null) 'hold': hold,
@@ -517,6 +550,7 @@ class VoteSlimEntityCompanion extends UpdateCompanion<VoteSlimEntityData> {
       Value<String>? title,
       Value<int>? votingType,
       Value<DateTime>? date,
+      Value<int?>? deputyVoteType,
       Value<int>? inFavor,
       Value<int>? against,
       Value<int>? hold,
@@ -530,6 +564,7 @@ class VoteSlimEntityCompanion extends UpdateCompanion<VoteSlimEntityData> {
       title: title ?? this.title,
       votingType: votingType ?? this.votingType,
       date: date ?? this.date,
+      deputyVoteType: deputyVoteType ?? this.deputyVoteType,
       inFavor: inFavor ?? this.inFavor,
       against: against ?? this.against,
       hold: hold ?? this.hold,
@@ -555,6 +590,9 @@ class VoteSlimEntityCompanion extends UpdateCompanion<VoteSlimEntityData> {
     }
     if (date.present) {
       map['date'] = Variable<DateTime>(date.value);
+    }
+    if (deputyVoteType.present) {
+      map['deputy_vote_type'] = Variable<int?>(deputyVoteType.value);
     }
     if (inFavor.present) {
       map['in_favor'] = Variable<int>(inFavor.value);
@@ -590,6 +628,7 @@ class VoteSlimEntityCompanion extends UpdateCompanion<VoteSlimEntityData> {
           ..write('title: $title, ')
           ..write('votingType: $votingType, ')
           ..write('date: $date, ')
+          ..write('deputyVoteType: $deputyVoteType, ')
           ..write('inFavor: $inFavor, ')
           ..write('against: $against, ')
           ..write('hold: $hold, ')
@@ -629,6 +668,12 @@ class $VoteSlimEntityTable extends VoteSlimEntity
   late final GeneratedColumn<DateTime?> date = GeneratedColumn<DateTime?>(
       'date', aliasedName, false,
       type: const IntType(), requiredDuringInsert: true);
+  final VerificationMeta _deputyVoteTypeMeta =
+      const VerificationMeta('deputyVoteType');
+  @override
+  late final GeneratedColumn<int?> deputyVoteType = GeneratedColumn<int?>(
+      'deputy_vote_type', aliasedName, true,
+      type: const IntType(), requiredDuringInsert: false);
   final VerificationMeta _inFavorMeta = const VerificationMeta('inFavor');
   @override
   late final GeneratedColumn<int?> inFavor = GeneratedColumn<int?>(
@@ -679,6 +724,7 @@ class $VoteSlimEntityTable extends VoteSlimEntity
         title,
         votingType,
         date,
+        deputyVoteType,
         inFavor,
         against,
         hold,
@@ -721,6 +767,12 @@ class $VoteSlimEntityTable extends VoteSlimEntity
           _dateMeta, date.isAcceptableOrUnknown(data['date']!, _dateMeta));
     } else if (isInserting) {
       context.missing(_dateMeta);
+    }
+    if (data.containsKey('deputy_vote_type')) {
+      context.handle(
+          _deputyVoteTypeMeta,
+          deputyVoteType.isAcceptableOrUnknown(
+              data['deputy_vote_type']!, _deputyVoteTypeMeta));
     }
     if (data.containsKey('in_favor')) {
       context.handle(_inFavorMeta,
