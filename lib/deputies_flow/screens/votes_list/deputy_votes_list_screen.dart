@@ -10,9 +10,6 @@ import 'package:provider/provider.dart';
 
 class DeputyVotesListScreen extends BaseScreen<BaseListBloc> {
   @override
-  bool get showBackArrow => true;
-
-  @override
   String getAppBarTitle(AppLocalizations localizations, BaseListBloc bloc) {
     return localizations.getText().deputiesVotesList();
   }
