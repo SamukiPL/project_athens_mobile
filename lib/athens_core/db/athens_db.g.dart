@@ -240,6 +240,12 @@ class VoteSlimEntityData extends DataClass
   final int? qualifyingMajority;
   final int? absoluteMajority;
   final bool viewed;
+
+  /// When downloading deputy votes we need distinction which
+  /// votes where downloaded for deputy and which for all otherwise
+  /// we could show votes in which deputy did not vote because he was
+  /// later choosen
+  final String? downloadedForDeputy;
   VoteSlimEntityData(
       {required this.id,
       required this.title,
@@ -253,7 +259,8 @@ class VoteSlimEntityData extends DataClass
       this.orderPoint,
       this.qualifyingMajority,
       this.absoluteMajority,
-      required this.viewed});
+      required this.viewed,
+      this.downloadedForDeputy});
   factory VoteSlimEntityData.fromData(Map<String, dynamic> data,
       {String? prefix}) {
     final effectivePrefix = prefix ?? '';
@@ -284,6 +291,8 @@ class VoteSlimEntityData extends DataClass
           .mapFromDatabaseResponse(data['${effectivePrefix}absolute_majority']),
       viewed: const BoolType()
           .mapFromDatabaseResponse(data['${effectivePrefix}viewed'])!,
+      downloadedForDeputy: const StringType().mapFromDatabaseResponse(
+          data['${effectivePrefix}downloaded_for_deputy']),
     );
   }
   @override
@@ -310,6 +319,9 @@ class VoteSlimEntityData extends DataClass
       map['absolute_majority'] = Variable<int?>(absoluteMajority);
     }
     map['viewed'] = Variable<bool>(viewed);
+    if (!nullToAbsent || downloadedForDeputy != null) {
+      map['downloaded_for_deputy'] = Variable<String?>(downloadedForDeputy);
+    }
     return map;
   }
 
@@ -336,6 +348,9 @@ class VoteSlimEntityData extends DataClass
           ? const Value.absent()
           : Value(absoluteMajority),
       viewed: Value(viewed),
+      downloadedForDeputy: downloadedForDeputy == null && nullToAbsent
+          ? const Value.absent()
+          : Value(downloadedForDeputy),
     );
   }
 
@@ -356,6 +371,8 @@ class VoteSlimEntityData extends DataClass
       qualifyingMajority: serializer.fromJson<int?>(json['qualifyingMajority']),
       absoluteMajority: serializer.fromJson<int?>(json['absoluteMajority']),
       viewed: serializer.fromJson<bool>(json['viewed']),
+      downloadedForDeputy:
+          serializer.fromJson<String?>(json['downloadedForDeputy']),
     );
   }
   @override
@@ -375,6 +392,7 @@ class VoteSlimEntityData extends DataClass
       'qualifyingMajority': serializer.toJson<int?>(qualifyingMajority),
       'absoluteMajority': serializer.toJson<int?>(absoluteMajority),
       'viewed': serializer.toJson<bool>(viewed),
+      'downloadedForDeputy': serializer.toJson<String?>(downloadedForDeputy),
     };
   }
 
@@ -391,7 +409,8 @@ class VoteSlimEntityData extends DataClass
           int? orderPoint,
           int? qualifyingMajority,
           int? absoluteMajority,
-          bool? viewed}) =>
+          bool? viewed,
+          String? downloadedForDeputy}) =>
       VoteSlimEntityData(
         id: id ?? this.id,
         title: title ?? this.title,
@@ -406,6 +425,7 @@ class VoteSlimEntityData extends DataClass
         qualifyingMajority: qualifyingMajority ?? this.qualifyingMajority,
         absoluteMajority: absoluteMajority ?? this.absoluteMajority,
         viewed: viewed ?? this.viewed,
+        downloadedForDeputy: downloadedForDeputy ?? this.downloadedForDeputy,
       );
   @override
   String toString() {
@@ -422,7 +442,8 @@ class VoteSlimEntityData extends DataClass
           ..write('orderPoint: $orderPoint, ')
           ..write('qualifyingMajority: $qualifyingMajority, ')
           ..write('absoluteMajority: $absoluteMajority, ')
-          ..write('viewed: $viewed')
+          ..write('viewed: $viewed, ')
+          ..write('downloadedForDeputy: $downloadedForDeputy')
           ..write(')'))
         .toString();
   }
@@ -441,7 +462,8 @@ class VoteSlimEntityData extends DataClass
       orderPoint,
       qualifyingMajority,
       absoluteMajority,
-      viewed);
+      viewed,
+      downloadedForDeputy);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -458,7 +480,8 @@ class VoteSlimEntityData extends DataClass
           other.orderPoint == this.orderPoint &&
           other.qualifyingMajority == this.qualifyingMajority &&
           other.absoluteMajority == this.absoluteMajority &&
-          other.viewed == this.viewed);
+          other.viewed == this.viewed &&
+          other.downloadedForDeputy == this.downloadedForDeputy);
 }
 
 class VoteSlimEntityCompanion extends UpdateCompanion<VoteSlimEntityData> {
@@ -475,6 +498,7 @@ class VoteSlimEntityCompanion extends UpdateCompanion<VoteSlimEntityData> {
   final Value<int?> qualifyingMajority;
   final Value<int?> absoluteMajority;
   final Value<bool> viewed;
+  final Value<String?> downloadedForDeputy;
   const VoteSlimEntityCompanion({
     this.id = const Value.absent(),
     this.title = const Value.absent(),
@@ -489,6 +513,7 @@ class VoteSlimEntityCompanion extends UpdateCompanion<VoteSlimEntityData> {
     this.qualifyingMajority = const Value.absent(),
     this.absoluteMajority = const Value.absent(),
     this.viewed = const Value.absent(),
+    this.downloadedForDeputy = const Value.absent(),
   });
   VoteSlimEntityCompanion.insert({
     required String id,
@@ -504,6 +529,7 @@ class VoteSlimEntityCompanion extends UpdateCompanion<VoteSlimEntityData> {
     this.qualifyingMajority = const Value.absent(),
     this.absoluteMajority = const Value.absent(),
     required bool viewed,
+    this.downloadedForDeputy = const Value.absent(),
   })  : id = Value(id),
         title = Value(title),
         votingType = Value(votingType),
@@ -527,6 +553,7 @@ class VoteSlimEntityCompanion extends UpdateCompanion<VoteSlimEntityData> {
     Expression<int?>? qualifyingMajority,
     Expression<int?>? absoluteMajority,
     Expression<bool>? viewed,
+    Expression<String?>? downloadedForDeputy,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -542,6 +569,8 @@ class VoteSlimEntityCompanion extends UpdateCompanion<VoteSlimEntityData> {
       if (qualifyingMajority != null) 'qualifying_majority': qualifyingMajority,
       if (absoluteMajority != null) 'absolute_majority': absoluteMajority,
       if (viewed != null) 'viewed': viewed,
+      if (downloadedForDeputy != null)
+        'downloaded_for_deputy': downloadedForDeputy,
     });
   }
 
@@ -558,7 +587,8 @@ class VoteSlimEntityCompanion extends UpdateCompanion<VoteSlimEntityData> {
       Value<int?>? orderPoint,
       Value<int?>? qualifyingMajority,
       Value<int?>? absoluteMajority,
-      Value<bool>? viewed}) {
+      Value<bool>? viewed,
+      Value<String?>? downloadedForDeputy}) {
     return VoteSlimEntityCompanion(
       id: id ?? this.id,
       title: title ?? this.title,
@@ -573,6 +603,7 @@ class VoteSlimEntityCompanion extends UpdateCompanion<VoteSlimEntityData> {
       qualifyingMajority: qualifyingMajority ?? this.qualifyingMajority,
       absoluteMajority: absoluteMajority ?? this.absoluteMajority,
       viewed: viewed ?? this.viewed,
+      downloadedForDeputy: downloadedForDeputy ?? this.downloadedForDeputy,
     );
   }
 
@@ -618,6 +649,10 @@ class VoteSlimEntityCompanion extends UpdateCompanion<VoteSlimEntityData> {
     if (viewed.present) {
       map['viewed'] = Variable<bool>(viewed.value);
     }
+    if (downloadedForDeputy.present) {
+      map['downloaded_for_deputy'] =
+          Variable<String?>(downloadedForDeputy.value);
+    }
     return map;
   }
 
@@ -636,7 +671,8 @@ class VoteSlimEntityCompanion extends UpdateCompanion<VoteSlimEntityData> {
           ..write('orderPoint: $orderPoint, ')
           ..write('qualifyingMajority: $qualifyingMajority, ')
           ..write('absoluteMajority: $absoluteMajority, ')
-          ..write('viewed: $viewed')
+          ..write('viewed: $viewed, ')
+          ..write('downloadedForDeputy: $downloadedForDeputy')
           ..write(')'))
         .toString();
   }
@@ -718,6 +754,12 @@ class $VoteSlimEntityTable extends VoteSlimEntity
       type: const BoolType(),
       requiredDuringInsert: true,
       defaultConstraints: 'CHECK (viewed IN (0, 1))');
+  final VerificationMeta _downloadedForDeputyMeta =
+      const VerificationMeta('downloadedForDeputy');
+  @override
+  late final GeneratedColumn<String?> downloadedForDeputy =
+      GeneratedColumn<String?>('downloaded_for_deputy', aliasedName, true,
+          type: const StringType(), requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [
         id,
@@ -732,7 +774,8 @@ class $VoteSlimEntityTable extends VoteSlimEntity
         orderPoint,
         qualifyingMajority,
         absoluteMajority,
-        viewed
+        viewed,
+        downloadedForDeputy
       ];
   @override
   String get aliasedName => _alias ?? 'vote_slim_entity';
@@ -821,6 +864,12 @@ class $VoteSlimEntityTable extends VoteSlimEntity
           viewed.isAcceptableOrUnknown(data['viewed']!, _viewedMeta));
     } else if (isInserting) {
       context.missing(_viewedMeta);
+    }
+    if (data.containsKey('downloaded_for_deputy')) {
+      context.handle(
+          _downloadedForDeputyMeta,
+          downloadedForDeputy.isAcceptableOrUnknown(
+              data['downloaded_for_deputy']!, _downloadedForDeputyMeta));
     }
     return context;
   }

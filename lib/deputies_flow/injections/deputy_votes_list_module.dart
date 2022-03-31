@@ -40,7 +40,7 @@ class DeputyVotesListModule extends Module {
     final networkMapper = VoteSlimNetworkMapper(deputiesCache, clubsCache, localizations);
 
     final database = Provider.of<AthensDatabase>(context);
-    final entityMapper = VotingEntityMapper();
+    final entityMapper = VotingEntityMapper(downloadedForDeputy: _deputyId);
     final speechModelDaoMapper = VotingModelDaoMapper(database, deputiesCache, clubsCache, localizations);
     final localDataSource = DeputyVotesListLocalDataSource(database, entityMapper, speechModelDaoMapper, _deputyId);
 

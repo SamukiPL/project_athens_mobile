@@ -22,15 +22,27 @@ LazyDatabase _openConnection() {
   });
 }
 
-@DriftDatabase(tables: [
-  SlimDeputyVoteTypeEntity,
-  VoteSlimEntity,
-  SlimClubMajorityEntity,
-  SpeechEntity
-])
+@DriftDatabase(tables: [SlimDeputyVoteTypeEntity, VoteSlimEntity, SlimClubMajorityEntity, SpeechEntity])
 class AthensDatabase extends _$AthensDatabase {
   AthensDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
+
+  @override
+  MigrationStrategy get migration {
+    return MigrationStrategy(
+      onCreate: (Migrator m) async {
+        await m.createAll();
+      },
+      onUpgrade: (Migrator m, int from, int to) async {
+        if (from < 2) {
+          // we added the dueDate property in the change from version 1 to
+          // version 2
+          await m.addColumn(voteSlimEntity, voteSlimEntity.downloadedForDeputy);
+          await m.addColumn(voteSlimEntity, voteSlimEntity.deputyVoteType);
+        }
+      },
+    );
+  }
 }

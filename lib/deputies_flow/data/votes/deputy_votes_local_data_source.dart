@@ -21,7 +21,8 @@ class DeputyVotesListLocalDataSource {
   }
 
   Future<List<VoteSlimModel>> getVoteModels(int limit, int offset, DeputyVotesEasyFilter easyFilter) async {
-    final entities = await _database.getVotings(limit, offset, [_getEasyFilterWhere(easyFilter)]);
+    final entities = await _database
+        .getVotings(limit, offset, [_getEasyFilterWhere(easyFilter), _getDeputyFilterWhere(_currentDeputyId)]);
     return _toModelMapper(entities);
   }
 
@@ -33,5 +34,9 @@ class DeputyVotesListLocalDataSource {
     } else {
       throw ArgumentError("There is no other DeputyVotesEasyFilter");
     }
+  }
+
+  Expression<bool?> Function($VoteSlimEntityTable) _getDeputyFilterWhere(String deputyId) {
+    return ($VoteSlimEntityTable tbl) => tbl.downloadedForDeputy.equals(deputyId);
   }
 }

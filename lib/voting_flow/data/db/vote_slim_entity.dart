@@ -18,6 +18,12 @@ class VoteSlimEntity extends Table {
 
   BoolColumn get viewed => boolean()();
 
+  /// When downloading deputy votes we need distinction which
+  /// votes where downloaded for deputy and which for all otherwise
+  /// we could show votes in which deputy did not vote because he was
+  /// later choosen
+  TextColumn get downloadedForDeputy => text().nullable()();
+
   @override
   Set<Column>? get primaryKey => {id};
 }
