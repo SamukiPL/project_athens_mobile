@@ -43,7 +43,6 @@ class AuthFacade {
     if (now < _tokenExp!) return _accessToken!;
 
     final newTokens = await _repository.refreshTokens(_refreshToken!).catchError((err) async {
-      print('An error occured while trying to refresh tokens');
       Fimber.e(err.toString());
 
       if (err is DioError && err.response?.statusCode == 401) {

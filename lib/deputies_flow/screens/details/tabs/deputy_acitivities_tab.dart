@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/i18n/localization.dart';
 import 'package:project_athens/athens_core/presentation/delegates/redirection_delegate.dart';
@@ -50,20 +49,11 @@ class AthensTile extends StatelessWidget {
                   child: ClipRRect(
                     child: Container(
                       color: Colors.white,
-                      // decoration: BoxDecoration(
-                      //     //     image: DecorationImage(
-                      //     //   image: Image.asset("resources/images/parliament/parliament_gathering_512px.jpg").image,
-                      //     //   fit: BoxFit.cover,
-                      //     // )
-                      //     ),
                       child: BackdropFilter(
                         filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
                         child: Center(
                           child: ClipRRect(
                               child: Container(
-                                  // width: double.infinity,
-                                  // height: double.infinity,
-                                  // color: Colors.black.withOpacity(0.7),
                                   child: Text(
                             title,
                             style: TextStyle(

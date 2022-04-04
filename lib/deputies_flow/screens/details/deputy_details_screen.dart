@@ -24,17 +24,11 @@ class DeputyDetailsScreen extends BaseScreen<DeputyDetailsBloc> {
     final localizations = Provider.of<AppLocalizations>(context);
 
     final double statusBarHeight = MediaQuery.of(context).padding.top;
-//var tabBarHeight = primaryTabBar.preferredSize.height;
-    var pinnedHeaderHeight =
-//statusBar height
-        statusBarHeight +
-            //pinned SliverAppBar height in header
-            (kToolbarHeight * 2);
+    var pinnedHeaderHeight = statusBarHeight + (kToolbarHeight * 2);
 
     return DefaultTabController(
         length: 2,
         child: ExtendedNestedScrollView(
-            // onlyOneScrollInBody: true,
             pinnedHeaderSliverHeightBuilder: () {
               return pinnedHeaderHeight;
             },
