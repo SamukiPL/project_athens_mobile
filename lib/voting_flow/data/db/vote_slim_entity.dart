@@ -5,6 +5,7 @@ class VoteSlimEntity extends Table {
   TextColumn get title => text()();
   IntColumn get votingType => integer()();
   DateTimeColumn get date => dateTime()();
+  IntColumn get deputyVoteType => integer().nullable()();
 
   IntColumn get inFavor => integer()();
   IntColumn get against => integer()();
@@ -16,6 +17,12 @@ class VoteSlimEntity extends Table {
   IntColumn get absoluteMajority => integer().nullable()();
 
   BoolColumn get viewed => boolean()();
+
+  /// When downloading deputy votes we need distinction which
+  /// votes where downloaded for deputy and which for all otherwise
+  /// we could show votes in which deputy did not vote because he was
+  /// later choosen
+  TextColumn get downloadedForDeputy => text().nullable()();
 
   @override
   Set<Column>? get primaryKey => {id};

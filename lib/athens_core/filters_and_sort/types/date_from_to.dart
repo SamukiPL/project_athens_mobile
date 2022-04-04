@@ -24,17 +24,14 @@ class DateFromTo extends BaseFilterType {
       child: Consumer<DateFromTo>(
         builder: (context, type, child) => Row(
           children: [
-            _buildDateColumn(parentContext, theme, localizations().filtersFiltersDateFrom(), fromTime,
-                () async {
-              fromTime = await showDateChooserBottomSheet(parentContext,
-                      firstSelectedDate: fromTime, maxDate: toTime) ??
-                  fromTime;
+            _buildDateColumn(parentContext, theme, localizations().filtersFiltersDateFrom(), fromTime, () async {
+              fromTime =
+                  await showDateChooserBottomSheet(parentContext, firstSelectedDate: fromTime, maxDate: toTime) ??
+                      fromTime;
               notifyListeners();
             }),
-            _buildDateColumn(parentContext, theme, localizations().filtersFiltersDateTo(), toTime,
-                () async {
-              toTime = await showDateChooserBottomSheet(parentContext,
-                      firstSelectedDate: toTime, minDate: fromTime) ??
+            _buildDateColumn(parentContext, theme, localizations().filtersFiltersDateTo(), toTime, () async {
+              toTime = await showDateChooserBottomSheet(parentContext, firstSelectedDate: toTime, minDate: fromTime) ??
                   toTime;
               notifyListeners();
             }),
@@ -44,8 +41,8 @@ class DateFromTo extends BaseFilterType {
     );
   }
 
-  Widget _buildDateColumn(BuildContext parentContext, ThemeData theme,
-      String title, DateTime date, VoidCallback onTap) {
+  Widget _buildDateColumn(
+      BuildContext parentContext, ThemeData theme, String title, DateTime date, VoidCallback onTap) {
     return Container(
       margin: EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8),
       child: Column(
@@ -58,7 +55,7 @@ class DateFromTo extends BaseFilterType {
           GestureDetector(
             child: Container(
               child: Text(
-                DateFormat("d.MM.y", "pl").format(date),
+                DateFormat("dd.MM.y", "pl").format(date),
                 style: TextStyle(
                   fontSize: 20,
                 ),
@@ -66,8 +63,7 @@ class DateFromTo extends BaseFilterType {
               padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               margin: EdgeInsets.only(top: 4),
               decoration: BoxDecoration(
-                  border: Border.all(color: theme.dividerColor),
-                  borderRadius: BorderRadius.all(Radius.circular(4))),
+                  border: Border.all(color: theme.dividerColor), borderRadius: BorderRadius.all(Radius.circular(4))),
             ),
             onTap: onTap,
           )

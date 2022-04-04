@@ -153,6 +153,9 @@
   },
   "deputies": {
     "deputiesListTitle": "Posłowie",
+    "speechesList": "Przemowy posła",
+    "votesList": "Głosowania posła",
+    "activities": "Aktywność",
     "information": "Informacje",
     "speeches": "Wypowiedzi",
     "votings": "Głosowania",

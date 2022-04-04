@@ -7,14 +7,13 @@ import 'package:project_athens/athens_core/filters_and_sort/types/date_from_to.d
 import 'package:project_athens/athens_core/filters_and_sort/types/sorting_filter.dart';
 
 mixin FilterableFacade {
-
   late FiltersRepository filtersRepository;
 
   List<BaseFilterType>? filters;
 
   DateTime from = DateTimeExtension.defaultFrom();
   DateTime to = DateTimeExtension.defaultTo();
-  
+
   String sortingParam = SortingModel.firstSortParam();
 
   Future<Result<List<BaseFilterType>>> getFilters({bool resetFilters = false}) async {
@@ -26,13 +25,13 @@ mixin FilterableFacade {
 
   Future<void> changeFilters(List<BaseFilterType> filters) async {
     this.filters = filters;
-    
+
     _setDates();
     _setSort();
-    
+
     refreshItems();
   }
-  
+
   void _setDates() {
     final dateTimeTo = filters!.firstWhere((element) => element is DateFromTo) as DateFromTo;
 
@@ -47,5 +46,4 @@ mixin FilterableFacade {
   }
 
   Future<void> refreshItems();
-
 }

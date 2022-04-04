@@ -17,7 +17,8 @@ class VoteSlimNetworkMapper extends AsyncDataMapper<VoteSlimDTO, VoteSlimModel> 
   @override
   Future<VoteSlimModel> transform(VoteSlimDTO data) async {
     final deputiesVoteFutures = data.deputiesVoteType.map((deputyDTO) async {
-      final deputy = await _subscribedDeputiesCache.getDeputyModelById(deputyDTO.cadencyDeputy) as SubscribedDeputyModel;
+      final deputy =
+          await _subscribedDeputiesCache.getDeputyModelById(deputyDTO.cadencyDeputy) as SubscribedDeputyModel;
 
       return VoteSlimDeputyVoteType(deputy, deputyDTO.voteType);
     }).toList();
@@ -32,22 +33,26 @@ class VoteSlimNetworkMapper extends AsyncDataMapper<VoteSlimDTO, VoteSlimModel> 
 
     final clubs = await Future.wait(clubsFutures);
 
-    final voteNumbers = VoteNumbers(absent: data.voteNumbers.absent, against: data.voteNumbers.against, hold: data.voteNumbers.hold, inFavor: data.voteNumbers.inFavor);
+    final voteNumbers = VoteNumbers(
+        absent: data.voteNumbers.absent,
+        against: data.voteNumbers.against,
+        hold: data.voteNumbers.hold,
+        inFavor: data.voteNumbers.inFavor);
     final voteDesc = getVoteDescriptionHelper(data.type, _localizations);
 
     return VoteSlimModel(
-      id: data.id,
-      title: data.agenda,
-      votingDesc: voteDesc,
-      type: data.type,
-      voteAt: data.voteAt,
-      absoluteMajority: data.absoluteMajority,
-      qualifyingMajority: data.qualifyingMajority,
-      voteNumbers: voteNumbers,
-      clubsMajority: clubs,
-      deputiesVote: deputiesVote,
-      orderPoint: data.orderPoint,
-      viewed: data.viewed == true
-    );
+        id: data.id,
+        title: data.agenda,
+        votingDesc: voteDesc,
+        type: data.type,
+        voteAt: data.voteAt,
+        absoluteMajority: data.absoluteMajority,
+        qualifyingMajority: data.qualifyingMajority,
+        voteNumbers: voteNumbers,
+        clubsMajority: clubs,
+        deputiesVote: deputiesVote,
+        orderPoint: data.orderPoint,
+        viewed: data.viewed == true,
+        deputyVoteType: data.deputyVoteType);
   }
 }

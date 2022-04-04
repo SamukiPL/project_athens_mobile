@@ -154,6 +154,9 @@
   },
   "deputies": {
     "deputiesListTitle": "Deputies",
+    "speechesList": "Deputy speeches",
+    "votesList": "Deputy votes",
+    "activities": "Activities",
     "information": "Information",
     "speeches": "Speeches",
     "votings": "Votings",

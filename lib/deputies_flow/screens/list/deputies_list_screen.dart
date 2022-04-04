@@ -21,38 +21,32 @@ class DeputiesListScreen extends BaseScreen<BaseListBloc> {
 
   @override
   Widget buildBody(BuildContext context, BaseListBloc bloc) {
-    return Stack(
+    return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Container(
-          padding: EdgeInsets.only(top: 26),
-          child: Column(mainAxisSize: MainAxisSize.min, children: [
-            Expanded(
-              child: Container(
-                height: 0,
-                child: PagingList(
-                  bloc.adapter,
-                  paginationIncluded: false,
-                  separator: Divider(
-                    height: 1,
-                  ),
-                ),
-              ),
-            )
-          ]),
-        ),
         EasyFiltersList(),
+        Expanded(
+          child: Container(
+            height: 0,
+            child: PagingList(
+              bloc.adapter,
+              paginationIncluded: false,
+              separator: Divider(
+                height: 1,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
 
   @override
-  Widget? buildFloatingActionButton(BuildContext context, BaseListBloc bloc) =>
-      null;
+  Widget? buildFloatingActionButton(BuildContext context, BaseListBloc bloc) => null;
 
   @override
   Widget buildAppBar(BuildContext context, BaseListBloc bloc) {
-    final AppLocalizations localizations =
-        Provider.of<AppLocalizations>(context);
+    final AppLocalizations localizations = Provider.of<AppLocalizations>(context);
 
     return SearchAppBar(
         title: getAppBarTitle(localizations, bloc),

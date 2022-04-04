@@ -1,3 +1,4 @@
+import 'package:project_athens/athens_core/navigation/destination_manager.dart';
 import 'package:project_athens/athens_core/presentation/search_app_bar/search_app_bar_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:project_athens/athens_core/presentation/search_app_bar/search_app_bar_facade.dart';
@@ -11,11 +12,8 @@ PreferredSize SearchAppBar(
     List<IconButton> additionalIcons = const []}) {
   return PreferredSize(
     preferredSize: Size.fromHeight(kToolbarHeight),
-    child: _SearchAppBar(
-        title: title,
-        hintText: hintText,
-        showBackArrow: showBackArrow,
-        additionalIcons: additionalIcons),
+    child:
+        _SearchAppBar(title: title, hintText: hintText, showBackArrow: showBackArrow, additionalIcons: additionalIcons),
   );
 }
 
@@ -45,6 +43,15 @@ class _SearchAppBar extends StatelessWidget {
       child: Consumer<SearchAppBarBloc>(
         builder: (context, bloc, _) => AppBar(
           title: _buildAppBarTitle(bloc),
+          leading: showBackArrow
+              ? Consumer<DestinationManager>(
+                  builder: (context, destinationManager, _) => BackButton(
+                        color: Colors.white,
+                        onPressed: () {
+                          destinationManager.goBack(context);
+                        },
+                      ))
+              : null,
           actions: <Widget>[
                 _buildAppBarIcon(bloc),
               ] +
@@ -64,14 +71,12 @@ class _SearchAppBar extends StatelessWidget {
           },
           style: TextStyle(color: Colors.white),
           decoration: InputDecoration(
-              prefixIcon: Icon(
-                Icons.search,
-                color: Colors.white,
-              ),
-              hintText: hintText,
-              hintStyle: TextStyle(
-                color: Colors.white60
-              ),
+            prefixIcon: Icon(
+              Icons.search,
+              color: Colors.white,
+            ),
+            hintText: hintText,
+            hintStyle: TextStyle(color: Colors.white60),
           ),
           cursorColor: Colors.white60,
           focusNode: bloc.searchFocusNode,
