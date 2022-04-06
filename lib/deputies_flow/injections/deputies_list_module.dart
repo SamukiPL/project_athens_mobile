@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
+import 'package:project_athens/athens_core/ads/domain/are_ads_enabled_use_case.dart';
 import 'package:project_athens/athens_core/ads/native_ad/native_ad_provider.dart';
 import 'package:project_athens/athens_core/ads/native_ad/native_ads.dart';
 import 'package:project_athens/athens_core/data/base_list/items_repository_impl.dart';
@@ -49,7 +50,11 @@ class DeputiesListModule extends Module {
       Provider<EasyFiltersListBloc>.value(
           value: _filtersListBloc),
       Provider<NativeAdProvider>(
-        create: (_) => NativeAdProvider(NativeAds.deputyAd),
+        create: (_) {
+          final areAdsEnabledUseCase = Provider.of<AreAdsEnabledUseCase>(context, listen: false);
+
+          return NativeAdProvider(NativeAds.deputyAd, areAdsEnabledUseCase);
+        },
         dispose: (_, provider) => provider.dispose(),
       )
     ];

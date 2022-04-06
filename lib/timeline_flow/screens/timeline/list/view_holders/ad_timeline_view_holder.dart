@@ -24,7 +24,7 @@ class AdTimelineViewHolder extends StatelessWidget with RedirectionDelegate {
     return ChangeNotifierProvider<InternalNativeAd>.value(
       value: adProvider.provide(),
       child: Consumer<InternalNativeAd>(
-        builder: (context, bloc, _) => (bloc.isLoaded) ? Column(children: <Widget>[
+        builder: (context, bloc, _) => (bloc.shouldShow) ? Column(children: <Widget>[
           IntrinsicHeight(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
