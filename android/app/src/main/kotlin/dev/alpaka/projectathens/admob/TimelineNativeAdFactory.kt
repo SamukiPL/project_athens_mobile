@@ -14,6 +14,8 @@ class TimelineNativeAdFactory(private val context: Context) : GoogleMobileAdsPlu
         binding.adBody.text = nativeAd.body
 
         binding.root.apply {
+            headlineView = binding.adHeadline
+            bodyView = binding.adBody
             setNativeAd(nativeAd)
         }
     }

@@ -19,6 +19,9 @@ class DeputyNativeAdFactory(private val context: Context) : GoogleMobileAdsPlugi
         binding.adBody.text = nativeAd.body
 
         binding.root.apply {
+            iconView = binding.adIcon
+            headlineView = binding.adHeadline
+            bodyView = binding.adBody
             setNativeAd(nativeAd)
         }
     }
