@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:project_athens/athens_core/ads/injections/ads_module.dart';
 import 'package:project_athens/athens_core/db/database_module.dart';
 import 'package:project_athens/athens_core/i18n/localization_delegate.dart';
 import 'package:project_athens/athens_core/i18n/localization_module.dart';
@@ -60,7 +61,8 @@ class MyApp extends StatelessWidget {
         FirebaseMessagingModule(context, _firebaseMessages),
         ConfigurationModule(context),
         DatabaseModule(context),
-        AppNavigationModule(context)
+        AppNavigationModule(context),
+        AdsModule(context)
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
