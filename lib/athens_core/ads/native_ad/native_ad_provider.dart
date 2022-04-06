@@ -4,13 +4,11 @@ import 'package:project_athens/athens_core/ads/domain/are_ads_enabled_use_case.d
 import 'package:project_athens/athens_core/ads/native_ad/internal_native_ad.dart';
 
 class NativeAdProvider {
-  final String _factoryId;
+  final String factoryId;
   final AreAdsEnabledUseCase _areAdsEnabledUseCase;
   final Queue<InternalNativeAd> nativeAds = Queue();
 
-  String get factoryId => _factoryId;
-
-  NativeAdProvider(this._factoryId, this._areAdsEnabledUseCase) {
+  NativeAdProvider(this.factoryId, this._areAdsEnabledUseCase) {
     List.generate(3, (index) => 0).forEach((element) {
       _generateAd();
     });
