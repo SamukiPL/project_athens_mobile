@@ -13,6 +13,8 @@ class VoteNativeAdFactory(private val context: Context) : GoogleMobileAdsPlugin.
         binding.adBody.text = nativeAd.body
 
         binding.root.apply {
+            headlineView = binding.adHeadline
+            bodyView = binding.adBody
             setNativeAd(nativeAd)
         }
     }

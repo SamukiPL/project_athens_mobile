@@ -2,8 +2,12 @@ package dev.alpaka.projectathens.admob
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
+import dev.alpaka.projectathens.R
 import dev.alpaka.projectathens.databinding.AdSpeechBinding
 import dev.alpaka.projectathens.ext.isInvisible
 import io.flutter.plugins.googlemobileads.GoogleMobileAdsPlugin
@@ -18,6 +22,9 @@ class SpeechNativeAdFactory(private val context: Context) : GoogleMobileAdsPlugi
         binding.adBody.text = nativeAd.body
 
         binding.root.apply {
+            iconView = binding.adIcon
+            headlineView = binding.adHeadline
+            bodyView = binding.adBody
             setNativeAd(nativeAd)
         }
     }
